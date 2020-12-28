@@ -1,5 +1,6 @@
 ^LICENSE\.md$
 ^README\.Rmd$
+^TODO\.md$
 ^\.Rproj\.user$
 ^\.lintr$
 ^renv$
