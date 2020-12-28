@@ -1,0 +1,154 @@
+---
+title: "R Training Log"
+date: 2020-12-02
+output:
+  html_notebook:
+    toc: TRUE
+    toc_float:
+      collapsed: FALSE
+      smooth_scroll: FALSE
+---
+
+Notes on learning R and RStudio.
+
+## Libraries
+
+Load libraries and suppress warning and error messages. Thanks to this tidyverse [article](https://reprex.tidyverse.org/articles/articles/suppress-startup-messages.html).
+
+```{r startup, message = FALSE, warning = FALSE}
+library(tidyverse)
+```
+
+## Other files
+
+Other files in this project:
+
+- R Markdown demo notebook (`demo-notebook.Rmd`): [R Notebook](demo-notebook.nb.html)
+- `knitr-spin.R` demo script: [knitr-spin.R](knitr-spin.nb.html) (from <https://yihui.org/knitr/demo/stitch/>)
+- `.lintr`: [lintr](https://github.com/jimhester/lintr) configuration file
+
+## Not R
+
+Not R, but has advice on git best practices and a guide to fixing commit mistakes: <https://sethrobertson.github.io>
+
+## Learning R
+
+Resources for learning R.
+
+**Already using:** these are packages I'm already using in R. *Note:* much of this has been influenced by the work of [Hadley Wickham](http://hadley.nz/), who seems to be one of the (if not the most) significant contributors to the modern R and RStudio environment. Most of these have good integration with RStudio.
+
+- [renv](https://github.com/rstudio/renv) - for package version management by project
+- [styler](https://styler.r-lib.org/) and [lintr](https://github.com/jimhester/lintr) - for implementing the [tidyverse style guide](https://style.tidyverse.org/)
+- Various [tidyverse](https://www.tidyverse.org/) packages, including:
+  - dplyr
+  - ggplot2
+  - glue
+  - lubridate
+  - readr
+  - stringr
+  - tibble
+  - tidyr
+- Other packages:
+  - gt
+  - kableExtra
+  - miniUI (for RStudio plugins)
+  - openxlsx
+- R Notebooks leveraging GitHub Pages
+
+When in doubt, start with the tidyverse, or RStudio sponsored projects, or built-in R.
+
+**Completed:** I've read these.
+
+- [R for Data Science](https://r4ds.had.co.nz/) - Hadley's intro book
+
+**In progress:** I'm reading these now.
+
+- Full [ggplot2](https://ggplot2.tidyverse.org/reference/index.html) documentation OR
+- ggplot2 book, 3rd edition draft: <https://ggplot2-book.org>
+
+**Future:** I'm planning on adopting these to improve my code quality.
+
+- [testthat](https://testthat.r-lib.org/) - R testing framework
+- [roxygen2](https://github.com/r-lib/roxygen2) - document functions inline
+- [Advanced R](https://adv-r.hadley.nz/) - more Hadley
+- [R Packages](https://r-pkgs.org/) - even more Hadley
+
+**Also helpful:** some additional helpful links, either from me or recommended by others.
+
+- [RStudio Education](https://education.rstudio.com/learn/beginner/) - the Beginners page
+- [janitor](https://garthtarr.github.io/meatR/janitor.html) - automate data cleanup
+- [purrr](https://purrr.tidyverse.org/) - for list iteration
+- [broom](https://github.com/tidymodels/broom) - for getting classic stats objects into tidy shapes that are easier to work with
+
+**References:** other good reference sites.
+
+- [Yan Holtz](https://www.yan-holtz.com) has some good sites for data visualization:
+  - [the R Graph Gallery](https://www.r-graph-gallery.com) - charts made with R and ggplot2
+  - [from Data to Viz](https://www.data-to-viz.com) - recommendations on data visualization
+  - He also has some tips on [R Markdown](https://holtzy.github.io/Pimp-my-rmd/)
+
+### R for Data Science
+
+Selected highlights from the book:
+
+#### Patterns and models
+
+[7.6 Patterns and models](https://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models) covers models and residuals, here showing how to reveal the expected relationship between cut and price:
+
+```{r models}
+library(modelr)
+
+mod <- lm(log(price) ~ log(carat), data = diamonds)
+
+diamonds2 <- diamonds %>%
+  add_residuals(mod) %>%
+  mutate(resid = exp(resid))
+
+ggplot(data = diamonds2) +
+  geom_point(mapping = aes(x = carat, y = resid))
+
+ggplot(data = diamonds2) +
+  geom_boxplot(mapping = aes(x = cut, y = resid))
+```
+
+#### Non-Tidy Data
+
+Hadley advocates for "tidy" data, but there are times when data is usefully [non-tidy](https://simplystatistics.org/2016/02/17/non-tidy-data/).
+
+#### Graphics: Learning more
+
+From [28.8 Learning more](https://r4ds.had.co.nz/graphics-for-communication.html#learning-more-4):
+
+"The absolute best place to learn more is the ggplot2 book: [_ggplot2: Elegant graphics for data analysis_](https://amzn.com/331924275X). It goes into much more depth about the underlying theory, and has many more examples of how to combine the individual pieces to solve practical problems. Unfortunately, the book is not available online for free, although you can find the source code at <https://github.com/hadley/ggplot2-book>.
+ 
+Another great resource is the ggplot2 extensions gallery <https://exts.ggplot2.tidyverse.org/gallery/>. This site lists many of the packages that extend ggplot2 with new geoms and scales. It's a great place to start if you're trying to do something that seems hard with ggplot2."
+
+#### R Markdown Websites
+
+From [29.8 Websites](https://r4ds.had.co.nz/r-markdown-formats.html#websites):
+
+"With a little additional infrastructure you can use R Markdown to generate a complete website:
+
+- Put your `.Rmd` files in a single directory. `index.Rmd` will become the home page.
+- Add a YAML file named `_site.yml` provides the navigation for the site. For example:
+
+```
+name: "my-website"
+navbar:
+  title: "My Website"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Viridis Colors"
+      href: 1-example.html
+    - text: "Terrain Colors"
+      href: 3-inline.html
+```
+
+Execute `rmarkdown::render_site()` to build `_site`, a directory of files ready to deploy as a standalone static website, or if you use an RStudio Project for your website directory. RStudio will add a Build tab to the IDE that you can use to build and preview your site. 
+
+Read more at <http://rmarkdown.rstudio.com/rmarkdown_websites.html>."
+
+#### R Notebook Advice
+
+Hadley has some good suggestions for R Notebooks in [30 R Markdown workflow](https://r4ds.had.co.nz/r-markdown-workflow.html).
