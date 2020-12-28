@@ -1,2 +1,4 @@
+^renv$
+^renv\.lock$
 ^rtraining\.Rproj$
 ^\.Rproj\.user$
