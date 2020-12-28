@@ -18,9 +18,11 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of rtraining is to ...
+My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress). The package is currently not yet functional, but you can read my [R Training Log](r-training-log.nb.html) using the GitHub Pages URL: <https://jabenninghoff.github.io/rtraining/>.
 
 ## Installation
+
+<!-- don't advertise CRAN install
 
 You can install the released version of rtraining from [CRAN](https://CRAN.R-project.org) with:
 
@@ -28,7 +30,9 @@ You can install the released version of rtraining from [CRAN](https://CRAN.R-pro
 install.packages("rtraining")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
+-->
+
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
