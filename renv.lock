@@ -520,6 +520,13 @@
       "Repository": "CRAN",
       "Hash": "9d7aba7bed9a79e2403b4777428a2b12"
     },
+    "rmarkdown": {
+      "Package": "rmarkdown",
+      "Version": "2.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bc4bac38960b446c183957bfd563e763"
+    },
     "roxygen2": {
       "Package": "roxygen2",
       "Version": "7.1.1",
@@ -610,6 +617,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "71dffd8544691c520dd8e41ed2d7e070"
+    },
+    "tinytex": {
+      "Package": "tinytex",
+      "Version": "0.28",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ff73961a77fba606fbf944dc3468e5b9"
     },
     "usethis": {
       "Package": "usethis",
