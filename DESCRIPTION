@@ -18,4 +18,6 @@ Suggests:
     styler,
     lintr,
     miniUI,
-    devtools
+    devtools,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
