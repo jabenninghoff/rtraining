@@ -19,13 +19,31 @@ Load libraries and suppress warning and error messages. Thanks to this tidyverse
 library(tidyverse)
 ```
 
-## Other files
+## Files
 
-Other files in this project:
+Files in this project:
 
-- R Markdown demo notebook (`demo-notebook.Rmd`): [R Notebook](demo-notebook.nb.html)
-- `knitr-spin.R` demo script: [knitr-spin.R](knitr-spin.nb.html) (from <https://yihui.org/knitr/demo/stitch/>)
+- `.Rbuildignore`:
+- `.Rhistory`:
+- `.Rprofile`:
+- `.Rproj.user`:
+- `.git`:
+- `.gitignore`:
 - `.lintr`: [lintr](https://github.com/jimhester/lintr) configuration file
+- `DESCRIPTION`:
+- `LICENSE`:
+- `LICENSE.md`:
+- `NAMESPACE`:
+- `README.Rmd`:
+- `README.md`:
+- `man`:
+- `r-training-log.Rmd`:
+- `r-training-log.nb.html`:
+- `renv`:
+- `renv.lock`:
+- `rtraining.Rproj`:
+- `setup-r`:
+- `tests`:
 
 ## Not R
 
@@ -53,6 +71,7 @@ Resources for learning R.
   - kableExtra
   - miniUI (for RStudio plugins)
   - openxlsx
+  - knitr: there is a useful [knitr-spin.R](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-spin.R) demo script that shows how to knit an R script (from <https://yihui.org/knitr/demo/stitch/>) - I briefly explored this as an alternative to notebooks
 - R Notebooks leveraging GitHub Pages
 
 When in doubt, start with the tidyverse, or RStudio sponsored projects, or built-in R.
