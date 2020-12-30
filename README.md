@@ -8,8 +8,8 @@
 
 My notes and experiences learning R and RStudio, bundled as an R package
 (work-in-progress). The package is currently not yet functional, but you
-can read my [R Training Log](r-training-log.nb.html) using the GitHub
-Pages URL: <https://jabenninghoff.github.io/rtraining/>.
+can read my [R Training Log](notebooks/r-training-log.Rmd) using the
+GitHub Pages URL: <https://jabenninghoff.github.io/rtraining/>.
 
 ## Installation
 
