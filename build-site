@@ -4,6 +4,12 @@ set -e
 NB="html_notebook"
 DOC="html_document"
 
+if [ ! -x build-site ]
+then
+	echo "error: not running 'build-site' from its directory!"
+	exit 1
+fi
+
 if [ ! -d .build ]
 then
 	mkdir .build
