@@ -1,4 +1,10 @@
 #!/bin/sh
+# build-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/
+# assumes: script exists and runs in top-level project directory
+#          .build is only used by build-site
+#          _site-HEAD.yml, _site-TAIL.yml, and index.Rmd are properly built in notebooks/
+#          all other .Rmd files in notebooks/ are either html_notebook or html_document
+# results: all .Rmd files other than index.Rmd are included in the "Notebooks" menu in file alphabetical order
 set -e
 
 NB="html_notebook"
