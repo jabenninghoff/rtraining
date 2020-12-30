@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-NB="html_notebook:"
-DOC="html_document:"
+NB="html_notebook"
+DOC="html_document"
 
 if [ ! -d .build ]
 then
@@ -14,6 +14,7 @@ cat notebooks/_site-HEAD.yml >.build/_site.yml
 for n in notebooks/*.Rmd
 do
 	NAME=`basename ${n}`
+	YAML=`cat ${n} | grep -n "\---" | head -2 | tail -1 | awk -F ':' '{print $1}'`
 
 	if [ "$NAME" != "index.Rmd" ]
 	then
@@ -23,7 +24,7 @@ do
 		echo "        href: ${HREF}" >>.build/_site.yml
 	fi
 
-	cat ${n} | sed -e "s/${NB}/${DOC}/" >.build/${NAME}
+	cat ${n} | sed -e "1,${YAML}s/${NB}/${DOC}/" >.build/${NAME}
 done
 
 cat notebooks/_site-TAIL.yml >>.build/_site.yml
