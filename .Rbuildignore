@@ -3,6 +3,7 @@
 ^TODO\.md$
 ^\.Rproj\.user$
 ^\.build-site$
+^\.github$
 ^\.lintr$
 ^build-site$
 ^docs$
@@ -10,4 +11,3 @@
 ^renv$
 ^renv\.lock$
 ^rtraining\.Rproj$
-^\.github$
