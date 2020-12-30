@@ -2,7 +2,11 @@
 ^README\.Rmd$
 ^TODO\.md$
 ^\.Rproj\.user$
+^\.build$
 ^\.lintr$
+^build-site$
+^docs$
+^notebooks$
 ^renv$
 ^renv\.lock$
 ^rtraining\.Rproj$

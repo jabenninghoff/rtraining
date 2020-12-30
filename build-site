@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+NB="html_notebook:"
+DOC="html_document:"
+
+if [ ! -d .build ]
+then
+	mkdir .build
+fi
+
+cat notebooks/_site-HEAD.yml >.build/_site.yml
+
+for n in notebooks/*.Rmd
+do
+	NAME=`basename ${n}`
+
+	if [ "$NAME" != "index.Rmd" ]
+	then
+		TEXT=`cat ${n} | grep "^title: " | head -1 | awk -F '"' '{print $2}'`
+		HREF="${NAME/.Rmd/.html}"
+		echo "      - text: \"${TEXT}\"" >>.build/_site.yml
+		echo "        href: ${HREF}" >>.build/_site.yml
+	fi
+
+	cat ${n} | sed -e "s/${NB}/${DOC}/" >.build/${NAME}
+done
+
+cat notebooks/_site-TAIL.yml >>.build/_site.yml
+
+Rscript -e 'rmarkdown::render_site(".build")'

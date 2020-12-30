@@ -1,0 +1,10 @@
+name: "rtraining"
+output_dir: ../docs
+navbar:
+  title: "R Training"
+  type: default
+  left:
+    - icon: fas fa-home
+      href: index.html
+    - text: "Notebooks"
+      menu:
