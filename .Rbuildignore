@@ -2,7 +2,7 @@
 ^README\.Rmd$
 ^TODO\.md$
 ^\.Rproj\.user$
-^\.build$
+^\.build-site$
 ^\.lintr$
 ^build-site$
 ^docs$
