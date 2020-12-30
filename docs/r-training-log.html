@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2020-12-02" />
+
+<title>R Training Log</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R Training</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fas fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Notebooks
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r-training-log.html">R Training Log</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jabenninghoff/rtraining">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">R Training Log</h1>
+<h4 class="date">2020-12-02</h4>
+
+</div>
+
+
+<p>Notes on learning R and RStudio.</p>
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
+<p>Load libraries and suppress warning and error messages. Thanks to this tidyverse <a href="https://reprex.tidyverse.org/articles/articles/suppress-startup-messages.html">article</a>.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+</div>
+<div id="files" class="section level2">
+<h2>Files</h2>
+<p>Files in this project:</p>
+<ul>
+<li><code>.Rbuildignore</code>:</li>
+<li><code>.Rhistory</code>:</li>
+<li><code>.Rprofile</code>:</li>
+<li><code>.Rproj.user</code>:</li>
+<li><code>.git</code>:</li>
+<li><code>.gitignore</code>:</li>
+<li><code>.lintr</code>: <a href="https://github.com/jimhester/lintr">lintr</a> configuration file</li>
+<li><code>DESCRIPTION</code>:</li>
+<li><code>LICENSE</code>:</li>
+<li><code>LICENSE.md</code>:</li>
+<li><code>NAMESPACE</code>:</li>
+<li><code>README.Rmd</code>:</li>
+<li><code>README.md</code>:</li>
+<li><code>man</code>:</li>
+<li><code>r-training-log.Rmd</code>:</li>
+<li><code>r-training-log.nb.html</code>:</li>
+<li><code>renv</code>:</li>
+<li><code>renv.lock</code>:</li>
+<li><code>rtraining.Rproj</code>:</li>
+<li><code>setup-r</code>:</li>
+<li><code>tests</code>:</li>
+</ul>
+</div>
+<div id="not-r" class="section level2">
+<h2>Not R</h2>
+<p>Not R, but has advice on git best practices and a guide to fixing commit mistakes: <a href="https://sethrobertson.github.io" class="uri">https://sethrobertson.github.io</a></p>
+</div>
+<div id="learning-r" class="section level2">
+<h2>Learning R</h2>
+<p>Resources for learning R.</p>
+<p><strong>Already using:</strong> these are packages I’m already using in R. <em>Note:</em> much of this has been influenced by the work of <a href="http://hadley.nz/">Hadley Wickham</a>, who seems to be one of the (if not the most) significant contributors to the modern R and RStudio environment. Most of these have good integration with RStudio.</p>
+<ul>
+<li><a href="https://github.com/rstudio/renv">renv</a> - for package version management by project</li>
+<li><a href="https://styler.r-lib.org/">styler</a> and <a href="https://github.com/jimhester/lintr">lintr</a> - for implementing the <a href="https://style.tidyverse.org/">tidyverse style guide</a></li>
+<li>Various <a href="https://www.tidyverse.org/">tidyverse</a> packages, including:
+<ul>
+<li>dplyr</li>
+<li>ggplot2</li>
+<li>glue</li>
+<li>lubridate</li>
+<li>readr</li>
+<li>stringr</li>
+<li>tibble</li>
+<li>tidyr</li>
+</ul></li>
+<li>Other packages:
+<ul>
+<li>gt</li>
+<li>kableExtra</li>
+<li>miniUI (for RStudio plugins)</li>
+<li>openxlsx</li>
+<li>knitr: there is a useful <a href="https://github.com/yihui/knitr/blob/master/inst/examples/knitr-spin.R">knitr-spin.R</a> demo script that shows how to knit an R script (from <a href="https://yihui.org/knitr/demo/stitch/" class="uri">https://yihui.org/knitr/demo/stitch/</a>) - I briefly explored this as an alternative to notebooks</li>
+</ul></li>
+<li>R Notebooks leveraging GitHub Pages</li>
+</ul>
+<p>When in doubt, start with the tidyverse, or RStudio sponsored projects, or built-in R.</p>
+<p><strong>Completed:</strong> I’ve read these.</p>
+<ul>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a> - Hadley’s intro book</li>
+</ul>
+<p><strong>In progress:</strong> I’m reading these now.</p>
+<ul>
+<li>Full <a href="https://ggplot2.tidyverse.org/reference/index.html">ggplot2</a> documentation OR</li>
+<li>ggplot2 book, 3rd edition draft: <a href="https://ggplot2-book.org" class="uri">https://ggplot2-book.org</a></li>
+</ul>
+<p><strong>Future:</strong> I’m planning on adopting these to improve my code quality.</p>
+<ul>
+<li><a href="https://testthat.r-lib.org/">testthat</a> - R testing framework</li>
+<li><a href="https://github.com/r-lib/roxygen2">roxygen2</a> - document functions inline</li>
+<li><a href="https://adv-r.hadley.nz/">Advanced R</a> - more Hadley</li>
+<li><a href="https://r-pkgs.org/">R Packages</a> - even more Hadley</li>
+</ul>
+<p><strong>Also helpful:</strong> some additional helpful links, either from me or recommended by others.</p>
+<ul>
+<li><a href="https://education.rstudio.com/learn/beginner/">RStudio Education</a> - the Beginners page</li>
+<li><a href="https://garthtarr.github.io/meatR/janitor.html">janitor</a> - automate data cleanup</li>
+<li><a href="https://purrr.tidyverse.org/">purrr</a> - for list iteration</li>
+<li><a href="https://github.com/tidymodels/broom">broom</a> - for getting classic stats objects into tidy shapes that are easier to work with</li>
+</ul>
+<p><strong>References:</strong> other good reference sites.</p>
+<ul>
+<li><a href="https://www.yan-holtz.com">Yan Holtz</a> has some good sites for data visualization:
+<ul>
+<li><a href="https://www.r-graph-gallery.com">the R Graph Gallery</a> - charts made with R and ggplot2</li>
+<li><a href="https://www.data-to-viz.com">from Data to Viz</a> - recommendations on data visualization</li>
+<li>He also has some tips on <a href="https://holtzy.github.io/Pimp-my-rmd/">R Markdown</a></li>
+</ul></li>
+</ul>
+<div id="r-for-data-science" class="section level3">
+<h3>R for Data Science</h3>
+<p>Selected highlights from the book:</p>
+<div id="patterns-and-models" class="section level4">
+<h4>Patterns and models</h4>
+<p><a href="https://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models">7.6 Patterns and models</a> covers models and residuals, here showing how to reveal the expected relationship between cut and price:</p>
+<pre class="r"><code>library(modelr)
+
+mod &lt;- lm(log(price) ~ log(carat), data = diamonds)
+
+diamonds2 &lt;- diamonds %&gt;%
+  add_residuals(mod) %&gt;%
+  mutate(resid = exp(resid))
+
+ggplot(data = diamonds2) +
+  geom_point(mapping = aes(x = carat, y = resid))</code></pre>
+<p><img src="r-training-log_files/figure-html/models-1.png" width="768" /></p>
+<pre class="r"><code>ggplot(data = diamonds2) +
+  geom_boxplot(mapping = aes(x = cut, y = resid))</code></pre>
+<p><img src="r-training-log_files/figure-html/models-2.png" width="768" /></p>
+</div>
+<div id="non-tidy-data" class="section level4">
+<h4>Non-Tidy Data</h4>
+<p>Hadley advocates for “tidy” data, but there are times when data is usefully <a href="https://simplystatistics.org/2016/02/17/non-tidy-data/">non-tidy</a>.</p>
+</div>
+<div id="graphics-learning-more" class="section level4">
+<h4>Graphics: Learning more</h4>
+<p>From <a href="https://r4ds.had.co.nz/graphics-for-communication.html#learning-more-4">28.8 Learning more</a>:</p>
+<p>"The absolute best place to learn more is the ggplot2 book: <a href="https://amzn.com/331924275X"><em>ggplot2: Elegant graphics for data analysis</em></a>. It goes into much more depth about the underlying theory, and has many more examples of how to combine the individual pieces to solve practical problems. Unfortunately, the book is not available online for free, although you can find the source code at <a href="https://github.com/hadley/ggplot2-book" class="uri">https://github.com/hadley/ggplot2-book</a>.</p>
+<p>Another great resource is the ggplot2 extensions gallery <a href="https://exts.ggplot2.tidyverse.org/gallery/" class="uri">https://exts.ggplot2.tidyverse.org/gallery/</a>. This site lists many of the packages that extend ggplot2 with new geoms and scales. It’s a great place to start if you’re trying to do something that seems hard with ggplot2."</p>
+</div>
+<div id="r-markdown-websites" class="section level4">
+<h4>R Markdown Websites</h4>
+<p>From <a href="https://r4ds.had.co.nz/r-markdown-formats.html#websites">29.8 Websites</a>:</p>
+<p>"With a little additional infrastructure you can use R Markdown to generate a complete website:</p>
+<ul>
+<li>Put your <code>.Rmd</code> files in a single directory. <code>index.Rmd</code> will become the home page.</li>
+<li>Add a YAML file named <code>_site.yml</code> provides the navigation for the site. For example:</li>
+</ul>
+<pre><code>name: &quot;my-website&quot;
+navbar:
+  title: &quot;My Website&quot;
+  left:
+    - text: &quot;Home&quot;
+      href: index.html
+    - text: &quot;Viridis Colors&quot;
+      href: 1-example.html
+    - text: &quot;Terrain Colors&quot;
+      href: 3-inline.html</code></pre>
+<p>Execute <code>rmarkdown::render_site()</code> to build <code>_site</code>, a directory of files ready to deploy as a standalone static website, or if you use an RStudio Project for your website directory. RStudio will add a Build tab to the IDE that you can use to build and preview your site.</p>
+<p>Read more at <a href="http://rmarkdown.rstudio.com/rmarkdown_websites.html" class="uri">http://rmarkdown.rstudio.com/rmarkdown_websites.html</a>."</p>
+</div>
+<div id="r-notebook-advice" class="section level4">
+<h4>R Notebook Advice</h4>
+<p>Hadley has some good suggestions for R Notebooks in <a href="https://r4ds.had.co.nz/r-markdown-workflow.html">30 R Markdown workflow</a>.</p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBUcmFpbmluZyBMb2ciCmRhdGU6IDIwMjAtMTItMDIKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IFRSVUUKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiBGQUxTRQogICAgICBzbW9vdGhfc2Nyb2xsOiBGQUxTRQotLS0KCk5vdGVzIG9uIGxlYXJuaW5nIFIgYW5kIFJTdHVkaW8uCgojIyBMaWJyYXJpZXMKCkxvYWQgbGlicmFyaWVzIGFuZCBzdXBwcmVzcyB3YXJuaW5nIGFuZCBlcnJvciBtZXNzYWdlcy4gVGhhbmtzIHRvIHRoaXMgdGlkeXZlcnNlIFthcnRpY2xlXShodHRwczovL3JlcHJleC50aWR5dmVyc2Uub3JnL2FydGljbGVzL2FydGljbGVzL3N1cHByZXNzLXN0YXJ0dXAtbWVzc2FnZXMuaHRtbCkuCgpgYGB7ciBzdGFydHVwLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0KbGlicmFyeSh0aWR5dmVyc2UpCmBgYAoKIyMgRmlsZXMKCkZpbGVzIGluIHRoaXMgcHJvamVjdDoKCi0gYC5SYnVpbGRpZ25vcmVgOgotIGAuUmhpc3RvcnlgOgotIGAuUnByb2ZpbGVgOgotIGAuUnByb2oudXNlcmA6Ci0gYC5naXRgOgotIGAuZ2l0aWdub3JlYDoKLSBgLmxpbnRyYDogW2xpbnRyXShodHRwczovL2dpdGh1Yi5jb20vamltaGVzdGVyL2xpbnRyKSBjb25maWd1cmF0aW9uIGZpbGUKLSBgREVTQ1JJUFRJT05gOgotIGBMSUNFTlNFYDoKLSBgTElDRU5TRS5tZGA6Ci0gYE5BTUVTUEFDRWA6Ci0gYFJFQURNRS5SbWRgOgotIGBSRUFETUUubWRgOgotIGBtYW5gOgotIGByLXRyYWluaW5nLWxvZy5SbWRgOgotIGByLXRyYWluaW5nLWxvZy5uYi5odG1sYDoKLSBgcmVudmA6Ci0gYHJlbnYubG9ja2A6Ci0gYHJ0cmFpbmluZy5ScHJvamA6Ci0gYHNldHVwLXJgOgotIGB0ZXN0c2A6CgojIyBOb3QgUgoKTm90IFIsIGJ1dCBoYXMgYWR2aWNlIG9uIGdpdCBiZXN0IHByYWN0aWNlcyBhbmQgYSBndWlkZSB0byBmaXhpbmcgY29tbWl0IG1pc3Rha2VzOiA8aHR0cHM6Ly9zZXRocm9iZXJ0c29uLmdpdGh1Yi5pbz4KCiMjIExlYXJuaW5nIFIKClJlc291cmNlcyBmb3IgbGVhcm5pbmcgUi4KCioqQWxyZWFkeSB1c2luZzoqKiB0aGVzZSBhcmUgcGFja2FnZXMgSSdtIGFscmVhZHkgdXNpbmcgaW4gUi4gKk5vdGU6KiBtdWNoIG9mIHRoaXMgaGFzIGJlZW4gaW5mbHVlbmNlZCBieSB0aGUgd29yayBvZiBbSGFkbGV5IFdpY2toYW1dKGh0dHA6Ly9oYWRsZXkubnovKSwgd2hvIHNlZW1zIHRvIGJlIG9uZSBvZiB0aGUgKGlmIG5vdCB0aGUgbW9zdCkgc2lnbmlmaWNhbnQgY29udHJpYnV0b3JzIHRvIHRoZSBtb2Rlcm4gUiBhbmQgUlN0dWRpbyBlbnZpcm9ubWVudC4gTW9zdCBvZiB0aGVzZSBoYXZlIGdvb2QgaW50ZWdyYXRpb24gd2l0aCBSU3R1ZGlvLgoKLSBbcmVudl0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vcmVudikgLSBmb3IgcGFja2FnZSB2ZXJzaW9uIG1hbmFnZW1lbnQgYnkgcHJvamVjdAotIFtzdHlsZXJdKGh0dHBzOi8vc3R5bGVyLnItbGliLm9yZy8pIGFuZCBbbGludHJdKGh0dHBzOi8vZ2l0aHViLmNvbS9qaW1oZXN0ZXIvbGludHIpIC0gZm9yIGltcGxlbWVudGluZyB0aGUgW3RpZHl2ZXJzZSBzdHlsZSBndWlkZV0oaHR0cHM6Ly9zdHlsZS50aWR5dmVyc2Uub3JnLykKLSBWYXJpb3VzIFt0aWR5dmVyc2VdKGh0dHBzOi8vd3d3LnRpZHl2ZXJzZS5vcmcvKSBwYWNrYWdlcywgaW5jbHVkaW5nOgogIC0gZHBseXIKICAtIGdncGxvdDIKICAtIGdsdWUKICAtIGx1YnJpZGF0ZQogIC0gcmVhZHIKICAtIHN0cmluZ3IKICAtIHRpYmJsZQogIC0gdGlkeXIKLSBPdGhlciBwYWNrYWdlczoKICAtIGd0CiAgLSBrYWJsZUV4dHJhCiAgLSBtaW5pVUkgKGZvciBSU3R1ZGlvIHBsdWdpbnMpCiAgLSBvcGVueGxzeAogIC0ga25pdHI6IHRoZXJlIGlzIGEgdXNlZnVsIFtrbml0ci1zcGluLlJdKGh0dHBzOi8vZ2l0aHViLmNvbS95aWh1aS9rbml0ci9ibG9iL21hc3Rlci9pbnN0L2V4YW1wbGVzL2tuaXRyLXNwaW4uUikgZGVtbyBzY3JpcHQgdGhhdCBzaG93cyBob3cgdG8ga25pdCBhbiBSIHNjcmlwdCAoZnJvbSA8aHR0cHM6Ly95aWh1aS5vcmcva25pdHIvZGVtby9zdGl0Y2gvPikgLSBJIGJyaWVmbHkgZXhwbG9yZWQgdGhpcyBhcyBhbiBhbHRlcm5hdGl2ZSB0byBub3RlYm9va3MKLSBSIE5vdGVib29rcyBsZXZlcmFnaW5nIEdpdEh1YiBQYWdlcwoKV2hlbiBpbiBkb3VidCwgc3RhcnQgd2l0aCB0aGUgdGlkeXZlcnNlLCBvciBSU3R1ZGlvIHNwb25zb3JlZCBwcm9qZWN0cywgb3IgYnVpbHQtaW4gUi4KCioqQ29tcGxldGVkOioqIEkndmUgcmVhZCB0aGVzZS4KCi0gW1IgZm9yIERhdGEgU2NpZW5jZV0oaHR0cHM6Ly9yNGRzLmhhZC5jby5uei8pIC0gSGFkbGV5J3MgaW50cm8gYm9vawoKKipJbiBwcm9ncmVzczoqKiBJJ20gcmVhZGluZyB0aGVzZSBub3cuCgotIEZ1bGwgW2dncGxvdDJdKGh0dHBzOi8vZ2dwbG90Mi50aWR5dmVyc2Uub3JnL3JlZmVyZW5jZS9pbmRleC5odG1sKSBkb2N1bWVudGF0aW9uIE9SCi0gZ2dwbG90MiBib29rLCAzcmQgZWRpdGlvbiBkcmFmdDogPGh0dHBzOi8vZ2dwbG90Mi1ib29rLm9yZz4KCioqRnV0dXJlOioqIEknbSBwbGFubmluZyBvbiBhZG9wdGluZyB0aGVzZSB0byBpbXByb3ZlIG15IGNvZGUgcXVhbGl0eS4KCi0gW3Rlc3R0aGF0XShodHRwczovL3Rlc3R0aGF0LnItbGliLm9yZy8pIC0gUiB0ZXN0aW5nIGZyYW1ld29yawotIFtyb3h5Z2VuMl0oaHR0cHM6Ly9naXRodWIuY29tL3ItbGliL3JveHlnZW4yKSAtIGRvY3VtZW50IGZ1bmN0aW9ucyBpbmxpbmUKLSBbQWR2YW5jZWQgUl0oaHR0cHM6Ly9hZHYtci5oYWRsZXkubnovKSAtIG1vcmUgSGFkbGV5Ci0gW1IgUGFja2FnZXNdKGh0dHBzOi8vci1wa2dzLm9yZy8pIC0gZXZlbiBtb3JlIEhhZGxleQoKKipBbHNvIGhlbHBmdWw6Kiogc29tZSBhZGRpdGlvbmFsIGhlbHBmdWwgbGlua3MsIGVpdGhlciBmcm9tIG1lIG9yIHJlY29tbWVuZGVkIGJ5IG90aGVycy4KCi0gW1JTdHVkaW8gRWR1Y2F0aW9uXShodHRwczovL2VkdWNhdGlvbi5yc3R1ZGlvLmNvbS9sZWFybi9iZWdpbm5lci8pIC0gdGhlIEJlZ2lubmVycyBwYWdlCi0gW2phbml0b3JdKGh0dHBzOi8vZ2FydGh0YXJyLmdpdGh1Yi5pby9tZWF0Ui9qYW5pdG9yLmh0bWwpIC0gYXV0b21hdGUgZGF0YSBjbGVhbnVwCi0gW3B1cnJyXShodHRwczovL3B1cnJyLnRpZHl2ZXJzZS5vcmcvKSAtIGZvciBsaXN0IGl0ZXJhdGlvbgotIFticm9vbV0oaHR0cHM6Ly9naXRodWIuY29tL3RpZHltb2RlbHMvYnJvb20pIC0gZm9yIGdldHRpbmcgY2xhc3NpYyBzdGF0cyBvYmplY3RzIGludG8gdGlkeSBzaGFwZXMgdGhhdCBhcmUgZWFzaWVyIHRvIHdvcmsgd2l0aAoKKipSZWZlcmVuY2VzOioqIG90aGVyIGdvb2QgcmVmZXJlbmNlIHNpdGVzLgoKLSBbWWFuIEhvbHR6XShodHRwczovL3d3dy55YW4taG9sdHouY29tKSBoYXMgc29tZSBnb29kIHNpdGVzIGZvciBkYXRhIHZpc3VhbGl6YXRpb246CiAgLSBbdGhlIFIgR3JhcGggR2FsbGVyeV0oaHR0cHM6Ly93d3cuci1ncmFwaC1nYWxsZXJ5LmNvbSkgLSBjaGFydHMgbWFkZSB3aXRoIFIgYW5kIGdncGxvdDIKICAtIFtmcm9tIERhdGEgdG8gVml6XShodHRwczovL3d3dy5kYXRhLXRvLXZpei5jb20pIC0gcmVjb21tZW5kYXRpb25zIG9uIGRhdGEgdmlzdWFsaXphdGlvbgogIC0gSGUgYWxzbyBoYXMgc29tZSB0aXBzIG9uIFtSIE1hcmtkb3duXShodHRwczovL2hvbHR6eS5naXRodWIuaW8vUGltcC1teS1ybWQvKQoKIyMjIFIgZm9yIERhdGEgU2NpZW5jZQoKU2VsZWN0ZWQgaGlnaGxpZ2h0cyBmcm9tIHRoZSBib29rOgoKIyMjIyBQYXR0ZXJucyBhbmQgbW9kZWxzCgpbNy42IFBhdHRlcm5zIGFuZCBtb2RlbHNdKGh0dHBzOi8vcjRkcy5oYWQuY28ubnovZXhwbG9yYXRvcnktZGF0YS1hbmFseXNpcy5odG1sI3BhdHRlcm5zLWFuZC1tb2RlbHMpIGNvdmVycyBtb2RlbHMgYW5kIHJlc2lkdWFscywgaGVyZSBzaG93aW5nIGhvdyB0byByZXZlYWwgdGhlIGV4cGVjdGVkIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIGN1dCBhbmQgcHJpY2U6CgpgYGB7ciBtb2RlbHN9CmxpYnJhcnkobW9kZWxyKQoKbW9kIDwtIGxtKGxvZyhwcmljZSkgfiBsb2coY2FyYXQpLCBkYXRhID0gZGlhbW9uZHMpCgpkaWFtb25kczIgPC0gZGlhbW9uZHMgJT4lCiAgYWRkX3Jlc2lkdWFscyhtb2QpICU+JQogIG11dGF0ZShyZXNpZCA9IGV4cChyZXNpZCkpCgpnZ3Bsb3QoZGF0YSA9IGRpYW1vbmRzMikgKwogIGdlb21fcG9pbnQobWFwcGluZyA9IGFlcyh4ID0gY2FyYXQsIHkgPSByZXNpZCkpCgpnZ3Bsb3QoZGF0YSA9IGRpYW1vbmRzMikgKwogIGdlb21fYm94cGxvdChtYXBwaW5nID0gYWVzKHggPSBjdXQsIHkgPSByZXNpZCkpCmBgYAoKIyMjIyBOb24tVGlkeSBEYXRhCgpIYWRsZXkgYWR2b2NhdGVzIGZvciAidGlkeSIgZGF0YSwgYnV0IHRoZXJlIGFyZSB0aW1lcyB3aGVuIGRhdGEgaXMgdXNlZnVsbHkgW25vbi10aWR5XShodHRwczovL3NpbXBseXN0YXRpc3RpY3Mub3JnLzIwMTYvMDIvMTcvbm9uLXRpZHktZGF0YS8pLgoKIyMjIyBHcmFwaGljczogTGVhcm5pbmcgbW9yZQoKRnJvbSBbMjguOCBMZWFybmluZyBtb3JlXShodHRwczovL3I0ZHMuaGFkLmNvLm56L2dyYXBoaWNzLWZvci1jb21tdW5pY2F0aW9uLmh0bWwjbGVhcm5pbmctbW9yZS00KToKCiJUaGUgYWJzb2x1dGUgYmVzdCBwbGFjZSB0byBsZWFybiBtb3JlIGlzIHRoZSBnZ3Bsb3QyIGJvb2s6IFtfZ2dwbG90MjogRWxlZ2FudCBncmFwaGljcyBmb3IgZGF0YSBhbmFseXNpc19dKGh0dHBzOi8vYW16bi5jb20vMzMxOTI0Mjc1WCkuIEl0IGdvZXMgaW50byBtdWNoIG1vcmUgZGVwdGggYWJvdXQgdGhlIHVuZGVybHlpbmcgdGhlb3J5LCBhbmQgaGFzIG1hbnkgbW9yZSBleGFtcGxlcyBvZiBob3cgdG8gY29tYmluZSB0aGUgaW5kaXZpZHVhbCBwaWVjZXMgdG8gc29sdmUgcHJhY3RpY2FsIHByb2JsZW1zLiBVbmZvcnR1bmF0ZWx5LCB0aGUgYm9vayBpcyBub3QgYXZhaWxhYmxlIG9ubGluZSBmb3IgZnJlZSwgYWx0aG91Z2ggeW91IGNhbiBmaW5kIHRoZSBzb3VyY2UgY29kZSBhdCA8aHR0cHM6Ly9naXRodWIuY29tL2hhZGxleS9nZ3Bsb3QyLWJvb2s+LgogCkFub3RoZXIgZ3JlYXQgcmVzb3VyY2UgaXMgdGhlIGdncGxvdDIgZXh0ZW5zaW9ucyBnYWxsZXJ5IDxodHRwczovL2V4dHMuZ2dwbG90Mi50aWR5dmVyc2Uub3JnL2dhbGxlcnkvPi4gVGhpcyBzaXRlIGxpc3RzIG1hbnkgb2YgdGhlIHBhY2thZ2VzIHRoYXQgZXh0ZW5kIGdncGxvdDIgd2l0aCBuZXcgZ2VvbXMgYW5kIHNjYWxlcy4gSXQncyBhIGdyZWF0IHBsYWNlIHRvIHN0YXJ0IGlmIHlvdSdyZSB0cnlpbmcgdG8gZG8gc29tZXRoaW5nIHRoYXQgc2VlbXMgaGFyZCB3aXRoIGdncGxvdDIuIgoKIyMjIyBSIE1hcmtkb3duIFdlYnNpdGVzCgpGcm9tIFsyOS44IFdlYnNpdGVzXShodHRwczovL3I0ZHMuaGFkLmNvLm56L3ItbWFya2Rvd24tZm9ybWF0cy5odG1sI3dlYnNpdGVzKToKCiJXaXRoIGEgbGl0dGxlIGFkZGl0aW9uYWwgaW5mcmFzdHJ1Y3R1cmUgeW91IGNhbiB1c2UgUiBNYXJrZG93biB0byBnZW5lcmF0ZSBhIGNvbXBsZXRlIHdlYnNpdGU6CgotIFB1dCB5b3VyIGAuUm1kYCBmaWxlcyBpbiBhIHNpbmdsZSBkaXJlY3RvcnkuIGBpbmRleC5SbWRgIHdpbGwgYmVjb21lIHRoZSBob21lIHBhZ2UuCi0gQWRkIGEgWUFNTCBmaWxlIG5hbWVkIGBfc2l0ZS55bWxgIHByb3ZpZGVzIHRoZSBuYXZpZ2F0aW9uIGZvciB0aGUgc2l0ZS4gRm9yIGV4YW1wbGU6CgpgYGAKbmFtZTogIm15LXdlYnNpdGUiCm5hdmJhcjoKICB0aXRsZTogIk15IFdlYnNpdGUiCiAgbGVmdDoKICAgIC0gdGV4dDogIkhvbWUiCiAgICAgIGhyZWY6IGluZGV4Lmh0bWwKICAgIC0gdGV4dDogIlZpcmlkaXMgQ29sb3JzIgogICAgICBocmVmOiAxLWV4YW1wbGUuaHRtbAogICAgLSB0ZXh0OiAiVGVycmFpbiBDb2xvcnMiCiAgICAgIGhyZWY6IDMtaW5saW5lLmh0bWwKYGBgCgpFeGVjdXRlIGBybWFya2Rvd246OnJlbmRlcl9zaXRlKClgIHRvIGJ1aWxkIGBfc2l0ZWAsIGEgZGlyZWN0b3J5IG9mIGZpbGVzIHJlYWR5IHRvIGRlcGxveSBhcyBhIHN0YW5kYWxvbmUgc3RhdGljIHdlYnNpdGUsIG9yIGlmIHlvdSB1c2UgYW4gUlN0dWRpbyBQcm9qZWN0IGZvciB5b3VyIHdlYnNpdGUgZGlyZWN0b3J5LiBSU3R1ZGlvIHdpbGwgYWRkIGEgQnVpbGQgdGFiIHRvIHRoZSBJREUgdGhhdCB5b3UgY2FuIHVzZSB0byBidWlsZCBhbmQgcHJldmlldyB5b3VyIHNpdGUuIAoKUmVhZCBtb3JlIGF0IDxodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tL3JtYXJrZG93bl93ZWJzaXRlcy5odG1sPi4iCgojIyMjIFIgTm90ZWJvb2sgQWR2aWNlCgpIYWRsZXkgaGFzIHNvbWUgZ29vZCBzdWdnZXN0aW9ucyBmb3IgUiBOb3RlYm9va3MgaW4gWzMwIFIgTWFya2Rvd24gd29ya2Zsb3ddKGh0dHBzOi8vcjRkcy5oYWQuY28ubnovci1tYXJrZG93bi13b3JrZmxvdy5odG1sKS4K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("r-training-log.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
