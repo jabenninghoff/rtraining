@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress). The package is currently not yet functional, but you can read my [R Training Log](notebooks/r-training-log.Rmd) using the GitHub Pages URL: <https://jabenninghoff.github.io/rtraining/>.
+`r packageDescription("rtraining", fields = "Description")` The package is currently not yet functional, but you can read my [R Training Log](notebooks/r-training-log.Rmd) using the GitHub Pages URL: <https://jabenninghoff.github.io/rtraining/>.
 
 ## Installation
 
