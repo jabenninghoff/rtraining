@@ -44,6 +44,14 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
 
-      - name: Lint
+      - name: Lint Package
         run: lintr::lint_package()
+        shell: Rscript {0}
+
+      - name: Lint README
+        run: lintr::lint("README.Rmd")
+        shell: Rscript {0}
+
+      - name: Lint Notebooks
+        run: lintr::lint_dir("notebooks", pattern = rex::rex(".Rmd"))
         shell: Rscript {0}
