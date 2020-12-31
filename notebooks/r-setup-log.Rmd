@@ -71,7 +71,7 @@ I also occasionally use `vim` (mainly for shell scripts) and [atom](https://atom
 
 ## Packages
 
-Managing packages and environments are a challenge for most modern languages. Thankfully R doesn't have the same level of challenge as python, or even ruby, managing packages availalbe within a project is a best practice. I use [renv](https://github.com/rstudio/renv) for this purpose. (I originally discovered [packrat](https://rstudio.github.io/packrat/) but quickly discovered RStudio is replacing it with renv)
+Managing packages and environments are a challenge for most modern languages. Thankfully R doesn't have the same level of challenge as python, or even ruby, managing packages available within a project is a best practice. I use [renv](https://github.com/rstudio/renv) for this purpose. (I originally discovered [packrat](https://rstudio.github.io/packrat/) but quickly discovered RStudio is replacing it with renv)
 
 Here is my package maintenance approach:
 
@@ -81,7 +81,7 @@ With no projects open, I periodically check for updates to the base R packages u
 
 ### Development Packages
 
-The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by [homebrew](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb), currently `/usr/local/lib/R/4.0/site-library`. I've developed a shell script to install development packages that you can find in the [tools](https://github.com/jabenninghoff/rtraining) directory of this repository.
+The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by [homebrew](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb), currently `/usr/local/lib/R/4.0/site-library`. I've developed a shell script to install development packages that you can find in the tools directory of [this repository](https://github.com/jabenninghoff/rtraining).
 
 ```sh
 #!/bin/sh
@@ -126,6 +126,8 @@ renv::clean() # remove extra libraries
 renv::update() # check for unpdated versions of installed libraries
 ```
 
+If you're installing (development) versions of packages from GitHub, you'll be prompted to set up a personal access token using `create_github_token()` and adding it to your `.Renviron` as `GITHUB_PAT=` using `usethis::edit_r_environ()`. I had to install the development versions of both `styler` and `lintr` due to bugs not yet fixed in the released (CRAN) versions. I did also look at using [pak](https://pak.r-lib.org) but found it too buggy to use.
+
 *Note:* I came across an odd quirk where renv will prompt you to upgrade base R projects, even if they're not used. I resolved these by just upgrading the base packages with RStudio with no project open.
 
 I've included some comments on useful packages in my *R Training Log* notebook.
@@ -146,15 +148,60 @@ RStudio has good integration with GitHub. I've adopted the convention of "one RS
 
 ## R Notebooks
 
-Why I use R Notebooks. Disadvantages of R Notebooks.
+R Notebooks are my preferred file format for data analysis, as they allow an easy mixing of text (using pandoc markdown) and R code chunks. This allows me to document what I'm doing as I go, both for reproducibility as well as recording my observations, thoughts and conclusions. It especially lends itself to iterative development:
 
-Issues:
+1. Write code
+1. Run code
+1. See results
+1. Update code
 
-- `Rcpp` and `rprojroot` are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with `renv`. This is a [bug in RStudio](https://github.com/rstudio/rstudio/issues/7935), which will be fixed in version 1.4.944.
+This method of development is not always appropriate, but fits well with exploratory analysis. Once I get to writing functions, I'm starting to adopt the formal structure of [packages](https://r-pkgs.org/index.html), [testthat](https://testthat.r-lib.org), and [roxygen2](https://roxygen2.r-lib.org).
+
+Specifically, I use `html_notebook`, which was recommended to me. RStudio handles this differently than `html_document`:
+
+Behavior|`html_notebook`|`html_document`
+--------|---------------|---------------
+Quick View|Preview Button|No Preview Button
+Saving Files|Automatically knits file on save|Manually knit file
+Rendering Files|Renders R output as it exists in the IDE on save|Renders R output by running all R code
+Default Options|Includes options for readability, hiding and downloading code, and paged tables|Higher-quality rendering of PNG graphics
+
+Essentially, R Notebooks are generally faster and more convenient when *doing* analysis, and `html_document` R Markdown files offer higher-quality output. This site uses a custom framework to convert html_notebooks to html_documents for publishing (see the next section for details). They are also a convenient way to share analysis with peers - just email the `.nb.html` file, which will include all of the output, as well as embedding the `.Rmd` source code for easy editing. This also allows people who don't have R/RStudio to see the results of an analysis.
+
+There are some drawbacks to using R Notebooks:
+
+- Because R Notebooks are render-on-save, you can inadvertently end up with missing or outdated R output from your notebook when saving, if you've made updates and haven't re-run the entire document. My habit is to do the following at the end of a writing session, before committing to git, which ensures a "clean" notebook:
+  1. Clear the Global Environment
+  1. "Restart R and Clear Output"
+  1. "Run All"
+  1. Save
 - [Debug breakpoints don't work in R Markdown documents](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio#debugging-in-r-markdown-documents). To fix this, [convert R Markdown documents to R Scripts using purl](https://bookdown.org/yihui/rmarkdown-cookbook/purl.html) for debugging.
+- Not really a drawback, but...`Rcpp` and `rprojroot` are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with `renv`. This is a [bug in RStudio](https://github.com/rstudio/rstudio/issues/7935), which will be fixed in version 1.4.944.
 
 ## Publishing R Notebooks
 
-...with GitHub Pages:
+Since R Notebooks are saved as html files, it's possible to publish them on GitHub using GitHub pages. GitHub published a [tutorial](https://resources.github.com/whitepapers/github-and-rstudio/) in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn't quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn't directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in [rstudio/rmarkdown #1020](https://github.com/rstudio/rmarkdown/issues/1020) - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.
 
-> Installation on macOS was easy enough, just `brew install r` and `brew cask install rstudio`. GitHub published a [tutorial](https://resources.github.com/whitepapers/github-and-rstudio/) in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn't quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn't directly support the automatically generated html of R Notebooks. *Side note: the consensus was to use `html_notebook` as a working document, and `html_document` to publish.* After more searching, I was able to get Notebooks working on GitHub, but I used the method described in [rstudio/rmarkdown #1020](https://github.com/rstudio/rmarkdown/issues/1020) - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.
+### Publishing with rmarkdown
+
+After using `README.md` and GitHub pages to publish notebooks, I found I wanted an easier way to publish and navigate across collections of notebooks. Publishing R Notebooks on GitHub pages works fine, but doesn't offer an easy navigation structure, like [pkgdown](https://pkgdown.r-lib.org). I tried using pkgdown to display notebooks, but pkgdown only supports building `vignettes`, which have a distinctly different look and feel than R Notebooks. The [rmarkdown site generator](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html), [render_site](https://rdrr.io/cran/rmarkdown/man/render_site.html), allows more flexible building of websites from R Markdown files with a simple navigation bar at the top, but doesn't support `html_notebook` files OOB.
+
+To work around this, I created a simple framework for converting `html_notebook` files to `html_document` and building a `_site.yml` from a list of notebooks stored in the non-standard `notebooks/` directory, initially using a shell script, `build_site` (stored at the root of this [repo](https://github.com/jabenninghoff/rtraining)). It does the following:
+
+1. Creates a working directory, `.build-site`
+1. Builds a `rmarkdown::render_site()` `_site.yml` file that includes a menu with all notebooks in the `notebooks/` directory
+1. Copies all `.Rmd` files to `.build-site` changing their type from `html_notebook` to `html_document`
+1. Includes some configuration to make `html_documents` work more like `html_notebook`
+1. Calls `rmarkdown::render_site()` to render the site in the `docs/` directory
+
+I typically rebuild a site with the following command, run from the top-level directory of the project:
+
+```sh
+rm -rf .build-site && sh build-site && open docs/index.html
+```
+
+This approach leverages the [docs functionality](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch) of GitHub pages, like pkgdown.
+
+# Next Steps
+
+I'll keep adding to this document as I go, and will likely eventually migrate this notebook to a `vignette` and switch to `pkgdown`.
