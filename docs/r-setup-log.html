@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2020-12-30" />
+
+<title>R Setup Log</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R Training</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fas fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Notebooks
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r-setup-log.html">R Setup Log</a>
+    </li>
+    <li>
+      <a href="r-training-log.html">R Training Log</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jabenninghoff/rtraining">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">R Setup Log</h1>
+<h4 class="date">2020-12-30</h4>
+
+</div>
+
+
+<p>My notes on my personal R setup. I started my R journey in <a href="https://www.information-safety.org/2020/09/11/working-with-r/">September 2020</a> after <a href="https://societyinforisk.org/event-3899786">SIRACon 2020</a>.</p>
+<pre class="r"><code># no libraries</code></pre>
+<div id="installing-r" class="section level1">
+<h1>Installing R</h1>
+<p>I prefer installing R and RStudio using <a href="https://brew.sh">Homebrew</a>. I use <a href="https://github.com/Homebrew/homebrew-bundle">Homebrew Bundle</a> to install all software on my systems, but installing R and RStudio is simple enough using the command line:</p>
+<!-- note: lintr version <= 2.0.1 throws an error when using language identifiers: <https://github.com/jimhester/lintr/issues/505> -->
+<pre class="sh"><code>brew install --formula r &amp;&amp; brew install --cask rstudio</code></pre>
+<div id="r-variants" class="section level2">
+<h2>R Variants</h2>
+<p><strong>TL;DR: just use homebrew.</strong></p>
+<p>I don’t recommend installing the <code>cask</code> variant of r because it creates problems with <code>brew doctor</code>:</p>
+<pre class="sh"><code>brew info --cask r</code></pre>
+<pre><code>## r: 4.0.3
+## https://www.r-project.org/
+## Not installed
+## From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r.rb
+## ==&gt; Name
+## R
+## ==&gt; Description
+## Environment for statistical computing and graphics
+## ==&gt; Artifacts
+## R-4.0.3.pkg (Pkg)
+## ==&gt; Caveats
+## Cask r installs files under /usr/local. The presence of such
+## files can cause warnings when running `brew doctor`, which is considered
+## to be a bug in Homebrew Cask.
+## 
+## ==&gt; Analytics
+## install: 916 (30 days), 2,826 (90 days), 11,852 (365 days)</code></pre>
+<p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
+<pre class="r"><code>options(width = 100)
+capabilities()</code></pre>
+<pre><code>##        jpeg         png        tiff       tcltk         X11        aqua    http/ftp     sockets 
+##       FALSE       FALSE       FALSE        TRUE       FALSE        TRUE        TRUE        TRUE 
+##      libxml        fifo      cledit       iconv         NLS     profmem       cairo         ICU 
+##        TRUE        TRUE       FALSE        TRUE        TRUE        TRUE       FALSE        TRUE 
+## long.double     libcurl 
+##        TRUE        TRUE</code></pre>
+<p>Currently, this is everything except the X11 dependencies, which aren’t really needed:</p>
+<pre class="r"><code>?capabilities</code></pre>
+<blockquote>
+<p><strong>Note to macOS users</strong></p>
+<p>Capabilities “jpeg”, “png” and “tiff” refer to the X11-based versions of these devices. If capabilities(“aqua”) is true, then these devices with type = “quartz” will be available, and out-of-the-box will be the default type. Thus for example the tiff device will be available if capabilities(“aqua”) || capabilities(“tiff”) if the defaults are unchanged.</p>
+</blockquote>
+<p>As an active contributor to Homebrew, I <em>strongly</em> recommend using it for any/all software; their quality control is excellent.</p>
+</div>
+</div>
+<div id="r-workspace" class="section level1">
+<h1>R Workspace</h1>
+<p>Once R and RStudio have been installed, you’ll need a development environment and some packages.</p>
+<div id="development-environment" class="section level2">
+<h2>Development Environment</h2>
+<p>Well, obviously, I use <a href="https://rstudio.com/products/rstudio/download/">RStudio</a>. There are other IDEs available, and it’s also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don’t typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.</p>
+<pre class="sh"><code>brew install github</code></pre>
+<p>I also occasionally use <code>vim</code> (mainly for shell scripts) and <a href="https://atom.io">atom</a> (mainly for vanilla <code>.md</code> files using <a href="https://atom.io/packages/markdown-preview-enhanced">markdown-preview-enhanced</a>).</p>
+</div>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<p>Managing packages and environments are a challenge for most modern languages. Thankfully R doesn’t have the same level of challenge as python, or even ruby, managing packages available within a project is a best practice. I use <a href="https://github.com/rstudio/renv">renv</a> for this purpose. (I originally discovered <a href="https://rstudio.github.io/packrat/">packrat</a> but quickly discovered RStudio is replacing it with renv)</p>
+<p>Here is my package maintenance approach:</p>
+<div id="base-r-packages" class="section level3">
+<h3>Base R Packages</h3>
+<p>With no projects open, I periodically check for updates to the base R packages using the RStudio Packages “Update” function. These are the only packages I install to the base directory <code>/usr/local/Cellar/r/4.0.3_2/lib/R/library</code>. <em>Note: upgrading or reinstalling r through homebrew may ‘downgrade’ the base packages.</em></p>
+</div>
+<div id="development-packages" class="section level3">
+<h3>Development Packages</h3>
+<p>The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb">homebrew</a>, currently <code>/usr/local/lib/R/4.0/site-library</code>. I’ve developed a shell script to install development packages that you can find in the tools directory of <a href="https://github.com/jabenninghoff/rtraining">this repository</a>.</p>
+<pre class="sh"><code>#!/bin/sh
+# install development packages to site repository
+# thanks to https://blog.sellorm.com/2017/10/21/quick-script-to-install-an-r-package-from-the-command-line/
+# and https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb
+# designed to work with homebrew: `brew install --formula r &amp;&amp; brew install --cask rstudio`
+set -ex # halt script on error, echo on
+
+PREFIX=`brew --prefix`
+RVERSION=`${PREFIX}/bin/Rscript -e &#39;cat(as.character(getRversion()[1,1:2]))&#39;`
+SITELIB=&quot;${PREFIX}/lib/R/${RVERSION}/site-library&quot;
+DEVPKG=&#39;c(&quot;renv&quot;, &quot;styler&quot;, &quot;lintr&quot;, &quot;miniUI&quot;, &quot;devtools&quot;, &quot;available&quot;)&#39;
+
+if [ ! -d &quot;${SITELIB}&quot; ]
+then
+    echo &quot;fatal error: ${SITELIB} does not exist - not using \`brew install --formula r\`?&quot;
+    exit 1
+fi
+
+brew install libgit2 # required by devtools
+
+echo &quot;install.packages(${DEVPKG}, repos=\&quot;https://cran.rstudio.com\&quot;, lib=\&quot;${SITELIB}\&quot;)&quot; | R --no-save</code></pre>
+</div>
+<div id="project-packages" class="section level3">
+<h3>Project Packages</h3>
+<p>Any packages <em>not</em> needed to create projects I install within a project using renv - here are some good intros:</p>
+<ul>
+<li>A <a href="https://rstudio.com/resources/rstudioconf-2020/renv-project-environments-for-r/">presentation at rstudio::conf 2020</a></li>
+<li>The <a href="https://blog.rstudio.com/2019/11/06/renv-project-environments-for-r/">RStudio Blog post</a></li>
+<li>An <a href="https://rstudio.github.io/renv/articles/renv.html">Introduction to renv</a></li>
+<li><a href="https://github.com/rstudio/renv">renv</a> on GitHub</li>
+</ul>
+<pre class="r"><code>renv::init() # to set up renv in the project
+renv::install(&quot;rtraining&quot;) # to install a package
+renv::status() # checks if renv.lock is in sync
+renv::snapshot() # save libraries in renv.lock
+renv::restore() # restore libraries from renv.lock - use when first using an existing project
+renv::clean() # remove extra libraries
+renv::update() # check for unpdated versions of installed libraries</code></pre>
+<p>If you’re installing (development) versions of packages from GitHub, you’ll be prompted to set up a personal access token using <code>create_github_token()</code> and adding it to your <code>.Renviron</code> as <code>GITHUB_PAT=</code> using <code>usethis::edit_r_environ()</code>. I had to install the development versions of both <code>styler</code> and <code>lintr</code> due to bugs not yet fixed in the released (CRAN) versions. I did also look at using <a href="https://pak.r-lib.org">pak</a> but found it too buggy to use.</p>
+<p><em>Note:</em> I came across an odd quirk where renv will prompt you to upgrade base R projects, even if they’re not used. I resolved these by just upgrading the base packages with RStudio with no project open.</p>
+<p>I’ve included some comments on useful packages in my <em>R Training Log</em> notebook.</p>
+</div>
+</div>
+</div>
+<div id="using-r" class="section level1">
+<h1>Using R</h1>
+<p>So - what have I learned about using R? I won’t cover the actual Data Science part here, but have some recommended reading in my <em>R Training Log</em>.</p>
+<div id="use-git" class="section level2">
+<h2>Use git!</h2>
+<p>This wasn’t really something I learned with R, but use of version control for any kind of code/script is crucial. These days, I keep all scripts and configuration files in some flavor of public or private version control. Mostly that means GitHub, but also private git servers (via ssh) are easy to set up for work that you want to keep off of GitHub.</p>
+<p>I don’t want to get too much into managing code via version control, but I favor trunk-based development with short-lived branches, small commits of working code, and rebase and merge for linear commit history. There’s a lot of good research on this topic from Google’s <a href="https://cloud.google.com/devops">Dev Ops Research and Assessment</a> team.</p>
+</div>
+<div id="using-rstudio-with-github" class="section level2">
+<h2>Using RStudio with GitHub</h2>
+<p>RStudio has good integration with GitHub. I’ve adopted the convention of “one RStudio Project (.Rproj) per repository” and storing the Rproj file in the repository. That seems to be the norm.</p>
+</div>
+<div id="r-notebooks" class="section level2">
+<h2>R Notebooks</h2>
+<p>R Notebooks are my preferred file format for data analysis, as they allow an easy mixing of text (using pandoc markdown) and R code chunks. This allows me to document what I’m doing as I go, both for reproducibility as well as recording my observations, thoughts and conclusions. It especially lends itself to iterative development:</p>
+<ol style="list-style-type: decimal">
+<li>Write code</li>
+<li>Run code</li>
+<li>See results</li>
+<li>Update code</li>
+</ol>
+<p>This method of development is not always appropriate, but fits well with exploratory analysis. Once I get to writing functions, I’m starting to adopt the formal structure of <a href="https://r-pkgs.org/index.html">packages</a>, <a href="https://testthat.r-lib.org">testthat</a>, and <a href="https://roxygen2.r-lib.org">roxygen2</a>.</p>
+<p>Specifically, I use <code>html_notebook</code>, which was recommended to me. RStudio handles this differently than <code>html_document</code>:</p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="39%" />
+<col width="39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Behavior</th>
+<th><code>html_notebook</code></th>
+<th><code>html_document</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quick View</td>
+<td>Preview Button</td>
+<td>No Preview Button</td>
+</tr>
+<tr class="even">
+<td>Saving Files</td>
+<td>Automatically knits file on save</td>
+<td>Manually knit file</td>
+</tr>
+<tr class="odd">
+<td>Rendering Files</td>
+<td>Renders R output as it exists in the IDE on save</td>
+<td>Renders R output by running all R code</td>
+</tr>
+<tr class="even">
+<td>Default Options</td>
+<td>Includes options for readability, hiding and downloading code, and paged tables</td>
+<td>Higher-quality rendering of PNG graphics</td>
+</tr>
+</tbody>
+</table>
+<p>Essentially, R Notebooks are generally faster and more convenient when <em>doing</em> analysis, and <code>html_document</code> R Markdown files offer higher-quality output. This site uses a custom framework to convert html_notebooks to html_documents for publishing (see the next section for details). They are also a convenient way to share analysis with peers - just email the <code>.nb.html</code> file, which will include all of the output, as well as embedding the <code>.Rmd</code> source code for easy editing. This also allows people who don’t have R/RStudio to see the results of an analysis.</p>
+<p>There are some drawbacks to using R Notebooks:</p>
+<ul>
+<li>Because R Notebooks are render-on-save, you can inadvertently end up with missing or outdated R output from your notebook when saving, if you’ve made updates and haven’t re-run the entire document. My habit is to do the following at the end of a writing session, before committing to git, which ensures a “clean” notebook:
+<ol style="list-style-type: decimal">
+<li>Clear the Global Environment</li>
+<li>“Restart R and Clear Output”</li>
+<li>“Run All”</li>
+<li>Save</li>
+</ol></li>
+<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio#debugging-in-r-markdown-documents">Debug breakpoints don’t work in R Markdown documents</a>. To fix this, <a href="https://bookdown.org/yihui/rmarkdown-cookbook/purl.html">convert R Markdown documents to R Scripts using purl</a> for debugging.</li>
+<li>Not really a drawback, but…<code>Rcpp</code> and <code>rprojroot</code> are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with <code>renv</code>. This is a <a href="https://github.com/rstudio/rstudio/issues/7935">bug in RStudio</a>, which will be fixed in version 1.4.944.</li>
+</ul>
+</div>
+<div id="publishing-r-notebooks" class="section level2">
+<h2>Publishing R Notebooks</h2>
+<p>Since R Notebooks are saved as html files, it’s possible to publish them on GitHub using GitHub pages. GitHub published a <a href="https://resources.github.com/whitepapers/github-and-rstudio/">tutorial</a> in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn’t quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn’t directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in <a href="https://github.com/rstudio/rmarkdown/issues/1020">rstudio/rmarkdown #1020</a> - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.</p>
+<div id="publishing-with-rmarkdown" class="section level3">
+<h3>Publishing with rmarkdown</h3>
+<p>After using <code>README.md</code> and GitHub pages to publish notebooks, I found I wanted an easier way to publish and navigate across collections of notebooks. Publishing R Notebooks on GitHub pages works fine, but doesn’t offer an easy navigation structure, like <a href="https://pkgdown.r-lib.org">pkgdown</a>. I tried using pkgdown to display notebooks, but pkgdown only supports building <code>vignettes</code>, which have a distinctly different look and feel than R Notebooks. The <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown site generator</a>, <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a>, allows more flexible building of websites from R Markdown files with a simple navigation bar at the top, but doesn’t support <code>html_notebook</code> files OOB.</p>
+<p>To work around this, I created a simple framework for converting <code>html_notebook</code> files to <code>html_document</code> and building a <code>_site.yml</code> from a list of notebooks stored in the non-standard <code>notebooks/</code> directory, initially using a shell script, <code>build_site</code> (stored at the root of this <a href="https://github.com/jabenninghoff/rtraining">repo</a>). It does the following:</p>
+<ol style="list-style-type: decimal">
+<li>Creates a working directory, <code>.build-site</code></li>
+<li>Builds a <code>rmarkdown::render_site()</code> <code>_site.yml</code> file that includes a menu with all notebooks in the <code>notebooks/</code> directory</li>
+<li>Copies all <code>.Rmd</code> files to <code>.build-site</code> changing their type from <code>html_notebook</code> to <code>html_document</code></li>
+<li>Includes some configuration to make <code>html_documents</code> work more like <code>html_notebook</code></li>
+<li>Calls <code>rmarkdown::render_site()</code> to render the site in the <code>docs/</code> directory</li>
+</ol>
+<p>I typically rebuild a site with the following command, run from the top-level directory of the project:</p>
+<pre class="sh"><code>rm -rf .build-site &amp;&amp; sh build-site &amp;&amp; open docs/index.html</code></pre>
+<p>This approach leverages the <a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch">docs functionality</a> of GitHub pages, like pkgdown.</p>
+</div>
+</div>
+</div>
+<div id="next-steps" class="section level1">
+<h1>Next Steps</h1>
+<p>I’ll keep adding to this document as I go, and will likely eventually migrate this notebook to a <code>vignette</code> and switch to <code>pkgdown</code>.</p>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBTZXR1cCBMb2ciCmRhdGU6IDIwMjAtMTItMzAKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICBjb2RlX2ZvbGRpbmc6CiAgICB0b2M6IFRSVUUKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiBGQUxTRQogICAgICBzbW9vdGhfc2Nyb2xsOiBGQUxTRQotLS0KCk15IG5vdGVzIG9uIG15IHBlcnNvbmFsIFIgc2V0dXAuIEkgc3RhcnRlZCBteSBSIGpvdXJuZXkgaW4gW1NlcHRlbWJlciAyMDIwXShodHRwczovL3d3dy5pbmZvcm1hdGlvbi1zYWZldHkub3JnLzIwMjAvMDkvMTEvd29ya2luZy13aXRoLXIvKSBhZnRlciBbU0lSQUNvbiAyMDIwXShodHRwczovL3NvY2lldHlpbmZvcmlzay5vcmcvZXZlbnQtMzg5OTc4NikuCgpgYGB7ciBzdGFydHVwLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0KIyBubyBsaWJyYXJpZXMKYGBgCgojIEluc3RhbGxpbmcgUgoKSSBwcmVmZXIgaW5zdGFsbGluZyBSIGFuZCBSU3R1ZGlvIHVzaW5nIFtIb21lYnJld10oaHR0cHM6Ly9icmV3LnNoKS4gSSB1c2UgW0hvbWVicmV3IEJ1bmRsZV0oaHR0cHM6Ly9naXRodWIuY29tL0hvbWVicmV3L2hvbWVicmV3LWJ1bmRsZSkgdG8gaW5zdGFsbCBhbGwgc29mdHdhcmUgb24gbXkgc3lzdGVtcywgYnV0IGluc3RhbGxpbmcgUiBhbmQgUlN0dWRpbyBpcyBzaW1wbGUgZW5vdWdoIHVzaW5nIHRoZSBjb21tYW5kIGxpbmU6Cgo8IS0tIG5vdGU6IGxpbnRyIHZlcnNpb24gPD0gMi4wLjEgdGhyb3dzIGFuIGVycm9yIHdoZW4gdXNpbmcgbGFuZ3VhZ2UgaWRlbnRpZmllcnM6IDxodHRwczovL2dpdGh1Yi5jb20vamltaGVzdGVyL2xpbnRyL2lzc3Vlcy81MDU+IC0tPgoKYGBgc2gKYnJldyBpbnN0YWxsIC0tZm9ybXVsYSByICYmIGJyZXcgaW5zdGFsbCAtLWNhc2sgcnN0dWRpbwpgYGAKCiMjIFIgVmFyaWFudHMKCioqVEw7RFI6IGp1c3QgdXNlIGhvbWVicmV3LioqCgpJIGRvbid0IHJlY29tbWVuZCBpbnN0YWxsaW5nIHRoZSBgY2Fza2AgdmFyaWFudCBvZiByIGJlY2F1c2UgaXQgY3JlYXRlcyBwcm9ibGVtcyB3aXRoIGBicmV3IGRvY3RvcmA6CgpgYGB7c2ggYnJldyBpbmZvIHJ9CmJyZXcgaW5mbyAtLWNhc2sgcgpgYGAKCkkgdHJpZWQgIltpbnN0YWxsaW5nIGFsbCB0aGUgdGhpbmdzXShodHRwczovL2x1aXNwdWVydG8ubmV0L2Jsb2cvMjAxOC8wNS8xMS9pbnN0YWxsaW5nLXItd2l0aC1ob21lYnJldy13aXRoLWFsbC10aGUtY2FwYWJpbGl0aWVzLykiIHdpdGggW2hvbWVicmV3LXItc3JmXShodHRwczovL2dpdGh1Yi5jb20vc2V0aHJmb3JlL2hvbWVicmV3LXItc3JmKSBidXQgZGlkbid0IGxpa2UgaG93IHRoZSB1bmluc3RhbGwgZG9lc24ndCBjbGVhbiB1cCwgYW5kIGZyYW5rbHksIEkgaGF2ZW4ndCBmb3VuZCBhIG5lZWQgZm9yIG1vcmUgdGhhbiB0aGUgY2FwYWJpbGl0aWVzIGluY2x1ZGVkIHdpdGggaG9tZWJyZXcgUjoKCmBgYHtyIGNhcGFiaWxpdGllc30Kb3B0aW9ucyh3aWR0aCA9IDEwMCkKY2FwYWJpbGl0aWVzKCkKYGBgCgpDdXJyZW50bHksIHRoaXMgaXMgZXZlcnl0aGluZyBleGNlcHQgdGhlIFgxMSBkZXBlbmRlbmNpZXMsIHdoaWNoIGFyZW4ndCByZWFsbHkgbmVlZGVkOgoKYGBgcgo/Y2FwYWJpbGl0aWVzCmBgYAoKPiAqKk5vdGUgdG8gbWFjT1MgdXNlcnMqKgo+IAo+IENhcGFiaWxpdGllcyAianBlZyIsICJwbmciIGFuZCAidGlmZiIgcmVmZXIgdG8gdGhlIFgxMS1iYXNlZCB2ZXJzaW9ucyBvZiB0aGVzZSBkZXZpY2VzLiBJZiBjYXBhYmlsaXRpZXMoImFxdWEiKSBpcyB0cnVlLCB0aGVuIHRoZXNlIGRldmljZXMgd2l0aCB0eXBlID0gInF1YXJ0eiIgd2lsbCBiZSBhdmFpbGFibGUsIGFuZCBvdXQtb2YtdGhlLWJveCB3aWxsIGJlIHRoZSBkZWZhdWx0IHR5cGUuIFRodXMgZm9yIGV4YW1wbGUgdGhlIHRpZmYgZGV2aWNlIHdpbGwgYmUgYXZhaWxhYmxlIGlmIGNhcGFiaWxpdGllcygiYXF1YSIpIHx8IGNhcGFiaWxpdGllcygidGlmZiIpIGlmIHRoZSBkZWZhdWx0cyBhcmUgdW5jaGFuZ2VkLgoKQXMgYW4gYWN0aXZlIGNvbnRyaWJ1dG9yIHRvIEhvbWVicmV3LCBJICpzdHJvbmdseSogcmVjb21tZW5kIHVzaW5nIGl0IGZvciBhbnkvYWxsIHNvZnR3YXJlOyB0aGVpciBxdWFsaXR5IGNvbnRyb2wgaXMgZXhjZWxsZW50LgoKIyBSIFdvcmtzcGFjZQoKT25jZSBSIGFuZCBSU3R1ZGlvIGhhdmUgYmVlbiBpbnN0YWxsZWQsIHlvdSdsbCBuZWVkIGEgZGV2ZWxvcG1lbnQgZW52aXJvbm1lbnQgYW5kIHNvbWUgcGFja2FnZXMuCgojIyBEZXZlbG9wbWVudCBFbnZpcm9ubWVudAoKV2VsbCwgb2J2aW91c2x5LCBJIHVzZSBbUlN0dWRpb10oaHR0cHM6Ly9yc3R1ZGlvLmNvbS9wcm9kdWN0cy9yc3R1ZGlvL2Rvd25sb2FkLykuIFRoZXJlIGFyZSBvdGhlciBJREVzIGF2YWlsYWJsZSwgYW5kIGl0J3MgYWxzbyBwb3NzaWJsZSB0byBkZXZlbG9wIHVzaW5nIHRoZSBjb21tYW5kIGxpbmUsIGJ1dCBSU3R1ZGlvIHByb3ZpZGVzIGEgcGxlYXNhbnQsIGludGVncmF0ZWQgZXhwZXJpZW5jZSBmb3IgUiBkZXZlbG9wbWVudCwgYW5kIGFjdGl2ZWx5IHN1cHBvcnRzIHRoZSBSIGNvbW11bml0eS4gSSBkb24ndCB0eXBpY2FsbHkgdXNlIHRoZSBidWlsdC1pbiBHaXQgY2xpZW50LCBpbnN0ZWFkIHVzaW5nIHRoZSBHaXRIdWIgRGVza3RvcCBjbGllbnQgYW5kIGdpdCBjb21tYW5kLWxpbmUgdG9vbC4KCmBgYHNoCmJyZXcgaW5zdGFsbCBnaXRodWIKYGBgCgpJIGFsc28gb2NjYXNpb25hbGx5IHVzZSBgdmltYCAobWFpbmx5IGZvciBzaGVsbCBzY3JpcHRzKSBhbmQgW2F0b21dKGh0dHBzOi8vYXRvbS5pbykgKG1haW5seSBmb3IgdmFuaWxsYSBgLm1kYCBmaWxlcyB1c2luZyBbbWFya2Rvd24tcHJldmlldy1lbmhhbmNlZF0oaHR0cHM6Ly9hdG9tLmlvL3BhY2thZ2VzL21hcmtkb3duLXByZXZpZXctZW5oYW5jZWQpKS4KCiMjIFBhY2thZ2VzCgpNYW5hZ2luZyBwYWNrYWdlcyBhbmQgZW52aXJvbm1lbnRzIGFyZSBhIGNoYWxsZW5nZSBmb3IgbW9zdCBtb2Rlcm4gbGFuZ3VhZ2VzLiBUaGFua2Z1bGx5IFIgZG9lc24ndCBoYXZlIHRoZSBzYW1lIGxldmVsIG9mIGNoYWxsZW5nZSBhcyBweXRob24sIG9yIGV2ZW4gcnVieSwgbWFuYWdpbmcgcGFja2FnZXMgYXZhaWxhYmxlIHdpdGhpbiBhIHByb2plY3QgaXMgYSBiZXN0IHByYWN0aWNlLiBJIHVzZSBbcmVudl0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vcmVudikgZm9yIHRoaXMgcHVycG9zZS4gKEkgb3JpZ2luYWxseSBkaXNjb3ZlcmVkIFtwYWNrcmF0XShodHRwczovL3JzdHVkaW8uZ2l0aHViLmlvL3BhY2tyYXQvKSBidXQgcXVpY2tseSBkaXNjb3ZlcmVkIFJTdHVkaW8gaXMgcmVwbGFjaW5nIGl0IHdpdGggcmVudikKCkhlcmUgaXMgbXkgcGFja2FnZSBtYWludGVuYW5jZSBhcHByb2FjaDoKCiMjIyBCYXNlIFIgUGFja2FnZXMKCldpdGggbm8gcHJvamVjdHMgb3BlbiwgSSBwZXJpb2RpY2FsbHkgY2hlY2sgZm9yIHVwZGF0ZXMgdG8gdGhlIGJhc2UgUiBwYWNrYWdlcyB1c2luZyB0aGUgUlN0dWRpbyBQYWNrYWdlcyAiVXBkYXRlIiBmdW5jdGlvbi4gVGhlc2UgYXJlIHRoZSBvbmx5IHBhY2thZ2VzIEkgaW5zdGFsbCB0byB0aGUgYmFzZSBkaXJlY3RvcnkgYC91c3IvbG9jYWwvQ2VsbGFyL3IvNC4wLjNfMi9saWIvUi9saWJyYXJ5YC4gKk5vdGU6IHVwZ3JhZGluZyBvciByZWluc3RhbGxpbmcgciB0aHJvdWdoIGhvbWVicmV3IG1heSAnZG93bmdyYWRlJyB0aGUgYmFzZSBwYWNrYWdlcy4qCgojIyMgRGV2ZWxvcG1lbnQgUGFja2FnZXMKClRoZSBvbmx5IG90aGVyIHRvb2xzIEkgaW5zdGFsbCBvdXRzaWRlIG9mIHByb2plY3RzIGFyZSBmb3Igc3VwcG9ydGluZyBkZXZlbG9wbWVudC4gT3JpZ2luYWxseSB0aGlzIHdhcyBqdXN0IHJlbnYsIGJ1dCBub3cgaXQgaW5jbHVkZXMgYSBudW1iZXIgb2YgZGV2ZWxvcG1lbnQgdG9vbHMgbmVlZGVkIHRvIGNyZWF0ZSBwcm9qZWN0cy4gSSB1c2UgdGhlIFIgc2l0ZSBsaWJyYXJ5IHVzZWQgYnkgW2hvbWVicmV3XShodHRwczovL2dpdGh1Yi5jb20vSG9tZWJyZXcvaG9tZWJyZXctY29yZS9ibG9iL0hFQUQvRm9ybXVsYS9yLnJiKSwgY3VycmVudGx5IGAvdXNyL2xvY2FsL2xpYi9SLzQuMC9zaXRlLWxpYnJhcnlgLiBJJ3ZlIGRldmVsb3BlZCBhIHNoZWxsIHNjcmlwdCB0byBpbnN0YWxsIGRldmVsb3BtZW50IHBhY2thZ2VzIHRoYXQgeW91IGNhbiBmaW5kIGluIHRoZSB0b29scyBkaXJlY3Rvcnkgb2YgW3RoaXMgcmVwb3NpdG9yeV0oaHR0cHM6Ly9naXRodWIuY29tL2phYmVubmluZ2hvZmYvcnRyYWluaW5nKS4KCmBgYHNoCiMhL2Jpbi9zaAojIGluc3RhbGwgZGV2ZWxvcG1lbnQgcGFja2FnZXMgdG8gc2l0ZSByZXBvc2l0b3J5CiMgdGhhbmtzIHRvIGh0dHBzOi8vYmxvZy5zZWxsb3JtLmNvbS8yMDE3LzEwLzIxL3F1aWNrLXNjcmlwdC10by1pbnN0YWxsLWFuLXItcGFja2FnZS1mcm9tLXRoZS1jb21tYW5kLWxpbmUvCiMgYW5kIGh0dHBzOi8vZ2l0aHViLmNvbS9Ib21lYnJldy9ob21lYnJldy1jb3JlL2Jsb2IvSEVBRC9Gb3JtdWxhL3IucmIKIyBkZXNpZ25lZCB0byB3b3JrIHdpdGggaG9tZWJyZXc6IGBicmV3IGluc3RhbGwgLS1mb3JtdWxhIHIgJiYgYnJldyBpbnN0YWxsIC0tY2FzayByc3R1ZGlvYApzZXQgLWV4ICMgaGFsdCBzY3JpcHQgb24gZXJyb3IsIGVjaG8gb24KClBSRUZJWD1gYnJldyAtLXByZWZpeGAKUlZFUlNJT049YCR7UFJFRklYfS9iaW4vUnNjcmlwdCAtZSAnY2F0KGFzLmNoYXJhY3RlcihnZXRSdmVyc2lvbigpWzEsMToyXSkpJ2AKU0lURUxJQj0iJHtQUkVGSVh9L2xpYi9SLyR7UlZFUlNJT059L3NpdGUtbGlicmFyeSIKREVWUEtHPSdjKCJyZW52IiwgInN0eWxlciIsICJsaW50ciIsICJtaW5pVUkiLCAiZGV2dG9vbHMiLCAiYXZhaWxhYmxlIiknCgppZiBbICEgLWQgIiR7U0lURUxJQn0iIF0KdGhlbgoJZWNobyAiZmF0YWwgZXJyb3I6ICR7U0lURUxJQn0gZG9lcyBub3QgZXhpc3QgLSBub3QgdXNpbmcgXGBicmV3IGluc3RhbGwgLS1mb3JtdWxhIHJcYD8iCglleGl0IDEKZmkKCmJyZXcgaW5zdGFsbCBsaWJnaXQyICMgcmVxdWlyZWQgYnkgZGV2dG9vbHMKCmVjaG8gImluc3RhbGwucGFja2FnZXMoJHtERVZQS0d9LCByZXBvcz1cImh0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbVwiLCBsaWI9XCIke1NJVEVMSUJ9XCIpIiB8IFIgLS1uby1zYXZlCmBgYAoKIyMjIFByb2plY3QgUGFja2FnZXMKCkFueSBwYWNrYWdlcyAqbm90KiBuZWVkZWQgdG8gY3JlYXRlIHByb2plY3RzIEkgaW5zdGFsbCB3aXRoaW4gYSBwcm9qZWN0IHVzaW5nIHJlbnYgLSBoZXJlIGFyZSBzb21lIGdvb2QgaW50cm9zOgoKLSBBIFtwcmVzZW50YXRpb24gYXQgcnN0dWRpbzo6Y29uZiAyMDIwXShodHRwczovL3JzdHVkaW8uY29tL3Jlc291cmNlcy9yc3R1ZGlvY29uZi0yMDIwL3JlbnYtcHJvamVjdC1lbnZpcm9ubWVudHMtZm9yLXIvKQotIFRoZSBbUlN0dWRpbyBCbG9nIHBvc3RdKGh0dHBzOi8vYmxvZy5yc3R1ZGlvLmNvbS8yMDE5LzExLzA2L3JlbnYtcHJvamVjdC1lbnZpcm9ubWVudHMtZm9yLXIvKQotIEFuIFtJbnRyb2R1Y3Rpb24gdG8gcmVudl0oaHR0cHM6Ly9yc3R1ZGlvLmdpdGh1Yi5pby9yZW52L2FydGljbGVzL3JlbnYuaHRtbCkKLSBbcmVudl0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vcmVudikgb24gR2l0SHViCgpgYGByCnJlbnY6OmluaXQoKSAjIHRvIHNldCB1cCByZW52IGluIHRoZSBwcm9qZWN0CnJlbnY6Omluc3RhbGwoInJ0cmFpbmluZyIpICMgdG8gaW5zdGFsbCBhIHBhY2thZ2UKcmVudjo6c3RhdHVzKCkgIyBjaGVja3MgaWYgcmVudi5sb2NrIGlzIGluIHN5bmMKcmVudjo6c25hcHNob3QoKSAjIHNhdmUgbGlicmFyaWVzIGluIHJlbnYubG9jawpyZW52OjpyZXN0b3JlKCkgIyByZXN0b3JlIGxpYnJhcmllcyBmcm9tIHJlbnYubG9jayAtIHVzZSB3aGVuIGZpcnN0IHVzaW5nIGFuIGV4aXN0aW5nIHByb2plY3QKcmVudjo6Y2xlYW4oKSAjIHJlbW92ZSBleHRyYSBsaWJyYXJpZXMKcmVudjo6dXBkYXRlKCkgIyBjaGVjayBmb3IgdW5wZGF0ZWQgdmVyc2lvbnMgb2YgaW5zdGFsbGVkIGxpYnJhcmllcwpgYGAKCklmIHlvdSdyZSBpbnN0YWxsaW5nIChkZXZlbG9wbWVudCkgdmVyc2lvbnMgb2YgcGFja2FnZXMgZnJvbSBHaXRIdWIsIHlvdSdsbCBiZSBwcm9tcHRlZCB0byBzZXQgdXAgYSBwZXJzb25hbCBhY2Nlc3MgdG9rZW4gdXNpbmcgYGNyZWF0ZV9naXRodWJfdG9rZW4oKWAgYW5kIGFkZGluZyBpdCB0byB5b3VyIGAuUmVudmlyb25gIGFzIGBHSVRIVUJfUEFUPWAgdXNpbmcgYHVzZXRoaXM6OmVkaXRfcl9lbnZpcm9uKClgLiBJIGhhZCB0byBpbnN0YWxsIHRoZSBkZXZlbG9wbWVudCB2ZXJzaW9ucyBvZiBib3RoIGBzdHlsZXJgIGFuZCBgbGludHJgIGR1ZSB0byBidWdzIG5vdCB5ZXQgZml4ZWQgaW4gdGhlIHJlbGVhc2VkIChDUkFOKSB2ZXJzaW9ucy4gSSBkaWQgYWxzbyBsb29rIGF0IHVzaW5nIFtwYWtdKGh0dHBzOi8vcGFrLnItbGliLm9yZykgYnV0IGZvdW5kIGl0IHRvbyBidWdneSB0byB1c2UuCgoqTm90ZToqIEkgY2FtZSBhY3Jvc3MgYW4gb2RkIHF1aXJrIHdoZXJlIHJlbnYgd2lsbCBwcm9tcHQgeW91IHRvIHVwZ3JhZGUgYmFzZSBSIHByb2plY3RzLCBldmVuIGlmIHRoZXkncmUgbm90IHVzZWQuIEkgcmVzb2x2ZWQgdGhlc2UgYnkganVzdCB1cGdyYWRpbmcgdGhlIGJhc2UgcGFja2FnZXMgd2l0aCBSU3R1ZGlvIHdpdGggbm8gcHJvamVjdCBvcGVuLgoKSSd2ZSBpbmNsdWRlZCBzb21lIGNvbW1lbnRzIG9uIHVzZWZ1bCBwYWNrYWdlcyBpbiBteSAqUiBUcmFpbmluZyBMb2cqIG5vdGVib29rLgoKIyBVc2luZyBSCgpTbyAtIHdoYXQgaGF2ZSBJIGxlYXJuZWQgYWJvdXQgdXNpbmcgUj8gSSB3b24ndCBjb3ZlciB0aGUgYWN0dWFsIERhdGEgU2NpZW5jZSBwYXJ0IGhlcmUsIGJ1dCBoYXZlIHNvbWUgcmVjb21tZW5kZWQgcmVhZGluZyBpbiBteSAqUiBUcmFpbmluZyBMb2cqLgoKIyMgVXNlIGdpdCEKClRoaXMgd2Fzbid0IHJlYWxseSBzb21ldGhpbmcgSSBsZWFybmVkIHdpdGggUiwgYnV0IHVzZSBvZiB2ZXJzaW9uIGNvbnRyb2wgZm9yIGFueSBraW5kIG9mIGNvZGUvc2NyaXB0IGlzIGNydWNpYWwuIFRoZXNlIGRheXMsIEkga2VlcCBhbGwgc2NyaXB0cyBhbmQgY29uZmlndXJhdGlvbiBmaWxlcyBpbiBzb21lIGZsYXZvciBvZiBwdWJsaWMgb3IgcHJpdmF0ZSB2ZXJzaW9uIGNvbnRyb2wuIE1vc3RseSB0aGF0IG1lYW5zIEdpdEh1YiwgYnV0IGFsc28gcHJpdmF0ZSBnaXQgc2VydmVycyAodmlhIHNzaCkgYXJlIGVhc3kgdG8gc2V0IHVwIGZvciB3b3JrIHRoYXQgeW91IHdhbnQgdG8ga2VlcCBvZmYgb2YgR2l0SHViLgoKSSBkb24ndCB3YW50IHRvIGdldCB0b28gbXVjaCBpbnRvIG1hbmFnaW5nIGNvZGUgdmlhIHZlcnNpb24gY29udHJvbCwgYnV0IEkgZmF2b3IgdHJ1bmstYmFzZWQgZGV2ZWxvcG1lbnQgd2l0aCBzaG9ydC1saXZlZCBicmFuY2hlcywgc21hbGwgY29tbWl0cyBvZiB3b3JraW5nIGNvZGUsIGFuZCByZWJhc2UgYW5kIG1lcmdlIGZvciBsaW5lYXIgY29tbWl0IGhpc3RvcnkuIFRoZXJlJ3MgYSBsb3Qgb2YgZ29vZCByZXNlYXJjaCBvbiB0aGlzIHRvcGljIGZyb20gR29vZ2xlJ3MgW0RldiBPcHMgUmVzZWFyY2ggYW5kIEFzc2Vzc21lbnRdKGh0dHBzOi8vY2xvdWQuZ29vZ2xlLmNvbS9kZXZvcHMpIHRlYW0uCgojIyBVc2luZyBSU3R1ZGlvIHdpdGggR2l0SHViCgpSU3R1ZGlvIGhhcyBnb29kIGludGVncmF0aW9uIHdpdGggR2l0SHViLiBJJ3ZlIGFkb3B0ZWQgdGhlIGNvbnZlbnRpb24gb2YgIm9uZSBSU3R1ZGlvIFByb2plY3QgKC5ScHJvaikgcGVyIHJlcG9zaXRvcnkiIGFuZCBzdG9yaW5nIHRoZSBScHJvaiBmaWxlIGluIHRoZSByZXBvc2l0b3J5LiBUaGF0IHNlZW1zIHRvIGJlIHRoZSBub3JtLgoKIyMgUiBOb3RlYm9va3MKClIgTm90ZWJvb2tzIGFyZSBteSBwcmVmZXJyZWQgZmlsZSBmb3JtYXQgZm9yIGRhdGEgYW5hbHlzaXMsIGFzIHRoZXkgYWxsb3cgYW4gZWFzeSBtaXhpbmcgb2YgdGV4dCAodXNpbmcgcGFuZG9jIG1hcmtkb3duKSBhbmQgUiBjb2RlIGNodW5rcy4gVGhpcyBhbGxvd3MgbWUgdG8gZG9jdW1lbnQgd2hhdCBJJ20gZG9pbmcgYXMgSSBnbywgYm90aCBmb3IgcmVwcm9kdWNpYmlsaXR5IGFzIHdlbGwgYXMgcmVjb3JkaW5nIG15IG9ic2VydmF0aW9ucywgdGhvdWdodHMgYW5kIGNvbmNsdXNpb25zLiBJdCBlc3BlY2lhbGx5IGxlbmRzIGl0c2VsZiB0byBpdGVyYXRpdmUgZGV2ZWxvcG1lbnQ6CgoxLiBXcml0ZSBjb2RlCjEuIFJ1biBjb2RlCjEuIFNlZSByZXN1bHRzCjEuIFVwZGF0ZSBjb2RlCgpUaGlzIG1ldGhvZCBvZiBkZXZlbG9wbWVudCBpcyBub3QgYWx3YXlzIGFwcHJvcHJpYXRlLCBidXQgZml0cyB3ZWxsIHdpdGggZXhwbG9yYXRvcnkgYW5hbHlzaXMuIE9uY2UgSSBnZXQgdG8gd3JpdGluZyBmdW5jdGlvbnMsIEknbSBzdGFydGluZyB0byBhZG9wdCB0aGUgZm9ybWFsIHN0cnVjdHVyZSBvZiBbcGFja2FnZXNdKGh0dHBzOi8vci1wa2dzLm9yZy9pbmRleC5odG1sKSwgW3Rlc3R0aGF0XShodHRwczovL3Rlc3R0aGF0LnItbGliLm9yZyksIGFuZCBbcm94eWdlbjJdKGh0dHBzOi8vcm94eWdlbjIuci1saWIub3JnKS4KClNwZWNpZmljYWxseSwgSSB1c2UgYGh0bWxfbm90ZWJvb2tgLCB3aGljaCB3YXMgcmVjb21tZW5kZWQgdG8gbWUuIFJTdHVkaW8gaGFuZGxlcyB0aGlzIGRpZmZlcmVudGx5IHRoYW4gYGh0bWxfZG9jdW1lbnRgOgoKQmVoYXZpb3J8YGh0bWxfbm90ZWJvb2tgfGBodG1sX2RvY3VtZW50YAotLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tClF1aWNrIFZpZXd8UHJldmlldyBCdXR0b258Tm8gUHJldmlldyBCdXR0b24KU2F2aW5nIEZpbGVzfEF1dG9tYXRpY2FsbHkga25pdHMgZmlsZSBvbiBzYXZlfE1hbnVhbGx5IGtuaXQgZmlsZQpSZW5kZXJpbmcgRmlsZXN8UmVuZGVycyBSIG91dHB1dCBhcyBpdCBleGlzdHMgaW4gdGhlIElERSBvbiBzYXZlfFJlbmRlcnMgUiBvdXRwdXQgYnkgcnVubmluZyBhbGwgUiBjb2RlCkRlZmF1bHQgT3B0aW9uc3xJbmNsdWRlcyBvcHRpb25zIGZvciByZWFkYWJpbGl0eSwgaGlkaW5nIGFuZCBkb3dubG9hZGluZyBjb2RlLCBhbmQgcGFnZWQgdGFibGVzfEhpZ2hlci1xdWFsaXR5IHJlbmRlcmluZyBvZiBQTkcgZ3JhcGhpY3MKCkVzc2VudGlhbGx5LCBSIE5vdGVib29rcyBhcmUgZ2VuZXJhbGx5IGZhc3RlciBhbmQgbW9yZSBjb252ZW5pZW50IHdoZW4gKmRvaW5nKiBhbmFseXNpcywgYW5kIGBodG1sX2RvY3VtZW50YCBSIE1hcmtkb3duIGZpbGVzIG9mZmVyIGhpZ2hlci1xdWFsaXR5IG91dHB1dC4gVGhpcyBzaXRlIHVzZXMgYSBjdXN0b20gZnJhbWV3b3JrIHRvIGNvbnZlcnQgaHRtbF9ub3RlYm9va3MgdG8gaHRtbF9kb2N1bWVudHMgZm9yIHB1Ymxpc2hpbmcgKHNlZSB0aGUgbmV4dCBzZWN0aW9uIGZvciBkZXRhaWxzKS4gVGhleSBhcmUgYWxzbyBhIGNvbnZlbmllbnQgd2F5IHRvIHNoYXJlIGFuYWx5c2lzIHdpdGggcGVlcnMgLSBqdXN0IGVtYWlsIHRoZSBgLm5iLmh0bWxgIGZpbGUsIHdoaWNoIHdpbGwgaW5jbHVkZSBhbGwgb2YgdGhlIG91dHB1dCwgYXMgd2VsbCBhcyBlbWJlZGRpbmcgdGhlIGAuUm1kYCBzb3VyY2UgY29kZSBmb3IgZWFzeSBlZGl0aW5nLiBUaGlzIGFsc28gYWxsb3dzIHBlb3BsZSB3aG8gZG9uJ3QgaGF2ZSBSL1JTdHVkaW8gdG8gc2VlIHRoZSByZXN1bHRzIG9mIGFuIGFuYWx5c2lzLgoKVGhlcmUgYXJlIHNvbWUgZHJhd2JhY2tzIHRvIHVzaW5nIFIgTm90ZWJvb2tzOgoKLSBCZWNhdXNlIFIgTm90ZWJvb2tzIGFyZSByZW5kZXItb24tc2F2ZSwgeW91IGNhbiBpbmFkdmVydGVudGx5IGVuZCB1cCB3aXRoIG1pc3Npbmcgb3Igb3V0ZGF0ZWQgUiBvdXRwdXQgZnJvbSB5b3VyIG5vdGVib29rIHdoZW4gc2F2aW5nLCBpZiB5b3UndmUgbWFkZSB1cGRhdGVzIGFuZCBoYXZlbid0IHJlLXJ1biB0aGUgZW50aXJlIGRvY3VtZW50LiBNeSBoYWJpdCBpcyB0byBkbyB0aGUgZm9sbG93aW5nIGF0IHRoZSBlbmQgb2YgYSB3cml0aW5nIHNlc3Npb24sIGJlZm9yZSBjb21taXR0aW5nIHRvIGdpdCwgd2hpY2ggZW5zdXJlcyBhICJjbGVhbiIgbm90ZWJvb2s6CiAgMS4gQ2xlYXIgdGhlIEdsb2JhbCBFbnZpcm9ubWVudAogIDEuICJSZXN0YXJ0IFIgYW5kIENsZWFyIE91dHB1dCIKICAxLiAiUnVuIEFsbCIKICAxLiBTYXZlCi0gW0RlYnVnIGJyZWFrcG9pbnRzIGRvbid0IHdvcmsgaW4gUiBNYXJrZG93biBkb2N1bWVudHNdKGh0dHBzOi8vc3VwcG9ydC5yc3R1ZGlvLmNvbS9oYy9lbi11cy9hcnRpY2xlcy8yMDU2MTI2MjctRGVidWdnaW5nLXdpdGgtUlN0dWRpbyNkZWJ1Z2dpbmctaW4tci1tYXJrZG93bi1kb2N1bWVudHMpLiBUbyBmaXggdGhpcywgW2NvbnZlcnQgUiBNYXJrZG93biBkb2N1bWVudHMgdG8gUiBTY3JpcHRzIHVzaW5nIHB1cmxdKGh0dHBzOi8vYm9va2Rvd24ub3JnL3lpaHVpL3JtYXJrZG93bi1jb29rYm9vay9wdXJsLmh0bWwpIGZvciBkZWJ1Z2dpbmcuCi0gTm90IHJlYWxseSBhIGRyYXdiYWNrLCBidXQuLi5gUmNwcGAgYW5kIGBycHJvanJvb3RgIGFyZSBlcnJvbmVvdXNseSBsaXN0ZWQgaW4gUlN0dWRpbyBhcyByZXF1aXJlZCB0byBjcmVhdGUgUiBNYXJrZG93biwgd2hpY2ggY2FuIGFsc28gY2F1c2UgcHJvYmxlbXMgd2l0aCBgcmVudmAuIFRoaXMgaXMgYSBbYnVnIGluIFJTdHVkaW9dKGh0dHBzOi8vZ2l0aHViLmNvbS9yc3R1ZGlvL3JzdHVkaW8vaXNzdWVzLzc5MzUpLCB3aGljaCB3aWxsIGJlIGZpeGVkIGluIHZlcnNpb24gMS40Ljk0NC4KCiMjIFB1Ymxpc2hpbmcgUiBOb3RlYm9va3MKClNpbmNlIFIgTm90ZWJvb2tzIGFyZSBzYXZlZCBhcyBodG1sIGZpbGVzLCBpdCdzIHBvc3NpYmxlIHRvIHB1Ymxpc2ggdGhlbSBvbiBHaXRIdWIgdXNpbmcgR2l0SHViIHBhZ2VzLiBHaXRIdWIgcHVibGlzaGVkIGEgW3R1dG9yaWFsXShodHRwczovL3Jlc291cmNlcy5naXRodWIuY29tL3doaXRlcGFwZXJzL2dpdGh1Yi1hbmQtcnN0dWRpby8pIGluIDIwMTggb24gZ2V0dGluZyBSU3R1ZGlvIGludGVncmF0ZWQgd2l0aCBHaXRIdWIsIGFuZCBJIHN0YXJ0ZWQgd29ya2luZyBvbiB0aGF0LiBRdWlja2x5IEkgZGlzY292ZXJlZCB0aGF0IHdoaWxlIHRoZSB0dXRvcmlhbCB3YXMgaGVscGZ1bCwgaXQgd2Fzbid0IHF1aXRlIHRoZSBzZXR1cCBJIHdhbnRlZDsgaXQgcHVibGlzaGVkIFIgTWFya2Rvd24gdGhyb3VnaCBHaXRIdWIgcGFnZXMsIGJ1dCB3b3VsZG4ndCBkaXJlY3RseSBzdXBwb3J0IHRoZSBhdXRvbWF0aWNhbGx5IGdlbmVyYXRlZCBodG1sIG9mIFIgTm90ZWJvb2tzLiBBZnRlciBtb3JlIHNlYXJjaGluZywgSSB3YXMgYWJsZSB0byBnZXQgTm90ZWJvb2tzIHdvcmtpbmcgb24gR2l0SHViLCBidXQgSSB1c2VkIHRoZSBtZXRob2QgZGVzY3JpYmVkIGluIFtyc3R1ZGlvL3JtYXJrZG93biAjMTAyMF0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vcm1hcmtkb3duL2lzc3Vlcy8xMDIwKSAtIGNoZWNraW5nIGluIHRoZSAubmIuaHRtbCBpbnRvIGdpdCwgYW5kIHVzaW5nIEdpdEh1YiBQYWdlcyBzbyB0aGF0IHlvdSBjYW4gdmlldyB0aGUgcmVuZGVyZWQgSFRNTCBpbnN0ZWFkIG9mIGp1c3QgdGhlIEhUTUwgY29kZS4KCiMjIyBQdWJsaXNoaW5nIHdpdGggcm1hcmtkb3duCgpBZnRlciB1c2luZyBgUkVBRE1FLm1kYCBhbmQgR2l0SHViIHBhZ2VzIHRvIHB1Ymxpc2ggbm90ZWJvb2tzLCBJIGZvdW5kIEkgd2FudGVkIGFuIGVhc2llciB3YXkgdG8gcHVibGlzaCBhbmQgbmF2aWdhdGUgYWNyb3NzIGNvbGxlY3Rpb25zIG9mIG5vdGVib29rcy4gUHVibGlzaGluZyBSIE5vdGVib29rcyBvbiBHaXRIdWIgcGFnZXMgd29ya3MgZmluZSwgYnV0IGRvZXNuJ3Qgb2ZmZXIgYW4gZWFzeSBuYXZpZ2F0aW9uIHN0cnVjdHVyZSwgbGlrZSBbcGtnZG93bl0oaHR0cHM6Ly9wa2dkb3duLnItbGliLm9yZykuIEkgdHJpZWQgdXNpbmcgcGtnZG93biB0byBkaXNwbGF5IG5vdGVib29rcywgYnV0IHBrZ2Rvd24gb25seSBzdXBwb3J0cyBidWlsZGluZyBgdmlnbmV0dGVzYCwgd2hpY2ggaGF2ZSBhIGRpc3RpbmN0bHkgZGlmZmVyZW50IGxvb2sgYW5kIGZlZWwgdGhhbiBSIE5vdGVib29rcy4gVGhlIFtybWFya2Rvd24gc2l0ZSBnZW5lcmF0b3JdKGh0dHBzOi8vYm9va2Rvd24ub3JnL3lpaHVpL3JtYXJrZG93bi9ybWFya2Rvd24tc2l0ZS5odG1sKSwgW3JlbmRlcl9zaXRlXShodHRwczovL3JkcnIuaW8vY3Jhbi9ybWFya2Rvd24vbWFuL3JlbmRlcl9zaXRlLmh0bWwpLCBhbGxvd3MgbW9yZSBmbGV4aWJsZSBidWlsZGluZyBvZiB3ZWJzaXRlcyBmcm9tIFIgTWFya2Rvd24gZmlsZXMgd2l0aCBhIHNpbXBsZSBuYXZpZ2F0aW9uIGJhciBhdCB0aGUgdG9wLCBidXQgZG9lc24ndCBzdXBwb3J0IGBodG1sX25vdGVib29rYCBmaWxlcyBPT0IuCgpUbyB3b3JrIGFyb3VuZCB0aGlzLCBJIGNyZWF0ZWQgYSBzaW1wbGUgZnJhbWV3b3JrIGZvciBjb252ZXJ0aW5nIGBodG1sX25vdGVib29rYCBmaWxlcyB0byBgaHRtbF9kb2N1bWVudGAgYW5kIGJ1aWxkaW5nIGEgYF9zaXRlLnltbGAgZnJvbSBhIGxpc3Qgb2Ygbm90ZWJvb2tzIHN0b3JlZCBpbiB0aGUgbm9uLXN0YW5kYXJkIGBub3RlYm9va3MvYCBkaXJlY3RvcnksIGluaXRpYWxseSB1c2luZyBhIHNoZWxsIHNjcmlwdCwgYGJ1aWxkX3NpdGVgIChzdG9yZWQgYXQgdGhlIHJvb3Qgb2YgdGhpcyBbcmVwb10oaHR0cHM6Ly9naXRodWIuY29tL2phYmVubmluZ2hvZmYvcnRyYWluaW5nKSkuIEl0IGRvZXMgdGhlIGZvbGxvd2luZzoKCjEuIENyZWF0ZXMgYSB3b3JraW5nIGRpcmVjdG9yeSwgYC5idWlsZC1zaXRlYAoxLiBCdWlsZHMgYSBgcm1hcmtkb3duOjpyZW5kZXJfc2l0ZSgpYCBgX3NpdGUueW1sYCBmaWxlIHRoYXQgaW5jbHVkZXMgYSBtZW51IHdpdGggYWxsIG5vdGVib29rcyBpbiB0aGUgYG5vdGVib29rcy9gIGRpcmVjdG9yeQoxLiBDb3BpZXMgYWxsIGAuUm1kYCBmaWxlcyB0byBgLmJ1aWxkLXNpdGVgIGNoYW5naW5nIHRoZWlyIHR5cGUgZnJvbSBgaHRtbF9ub3RlYm9va2AgdG8gYGh0bWxfZG9jdW1lbnRgCjEuIEluY2x1ZGVzIHNvbWUgY29uZmlndXJhdGlvbiB0byBtYWtlIGBodG1sX2RvY3VtZW50c2Agd29yayBtb3JlIGxpa2UgYGh0bWxfbm90ZWJvb2tgCjEuIENhbGxzIGBybWFya2Rvd246OnJlbmRlcl9zaXRlKClgIHRvIHJlbmRlciB0aGUgc2l0ZSBpbiB0aGUgYGRvY3MvYCBkaXJlY3RvcnkKCkkgdHlwaWNhbGx5IHJlYnVpbGQgYSBzaXRlIHdpdGggdGhlIGZvbGxvd2luZyBjb21tYW5kLCBydW4gZnJvbSB0aGUgdG9wLWxldmVsIGRpcmVjdG9yeSBvZiB0aGUgcHJvamVjdDoKCmBgYHNoCnJtIC1yZiAuYnVpbGQtc2l0ZSAmJiBzaCBidWlsZC1zaXRlICYmIG9wZW4gZG9jcy9pbmRleC5odG1sCmBgYAoKVGhpcyBhcHByb2FjaCBsZXZlcmFnZXMgdGhlIFtkb2NzIGZ1bmN0aW9uYWxpdHldKGh0dHBzOi8vaGVscC5naXRodWIuY29tL2FydGljbGVzL2NvbmZpZ3VyaW5nLWEtcHVibGlzaGluZy1zb3VyY2UtZm9yLWdpdGh1Yi1wYWdlcy8jcHVibGlzaGluZy15b3VyLWdpdGh1Yi1wYWdlcy1zaXRlLWZyb20tYS1kb2NzLWZvbGRlci1vbi15b3VyLW1hc3Rlci1icmFuY2gpIG9mIEdpdEh1YiBwYWdlcywgbGlrZSBwa2dkb3duLgoKIyBOZXh0IFN0ZXBzCgpJJ2xsIGtlZXAgYWRkaW5nIHRvIHRoaXMgZG9jdW1lbnQgYXMgSSBnbywgYW5kIHdpbGwgbGlrZWx5IGV2ZW50dWFsbHkgbWlncmF0ZSB0aGlzIG5vdGVib29rIHRvIGEgYHZpZ25ldHRlYCBhbmQgc3dpdGNoIHRvIGBwa2dkb3duYC4K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("r-setup-log.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
