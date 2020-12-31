@@ -13,13 +13,15 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Depends: 
-    tidyverse,
-    modelr
+Imports: 
+    lintr
 X-rtraining-comment: use "Suggests" for development packages, per https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-
 Suggests: 
     styler,
-    lintr,
     miniUI,
     devtools,
-    rmarkdown
+    rmarkdown,
+    tidyverse,
+    modelr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
