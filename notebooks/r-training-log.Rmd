@@ -11,7 +11,7 @@ output:
 
 Notes on learning R and RStudio.
 
-## Libraries
+# Libraries
 
 Load libraries and suppress warning and error messages. Thanks to this tidyverse [article](https://reprex.tidyverse.org/articles/articles/suppress-startup-messages.html).
 
@@ -19,7 +19,7 @@ Load libraries and suppress warning and error messages. Thanks to this tidyverse
 library(tidyverse)
 ```
 
-## Files
+# Files
 
 Files in this project:
 
@@ -45,11 +45,11 @@ Files in this project:
 - `setup-r`:
 - `tests`:
 
-## Not R
+# Not R
 
 Not R, but has advice on git best practices and a guide to fixing commit mistakes: <https://sethrobertson.github.io>
 
-## Learning R
+# Learning R
 
 Resources for learning R.
 
@@ -106,11 +106,11 @@ When in doubt, start with the tidyverse, or RStudio sponsored projects, or built
   - [from Data to Viz](https://www.data-to-viz.com) - recommendations on data visualization
   - He also has some tips on [R Markdown](https://holtzy.github.io/Pimp-my-rmd/)
 
-### R for Data Science
+## R for Data Science
 
 Selected highlights from the book:
 
-#### Patterns and models
+### Patterns and models
 
 [7.6 Patterns and models](https://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models) covers models and residuals, here showing how to reveal the expected relationship between cut and price:
 
@@ -130,11 +130,11 @@ ggplot(data = diamonds2) +
   geom_boxplot(mapping = aes(x = cut, y = resid))
 ```
 
-#### Non-Tidy Data
+### Non-Tidy Data
 
 Hadley advocates for "tidy" data, but there are times when data is usefully [non-tidy](https://simplystatistics.org/2016/02/17/non-tidy-data/).
 
-#### Graphics: Learning more
+### Graphics: Learning more
 
 From [28.8 Learning more](https://r4ds.had.co.nz/graphics-for-communication.html#learning-more-4):
 
@@ -142,7 +142,7 @@ From [28.8 Learning more](https://r4ds.had.co.nz/graphics-for-communication.html
  
 Another great resource is the ggplot2 extensions gallery <https://exts.ggplot2.tidyverse.org/gallery/>. This site lists many of the packages that extend ggplot2 with new geoms and scales. It's a great place to start if you're trying to do something that seems hard with ggplot2."
 
-#### R Markdown Websites
+### R Markdown Websites
 
 From [29.8 Websites](https://r4ds.had.co.nz/r-markdown-formats.html#websites):
 
@@ -168,6 +168,6 @@ Execute `rmarkdown::render_site()` to build `_site`, a directory of files ready 
 
 Read more at <http://rmarkdown.rstudio.com/rmarkdown_websites.html>."
 
-#### R Notebook Advice
+### R Notebook Advice
 
 Hadley has some good suggestions for R Notebooks in [30 R Markdown workflow](https://r4ds.had.co.nz/r-markdown-workflow.html).
