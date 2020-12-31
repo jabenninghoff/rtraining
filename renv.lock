@@ -501,10 +501,15 @@
     },
     "lintr": {
       "Package": "lintr",
-      "Version": "2.0.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "023cecbdc0a32f86ad3cb1734c018d2e"
+      "Version": "2.0.1.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "lintr",
+      "RemoteUsername": "jimhester",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "180e1a198469210674c2d3755e7a3c38fa47b61d",
+      "Hash": "5c2ccfda12c58e506ffc4aed90c41131"
     },
     "lubridate": {
       "Package": "lubridate",

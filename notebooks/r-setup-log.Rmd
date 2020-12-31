@@ -3,6 +3,7 @@ title: "R Setup Log"
 date: 2020-12-30
 output:
   html_notebook:
+    code_folding:
     toc: TRUE
     toc_float:
       collapsed: FALSE
@@ -18,6 +19,8 @@ My notes on my personal R setup. I started my R journey in [September 2020](http
 # Installing R
 
 I prefer installing R and RStudio using [Homebrew](https://brew.sh). I use [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) to install all software on my systems, but installing R and RStudio is simple enough using the command line:
+
+<!-- note: lintr version <= 2.0.1 throws an error when using language identifiers: <https://github.com/jimhester/lintr/issues/505> -->
 
 ```sh
 brew install --formula r && brew install --cask rstudio
