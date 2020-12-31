@@ -12,7 +12,7 @@ output:
 My notes on my personal R setup. I started my R journey in [September 2020](https://www.information-safety.org/2020/09/11/working-with-r/) after [SIRACon 2020](https://societyinforisk.org/event-3899786).
 
 ```{r startup, message = FALSE, warning = FALSE}
-# libraries
+# no libraries
 ```
 
 # Installing R
@@ -145,6 +145,13 @@ RStudio has good integration with GitHub. I've adopted the convention of "one RS
 
 Why I use R Notebooks. Disadvantages of R Notebooks.
 
-## Publishing R Notebooks with GitHub Pages
+Issues:
+
+- `Rcpp` and `rprojroot` are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with `renv`. This is a [bug in RStudio](https://github.com/rstudio/rstudio/issues/7935), which will be fixed in version 1.4.944.
+- [Debug breakpoints don't work in R Markdown documents](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio#debugging-in-r-markdown-documents). To fix this, [convert R Markdown documents to R Scripts using purl](https://bookdown.org/yihui/rmarkdown-cookbook/purl.html) for debugging.
+
+## Publishing R Notebooks
+
+...with GitHub Pages:
 
 > Installation on macOS was easy enough, just `brew install r` and `brew cask install rstudio`. GitHub published a [tutorial](https://resources.github.com/whitepapers/github-and-rstudio/) in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn't quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn't directly support the automatically generated html of R Notebooks. *Side note: the consensus was to use `html_notebook` as a working document, and `html_document` to publish.* After more searching, I was able to get Notebooks working on GitHub, but I used the method described in [rstudio/rmarkdown #1020](https://github.com/rstudio/rmarkdown/issues/1020) - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.
