@@ -1,0 +1,150 @@
+---
+title: "R Setup Log"
+date: 2020-12-30
+output:
+  html_notebook:
+    toc: TRUE
+    toc_float:
+      collapsed: FALSE
+      smooth_scroll: FALSE
+---
+
+My notes on my personal R setup. I started my R journey in [September 2020](https://www.information-safety.org/2020/09/11/working-with-r/) after [SIRACon 2020](https://societyinforisk.org/event-3899786).
+
+```{r startup, message = FALSE, warning = FALSE}
+# libraries
+```
+
+# Installing R
+
+I prefer installing R and RStudio using [Homebrew](https://brew.sh). I use [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) to install all software on my systems, but installing R and RStudio is simple enough using the command line:
+
+```sh
+brew install --formula r && brew install --cask rstudio
+```
+
+## R Variants
+
+**TL;DR: just use homebrew.**
+
+I don't recommend installing the `cask` variant of r because it creates problems with `brew doctor`:
+
+```{sh brew info r}
+brew info --cask r
+```
+
+I tried "[installing all the things](https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/)" with [homebrew-r-srf](https://github.com/sethrfore/homebrew-r-srf) but didn't like how the uninstall doesn't clean up, and frankly, I haven't found a need for more than the capabilities included with homebrew R:
+
+```{r capabilities}
+options(width = 100)
+capabilities()
+```
+
+Currently, this is everything except the X11 dependencies, which aren't really needed:
+
+```r
+?capabilities
+```
+
+> **Note to macOS users**
+> 
+> Capabilities "jpeg", "png" and "tiff" refer to the X11-based versions of these devices. If capabilities("aqua") is true, then these devices with type = "quartz" will be available, and out-of-the-box will be the default type. Thus for example the tiff device will be available if capabilities("aqua") || capabilities("tiff") if the defaults are unchanged.
+
+As an active contributor to Homebrew, I *strongly* recommend using it for any/all software; their quality control is excellent.
+
+# R Workspace
+
+Once R and RStudio have been installed, you'll need a development environment and some packages.
+
+## Development Environment
+
+Well, obviously, I use [RStudio](https://rstudio.com/products/rstudio/download/). There are other IDEs available, and it's also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don't typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.
+
+```sh
+brew install github
+```
+
+I also occasionally use `vim` (mainly for shell scripts) and [atom](https://atom.io) (mainly for vanilla `.md` files using [markdown-preview-enhanced](https://atom.io/packages/markdown-preview-enhanced)).
+
+## Packages
+
+Managing packages and environments are a challenge for most modern languages. Thankfully R doesn't have the same level of challenge as python, or even ruby, managing packages availalbe within a project is a best practice. I use [renv](https://github.com/rstudio/renv) for this purpose. (I originally discovered [packrat](https://rstudio.github.io/packrat/) but quickly discovered RStudio is replacing it with renv)
+
+Here is my package maintenance approach:
+
+### Base R Packages
+
+With no projects open, I periodically check for updates to the base R packages using the RStudio Packages "Update" function. These are the only packages I install to the base directory `/usr/local/Cellar/r/4.0.3_2/lib/R/library`. *Note: upgrading or reinstalling r through homebrew may 'downgrade' the base packages.*
+
+### Development Packages
+
+The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by [homebrew](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb), currently `/usr/local/lib/R/4.0/site-library`. I've developed a shell script to install development packages that you can find in the [tools](https://github.com/jabenninghoff/rtraining) directory of this repository.
+
+```sh
+#!/bin/sh
+# install development packages to site repository
+# thanks to https://blog.sellorm.com/2017/10/21/quick-script-to-install-an-r-package-from-the-command-line/
+# and https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb
+# designed to work with homebrew: `brew install --formula r && brew install --cask rstudio`
+set -ex # halt script on error, echo on
+
+PREFIX=`brew --prefix`
+RVERSION=`${PREFIX}/bin/Rscript -e 'cat(as.character(getRversion()[1,1:2]))'`
+SITELIB="${PREFIX}/lib/R/${RVERSION}/site-library"
+DEVPKG='c("renv", "styler", "lintr", "miniUI", "devtools", "available")'
+
+if [ ! -d "${SITELIB}" ]
+then
+	echo "fatal error: ${SITELIB} does not exist - not using \`brew install --formula r\`?"
+	exit 1
+fi
+
+brew install libgit2 # required by devtools
+
+echo "install.packages(${DEVPKG}, repos=\"https://cran.rstudio.com\", lib=\"${SITELIB}\")" | R --no-save
+```
+
+### Project Packages
+
+Any packages *not* needed to create projects I install within a project using renv - here are some good intros:
+
+- A [presentation at rstudio::conf 2020](https://rstudio.com/resources/rstudioconf-2020/renv-project-environments-for-r/)
+- The [RStudio Blog post](https://blog.rstudio.com/2019/11/06/renv-project-environments-for-r/)
+- An [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html)
+- [renv](https://github.com/rstudio/renv) on GitHub
+
+```r
+renv::init() # to set up renv in the project
+renv::install("rtraining") # to install a package
+renv::status() # checks if renv.lock is in sync
+renv::snapshot() # save libraries in renv.lock
+renv::restore() # restore libraries from renv.lock - use when first using an existing project
+renv::clean() # remove extra libraries
+renv::update() # check for unpdated versions of installed libraries
+```
+
+*Note:* I came across an odd quirk where renv will prompt you to upgrade base R projects, even if they're not used. I resolved these by just upgrading the base packages with RStudio with no project open.
+
+I've included some comments on useful packages in my *R Training Log* notebook.
+
+# Using R
+
+So - what have I learned about using R? I won't cover the actual Data Science part here, but have some recommended reading in my *R Training Log*.
+
+## Use git!
+
+This wasn't really something I learned with R, but use of version control for any kind of code/script is crucial. These days, I keep all scripts and configuration files in some flavor of public or private version control. Mostly that means GitHub, but also private git servers (via ssh) are easy to set up for work that you want to keep off of GitHub.
+
+I don't want to get too much into managing code via version control, but I favor trunk-based development with short-lived branches, small commits of working code, and rebase and merge for linear commit history. There's a lot of good research on this topic from Google's [Dev Ops Research and Assessment](https://cloud.google.com/devops) team.
+
+## Using RStudio with GitHub
+
+RStudio has good integration with GitHub. I've adopted the convention of "one RStudio Project (.Rproj) per repository" and storing the Rproj file in the repository. That seems to be the norm.
+
+## R Notebooks
+
+Why I use R Notebooks. Disadvantages of R Notebooks.
+
+## Publishing R Notebooks with GitHub Pages
+
+> Installation on macOS was easy enough, just `brew install r` and `brew cask install rstudio`. GitHub published a [tutorial](https://resources.github.com/whitepapers/github-and-rstudio/) in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn't quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn't directly support the automatically generated html of R Notebooks. *Side note: the consensus was to use `html_notebook` as a working document, and `html_document` to publish.* After more searching, I was able to get Notebooks working on GitHub, but I used the method described in [rstudio/rmarkdown #1020](https://github.com/rstudio/rmarkdown/issues/1020) - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.
