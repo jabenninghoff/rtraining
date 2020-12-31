@@ -14,8 +14,8 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
-    styler,
-    lintr
+    styler (>= 1.3.2.9000),
+    lintr (>= 2.0.1.9000)
 X-rtraining-comment: use "Suggests" for development packages, per https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-
 Suggests: 
     miniUI,
@@ -26,3 +26,6 @@ Suggests:
     tibble,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Remotes:  
+    jimhester/lintr,
+    r-lib/styler
