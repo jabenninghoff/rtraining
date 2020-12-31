@@ -44,6 +44,6 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
 
-      - name: Lint All
+      - name: Lint all files
         run: lintr::lint_dir(path = ".", exclusions = list(".git", ".github", "packrat", "renv"))
         shell: Rscript {0}
