@@ -9,9 +9,10 @@
 <!-- badges: end -->
 
 My notes and experiences learning R and RStudio, bundled as an R package
-(work-in-progress). The package is currently not yet functional, but you
-can read my [R Training Log](notebooks/r-training-log.Rmd) using the
-GitHub Pages URL: <https://jabenninghoff.github.io/rtraining/>.
+(work-in-progress). The package is currently not yet fully functional,
+but you can read my [R Training Log](notebooks/r-training-log.Rmd) and
+[R Setup Log](notebooks/r-setup-log.Rmd) using the GitHub Pages URL:
+<https://jabenninghoff.github.io/rtraining/>.
 
 ## Installation
 
@@ -39,16 +40,6 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(rtraining)
-#> Loading required package: tidyverse
-#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
-#> ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-#> ✓ tibble  3.0.4     ✓ dplyr   1.0.2
-#> ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-#> ✓ readr   1.4.0     ✓ forcats 0.5.0
-#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
-#> Loading required package: modelr
 ## basic example code
 ```
 

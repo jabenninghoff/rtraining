@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/jabenninghoff/rtraining/workflows/R-CMD-check/badge.svg)](https://github.com/jabenninghoff/rtraining/actions)
 <!-- badges: end -->
 
-`r packageDescription("rtraining", fields = "Description")` The package is currently not yet functional, but you can read my [R Training Log](notebooks/r-training-log.Rmd) using the GitHub Pages URL: <https://jabenninghoff.github.io/rtraining/>.
+`r packageDescription("rtraining", fields = "Description")` The package is currently not yet fully functional, but you can read my [R Training Log](notebooks/r-training-log.Rmd) and [R Setup Log](notebooks/r-setup-log.Rmd) using the GitHub Pages URL: <https://jabenninghoff.github.io/rtraining/>.
 
 ## Installation
 
