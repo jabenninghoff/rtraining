@@ -4,7 +4,7 @@
 \alias{lint_all}
 \title{Lint all files}
 \usage{
-lint_all(path = ".", exclusions = list(".git", ".github", "renv"))
+lint_all(path = ".", exclusions = list(".git", ".github", "packrat", "renv"))
 }
 \arguments{
 \item{path}{the path to the base directory, by default,
@@ -18,15 +18,15 @@ A list of lint objects.
 }
 \description{
 Lint all files in a project. Implemented as a wrapper for lintr::lint_dir() that excludes .git,
-.github, and renv by default.
+.github, packrat, and renv by default.
 }
 \examples{
 \dontrun{
-  lint_all()
-  lint_all("notebooks")
-  lint_all(
-    path = "./inst",
-    exclusions = list("inst/example/bad.R")
-  )
+lint_all()
+lint_all("notebooks")
+lint_all(
+  path = "./inst",
+  exclusions = list("inst/example/bad.R")
+)
 }
 }
