@@ -39,6 +39,9 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("jabenninghoff/rtraining")
 ```
+
+<!-- replace boilerplate example
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
@@ -63,3 +66,5 @@ plot(pressure)
 ```
 
 In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+
+-->
