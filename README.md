@@ -16,7 +16,7 @@ but you can read my [R Training Log](notebooks/r-training-log.Rmd) and
 
 ## Installation
 
-<!-- don't advertise CRAN install
+<!-- CRAN install not available
 
 You can install the released version of rtraining from [CRAN](https://CRAN.R-project.org) with:
 
@@ -34,7 +34,7 @@ You can install the development version from
 devtools::install_github("jabenninghoff/rtraining")
 ```
 
-<!-- replace boilerplate example
+<!-- boilerplate example to be replaced
 
 ## Example
 
