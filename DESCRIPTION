@@ -7,7 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jbenninghoff@mac.com",
            comment = c(ORCID = "0000-0002-6230-4742"))
-Description: My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress).
+Description: My notes and experiences learning R and RStudio, bundled as an R package
+    (work-in-progress).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -18,7 +19,8 @@ Imports:
     lintr (>= 2.0.1.9000),
     rcmdcheck,
     renv
-X-rtraining-comment: use "Suggests" for development packages, per https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-
+X-rtraining-comment: use "Suggests" for development packages, per
+    https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-
 Suggests: 
     miniUI,
     devtools,
