@@ -17,7 +17,6 @@
 #'   exclusions = list("inst/example/bad.R")
 #' )
 #' }
-#' @import lintr
 #' @export
 lint_all <- function(path = ".", exclusions = list(".git", ".github", "packrat", "renv")) {
   lintr::lint_dir(path = path, exclusions = exclusions)
