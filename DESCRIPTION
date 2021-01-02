@@ -1,12 +1,12 @@
 Package: rtraining
 Title: R Training
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: 
     person(given = "John",
            family = "Benninghoff",
            role = c("aut", "cre"),
            email = "jbenninghoff@mac.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0002-6230-4742"))
 Description: My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress).
 License: MIT + file LICENSE
 Encoding: UTF-8
