@@ -14,7 +14,7 @@
 ## Package
 
 - [x] Write wrapper functions to `styler` and `lintr` all files: the package, README.Rmd, and notebooks directory
-- [ ] Write a utility/maintenance function to verify: `renv::status`, `renv::clean`, and possibly `renv::update` - see <https://github.com/rstudio/renv/blob/master/R/status.R>
+- [x] Write a utility/maintenance function to verify: `renv::status`, `renv::clean`, and possibly `renv::update` - see <https://github.com/rstudio/renv/blob/master/R/status.R>
 - [ ] Write a utility function to sort `.Rbuildignore`
 - [ ] Review <https://github.com/rstudio/renv/> for ideas to include here
 - [ ] Review <https://github.com/jimbrig/rtraining/> for ideas to include here
