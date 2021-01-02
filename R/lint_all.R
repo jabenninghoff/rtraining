@@ -1,12 +1,12 @@
 #' Lint all files
 #'
 #' Lint all files in a project. Implemented as a wrapper for lintr::lint_dir() that excludes .git,
-#' .github, packrat, and renv by default.
+#'   .github, packrat, and renv by default.
 #'
 #' @param path the path to the base directory, by default,
-#' it will be searched in the parent directories of the current directory.
+#'   it will be searched in the parent directories of the current directory.
 #' @param exclusions exclusions for \code{\link[lintr]{exclude}}, relative to the
-#' package path.
+#'   package path.
 #' @return A list of lint objects.
 #' @examples
 #' \dontrun{
