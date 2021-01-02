@@ -4,9 +4,9 @@
 #'
 #' @param styler style all files: \code{styler::style_dir(".", exclude_dirs = c("renv"))}
 #' @param lintr lint all files:
-#' \code{lintr::lint_dir(path = ".", exclusions = list(".git", ".github", "packrat", "renv"))}
+#'   \code{lintr::lint_dir(path = ".", exclusions = list(".git", ".github", "packrat", "renv"))}
 #' @param rcmdcheck run \code{R CMD check} using
-#' \code{rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")}
+#'   \code{rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")}
 #' @export ci
 #' @examples
 #' \dontrun{
