@@ -7,7 +7,7 @@
 check_renv(update = TRUE)
 }
 \arguments{
-\item{update}{run \code{renv::update} (ON by default)}
+\item{update}{run \code{renv::update} (default \code{TRUE})}
 }
 \description{
 Checks \code{renv} \code{status()}, \code{clean()}, and optionally \code{update()}
