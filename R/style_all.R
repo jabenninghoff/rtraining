@@ -20,7 +20,6 @@
 #'   exclude_dirs = c("inst/example/bad.R")
 #' )
 #' }
-#' @import styler
 #' @export
 style_all <- function(path = ".", filetype = c("R", "Rprofile", "Rmd"),
                       exclude_dirs = c(".git", ".github", "packrat", "renv")) {

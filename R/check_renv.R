@@ -4,7 +4,6 @@
 #'
 #' @param update run \code{renv::update} (ON by default)
 #'
-#' @import renv
 #' @export check_renv
 #' @examples
 #' \dontrun{

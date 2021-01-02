@@ -7,7 +7,6 @@
 #' \code{lintr::lint_dir(path = ".", exclusions = list(".git", ".github", "packrat", "renv"))}
 #' @param rcmdcheck run \code{R CMD check} using
 #' \code{rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")}
-#' @import styler lintr rcmdcheck
 #' @export ci
 #' @examples
 #' \dontrun{
