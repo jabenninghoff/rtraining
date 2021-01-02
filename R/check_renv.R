@@ -2,8 +2,7 @@
 #'
 #' Checks \code{renv} \code{status()}, \code{clean()}, and optionally \code{update()}
 #'
-#' @param update run \code{renv::update} (ON by default)
-#'
+#' @param update run \code{renv::update} (default \code{TRUE})
 #' @export check_renv
 #' @examples
 #' \dontrun{
