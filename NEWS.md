@@ -2,7 +2,7 @@
 
 rdev migration
 
-* `ci()`, `check_renv()`, `style_all()`, `lint_all()`, and `tools/setup-r` have been migrated to [rdev](https://github.com/jabenninghoff/rdev/), my "opinionated collection of R development tools"
+* `ci()`, `check_renv()`, `style_all()`, `lint_all()`, and `tools/setup-r` have been migrated to [rdev](https://jabenninghoff.github.io/rdev/), my "opinionated collection of R development tools"
 
 * rtraining has been updated to import and load development tools through `rdev`
 
