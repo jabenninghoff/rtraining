@@ -679,6 +679,18 @@
       "Repository": "CRAN",
       "Hash": "ed95895886dab6d2a584da45503555da"
     },
+    "rdev": {
+      "Package": "rdev",
+      "Version": "0.2.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteUsername": "jabenninghoff",
+      "RemoteRepo": "rdev",
+      "RemoteRef": "main",
+      "RemoteSha": "df72dffc28a2b90551241e3f1c3dd318fb3c6780",
+      "RemoteHost": "api.github.com",
+      "Hash": "b0d6fc7c74392c0128f88e55e09c33d7"
+    },
     "readr": {
       "Package": "readr",
       "Version": "1.4.0",
