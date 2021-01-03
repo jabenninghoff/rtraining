@@ -14,8 +14,8 @@
 as an R package (work-in-progress).
 
 The package is currently not yet fully functional, but you can read my
-[R Training Log](notebooks/r-training-log.Rmd) and [R Setup
-Log](notebooks/r-setup-log.Rmd) using the GitHub Pages URL:
+[R Training Log](analysis/r-training-log.html) and [R Setup
+Log](analysis/r-setup-log.html) using the GitHub Pages URL:
 <https://jabenninghoff.github.io/rtraining/>.
 
 ## Installation
