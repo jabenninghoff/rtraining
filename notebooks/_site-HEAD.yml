@@ -4,7 +4,7 @@ navbar:
   title: "R Training"
   type: default
   left:
-    - icon: fas fa-home
+    - icon: fas fa-home fa-lg
       href: index.html
     - text: "Notebooks"
       menu:

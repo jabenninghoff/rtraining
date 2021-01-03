@@ -1,5 +1,5 @@
   right:
-    - icon: fab fa-github
+    - icon: fab fa-github fa-lg
       href: https://github.com/jabenninghoff/rtraining
 output:
   html_document:
