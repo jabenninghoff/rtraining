@@ -16,7 +16,7 @@
 - [x] Write wrapper functions to `styler` and `lintr` all files: the package, README.Rmd, and notebooks directory
 - [x] Write a utility/maintenance function to verify: `renv::status`, `renv::clean`, and possibly `renv::update` - see <https://github.com/rstudio/renv/blob/master/R/status.R>
 - [x] ~~Write a utility function to sort `.Rbuildignore`~~
-- [ ] Migrate utility functions to [rdev](https://github.com/jabenninghoff/rdev)
+- [x] Migrate utility functions to [rdev](https://github.com/jabenninghoff/rdev)
 - [ ] Integrate `build-site` and pkgdown using custom navbars
   - Implement [pkgdown](https://pkgdown.r-lib.org)
   - Rename notebooks/ to analysis/, `build-site` in a subdirectory (docs/analysis)
