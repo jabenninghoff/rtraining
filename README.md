@@ -8,23 +8,17 @@
 [![R-CMD-check](https://github.com/jabenninghoff/rtraining/workflows/R-CMD-check/badge.svg)](https://github.com/jabenninghoff/rtraining/actions)
 <!-- badges: end -->
 
-My notes and experiences learning R and RStudio, bundled as an R package
-(work-in-progress). The package is currently not yet fully functional,
-but you can read my [R Training Log](notebooks/r-training-log.Rmd) and
-[R Setup Log](notebooks/r-setup-log.Rmd) using the GitHub Pages URL:
+## Overview
+
+**R Training:** My notes and experiences learning R and RStudio, bundled
+as an R package (work-in-progress).
+
+The package is currently not yet fully functional, but you can read my
+[R Training Log](notebooks/r-training-log.Rmd) and [R Setup
+Log](notebooks/r-setup-log.Rmd) using the GitHub Pages URL:
 <https://jabenninghoff.github.io/rtraining/>.
 
 ## Installation
-
-<!-- CRAN install not available
-
-You can install the released version of rtraining from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("rtraining")
-```
-
--->
 
 You can install the development version from
 [GitHub](https://github.com/) with:
@@ -34,38 +28,14 @@ You can install the development version from
 devtools::install_github("jabenninghoff/rtraining")
 ```
 
-<!-- boilerplate example to be replaced
+Or using renv:
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-
-```r
-library(rtraining)
-## basic example code
+``` r
+# install.packages("renv")
+renv::install("jabenninghoff/rtraining")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Development
 
-
-```r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
-
--->
+-   Changelog: [NEWS](NEWS.md)
+-   Planned: [TODO](TODO.md)
