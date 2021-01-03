@@ -21,6 +21,9 @@ then
 	mkdir .build-site
 fi
 
+# pkgdown must run first
+Rscript -e 'pkgdown::clean_site()\npkgdown::build_site()'
+
 cat analysis/_site-HEAD.yml >.build-site/_site.yml
 
 for n in analysis/*.Rmd
