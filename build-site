@@ -45,3 +45,6 @@ done
 cat analysis/_site-TAIL.yml >>.build-site/_site.yml
 
 Rscript -e 'rmarkdown::render_site(".build-site")'
+
+# move staged files
+mv -n .build-site/docs/* docs/
