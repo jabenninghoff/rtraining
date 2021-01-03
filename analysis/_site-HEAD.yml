@@ -1,5 +1,5 @@
 name: "rtraining"
-output_dir: ../docs
+output_dir: ../docs/analysis
 navbar:
   title: "R Training"
   type: default
