@@ -27,9 +27,7 @@ Suggests:
     rmarkdown,
     tidyverse,
     modelr,
-    tibble,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    tibble
 Remotes: 
     jimhester/lintr,
     r-lib/styler
