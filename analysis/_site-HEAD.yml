@@ -1,10 +1,10 @@
 name: "rtraining"
-output_dir: ../docs/analysis
+output_dir: docs
 navbar:
-  title: "R Training"
+  title: "rtraining analysis"
   type: default
   left:
     - icon: fas fa-home fa-lg
       href: index.html
-    - text: "Notebooks"
+    - text: "Analysis"
       menu:
