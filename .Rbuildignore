@@ -3,10 +3,10 @@
 ^\.github$
 ^\.lintr$
 ^\.Rproj\.user$
+^analysis$
 ^build-site$
 ^docs$
 ^LICENSE\.md$
-^notebooks$
 ^pkgdown$
 ^README\.Rmd$
 ^renv\.lock$

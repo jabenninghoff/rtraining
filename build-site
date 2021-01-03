@@ -1,9 +1,9 @@
 #!/bin/sh
-# build-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/
+# build-site: build a website from a collection of R Notebooks (html_notebook) in analysis/
 # assumes: script exists and runs in top-level project directory
 #          .build-site directory is only used by build-site
-#          _site-HEAD.yml, _site-TAIL.yml, and index.Rmd are properly built in notebooks/
-#          all other .Rmd files in notebooks/ are either html_notebook or html_document
+#          _site-HEAD.yml, _site-TAIL.yml, and index.Rmd are properly built in analysis/
+#          all other .Rmd files in analysis/ are either html_notebook or html_document
 # results: all .Rmd files other than index.Rmd are included in the "Notebooks" menu in file alphabetical order
 set -e
 
@@ -21,9 +21,9 @@ then
 	mkdir .build-site
 fi
 
-cat notebooks/_site-HEAD.yml >.build-site/_site.yml
+cat analysis/_site-HEAD.yml >.build-site/_site.yml
 
-for n in notebooks/*.Rmd
+for n in analysis/*.Rmd
 do
 	NAME=`basename ${n}`
 	YAML=`cat ${n} | grep -n "\---" | head -2 | tail -1 | awk -F ':' '{print $1}'`
@@ -39,6 +39,6 @@ do
 	cat ${n} | sed -e "1,${YAML}s/${NB}/${DOC}/" >.build-site/${NAME}
 done
 
-cat notebooks/_site-TAIL.yml >>.build-site/_site.yml
+cat analysis/_site-TAIL.yml >>.build-site/_site.yml
 
 Rscript -e 'rmarkdown::render_site(".build-site")'
