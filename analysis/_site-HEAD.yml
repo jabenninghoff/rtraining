@@ -1,7 +1,7 @@
 name: "rtraining"
 output_dir: docs
 navbar:
-  title: "rtraining analysis"
+  title: "rtraining notebooks"
   type: default
   left:
     - icon: fas fa-home fa-lg
