@@ -6,5 +6,9 @@ navbar:
   left:
     - icon: fas fa-home fa-lg
       href: index.html
+    - text: Reference
+      href: reference/index.html
+    - text: Changelog
+      href: news/index.html
     - text: "Analysis"
       menu:
