@@ -13,9 +13,8 @@
 **R Training:** My notes and experiences learning R and RStudio, bundled
 as an R package (work-in-progress).
 
-The package is currently not yet fully functional, but you can read my
-[R Training Log](analysis/r-training-log.html) and [R Setup
-Log](analysis/r-setup-log.html) using the GitHub Pages URL:
+The package currently contains my **R Training Log** and **R Setup Log**
+notebooks, which are viewable from the GitHub Pages URL:
 <https://jabenninghoff.github.io/rtraining/>.
 
 ## Installation
@@ -37,5 +36,5 @@ renv::install("jabenninghoff/rtraining")
 
 ## Development
 
--   Changelog: [NEWS](NEWS.md)
+-   Changelog: See “Changelog” or `NEWS.md`.
 -   Planned: [TODO](TODO.md)
