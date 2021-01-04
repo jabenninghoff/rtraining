@@ -21,6 +21,7 @@ X-rtraining-comment: use "Suggests" for development packages, per
 Suggests: 
     devtools,
     rdev,
+    pkgdown,
     tidyverse,
     modelr
 Remotes: 
