@@ -1,17 +1,9 @@
 ---
-title: "R Training"
+title: "index"
 output:
   html_document:
-    code_download: FALSE
     code_folding:
-    toc: TRUE
-    toc_float:
-      collapsed: FALSE
-      smooth_scroll: FALSE
+    code_download: FALSE
 ---
 
-R Training website
-
-# About
-
-My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress). The package is currently not yet fully functional, but you can read my [R Training Log](r-training-log.html) and [R Setup Log](r-setup-log.html) using the GitHub Pages URL: <https://jabenninghoff.github.io/rtraining/>.
+stub index: only used to build notebooks
