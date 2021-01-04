@@ -17,7 +17,7 @@
 - [x] Write a utility/maintenance function to verify: `renv::status`, `renv::clean`, and possibly `renv::update` - see <https://github.com/rstudio/renv/blob/master/R/status.R>
 - [x] ~~Write a utility function to sort `.Rbuildignore`~~
 - [x] Migrate utility functions to [rdev](https://github.com/jabenninghoff/rdev)
-- [ ] Integrate `build-site` and pkgdown using custom navbars
+- [x] Integrate `build-site` and pkgdown using custom navbars
   - Implement [pkgdown](https://pkgdown.r-lib.org)
   - Rename notebooks/ to analysis/, `build-site` in a subdirectory (docs/analysis)
 - [ ] Review <https://github.com/rstudio/renv/> for ideas to include here
