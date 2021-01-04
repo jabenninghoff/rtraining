@@ -1,3 +1,9 @@
+# rtraining 0.4.0
+
+pkgdown integration
+
+* `build-site` has been updated to (mostly) seamlessly build a site that integrates pkgdown as the base site and adds an "Analaysis" menu that contains all of the R Notebooks (`html_notebook`) or Documents (`html_document`) in `analysis/` (moved from `notebooks/`)
+
 # rtraining 0.3.0
 
 rdev migration
