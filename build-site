@@ -21,8 +21,14 @@ then
 	mkdir .build-site
 fi
 
-# pkgdown must run first
-Rscript -e 'pkgdown::clean_site()\npkgdown::build_site()'
+# clean _pkgdown.yml to avoid errors on template_navbar() Rscript
+rm pkgdown/_pkgdown.yml
+
+# warning: this will break if template_navbar() changes
+Rscript -e 'pkgdown::template_navbar()' >pkgdown/navbar.yml
+cat pkgdown/url.yml >pkgdown/_pkgdown.yml
+cat pkgdown/navbar.yml | head -20 >>pkgdown/_pkgdown.yml
+cat pkgdown/analysis.yml >>pkgdown/_pkgdown.yml
 
 cat analysis/_site-HEAD.yml >.build-site/_site.yml
 
@@ -35,6 +41,8 @@ do
 	then
 		TEXT=`cat ${n} | grep "^title: " | head -1 | awk -F '"' '{print $2}'`
 		HREF="${NAME/.Rmd/.html}"
+		echo "      - text: \"${TEXT}\"" >>pkgdown/_pkgdown.yml
+		echo "        href: ${HREF}" >>pkgdown/_pkgdown.yml
 		echo "      - text: \"${TEXT}\"" >>.build-site/_site.yml
 		echo "        href: ${HREF}" >>.build-site/_site.yml
 	fi
@@ -42,9 +50,9 @@ do
 	cat ${n} | sed -e "1,${YAML}s/${NB}/${DOC}/" >.build-site/${NAME}
 done
 
+cat pkgdown/navbar.yml | tail -4 | head -3 >>pkgdown/_pkgdown.yml
 cat analysis/_site-TAIL.yml >>.build-site/_site.yml
 
+Rscript -e 'pkgdown::clean_site()\npkgdown::build_site()'
 Rscript -e 'rmarkdown::render_site(".build-site")'
-
-# move staged files
 mv -n .build-site/docs/* docs/
