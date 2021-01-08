@@ -1,6 +1,6 @@
 # rtraining 0.5.0
 
-* moved `rmarkdown::render_site` header files to `pkgdown`
+* moved `rmarkdown::render_site` header files to `pkgdown` - `analysis` now contains only R Notebooks!
 
 # rtraining 0.4.0
 
