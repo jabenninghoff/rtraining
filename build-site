@@ -22,7 +22,7 @@ then
 fi
 
 # clean _pkgdown.yml to avoid errors on template_navbar() Rscript
-rm pkgdown/_pkgdown.yml
+rm -f pkgdown/_pkgdown.yml
 
 # warning: this will break if template_navbar() changes
 Rscript -e 'pkgdown::template_navbar()' >pkgdown/navbar.yml
