@@ -1,4 +1,4 @@
-# rtraining (development version)
+# rtraining 0.5.0
 
 * moved `rmarkdown::render_site` header files to `pkgdown`
 
