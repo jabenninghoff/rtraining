@@ -1,3 +1,7 @@
+# rtraining (development version)
+
+* moved `rmarkdown::render_site` header files to `pkgdown`
+
 # rtraining 0.4.0
 
 pkgdown integration
