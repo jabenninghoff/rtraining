@@ -31,6 +31,7 @@
   - support for additional links in the navbar
   - order links by Title, not filename
   - better logic for converting `html_notebook` to `html_document`
+- [ ] Migrate site builder to rdev
 
 ## GitHub
 
