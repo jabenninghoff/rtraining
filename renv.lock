@@ -702,15 +702,15 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "0.2.1",
+      "Version": "0.2.1.9000",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "e099803bcf2e226dc8813fe1da12233b1c978256",
+      "RemoteSha": "d540b92325d565a546cfbb39dac2c6ecba5722a8",
       "RemoteHost": "api.github.com",
-      "Hash": "cb43c1846c160d8580e6a54aa153246b"
+      "Hash": "da0731d5706b55abcf73e8facf8bae4c"
     },
     "readr": {
       "Package": "readr",
@@ -749,10 +749,10 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.12.3",
+      "Version": "0.12.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "b5510c50c7f31d453c385c7b460af2b9"
+      "Hash": "5c0cdb37f063c58cdab3c7e9fbb8bd2c"
     },
     "reprex": {
       "Package": "reprex",
