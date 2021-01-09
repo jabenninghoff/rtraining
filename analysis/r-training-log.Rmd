@@ -82,15 +82,15 @@ When in doubt, start with the tidyverse, or RStudio sponsored projects, or built
 
 **In progress:** I'm reading these now.
 
-- Full [ggplot2](https://ggplot2.tidyverse.org/reference/index.html) documentation OR
-- ggplot2 book, 3rd edition draft: <https://ggplot2-book.org>
+- [R Packages](https://r-pkgs.org/) - even more Hadley
+- [testthat](https://testthat.r-lib.org/) - R testing framework
+- [roxygen2](https://github.com/r-lib/roxygen2) - document functions inline
 
 **Future:** I'm planning on adopting these to improve my code quality.
 
-- [testthat](https://testthat.r-lib.org/) - R testing framework
-- [roxygen2](https://github.com/r-lib/roxygen2) - document functions inline
+- Full [ggplot2](https://ggplot2.tidyverse.org/reference/index.html) documentation OR
+- ggplot2 book, 3rd edition draft: <https://ggplot2-book.org>
 - [Advanced R](https://adv-r.hadley.nz/) - more Hadley
-- [R Packages](https://r-pkgs.org/) - even more Hadley
 
 **Also helpful:** some additional helpful links, either from me or recommended by others.
 
@@ -105,6 +105,7 @@ When in doubt, start with the tidyverse, or RStudio sponsored projects, or built
   - [the R Graph Gallery](https://www.r-graph-gallery.com) - charts made with R and ggplot2
   - [from Data to Viz](https://www.data-to-viz.com) - recommendations on data visualization
   - He also has some tips on [R Markdown](https://holtzy.github.io/Pimp-my-rmd/)
+- [MIT Roxygen Quick Reference](https://stuff.mit.edu/afs/athena/software/r/current/RStudio/resources/roxygen_help.html)
 
 ## R for Data Science
 
