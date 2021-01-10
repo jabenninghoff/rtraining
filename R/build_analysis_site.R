@@ -1,5 +1,7 @@
 #' Build Analysis Site
 #'
+#' \bold{\preformatted{NOT WORKING YET
+#' }}
 #' `build_analysis_site()` is a wrapper for [pkgdown::build_site()] that adds an 'Analysis' menu
 #'   containing rendered versions of all .Rmd files in `analysis/`
 #'
@@ -29,6 +31,7 @@
 #' @importFrom pkgdown clean_site build_site template_navbar
 #' @importFrom rmarkdown render_site
 build_analysis_site <- function(pkg = ".", ...) {
+  return ("NOT WORKING YET")
   # fail if analysis/ directory does not exist or has no .Rmd files
   # copy pkgdown/_base.yml to pkgdown/_pkgdown.yml, overwrite
   # build navbar (function?)
@@ -39,6 +42,8 @@ build_analysis_site <- function(pkg = ".", ...) {
   # write _site.yml to build directory
   # read *.Rmd, replace html_notebook in yaml header with html_document, write to build directory
   # copy data/, assets/ to build directory as-is
+  # remove .gitignore from assets/ directory to allow for manually built assets to be included in
+  #   docs/ but not elsewhere in git
   # render site using rmarkdown to docs/ in build directory
   # move staged files to package docs/ directory, do not overwrite
 }
