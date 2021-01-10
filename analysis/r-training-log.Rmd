@@ -172,3 +172,27 @@ Read more at <http://rmarkdown.rstudio.com/rmarkdown_websites.html>."
 ### R Notebook Advice
 
 Hadley has some good suggestions for R Notebooks in [30 R Markdown workflow](https://r4ds.had.co.nz/r-markdown-workflow.html).
+
+## R Packages
+
+Notes from the book. I've started writing all code in the package structure described in the book and used by Hadley and the tidyverse. Doing so makes it easier to write tests, documentation, track dependencies, and provides convenient continous integration through `R CMD check`.
+
+### System Setup
+
+[Chapter 3](https://r-pkgs.org/setup.html) has good coverage of setting up a system for R development, I've incorporated what I learned from this into my "R Setup Log".
+
+### Naming Things
+
+Package names are pretty restricted, but Hadley has some good recommendation on [naming](https://r-pkgs.org/workflows101.html#naming) them, including the "[available](https://github.com/r-lib/available)" package, which I've started using.
+
+### RStudio
+
+There are some helpful tips in the [RStudio](https://r-pkgs.org/workflows101.html#benefits-of-rstudio-projects) section, including 2 key shortcuts to remember:
+
+- control-. to "Go to file/function"
+- alt-shift-k for the keyboard shortcut quick reference
+- not a shortcut, but use [`proj_sitrep()`](https://usethis.r-lib.org/reference/proj_sitrep.html) to query active projects and working directory
+
+### Writing Better Code
+
+Chapter 6, [The Package Within](https://r-pkgs.org/package-within.html), highlights some sub-optimal R code and shows how to clean it up. It never occurred to me to use a [left join](https://r-pkgs.org/package-within.html#bravo-a-better-script-that-works) to clean up data, and I've already started using the technique.
