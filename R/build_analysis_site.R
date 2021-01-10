@@ -41,9 +41,7 @@ build_analysis_site <- function(pkg = ".", ...) {
   # create _site.yml from _pkgdown.yml - store _site.yml template in this file
   # write _site.yml to build directory
   # read *.Rmd, replace html_notebook in yaml header with html_document, write to build directory
-  # copy data/, assets/ to build directory as-is
-  # remove .gitignore from assets/ directory to allow for manually built assets to be included in
-  #   docs/ but not elsewhere in git
+  # copy data/, assets/, rendered/ to build directory as-is
   # render site using rmarkdown to docs/ in build directory
-  # move staged files to package docs/ directory, do not overwrite
+  # move staged files to package docs/ directory, do not overwrite - include all files (skip data?)
 }
