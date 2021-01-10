@@ -31,7 +31,7 @@
 #' @importFrom pkgdown clean_site build_site template_navbar
 #' @importFrom rmarkdown render_site
 build_analysis_site <- function(pkg = ".", ...) {
-  return ("NOT WORKING YET")
+  return("NOT WORKING YET")
   # fail if analysis/ directory does not exist or has no .Rmd files
   # copy pkgdown/_base.yml to pkgdown/_pkgdown.yml, overwrite
   # build navbar (function?)
