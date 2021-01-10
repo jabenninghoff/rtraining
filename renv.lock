@@ -708,9 +708,9 @@
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "d540b92325d565a546cfbb39dac2c6ecba5722a8",
+      "RemoteSha": "b426c3b34a5f3d763ec7bfc37468392d808857b0",
       "RemoteHost": "api.github.com",
-      "Hash": "da0731d5706b55abcf73e8facf8bae4c"
+      "Hash": "758491bbb726c5c27ffec69206c6dccd"
     },
     "readr": {
       "Package": "readr",
