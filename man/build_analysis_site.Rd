@@ -12,6 +12,8 @@ build_analysis_site(pkg = ".", ...)
 \item{...}{additional arguments passed to \code{\link[pkgdown:build_site]{pkgdown::build_site()}}}
 }
 \description{
+\bold{\preformatted{NOT WORKING YET
+}}
 \code{build_analysis_site()} is a wrapper for \code{\link[pkgdown:build_site]{pkgdown::build_site()}} that adds an 'Analysis' menu
 containing rendered versions of all .Rmd files in \verb{analysis/}
 }
