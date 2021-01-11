@@ -33,7 +33,7 @@
 build_analysis_site <- function(pkg = ".", ...) {
   notebooks <- fs::dir_ls("analysis", glob = "*.Rmd")
   if (length(notebooks) == 0) {
-    stop("No *.Rmd files in analysis/")
+    stop("No *.Rmd files in analysis directory")
   }
   notebooks
   # copy pkgdown/_base.yml to pkgdown/_pkgdown.yml, overwrite
