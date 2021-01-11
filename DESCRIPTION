@@ -16,6 +16,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
+    fs,
     pkgdown,
     rmarkdown
 X-rtraining-comment: use "Suggests" for development packages, per
