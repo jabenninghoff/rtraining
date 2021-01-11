@@ -28,31 +28,40 @@
 #' \dontrun{
 #' build_analysis_site()
 #' }
-#' @importFrom rmarkdown render_site
 build_analysis_site <- function(pkg = ".", ...) {
-  menu <- list(
-    list(text = "R Setup Log", href = "r-setup-log.html"),
-    list(text = "R Training Log", href = "r-training-log.html")
-  )
+  analysis_menu_item <- function(str_file) {
+    title <- rmarkdown::yaml_front_matter(str_file)$title
+    link <- as.character(fs::path_ext_set(fs::path_file(str_file), ".html"))
+    list(text = title, href = link)
+  }
 
   notebooks <- fs::dir_ls("analysis", glob = "*.Rmd")
   if (length(notebooks) == 0) {
     stop("No *.Rmd files in analysis directory")
   }
-  # copy pkgdown/_base.yml to pkgdown/_pkgdown.yml, overwrite
-  fs::file_copy("pkgdown/_base.yml", "pkgdown/_pkgdown.yml", overwrite = TRUE)
-  nav <- pkgdown::template_navbar()
 
+  # read base settings, write to pkgdown
+  base <- yaml::read_yaml("pkgdown/_base.yml")
+  fs::file_copy("pkgdown/_base.yml", "pkgdown/_pkgdown.yml", overwrite = TRUE)
+
+  # create navbar template and insert analysis menu
+  menu <- unname(purrr::map(notebooks, analysis_menu_item))
+  nav <- pkgdown::template_navbar()
   nav$navbar$structure$left <- append(nav$navbar$structure$left, "analysis")
   nav$navbar$components <- append(
     nav$navbar$components,
     list(analysis = list(text = "Analysis", menu = menu)),
     length(nav$navbar$components) - 1
   )
-  nav
-  # build navbar (function?)
-  # write pkgdown/_pkgdown.yml
-  # clean and build pkgdown site
+  nav <- append(nav, base, 0)
+
+  # write template
+  yaml::write_yaml(nav, "pkgdown/_pkgdown.yml")
+
+  # run clean_site() and build_site()
+  pkgdown::clean_site()
+  pkgdown::build_site()
+
   # create temporary build directory
   # create _site.yml from _pkgdown.yml - store _site.yml template in this file
   # write _site.yml to build directory
