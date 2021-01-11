@@ -30,13 +30,26 @@
 #' }
 #' @importFrom rmarkdown render_site
 build_analysis_site <- function(pkg = ".", ...) {
+  menu <- list(
+    list(text = "R Setup Log", href = "r-setup-log.html"),
+    list(text = "R Training Log", href = "r-training-log.html")
+  )
+
   notebooks <- fs::dir_ls("analysis", glob = "*.Rmd")
   if (length(notebooks) == 0) {
     stop("No *.Rmd files in analysis directory")
   }
   # copy pkgdown/_base.yml to pkgdown/_pkgdown.yml, overwrite
   fs::file_copy("pkgdown/_base.yml", "pkgdown/_pkgdown.yml", overwrite = TRUE)
-  pkgdown::template_navbar()
+  nav <- pkgdown::template_navbar()
+
+  nav$navbar$structure$left <- append(nav$navbar$structure$left, "analysis")
+  nav$navbar$components <- append(
+    nav$navbar$components,
+    list(analysis = list(text = "Analysis", menu = menu)),
+    length(nav$navbar$components) - 1
+  )
+  nav
   # build navbar (function?)
   # write pkgdown/_pkgdown.yml
   # clean and build pkgdown site
