@@ -28,15 +28,15 @@
 #' \dontrun{
 #' build_analysis_site()
 #' }
-#' @importFrom pkgdown clean_site build_site template_navbar
 #' @importFrom rmarkdown render_site
 build_analysis_site <- function(pkg = ".", ...) {
   notebooks <- fs::dir_ls("analysis", glob = "*.Rmd")
   if (length(notebooks) == 0) {
     stop("No *.Rmd files in analysis directory")
   }
-  notebooks
   # copy pkgdown/_base.yml to pkgdown/_pkgdown.yml, overwrite
+  fs::file_copy("pkgdown/_base.yml", "pkgdown/_pkgdown.yml", overwrite = TRUE)
+  pkgdown::template_navbar()
   # build navbar (function?)
   # write pkgdown/_pkgdown.yml
   # clean and build pkgdown site
