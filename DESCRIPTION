@@ -18,7 +18,9 @@ RoxygenNote: 7.1.1
 Imports: 
     fs,
     pkgdown,
-    rmarkdown
+    purrr,
+    rmarkdown,
+    yaml
 X-rtraining-comment: use "Suggests" for development packages, per
     https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-
 Suggests: 
