@@ -35,6 +35,10 @@ build_analysis_site <- function(pkg = ".", ...) {
     list(text = title, href = link)
   }
 
+  if (pkg != ".") {
+    stop('currently only build_analysis_site(pkg = ".") is supported')
+  }
+
   notebooks <- fs::dir_ls("analysis", glob = "*.Rmd")
   if (length(notebooks) == 0) {
     stop("No *.Rmd files in analysis directory")
@@ -59,10 +63,26 @@ build_analysis_site <- function(pkg = ".", ...) {
   yaml::write_yaml(pkg_yml, "pkgdown/_pkgdown.yml")
 
   # run clean_site() and build_site()
-  pkgdown::clean_site()
-  pkgdown::build_site()
+  # pkgdown::clean_site()
+  # pkgdown::build_site()
 
-  # create temporary build directory
+  # create _site.yml from _pkgdown.yml in temporary build directory
+  # warning: this assumes that there is only one element on the right, all others on the left
+  left_nav <- unname(pkg_yml$navbar$components[-length(pkg_yml$navbar$components)])
+  right_nav <- unname(pkg_yml$navbar$components[length(pkg_yml$navbar$components)])
+  desc <- desc::description$new(pkg)
+  title <- paste(desc$get("Package")[[1]], "notebooks")
+  site_yml <- list(
+    output_dir = "docs",
+    navbar = list(title = title, type = "default", left = left_nav, right = right_nav),
+    output = list(html_document = list(
+      code_download = TRUE, code_folding = "show", df_print = "paged",
+      fig_width = 8, fig_height = 4.5, highlight = "textmate"
+    ))
+  )
+
+  structure(site_yml, class = "print_yaml")
+  # create temporary build directory - use fs::path_temp("test")
   # create _site.yml from _pkgdown.yml - store _site.yml template in this file
   # write _site.yml to build directory
   # read *.Rmd, replace html_notebook in yaml header with html_document, write to build directory
