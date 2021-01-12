@@ -46,17 +46,17 @@ build_analysis_site <- function(pkg = ".", ...) {
 
   # create navbar template and insert analysis menu
   menu <- unname(purrr::map(notebooks, analysis_menu_item))
-  nav <- pkgdown::template_navbar()
-  nav$navbar$structure$left <- append(nav$navbar$structure$left, "analysis")
-  nav$navbar$components <- append(
-    nav$navbar$components,
+  pkg_yml <- pkgdown::template_navbar()
+  pkg_yml$navbar$structure$left <- append(pkg_yml$navbar$structure$left, "analysis")
+  pkg_yml$navbar$components <- append(
+    pkg_yml$navbar$components,
     list(analysis = list(text = "Analysis", menu = menu)),
-    length(nav$navbar$components) - 1
+    length(pkg_yml$navbar$components) - 1
   )
-  nav <- append(nav, base, 0)
+  pkg_yml <- append(pkg_yml, base, 0)
 
   # write template
-  yaml::write_yaml(nav, "pkgdown/_pkgdown.yml")
+  yaml::write_yaml(pkg_yml, "pkgdown/_pkgdown.yml")
 
   # run clean_site() and build_site()
   pkgdown::clean_site()
