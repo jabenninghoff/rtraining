@@ -1,2 +1,5 @@
 # rendered R Notebooks
 *.nb.html
+
+# manually rendered files
+rendered/
