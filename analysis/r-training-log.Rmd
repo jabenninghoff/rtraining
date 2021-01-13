@@ -152,7 +152,7 @@ From [29.8 Websites](https://r4ds.had.co.nz/r-markdown-formats.html#websites):
 - Put your `.Rmd` files in a single directory. `index.Rmd` will become the home page.
 - Add a YAML file named `_site.yml` provides the navigation for the site. For example:
 
-```
+```yaml
 name: "my-website"
 navbar:
   title: "My Website"
@@ -199,5 +199,8 @@ Chapter 6, [The Package Within](https://r-pkgs.org/package-within.html), highlig
 
 ### R and Homebrew
 
-https://r-pkgs.org/r.html#code-style
-https://mikemcquaid.com/2018/06/05/robot-pedantry-human-empathy/
+[7.3 Code Style](https://r-pkgs.org/r.html#code-style) includes a footnote that references my favorite open source project, [Homebrew](https://brew.sh):
+
+> The [Robot Pedantry, Human Empathy](https://mikemcquaid.com/2018/06/05/robot-pedantry-human-empathy/) blog post by Mike McQuaid does an excellent job summarizing the benefit of automating tasks like code re-styling.
+
+I've contributed to homebrew, but I've only recently realized how advanced a project it truly is - "advanced" DevOps concepts like trunk-based development and pedantic continuous integration checks just make sense to me, thanks to my experiences contributing. And, I've been the recipient of a "You Rock!" from Mike, which felt great, and still does now, even after learning it was partially automated.
