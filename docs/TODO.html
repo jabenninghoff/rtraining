@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rtraining</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -190,18 +190,18 @@ Review <a href="https://github.com/rstudio/renv/" class="uri">https://github.com
 <input type="checkbox" disabled>
 Review <a href="https://github.com/jimbrig/rtraining/" class="uri">https://github.com/jimbrig/rtraining/</a> for ideas to include here</li>
 <li>
-<input type="checkbox" disabled>
+<input type="checkbox" disabled checked>
 Refactor site builder as an R function<ul>
 <li>wrapper for <code><a href="https://rdrr.io/pkg/rmarkdown/man/render_site.html">rmarkdown::render_site()</a></code>
 </li>
 <li>run the build in a temporary directory like <code>render_site()</code>
 </li>
-<li>re-use code from <code>render_site()</code> to create list of R Notebooks</li>
+<li><del>re-use code from <code>render_site()</code> to create list of R Notebooks</del></li>
 <li>dynamically build the <code>_site.yml</code> file using <a href="https://github.com/viking/r-yaml/">yaml</a> with configuration settings passed to the wrapper function</li>
 <li>dynamically build the <code>index.Rmd</code> using <code>DESCRIPTION</code>
 </li>
 <li>support for additional links in the navbar</li>
-<li>order links by Title, not filename</li>
+<li><del>order links by Title, not filename</del></li>
 <li>better logic for converting <code>html_notebook</code> to <code>html_document</code>
 </li>
 </ul>
