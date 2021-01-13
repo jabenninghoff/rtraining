@@ -22,14 +22,14 @@
   - Rename notebooks/ to analysis/, `build-site` in a subdirectory (docs/analysis)
 - [ ] Review <https://github.com/rstudio/renv/> for ideas to include here
 - [ ] Review <https://github.com/jimbrig/rtraining/> for ideas to include here
-- [ ] Refactor site builder as an R function
+- [x] Refactor site builder as an R function
   - wrapper for `rmarkdown::render_site()`
   - run the build in a temporary directory like `render_site()`
-  - re-use code from `render_site()` to create list of R Notebooks
+  - ~~re-use code from `render_site()` to create list of R Notebooks~~
   - dynamically build the `_site.yml` file using [yaml](https://github.com/viking/r-yaml/) with configuration settings passed to the wrapper function
   - dynamically build the `index.Rmd` using `DESCRIPTION`
   - support for additional links in the navbar
-  - order links by Title, not filename
+  - ~~order links by Title, not filename~~
   - better logic for converting `html_notebook` to `html_document`
 - [ ] Migrate site builder to rdev
 
