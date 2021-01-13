@@ -41,6 +41,3 @@ vignettes/*.pdf
 # macOS, vim
 .DS_Store
 *.swp
-
-# build-site directory
-.build-site/
