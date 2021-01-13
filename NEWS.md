@@ -1,3 +1,19 @@
+# rtraining 0.6.0
+
+## New Features
+
+* major update: `build-site` has been replaced with an R function, `build_analysis_site()`, which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to `html_document`, `to_document()`.
+
+* `build_analysis_site()` will be migrated to [rdev](https://jabenninghoff.github.io/rdev/) in a future release
+
+## New Content
+
+* R Setup Log: added notes on the package layout I use for "analysis" packages (will be converted to an rdev vignette in a future release)
+
+* R Setup Log: added notes on my R Workflow
+
+* R Training Log: updated with notes on my current book, [R Packages](https://r-pkgs.org)
+
 # rtraining 0.5.1
 
 * R Training Log content updates
@@ -10,7 +26,7 @@
 
 pkgdown integration
 
-* `build-site` has been updated to (mostly) seamlessly build a site that integrates pkgdown as the base site and adds an "Analaysis" menu that contains all of the R Notebooks (`html_notebook`) or Documents (`html_document`) in `analysis/` (moved from `notebooks/`)
+* `build-site` has been updated to (mostly) seamlessly build a site that integrates pkgdown as the base site and adds an "Analysis" menu that contains all of the R Notebooks (`html_notebook`) or Documents (`html_document`) in `analysis/` (moved from `notebooks/`)
 
 # rtraining 0.3.0
 
