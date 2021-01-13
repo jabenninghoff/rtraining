@@ -202,6 +202,10 @@ rm -rf .build-site && sh build-site && open docs/index.html
 
 This approach leverages the [docs functionality](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch) of GitHub pages, like pkgdown.
 
+### Update on Publishing
+
+`build-site` has been replaced with `build_analysis_site()`! At its core, it is functionally the same: builds a `pkgdown` site, adding an "Analysis" menu with all notebooks in the (renamed) `analysis/` directory, then converts and builds the notebooks using `rmarkdown`, and moves them into the `docs/` directory. Since it is now an R Script, it's more portable and can be more easily bundled with packages. I will be migrating its functionality to [rdev](https://jabenninghoff.github.io/rdev/) shortly, so that it's usable across multiple analysis projects.
+
 ## R Package Layout
 
 Here is my package layout - the table shows the path, whether it's part of the formal R package definition, and my notes on its use.
