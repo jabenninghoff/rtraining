@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining//index.html</loc>
+    <loc>https://jabenninghoff.github.io/rtraining/index.html</loc>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining//reference/build_analysis_site.html</loc>
+    <loc>https://jabenninghoff.github.io/rtraining/reference/build_analysis_site.html</loc>
+  </url>
+  <url>
+    <loc>https://jabenninghoff.github.io/rtraining/reference/to_document.html</loc>
   </url>
 </urlset>

@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Build Analysis Site — build_analysis_site" />
 <meta property="og:description" content="build_analysis_site() is a wrapper for pkgdown::build_site() that adds an 'Analysis' menu
-containing rendered versions of all .Rmd files in analysis/" />
+containing rendered versions of all .Rmd files in analysis/." />
 
 
 
@@ -73,7 +73,7 @@ containing rendered versions of all .Rmd files in analysis/" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rtraining</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@ containing rendered versions of all .Rmd files in analysis/" />
 
     <div class="ref-description">
     <p><code>build_analysis_site()</code> is a wrapper for <code><a href='https://pkgdown.r-lib.org/reference/build_site.html'>pkgdown::build_site()</a></code> that adds an 'Analysis' menu
-containing rendered versions of all .Rmd files in <code>analysis/</code></p>
+containing rendered versions of all .Rmd files in <code>analysis/</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_analysis_site</span><span class='op'>(</span>pkg <span class='op'>=</span> <span class='st'>"."</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -163,14 +163,17 @@ links to html versions of each .Rmd file in <code>analysis/</code></p></li>
 <li><p>Runs <code><a href='https://pkgdown.r-lib.org/reference/clean_site.html'>pkgdown::clean_site()</a></code> and <code><a href='https://pkgdown.r-lib.org/reference/build_site.html'>pkgdown::build_site()</a></code></p></li>
 <li><p>Creates a <code>_site.yml</code> file based on the final <code>_pkgdown.yml</code> that clones the pkgdown navbar
 in a temporary build directory</p></li>
-<li><p>Copies the following from <code>analysis/</code> into the build directory: <code>*.Rmd</code>, <code>data/</code>, <code>assets/</code></p></li>
-<li><p>Changes <code>html_notebook</code> to <code>html_document</code></p></li>
-<li><p>Builds a site using <code><a href='https://rdrr.io/pkg/rmarkdown/man/render_site.html'>rmarkdown::render_site()</a></code> using a modified <code>html_document</code> settings to
-render files with the look and feel of <code>html_notebook</code></p></li>
-<li><p>Moves the rendered files to <code>docs/</code>: <code>*.html</code>, <code>data/</code>, <code>assets/</code> (excluding <code>index.html</code>)</p></li>
+<li><p>Copies the following from <code>analysis/</code> into the build directory: <code>*.Rmd</code>, <code>data/</code>, <code>assets/</code>,
+<code>rendered/</code></p></li>
+<li><p>Changes <code>*.Rmd</code> from <code>html_notebook</code> to <code>html_document</code> using <code><a href='to_document.html'>to_document()</a></code></p></li>
+<li><p>Builds a site using <code><a href='https://rdrr.io/pkg/rmarkdown/man/render_site.html'>rmarkdown::render_site()</a></code> using modified <code>html_document</code> output settings
+to render files with the look and feel of <code>html_notebook</code></p></li>
+<li><p>Moves the rendered files to <code>docs/</code>: <code>*.html</code>, <code>data/</code>, <code>assets/</code>, without overwriting</p></li>
 </ol>
 
 <p><code>build_analysis_site()</code> will fail with an error if there are no files in <code>analysis/*.Rmd</code>.</p>
+<p><strong>Warning:</strong> <code>build_analysis_site()</code> is currently considered Experimental. Currently only
+<code>build_analysis_site(pkg = ".")</code> is supported.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>

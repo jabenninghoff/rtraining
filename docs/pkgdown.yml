@@ -2,8 +2,8 @@ pandoc: 2.11.3.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-01-09T21:44Z
+last_built: 2021-01-13T03:32Z
 urls:
-  reference: https://jabenninghoff.github.io/rtraining//reference
-  article: https://jabenninghoff.github.io/rtraining//articles
+  reference: https://jabenninghoff.github.io/rtraining/reference
+  article: https://jabenninghoff.github.io/rtraining/articles
 

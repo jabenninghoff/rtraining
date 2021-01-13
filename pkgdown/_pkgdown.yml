@@ -1,4 +1,4 @@
-url: https://jabenninghoff.github.io/rtraining/
+url: https://jabenninghoff.github.io/rtraining
 navbar:
   structure:
     left:
@@ -8,6 +8,7 @@ navbar:
     - articles
     - tutorials
     - news
+    - analysis
     right: github
   components:
     home:
@@ -22,9 +23,9 @@ navbar:
     analysis:
       text: Analysis
       menu:
-      - text: "R Setup Log"
+      - text: R Setup Log
         href: r-setup-log.html
-      - text: "R Training Log"
+      - text: R Training Log
         href: r-training-log.html
     github:
       icon: fab fa-github fa-lg
