@@ -95,7 +95,7 @@ build_analysis_site <- function(pkg = ".", ...) {
 
   # copy files from analysis/ into build directory, changing html_notebook to html_document
   # warning: assumes assets, data, and rendered are directories
-  analysis_dirs <- fs::dir_ls("analysis", regexp = "^(assets|data|rendered)$")
+  analysis_dirs <- fs::dir_ls("analysis", regexp = "/(assets|data|rendered)$")
   purrr::walk(analysis_dirs, fs::dir_copy, tmp_dir)
   purrr::walk(notebooks, to_document, tmp_dir)
 
