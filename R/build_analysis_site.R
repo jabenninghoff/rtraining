@@ -94,7 +94,8 @@ build_analysis_site <- function(pkg = ".", ...) {
   yaml::write_yaml(site_yml, paste0(tmp_dir, "/_site.yml"))
 
   # copy files from analysis/ into build directory, changing html_notebook to html_document
-  analysis_dirs <- fs::dir_ls("analysis", regexp = "(assets|data|rendered)")
+  # warning: assumes assets, data, and rendered are directories
+  analysis_dirs <- fs::dir_ls("analysis", regexp = "^(assets|data|rendered)$")
   purrr::walk(analysis_dirs, fs::dir_copy, tmp_dir)
   purrr::walk(notebooks, to_document, tmp_dir)
 
@@ -124,7 +125,7 @@ build_analysis_site <- function(pkg = ".", ...) {
 #' }
 #' @export
 to_document <- function(file_path, new_path, overwrite = FALSE) {
-  new_file <- fs::file_copy(file_path, new_path, overwrite)
+  new_file <- fs::file_copy(file_path, new_path, overwrite = overwrite)
   notebook <- readLines(new_file)
 
   # warning: assumes the document has valid front matter bounded by ^---$
