@@ -1,3 +1,7 @@
+# rtraining 0.7.0
+
+* `build_analysis_site()` migrated to [rdev](https://jabenninghoff.github.io/rdev/)
+
 # rtraining 0.6.0
 
 ## New Features
