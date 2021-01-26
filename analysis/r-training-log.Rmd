@@ -204,3 +204,23 @@ Chapter 6, [The Package Within](https://r-pkgs.org/package-within.html), highlig
 > The [Robot Pedantry, Human Empathy](https://mikemcquaid.com/2018/06/05/robot-pedantry-human-empathy/) blog post by Mike McQuaid does an excellent job summarizing the benefit of automating tasks like code re-styling.
 
 I've contributed to homebrew, but I've only recently realized how advanced a project it truly is - "advanced" DevOps concepts like trunk-based development and pedantic continuous integration checks just make sense to me, thanks to my experiences contributing. And, I've been the recipient of a "You Rock!" from Mike, which felt great, and still does now, even after learning it was partially automated.
+
+### Package Conventions
+
+From [7.5 Respect the R landscape](https://r-pkgs.org/r.html#code-r-landscape):
+
+Avoid using any of the following:
+
+```r
+library()
+require()
+source()
+options()
+par()
+setwd()
+Sys.setenv()
+Sys.setlocale()
+set.seed()
+```
+
+Instead, manage dependencies through `roxygen2` and the `DESCRIPTION` file. Use  [`withr`](https://withr.r-lib.org/index.html) when you need to modify state.
