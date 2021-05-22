@@ -14,13 +14,22 @@
 
 <title>R Setup Log</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -44,11 +53,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -62,30 +66,6 @@ if (window.hljs) {
 
 
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
 #rmd-source-code {
   display: none;
 }
@@ -100,10 +80,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -120,40 +96,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -181,7 +130,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -193,7 +142,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -204,10 +153,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -219,7 +181,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -354,7 +315,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -417,11 +378,11 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-download-source" href="#">Download Rmd</a></li>
 </ul>
 </div>
@@ -446,7 +407,7 @@ div.tocify {
 <p><strong>TL;DR: just use homebrew.</strong></p>
 <p>I don’t recommend installing the <code>cask</code> variant of r because it creates problems with <code>brew doctor</code>:</p>
 <pre class="sh"><code>brew info --cask r</code></pre>
-<pre><code>## r: 4.0.3
+<pre><code>## r: 4.1.0
 ## https://www.r-project.org/
 ## Not installed
 ## From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r.rb
@@ -455,23 +416,23 @@ div.tocify {
 ## ==&gt; Description
 ## Environment for statistical computing and graphics
 ## ==&gt; Artifacts
-## R-4.0.3.pkg (Pkg)
+## R-4.1.0.pkg (Pkg)
 ## ==&gt; Caveats
 ## Cask r installs files under /usr/local. The presence of such
 ## files can cause warnings when running `brew doctor`, which is considered
 ## to be a bug in Homebrew Cask.
 ## 
 ## ==&gt; Analytics
-## install: 572 (30 days), 2,623 (90 days), 11,708 (365 days)</code></pre>
+## install: 663 (30 days), 2,205 (90 days), 10,758 (365 days)</code></pre>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
 <pre class="r"><code>options(width = 100)
 capabilities()</code></pre>
 <pre><code>##        jpeg         png        tiff       tcltk         X11        aqua    http/ftp     sockets 
 ##       FALSE       FALSE       FALSE        TRUE       FALSE        TRUE        TRUE        TRUE 
-##      libxml        fifo      cledit       iconv         NLS     profmem       cairo         ICU 
-##        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE       FALSE        TRUE 
-## long.double     libcurl 
-##        TRUE        TRUE</code></pre>
+##      libxml        fifo      cledit       iconv         NLS       Rprof     profmem       cairo 
+##        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE       FALSE 
+##         ICU long.double     libcurl 
+##        TRUE        TRUE        TRUE</code></pre>
 <p>Currently, this is everything except the X11 dependencies, which aren’t really needed:</p>
 <pre class="r"><code>?capabilities</code></pre>
 <blockquote>
@@ -865,7 +826,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
