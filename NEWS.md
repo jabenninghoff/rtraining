@@ -1,3 +1,7 @@
+# rtraining 0.7.1
+
+* maintance release, updated for R 4.1.0
+
 # rtraining 0.7.0
 
 * `build_analysis_site()` migrated to [rdev](https://jabenninghoff.github.io/rdev/)
