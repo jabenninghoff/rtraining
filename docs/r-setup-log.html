@@ -14,8 +14,8 @@
 
 <title>R Setup Log</title>
 
-<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -407,7 +407,7 @@ div.tocify {
 <p><strong>TL;DR: just use homebrew.</strong></p>
 <p>I don’t recommend installing the <code>cask</code> variant of r because it creates problems with <code>brew doctor</code>:</p>
 <pre class="sh"><code>brew info --cask r</code></pre>
-<pre><code>## r: 4.1.0
+<pre><code>## r: 4.1.1
 ## https://www.r-project.org/
 ## Not installed
 ## From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r.rb
@@ -416,21 +416,21 @@ div.tocify {
 ## ==&gt; Description
 ## Environment for statistical computing and graphics
 ## ==&gt; Artifacts
-## R-4.1.0.pkg (Pkg)
+## R-4.1.1.pkg (Pkg)
 ## ==&gt; Caveats
 ## Cask r installs files under /usr/local. The presence of such
 ## files can cause warnings when running `brew doctor`, which is considered
 ## to be a bug in Homebrew Cask.
 ## 
 ## ==&gt; Analytics
-## install: 663 (30 days), 2,205 (90 days), 10,758 (365 days)</code></pre>
+## install: 1,331 (30 days), 2,722 (90 days), 10,236 (365 days)</code></pre>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
 <pre class="r"><code>options(width = 100)
 capabilities()</code></pre>
 <pre><code>##        jpeg         png        tiff       tcltk         X11        aqua    http/ftp     sockets 
-##       FALSE       FALSE       FALSE        TRUE       FALSE        TRUE        TRUE        TRUE 
+##        TRUE        TRUE       FALSE        TRUE       FALSE        TRUE        TRUE        TRUE 
 ##      libxml        fifo      cledit       iconv         NLS       Rprof     profmem       cairo 
-##        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE       FALSE 
+##        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE 
 ##         ICU long.double     libcurl 
 ##        TRUE        TRUE        TRUE</code></pre>
 <p>Currently, this is everything except the X11 dependencies, which aren’t really needed:</p>
@@ -840,6 +840,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

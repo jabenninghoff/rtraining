@@ -14,8 +14,8 @@
 
 <title>R Training Log</title>
 
-<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -525,13 +525,13 @@ ggplot(data = diamonds2) +
 <div id="graphics-learning-more" class="section level3">
 <h3>Graphics: Learning more</h3>
 <p>From <a href="https://r4ds.had.co.nz/graphics-for-communication.html#learning-more-4">28.8 Learning more</a>:</p>
-<p>"The absolute best place to learn more is the ggplot2 book: <a href="https://amzn.com/331924275X"><em>ggplot2: Elegant graphics for data analysis</em></a>. It goes into much more depth about the underlying theory, and has many more examples of how to combine the individual pieces to solve practical problems. Unfortunately, the book is not available online for free, although you can find the source code at <a href="https://github.com/hadley/ggplot2-book" class="uri">https://github.com/hadley/ggplot2-book</a>.</p>
-<p>Another great resource is the ggplot2 extensions gallery <a href="https://exts.ggplot2.tidyverse.org/gallery/" class="uri">https://exts.ggplot2.tidyverse.org/gallery/</a>. This site lists many of the packages that extend ggplot2 with new geoms and scales. It’s a great place to start if you’re trying to do something that seems hard with ggplot2."</p>
+<p>“The absolute best place to learn more is the ggplot2 book: <a href="https://amzn.com/331924275X"><em>ggplot2: Elegant graphics for data analysis</em></a>. It goes into much more depth about the underlying theory, and has many more examples of how to combine the individual pieces to solve practical problems. Unfortunately, the book is not available online for free, although you can find the source code at <a href="https://github.com/hadley/ggplot2-book" class="uri">https://github.com/hadley/ggplot2-book</a>.</p>
+<p>Another great resource is the ggplot2 extensions gallery <a href="https://exts.ggplot2.tidyverse.org/gallery/" class="uri">https://exts.ggplot2.tidyverse.org/gallery/</a>. This site lists many of the packages that extend ggplot2 with new geoms and scales. It’s a great place to start if you’re trying to do something that seems hard with ggplot2.”</p>
 </div>
 <div id="r-markdown-websites" class="section level3">
 <h3>R Markdown Websites</h3>
 <p>From <a href="https://r4ds.had.co.nz/r-markdown-formats.html#websites">29.8 Websites</a>:</p>
-<p>"With a little additional infrastructure you can use R Markdown to generate a complete website:</p>
+<p>“With a little additional infrastructure you can use R Markdown to generate a complete website:</p>
 <ul>
 <li>Put your <code>.Rmd</code> files in a single directory. <code>index.Rmd</code> will become the home page.</li>
 <li>Add a YAML file named <code>_site.yml</code> provides the navigation for the site. For example:</li>
@@ -547,7 +547,7 @@ navbar:
     - text: &quot;Terrain Colors&quot;
       href: 3-inline.html</code></pre>
 <p>Execute <code>rmarkdown::render_site()</code> to build <code>_site</code>, a directory of files ready to deploy as a standalone static website, or if you use an RStudio Project for your website directory. RStudio will add a Build tab to the IDE that you can use to build and preview your site.</p>
-<p>Read more at <a href="http://rmarkdown.rstudio.com/rmarkdown_websites.html" class="uri">http://rmarkdown.rstudio.com/rmarkdown_websites.html</a>."</p>
+<p>Read more at <a href="http://rmarkdown.rstudio.com/rmarkdown_websites.html" class="uri">http://rmarkdown.rstudio.com/rmarkdown_websites.html</a>.”</p>
 </div>
 <div id="r-notebook-advice" class="section level3">
 <h3>R Notebook Advice</h3>
@@ -649,6 +649,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
