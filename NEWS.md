@@ -1,6 +1,10 @@
+# rtraining 0.7.2
+
+* maintenance release
+
 # rtraining 0.7.1
 
-* maintance release, updated for R 4.1.0
+* maintenance release, updated for R 4.1.0
 
 # rtraining 0.7.0
 
