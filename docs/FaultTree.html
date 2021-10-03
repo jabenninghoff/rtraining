@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2021-09-30" />
+
+<title>FaultTree.widget Test</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/d3-3.5.17/d3.min.js"></script>
+<link href="site_libs/ftree-0.0.2/ftree_styles.css" rel="stylesheet" />
+<script src="site_libs/ftree_widget1-binding-0.99.8/ftree_widget1.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">rtraining notebooks</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="FaultTree.html">FaultTree.widget Test</a>
+    </li>
+    <li>
+      <a href="r-setup-log.html">R Setup Log</a>
+    </li>
+    <li>
+      <a href="r-training-log.html">R Training Log</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jabenninghoff/rtraining/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">FaultTree.widget Test</h1>
+<h4 class="date">2021-09-30</h4>
+
+</div>
+
+
+<div id="example" class="section level1">
+<h1>Example</h1>
+<p>The fault tree below is centered in-frame when viewed in RStudio, but is partially off-frame when viewed in a browser, and completely off-frame if the browser window is wide enough. This is true for both <code>html_notebook</code> and <code>html_document</code>.</p>
+<pre class="r"><code>library(FaultTree)
+library(FaultTree.widget)
+
+# nolint start
+tree1 &lt;- ftree.make(type = &quot;priority&quot;, reversible_cond = TRUE, name = &quot;Site power loss&quot;)
+tree1 &lt;- addLogic(tree1, at = 1, type = &quot;or&quot;, name = &quot;neither emergency&quot;, name2 = &quot;generator operable&quot;)
+tree1 &lt;- addLogic(tree1, at = 2, type = &quot;and&quot;, name = &quot;Independent failure&quot;, name2 = &quot;of generators&quot;)
+tree1 &lt;- addLatent(tree1, at = 3, mttf = 5, mttr = 12 / 8760, inspect = 1 / 26, name = &quot;e-gen set fails&quot;)
+tree1 &lt;- addLatent(tree1, at = 3, mttf = 5, mttr = 12 / 8760, inspect = 1 / 26, name = &quot;e-gen set fails&quot;)
+tree1 &lt;- addLogic(tree1, at = 2, type = &quot;inhibit&quot;, name = &quot;Common cause&quot;, name2 = &quot;failure of generators&quot;)
+tree1 &lt;- addProbability(tree1, at = 6, prob = .05, name = &quot;Common cause&quot;, name2 = &quot;beta factor&quot;)
+tree1 &lt;- addLatent(tree1, at = 6, mttf = 5, mttr = 12 / 8760, inspect = 1 / 26, name = &quot;e-gen set fails&quot;)
+tree1 &lt;- addDemand(tree1, at = 1, mttf = 1.0, name = &quot;External power&quot;, name2 = &quot;interruption&quot;)
+# nolint end
+
+tree1 &lt;- ftree.calc(tree1)
+
+ftree2widget(tree1, height = 500, width = 800)</code></pre>
+<div id="htmlwidget-702cf078dc7305724bd3" style="width:800px;height:500px;" class="ftree_widget1 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-702cf078dc7305724bd3">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<p>Check rendering without height and width specified:</p>
+<pre class="r"><code>ftree2widget(tree1)</code></pre>
+<div id="htmlwidget-98f26c6c9adbac70592b" style="width:768px;height:432px;" class="ftree_widget1 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-98f26c6c9adbac70592b">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="solution" class="section level1">
+<h1>Solution</h1>
+<p>A partial fix is to change the line in <code>inst/htmlwidgets/ftree_widget1.js</code> and <code>inst/htmlwidgets/ftree_widget2.js</code></p>
+<p>from (which sets the position based on the width of the browser window):</p>
+<pre class="javascript"><code>var width_initial = $(window).width()/2-60;</code></pre>
+<p>to (which sets the position based on the width of the div containing the widget):</p>
+<pre class="javascript"><code>var width_initial = $(&quot;div&quot;).width()/2-60;</code></pre>
+<p>Then the fault tree will position itself within view, but not always centered. A complete fix would render the fault tree centered within the widget.</p>
+<p>Other approaches tested:</p>
+<pre class="javascript"><code>// var width_initial = $(&#39;div:contains(&quot;htmlwidget&quot;)&#39;).width()/2-60;
+// var width_initial = $(&quot;div&quot;).filter(function(){ return this.children.length === 0; }).width()/2-60;</code></pre>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmF1bHRUcmVlLndpZGdldCBUZXN0IgpkYXRlOiAyMDIxLTA5LTMwCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgaGlnaGxpZ2h0OiB0ZXh0bWF0ZQogICAgdG9jOiBUUlVFCiAgICB0b2NfZmxvYXQ6CiAgICAgIGNvbGxhcHNlZDogRkFMU0UKICAgICAgc21vb3RoX3Njcm9sbDogRkFMU0UKLS0tCgojIEV4YW1wbGUKClRoZSBmYXVsdCB0cmVlIGJlbG93IGlzIGNlbnRlcmVkIGluLWZyYW1lIHdoZW4gdmlld2VkIGluIFJTdHVkaW8sIGJ1dCBpcyBwYXJ0aWFsbHkgb2ZmLWZyYW1lIHdoZW4gdmlld2VkIGluIGEgYnJvd3NlciwgYW5kIGNvbXBsZXRlbHkgb2ZmLWZyYW1lIGlmIHRoZSBicm93c2VyIHdpbmRvdyBpcyB3aWRlIGVub3VnaC4gVGhpcyBpcyB0cnVlIGZvciBib3RoIGBodG1sX25vdGVib29rYCBhbmQgYGh0bWxfZG9jdW1lbnRgLgoKYGBge3IgdHJlZTF9CmxpYnJhcnkoRmF1bHRUcmVlKQpsaWJyYXJ5KEZhdWx0VHJlZS53aWRnZXQpCgojIG5vbGludCBzdGFydAp0cmVlMSA8LSBmdHJlZS5tYWtlKHR5cGUgPSAicHJpb3JpdHkiLCByZXZlcnNpYmxlX2NvbmQgPSBUUlVFLCBuYW1lID0gIlNpdGUgcG93ZXIgbG9zcyIpCnRyZWUxIDwtIGFkZExvZ2ljKHRyZWUxLCBhdCA9IDEsIHR5cGUgPSAib3IiLCBuYW1lID0gIm5laXRoZXIgZW1lcmdlbmN5IiwgbmFtZTIgPSAiZ2VuZXJhdG9yIG9wZXJhYmxlIikKdHJlZTEgPC0gYWRkTG9naWModHJlZTEsIGF0ID0gMiwgdHlwZSA9ICJhbmQiLCBuYW1lID0gIkluZGVwZW5kZW50IGZhaWx1cmUiLCBuYW1lMiA9ICJvZiBnZW5lcmF0b3JzIikKdHJlZTEgPC0gYWRkTGF0ZW50KHRyZWUxLCBhdCA9IDMsIG10dGYgPSA1LCBtdHRyID0gMTIgLyA4NzYwLCBpbnNwZWN0ID0gMSAvIDI2LCBuYW1lID0gImUtZ2VuIHNldCBmYWlscyIpCnRyZWUxIDwtIGFkZExhdGVudCh0cmVlMSwgYXQgPSAzLCBtdHRmID0gNSwgbXR0ciA9IDEyIC8gODc2MCwgaW5zcGVjdCA9IDEgLyAyNiwgbmFtZSA9ICJlLWdlbiBzZXQgZmFpbHMiKQp0cmVlMSA8LSBhZGRMb2dpYyh0cmVlMSwgYXQgPSAyLCB0eXBlID0gImluaGliaXQiLCBuYW1lID0gIkNvbW1vbiBjYXVzZSIsIG5hbWUyID0gImZhaWx1cmUgb2YgZ2VuZXJhdG9ycyIpCnRyZWUxIDwtIGFkZFByb2JhYmlsaXR5KHRyZWUxLCBhdCA9IDYsIHByb2IgPSAuMDUsIG5hbWUgPSAiQ29tbW9uIGNhdXNlIiwgbmFtZTIgPSAiYmV0YSBmYWN0b3IiKQp0cmVlMSA8LSBhZGRMYXRlbnQodHJlZTEsIGF0ID0gNiwgbXR0ZiA9IDUsIG10dHIgPSAxMiAvIDg3NjAsIGluc3BlY3QgPSAxIC8gMjYsIG5hbWUgPSAiZS1nZW4gc2V0IGZhaWxzIikKdHJlZTEgPC0gYWRkRGVtYW5kKHRyZWUxLCBhdCA9IDEsIG10dGYgPSAxLjAsIG5hbWUgPSAiRXh0ZXJuYWwgcG93ZXIiLCBuYW1lMiA9ICJpbnRlcnJ1cHRpb24iKQojIG5vbGludCBlbmQKCnRyZWUxIDwtIGZ0cmVlLmNhbGModHJlZTEpCgpmdHJlZTJ3aWRnZXQodHJlZTEsIGhlaWdodCA9IDUwMCwgd2lkdGggPSA4MDApCmBgYAoKQ2hlY2sgcmVuZGVyaW5nIHdpdGhvdXQgaGVpZ2h0IGFuZCB3aWR0aCBzcGVjaWZpZWQ6CgpgYGB7ciBub19od30KZnRyZWUyd2lkZ2V0KHRyZWUxKQpgYGAKCiMgU29sdXRpb24KCkEgcGFydGlhbCBmaXggaXMgdG8gY2hhbmdlIHRoZSBsaW5lIGluIGBpbnN0L2h0bWx3aWRnZXRzL2Z0cmVlX3dpZGdldDEuanNgIGFuZCBgaW5zdC9odG1sd2lkZ2V0cy9mdHJlZV93aWRnZXQyLmpzYAoKZnJvbSAod2hpY2ggc2V0cyB0aGUgcG9zaXRpb24gYmFzZWQgb24gdGhlIHdpZHRoIG9mIHRoZSBicm93c2VyIHdpbmRvdyk6CgpgYGBqYXZhc2NyaXB0CnZhciB3aWR0aF9pbml0aWFsID0gJCh3aW5kb3cpLndpZHRoKCkvMi02MDsKYGBgCgp0byAod2hpY2ggc2V0cyB0aGUgcG9zaXRpb24gYmFzZWQgb24gdGhlIHdpZHRoIG9mIHRoZSBkaXYgY29udGFpbmluZyB0aGUgd2lkZ2V0KToKCmBgYGphdmFzY3JpcHQKdmFyIHdpZHRoX2luaXRpYWwgPSAkKCJkaXYiKS53aWR0aCgpLzItNjA7CmBgYAoKVGhlbiB0aGUgZmF1bHQgdHJlZSB3aWxsIHBvc2l0aW9uIGl0c2VsZiB3aXRoaW4gdmlldywgYnV0IG5vdCBhbHdheXMgY2VudGVyZWQuIEEgY29tcGxldGUgZml4IHdvdWxkIHJlbmRlciB0aGUgZmF1bHQgdHJlZSBjZW50ZXJlZCB3aXRoaW4gdGhlIHdpZGdldC4KCk90aGVyIGFwcHJvYWNoZXMgdGVzdGVkOgoKYGBgamF2YXNjcmlwdAovLyB2YXIgd2lkdGhfaW5pdGlhbCA9ICQoJ2Rpdjpjb250YWlucygiaHRtbHdpZGdldCIpJykud2lkdGgoKS8yLTYwOwovLyB2YXIgd2lkdGhfaW5pdGlhbCA9ICQoImRpdiIpLmZpbHRlcihmdW5jdGlvbigpeyByZXR1cm4gdGhpcy5jaGlsZHJlbi5sZW5ndGggPT09IDA7IH0pLndpZHRoKCkvMi02MDsKYGBgCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("FaultTree.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
