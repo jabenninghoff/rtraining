@@ -16,6 +16,30 @@
       "Repository": "CRAN",
       "Hash": "030aaec5bc6553f35347cbb1e70b1a17"
     },
+    "FaultTree": {
+      "Package": "FaultTree",
+      "Version": "0.99.8",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "jto888",
+      "RemoteRepo": "FaultTree",
+      "RemoteRef": "master",
+      "RemoteSha": "6d53b2dfa858e9faaab8939d210efaa607565140",
+      "Hash": "d27f93012c52766682bd660c16c0d816"
+    },
+    "FaultTree.widget": {
+      "Package": "FaultTree.widget",
+      "Version": "0.99.8",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "jabenninghoff",
+      "RemoteRepo": "FaultTree.widget",
+      "RemoteRef": "master",
+      "RemoteSha": "79d12296d83ac252825239b08cc0bc92a4b54671",
+      "Hash": "4a189f69325a79c8d79bcfed8a1e4255"
+    },
     "MASS": {
       "Package": "MASS",
       "Version": "7.3-54",
@@ -78,6 +102,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "dab19adae4440ae55aa8a9d238b246bb"
+    },
+    "RcppArmadillo": {
+      "Package": "RcppArmadillo",
+      "Version": "0.10.7.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "76a46d0219364e5f6c8b04a148760acf"
     },
     "askpass": {
       "Package": "askpass",
@@ -463,6 +494,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "526c484233f42522278ab06fb185cb26"
+    },
+    "htmlwidgets": {
+      "Package": "htmlwidgets",
+      "Version": "1.5.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "76147821cd3fcd8c4b04e1ef0498e7fb"
     },
     "httpuv": {
       "Package": "httpuv",
@@ -897,10 +935,10 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.7.0",
+      "Version": "1.7.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "72bf551406bb75a182df55090dc5a25a"
+      "Hash": "00344c227c7bd0ab5d78052c5d736c44"
     },
     "sourcetools": {
       "Package": "sourcetools",
@@ -960,10 +998,10 @@
     },
     "tibble": {
       "Package": "tibble",
-      "Version": "3.1.4",
+      "Version": "3.1.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5e8ad5621e5c94b24ec07b88eee13df8"
+      "Hash": "36eb05ad4cfdfeaa56f5a9b2a1311efd"
     },
     "tidyr": {
       "Package": "tidyr",
