@@ -41,3 +41,8 @@ vignettes/*.pdf
 # macOS, vim
 .DS_Store
 *.swp
+
+# package exclusions
+pkgdown/_pkgdown.yml
+analysis/*.html
+analysis/rendered/
