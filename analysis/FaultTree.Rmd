@@ -8,8 +8,6 @@ output:
     toc_float:
       collapsed: FALSE
       smooth_scroll: FALSE
-  html_document:
-    highlight: textmate
 ---
 
 # Example
