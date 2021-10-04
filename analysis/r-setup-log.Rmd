@@ -50,7 +50,7 @@ Currently, this is everything except the X11 dependencies, which aren't really n
 ```
 
 > **Note to macOS users**
-> 
+>
 > Capabilities "jpeg", "png" and "tiff" refer to the X11-based versions of these devices. If capabilities("aqua") is true, then these devices with type = "quartz" will be available, and out-of-the-box will be the default type. Thus for example the tiff device will be available if capabilities("aqua") || capabilities("tiff") if the defaults are unchanged.
 
 As an active contributor to Homebrew, I *strongly* recommend using it for any/all software; their quality control is excellent.
@@ -210,7 +210,7 @@ This approach leverages the [docs functionality](https://help.github.com/article
 
 Here is my package layout - the table shows the path, whether it's part of the formal R package definition, and my notes on its use.
 
-Path | R | Notes 
+Path | R | Notes
 -----|:-:|------------------------------
 .Rbuildignore|`x`|Exclude files from package
 .Rprofile|`x`|Used by `renv` and to [attach development tools](https://r-pkgs.org/setup.html?#personal-startup-configuration)
