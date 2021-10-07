@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/jabenninghoff/rtraining/workflows/R-CMD-check/badge.svg)](https://github.com/jabenninghoff/rtraining/actions)
+[![lint](https://github.com/jabenninghoff/rtraining/workflows/lint/badge.svg)](https://github.com/jabenninghoff/rtraining/actions)
 <!-- badges: end -->
 
 ## Overview
