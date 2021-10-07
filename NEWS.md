@@ -1,3 +1,7 @@
+# rtraining 0.7.4
+
+* maintenance release, update README and GitHub Actions
+
 # rtraining 0.7.3
 
 * Add FaultTree.widget Test notebook for demonstrating `ftree2widget()` issue
