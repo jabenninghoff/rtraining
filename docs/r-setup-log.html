@@ -339,12 +339,6 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
@@ -410,7 +404,7 @@ div.tocify {
 <p><strong>TL;DR: just use homebrew.</strong></p>
 <p>I don’t recommend installing the <code>cask</code> variant of r because it creates problems with <code>brew doctor</code>:</p>
 <pre class="sh"><code>brew info --cask r</code></pre>
-<pre><code>## r: 4.1.1
+<pre><code>## r: 4.1.2
 ## https://www.r-project.org/
 ## Not installed
 ## From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r.rb
@@ -419,14 +413,14 @@ div.tocify {
 ## ==&gt; Description
 ## Environment for statistical computing and graphics
 ## ==&gt; Artifacts
-## R-4.1.1.pkg (Pkg)
+## R-4.1.2.pkg (Pkg)
 ## ==&gt; Caveats
 ## Cask r installs files under /usr/local. The presence of such
 ## files can cause warnings when running `brew doctor`, which is considered
 ## to be a bug in Homebrew Cask.
 ## 
 ## ==&gt; Analytics
-## install: 1,199 (30 days), 2,812 (90 days), 10,229 (365 days)</code></pre>
+## install: 961 (30 days), 2,948 (90 days), 10,198 (365 days)</code></pre>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
 <pre class="r"><code>options(width = 100)
 capabilities()</code></pre>

@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jabenninghoff.github.io/rtraining/404.html</loc>
+  </url>
+  <url>
+    <loc>https://jabenninghoff.github.io/rtraining/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://jabenninghoff.github.io/rtraining/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://jabenninghoff.github.io/rtraining/TODO.html</loc>
+  </url>
+  <url>
+    <loc>https://jabenninghoff.github.io/rtraining/authors.html</loc>
+  </url>
+  <url>
     <loc>https://jabenninghoff.github.io/rtraining/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jabenninghoff.github.io/rtraining/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jabenninghoff.github.io/rtraining/reference/index.html</loc>
   </url>
   <url>
     <loc>https://jabenninghoff.github.io/rtraining/reference/rtraining-package.html</loc>
