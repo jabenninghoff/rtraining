@@ -1,6 +1,6 @@
 Package: rtraining
 Title: R Training
-Version: 0.7.4.9000
+Version: 0.7.5
 Authors@R:
     person(given = "John",
            family = "Benninghoff",
