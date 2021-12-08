@@ -1,3 +1,7 @@
+# rtraining 0.7.5
+
+* maintenance release
+
 # rtraining 0.7.4
 
 * maintenance release, update README and GitHub Actions
