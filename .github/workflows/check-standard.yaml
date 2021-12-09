@@ -45,10 +45,10 @@ jobs:
           renv::install("rcmdcheck")
         shell: Rscript {0}
 
-      # will fail on vignettes until https://github.com/rstudio/renv/issues/833 is fixed
       - uses: r-lib/actions/check-r-package@v1
         with:
-          args: '"--no-manual"'
+          # see https://github.com/r-hub/rhub/issues/476 for --no-multiarch
+          args: '"--no-manual", "--no-multiarch"'
 
       - name: Show testthat output
         if: always()
