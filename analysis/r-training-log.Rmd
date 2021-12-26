@@ -13,10 +13,13 @@ Notes on learning R and RStudio.
 
 # Libraries
 
-Load libraries and suppress warning and error messages. Thanks to this tidyverse [article](https://reprex.tidyverse.org/articles/articles/suppress-startup-messages.html).
+Load libraries and suppress warning and error messages. Thanks to this tidyverse [article](https://reprex.tidyverse.org/articles/articles/suppress-startup-messages.html). Also load rdev and set default theme and color scales.
 
 ```{r startup, message = FALSE, warning = FALSE}
 library(tidyverse)
+library(rdev)
+
+viridis_quo()
 ```
 
 # Files
