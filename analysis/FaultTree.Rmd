@@ -1,13 +1,13 @@
 ---
 title: "FaultTree.widget Test"
-date: 2021-09-30
+date: '2021-09-30'
 output:
   html_notebook:
     highlight: textmate
-    toc: TRUE
+    toc: yes
     toc_float:
-      collapsed: FALSE
-      smooth_scroll: FALSE
+      collapsed: no
+      smooth_scroll: no
 ---
 
 # Example

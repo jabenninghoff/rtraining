@@ -1,12 +1,12 @@
 ---
 title: "R Training Log"
-date: 2020-12-02
+date: '2020-12-02'
 output:
   html_notebook:
-    toc: TRUE
+    toc: yes
     toc_float:
-      collapsed: FALSE
-      smooth_scroll: FALSE
+      collapsed: no
+      smooth_scroll: no
 ---
 
 Notes on learning R and RStudio.
