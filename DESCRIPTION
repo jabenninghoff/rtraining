@@ -2,20 +2,17 @@ Package: rtraining
 Title: R Training
 Version: 0.7.6.9000
 Authors@R:
-    person(given = "John",
-           family = "Benninghoff",
-           role = c("aut", "cre"),
-           email = "jbenninghoff@mac.com",
+    person("John", "Benninghoff", email = "jbenninghoff@mac.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6230-4742"))
 Description: My notes and experiences learning R and RStudio, bundled as an R package
     (work-in-progress).
 License: MIT + file LICENSE
-URL: https://jabenninghoff.github.io/rtraining/, https://github.com/jabenninghoff/rtraining
+URL: https://jabenninghoff.github.io/rtraining/,
+    https://github.com/jabenninghoff/rtraining
+BugReports: https://github.com/jabenninghoff/rtraining/issues
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Imports:
 X-rtraining-comment: use "Suggests" for development packages, per
     https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-
 Suggests:
