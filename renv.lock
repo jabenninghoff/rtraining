@@ -789,16 +789,16 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "0.5.1",
+      "Version": "0.6.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "d38e6295827fb1ea05e30c3911d9553d2bbabf13",
+      "RemoteSha": "43b1b02ee76f4c499960e1aaab901c524d15c2ae",
       "RemoteHost": "api.github.com",
       "Remotes": "jimhester/lintr",
-      "Hash": "1b03c1b52d8e5fe857388fa02f2e6f0a"
+      "Hash": "60e177601fc20ed9c2721010b6101c76"
     },
     "readr": {
       "Package": "readr",
