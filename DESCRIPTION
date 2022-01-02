@@ -7,7 +7,7 @@ Authors@R:
 Description: My notes and experiences learning R and RStudio, bundled as an R package
     (work-in-progress).
 License: MIT + file LICENSE
-URL: https://jabenninghoff.github.io/rtraining/,
+URL: https://jabenninghoff.github.io/rtraining,
     https://github.com/jabenninghoff/rtraining
 BugReports: https://github.com/jabenninghoff/rtraining/issues
 Encoding: UTF-8
