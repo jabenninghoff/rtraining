@@ -50,6 +50,6 @@ analysis/*.html
 analysis/*.md
 analysis/*.pdf
 analysis/*-figure/
-analysis/import/
-analysis/rendered/
+analysis/import
+analysis/rendered
 pkgdown/_pkgdown.yml

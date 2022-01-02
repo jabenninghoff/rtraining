@@ -2,7 +2,13 @@
 ^\.github$
 ^\.lintr$
 ^\.Rproj\.user$
-^analysis$
+^analysis/.*-figure$
+^analysis/.*\.docx$
+^analysis/.*\.html$
+^analysis/.*\.md$
+^analysis/.*\.pdf$
+^analysis/import$
+^analysis/rendered$
 ^docs$
 ^LICENSE\.md$
 ^pkgdown$
