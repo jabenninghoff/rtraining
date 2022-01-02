@@ -11,8 +11,9 @@ My notes and experiences learning R and RStudio, bundled as an R package (work-i
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://jabenninghoff.github.io/rtraining/}
+  \item \url{https://jabenninghoff.github.io/rtraining}
   \item \url{https://github.com/jabenninghoff/rtraining}
+  \item Report bugs at \url{https://github.com/jabenninghoff/rtraining/issues}
 }
 
 }
