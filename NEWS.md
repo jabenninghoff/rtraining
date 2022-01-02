@@ -1,3 +1,7 @@
+# rtraining 0.7.7
+
+* maintenance release
+
 # rtraining 0.7.6
 
 * Add new `viridis_quo()` styling to rtraining log, maintenance updates
