@@ -17,7 +17,7 @@ Load libraries and suppress warning and error messages. Thanks to this tidyverse
 
 ```{r startup, message = FALSE, warning = FALSE}
 library(tidyverse)
-library(rdev)
+library(jbplot)
 
 viridis_quo()
 ```

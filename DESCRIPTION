@@ -19,6 +19,7 @@ Suggests:
     devtools,
     rdev,
     tidyverse,
-    modelr
+    modelr,
+    jbplot
 Remotes:
     jabenninghoff/rdev
