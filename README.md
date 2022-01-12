@@ -14,13 +14,26 @@
 **R Training:** My notes and experiences learning R and RStudio, bundled
 as an R package (work-in-progress).
 
-The package currently contains my **R Training Log** and **R Setup Log**
-notebooks, which are viewable from the GitHub Pages URL:
-<https://jabenninghoff.github.io/rtraining/>.
+## Notebooks
+
+Notebooks in this package:
+
+-   [FaultTree.widget
+    Test](https://jabenninghoff.github.io/rtraining/FaultTree.html)
+    (2021-09-30): Notebook for testing FaultTree.widget rendering fixes.
+-   [R Setup
+    Log](https://jabenninghoff.github.io/rtraining/r-setup-log.html)
+    (2020-12-30): My notes on my personal R setup. I started my R
+    journey in [September
+    2020](https://www.information-safety.org/2020/09/11/working-with-r/)
+    after [SIRACon 2020](https://societyinforisk.org/event-3899786).
+-   [R Training
+    Log](https://jabenninghoff.github.io/rtraining/r-training-log.html)
+    (2020-12-02): Notes on learning R and RStudio.
 
 ## Installation
 
-You can install the development version from
+You can install the development version of rtraining from
 [GitHub](https://github.com/) with:
 
 ``` r
