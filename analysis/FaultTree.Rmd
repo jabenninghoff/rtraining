@@ -10,6 +10,8 @@ output:
       smooth_scroll: no
 ---
 
+Notebook for testing FaultTree.widget rendering fixes.
+
 # Example
 
 The fault tree below is centered in-frame when viewed in RStudio, but is partially off-frame when viewed in a browser, and completely off-frame if the browser window is wide enough. This is true for both `html_notebook` and `html_document`.
