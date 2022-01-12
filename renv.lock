@@ -871,6 +871,22 @@
       "Hash": "7ab57a6de7f48a8dc84910d1eca42883",
       "Requirements": []
     },
+    "jbplot": {
+      "Package": "jbplot",
+      "Version": "1.0.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "jabenninghoff",
+      "RemoteRepo": "jbplot",
+      "RemoteRef": "main",
+      "RemoteSha": "928f7eb5bebfb1f6dada0c3a68a3725e7e33f188",
+      "Remotes": "jabenninghoff/rdev",
+      "Hash": "641e56159bd4174616da2df1a8b1b12a",
+      "Requirements": [
+        "ggplot2"
+      ]
+    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
