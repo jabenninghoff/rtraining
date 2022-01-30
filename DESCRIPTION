@@ -17,9 +17,11 @@ X-rtraining-comment: use "Suggests" for development packages, per
     https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-
 Suggests:
     devtools,
-    rdev,
+    rdev (>= 0.8.9),
     tidyverse,
     modelr,
-    jbplot
+    jbplot,
+    testthat (>= 3.0.0)
 Remotes:
     jabenninghoff/rdev
+Config/testthat/edition: 3
