@@ -395,17 +395,25 @@ div.tocify {
 </div>
 
 
-<p>My notes on my personal R setup. I started my R journey in <a href="https://www.information-safety.org/2020/09/11/working-with-r/">September 2020</a> after <a href="https://societyinforisk.org/event-3899786">SIRACon 2020</a>.</p>
+<p>My notes on my personal R setup. I started my R journey in <a
+href="https://www.information-safety.org/2020/09/11/working-with-r/">September
+2020</a> after <a
+href="https://societyinforisk.org/event-3899786">SIRACon 2020</a>.</p>
 <pre class="r"><code># no libraries</code></pre>
 <div id="installing-r" class="section level1">
 <h1>Installing R</h1>
-<p>I prefer installing R and RStudio using <a href="https://brew.sh">Homebrew</a>. I use <a href="https://github.com/Homebrew/homebrew-bundle">Homebrew Bundle</a> to install all software on my systems, but installing R and RStudio is simple enough using the command line:</p>
+<p>I prefer installing R and RStudio using <a
+href="https://brew.sh">Homebrew</a>. I use <a
+href="https://github.com/Homebrew/homebrew-bundle">Homebrew Bundle</a>
+to install all software on my systems, but installing R and RStudio is
+simple enough using the command line:</p>
 <!-- note: lintr version <= 2.0.1 throws an error when using language identifiers: <https://github.com/jimhester/lintr/issues/505> -->
 <pre class="sh"><code>brew install --formula r &amp;&amp; brew install --cask rstudio</code></pre>
 <div id="r-variants" class="section level2">
 <h2>R Variants</h2>
 <p><strong>TL;DR: just use homebrew.</strong></p>
-<p>I don’t recommend installing the <code>cask</code> variant of r because it creates problems with <code>brew doctor</code>:</p>
+<p>I don’t recommend installing the <code>cask</code> variant of r
+because it creates problems with <code>brew doctor</code>:</p>
 <pre class="sh"><code>brew info --cask r</code></pre>
 <pre><code>## r: 4.1.2
 ## https://www.r-project.org/
@@ -423,8 +431,14 @@ div.tocify {
 ## to be a bug in Homebrew Cask.
 ## 
 ## ==&gt; Analytics
-## install: 786 (30 days), 2,626 (90 days), 10,255 (365 days)</code></pre>
-<p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
+## install: 938 (30 days), 2,663 (90 days), 10,383 (365 days)</code></pre>
+<p>I tried “<a
+href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing
+all the things</a>” with <a
+href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a>
+but didn’t like how the uninstall doesn’t clean up, and frankly, I
+haven’t found a need for more than the capabilities included with
+homebrew R:</p>
 <pre class="r"><code>options(width = 100)
 capabilities()</code></pre>
 <pre><code>##        jpeg         png        tiff       tcltk         X11        aqua    http/ftp     sockets 
@@ -433,35 +447,72 @@ capabilities()</code></pre>
 ##        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE 
 ##         ICU long.double     libcurl 
 ##        TRUE        TRUE        TRUE</code></pre>
-<p>Currently, this is everything except the X11 dependencies, which aren’t really needed:</p>
+<p>Currently, this is everything except the X11 dependencies, which
+aren’t really needed:</p>
 <pre class="r"><code>?capabilities</code></pre>
 <blockquote>
 <p><strong>Note to macOS users</strong></p>
-<p>Capabilities “jpeg”, “png” and “tiff” refer to the X11-based versions of these devices. If capabilities(“aqua”) is true, then these devices with type = “quartz” will be available, and out-of-the-box will be the default type. Thus for example the tiff device will be available if capabilities(“aqua”) || capabilities(“tiff”) if the defaults are unchanged.</p>
+<p>Capabilities “jpeg”, “png” and “tiff” refer to the X11-based versions
+of these devices. If capabilities(“aqua”) is true, then these devices
+with type = “quartz” will be available, and out-of-the-box will be the
+default type. Thus for example the tiff device will be available if
+capabilities(“aqua”) || capabilities(“tiff”) if the defaults are
+unchanged.</p>
 </blockquote>
-<p>As an active contributor to Homebrew, I <em>strongly</em> recommend using it for any/all software; their quality control is excellent.</p>
+<p>As an active contributor to Homebrew, I <em>strongly</em> recommend
+using it for any/all software; their quality control is excellent.</p>
 </div>
 </div>
 <div id="r-workspace" class="section level1">
 <h1>R Workspace</h1>
-<p>Once R and RStudio have been installed, you’ll need a development environment and some packages.</p>
+<p>Once R and RStudio have been installed, you’ll need a development
+environment and some packages.</p>
 <div id="development-environment" class="section level2">
 <h2>Development Environment</h2>
-<p>Well, obviously, I use <a href="https://rstudio.com/products/rstudio/download/">RStudio</a>. There are other IDEs available, and it’s also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don’t typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.</p>
+<p>Well, obviously, I use <a
+href="https://rstudio.com/products/rstudio/download/">RStudio</a>. There
+are other IDEs available, and it’s also possible to develop using the
+command line, but RStudio provides a pleasant, integrated experience for
+R development, and actively supports the R community. I don’t typically
+use the built-in Git client, instead using the GitHub Desktop client and
+git command-line tool.</p>
 <pre class="sh"><code>brew install github</code></pre>
-<p>I also occasionally use <code>vim</code> (mainly for shell scripts) and <a href="https://atom.io">atom</a> (mainly for vanilla <code>.md</code> files using <a href="https://atom.io/packages/markdown-preview-enhanced">markdown-preview-enhanced</a>).</p>
+<p>I also occasionally use <code>vim</code> (mainly for shell scripts)
+and <a href="https://atom.io">atom</a> (mainly for vanilla
+<code>.md</code> files using <a
+href="https://atom.io/packages/markdown-preview-enhanced">markdown-preview-enhanced</a>).</p>
 </div>
 <div id="packages" class="section level2">
 <h2>Packages</h2>
-<p>Managing packages and environments are a challenge for most modern languages. Thankfully R doesn’t have the same level of challenge as python, or even ruby, managing packages available within a project is a best practice. I use <a href="https://github.com/rstudio/renv">renv</a> for this purpose. (I originally discovered <a href="https://rstudio.github.io/packrat/">packrat</a> but quickly discovered RStudio is replacing it with renv)</p>
+<p>Managing packages and environments are a challenge for most modern
+languages. Thankfully R doesn’t have the same level of challenge as
+python, or even ruby, managing packages available within a project is a
+best practice. I use <a href="https://github.com/rstudio/renv">renv</a>
+for this purpose. (I originally discovered <a
+href="https://rstudio.github.io/packrat/">packrat</a> but quickly
+discovered RStudio is replacing it with renv)</p>
 <p>Here is my package maintenance approach:</p>
 <div id="base-r-packages" class="section level3">
 <h3>Base R Packages</h3>
-<p>With no projects open, I periodically check for updates to the base R packages using the RStudio Packages “Update” function. These are the only packages I install to the base directory <code>/usr/local/Cellar/r/4.0.3_2/lib/R/library</code>. <em>Note: upgrading or reinstalling r through homebrew may ‘downgrade’ the base packages.</em></p>
+<p>With no projects open, I periodically check for updates to the base R
+packages using the RStudio Packages “Update” function. These are the
+only packages I install to the base directory
+<code>/usr/local/Cellar/r/4.0.3_2/lib/R/library</code>. <em>Note:
+upgrading or reinstalling r through homebrew may ‘downgrade’ the base
+packages.</em></p>
 </div>
 <div id="development-packages" class="section level3">
 <h3>Development Packages</h3>
-<p>The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb">homebrew</a>, currently <code>/usr/local/lib/R/4.0/site-library</code>. I’ve developed a shell script to install development packages that you can find in the tools directory of <a href="https://github.com/jabenninghoff/rtraining">this repository</a>.</p>
+<p>The only other tools I install outside of projects are for supporting
+development. Originally this was just renv, but now it includes a number
+of development tools needed to create projects. I use the R site library
+used by <a
+href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb">homebrew</a>,
+currently <code>/usr/local/lib/R/4.0/site-library</code>. I’ve developed
+a shell script to install development packages that you can find in the
+tools directory of <a
+href="https://github.com/jabenninghoff/rtraining">this
+repository</a>.</p>
 <pre class="sh"><code>#!/bin/sh
 # install development packages to site repository
 # thanks to https://blog.sellorm.com/2017/10/21/quick-script-to-install-an-r-package-from-the-command-line/
@@ -486,11 +537,18 @@ echo &quot;install.packages(${DEVPKG}, repos=\&quot;https://cran.rstudio.com\&qu
 </div>
 <div id="project-packages" class="section level3">
 <h3>Project Packages</h3>
-<p>Any packages <em>not</em> needed to create projects I install within a project using renv - here are some good intros:</p>
+<p>Any packages <em>not</em> needed to create projects I install within
+a project using renv - here are some good intros:</p>
 <ul>
-<li>A <a href="https://rstudio.com/resources/rstudioconf-2020/renv-project-environments-for-r/">presentation at rstudio::conf 2020</a></li>
-<li>The <a href="https://blog.rstudio.com/2019/11/06/renv-project-environments-for-r/">RStudio Blog post</a></li>
-<li>An <a href="https://rstudio.github.io/renv/articles/renv.html">Introduction to renv</a></li>
+<li>A <a
+href="https://rstudio.com/resources/rstudioconf-2020/renv-project-environments-for-r/">presentation
+at rstudio::conf 2020</a></li>
+<li>The <a
+href="https://blog.rstudio.com/2019/11/06/renv-project-environments-for-r/">RStudio
+Blog post</a></li>
+<li>An <a
+href="https://rstudio.github.io/renv/articles/renv.html">Introduction to
+renv</a></li>
 <li><a href="https://github.com/rstudio/renv">renv</a> on GitHub</li>
 </ul>
 <pre class="r"><code>renv::init() # to set up renv in the project
@@ -500,35 +558,72 @@ renv::snapshot() # save libraries in renv.lock
 renv::restore() # restore libraries from renv.lock - use when first using an existing project
 renv::clean() # remove extra libraries
 renv::update() # check for unpdated versions of installed libraries</code></pre>
-<p>If you’re installing (development) versions of packages from GitHub, you’ll be prompted to set up a personal access token using <code>create_github_token()</code> and adding it to your <code>.Renviron</code> as <code>GITHUB_PAT=</code> using <code>usethis::edit_r_environ()</code>. I had to install the development versions of both <code>styler</code> and <code>lintr</code> due to bugs not yet fixed in the released (CRAN) versions. I did also look at using <a href="https://pak.r-lib.org">pak</a> but found it too buggy to use.</p>
-<p><em>Note:</em> I came across an odd quirk where renv will prompt you to upgrade base R projects, even if they’re not used. I resolved these by just upgrading the base packages with RStudio with no project open.</p>
-<p>I’ve included some comments on useful packages in my <em>R Training Log</em> notebook.</p>
+<p>If you’re installing (development) versions of packages from GitHub,
+you’ll be prompted to set up a personal access token using
+<code>create_github_token()</code> and adding it to your
+<code>.Renviron</code> as <code>GITHUB_PAT=</code> using
+<code>usethis::edit_r_environ()</code>. I had to install the development
+versions of both <code>styler</code> and <code>lintr</code> due to bugs
+not yet fixed in the released (CRAN) versions. I did also look at using
+<a href="https://pak.r-lib.org">pak</a> but found it too buggy to
+use.</p>
+<p><em>Note:</em> I came across an odd quirk where renv will prompt you
+to upgrade base R projects, even if they’re not used. I resolved these
+by just upgrading the base packages with RStudio with no project
+open.</p>
+<p>I’ve included some comments on useful packages in my <em>R Training
+Log</em> notebook.</p>
 </div>
 </div>
 </div>
 <div id="using-r" class="section level1">
 <h1>Using R</h1>
-<p>So - what have I learned about using R? I won’t cover the actual Data Science part here, but have some recommended reading in my <em>R Training Log</em>.</p>
+<p>So - what have I learned about using R? I won’t cover the actual Data
+Science part here, but have some recommended reading in my <em>R
+Training Log</em>.</p>
 <div id="use-git" class="section level2">
 <h2>Use git!</h2>
-<p>This wasn’t really something I learned with R, but use of version control for any kind of code/script is crucial. These days, I keep all scripts and configuration files in some flavor of public or private version control. Mostly that means GitHub, but also private git servers (via ssh) are easy to set up for work that you want to keep off of GitHub.</p>
-<p>I don’t want to get too much into managing code via version control, but I favor trunk-based development with short-lived branches, small commits of working code, and rebase and merge for linear commit history. There’s a lot of good research on this topic from Google’s <a href="https://cloud.google.com/devops">Dev Ops Research and Assessment</a> team.</p>
+<p>This wasn’t really something I learned with R, but use of version
+control for any kind of code/script is crucial. These days, I keep all
+scripts and configuration files in some flavor of public or private
+version control. Mostly that means GitHub, but also private git servers
+(via ssh) are easy to set up for work that you want to keep off of
+GitHub.</p>
+<p>I don’t want to get too much into managing code via version control,
+but I favor trunk-based development with short-lived branches, small
+commits of working code, and rebase and merge for linear commit history.
+There’s a lot of good research on this topic from Google’s <a
+href="https://cloud.google.com/devops">Dev Ops Research and
+Assessment</a> team.</p>
 </div>
 <div id="using-rstudio-with-github" class="section level2">
 <h2>Using RStudio with GitHub</h2>
-<p>RStudio has good integration with GitHub. I’ve adopted the convention of “one RStudio Project (.Rproj) per repository” and storing the Rproj file in the repository. That seems to be the norm.</p>
+<p>RStudio has good integration with GitHub. I’ve adopted the convention
+of “one RStudio Project (.Rproj) per repository” and storing the Rproj
+file in the repository. That seems to be the norm.</p>
 </div>
 <div id="r-notebooks" class="section level2">
 <h2>R Notebooks</h2>
-<p>R Notebooks are my preferred file format for data analysis, as they allow an easy mixing of text (using pandoc markdown) and R code chunks. This allows me to document what I’m doing as I go, both for reproducibility as well as recording my observations, thoughts and conclusions. It especially lends itself to iterative development:</p>
+<p>R Notebooks are my preferred file format for data analysis, as they
+allow an easy mixing of text (using pandoc markdown) and R code chunks.
+This allows me to document what I’m doing as I go, both for
+reproducibility as well as recording my observations, thoughts and
+conclusions. It especially lends itself to iterative development:</p>
 <ol style="list-style-type: decimal">
 <li>Write code</li>
 <li>Run code</li>
 <li>See results</li>
 <li>Update code</li>
 </ol>
-<p>This method of development is not always appropriate, but fits well with exploratory analysis. Once I get to writing functions, I’m starting to adopt the formal structure of <a href="https://r-pkgs.org/index.html">packages</a>, <a href="https://testthat.r-lib.org">testthat</a>, and <a href="https://roxygen2.r-lib.org">roxygen2</a>.</p>
-<p>Specifically, I use <code>html_notebook</code>, which was recommended to me. RStudio handles this differently than <code>html_document</code>:</p>
+<p>This method of development is not always appropriate, but fits well
+with exploratory analysis. Once I get to writing functions, I’m starting
+to adopt the formal structure of <a
+href="https://r-pkgs.org/index.html">packages</a>, <a
+href="https://testthat.r-lib.org">testthat</a>, and <a
+href="https://roxygen2.r-lib.org">roxygen2</a>.</p>
+<p>Specifically, I use <code>html_notebook</code>, which was recommended
+to me. RStudio handles this differently than
+<code>html_document</code>:</p>
 <table>
 <colgroup>
 <col width="21%" />
@@ -560,51 +655,121 @@ renv::update() # check for unpdated versions of installed libraries</code></pre>
 </tr>
 <tr class="even">
 <td>Default Options</td>
-<td>Includes options for readability, hiding and downloading code, and paged tables</td>
+<td>Includes options for readability, hiding and downloading code, and
+paged tables</td>
 <td>Higher-quality rendering of PNG graphics</td>
 </tr>
 </tbody>
 </table>
-<p>Essentially, R Notebooks are generally faster and more convenient when <em>doing</em> analysis, and <code>html_document</code> R Markdown files offer higher-quality output. This site uses a custom framework to convert html_notebooks to html_documents for publishing (see the next section for details). They are also a convenient way to share analysis with peers - just email the <code>.nb.html</code> file, which will include all of the output, as well as embedding the <code>.Rmd</code> source code for easy editing. This also allows people who don’t have R/RStudio to see the results of an analysis.</p>
+<p>Essentially, R Notebooks are generally faster and more convenient
+when <em>doing</em> analysis, and <code>html_document</code> R Markdown
+files offer higher-quality output. This site uses a custom framework to
+convert html_notebooks to html_documents for publishing (see the next
+section for details). They are also a convenient way to share analysis
+with peers - just email the <code>.nb.html</code> file, which will
+include all of the output, as well as embedding the <code>.Rmd</code>
+source code for easy editing. This also allows people who don’t have
+R/RStudio to see the results of an analysis.</p>
 <p>There are some drawbacks to using R Notebooks:</p>
 <ul>
-<li>Because R Notebooks are render-on-save, you can inadvertently end up with missing or outdated R output from your notebook when saving, if you’ve made updates and haven’t re-run the entire document. My habit is to do the following at the end of a writing session, before committing to git, which ensures a “clean” notebook:
+<li>Because R Notebooks are render-on-save, you can inadvertently end up
+with missing or outdated R output from your notebook when saving, if
+you’ve made updates and haven’t re-run the entire document. My habit is
+to do the following at the end of a writing session, before committing
+to git, which ensures a “clean” notebook:
 <ol style="list-style-type: decimal">
 <li>Clear the Global Environment</li>
 <li>“Restart R and Clear Output”</li>
 <li>“Run All”</li>
 <li>Save</li>
 </ol></li>
-<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio#debugging-in-r-markdown-documents">Debug breakpoints don’t work in R Markdown documents</a>. To fix this, <a href="https://bookdown.org/yihui/rmarkdown-cookbook/purl.html">convert R Markdown documents to R Scripts using purl</a> for debugging.</li>
-<li>Not really a drawback, but…<code>Rcpp</code> and <code>rprojroot</code> are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with <code>renv</code>. This is a <a href="https://github.com/rstudio/rstudio/issues/7935">bug in RStudio</a>, which will be fixed in version 1.4.944.</li>
+<li><a
+href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio#debugging-in-r-markdown-documents">Debug
+breakpoints don’t work in R Markdown documents</a>. To fix this, <a
+href="https://bookdown.org/yihui/rmarkdown-cookbook/purl.html">convert R
+Markdown documents to R Scripts using purl</a> for debugging.</li>
+<li>Not really a drawback, but…<code>Rcpp</code> and
+<code>rprojroot</code> are erroneously listed in RStudio as required to
+create R Markdown, which can also cause problems with <code>renv</code>.
+This is a <a href="https://github.com/rstudio/rstudio/issues/7935">bug
+in RStudio</a>, which will be fixed in version 1.4.944.</li>
 </ul>
 </div>
 <div id="publishing-r-notebooks" class="section level2">
 <h2>Publishing R Notebooks</h2>
-<p>Since R Notebooks are saved as html files, it’s possible to publish them on GitHub using GitHub pages. GitHub published a <a href="https://resources.github.com/whitepapers/github-and-rstudio/">tutorial</a> in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn’t quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn’t directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in <a href="https://github.com/rstudio/rmarkdown/issues/1020">rstudio/rmarkdown #1020</a> - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.</p>
+<p>Since R Notebooks are saved as html files, it’s possible to publish
+them on GitHub using GitHub pages. GitHub published a <a
+href="https://resources.github.com/whitepapers/github-and-rstudio/">tutorial</a>
+in 2018 on getting RStudio integrated with GitHub, and I started working
+on that. Quickly I discovered that while the tutorial was helpful, it
+wasn’t quite the setup I wanted; it published R Markdown through GitHub
+pages, but wouldn’t directly support the automatically generated html of
+R Notebooks. After more searching, I was able to get Notebooks working
+on GitHub, but I used the method described in <a
+href="https://github.com/rstudio/rmarkdown/issues/1020">rstudio/rmarkdown
+#1020</a> - checking in the .nb.html into git, and using GitHub Pages so
+that you can view the rendered HTML instead of just the HTML code.</p>
 <div id="publishing-with-rmarkdown" class="section level3">
 <h3>Publishing with rmarkdown</h3>
-<p>After using <code>README.md</code> and GitHub pages to publish notebooks, I found I wanted an easier way to publish and navigate across collections of notebooks. Publishing R Notebooks on GitHub pages works fine, but doesn’t offer an easy navigation structure, like <a href="https://pkgdown.r-lib.org">pkgdown</a>. I tried using pkgdown to display notebooks, but pkgdown only supports building <code>vignettes</code>, which have a distinctly different look and feel than R Notebooks. The <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown site generator</a>, <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a>, allows more flexible building of websites from R Markdown files with a simple navigation bar at the top, but doesn’t support <code>html_notebook</code> files OOB.</p>
-<p>To work around this, I created a simple framework for converting <code>html_notebook</code> files to <code>html_document</code> and building a <code>_site.yml</code> from a list of notebooks stored in the non-standard <code>notebooks/</code> directory, initially using a shell script, <code>build_site</code> (stored at the root of this <a href="https://github.com/jabenninghoff/rtraining">repo</a>). It does the following:</p>
+<p>After using <code>README.md</code> and GitHub pages to publish
+notebooks, I found I wanted an easier way to publish and navigate across
+collections of notebooks. Publishing R Notebooks on GitHub pages works
+fine, but doesn’t offer an easy navigation structure, like <a
+href="https://pkgdown.r-lib.org">pkgdown</a>. I tried using pkgdown to
+display notebooks, but pkgdown only supports building
+<code>vignettes</code>, which have a distinctly different look and feel
+than R Notebooks. The <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown
+site generator</a>, <a
+href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a>,
+allows more flexible building of websites from R Markdown files with a
+simple navigation bar at the top, but doesn’t support
+<code>html_notebook</code> files OOB.</p>
+<p>To work around this, I created a simple framework for converting
+<code>html_notebook</code> files to <code>html_document</code> and
+building a <code>_site.yml</code> from a list of notebooks stored in the
+non-standard <code>notebooks/</code> directory, initially using a shell
+script, <code>build_site</code> (stored at the root of this <a
+href="https://github.com/jabenninghoff/rtraining">repo</a>). It does the
+following:</p>
 <ol style="list-style-type: decimal">
 <li>Creates a working directory, <code>.build-site</code></li>
-<li>Builds a <code>rmarkdown::render_site()</code> <code>_site.yml</code> file that includes a menu with all notebooks in the <code>notebooks/</code> directory</li>
-<li>Copies all <code>.Rmd</code> files to <code>.build-site</code> changing their type from <code>html_notebook</code> to <code>html_document</code></li>
-<li>Includes some configuration to make <code>html_documents</code> work more like <code>html_notebook</code></li>
-<li>Calls <code>rmarkdown::render_site()</code> to render the site in the <code>docs/</code> directory</li>
+<li>Builds a <code>rmarkdown::render_site()</code>
+<code>_site.yml</code> file that includes a menu with all notebooks in
+the <code>notebooks/</code> directory</li>
+<li>Copies all <code>.Rmd</code> files to <code>.build-site</code>
+changing their type from <code>html_notebook</code> to
+<code>html_document</code></li>
+<li>Includes some configuration to make <code>html_documents</code> work
+more like <code>html_notebook</code></li>
+<li>Calls <code>rmarkdown::render_site()</code> to render the site in
+the <code>docs/</code> directory</li>
 </ol>
-<p>I typically rebuild a site with the following command, run from the top-level directory of the project:</p>
+<p>I typically rebuild a site with the following command, run from the
+top-level directory of the project:</p>
 <pre class="sh"><code>rm -rf .build-site &amp;&amp; sh build-site &amp;&amp; open docs/index.html</code></pre>
-<p>This approach leverages the <a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch">docs functionality</a> of GitHub pages, like pkgdown.</p>
+<p>This approach leverages the <a
+href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch">docs
+functionality</a> of GitHub pages, like pkgdown.</p>
 </div>
 <div id="update-on-publishing" class="section level3">
 <h3>Update on Publishing</h3>
-<p><code>build-site</code> has been replaced with <code>build_analysis_site()</code>! At its core, it is functionally the same: builds a <code>pkgdown</code> site, adding an “Analysis” menu with all notebooks in the (renamed) <code>analysis/</code> directory, then converts and builds the notebooks using <code>rmarkdown</code>, and moves them into the <code>docs/</code> directory. Since it is now an R Script, it’s more portable and can be more easily bundled with packages. I will be migrating its functionality to <a href="https://jabenninghoff.github.io/rdev/">rdev</a> shortly, so that it’s usable across multiple analysis projects.</p>
+<p><code>build-site</code> has been replaced with
+<code>build_analysis_site()</code>! At its core, it is functionally the
+same: builds a <code>pkgdown</code> site, adding an “Analysis” menu with
+all notebooks in the (renamed) <code>analysis/</code> directory, then
+converts and builds the notebooks using <code>rmarkdown</code>, and
+moves them into the <code>docs/</code> directory. Since it is now an R
+Script, it’s more portable and can be more easily bundled with packages.
+I will be migrating its functionality to <a
+href="https://jabenninghoff.github.io/rdev/">rdev</a> shortly, so that
+it’s usable across multiple analysis projects.</p>
 </div>
 </div>
 <div id="r-package-layout" class="section level2">
 <h2>R Package Layout</h2>
-<p>Here is my package layout - the table shows the path, whether it’s part of the formal R package definition, and my notes on its use.</p>
+<p>Here is my package layout - the table shows the path, whether it’s
+part of the formal R package definition, and my notes on its use.</p>
 <table>
 <colgroup>
 <col width="13%" />
@@ -627,7 +792,9 @@ renv::update() # check for unpdated versions of installed libraries</code></pre>
 <tr class="even">
 <td>.Rprofile</td>
 <td align="center"><code>x</code></td>
-<td>Used by <code>renv</code> and to <a href="https://r-pkgs.org/setup.html?#personal-startup-configuration">attach development tools</a></td>
+<td>Used by <code>renv</code> and to <a
+href="https://r-pkgs.org/setup.html?#personal-startup-configuration">attach
+development tools</a></td>
 </tr>
 <tr class="odd">
 <td>.github</td>
@@ -637,57 +804,72 @@ renv::update() # check for unpdated versions of installed libraries</code></pre>
 <tr class="even">
 <td>.gitignore</td>
 <td align="center"><code>x</code></td>
-<td>I use <a href="https://github.com/github/gitignore/blob/master/R.gitignore">R</a> and macOS exclusions, and <strong>always</strong> exclude generated files outside of <code>docs/</code></td>
+<td>I use <a
+href="https://github.com/github/gitignore/blob/master/R.gitignore">R</a>
+and macOS exclusions, and <strong>always</strong> exclude generated
+files outside of <code>docs/</code></td>
 </tr>
 <tr class="odd">
 <td>.lintr</td>
 <td align="center"></td>
-<td><a href="https://github.com/jimhester/lintr">lintr</a> default linters with 100 columns: <code>linters: with_defaults(line_length_linter(100))</code></td>
+<td><a href="https://github.com/jimhester/lintr">lintr</a> default
+linters with 100 columns: <code>linters:
+with_defaults(line_length_linter(100))</code></td>
 </tr>
 <tr class="even">
 <td>DESCRIPTION</td>
 <td align="center"><code>x</code></td>
-<td>use “Suggests” for development tools, per <a href="https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-">renv</a></td>
+<td>use “Suggests” for development tools, per <a
+href="https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-">renv</a></td>
 </tr>
 <tr class="odd">
 <td>LICENSE</td>
 <td align="center"><code>x</code></td>
-<td>Generated with <a href="https://usethis.r-lib.org/reference/licenses.html"><code>use_mit_license()</code></a></td>
+<td>Generated with <a
+href="https://usethis.r-lib.org/reference/licenses.html"><code>use_mit_license()</code></a></td>
 </tr>
 <tr class="even">
 <td>LICENSE.md</td>
 <td align="center"></td>
-<td>See above, used by <a href="https://pkgdown.r-lib.org">pkgdown</a></td>
+<td>See above, used by <a
+href="https://pkgdown.r-lib.org">pkgdown</a></td>
 </tr>
 <tr class="odd">
 <td>NAMESPACE</td>
 <td align="center"><code>x</code></td>
-<td>Generated with <a href="https://roxygen2.r-lib.org">roxygen2</a></td>
+<td>Generated with <a
+href="https://roxygen2.r-lib.org">roxygen2</a></td>
 </tr>
 <tr class="even">
 <td>NEWS.md</td>
 <td align="center"></td>
-<td>Release notes, used by <a href="https://pkgdown.r-lib.org">pkgdown</a></td>
+<td>Release notes, used by <a
+href="https://pkgdown.r-lib.org">pkgdown</a></td>
 </tr>
 <tr class="odd">
 <td>README.Rmd</td>
 <td align="center"><code>x</code></td>
-<td>Generated with <a href="https://usethis.r-lib.org/reference/use_readme_rmd.html"><code>use_readme_md()</code></a></td>
+<td>Generated with <a
+href="https://usethis.r-lib.org/reference/use_readme_rmd.html"><code>use_readme_md()</code></a></td>
 </tr>
 <tr class="even">
 <td>README.md</td>
 <td align="center"><code>x</code></td>
-<td>Generated with <a href="https://devtools.r-lib.org/reference/build_rmd.html"><code>build_readme()</code></a></td>
+<td>Generated with <a
+href="https://devtools.r-lib.org/reference/build_rmd.html"><code>build_readme()</code></a></td>
 </tr>
 <tr class="odd">
 <td>R</td>
 <td align="center"><code>x</code></td>
-<td>All project functions go here, with <a href="https://roxygen2.r-lib.org">roxygen2</a> comments</td>
+<td>All project functions go here, with <a
+href="https://roxygen2.r-lib.org">roxygen2</a> comments</td>
 </tr>
 <tr class="even">
 <td>TODO.md</td>
 <td align="center"></td>
-<td>To-do list, inspired by <a href="https://github.com/rstudio/renv/blob/master/TODO.md" class="uri">https://github.com/rstudio/renv/blob/master/TODO.md</a></td>
+<td>To-do list, inspired by <a
+href="https://github.com/rstudio/renv/blob/master/TODO.md"
+class="uri">https://github.com/rstudio/renv/blob/master/TODO.md</a></td>
 </tr>
 <tr class="odd">
 <td>analysis</td>
@@ -707,17 +889,26 @@ renv::update() # check for unpdated versions of installed libraries</code></pre>
 <tr class="even">
 <td>analysis/rendered</td>
 <td align="center"></td>
-<td>Manually rendered html versions of <code>analysis/</code> files to be included in <code>docs/</code>, ie <a href="https://stackoverflow.com/questions/27930127/render-r-presentation-from-the-command-line">.Rpres files</a>, not stored in git</td>
+<td>Manually rendered html versions of <code>analysis/</code> files to
+be included in <code>docs/</code>, ie <a
+href="https://stackoverflow.com/questions/27930127/render-r-presentation-from-the-command-line">.Rpres
+files</a>, not stored in git</td>
 </tr>
 <tr class="odd">
 <td><del>demos</del></td>
 <td align="center"><code>x</code></td>
-<td>I don’t use demos, as recommended by <a href="https://r-pkgs.org/misc.html">R Packages</a></td>
+<td>I don’t use demos, as recommended by <a
+href="https://r-pkgs.org/misc.html">R Packages</a></td>
 </tr>
 <tr class="even">
 <td>docs</td>
 <td align="center"></td>
-<td>Used by <a href="https://pkgdown.r-lib.org/reference/build_site.html"><code>pkgdown::build_site()</code></a> and R Notebooks rendered as <code>html_document</code> using <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html"><code>rmarkdown::render_site()</code></a> via <a href="https://jabenninghoff.github.io/rtraining/reference/build_analysis_site.html"><code>build_analysis_site()</code></a> <em>(work-in-progress)</em></td>
+<td>Used by <a
+href="https://pkgdown.r-lib.org/reference/build_site.html"><code>pkgdown::build_site()</code></a>
+and R Notebooks rendered as <code>html_document</code> using <a
+href="https://rdrr.io/cran/rmarkdown/man/render_site.html"><code>rmarkdown::render_site()</code></a>
+via <a
+href="https://jabenninghoff.github.io/rdev/reference/build_analysis_site.html"><code>build_analysis_site()</code></a></td>
 </tr>
 <tr class="odd">
 <td><em>exec</em></td>
@@ -727,27 +918,33 @@ renv::update() # check for unpdated versions of installed libraries</code></pre>
 <tr class="even">
 <td>inst/templates/rmarkdown</td>
 <td align="center"><code>x</code></td>
-<td><em>Planned location for <a href="https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html">R Markdown Templates</a></em></td>
+<td><em>Planned location for <a
+href="https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html">R
+Markdown Templates</a></em></td>
 </tr>
 <tr class="odd">
 <td>man</td>
 <td align="center"><code>x</code></td>
-<td>Generated with <a href="https://roxygen2.r-lib.org">roxygen2</a></td>
+<td>Generated with <a
+href="https://roxygen2.r-lib.org">roxygen2</a></td>
 </tr>
 <tr class="even">
 <td>package.Rproj</td>
 <td align="center"></td>
-<td>I use the same name for the package, .Rproj, directory, and GitHub repo</td>
+<td>I use the same name for the package, .Rproj, directory, and GitHub
+repo</td>
 </tr>
 <tr class="odd">
 <td>pkgdown</td>
 <td align="center"></td>
-<td>I store all <a href="https://pkgdown.r-lib.org">pkgdown</a> files here</td>
+<td>I store all <a href="https://pkgdown.r-lib.org">pkgdown</a> files
+here</td>
 </tr>
 <tr class="even">
 <td><em>po</em></td>
 <td align="center"><code>x</code></td>
-<td>Used for <a href="https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Internationalization">Internationalization</a></td>
+<td>Used for <a
+href="https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Internationalization">Internationalization</a></td>
 </tr>
 <tr class="odd">
 <td>renv</td>
@@ -757,7 +954,8 @@ renv::update() # check for unpdated versions of installed libraries</code></pre>
 <tr class="even">
 <td>renv.lock</td>
 <td align="center"></td>
-<td>The renv <a href="https://rstudio.github.io/renv/reference/lockfiles.html">lockfile</a></td>
+<td>The renv <a
+href="https://rstudio.github.io/renv/reference/lockfiles.html">lockfile</a></td>
 </tr>
 <tr class="odd">
 <td>tests</td>
@@ -767,36 +965,68 @@ renv::update() # check for unpdated versions of installed libraries</code></pre>
 <tr class="even">
 <td>tools</td>
 <td align="center"><code>x</code></td>
-<td>I use <code>tools/</code> for shell scripts that support development, like <code>setup-r</code></td>
+<td>I use <code>tools/</code> for shell scripts that support
+development, like <code>setup-r</code></td>
 </tr>
 <tr class="odd">
 <td>vignettes</td>
 <td align="center"><code>x</code></td>
-<td>More typical package articles, used by <a href="https://pkgdown.r-lib.org">pkgdown</a></td>
+<td>More typical package articles, used by <a
+href="https://pkgdown.r-lib.org">pkgdown</a></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="r-workflow" class="section level2">
 <h2>R Workflow</h2>
-<p>Here is the typical workflow I’m settling into (or at least trying to…I still don’t have TDD down just yet), once a project is created. Projects are either vanilla packages and don’t contain <code>analysis/</code>, like <a href="https://jabenninghoff.github.io/rdev/">rdev</a>, or “analysis packages” and bundle analysis notebooks as a project, like <a href="https://jabenninghoff.github.io/rtraining/">rtraining</a>.</p>
+<p>Here is the typical workflow I’m settling into (or at least trying
+to…I still don’t have TDD down just yet), once a project is created.
+Projects are either vanilla packages and don’t contain
+<code>analysis/</code>, like <a
+href="https://jabenninghoff.github.io/rdev/">rdev</a>, or “analysis
+packages” and bundle analysis notebooks as a project, like <a
+href="https://jabenninghoff.github.io/rtraining/">rtraining</a>.</p>
 <ol style="list-style-type: decimal">
-<li>Check for updated packages when starting to work, (I created <a href="https://jabenninghoff.github.io/rdev/reference/check_renv.html"><code>check_renv()</code></a> for this) and check for errors using local CI checks (<a href="https://jabenninghoff.github.io/rdev/reference/ci.html"><code>ci()</code></a>).</li>
-<li>When creating a new function, write the documentation first, using Roxygen - this helps encourage up-front design and clarifies goals/requirements.</li>
-<li>Write tests next - both happy path and negative test cases whenever possible. 100% test coverage is overkill, but I try to write a ‘data validity checker’ which also helps define the expected format of the data.</li>
-<li><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a>: run tests, write code that fails tests, fix code, repeat. (Don’t forget to refactor)</li>
-<li>I use trunk-based development, which I learned from <a href="https://brew.sh">Homebrew</a>. I try to keep commits small, related, and implementing changes that don’t break code, merge back to main frequently - before the end of the day - and require linear commit history (ie rebase and merge).</li>
-<li>Before pushing commits, I run <a href="https://jabenninghoff.github.io/rdev/reference/style_all.html"><code>style_all()</code></a> and <a href="https://jabenninghoff.github.io/rdev/reference/ci.html"><code>ci()</code></a> to fix any problems locally (just “undo” in GitHub Desktop, fix, and re-commit).</li>
+<li>Check for updated packages when starting to work, (I created <a
+href="https://jabenninghoff.github.io/rdev/reference/check_renv.html"><code>check_renv()</code></a>
+for this) and check for errors using local CI checks (<a
+href="https://jabenninghoff.github.io/rdev/reference/ci.html"><code>ci()</code></a>).</li>
+<li>When creating a new function, write the documentation first, using
+Roxygen - this helps encourage up-front design and clarifies
+goals/requirements.</li>
+<li>Write tests next - both happy path and negative test cases whenever
+possible. 100% test coverage is overkill, but I try to write a ‘data
+validity checker’ which also helps define the expected format of the
+data.</li>
+<li><a
+href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a>:
+run tests, write code that fails tests, fix code, repeat. (Don’t forget
+to refactor)</li>
+<li>I use trunk-based development, which I learned from <a
+href="https://brew.sh">Homebrew</a>. I try to keep commits small,
+related, and implementing changes that don’t break code, merge back to
+main frequently - before the end of the day - and require linear commit
+history (ie rebase and merge).</li>
+<li>Before pushing commits, I run <a
+href="https://jabenninghoff.github.io/rdev/reference/style_all.html"><code>style_all()</code></a>
+and <a
+href="https://jabenninghoff.github.io/rdev/reference/ci.html"><code>ci()</code></a>
+to fix any problems locally (just “undo” in GitHub Desktop, fix, and
+re-commit).</li>
 </ol>
-<p>One thing that annoys me is that by default, devtools just writes new lines to the end of <code>.Rbuildignore</code>, so I wrote <a href="https://jabenninghoff.github.io/rdev/reference/sort_rbuildignore.html"><code>sort_rbuildignore()</code></a>.</p>
+<p>One thing that annoys me is that by default, devtools just writes new
+lines to the end of <code>.Rbuildignore</code>, so I wrote <a
+href="https://jabenninghoff.github.io/rdev/reference/sort_rbuildignore.html"><code>sort_rbuildignore()</code></a>.</p>
 </div>
 </div>
 <div id="next-steps" class="section level1">
 <h1>Next Steps</h1>
-<p>I’ll keep adding to this document as I go, and will likely eventually migrate this notebook to a <code>vignette</code> and switch to <code>pkgdown</code>.</p>
+<p>I’ll keep adding to this document as I go, and will likely eventually
+migrate this notebook to a <code>vignette</code> and switch to
+<code>pkgdown</code>.</p>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBTZXR1cCBMb2ciCmRhdGU6ICcyMDIwLTEyLTMwJwpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogeWVzCiAgICB0b2NfZmxvYXQ6CiAgICAgIGNvbGxhcHNlZDogbm8KICAgICAgc21vb3RoX3Njcm9sbDogbm8KLS0tCgpNeSBub3RlcyBvbiBteSBwZXJzb25hbCBSIHNldHVwLiBJIHN0YXJ0ZWQgbXkgUiBqb3VybmV5IGluIFtTZXB0ZW1iZXIgMjAyMF0oaHR0cHM6Ly93d3cuaW5mb3JtYXRpb24tc2FmZXR5Lm9yZy8yMDIwLzA5LzExL3dvcmtpbmctd2l0aC1yLykgYWZ0ZXIgW1NJUkFDb24gMjAyMF0oaHR0cHM6Ly9zb2NpZXR5aW5mb3Jpc2sub3JnL2V2ZW50LTM4OTk3ODYpLgoKYGBge3Igc3RhcnR1cCwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9CiMgbm8gbGlicmFyaWVzCmBgYAoKIyBJbnN0YWxsaW5nIFIKCkkgcHJlZmVyIGluc3RhbGxpbmcgUiBhbmQgUlN0dWRpbyB1c2luZyBbSG9tZWJyZXddKGh0dHBzOi8vYnJldy5zaCkuIEkgdXNlIFtIb21lYnJldyBCdW5kbGVdKGh0dHBzOi8vZ2l0aHViLmNvbS9Ib21lYnJldy9ob21lYnJldy1idW5kbGUpIHRvIGluc3RhbGwgYWxsIHNvZnR3YXJlIG9uIG15IHN5c3RlbXMsIGJ1dCBpbnN0YWxsaW5nIFIgYW5kIFJTdHVkaW8gaXMgc2ltcGxlIGVub3VnaCB1c2luZyB0aGUgY29tbWFuZCBsaW5lOgoKPCEtLSBub3RlOiBsaW50ciB2ZXJzaW9uIDw9IDIuMC4xIHRocm93cyBhbiBlcnJvciB3aGVuIHVzaW5nIGxhbmd1YWdlIGlkZW50aWZpZXJzOiA8aHR0cHM6Ly9naXRodWIuY29tL2ppbWhlc3Rlci9saW50ci9pc3N1ZXMvNTA1PiAtLT4KCmBgYHNoCmJyZXcgaW5zdGFsbCAtLWZvcm11bGEgciAmJiBicmV3IGluc3RhbGwgLS1jYXNrIHJzdHVkaW8KYGBgCgojIyBSIFZhcmlhbnRzCgoqKlRMO0RSOiBqdXN0IHVzZSBob21lYnJldy4qKgoKSSBkb24ndCByZWNvbW1lbmQgaW5zdGFsbGluZyB0aGUgYGNhc2tgIHZhcmlhbnQgb2YgciBiZWNhdXNlIGl0IGNyZWF0ZXMgcHJvYmxlbXMgd2l0aCBgYnJldyBkb2N0b3JgOgoKYGBge3NoIGJyZXcgaW5mbyByfQpicmV3IGluZm8gLS1jYXNrIHIKYGBgCgpJIHRyaWVkICJbaW5zdGFsbGluZyBhbGwgdGhlIHRoaW5nc10oaHR0cHM6Ly9sdWlzcHVlcnRvLm5ldC9ibG9nLzIwMTgvMDUvMTEvaW5zdGFsbGluZy1yLXdpdGgtaG9tZWJyZXctd2l0aC1hbGwtdGhlLWNhcGFiaWxpdGllcy8pIiB3aXRoIFtob21lYnJldy1yLXNyZl0oaHR0cHM6Ly9naXRodWIuY29tL3NldGhyZm9yZS9ob21lYnJldy1yLXNyZikgYnV0IGRpZG4ndCBsaWtlIGhvdyB0aGUgdW5pbnN0YWxsIGRvZXNuJ3QgY2xlYW4gdXAsIGFuZCBmcmFua2x5LCBJIGhhdmVuJ3QgZm91bmQgYSBuZWVkIGZvciBtb3JlIHRoYW4gdGhlIGNhcGFiaWxpdGllcyBpbmNsdWRlZCB3aXRoIGhvbWVicmV3IFI6CgpgYGB7ciBjYXBhYmlsaXRpZXN9Cm9wdGlvbnMod2lkdGggPSAxMDApCmNhcGFiaWxpdGllcygpCmBgYAoKQ3VycmVudGx5LCB0aGlzIGlzIGV2ZXJ5dGhpbmcgZXhjZXB0IHRoZSBYMTEgZGVwZW5kZW5jaWVzLCB3aGljaCBhcmVuJ3QgcmVhbGx5IG5lZWRlZDoKCmBgYHIKP2NhcGFiaWxpdGllcwpgYGAKCj4gKipOb3RlIHRvIG1hY09TIHVzZXJzKioKPgo+IENhcGFiaWxpdGllcyAianBlZyIsICJwbmciIGFuZCAidGlmZiIgcmVmZXIgdG8gdGhlIFgxMS1iYXNlZCB2ZXJzaW9ucyBvZiB0aGVzZSBkZXZpY2VzLiBJZiBjYXBhYmlsaXRpZXMoImFxdWEiKSBpcyB0cnVlLCB0aGVuIHRoZXNlIGRldmljZXMgd2l0aCB0eXBlID0gInF1YXJ0eiIgd2lsbCBiZSBhdmFpbGFibGUsIGFuZCBvdXQtb2YtdGhlLWJveCB3aWxsIGJlIHRoZSBkZWZhdWx0IHR5cGUuIFRodXMgZm9yIGV4YW1wbGUgdGhlIHRpZmYgZGV2aWNlIHdpbGwgYmUgYXZhaWxhYmxlIGlmIGNhcGFiaWxpdGllcygiYXF1YSIpIHx8IGNhcGFiaWxpdGllcygidGlmZiIpIGlmIHRoZSBkZWZhdWx0cyBhcmUgdW5jaGFuZ2VkLgoKQXMgYW4gYWN0aXZlIGNvbnRyaWJ1dG9yIHRvIEhvbWVicmV3LCBJICpzdHJvbmdseSogcmVjb21tZW5kIHVzaW5nIGl0IGZvciBhbnkvYWxsIHNvZnR3YXJlOyB0aGVpciBxdWFsaXR5IGNvbnRyb2wgaXMgZXhjZWxsZW50LgoKIyBSIFdvcmtzcGFjZQoKT25jZSBSIGFuZCBSU3R1ZGlvIGhhdmUgYmVlbiBpbnN0YWxsZWQsIHlvdSdsbCBuZWVkIGEgZGV2ZWxvcG1lbnQgZW52aXJvbm1lbnQgYW5kIHNvbWUgcGFja2FnZXMuCgojIyBEZXZlbG9wbWVudCBFbnZpcm9ubWVudAoKV2VsbCwgb2J2aW91c2x5LCBJIHVzZSBbUlN0dWRpb10oaHR0cHM6Ly9yc3R1ZGlvLmNvbS9wcm9kdWN0cy9yc3R1ZGlvL2Rvd25sb2FkLykuIFRoZXJlIGFyZSBvdGhlciBJREVzIGF2YWlsYWJsZSwgYW5kIGl0J3MgYWxzbyBwb3NzaWJsZSB0byBkZXZlbG9wIHVzaW5nIHRoZSBjb21tYW5kIGxpbmUsIGJ1dCBSU3R1ZGlvIHByb3ZpZGVzIGEgcGxlYXNhbnQsIGludGVncmF0ZWQgZXhwZXJpZW5jZSBmb3IgUiBkZXZlbG9wbWVudCwgYW5kIGFjdGl2ZWx5IHN1cHBvcnRzIHRoZSBSIGNvbW11bml0eS4gSSBkb24ndCB0eXBpY2FsbHkgdXNlIHRoZSBidWlsdC1pbiBHaXQgY2xpZW50LCBpbnN0ZWFkIHVzaW5nIHRoZSBHaXRIdWIgRGVza3RvcCBjbGllbnQgYW5kIGdpdCBjb21tYW5kLWxpbmUgdG9vbC4KCmBgYHNoCmJyZXcgaW5zdGFsbCBnaXRodWIKYGBgCgpJIGFsc28gb2NjYXNpb25hbGx5IHVzZSBgdmltYCAobWFpbmx5IGZvciBzaGVsbCBzY3JpcHRzKSBhbmQgW2F0b21dKGh0dHBzOi8vYXRvbS5pbykgKG1haW5seSBmb3IgdmFuaWxsYSBgLm1kYCBmaWxlcyB1c2luZyBbbWFya2Rvd24tcHJldmlldy1lbmhhbmNlZF0oaHR0cHM6Ly9hdG9tLmlvL3BhY2thZ2VzL21hcmtkb3duLXByZXZpZXctZW5oYW5jZWQpKS4KCiMjIFBhY2thZ2VzCgpNYW5hZ2luZyBwYWNrYWdlcyBhbmQgZW52aXJvbm1lbnRzIGFyZSBhIGNoYWxsZW5nZSBmb3IgbW9zdCBtb2Rlcm4gbGFuZ3VhZ2VzLiBUaGFua2Z1bGx5IFIgZG9lc24ndCBoYXZlIHRoZSBzYW1lIGxldmVsIG9mIGNoYWxsZW5nZSBhcyBweXRob24sIG9yIGV2ZW4gcnVieSwgbWFuYWdpbmcgcGFja2FnZXMgYXZhaWxhYmxlIHdpdGhpbiBhIHByb2plY3QgaXMgYSBiZXN0IHByYWN0aWNlLiBJIHVzZSBbcmVudl0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vcmVudikgZm9yIHRoaXMgcHVycG9zZS4gKEkgb3JpZ2luYWxseSBkaXNjb3ZlcmVkIFtwYWNrcmF0XShodHRwczovL3JzdHVkaW8uZ2l0aHViLmlvL3BhY2tyYXQvKSBidXQgcXVpY2tseSBkaXNjb3ZlcmVkIFJTdHVkaW8gaXMgcmVwbGFjaW5nIGl0IHdpdGggcmVudikKCkhlcmUgaXMgbXkgcGFja2FnZSBtYWludGVuYW5jZSBhcHByb2FjaDoKCiMjIyBCYXNlIFIgUGFja2FnZXMKCldpdGggbm8gcHJvamVjdHMgb3BlbiwgSSBwZXJpb2RpY2FsbHkgY2hlY2sgZm9yIHVwZGF0ZXMgdG8gdGhlIGJhc2UgUiBwYWNrYWdlcyB1c2luZyB0aGUgUlN0dWRpbyBQYWNrYWdlcyAiVXBkYXRlIiBmdW5jdGlvbi4gVGhlc2UgYXJlIHRoZSBvbmx5IHBhY2thZ2VzIEkgaW5zdGFsbCB0byB0aGUgYmFzZSBkaXJlY3RvcnkgYC91c3IvbG9jYWwvQ2VsbGFyL3IvNC4wLjNfMi9saWIvUi9saWJyYXJ5YC4gKk5vdGU6IHVwZ3JhZGluZyBvciByZWluc3RhbGxpbmcgciB0aHJvdWdoIGhvbWVicmV3IG1heSAnZG93bmdyYWRlJyB0aGUgYmFzZSBwYWNrYWdlcy4qCgojIyMgRGV2ZWxvcG1lbnQgUGFja2FnZXMKClRoZSBvbmx5IG90aGVyIHRvb2xzIEkgaW5zdGFsbCBvdXRzaWRlIG9mIHByb2plY3RzIGFyZSBmb3Igc3VwcG9ydGluZyBkZXZlbG9wbWVudC4gT3JpZ2luYWxseSB0aGlzIHdhcyBqdXN0IHJlbnYsIGJ1dCBub3cgaXQgaW5jbHVkZXMgYSBudW1iZXIgb2YgZGV2ZWxvcG1lbnQgdG9vbHMgbmVlZGVkIHRvIGNyZWF0ZSBwcm9qZWN0cy4gSSB1c2UgdGhlIFIgc2l0ZSBsaWJyYXJ5IHVzZWQgYnkgW2hvbWVicmV3XShodHRwczovL2dpdGh1Yi5jb20vSG9tZWJyZXcvaG9tZWJyZXctY29yZS9ibG9iL0hFQUQvRm9ybXVsYS9yLnJiKSwgY3VycmVudGx5IGAvdXNyL2xvY2FsL2xpYi9SLzQuMC9zaXRlLWxpYnJhcnlgLiBJJ3ZlIGRldmVsb3BlZCBhIHNoZWxsIHNjcmlwdCB0byBpbnN0YWxsIGRldmVsb3BtZW50IHBhY2thZ2VzIHRoYXQgeW91IGNhbiBmaW5kIGluIHRoZSB0b29scyBkaXJlY3Rvcnkgb2YgW3RoaXMgcmVwb3NpdG9yeV0oaHR0cHM6Ly9naXRodWIuY29tL2phYmVubmluZ2hvZmYvcnRyYWluaW5nKS4KCmBgYHNoCiMhL2Jpbi9zaAojIGluc3RhbGwgZGV2ZWxvcG1lbnQgcGFja2FnZXMgdG8gc2l0ZSByZXBvc2l0b3J5CiMgdGhhbmtzIHRvIGh0dHBzOi8vYmxvZy5zZWxsb3JtLmNvbS8yMDE3LzEwLzIxL3F1aWNrLXNjcmlwdC10by1pbnN0YWxsLWFuLXItcGFja2FnZS1mcm9tLXRoZS1jb21tYW5kLWxpbmUvCiMgYW5kIGh0dHBzOi8vZ2l0aHViLmNvbS9Ib21lYnJldy9ob21lYnJldy1jb3JlL2Jsb2IvSEVBRC9Gb3JtdWxhL3IucmIKIyBkZXNpZ25lZCB0byB3b3JrIHdpdGggaG9tZWJyZXc6IGBicmV3IGluc3RhbGwgLS1mb3JtdWxhIHIgJiYgYnJldyBpbnN0YWxsIC0tY2FzayByc3R1ZGlvYApzZXQgLWV4ICMgaGFsdCBzY3JpcHQgb24gZXJyb3IsIGVjaG8gb24KClBSRUZJWD1gYnJldyAtLXByZWZpeGAKUlZFUlNJT049YCR7UFJFRklYfS9iaW4vUnNjcmlwdCAtZSAnY2F0KGFzLmNoYXJhY3RlcihnZXRSdmVyc2lvbigpWzEsMToyXSkpJ2AKU0lURUxJQj0iJHtQUkVGSVh9L2xpYi9SLyR7UlZFUlNJT059L3NpdGUtbGlicmFyeSIKREVWUEtHPSdjKCJyZW52IiwgInN0eWxlciIsICJsaW50ciIsICJtaW5pVUkiLCAiZGV2dG9vbHMiLCAiYXZhaWxhYmxlIiknCgppZiBbICEgLWQgIiR7U0lURUxJQn0iIF0KdGhlbgoJZWNobyAiZmF0YWwgZXJyb3I6ICR7U0lURUxJQn0gZG9lcyBub3QgZXhpc3QgLSBub3QgdXNpbmcgXGBicmV3IGluc3RhbGwgLS1mb3JtdWxhIHJcYD8iCglleGl0IDEKZmkKCmJyZXcgaW5zdGFsbCBsaWJnaXQyICMgcmVxdWlyZWQgYnkgZGV2dG9vbHMKCmVjaG8gImluc3RhbGwucGFja2FnZXMoJHtERVZQS0d9LCByZXBvcz1cImh0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbVwiLCBsaWI9XCIke1NJVEVMSUJ9XCIpIiB8IFIgLS1uby1zYXZlCmBgYAoKIyMjIFByb2plY3QgUGFja2FnZXMKCkFueSBwYWNrYWdlcyAqbm90KiBuZWVkZWQgdG8gY3JlYXRlIHByb2plY3RzIEkgaW5zdGFsbCB3aXRoaW4gYSBwcm9qZWN0IHVzaW5nIHJlbnYgLSBoZXJlIGFyZSBzb21lIGdvb2QgaW50cm9zOgoKLSBBIFtwcmVzZW50YXRpb24gYXQgcnN0dWRpbzo6Y29uZiAyMDIwXShodHRwczovL3JzdHVkaW8uY29tL3Jlc291cmNlcy9yc3R1ZGlvY29uZi0yMDIwL3JlbnYtcHJvamVjdC1lbnZpcm9ubWVudHMtZm9yLXIvKQotIFRoZSBbUlN0dWRpbyBCbG9nIHBvc3RdKGh0dHBzOi8vYmxvZy5yc3R1ZGlvLmNvbS8yMDE5LzExLzA2L3JlbnYtcHJvamVjdC1lbnZpcm9ubWVudHMtZm9yLXIvKQotIEFuIFtJbnRyb2R1Y3Rpb24gdG8gcmVudl0oaHR0cHM6Ly9yc3R1ZGlvLmdpdGh1Yi5pby9yZW52L2FydGljbGVzL3JlbnYuaHRtbCkKLSBbcmVudl0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vcmVudikgb24gR2l0SHViCgpgYGByCnJlbnY6OmluaXQoKSAjIHRvIHNldCB1cCByZW52IGluIHRoZSBwcm9qZWN0CnJlbnY6Omluc3RhbGwoInJ0cmFpbmluZyIpICMgdG8gaW5zdGFsbCBhIHBhY2thZ2UKcmVudjo6c3RhdHVzKCkgIyBjaGVja3MgaWYgcmVudi5sb2NrIGlzIGluIHN5bmMKcmVudjo6c25hcHNob3QoKSAjIHNhdmUgbGlicmFyaWVzIGluIHJlbnYubG9jawpyZW52OjpyZXN0b3JlKCkgIyByZXN0b3JlIGxpYnJhcmllcyBmcm9tIHJlbnYubG9jayAtIHVzZSB3aGVuIGZpcnN0IHVzaW5nIGFuIGV4aXN0aW5nIHByb2plY3QKcmVudjo6Y2xlYW4oKSAjIHJlbW92ZSBleHRyYSBsaWJyYXJpZXMKcmVudjo6dXBkYXRlKCkgIyBjaGVjayBmb3IgdW5wZGF0ZWQgdmVyc2lvbnMgb2YgaW5zdGFsbGVkIGxpYnJhcmllcwpgYGAKCklmIHlvdSdyZSBpbnN0YWxsaW5nIChkZXZlbG9wbWVudCkgdmVyc2lvbnMgb2YgcGFja2FnZXMgZnJvbSBHaXRIdWIsIHlvdSdsbCBiZSBwcm9tcHRlZCB0byBzZXQgdXAgYSBwZXJzb25hbCBhY2Nlc3MgdG9rZW4gdXNpbmcgYGNyZWF0ZV9naXRodWJfdG9rZW4oKWAgYW5kIGFkZGluZyBpdCB0byB5b3VyIGAuUmVudmlyb25gIGFzIGBHSVRIVUJfUEFUPWAgdXNpbmcgYHVzZXRoaXM6OmVkaXRfcl9lbnZpcm9uKClgLiBJIGhhZCB0byBpbnN0YWxsIHRoZSBkZXZlbG9wbWVudCB2ZXJzaW9ucyBvZiBib3RoIGBzdHlsZXJgIGFuZCBgbGludHJgIGR1ZSB0byBidWdzIG5vdCB5ZXQgZml4ZWQgaW4gdGhlIHJlbGVhc2VkIChDUkFOKSB2ZXJzaW9ucy4gSSBkaWQgYWxzbyBsb29rIGF0IHVzaW5nIFtwYWtdKGh0dHBzOi8vcGFrLnItbGliLm9yZykgYnV0IGZvdW5kIGl0IHRvbyBidWdneSB0byB1c2UuCgoqTm90ZToqIEkgY2FtZSBhY3Jvc3MgYW4gb2RkIHF1aXJrIHdoZXJlIHJlbnYgd2lsbCBwcm9tcHQgeW91IHRvIHVwZ3JhZGUgYmFzZSBSIHByb2plY3RzLCBldmVuIGlmIHRoZXkncmUgbm90IHVzZWQuIEkgcmVzb2x2ZWQgdGhlc2UgYnkganVzdCB1cGdyYWRpbmcgdGhlIGJhc2UgcGFja2FnZXMgd2l0aCBSU3R1ZGlvIHdpdGggbm8gcHJvamVjdCBvcGVuLgoKSSd2ZSBpbmNsdWRlZCBzb21lIGNvbW1lbnRzIG9uIHVzZWZ1bCBwYWNrYWdlcyBpbiBteSAqUiBUcmFpbmluZyBMb2cqIG5vdGVib29rLgoKIyBVc2luZyBSCgpTbyAtIHdoYXQgaGF2ZSBJIGxlYXJuZWQgYWJvdXQgdXNpbmcgUj8gSSB3b24ndCBjb3ZlciB0aGUgYWN0dWFsIERhdGEgU2NpZW5jZSBwYXJ0IGhlcmUsIGJ1dCBoYXZlIHNvbWUgcmVjb21tZW5kZWQgcmVhZGluZyBpbiBteSAqUiBUcmFpbmluZyBMb2cqLgoKIyMgVXNlIGdpdCEKClRoaXMgd2Fzbid0IHJlYWxseSBzb21ldGhpbmcgSSBsZWFybmVkIHdpdGggUiwgYnV0IHVzZSBvZiB2ZXJzaW9uIGNvbnRyb2wgZm9yIGFueSBraW5kIG9mIGNvZGUvc2NyaXB0IGlzIGNydWNpYWwuIFRoZXNlIGRheXMsIEkga2VlcCBhbGwgc2NyaXB0cyBhbmQgY29uZmlndXJhdGlvbiBmaWxlcyBpbiBzb21lIGZsYXZvciBvZiBwdWJsaWMgb3IgcHJpdmF0ZSB2ZXJzaW9uIGNvbnRyb2wuIE1vc3RseSB0aGF0IG1lYW5zIEdpdEh1YiwgYnV0IGFsc28gcHJpdmF0ZSBnaXQgc2VydmVycyAodmlhIHNzaCkgYXJlIGVhc3kgdG8gc2V0IHVwIGZvciB3b3JrIHRoYXQgeW91IHdhbnQgdG8ga2VlcCBvZmYgb2YgR2l0SHViLgoKSSBkb24ndCB3YW50IHRvIGdldCB0b28gbXVjaCBpbnRvIG1hbmFnaW5nIGNvZGUgdmlhIHZlcnNpb24gY29udHJvbCwgYnV0IEkgZmF2b3IgdHJ1bmstYmFzZWQgZGV2ZWxvcG1lbnQgd2l0aCBzaG9ydC1saXZlZCBicmFuY2hlcywgc21hbGwgY29tbWl0cyBvZiB3b3JraW5nIGNvZGUsIGFuZCByZWJhc2UgYW5kIG1lcmdlIGZvciBsaW5lYXIgY29tbWl0IGhpc3RvcnkuIFRoZXJlJ3MgYSBsb3Qgb2YgZ29vZCByZXNlYXJjaCBvbiB0aGlzIHRvcGljIGZyb20gR29vZ2xlJ3MgW0RldiBPcHMgUmVzZWFyY2ggYW5kIEFzc2Vzc21lbnRdKGh0dHBzOi8vY2xvdWQuZ29vZ2xlLmNvbS9kZXZvcHMpIHRlYW0uCgojIyBVc2luZyBSU3R1ZGlvIHdpdGggR2l0SHViCgpSU3R1ZGlvIGhhcyBnb29kIGludGVncmF0aW9uIHdpdGggR2l0SHViLiBJJ3ZlIGFkb3B0ZWQgdGhlIGNvbnZlbnRpb24gb2YgIm9uZSBSU3R1ZGlvIFByb2plY3QgKC5ScHJvaikgcGVyIHJlcG9zaXRvcnkiIGFuZCBzdG9yaW5nIHRoZSBScHJvaiBmaWxlIGluIHRoZSByZXBvc2l0b3J5LiBUaGF0IHNlZW1zIHRvIGJlIHRoZSBub3JtLgoKIyMgUiBOb3RlYm9va3MKClIgTm90ZWJvb2tzIGFyZSBteSBwcmVmZXJyZWQgZmlsZSBmb3JtYXQgZm9yIGRhdGEgYW5hbHlzaXMsIGFzIHRoZXkgYWxsb3cgYW4gZWFzeSBtaXhpbmcgb2YgdGV4dCAodXNpbmcgcGFuZG9jIG1hcmtkb3duKSBhbmQgUiBjb2RlIGNodW5rcy4gVGhpcyBhbGxvd3MgbWUgdG8gZG9jdW1lbnQgd2hhdCBJJ20gZG9pbmcgYXMgSSBnbywgYm90aCBmb3IgcmVwcm9kdWNpYmlsaXR5IGFzIHdlbGwgYXMgcmVjb3JkaW5nIG15IG9ic2VydmF0aW9ucywgdGhvdWdodHMgYW5kIGNvbmNsdXNpb25zLiBJdCBlc3BlY2lhbGx5IGxlbmRzIGl0c2VsZiB0byBpdGVyYXRpdmUgZGV2ZWxvcG1lbnQ6CgoxLiBXcml0ZSBjb2RlCjEuIFJ1biBjb2RlCjEuIFNlZSByZXN1bHRzCjEuIFVwZGF0ZSBjb2RlCgpUaGlzIG1ldGhvZCBvZiBkZXZlbG9wbWVudCBpcyBub3QgYWx3YXlzIGFwcHJvcHJpYXRlLCBidXQgZml0cyB3ZWxsIHdpdGggZXhwbG9yYXRvcnkgYW5hbHlzaXMuIE9uY2UgSSBnZXQgdG8gd3JpdGluZyBmdW5jdGlvbnMsIEknbSBzdGFydGluZyB0byBhZG9wdCB0aGUgZm9ybWFsIHN0cnVjdHVyZSBvZiBbcGFja2FnZXNdKGh0dHBzOi8vci1wa2dzLm9yZy9pbmRleC5odG1sKSwgW3Rlc3R0aGF0XShodHRwczovL3Rlc3R0aGF0LnItbGliLm9yZyksIGFuZCBbcm94eWdlbjJdKGh0dHBzOi8vcm94eWdlbjIuci1saWIub3JnKS4KClNwZWNpZmljYWxseSwgSSB1c2UgYGh0bWxfbm90ZWJvb2tgLCB3aGljaCB3YXMgcmVjb21tZW5kZWQgdG8gbWUuIFJTdHVkaW8gaGFuZGxlcyB0aGlzIGRpZmZlcmVudGx5IHRoYW4gYGh0bWxfZG9jdW1lbnRgOgoKQmVoYXZpb3J8YGh0bWxfbm90ZWJvb2tgfGBodG1sX2RvY3VtZW50YAotLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tClF1aWNrIFZpZXd8UHJldmlldyBCdXR0b258Tm8gUHJldmlldyBCdXR0b24KU2F2aW5nIEZpbGVzfEF1dG9tYXRpY2FsbHkga25pdHMgZmlsZSBvbiBzYXZlfE1hbnVhbGx5IGtuaXQgZmlsZQpSZW5kZXJpbmcgRmlsZXN8UmVuZGVycyBSIG91dHB1dCBhcyBpdCBleGlzdHMgaW4gdGhlIElERSBvbiBzYXZlfFJlbmRlcnMgUiBvdXRwdXQgYnkgcnVubmluZyBhbGwgUiBjb2RlCkRlZmF1bHQgT3B0aW9uc3xJbmNsdWRlcyBvcHRpb25zIGZvciByZWFkYWJpbGl0eSwgaGlkaW5nIGFuZCBkb3dubG9hZGluZyBjb2RlLCBhbmQgcGFnZWQgdGFibGVzfEhpZ2hlci1xdWFsaXR5IHJlbmRlcmluZyBvZiBQTkcgZ3JhcGhpY3MKCkVzc2VudGlhbGx5LCBSIE5vdGVib29rcyBhcmUgZ2VuZXJhbGx5IGZhc3RlciBhbmQgbW9yZSBjb252ZW5pZW50IHdoZW4gKmRvaW5nKiBhbmFseXNpcywgYW5kIGBodG1sX2RvY3VtZW50YCBSIE1hcmtkb3duIGZpbGVzIG9mZmVyIGhpZ2hlci1xdWFsaXR5IG91dHB1dC4gVGhpcyBzaXRlIHVzZXMgYSBjdXN0b20gZnJhbWV3b3JrIHRvIGNvbnZlcnQgaHRtbF9ub3RlYm9va3MgdG8gaHRtbF9kb2N1bWVudHMgZm9yIHB1Ymxpc2hpbmcgKHNlZSB0aGUgbmV4dCBzZWN0aW9uIGZvciBkZXRhaWxzKS4gVGhleSBhcmUgYWxzbyBhIGNvbnZlbmllbnQgd2F5IHRvIHNoYXJlIGFuYWx5c2lzIHdpdGggcGVlcnMgLSBqdXN0IGVtYWlsIHRoZSBgLm5iLmh0bWxgIGZpbGUsIHdoaWNoIHdpbGwgaW5jbHVkZSBhbGwgb2YgdGhlIG91dHB1dCwgYXMgd2VsbCBhcyBlbWJlZGRpbmcgdGhlIGAuUm1kYCBzb3VyY2UgY29kZSBmb3IgZWFzeSBlZGl0aW5nLiBUaGlzIGFsc28gYWxsb3dzIHBlb3BsZSB3aG8gZG9uJ3QgaGF2ZSBSL1JTdHVkaW8gdG8gc2VlIHRoZSByZXN1bHRzIG9mIGFuIGFuYWx5c2lzLgoKVGhlcmUgYXJlIHNvbWUgZHJhd2JhY2tzIHRvIHVzaW5nIFIgTm90ZWJvb2tzOgoKLSBCZWNhdXNlIFIgTm90ZWJvb2tzIGFyZSByZW5kZXItb24tc2F2ZSwgeW91IGNhbiBpbmFkdmVydGVudGx5IGVuZCB1cCB3aXRoIG1pc3Npbmcgb3Igb3V0ZGF0ZWQgUiBvdXRwdXQgZnJvbSB5b3VyIG5vdGVib29rIHdoZW4gc2F2aW5nLCBpZiB5b3UndmUgbWFkZSB1cGRhdGVzIGFuZCBoYXZlbid0IHJlLXJ1biB0aGUgZW50aXJlIGRvY3VtZW50LiBNeSBoYWJpdCBpcyB0byBkbyB0aGUgZm9sbG93aW5nIGF0IHRoZSBlbmQgb2YgYSB3cml0aW5nIHNlc3Npb24sIGJlZm9yZSBjb21taXR0aW5nIHRvIGdpdCwgd2hpY2ggZW5zdXJlcyBhICJjbGVhbiIgbm90ZWJvb2s6CiAgMS4gQ2xlYXIgdGhlIEdsb2JhbCBFbnZpcm9ubWVudAogIDEuICJSZXN0YXJ0IFIgYW5kIENsZWFyIE91dHB1dCIKICAxLiAiUnVuIEFsbCIKICAxLiBTYXZlCi0gW0RlYnVnIGJyZWFrcG9pbnRzIGRvbid0IHdvcmsgaW4gUiBNYXJrZG93biBkb2N1bWVudHNdKGh0dHBzOi8vc3VwcG9ydC5yc3R1ZGlvLmNvbS9oYy9lbi11cy9hcnRpY2xlcy8yMDU2MTI2MjctRGVidWdnaW5nLXdpdGgtUlN0dWRpbyNkZWJ1Z2dpbmctaW4tci1tYXJrZG93bi1kb2N1bWVudHMpLiBUbyBmaXggdGhpcywgW2NvbnZlcnQgUiBNYXJrZG93biBkb2N1bWVudHMgdG8gUiBTY3JpcHRzIHVzaW5nIHB1cmxdKGh0dHBzOi8vYm9va2Rvd24ub3JnL3lpaHVpL3JtYXJrZG93bi1jb29rYm9vay9wdXJsLmh0bWwpIGZvciBkZWJ1Z2dpbmcuCi0gTm90IHJlYWxseSBhIGRyYXdiYWNrLCBidXQuLi5gUmNwcGAgYW5kIGBycHJvanJvb3RgIGFyZSBlcnJvbmVvdXNseSBsaXN0ZWQgaW4gUlN0dWRpbyBhcyByZXF1aXJlZCB0byBjcmVhdGUgUiBNYXJrZG93biwgd2hpY2ggY2FuIGFsc28gY2F1c2UgcHJvYmxlbXMgd2l0aCBgcmVudmAuIFRoaXMgaXMgYSBbYnVnIGluIFJTdHVkaW9dKGh0dHBzOi8vZ2l0aHViLmNvbS9yc3R1ZGlvL3JzdHVkaW8vaXNzdWVzLzc5MzUpLCB3aGljaCB3aWxsIGJlIGZpeGVkIGluIHZlcnNpb24gMS40Ljk0NC4KCiMjIFB1Ymxpc2hpbmcgUiBOb3RlYm9va3MKClNpbmNlIFIgTm90ZWJvb2tzIGFyZSBzYXZlZCBhcyBodG1sIGZpbGVzLCBpdCdzIHBvc3NpYmxlIHRvIHB1Ymxpc2ggdGhlbSBvbiBHaXRIdWIgdXNpbmcgR2l0SHViIHBhZ2VzLiBHaXRIdWIgcHVibGlzaGVkIGEgW3R1dG9yaWFsXShodHRwczovL3Jlc291cmNlcy5naXRodWIuY29tL3doaXRlcGFwZXJzL2dpdGh1Yi1hbmQtcnN0dWRpby8pIGluIDIwMTggb24gZ2V0dGluZyBSU3R1ZGlvIGludGVncmF0ZWQgd2l0aCBHaXRIdWIsIGFuZCBJIHN0YXJ0ZWQgd29ya2luZyBvbiB0aGF0LiBRdWlja2x5IEkgZGlzY292ZXJlZCB0aGF0IHdoaWxlIHRoZSB0dXRvcmlhbCB3YXMgaGVscGZ1bCwgaXQgd2Fzbid0IHF1aXRlIHRoZSBzZXR1cCBJIHdhbnRlZDsgaXQgcHVibGlzaGVkIFIgTWFya2Rvd24gdGhyb3VnaCBHaXRIdWIgcGFnZXMsIGJ1dCB3b3VsZG4ndCBkaXJlY3RseSBzdXBwb3J0IHRoZSBhdXRvbWF0aWNhbGx5IGdlbmVyYXRlZCBodG1sIG9mIFIgTm90ZWJvb2tzLiBBZnRlciBtb3JlIHNlYXJjaGluZywgSSB3YXMgYWJsZSB0byBnZXQgTm90ZWJvb2tzIHdvcmtpbmcgb24gR2l0SHViLCBidXQgSSB1c2VkIHRoZSBtZXRob2QgZGVzY3JpYmVkIGluIFtyc3R1ZGlvL3JtYXJrZG93biAjMTAyMF0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vcm1hcmtkb3duL2lzc3Vlcy8xMDIwKSAtIGNoZWNraW5nIGluIHRoZSAubmIuaHRtbCBpbnRvIGdpdCwgYW5kIHVzaW5nIEdpdEh1YiBQYWdlcyBzbyB0aGF0IHlvdSBjYW4gdmlldyB0aGUgcmVuZGVyZWQgSFRNTCBpbnN0ZWFkIG9mIGp1c3QgdGhlIEhUTUwgY29kZS4KCiMjIyBQdWJsaXNoaW5nIHdpdGggcm1hcmtkb3duCgpBZnRlciB1c2luZyBgUkVBRE1FLm1kYCBhbmQgR2l0SHViIHBhZ2VzIHRvIHB1Ymxpc2ggbm90ZWJvb2tzLCBJIGZvdW5kIEkgd2FudGVkIGFuIGVhc2llciB3YXkgdG8gcHVibGlzaCBhbmQgbmF2aWdhdGUgYWNyb3NzIGNvbGxlY3Rpb25zIG9mIG5vdGVib29rcy4gUHVibGlzaGluZyBSIE5vdGVib29rcyBvbiBHaXRIdWIgcGFnZXMgd29ya3MgZmluZSwgYnV0IGRvZXNuJ3Qgb2ZmZXIgYW4gZWFzeSBuYXZpZ2F0aW9uIHN0cnVjdHVyZSwgbGlrZSBbcGtnZG93bl0oaHR0cHM6Ly9wa2dkb3duLnItbGliLm9yZykuIEkgdHJpZWQgdXNpbmcgcGtnZG93biB0byBkaXNwbGF5IG5vdGVib29rcywgYnV0IHBrZ2Rvd24gb25seSBzdXBwb3J0cyBidWlsZGluZyBgdmlnbmV0dGVzYCwgd2hpY2ggaGF2ZSBhIGRpc3RpbmN0bHkgZGlmZmVyZW50IGxvb2sgYW5kIGZlZWwgdGhhbiBSIE5vdGVib29rcy4gVGhlIFtybWFya2Rvd24gc2l0ZSBnZW5lcmF0b3JdKGh0dHBzOi8vYm9va2Rvd24ub3JnL3lpaHVpL3JtYXJrZG93bi9ybWFya2Rvd24tc2l0ZS5odG1sKSwgW3JlbmRlcl9zaXRlXShodHRwczovL3JkcnIuaW8vY3Jhbi9ybWFya2Rvd24vbWFuL3JlbmRlcl9zaXRlLmh0bWwpLCBhbGxvd3MgbW9yZSBmbGV4aWJsZSBidWlsZGluZyBvZiB3ZWJzaXRlcyBmcm9tIFIgTWFya2Rvd24gZmlsZXMgd2l0aCBhIHNpbXBsZSBuYXZpZ2F0aW9uIGJhciBhdCB0aGUgdG9wLCBidXQgZG9lc24ndCBzdXBwb3J0IGBodG1sX25vdGVib29rYCBmaWxlcyBPT0IuCgpUbyB3b3JrIGFyb3VuZCB0aGlzLCBJIGNyZWF0ZWQgYSBzaW1wbGUgZnJhbWV3b3JrIGZvciBjb252ZXJ0aW5nIGBodG1sX25vdGVib29rYCBmaWxlcyB0byBgaHRtbF9kb2N1bWVudGAgYW5kIGJ1aWxkaW5nIGEgYF9zaXRlLnltbGAgZnJvbSBhIGxpc3Qgb2Ygbm90ZWJvb2tzIHN0b3JlZCBpbiB0aGUgbm9uLXN0YW5kYXJkIGBub3RlYm9va3MvYCBkaXJlY3RvcnksIGluaXRpYWxseSB1c2luZyBhIHNoZWxsIHNjcmlwdCwgYGJ1aWxkX3NpdGVgIChzdG9yZWQgYXQgdGhlIHJvb3Qgb2YgdGhpcyBbcmVwb10oaHR0cHM6Ly9naXRodWIuY29tL2phYmVubmluZ2hvZmYvcnRyYWluaW5nKSkuIEl0IGRvZXMgdGhlIGZvbGxvd2luZzoKCjEuIENyZWF0ZXMgYSB3b3JraW5nIGRpcmVjdG9yeSwgYC5idWlsZC1zaXRlYAoxLiBCdWlsZHMgYSBgcm1hcmtkb3duOjpyZW5kZXJfc2l0ZSgpYCBgX3NpdGUueW1sYCBmaWxlIHRoYXQgaW5jbHVkZXMgYSBtZW51IHdpdGggYWxsIG5vdGVib29rcyBpbiB0aGUgYG5vdGVib29rcy9gIGRpcmVjdG9yeQoxLiBDb3BpZXMgYWxsIGAuUm1kYCBmaWxlcyB0byBgLmJ1aWxkLXNpdGVgIGNoYW5naW5nIHRoZWlyIHR5cGUgZnJvbSBgaHRtbF9ub3RlYm9va2AgdG8gYGh0bWxfZG9jdW1lbnRgCjEuIEluY2x1ZGVzIHNvbWUgY29uZmlndXJhdGlvbiB0byBtYWtlIGBodG1sX2RvY3VtZW50c2Agd29yayBtb3JlIGxpa2UgYGh0bWxfbm90ZWJvb2tgCjEuIENhbGxzIGBybWFya2Rvd246OnJlbmRlcl9zaXRlKClgIHRvIHJlbmRlciB0aGUgc2l0ZSBpbiB0aGUgYGRvY3MvYCBkaXJlY3RvcnkKCkkgdHlwaWNhbGx5IHJlYnVpbGQgYSBzaXRlIHdpdGggdGhlIGZvbGxvd2luZyBjb21tYW5kLCBydW4gZnJvbSB0aGUgdG9wLWxldmVsIGRpcmVjdG9yeSBvZiB0aGUgcHJvamVjdDoKCmBgYHNoCnJtIC1yZiAuYnVpbGQtc2l0ZSAmJiBzaCBidWlsZC1zaXRlICYmIG9wZW4gZG9jcy9pbmRleC5odG1sCmBgYAoKVGhpcyBhcHByb2FjaCBsZXZlcmFnZXMgdGhlIFtkb2NzIGZ1bmN0aW9uYWxpdHldKGh0dHBzOi8vaGVscC5naXRodWIuY29tL2FydGljbGVzL2NvbmZpZ3VyaW5nLWEtcHVibGlzaGluZy1zb3VyY2UtZm9yLWdpdGh1Yi1wYWdlcy8jcHVibGlzaGluZy15b3VyLWdpdGh1Yi1wYWdlcy1zaXRlLWZyb20tYS1kb2NzLWZvbGRlci1vbi15b3VyLW1hc3Rlci1icmFuY2gpIG9mIEdpdEh1YiBwYWdlcywgbGlrZSBwa2dkb3duLgoKIyMjIFVwZGF0ZSBvbiBQdWJsaXNoaW5nCgpgYnVpbGQtc2l0ZWAgaGFzIGJlZW4gcmVwbGFjZWQgd2l0aCBgYnVpbGRfYW5hbHlzaXNfc2l0ZSgpYCEgQXQgaXRzIGNvcmUsIGl0IGlzIGZ1bmN0aW9uYWxseSB0aGUgc2FtZTogYnVpbGRzIGEgYHBrZ2Rvd25gIHNpdGUsIGFkZGluZyBhbiAiQW5hbHlzaXMiIG1lbnUgd2l0aCBhbGwgbm90ZWJvb2tzIGluIHRoZSAocmVuYW1lZCkgYGFuYWx5c2lzL2AgZGlyZWN0b3J5LCB0aGVuIGNvbnZlcnRzIGFuZCBidWlsZHMgdGhlIG5vdGVib29rcyB1c2luZyBgcm1hcmtkb3duYCwgYW5kIG1vdmVzIHRoZW0gaW50byB0aGUgYGRvY3MvYCBkaXJlY3RvcnkuIFNpbmNlIGl0IGlzIG5vdyBhbiBSIFNjcmlwdCwgaXQncyBtb3JlIHBvcnRhYmxlIGFuZCBjYW4gYmUgbW9yZSBlYXNpbHkgYnVuZGxlZCB3aXRoIHBhY2thZ2VzLiBJIHdpbGwgYmUgbWlncmF0aW5nIGl0cyBmdW5jdGlvbmFsaXR5IHRvIFtyZGV2XShodHRwczovL2phYmVubmluZ2hvZmYuZ2l0aHViLmlvL3JkZXYvKSBzaG9ydGx5LCBzbyB0aGF0IGl0J3MgdXNhYmxlIGFjcm9zcyBtdWx0aXBsZSBhbmFseXNpcyBwcm9qZWN0cy4KCiMjIFIgUGFja2FnZSBMYXlvdXQKCkhlcmUgaXMgbXkgcGFja2FnZSBsYXlvdXQgLSB0aGUgdGFibGUgc2hvd3MgdGhlIHBhdGgsIHdoZXRoZXIgaXQncyBwYXJ0IG9mIHRoZSBmb3JtYWwgUiBwYWNrYWdlIGRlZmluaXRpb24sIGFuZCBteSBub3RlcyBvbiBpdHMgdXNlLgoKUGF0aCB8IFIgfCBOb3RlcwotLS0tLXw6LTp8LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi5SYnVpbGRpZ25vcmV8YHhgfEV4Y2x1ZGUgZmlsZXMgZnJvbSBwYWNrYWdlCi5ScHJvZmlsZXxgeGB8VXNlZCBieSBgcmVudmAgYW5kIHRvIFthdHRhY2ggZGV2ZWxvcG1lbnQgdG9vbHNdKGh0dHBzOi8vci1wa2dzLm9yZy9zZXR1cC5odG1sPyNwZXJzb25hbC1zdGFydHVwLWNvbmZpZ3VyYXRpb24pCi5naXRodWJ8IHxHaXRIdWIgdGVtcGxhdGVzIGFuZCB3b3JrZmxvd3MKLmdpdGlnbm9yZXxgeGB8SSB1c2UgW1JdKGh0dHBzOi8vZ2l0aHViLmNvbS9naXRodWIvZ2l0aWdub3JlL2Jsb2IvbWFzdGVyL1IuZ2l0aWdub3JlKSBhbmQgbWFjT1MgZXhjbHVzaW9ucywgYW5kICoqYWx3YXlzKiogZXhjbHVkZSBnZW5lcmF0ZWQgZmlsZXMgb3V0c2lkZSBvZiBgZG9jcy9gCi5saW50cnwgfFtsaW50cl0oaHR0cHM6Ly9naXRodWIuY29tL2ppbWhlc3Rlci9saW50cikgZGVmYXVsdCBsaW50ZXJzIHdpdGggMTAwIGNvbHVtbnM6IGBsaW50ZXJzOiB3aXRoX2RlZmF1bHRzKGxpbmVfbGVuZ3RoX2xpbnRlcigxMDApKWAKREVTQ1JJUFRJT058YHhgfHVzZSAiU3VnZ2VzdHMiIGZvciBkZXZlbG9wbWVudCB0b29scywgcGVyIFtyZW52XShodHRwczovL3JzdHVkaW8uZ2l0aHViLmlvL3JlbnYvYXJ0aWNsZXMvZmFxLmh0bWwjaG93LXNob3VsZC1pLWhhbmRsZS1kZXZlbG9wbWVudC1kZXBlbmRlbmNpZXMtKQpMSUNFTlNFfGB4YHxHZW5lcmF0ZWQgd2l0aCBbYHVzZV9taXRfbGljZW5zZSgpYF0oaHR0cHM6Ly91c2V0aGlzLnItbGliLm9yZy9yZWZlcmVuY2UvbGljZW5zZXMuaHRtbCkKTElDRU5TRS5tZHwgfFNlZSBhYm92ZSwgdXNlZCBieSBbcGtnZG93bl0oaHR0cHM6Ly9wa2dkb3duLnItbGliLm9yZykKTkFNRVNQQUNFfGB4YHxHZW5lcmF0ZWQgd2l0aCBbcm94eWdlbjJdKGh0dHBzOi8vcm94eWdlbjIuci1saWIub3JnKQpORVdTLm1kfCB8UmVsZWFzZSBub3RlcywgdXNlZCBieSBbcGtnZG93bl0oaHR0cHM6Ly9wa2dkb3duLnItbGliLm9yZykKUkVBRE1FLlJtZHxgeGB8R2VuZXJhdGVkIHdpdGggW2B1c2VfcmVhZG1lX21kKClgXShodHRwczovL3VzZXRoaXMuci1saWIub3JnL3JlZmVyZW5jZS91c2VfcmVhZG1lX3JtZC5odG1sKQpSRUFETUUubWR8YHhgfEdlbmVyYXRlZCB3aXRoIFtgYnVpbGRfcmVhZG1lKClgXShodHRwczovL2RldnRvb2xzLnItbGliLm9yZy9yZWZlcmVuY2UvYnVpbGRfcm1kLmh0bWwpClJ8YHhgfEFsbCBwcm9qZWN0IGZ1bmN0aW9ucyBnbyBoZXJlLCB3aXRoIFtyb3h5Z2VuMl0oaHR0cHM6Ly9yb3h5Z2VuMi5yLWxpYi5vcmcpIGNvbW1lbnRzClRPRE8ubWR8IHxUby1kbyBsaXN0LCBpbnNwaXJlZCBieSA8aHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vcmVudi9ibG9iL21hc3Rlci9UT0RPLm1kPgphbmFseXNpc3wgfEV4cGxvcmF0b3J5IGRhdGEgYW5hbHlzaXMgaW4gUiBOb3RlYm9va3MgYW5kIFIgUHJlc2VudGF0aW9ucwphbmFseXNpcy9kYXRhfCB8V2hlbiBhcHByb3ByaWF0ZSwgYW5hbHlzaXMgZGF0YSBsaXZlcyBoZXJlCmFuYWx5c2lzL2Fzc2V0c3wgfEV4dGVybmFsIGFzc2V0cyAoaW1hZ2VzLCBvdGhlciBmaWxlcykgaW5jbHVkZWQgaW4gUiBOb3RlYm9va3MKYW5hbHlzaXMvcmVuZGVyZWR8IHxNYW51YWxseSByZW5kZXJlZCBodG1sIHZlcnNpb25zIG9mIGBhbmFseXNpcy9gIGZpbGVzIHRvIGJlIGluY2x1ZGVkIGluIGBkb2NzL2AsIGllIFsuUnByZXMgZmlsZXNdKGh0dHBzOi8vc3RhY2tvdmVyZmxvdy5jb20vcXVlc3Rpb25zLzI3OTMwMTI3L3JlbmRlci1yLXByZXNlbnRhdGlvbi1mcm9tLXRoZS1jb21tYW5kLWxpbmUpLCBub3Qgc3RvcmVkIGluIGdpdAp+fmRlbW9zfn58YHhgfEkgZG9uJ3QgdXNlIGRlbW9zLCBhcyByZWNvbW1lbmRlZCBieSBbUiBQYWNrYWdlc10oaHR0cHM6Ly9yLXBrZ3Mub3JnL21pc2MuaHRtbCkKZG9jc3wgfFVzZWQgYnkgW2Bwa2dkb3duOjpidWlsZF9zaXRlKClgXShodHRwczovL3BrZ2Rvd24uci1saWIub3JnL3JlZmVyZW5jZS9idWlsZF9zaXRlLmh0bWwpIGFuZCBSIE5vdGVib29rcyByZW5kZXJlZCBhcyBgaHRtbF9kb2N1bWVudGAgdXNpbmcgW2BybWFya2Rvd246OnJlbmRlcl9zaXRlKClgXShodHRwczovL3JkcnIuaW8vY3Jhbi9ybWFya2Rvd24vbWFuL3JlbmRlcl9zaXRlLmh0bWwpIHZpYSBbYGJ1aWxkX2FuYWx5c2lzX3NpdGUoKWBdKGh0dHBzOi8vamFiZW5uaW5naG9mZi5naXRodWIuaW8vcnRyYWluaW5nL3JlZmVyZW5jZS9idWlsZF9hbmFseXNpc19zaXRlLmh0bWwpICood29yay1pbi1wcm9ncmVzcykqCipleGVjKnxgeGB8SW4gdGhlb3J5IHRoaXMgaXMgd2hlcmUgY29tbWFuZCBsaW5lIGV4ZWN1dGFibGUgc2NyaXBzIHJlc2lkZQppbnN0L3RlbXBsYXRlcy9ybWFya2Rvd258YHhgfCpQbGFubmVkIGxvY2F0aW9uIGZvciBbUiBNYXJrZG93biBUZW1wbGF0ZXNdKGh0dHBzOi8vcnN0dWRpby5naXRodWIuaW8vcnN0dWRpby1leHRlbnNpb25zL3JtYXJrZG93bl90ZW1wbGF0ZXMuaHRtbCkqCm1hbnxgeGB8R2VuZXJhdGVkIHdpdGggW3JveHlnZW4yXShodHRwczovL3JveHlnZW4yLnItbGliLm9yZykKcGFja2FnZS5ScHJvanwgfEkgdXNlIHRoZSBzYW1lIG5hbWUgZm9yIHRoZSBwYWNrYWdlLCAuUnByb2osIGRpcmVjdG9yeSwgYW5kIEdpdEh1YiByZXBvCnBrZ2Rvd258IHxJIHN0b3JlIGFsbCBbcGtnZG93bl0oaHR0cHM6Ly9wa2dkb3duLnItbGliLm9yZykgZmlsZXMgaGVyZQoqcG8qfGB4YHxVc2VkIGZvciBbSW50ZXJuYXRpb25hbGl6YXRpb25dKGh0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbS9kb2MvbWFudWFscy9yLWRldmVsL1ItZXh0cy5odG1sI0ludGVybmF0aW9uYWxpemF0aW9uKQpyZW52fCB8VXNlZCBieSBbcmVudl0oaHR0cHM6Ly9yc3R1ZGlvLmdpdGh1Yi5pby9yZW52LykKcmVudi5sb2NrfCB8VGhlIHJlbnYgW2xvY2tmaWxlXShodHRwczovL3JzdHVkaW8uZ2l0aHViLmlvL3JlbnYvcmVmZXJlbmNlL2xvY2tmaWxlcy5odG1sKQp0ZXN0c3xgeGB8VGVzdHMgdXNpbmcgW3Rlc3R0aGF0XShodHRwczovL3Rlc3R0aGF0LnItbGliLm9yZykKdG9vbHN8YHhgfEkgdXNlIGB0b29scy9gIGZvciBzaGVsbCBzY3JpcHRzIHRoYXQgc3VwcG9ydCBkZXZlbG9wbWVudCwgbGlrZSBgc2V0dXAtcmAKdmlnbmV0dGVzfGB4YHxNb3JlIHR5cGljYWwgcGFja2FnZSBhcnRpY2xlcywgdXNlZCBieSBbcGtnZG93bl0oaHR0cHM6Ly9wa2dkb3duLnItbGliLm9yZykKCiMjIFIgV29ya2Zsb3cKCkhlcmUgaXMgdGhlIHR5cGljYWwgd29ya2Zsb3cgSSdtIHNldHRsaW5nIGludG8gKG9yIGF0IGxlYXN0IHRyeWluZyB0by4uLkkgc3RpbGwgZG9uJ3QgaGF2ZSBUREQgZG93biBqdXN0IHlldCksIG9uY2UgYSBwcm9qZWN0IGlzIGNyZWF0ZWQuIFByb2plY3RzIGFyZSBlaXRoZXIgdmFuaWxsYSBwYWNrYWdlcyBhbmQgZG9uJ3QgY29udGFpbiBgYW5hbHlzaXMvYCwgbGlrZSBbcmRldl0oaHR0cHM6Ly9qYWJlbm5pbmdob2ZmLmdpdGh1Yi5pby9yZGV2LyksIG9yICJhbmFseXNpcyBwYWNrYWdlcyIgYW5kIGJ1bmRsZSBhbmFseXNpcyBub3RlYm9va3MgYXMgYSBwcm9qZWN0LCBsaWtlIFtydHJhaW5pbmddKGh0dHBzOi8vamFiZW5uaW5naG9mZi5naXRodWIuaW8vcnRyYWluaW5nLykuCgoxLiBDaGVjayBmb3IgdXBkYXRlZCBwYWNrYWdlcyB3aGVuIHN0YXJ0aW5nIHRvIHdvcmssIChJIGNyZWF0ZWQgW2BjaGVja19yZW52KClgXShodHRwczovL2phYmVubmluZ2hvZmYuZ2l0aHViLmlvL3JkZXYvcmVmZXJlbmNlL2NoZWNrX3JlbnYuaHRtbCkgZm9yIHRoaXMpIGFuZCBjaGVjayBmb3IgZXJyb3JzIHVzaW5nIGxvY2FsIENJIGNoZWNrcyAoW2BjaSgpYF0oaHR0cHM6Ly9qYWJlbm5pbmdob2ZmLmdpdGh1Yi5pby9yZGV2L3JlZmVyZW5jZS9jaS5odG1sKSkuCjEuIFdoZW4gY3JlYXRpbmcgYSBuZXcgZnVuY3Rpb24sIHdyaXRlIHRoZSBkb2N1bWVudGF0aW9uIGZpcnN0LCB1c2luZyBSb3h5Z2VuIC0gdGhpcyBoZWxwcyBlbmNvdXJhZ2UgdXAtZnJvbnQgZGVzaWduIGFuZCBjbGFyaWZpZXMgZ29hbHMvcmVxdWlyZW1lbnRzLgoxLiBXcml0ZSB0ZXN0cyBuZXh0IC0gYm90aCBoYXBweSBwYXRoIGFuZCBuZWdhdGl2ZSB0ZXN0IGNhc2VzIHdoZW5ldmVyIHBvc3NpYmxlLiAxMDAlIHRlc3QgY292ZXJhZ2UgaXMgb3ZlcmtpbGwsIGJ1dCBJIHRyeSB0byB3cml0ZSBhICdkYXRhIHZhbGlkaXR5IGNoZWNrZXInIHdoaWNoIGFsc28gaGVscHMgZGVmaW5lIHRoZSBleHBlY3RlZCBmb3JtYXQgb2YgdGhlIGRhdGEuCjEuIFtURERdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1Rlc3QtZHJpdmVuX2RldmVsb3BtZW50KTogcnVuIHRlc3RzLCB3cml0ZSBjb2RlIHRoYXQgZmFpbHMgdGVzdHMsIGZpeCBjb2RlLCByZXBlYXQuIChEb24ndCBmb3JnZXQgdG8gcmVmYWN0b3IpCjEuIEkgdXNlIHRydW5rLWJhc2VkIGRldmVsb3BtZW50LCB3aGljaCBJIGxlYXJuZWQgZnJvbSBbSG9tZWJyZXddKGh0dHBzOi8vYnJldy5zaCkuIEkgdHJ5IHRvIGtlZXAgY29tbWl0cyBzbWFsbCwgcmVsYXRlZCwgYW5kIGltcGxlbWVudGluZyBjaGFuZ2VzIHRoYXQgZG9uJ3QgYnJlYWsgY29kZSwgbWVyZ2UgYmFjayB0byBtYWluIGZyZXF1ZW50bHkgLSBiZWZvcmUgdGhlIGVuZCBvZiB0aGUgZGF5IC0gYW5kIHJlcXVpcmUgbGluZWFyIGNvbW1pdCBoaXN0b3J5IChpZSByZWJhc2UgYW5kIG1lcmdlKS4KMS4gQmVmb3JlIHB1c2hpbmcgY29tbWl0cywgSSBydW4gW2BzdHlsZV9hbGwoKWBdKGh0dHBzOi8vamFiZW5uaW5naG9mZi5naXRodWIuaW8vcmRldi9yZWZlcmVuY2Uvc3R5bGVfYWxsLmh0bWwpIGFuZCBbYGNpKClgXShodHRwczovL2phYmVubmluZ2hvZmYuZ2l0aHViLmlvL3JkZXYvcmVmZXJlbmNlL2NpLmh0bWwpIHRvIGZpeCBhbnkgcHJvYmxlbXMgbG9jYWxseSAoanVzdCAidW5kbyIgaW4gR2l0SHViIERlc2t0b3AsIGZpeCwgYW5kIHJlLWNvbW1pdCkuCgpPbmUgdGhpbmcgdGhhdCBhbm5veXMgbWUgaXMgdGhhdCBieSBkZWZhdWx0LCBkZXZ0b29scyBqdXN0IHdyaXRlcyBuZXcgbGluZXMgdG8gdGhlIGVuZCBvZiBgLlJidWlsZGlnbm9yZWAsIHNvIEkgd3JvdGUgW2Bzb3J0X3JidWlsZGlnbm9yZSgpYF0oaHR0cHM6Ly9qYWJlbm5pbmdob2ZmLmdpdGh1Yi5pby9yZGV2L3JlZmVyZW5jZS9zb3J0X3JidWlsZGlnbm9yZS5odG1sKS4KCiMgTmV4dCBTdGVwcwoKSSdsbCBrZWVwIGFkZGluZyB0byB0aGlzIGRvY3VtZW50IGFzIEkgZ28sIGFuZCB3aWxsIGxpa2VseSBldmVudHVhbGx5IG1pZ3JhdGUgdGhpcyBub3RlYm9vayB0byBhIGB2aWduZXR0ZWAgYW5kIHN3aXRjaCB0byBgcGtnZG93bmAuCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiBSIFNldHVwIExvZwpkYXRlOiAnMjAyMC0xMi0zMCcKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHllcwogICAgdG9jX2Zsb2F0OgogICAgICBjb2xsYXBzZWQ6IG5vCiAgICAgIHNtb290aF9zY3JvbGw6IG5vCi0tLQoKTXkgbm90ZXMgb24gbXkgcGVyc29uYWwgUiBzZXR1cC4gSSBzdGFydGVkIG15IFIgam91cm5leSBpbiBbU2VwdGVtYmVyIDIwMjBdKGh0dHBzOi8vd3d3LmluZm9ybWF0aW9uLXNhZmV0eS5vcmcvMjAyMC8wOS8xMS93b3JraW5nLXdpdGgtci8pIGFmdGVyIFtTSVJBQ29uIDIwMjBdKGh0dHBzOi8vc29jaWV0eWluZm9yaXNrLm9yZy9ldmVudC0zODk5Nzg2KS4KCmBgYHtyIHN0YXJ0dXAsIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQojIG5vIGxpYnJhcmllcwpgYGAKCiMgSW5zdGFsbGluZyBSCgpJIHByZWZlciBpbnN0YWxsaW5nIFIgYW5kIFJTdHVkaW8gdXNpbmcgW0hvbWVicmV3XShodHRwczovL2JyZXcuc2gpLiBJIHVzZSBbSG9tZWJyZXcgQnVuZGxlXShodHRwczovL2dpdGh1Yi5jb20vSG9tZWJyZXcvaG9tZWJyZXctYnVuZGxlKSB0byBpbnN0YWxsIGFsbCBzb2Z0d2FyZSBvbiBteSBzeXN0ZW1zLCBidXQgaW5zdGFsbGluZyBSIGFuZCBSU3R1ZGlvIGlzIHNpbXBsZSBlbm91Z2ggdXNpbmcgdGhlIGNvbW1hbmQgbGluZToKCjwhLS0gbm90ZTogbGludHIgdmVyc2lvbiA8PSAyLjAuMSB0aHJvd3MgYW4gZXJyb3Igd2hlbiB1c2luZyBsYW5ndWFnZSBpZGVudGlmaWVyczogPGh0dHBzOi8vZ2l0aHViLmNvbS9qaW1oZXN0ZXIvbGludHIvaXNzdWVzLzUwNT4gLS0+CgpgYGBzaApicmV3IGluc3RhbGwgLS1mb3JtdWxhIHIgJiYgYnJldyBpbnN0YWxsIC0tY2FzayByc3R1ZGlvCmBgYAoKIyMgUiBWYXJpYW50cwoKKipUTDtEUjoganVzdCB1c2UgaG9tZWJyZXcuKioKCkkgZG9uJ3QgcmVjb21tZW5kIGluc3RhbGxpbmcgdGhlIGBjYXNrYCB2YXJpYW50IG9mIHIgYmVjYXVzZSBpdCBjcmVhdGVzIHByb2JsZW1zIHdpdGggYGJyZXcgZG9jdG9yYDoKCmBgYHtzaCBicmV3IGluZm8gcn0KYnJldyBpbmZvIC0tY2FzayByCmBgYAoKSSB0cmllZCAiW2luc3RhbGxpbmcgYWxsIHRoZSB0aGluZ3NdKGh0dHBzOi8vbHVpc3B1ZXJ0by5uZXQvYmxvZy8yMDE4LzA1LzExL2luc3RhbGxpbmctci13aXRoLWhvbWVicmV3LXdpdGgtYWxsLXRoZS1jYXBhYmlsaXRpZXMvKSIgd2l0aCBbaG9tZWJyZXctci1zcmZdKGh0dHBzOi8vZ2l0aHViLmNvbS9zZXRocmZvcmUvaG9tZWJyZXctci1zcmYpIGJ1dCBkaWRuJ3QgbGlrZSBob3cgdGhlIHVuaW5zdGFsbCBkb2Vzbid0IGNsZWFuIHVwLCBhbmQgZnJhbmtseSwgSSBoYXZlbid0IGZvdW5kIGEgbmVlZCBmb3IgbW9yZSB0aGFuIHRoZSBjYXBhYmlsaXRpZXMgaW5jbHVkZWQgd2l0aCBob21lYnJldyBSOgoKYGBge3IgY2FwYWJpbGl0aWVzfQpvcHRpb25zKHdpZHRoID0gMTAwKQpjYXBhYmlsaXRpZXMoKQpgYGAKCkN1cnJlbnRseSwgdGhpcyBpcyBldmVyeXRoaW5nIGV4Y2VwdCB0aGUgWDExIGRlcGVuZGVuY2llcywgd2hpY2ggYXJlbid0IHJlYWxseSBuZWVkZWQ6CgpgYGByCj9jYXBhYmlsaXRpZXMKYGBgCgo+ICoqTm90ZSB0byBtYWNPUyB1c2VycyoqCj4KPiBDYXBhYmlsaXRpZXMgImpwZWciLCAicG5nIiBhbmQgInRpZmYiIHJlZmVyIHRvIHRoZSBYMTEtYmFzZWQgdmVyc2lvbnMgb2YgdGhlc2UgZGV2aWNlcy4gSWYgY2FwYWJpbGl0aWVzKCJhcXVhIikgaXMgdHJ1ZSwgdGhlbiB0aGVzZSBkZXZpY2VzIHdpdGggdHlwZSA9ICJxdWFydHoiIHdpbGwgYmUgYXZhaWxhYmxlLCBhbmQgb3V0LW9mLXRoZS1ib3ggd2lsbCBiZSB0aGUgZGVmYXVsdCB0eXBlLiBUaHVzIGZvciBleGFtcGxlIHRoZSB0aWZmIGRldmljZSB3aWxsIGJlIGF2YWlsYWJsZSBpZiBjYXBhYmlsaXRpZXMoImFxdWEiKSB8fCBjYXBhYmlsaXRpZXMoInRpZmYiKSBpZiB0aGUgZGVmYXVsdHMgYXJlIHVuY2hhbmdlZC4KCkFzIGFuIGFjdGl2ZSBjb250cmlidXRvciB0byBIb21lYnJldywgSSAqc3Ryb25nbHkqIHJlY29tbWVuZCB1c2luZyBpdCBmb3IgYW55L2FsbCBzb2Z0d2FyZTsgdGhlaXIgcXVhbGl0eSBjb250cm9sIGlzIGV4Y2VsbGVudC4KCiMgUiBXb3Jrc3BhY2UKCk9uY2UgUiBhbmQgUlN0dWRpbyBoYXZlIGJlZW4gaW5zdGFsbGVkLCB5b3UnbGwgbmVlZCBhIGRldmVsb3BtZW50IGVudmlyb25tZW50IGFuZCBzb21lIHBhY2thZ2VzLgoKIyMgRGV2ZWxvcG1lbnQgRW52aXJvbm1lbnQKCldlbGwsIG9idmlvdXNseSwgSSB1c2UgW1JTdHVkaW9dKGh0dHBzOi8vcnN0dWRpby5jb20vcHJvZHVjdHMvcnN0dWRpby9kb3dubG9hZC8pLiBUaGVyZSBhcmUgb3RoZXIgSURFcyBhdmFpbGFibGUsIGFuZCBpdCdzIGFsc28gcG9zc2libGUgdG8gZGV2ZWxvcCB1c2luZyB0aGUgY29tbWFuZCBsaW5lLCBidXQgUlN0dWRpbyBwcm92aWRlcyBhIHBsZWFzYW50LCBpbnRlZ3JhdGVkIGV4cGVyaWVuY2UgZm9yIFIgZGV2ZWxvcG1lbnQsIGFuZCBhY3RpdmVseSBzdXBwb3J0cyB0aGUgUiBjb21tdW5pdHkuIEkgZG9uJ3QgdHlwaWNhbGx5IHVzZSB0aGUgYnVpbHQtaW4gR2l0IGNsaWVudCwgaW5zdGVhZCB1c2luZyB0aGUgR2l0SHViIERlc2t0b3AgY2xpZW50IGFuZCBnaXQgY29tbWFuZC1saW5lIHRvb2wuCgpgYGBzaApicmV3IGluc3RhbGwgZ2l0aHViCmBgYAoKSSBhbHNvIG9jY2FzaW9uYWxseSB1c2UgYHZpbWAgKG1haW5seSBmb3Igc2hlbGwgc2NyaXB0cykgYW5kIFthdG9tXShodHRwczovL2F0b20uaW8pIChtYWlubHkgZm9yIHZhbmlsbGEgYC5tZGAgZmlsZXMgdXNpbmcgW21hcmtkb3duLXByZXZpZXctZW5oYW5jZWRdKGh0dHBzOi8vYXRvbS5pby9wYWNrYWdlcy9tYXJrZG93bi1wcmV2aWV3LWVuaGFuY2VkKSkuCgojIyBQYWNrYWdlcwoKTWFuYWdpbmcgcGFja2FnZXMgYW5kIGVudmlyb25tZW50cyBhcmUgYSBjaGFsbGVuZ2UgZm9yIG1vc3QgbW9kZXJuIGxhbmd1YWdlcy4gVGhhbmtmdWxseSBSIGRvZXNuJ3QgaGF2ZSB0aGUgc2FtZSBsZXZlbCBvZiBjaGFsbGVuZ2UgYXMgcHl0aG9uLCBvciBldmVuIHJ1YnksIG1hbmFnaW5nIHBhY2thZ2VzIGF2YWlsYWJsZSB3aXRoaW4gYSBwcm9qZWN0IGlzIGEgYmVzdCBwcmFjdGljZS4gSSB1c2UgW3JlbnZdKGh0dHBzOi8vZ2l0aHViLmNvbS9yc3R1ZGlvL3JlbnYpIGZvciB0aGlzIHB1cnBvc2UuIChJIG9yaWdpbmFsbHkgZGlzY292ZXJlZCBbcGFja3JhdF0oaHR0cHM6Ly9yc3R1ZGlvLmdpdGh1Yi5pby9wYWNrcmF0LykgYnV0IHF1aWNrbHkgZGlzY292ZXJlZCBSU3R1ZGlvIGlzIHJlcGxhY2luZyBpdCB3aXRoIHJlbnYpCgpIZXJlIGlzIG15IHBhY2thZ2UgbWFpbnRlbmFuY2UgYXBwcm9hY2g6CgojIyMgQmFzZSBSIFBhY2thZ2VzCgpXaXRoIG5vIHByb2plY3RzIG9wZW4sIEkgcGVyaW9kaWNhbGx5IGNoZWNrIGZvciB1cGRhdGVzIHRvIHRoZSBiYXNlIFIgcGFja2FnZXMgdXNpbmcgdGhlIFJTdHVkaW8gUGFja2FnZXMgIlVwZGF0ZSIgZnVuY3Rpb24uIFRoZXNlIGFyZSB0aGUgb25seSBwYWNrYWdlcyBJIGluc3RhbGwgdG8gdGhlIGJhc2UgZGlyZWN0b3J5IGAvdXNyL2xvY2FsL0NlbGxhci9yLzQuMC4zXzIvbGliL1IvbGlicmFyeWAuICpOb3RlOiB1cGdyYWRpbmcgb3IgcmVpbnN0YWxsaW5nIHIgdGhyb3VnaCBob21lYnJldyBtYXkgJ2Rvd25ncmFkZScgdGhlIGJhc2UgcGFja2FnZXMuKgoKIyMjIERldmVsb3BtZW50IFBhY2thZ2VzCgpUaGUgb25seSBvdGhlciB0b29scyBJIGluc3RhbGwgb3V0c2lkZSBvZiBwcm9qZWN0cyBhcmUgZm9yIHN1cHBvcnRpbmcgZGV2ZWxvcG1lbnQuIE9yaWdpbmFsbHkgdGhpcyB3YXMganVzdCByZW52LCBidXQgbm93IGl0IGluY2x1ZGVzIGEgbnVtYmVyIG9mIGRldmVsb3BtZW50IHRvb2xzIG5lZWRlZCB0byBjcmVhdGUgcHJvamVjdHMuIEkgdXNlIHRoZSBSIHNpdGUgbGlicmFyeSB1c2VkIGJ5IFtob21lYnJld10oaHR0cHM6Ly9naXRodWIuY29tL0hvbWVicmV3L2hvbWVicmV3LWNvcmUvYmxvYi9IRUFEL0Zvcm11bGEvci5yYiksIGN1cnJlbnRseSBgL3Vzci9sb2NhbC9saWIvUi80LjAvc2l0ZS1saWJyYXJ5YC4gSSd2ZSBkZXZlbG9wZWQgYSBzaGVsbCBzY3JpcHQgdG8gaW5zdGFsbCBkZXZlbG9wbWVudCBwYWNrYWdlcyB0aGF0IHlvdSBjYW4gZmluZCBpbiB0aGUgdG9vbHMgZGlyZWN0b3J5IG9mIFt0aGlzIHJlcG9zaXRvcnldKGh0dHBzOi8vZ2l0aHViLmNvbS9qYWJlbm5pbmdob2ZmL3J0cmFpbmluZykuCgpgYGBzaAojIS9iaW4vc2gKIyBpbnN0YWxsIGRldmVsb3BtZW50IHBhY2thZ2VzIHRvIHNpdGUgcmVwb3NpdG9yeQojIHRoYW5rcyB0byBodHRwczovL2Jsb2cuc2VsbG9ybS5jb20vMjAxNy8xMC8yMS9xdWljay1zY3JpcHQtdG8taW5zdGFsbC1hbi1yLXBhY2thZ2UtZnJvbS10aGUtY29tbWFuZC1saW5lLwojIGFuZCBodHRwczovL2dpdGh1Yi5jb20vSG9tZWJyZXcvaG9tZWJyZXctY29yZS9ibG9iL0hFQUQvRm9ybXVsYS9yLnJiCiMgZGVzaWduZWQgdG8gd29yayB3aXRoIGhvbWVicmV3OiBgYnJldyBpbnN0YWxsIC0tZm9ybXVsYSByICYmIGJyZXcgaW5zdGFsbCAtLWNhc2sgcnN0dWRpb2AKc2V0IC1leCAjIGhhbHQgc2NyaXB0IG9uIGVycm9yLCBlY2hvIG9uCgpQUkVGSVg9YGJyZXcgLS1wcmVmaXhgClJWRVJTSU9OPWAke1BSRUZJWH0vYmluL1JzY3JpcHQgLWUgJ2NhdChhcy5jaGFyYWN0ZXIoZ2V0UnZlcnNpb24oKVsxLDE6Ml0pKSdgClNJVEVMSUI9IiR7UFJFRklYfS9saWIvUi8ke1JWRVJTSU9OfS9zaXRlLWxpYnJhcnkiCkRFVlBLRz0nYygicmVudiIsICJzdHlsZXIiLCAibGludHIiLCAibWluaVVJIiwgImRldnRvb2xzIiwgImF2YWlsYWJsZSIpJwoKaWYgWyAhIC1kICIke1NJVEVMSUJ9IiBdCnRoZW4KCWVjaG8gImZhdGFsIGVycm9yOiAke1NJVEVMSUJ9IGRvZXMgbm90IGV4aXN0IC0gbm90IHVzaW5nIFxgYnJldyBpbnN0YWxsIC0tZm9ybXVsYSByXGA/IgoJZXhpdCAxCmZpCgpicmV3IGluc3RhbGwgbGliZ2l0MiAjIHJlcXVpcmVkIGJ5IGRldnRvb2xzCgplY2hvICJpbnN0YWxsLnBhY2thZ2VzKCR7REVWUEtHfSwgcmVwb3M9XCJodHRwczovL2NyYW4ucnN0dWRpby5jb21cIiwgbGliPVwiJHtTSVRFTElCfVwiKSIgfCBSIC0tbm8tc2F2ZQpgYGAKCiMjIyBQcm9qZWN0IFBhY2thZ2VzCgpBbnkgcGFja2FnZXMgKm5vdCogbmVlZGVkIHRvIGNyZWF0ZSBwcm9qZWN0cyBJIGluc3RhbGwgd2l0aGluIGEgcHJvamVjdCB1c2luZyByZW52IC0gaGVyZSBhcmUgc29tZSBnb29kIGludHJvczoKCi0gQSBbcHJlc2VudGF0aW9uIGF0IHJzdHVkaW86OmNvbmYgMjAyMF0oaHR0cHM6Ly9yc3R1ZGlvLmNvbS9yZXNvdXJjZXMvcnN0dWRpb2NvbmYtMjAyMC9yZW52LXByb2plY3QtZW52aXJvbm1lbnRzLWZvci1yLykKLSBUaGUgW1JTdHVkaW8gQmxvZyBwb3N0XShodHRwczovL2Jsb2cucnN0dWRpby5jb20vMjAxOS8xMS8wNi9yZW52LXByb2plY3QtZW52aXJvbm1lbnRzLWZvci1yLykKLSBBbiBbSW50cm9kdWN0aW9uIHRvIHJlbnZdKGh0dHBzOi8vcnN0dWRpby5naXRodWIuaW8vcmVudi9hcnRpY2xlcy9yZW52Lmh0bWwpCi0gW3JlbnZdKGh0dHBzOi8vZ2l0aHViLmNvbS9yc3R1ZGlvL3JlbnYpIG9uIEdpdEh1YgoKYGBgcgpyZW52Ojppbml0KCkgIyB0byBzZXQgdXAgcmVudiBpbiB0aGUgcHJvamVjdApyZW52OjppbnN0YWxsKCJydHJhaW5pbmciKSAjIHRvIGluc3RhbGwgYSBwYWNrYWdlCnJlbnY6OnN0YXR1cygpICMgY2hlY2tzIGlmIHJlbnYubG9jayBpcyBpbiBzeW5jCnJlbnY6OnNuYXBzaG90KCkgIyBzYXZlIGxpYnJhcmllcyBpbiByZW52LmxvY2sKcmVudjo6cmVzdG9yZSgpICMgcmVzdG9yZSBsaWJyYXJpZXMgZnJvbSByZW52LmxvY2sgLSB1c2Ugd2hlbiBmaXJzdCB1c2luZyBhbiBleGlzdGluZyBwcm9qZWN0CnJlbnY6OmNsZWFuKCkgIyByZW1vdmUgZXh0cmEgbGlicmFyaWVzCnJlbnY6OnVwZGF0ZSgpICMgY2hlY2sgZm9yIHVucGRhdGVkIHZlcnNpb25zIG9mIGluc3RhbGxlZCBsaWJyYXJpZXMKYGBgCgpJZiB5b3UncmUgaW5zdGFsbGluZyAoZGV2ZWxvcG1lbnQpIHZlcnNpb25zIG9mIHBhY2thZ2VzIGZyb20gR2l0SHViLCB5b3UnbGwgYmUgcHJvbXB0ZWQgdG8gc2V0IHVwIGEgcGVyc29uYWwgYWNjZXNzIHRva2VuIHVzaW5nIGBjcmVhdGVfZ2l0aHViX3Rva2VuKClgIGFuZCBhZGRpbmcgaXQgdG8geW91ciBgLlJlbnZpcm9uYCBhcyBgR0lUSFVCX1BBVD1gIHVzaW5nIGB1c2V0aGlzOjplZGl0X3JfZW52aXJvbigpYC4gSSBoYWQgdG8gaW5zdGFsbCB0aGUgZGV2ZWxvcG1lbnQgdmVyc2lvbnMgb2YgYm90aCBgc3R5bGVyYCBhbmQgYGxpbnRyYCBkdWUgdG8gYnVncyBub3QgeWV0IGZpeGVkIGluIHRoZSByZWxlYXNlZCAoQ1JBTikgdmVyc2lvbnMuIEkgZGlkIGFsc28gbG9vayBhdCB1c2luZyBbcGFrXShodHRwczovL3Bhay5yLWxpYi5vcmcpIGJ1dCBmb3VuZCBpdCB0b28gYnVnZ3kgdG8gdXNlLgoKKk5vdGU6KiBJIGNhbWUgYWNyb3NzIGFuIG9kZCBxdWlyayB3aGVyZSByZW52IHdpbGwgcHJvbXB0IHlvdSB0byB1cGdyYWRlIGJhc2UgUiBwcm9qZWN0cywgZXZlbiBpZiB0aGV5J3JlIG5vdCB1c2VkLiBJIHJlc29sdmVkIHRoZXNlIGJ5IGp1c3QgdXBncmFkaW5nIHRoZSBiYXNlIHBhY2thZ2VzIHdpdGggUlN0dWRpbyB3aXRoIG5vIHByb2plY3Qgb3Blbi4KCkkndmUgaW5jbHVkZWQgc29tZSBjb21tZW50cyBvbiB1c2VmdWwgcGFja2FnZXMgaW4gbXkgKlIgVHJhaW5pbmcgTG9nKiBub3RlYm9vay4KCiMgVXNpbmcgUgoKU28gLSB3aGF0IGhhdmUgSSBsZWFybmVkIGFib3V0IHVzaW5nIFI/IEkgd29uJ3QgY292ZXIgdGhlIGFjdHVhbCBEYXRhIFNjaWVuY2UgcGFydCBoZXJlLCBidXQgaGF2ZSBzb21lIHJlY29tbWVuZGVkIHJlYWRpbmcgaW4gbXkgKlIgVHJhaW5pbmcgTG9nKi4KCiMjIFVzZSBnaXQhCgpUaGlzIHdhc24ndCByZWFsbHkgc29tZXRoaW5nIEkgbGVhcm5lZCB3aXRoIFIsIGJ1dCB1c2Ugb2YgdmVyc2lvbiBjb250cm9sIGZvciBhbnkga2luZCBvZiBjb2RlL3NjcmlwdCBpcyBjcnVjaWFsLiBUaGVzZSBkYXlzLCBJIGtlZXAgYWxsIHNjcmlwdHMgYW5kIGNvbmZpZ3VyYXRpb24gZmlsZXMgaW4gc29tZSBmbGF2b3Igb2YgcHVibGljIG9yIHByaXZhdGUgdmVyc2lvbiBjb250cm9sLiBNb3N0bHkgdGhhdCBtZWFucyBHaXRIdWIsIGJ1dCBhbHNvIHByaXZhdGUgZ2l0IHNlcnZlcnMgKHZpYSBzc2gpIGFyZSBlYXN5IHRvIHNldCB1cCBmb3Igd29yayB0aGF0IHlvdSB3YW50IHRvIGtlZXAgb2ZmIG9mIEdpdEh1Yi4KCkkgZG9uJ3Qgd2FudCB0byBnZXQgdG9vIG11Y2ggaW50byBtYW5hZ2luZyBjb2RlIHZpYSB2ZXJzaW9uIGNvbnRyb2wsIGJ1dCBJIGZhdm9yIHRydW5rLWJhc2VkIGRldmVsb3BtZW50IHdpdGggc2hvcnQtbGl2ZWQgYnJhbmNoZXMsIHNtYWxsIGNvbW1pdHMgb2Ygd29ya2luZyBjb2RlLCBhbmQgcmViYXNlIGFuZCBtZXJnZSBmb3IgbGluZWFyIGNvbW1pdCBoaXN0b3J5LiBUaGVyZSdzIGEgbG90IG9mIGdvb2QgcmVzZWFyY2ggb24gdGhpcyB0b3BpYyBmcm9tIEdvb2dsZSdzIFtEZXYgT3BzIFJlc2VhcmNoIGFuZCBBc3Nlc3NtZW50XShodHRwczovL2Nsb3VkLmdvb2dsZS5jb20vZGV2b3BzKSB0ZWFtLgoKIyMgVXNpbmcgUlN0dWRpbyB3aXRoIEdpdEh1YgoKUlN0dWRpbyBoYXMgZ29vZCBpbnRlZ3JhdGlvbiB3aXRoIEdpdEh1Yi4gSSd2ZSBhZG9wdGVkIHRoZSBjb252ZW50aW9uIG9mICJvbmUgUlN0dWRpbyBQcm9qZWN0ICguUnByb2opIHBlciByZXBvc2l0b3J5IiBhbmQgc3RvcmluZyB0aGUgUnByb2ogZmlsZSBpbiB0aGUgcmVwb3NpdG9yeS4gVGhhdCBzZWVtcyB0byBiZSB0aGUgbm9ybS4KCiMjIFIgTm90ZWJvb2tzCgpSIE5vdGVib29rcyBhcmUgbXkgcHJlZmVycmVkIGZpbGUgZm9ybWF0IGZvciBkYXRhIGFuYWx5c2lzLCBhcyB0aGV5IGFsbG93IGFuIGVhc3kgbWl4aW5nIG9mIHRleHQgKHVzaW5nIHBhbmRvYyBtYXJrZG93bikgYW5kIFIgY29kZSBjaHVua3MuIFRoaXMgYWxsb3dzIG1lIHRvIGRvY3VtZW50IHdoYXQgSSdtIGRvaW5nIGFzIEkgZ28sIGJvdGggZm9yIHJlcHJvZHVjaWJpbGl0eSBhcyB3ZWxsIGFzIHJlY29yZGluZyBteSBvYnNlcnZhdGlvbnMsIHRob3VnaHRzIGFuZCBjb25jbHVzaW9ucy4gSXQgZXNwZWNpYWxseSBsZW5kcyBpdHNlbGYgdG8gaXRlcmF0aXZlIGRldmVsb3BtZW50OgoKMS4gV3JpdGUgY29kZQoxLiBSdW4gY29kZQoxLiBTZWUgcmVzdWx0cwoxLiBVcGRhdGUgY29kZQoKVGhpcyBtZXRob2Qgb2YgZGV2ZWxvcG1lbnQgaXMgbm90IGFsd2F5cyBhcHByb3ByaWF0ZSwgYnV0IGZpdHMgd2VsbCB3aXRoIGV4cGxvcmF0b3J5IGFuYWx5c2lzLiBPbmNlIEkgZ2V0IHRvIHdyaXRpbmcgZnVuY3Rpb25zLCBJJ20gc3RhcnRpbmcgdG8gYWRvcHQgdGhlIGZvcm1hbCBzdHJ1Y3R1cmUgb2YgW3BhY2thZ2VzXShodHRwczovL3ItcGtncy5vcmcvaW5kZXguaHRtbCksIFt0ZXN0dGhhdF0oaHR0cHM6Ly90ZXN0dGhhdC5yLWxpYi5vcmcpLCBhbmQgW3JveHlnZW4yXShodHRwczovL3JveHlnZW4yLnItbGliLm9yZykuCgpTcGVjaWZpY2FsbHksIEkgdXNlIGBodG1sX25vdGVib29rYCwgd2hpY2ggd2FzIHJlY29tbWVuZGVkIHRvIG1lLiBSU3R1ZGlvIGhhbmRsZXMgdGhpcyBkaWZmZXJlbnRseSB0aGFuIGBodG1sX2RvY3VtZW50YDoKCkJlaGF2aW9yfGBodG1sX25vdGVib29rYHxgaHRtbF9kb2N1bWVudGAKLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLQpRdWljayBWaWV3fFByZXZpZXcgQnV0dG9ufE5vIFByZXZpZXcgQnV0dG9uClNhdmluZyBGaWxlc3xBdXRvbWF0aWNhbGx5IGtuaXRzIGZpbGUgb24gc2F2ZXxNYW51YWxseSBrbml0IGZpbGUKUmVuZGVyaW5nIEZpbGVzfFJlbmRlcnMgUiBvdXRwdXQgYXMgaXQgZXhpc3RzIGluIHRoZSBJREUgb24gc2F2ZXxSZW5kZXJzIFIgb3V0cHV0IGJ5IHJ1bm5pbmcgYWxsIFIgY29kZQpEZWZhdWx0IE9wdGlvbnN8SW5jbHVkZXMgb3B0aW9ucyBmb3IgcmVhZGFiaWxpdHksIGhpZGluZyBhbmQgZG93bmxvYWRpbmcgY29kZSwgYW5kIHBhZ2VkIHRhYmxlc3xIaWdoZXItcXVhbGl0eSByZW5kZXJpbmcgb2YgUE5HIGdyYXBoaWNzCgpFc3NlbnRpYWxseSwgUiBOb3RlYm9va3MgYXJlIGdlbmVyYWxseSBmYXN0ZXIgYW5kIG1vcmUgY29udmVuaWVudCB3aGVuICpkb2luZyogYW5hbHlzaXMsIGFuZCBgaHRtbF9kb2N1bWVudGAgUiBNYXJrZG93biBmaWxlcyBvZmZlciBoaWdoZXItcXVhbGl0eSBvdXRwdXQuIFRoaXMgc2l0ZSB1c2VzIGEgY3VzdG9tIGZyYW1ld29yayB0byBjb252ZXJ0IGh0bWxfbm90ZWJvb2tzIHRvIGh0bWxfZG9jdW1lbnRzIGZvciBwdWJsaXNoaW5nIChzZWUgdGhlIG5leHQgc2VjdGlvbiBmb3IgZGV0YWlscykuIFRoZXkgYXJlIGFsc28gYSBjb252ZW5pZW50IHdheSB0byBzaGFyZSBhbmFseXNpcyB3aXRoIHBlZXJzIC0ganVzdCBlbWFpbCB0aGUgYC5uYi5odG1sYCBmaWxlLCB3aGljaCB3aWxsIGluY2x1ZGUgYWxsIG9mIHRoZSBvdXRwdXQsIGFzIHdlbGwgYXMgZW1iZWRkaW5nIHRoZSBgLlJtZGAgc291cmNlIGNvZGUgZm9yIGVhc3kgZWRpdGluZy4gVGhpcyBhbHNvIGFsbG93cyBwZW9wbGUgd2hvIGRvbid0IGhhdmUgUi9SU3R1ZGlvIHRvIHNlZSB0aGUgcmVzdWx0cyBvZiBhbiBhbmFseXNpcy4KClRoZXJlIGFyZSBzb21lIGRyYXdiYWNrcyB0byB1c2luZyBSIE5vdGVib29rczoKCi0gQmVjYXVzZSBSIE5vdGVib29rcyBhcmUgcmVuZGVyLW9uLXNhdmUsIHlvdSBjYW4gaW5hZHZlcnRlbnRseSBlbmQgdXAgd2l0aCBtaXNzaW5nIG9yIG91dGRhdGVkIFIgb3V0cHV0IGZyb20geW91ciBub3RlYm9vayB3aGVuIHNhdmluZywgaWYgeW91J3ZlIG1hZGUgdXBkYXRlcyBhbmQgaGF2ZW4ndCByZS1ydW4gdGhlIGVudGlyZSBkb2N1bWVudC4gTXkgaGFiaXQgaXMgdG8gZG8gdGhlIGZvbGxvd2luZyBhdCB0aGUgZW5kIG9mIGEgd3JpdGluZyBzZXNzaW9uLCBiZWZvcmUgY29tbWl0dGluZyB0byBnaXQsIHdoaWNoIGVuc3VyZXMgYSAiY2xlYW4iIG5vdGVib29rOgogIDEuIENsZWFyIHRoZSBHbG9iYWwgRW52aXJvbm1lbnQKICAxLiAiUmVzdGFydCBSIGFuZCBDbGVhciBPdXRwdXQiCiAgMS4gIlJ1biBBbGwiCiAgMS4gU2F2ZQotIFtEZWJ1ZyBicmVha3BvaW50cyBkb24ndCB3b3JrIGluIFIgTWFya2Rvd24gZG9jdW1lbnRzXShodHRwczovL3N1cHBvcnQucnN0dWRpby5jb20vaGMvZW4tdXMvYXJ0aWNsZXMvMjA1NjEyNjI3LURlYnVnZ2luZy13aXRoLVJTdHVkaW8jZGVidWdnaW5nLWluLXItbWFya2Rvd24tZG9jdW1lbnRzKS4gVG8gZml4IHRoaXMsIFtjb252ZXJ0IFIgTWFya2Rvd24gZG9jdW1lbnRzIHRvIFIgU2NyaXB0cyB1c2luZyBwdXJsXShodHRwczovL2Jvb2tkb3duLm9yZy95aWh1aS9ybWFya2Rvd24tY29va2Jvb2svcHVybC5odG1sKSBmb3IgZGVidWdnaW5nLgotIE5vdCByZWFsbHkgYSBkcmF3YmFjaywgYnV0Li4uYFJjcHBgIGFuZCBgcnByb2pyb290YCBhcmUgZXJyb25lb3VzbHkgbGlzdGVkIGluIFJTdHVkaW8gYXMgcmVxdWlyZWQgdG8gY3JlYXRlIFIgTWFya2Rvd24sIHdoaWNoIGNhbiBhbHNvIGNhdXNlIHByb2JsZW1zIHdpdGggYHJlbnZgLiBUaGlzIGlzIGEgW2J1ZyBpbiBSU3R1ZGlvXShodHRwczovL2dpdGh1Yi5jb20vcnN0dWRpby9yc3R1ZGlvL2lzc3Vlcy83OTM1KSwgd2hpY2ggd2lsbCBiZSBmaXhlZCBpbiB2ZXJzaW9uIDEuNC45NDQuCgojIyBQdWJsaXNoaW5nIFIgTm90ZWJvb2tzCgpTaW5jZSBSIE5vdGVib29rcyBhcmUgc2F2ZWQgYXMgaHRtbCBmaWxlcywgaXQncyBwb3NzaWJsZSB0byBwdWJsaXNoIHRoZW0gb24gR2l0SHViIHVzaW5nIEdpdEh1YiBwYWdlcy4gR2l0SHViIHB1Ymxpc2hlZCBhIFt0dXRvcmlhbF0oaHR0cHM6Ly9yZXNvdXJjZXMuZ2l0aHViLmNvbS93aGl0ZXBhcGVycy9naXRodWItYW5kLXJzdHVkaW8vKSBpbiAyMDE4IG9uIGdldHRpbmcgUlN0dWRpbyBpbnRlZ3JhdGVkIHdpdGggR2l0SHViLCBhbmQgSSBzdGFydGVkIHdvcmtpbmcgb24gdGhhdC4gUXVpY2tseSBJIGRpc2NvdmVyZWQgdGhhdCB3aGlsZSB0aGUgdHV0b3JpYWwgd2FzIGhlbHBmdWwsIGl0IHdhc24ndCBxdWl0ZSB0aGUgc2V0dXAgSSB3YW50ZWQ7IGl0IHB1Ymxpc2hlZCBSIE1hcmtkb3duIHRocm91Z2ggR2l0SHViIHBhZ2VzLCBidXQgd291bGRuJ3QgZGlyZWN0bHkgc3VwcG9ydCB0aGUgYXV0b21hdGljYWxseSBnZW5lcmF0ZWQgaHRtbCBvZiBSIE5vdGVib29rcy4gQWZ0ZXIgbW9yZSBzZWFyY2hpbmcsIEkgd2FzIGFibGUgdG8gZ2V0IE5vdGVib29rcyB3b3JraW5nIG9uIEdpdEh1YiwgYnV0IEkgdXNlZCB0aGUgbWV0aG9kIGRlc2NyaWJlZCBpbiBbcnN0dWRpby9ybWFya2Rvd24gIzEwMjBdKGh0dHBzOi8vZ2l0aHViLmNvbS9yc3R1ZGlvL3JtYXJrZG93bi9pc3N1ZXMvMTAyMCkgLSBjaGVja2luZyBpbiB0aGUgLm5iLmh0bWwgaW50byBnaXQsIGFuZCB1c2luZyBHaXRIdWIgUGFnZXMgc28gdGhhdCB5b3UgY2FuIHZpZXcgdGhlIHJlbmRlcmVkIEhUTUwgaW5zdGVhZCBvZiBqdXN0IHRoZSBIVE1MIGNvZGUuCgojIyMgUHVibGlzaGluZyB3aXRoIHJtYXJrZG93bgoKQWZ0ZXIgdXNpbmcgYFJFQURNRS5tZGAgYW5kIEdpdEh1YiBwYWdlcyB0byBwdWJsaXNoIG5vdGVib29rcywgSSBmb3VuZCBJIHdhbnRlZCBhbiBlYXNpZXIgd2F5IHRvIHB1Ymxpc2ggYW5kIG5hdmlnYXRlIGFjcm9zcyBjb2xsZWN0aW9ucyBvZiBub3RlYm9va3MuIFB1Ymxpc2hpbmcgUiBOb3RlYm9va3Mgb24gR2l0SHViIHBhZ2VzIHdvcmtzIGZpbmUsIGJ1dCBkb2Vzbid0IG9mZmVyIGFuIGVhc3kgbmF2aWdhdGlvbiBzdHJ1Y3R1cmUsIGxpa2UgW3BrZ2Rvd25dKGh0dHBzOi8vcGtnZG93bi5yLWxpYi5vcmcpLiBJIHRyaWVkIHVzaW5nIHBrZ2Rvd24gdG8gZGlzcGxheSBub3RlYm9va3MsIGJ1dCBwa2dkb3duIG9ubHkgc3VwcG9ydHMgYnVpbGRpbmcgYHZpZ25ldHRlc2AsIHdoaWNoIGhhdmUgYSBkaXN0aW5jdGx5IGRpZmZlcmVudCBsb29rIGFuZCBmZWVsIHRoYW4gUiBOb3RlYm9va3MuIFRoZSBbcm1hcmtkb3duIHNpdGUgZ2VuZXJhdG9yXShodHRwczovL2Jvb2tkb3duLm9yZy95aWh1aS9ybWFya2Rvd24vcm1hcmtkb3duLXNpdGUuaHRtbCksIFtyZW5kZXJfc2l0ZV0oaHR0cHM6Ly9yZHJyLmlvL2NyYW4vcm1hcmtkb3duL21hbi9yZW5kZXJfc2l0ZS5odG1sKSwgYWxsb3dzIG1vcmUgZmxleGlibGUgYnVpbGRpbmcgb2Ygd2Vic2l0ZXMgZnJvbSBSIE1hcmtkb3duIGZpbGVzIHdpdGggYSBzaW1wbGUgbmF2aWdhdGlvbiBiYXIgYXQgdGhlIHRvcCwgYnV0IGRvZXNuJ3Qgc3VwcG9ydCBgaHRtbF9ub3RlYm9va2AgZmlsZXMgT09CLgoKVG8gd29yayBhcm91bmQgdGhpcywgSSBjcmVhdGVkIGEgc2ltcGxlIGZyYW1ld29yayBmb3IgY29udmVydGluZyBgaHRtbF9ub3RlYm9va2AgZmlsZXMgdG8gYGh0bWxfZG9jdW1lbnRgIGFuZCBidWlsZGluZyBhIGBfc2l0ZS55bWxgIGZyb20gYSBsaXN0IG9mIG5vdGVib29rcyBzdG9yZWQgaW4gdGhlIG5vbi1zdGFuZGFyZCBgbm90ZWJvb2tzL2AgZGlyZWN0b3J5LCBpbml0aWFsbHkgdXNpbmcgYSBzaGVsbCBzY3JpcHQsIGBidWlsZF9zaXRlYCAoc3RvcmVkIGF0IHRoZSByb290IG9mIHRoaXMgW3JlcG9dKGh0dHBzOi8vZ2l0aHViLmNvbS9qYWJlbm5pbmdob2ZmL3J0cmFpbmluZykpLiBJdCBkb2VzIHRoZSBmb2xsb3dpbmc6CgoxLiBDcmVhdGVzIGEgd29ya2luZyBkaXJlY3RvcnksIGAuYnVpbGQtc2l0ZWAKMS4gQnVpbGRzIGEgYHJtYXJrZG93bjo6cmVuZGVyX3NpdGUoKWAgYF9zaXRlLnltbGAgZmlsZSB0aGF0IGluY2x1ZGVzIGEgbWVudSB3aXRoIGFsbCBub3RlYm9va3MgaW4gdGhlIGBub3RlYm9va3MvYCBkaXJlY3RvcnkKMS4gQ29waWVzIGFsbCBgLlJtZGAgZmlsZXMgdG8gYC5idWlsZC1zaXRlYCBjaGFuZ2luZyB0aGVpciB0eXBlIGZyb20gYGh0bWxfbm90ZWJvb2tgIHRvIGBodG1sX2RvY3VtZW50YAoxLiBJbmNsdWRlcyBzb21lIGNvbmZpZ3VyYXRpb24gdG8gbWFrZSBgaHRtbF9kb2N1bWVudHNgIHdvcmsgbW9yZSBsaWtlIGBodG1sX25vdGVib29rYAoxLiBDYWxscyBgcm1hcmtkb3duOjpyZW5kZXJfc2l0ZSgpYCB0byByZW5kZXIgdGhlIHNpdGUgaW4gdGhlIGBkb2NzL2AgZGlyZWN0b3J5CgpJIHR5cGljYWxseSByZWJ1aWxkIGEgc2l0ZSB3aXRoIHRoZSBmb2xsb3dpbmcgY29tbWFuZCwgcnVuIGZyb20gdGhlIHRvcC1sZXZlbCBkaXJlY3Rvcnkgb2YgdGhlIHByb2plY3Q6CgpgYGBzaApybSAtcmYgLmJ1aWxkLXNpdGUgJiYgc2ggYnVpbGQtc2l0ZSAmJiBvcGVuIGRvY3MvaW5kZXguaHRtbApgYGAKClRoaXMgYXBwcm9hY2ggbGV2ZXJhZ2VzIHRoZSBbZG9jcyBmdW5jdGlvbmFsaXR5XShodHRwczovL2hlbHAuZ2l0aHViLmNvbS9hcnRpY2xlcy9jb25maWd1cmluZy1hLXB1Ymxpc2hpbmctc291cmNlLWZvci1naXRodWItcGFnZXMvI3B1Ymxpc2hpbmcteW91ci1naXRodWItcGFnZXMtc2l0ZS1mcm9tLWEtZG9jcy1mb2xkZXItb24teW91ci1tYXN0ZXItYnJhbmNoKSBvZiBHaXRIdWIgcGFnZXMsIGxpa2UgcGtnZG93bi4KCiMjIyBVcGRhdGUgb24gUHVibGlzaGluZwoKYGJ1aWxkLXNpdGVgIGhhcyBiZWVuIHJlcGxhY2VkIHdpdGggYGJ1aWxkX2FuYWx5c2lzX3NpdGUoKWAhIEF0IGl0cyBjb3JlLCBpdCBpcyBmdW5jdGlvbmFsbHkgdGhlIHNhbWU6IGJ1aWxkcyBhIGBwa2dkb3duYCBzaXRlLCBhZGRpbmcgYW4gIkFuYWx5c2lzIiBtZW51IHdpdGggYWxsIG5vdGVib29rcyBpbiB0aGUgKHJlbmFtZWQpIGBhbmFseXNpcy9gIGRpcmVjdG9yeSwgdGhlbiBjb252ZXJ0cyBhbmQgYnVpbGRzIHRoZSBub3RlYm9va3MgdXNpbmcgYHJtYXJrZG93bmAsIGFuZCBtb3ZlcyB0aGVtIGludG8gdGhlIGBkb2NzL2AgZGlyZWN0b3J5LiBTaW5jZSBpdCBpcyBub3cgYW4gUiBTY3JpcHQsIGl0J3MgbW9yZSBwb3J0YWJsZSBhbmQgY2FuIGJlIG1vcmUgZWFzaWx5IGJ1bmRsZWQgd2l0aCBwYWNrYWdlcy4gSSB3aWxsIGJlIG1pZ3JhdGluZyBpdHMgZnVuY3Rpb25hbGl0eSB0byBbcmRldl0oaHR0cHM6Ly9qYWJlbm5pbmdob2ZmLmdpdGh1Yi5pby9yZGV2Lykgc2hvcnRseSwgc28gdGhhdCBpdCdzIHVzYWJsZSBhY3Jvc3MgbXVsdGlwbGUgYW5hbHlzaXMgcHJvamVjdHMuCgojIyBSIFBhY2thZ2UgTGF5b3V0CgpIZXJlIGlzIG15IHBhY2thZ2UgbGF5b3V0IC0gdGhlIHRhYmxlIHNob3dzIHRoZSBwYXRoLCB3aGV0aGVyIGl0J3MgcGFydCBvZiB0aGUgZm9ybWFsIFIgcGFja2FnZSBkZWZpbml0aW9uLCBhbmQgbXkgbm90ZXMgb24gaXRzIHVzZS4KClBhdGggfCBSIHwgTm90ZXMKLS0tLS18Oi06fC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQouUmJ1aWxkaWdub3JlfGB4YHxFeGNsdWRlIGZpbGVzIGZyb20gcGFja2FnZQouUnByb2ZpbGV8YHhgfFVzZWQgYnkgYHJlbnZgIGFuZCB0byBbYXR0YWNoIGRldmVsb3BtZW50IHRvb2xzXShodHRwczovL3ItcGtncy5vcmcvc2V0dXAuaHRtbD8jcGVyc29uYWwtc3RhcnR1cC1jb25maWd1cmF0aW9uKQouZ2l0aHVifCB8R2l0SHViIHRlbXBsYXRlcyBhbmQgd29ya2Zsb3dzCi5naXRpZ25vcmV8YHhgfEkgdXNlIFtSXShodHRwczovL2dpdGh1Yi5jb20vZ2l0aHViL2dpdGlnbm9yZS9ibG9iL21hc3Rlci9SLmdpdGlnbm9yZSkgYW5kIG1hY09TIGV4Y2x1c2lvbnMsIGFuZCAqKmFsd2F5cyoqIGV4Y2x1ZGUgZ2VuZXJhdGVkIGZpbGVzIG91dHNpZGUgb2YgYGRvY3MvYAoubGludHJ8IHxbbGludHJdKGh0dHBzOi8vZ2l0aHViLmNvbS9qaW1oZXN0ZXIvbGludHIpIGRlZmF1bHQgbGludGVycyB3aXRoIDEwMCBjb2x1bW5zOiBgbGludGVyczogd2l0aF9kZWZhdWx0cyhsaW5lX2xlbmd0aF9saW50ZXIoMTAwKSlgCkRFU0NSSVBUSU9OfGB4YHx1c2UgIlN1Z2dlc3RzIiBmb3IgZGV2ZWxvcG1lbnQgdG9vbHMsIHBlciBbcmVudl0oaHR0cHM6Ly9yc3R1ZGlvLmdpdGh1Yi5pby9yZW52L2FydGljbGVzL2ZhcS5odG1sI2hvdy1zaG91bGQtaS1oYW5kbGUtZGV2ZWxvcG1lbnQtZGVwZW5kZW5jaWVzLSkKTElDRU5TRXxgeGB8R2VuZXJhdGVkIHdpdGggW2B1c2VfbWl0X2xpY2Vuc2UoKWBdKGh0dHBzOi8vdXNldGhpcy5yLWxpYi5vcmcvcmVmZXJlbmNlL2xpY2Vuc2VzLmh0bWwpCkxJQ0VOU0UubWR8IHxTZWUgYWJvdmUsIHVzZWQgYnkgW3BrZ2Rvd25dKGh0dHBzOi8vcGtnZG93bi5yLWxpYi5vcmcpCk5BTUVTUEFDRXxgeGB8R2VuZXJhdGVkIHdpdGggW3JveHlnZW4yXShodHRwczovL3JveHlnZW4yLnItbGliLm9yZykKTkVXUy5tZHwgfFJlbGVhc2Ugbm90ZXMsIHVzZWQgYnkgW3BrZ2Rvd25dKGh0dHBzOi8vcGtnZG93bi5yLWxpYi5vcmcpClJFQURNRS5SbWR8YHhgfEdlbmVyYXRlZCB3aXRoIFtgdXNlX3JlYWRtZV9tZCgpYF0oaHR0cHM6Ly91c2V0aGlzLnItbGliLm9yZy9yZWZlcmVuY2UvdXNlX3JlYWRtZV9ybWQuaHRtbCkKUkVBRE1FLm1kfGB4YHxHZW5lcmF0ZWQgd2l0aCBbYGJ1aWxkX3JlYWRtZSgpYF0oaHR0cHM6Ly9kZXZ0b29scy5yLWxpYi5vcmcvcmVmZXJlbmNlL2J1aWxkX3JtZC5odG1sKQpSfGB4YHxBbGwgcHJvamVjdCBmdW5jdGlvbnMgZ28gaGVyZSwgd2l0aCBbcm94eWdlbjJdKGh0dHBzOi8vcm94eWdlbjIuci1saWIub3JnKSBjb21tZW50cwpUT0RPLm1kfCB8VG8tZG8gbGlzdCwgaW5zcGlyZWQgYnkgPGh0dHBzOi8vZ2l0aHViLmNvbS9yc3R1ZGlvL3JlbnYvYmxvYi9tYXN0ZXIvVE9ETy5tZD4KYW5hbHlzaXN8IHxFeHBsb3JhdG9yeSBkYXRhIGFuYWx5c2lzIGluIFIgTm90ZWJvb2tzIGFuZCBSIFByZXNlbnRhdGlvbnMKYW5hbHlzaXMvZGF0YXwgfFdoZW4gYXBwcm9wcmlhdGUsIGFuYWx5c2lzIGRhdGEgbGl2ZXMgaGVyZQphbmFseXNpcy9hc3NldHN8IHxFeHRlcm5hbCBhc3NldHMgKGltYWdlcywgb3RoZXIgZmlsZXMpIGluY2x1ZGVkIGluIFIgTm90ZWJvb2tzCmFuYWx5c2lzL3JlbmRlcmVkfCB8TWFudWFsbHkgcmVuZGVyZWQgaHRtbCB2ZXJzaW9ucyBvZiBgYW5hbHlzaXMvYCBmaWxlcyB0byBiZSBpbmNsdWRlZCBpbiBgZG9jcy9gLCBpZSBbLlJwcmVzIGZpbGVzXShodHRwczovL3N0YWNrb3ZlcmZsb3cuY29tL3F1ZXN0aW9ucy8yNzkzMDEyNy9yZW5kZXItci1wcmVzZW50YXRpb24tZnJvbS10aGUtY29tbWFuZC1saW5lKSwgbm90IHN0b3JlZCBpbiBnaXQKfn5kZW1vc35+fGB4YHxJIGRvbid0IHVzZSBkZW1vcywgYXMgcmVjb21tZW5kZWQgYnkgW1IgUGFja2FnZXNdKGh0dHBzOi8vci1wa2dzLm9yZy9taXNjLmh0bWwpCmRvY3N8IHxVc2VkIGJ5IFtgcGtnZG93bjo6YnVpbGRfc2l0ZSgpYF0oaHR0cHM6Ly9wa2dkb3duLnItbGliLm9yZy9yZWZlcmVuY2UvYnVpbGRfc2l0ZS5odG1sKSBhbmQgUiBOb3RlYm9va3MgcmVuZGVyZWQgYXMgYGh0bWxfZG9jdW1lbnRgIHVzaW5nIFtgcm1hcmtkb3duOjpyZW5kZXJfc2l0ZSgpYF0oaHR0cHM6Ly9yZHJyLmlvL2NyYW4vcm1hcmtkb3duL21hbi9yZW5kZXJfc2l0ZS5odG1sKSB2aWEgW2BidWlsZF9hbmFseXNpc19zaXRlKClgXShodHRwczovL2phYmVubmluZ2hvZmYuZ2l0aHViLmlvL3JkZXYvcmVmZXJlbmNlL2J1aWxkX2FuYWx5c2lzX3NpdGUuaHRtbCkKKmV4ZWMqfGB4YHxJbiB0aGVvcnkgdGhpcyBpcyB3aGVyZSBjb21tYW5kIGxpbmUgZXhlY3V0YWJsZSBzY3JpcHMgcmVzaWRlCmluc3QvdGVtcGxhdGVzL3JtYXJrZG93bnxgeGB8KlBsYW5uZWQgbG9jYXRpb24gZm9yIFtSIE1hcmtkb3duIFRlbXBsYXRlc10oaHR0cHM6Ly9yc3R1ZGlvLmdpdGh1Yi5pby9yc3R1ZGlvLWV4dGVuc2lvbnMvcm1hcmtkb3duX3RlbXBsYXRlcy5odG1sKSoKbWFufGB4YHxHZW5lcmF0ZWQgd2l0aCBbcm94eWdlbjJdKGh0dHBzOi8vcm94eWdlbjIuci1saWIub3JnKQpwYWNrYWdlLlJwcm9qfCB8SSB1c2UgdGhlIHNhbWUgbmFtZSBmb3IgdGhlIHBhY2thZ2UsIC5ScHJvaiwgZGlyZWN0b3J5LCBhbmQgR2l0SHViIHJlcG8KcGtnZG93bnwgfEkgc3RvcmUgYWxsIFtwa2dkb3duXShodHRwczovL3BrZ2Rvd24uci1saWIub3JnKSBmaWxlcyBoZXJlCipwbyp8YHhgfFVzZWQgZm9yIFtJbnRlcm5hdGlvbmFsaXphdGlvbl0oaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2RvYy9tYW51YWxzL3ItZGV2ZWwvUi1leHRzLmh0bWwjSW50ZXJuYXRpb25hbGl6YXRpb24pCnJlbnZ8IHxVc2VkIGJ5IFtyZW52XShodHRwczovL3JzdHVkaW8uZ2l0aHViLmlvL3JlbnYvKQpyZW52LmxvY2t8IHxUaGUgcmVudiBbbG9ja2ZpbGVdKGh0dHBzOi8vcnN0dWRpby5naXRodWIuaW8vcmVudi9yZWZlcmVuY2UvbG9ja2ZpbGVzLmh0bWwpCnRlc3RzfGB4YHxUZXN0cyB1c2luZyBbdGVzdHRoYXRdKGh0dHBzOi8vdGVzdHRoYXQuci1saWIub3JnKQp0b29sc3xgeGB8SSB1c2UgYHRvb2xzL2AgZm9yIHNoZWxsIHNjcmlwdHMgdGhhdCBzdXBwb3J0IGRldmVsb3BtZW50LCBsaWtlIGBzZXR1cC1yYAp2aWduZXR0ZXN8YHhgfE1vcmUgdHlwaWNhbCBwYWNrYWdlIGFydGljbGVzLCB1c2VkIGJ5IFtwa2dkb3duXShodHRwczovL3BrZ2Rvd24uci1saWIub3JnKQoKIyMgUiBXb3JrZmxvdwoKSGVyZSBpcyB0aGUgdHlwaWNhbCB3b3JrZmxvdyBJJ20gc2V0dGxpbmcgaW50byAob3IgYXQgbGVhc3QgdHJ5aW5nIHRvLi4uSSBzdGlsbCBkb24ndCBoYXZlIFRERCBkb3duIGp1c3QgeWV0KSwgb25jZSBhIHByb2plY3QgaXMgY3JlYXRlZC4gUHJvamVjdHMgYXJlIGVpdGhlciB2YW5pbGxhIHBhY2thZ2VzIGFuZCBkb24ndCBjb250YWluIGBhbmFseXNpcy9gLCBsaWtlIFtyZGV2XShodHRwczovL2phYmVubmluZ2hvZmYuZ2l0aHViLmlvL3JkZXYvKSwgb3IgImFuYWx5c2lzIHBhY2thZ2VzIiBhbmQgYnVuZGxlIGFuYWx5c2lzIG5vdGVib29rcyBhcyBhIHByb2plY3QsIGxpa2UgW3J0cmFpbmluZ10oaHR0cHM6Ly9qYWJlbm5pbmdob2ZmLmdpdGh1Yi5pby9ydHJhaW5pbmcvKS4KCjEuIENoZWNrIGZvciB1cGRhdGVkIHBhY2thZ2VzIHdoZW4gc3RhcnRpbmcgdG8gd29yaywgKEkgY3JlYXRlZCBbYGNoZWNrX3JlbnYoKWBdKGh0dHBzOi8vamFiZW5uaW5naG9mZi5naXRodWIuaW8vcmRldi9yZWZlcmVuY2UvY2hlY2tfcmVudi5odG1sKSBmb3IgdGhpcykgYW5kIGNoZWNrIGZvciBlcnJvcnMgdXNpbmcgbG9jYWwgQ0kgY2hlY2tzIChbYGNpKClgXShodHRwczovL2phYmVubmluZ2hvZmYuZ2l0aHViLmlvL3JkZXYvcmVmZXJlbmNlL2NpLmh0bWwpKS4KMS4gV2hlbiBjcmVhdGluZyBhIG5ldyBmdW5jdGlvbiwgd3JpdGUgdGhlIGRvY3VtZW50YXRpb24gZmlyc3QsIHVzaW5nIFJveHlnZW4gLSB0aGlzIGhlbHBzIGVuY291cmFnZSB1cC1mcm9udCBkZXNpZ24gYW5kIGNsYXJpZmllcyBnb2Fscy9yZXF1aXJlbWVudHMuCjEuIFdyaXRlIHRlc3RzIG5leHQgLSBib3RoIGhhcHB5IHBhdGggYW5kIG5lZ2F0aXZlIHRlc3QgY2FzZXMgd2hlbmV2ZXIgcG9zc2libGUuIDEwMCUgdGVzdCBjb3ZlcmFnZSBpcyBvdmVya2lsbCwgYnV0IEkgdHJ5IHRvIHdyaXRlIGEgJ2RhdGEgdmFsaWRpdHkgY2hlY2tlcicgd2hpY2ggYWxzbyBoZWxwcyBkZWZpbmUgdGhlIGV4cGVjdGVkIGZvcm1hdCBvZiB0aGUgZGF0YS4KMS4gW1RERF0oaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvVGVzdC1kcml2ZW5fZGV2ZWxvcG1lbnQpOiBydW4gdGVzdHMsIHdyaXRlIGNvZGUgdGhhdCBmYWlscyB0ZXN0cywgZml4IGNvZGUsIHJlcGVhdC4gKERvbid0IGZvcmdldCB0byByZWZhY3RvcikKMS4gSSB1c2UgdHJ1bmstYmFzZWQgZGV2ZWxvcG1lbnQsIHdoaWNoIEkgbGVhcm5lZCBmcm9tIFtIb21lYnJld10oaHR0cHM6Ly9icmV3LnNoKS4gSSB0cnkgdG8ga2VlcCBjb21taXRzIHNtYWxsLCByZWxhdGVkLCBhbmQgaW1wbGVtZW50aW5nIGNoYW5nZXMgdGhhdCBkb24ndCBicmVhayBjb2RlLCBtZXJnZSBiYWNrIHRvIG1haW4gZnJlcXVlbnRseSAtIGJlZm9yZSB0aGUgZW5kIG9mIHRoZSBkYXkgLSBhbmQgcmVxdWlyZSBsaW5lYXIgY29tbWl0IGhpc3RvcnkgKGllIHJlYmFzZSBhbmQgbWVyZ2UpLgoxLiBCZWZvcmUgcHVzaGluZyBjb21taXRzLCBJIHJ1biBbYHN0eWxlX2FsbCgpYF0oaHR0cHM6Ly9qYWJlbm5pbmdob2ZmLmdpdGh1Yi5pby9yZGV2L3JlZmVyZW5jZS9zdHlsZV9hbGwuaHRtbCkgYW5kIFtgY2koKWBdKGh0dHBzOi8vamFiZW5uaW5naG9mZi5naXRodWIuaW8vcmRldi9yZWZlcmVuY2UvY2kuaHRtbCkgdG8gZml4IGFueSBwcm9ibGVtcyBsb2NhbGx5IChqdXN0ICJ1bmRvIiBpbiBHaXRIdWIgRGVza3RvcCwgZml4LCBhbmQgcmUtY29tbWl0KS4KCk9uZSB0aGluZyB0aGF0IGFubm95cyBtZSBpcyB0aGF0IGJ5IGRlZmF1bHQsIGRldnRvb2xzIGp1c3Qgd3JpdGVzIG5ldyBsaW5lcyB0byB0aGUgZW5kIG9mIGAuUmJ1aWxkaWdub3JlYCwgc28gSSB3cm90ZSBbYHNvcnRfcmJ1aWxkaWdub3JlKClgXShodHRwczovL2phYmVubmluZ2hvZmYuZ2l0aHViLmlvL3JkZXYvcmVmZXJlbmNlL3NvcnRfcmJ1aWxkaWdub3JlLmh0bWwpLgoKIyBOZXh0IFN0ZXBzCgpJJ2xsIGtlZXAgYWRkaW5nIHRvIHRoaXMgZG9jdW1lbnQgYXMgSSBnbywgYW5kIHdpbGwgbGlrZWx5IGV2ZW50dWFsbHkgbWlncmF0ZSB0aGlzIG5vdGVib29rIHRvIGEgYHZpZ25ldHRlYCBhbmQgc3dpdGNoIHRvIGBwa2dkb3duYC4K</div>
 
 
 </div>
