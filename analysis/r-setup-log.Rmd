@@ -230,7 +230,7 @@ analysis/data| |When appropriate, analysis data lives here
 analysis/assets| |External assets (images, other files) included in R Notebooks
 analysis/rendered| |Manually rendered html versions of `analysis/` files to be included in `docs/`, ie [.Rpres files](https://stackoverflow.com/questions/27930127/render-r-presentation-from-the-command-line), not stored in git
 ~~demos~~|`x`|I don't use demos, as recommended by [R Packages](https://r-pkgs.org/misc.html)
-docs| |Used by [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html) and R Notebooks rendered as `html_document` using [`rmarkdown::render_site()`](https://rdrr.io/cran/rmarkdown/man/render_site.html) via [`build_analysis_site()`](https://jabenninghoff.github.io/rtraining/reference/build_analysis_site.html) *(work-in-progress)*
+docs| |Used by [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html) and R Notebooks rendered as `html_document` using [`rmarkdown::render_site()`](https://rdrr.io/cran/rmarkdown/man/render_site.html) via [`build_analysis_site()`](https://jabenninghoff.github.io/rdev/reference/build_analysis_site.html)
 *exec*|`x`|In theory this is where command line executable scrips reside
 inst/templates/rmarkdown|`x`|*Planned location for [R Markdown Templates](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)*
 man|`x`|Generated with [roxygen2](https://roxygen2.r-lib.org)
