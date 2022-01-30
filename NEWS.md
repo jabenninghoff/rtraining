@@ -1,3 +1,7 @@
+# rtraining 0.7.10
+
+* maintenance release, fix broken links
+
 # rtraining 0.7.9
 
 * Important update from renv 0.15.0 to [0.15.1](https://rstudio.github.io/renv/news/index.html#renv-0151)
