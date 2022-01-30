@@ -29,6 +29,8 @@ knitr::opts_chunk$set(
 
 **`r packageDescription("rtraining", fields = "Title")`:** `r packageDescription("rtraining", fields = "Description")`
 
+Feel free to use and/or fork this project!
+
 ## Notebooks
 
 Notebooks in this package:

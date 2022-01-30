@@ -14,6 +14,8 @@
 **R Training:** My notes and experiences learning R and RStudio, bundled
 as an R package (work-in-progress).
 
+Feel free to use and/or fork this project!
+
 ## Notebooks
 
 Notebooks in this package:
