@@ -4,7 +4,7 @@
 
 # rtraining 0.7.8
 
-* Updated witn new analysis package updates
+* Updated with new analysis package updates
 
 # rtraining 0.7.7
 
