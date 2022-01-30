@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rtraining</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.10</span>
       </span>
     </div>
 
@@ -64,13 +64,17 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.10" id="rtraining-0710">rtraining 0.7.10<a class="anchor" aria-label="anchor" href="#rtraining-0710"></a></h2>
+<ul><li>maintenance release, fix broken links</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.9" id="rtraining-079">rtraining 0.7.9<a class="anchor" aria-label="anchor" href="#rtraining-079"></a></h2>
 <ul><li>Important update from renv 0.15.0 to <a href="https://rstudio.github.io/renv/news/index.html#renv-0151" class="external-link">0.15.1</a>
 </li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.8" id="rtraining-078">rtraining 0.7.8<a class="anchor" aria-label="anchor" href="#rtraining-078"></a></h2>
-<ul><li>Updated witn new analysis package updates</li>
+<ul><li>Updated with new analysis package updates</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.7" id="rtraining-077">rtraining 0.7.7<a class="anchor" aria-label="anchor" href="#rtraining-077"></a></h2>
@@ -78,7 +82,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.6" id="rtraining-076">rtraining 0.7.6<a class="anchor" aria-label="anchor" href="#rtraining-076"></a></h2>
-<ul><li>Add new <code>viridis_quo()</code> styling to rtraining log, maintenance updates</li>
+<ul><li>Add new <code>viridis_quo()</code> styling to rtraining log,
+maintenance updates</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.5" id="rtraining-075">rtraining 0.7.5<a class="anchor" aria-label="anchor" href="#rtraining-075"></a></h2>
@@ -90,7 +95,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.3" id="rtraining-073">rtraining 0.7.3<a class="anchor" aria-label="anchor" href="#rtraining-073"></a></h2>
-<ul><li>Add FaultTree.widget Test notebook for demonstrating <code>ftree2widget()</code> issue</li>
+<ul><li>Add FaultTree.widget Test notebook for demonstrating
+<code>ftree2widget()</code> issue</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.2" id="rtraining-072">rtraining 0.7.2<a class="anchor" aria-label="anchor" href="#rtraining-072"></a></h2>
@@ -110,12 +116,21 @@
 <h2 class="page-header" data-toc-text="0.6.0" id="rtraining-060">rtraining 0.6.0<a class="anchor" aria-label="anchor" href="#rtraining-060"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-6-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h3>
-<ul><li><p>major update: <code>build-site</code> has been replaced with an R function, <code>build_analysis_site()</code>, which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to <code>html_document</code>, <code>to_document()</code>.</p></li>
-<li><p><code>build_analysis_site()</code> will be migrated to <a href="https://jabenninghoff.github.io/rdev/" class="external-link">rdev</a> in a future release</p></li>
+<ul><li><p>major update: <code>build-site</code> has been replaced with an R
+function, <code>build_analysis_site()</code>, which retains all of the
+functionality of the old shell script. It is still considered
+Experimental, due to lack of test coverage and some features that are
+not implemented, but should work for projects with limited pkgdown
+customization. The update also includes a function to convert notebooks
+to <code>html_document</code>, <code>to_document()</code>.</p></li>
+<li><p><code>build_analysis_site()</code> will be migrated to <a href="https://jabenninghoff.github.io/rdev/" class="external-link">rdev</a> in a future
+release</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-content-0-6-0">New Content<a class="anchor" aria-label="anchor" href="#new-content-0-6-0"></a></h3>
-<ul><li><p>R Setup Log: added notes on the package layout I use for “analysis” packages (will be converted to an rdev vignette in a future release)</p></li>
+<ul><li><p>R Setup Log: added notes on the package layout I use for
+“analysis” packages (will be converted to an rdev vignette in a future
+release)</p></li>
 <li><p>R Setup Log: added notes on my R Workflow</p></li>
 <li><p>R Training Log: updated with notes on my current book, <a href="https://r-pkgs.org" class="external-link">R Packages</a></p></li>
 </ul></div>
@@ -126,19 +141,29 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.0" id="rtraining-050">rtraining 0.5.0<a class="anchor" aria-label="anchor" href="#rtraining-050"></a></h2>
-<ul><li>moved <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render_site.html" class="external-link">rmarkdown::render_site</a></code> header files to <code>pkgdown</code> - <code>analysis</code> now contains only R Notebooks!</li>
+<ul><li>moved <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render_site.html" class="external-link">rmarkdown::render_site</a></code> header files to
+<code>pkgdown</code> - <code>analysis</code> now contains only R
+Notebooks!</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.0" id="rtraining-040">rtraining 0.4.0<a class="anchor" aria-label="anchor" href="#rtraining-040"></a></h2>
 <p>pkgdown integration</p>
 <ul><li>
-<code>build-site</code> has been updated to (mostly) seamlessly build a site that integrates pkgdown as the base site and adds an “Analysis” menu that contains all of the R Notebooks (<code>html_notebook</code>) or Documents (<code>html_document</code>) in <code>analysis/</code> (moved from <code>notebooks/</code>)</li>
+<code>build-site</code> has been updated to (mostly) seamlessly
+build a site that integrates pkgdown as the base site and adds an
+“Analysis” menu that contains all of the R Notebooks
+(<code>html_notebook</code>) or Documents (<code>html_document</code>)
+in <code>analysis/</code> (moved from <code>notebooks/</code>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="rtraining-030">rtraining 0.3.0<a class="anchor" aria-label="anchor" href="#rtraining-030"></a></h2>
 <p>rdev migration</p>
-<ul><li><p><code>ci()</code>, <code>check_renv()</code>, <code>style_all()</code>, <code>lint_all()</code>, and <code>tools/setup-r</code> have been migrated to <a href="https://jabenninghoff.github.io/rdev/" class="external-link">rdev</a>, my “opinionated collection of R development tools”</p></li>
-<li><p>rtraining has been updated to import and load development tools through <code>rdev</code></p></li>
+<ul><li><p><code>ci()</code>, <code>check_renv()</code>,
+<code>style_all()</code>, <code>lint_all()</code>, and
+<code>tools/setup-r</code> have been migrated to <a href="https://jabenninghoff.github.io/rdev/" class="external-link">rdev</a>, my “opinionated
+collection of R development tools”</p></li>
+<li><p>rtraining has been updated to import and load development tools
+through <code>rdev</code></p></li>
 <li><p>updated README</p></li>
 </ul></div>
     <div class="section level2">
@@ -150,8 +175,11 @@
 <h2 class="page-header" data-toc-text="0.2.0" id="rtraining-020">rtraining 0.2.0<a class="anchor" aria-label="anchor" href="#rtraining-020"></a></h2>
 <div class="section level3">
 <h3 id="new-contentfeatures-0-2-0">New Content/Features<a class="anchor" aria-label="anchor" href="#new-contentfeatures-0-2-0"></a></h3>
-<ul><li><p><code>ci()</code>: run continuous integration tests locally: lint, R CMD check, and style (off by default).</p></li>
-<li><p><code>check_renv()</code>: convenience function that runs <code>renv</code> <code>status()</code>, <code>clean()</code>, and optionally <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code> (on by default).</p></li>
+<ul><li><p><code>ci()</code>: run continuous integration tests locally:
+lint, R CMD check, and style (off by default).</p></li>
+<li><p><code>check_renv()</code>: convenience function that runs
+<code>renv</code> <code>status()</code>, <code>clean()</code>, and
+optionally <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code> (on by default).</p></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -163,10 +191,13 @@
 <p>Initial GitHub release</p>
 <div class="section level3">
 <h3 id="new-contentfeatures-0-1-0">New Content/Features<a class="anchor" aria-label="anchor" href="#new-contentfeatures-0-1-0"></a></h3>
-<ul><li><p>R Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R setup</p></li>
+<ul><li><p>R Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R
+setup</p></li>
 <li><p>minor updates to R Training Log</p></li>
-<li><p><code>style_all()</code>: style all <code>.R</code> and <code>.Rmd</code> files in a project using <code>styler</code></p></li>
-<li><p><code>lint_all()</code>: lint all <code>.R</code> and <code>.Rmd</code> files in a project using <code>lintr</code></p></li>
+<li><p><code>style_all()</code>: style all <code>.R</code> and
+<code>.Rmd</code> files in a project using <code>styler</code></p></li>
+<li><p><code>lint_all()</code>: lint all <code>.R</code> and
+<code>.Rmd</code> files in a project using <code>lintr</code></p></li>
 <li><p>add GitHub Actions for continuous integration testing</p></li>
 </ul></div>
 </div>
@@ -176,9 +207,13 @@
 <ul><li>initial package setup, GitHub pages build</li>
 </ul><div class="section level3">
 <h3 id="new-contentfeatures-0-0-1">New Content/Features<a class="anchor" aria-label="anchor" href="#new-contentfeatures-0-0-1"></a></h3>
-<ul><li><p>R Training Log Notebook (r-training-log.Rmd): Notes on learning R and RStudio</p></li>
-<li><p><code>tools/setup-r</code>: shell script to install development packages to site repository on macOS + Homebrew</p></li>
-<li><p><code>build-site</code>: build a website from a collection of R Notebooks (<code>html_notebook</code>) in <code>notebooks/</code></p></li>
+<ul><li><p>R Training Log Notebook (r-training-log.Rmd): Notes on learning R
+and RStudio</p></li>
+<li><p><code>tools/setup-r</code>: shell script to install development
+packages to site repository on macOS + Homebrew</p></li>
+<li><p><code>build-site</code>: build a website from a collection of R
+Notebooks (<code>html_notebook</code>) in
+<code>notebooks/</code></p></li>
 </ul></div>
 </div>
   </div>
@@ -195,7 +230,8 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer></div>
