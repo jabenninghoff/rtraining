@@ -210,10 +210,10 @@
     },
     "brew": {
       "Package": "brew",
-      "Version": "1.0-6",
+      "Version": "1.0-7",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "92a5f887f9ae3035ac7afde22ba73ee9",
+      "Hash": "38875ea52350ff4b4c03849fc69736c8",
       "Requirements": []
     },
     "brio": {
@@ -627,10 +627,10 @@
     },
     "generics": {
       "Package": "generics",
-      "Version": "0.1.1",
+      "Version": "0.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3f6bcfb0ee5d671d9fd1893d2faa79cb",
+      "Hash": "177475892cf4a55865868527654a7741",
       "Requirements": []
     },
     "gert": {
@@ -873,16 +873,16 @@
     },
     "jbplot": {
       "Package": "jbplot",
-      "Version": "1.0.2",
+      "Version": "1.1.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "jbplot",
       "RemoteRef": "main",
-      "RemoteSha": "bcc8ef417edd03ffbc244c9a2f85512a45d3af35",
+      "RemoteSha": "3407d5e9847555d5d15112c8b0e49cbca2befb45",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "a939830b62e794497920acff6817a1e7",
+      "Hash": "f20749173c624b8f99f918f500d90c39",
       "Requirements": [
         "ggplot2"
       ]
@@ -1108,10 +1108,10 @@
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.6.5",
+      "Version": "1.7.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "464a3e015331eeb8efd1d239cad5128d",
+      "Hash": "51dfc97e1b7069e9f7e6f83f3589c22e",
       "Requirements": [
         "cli",
         "crayon",
@@ -1309,16 +1309,16 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "0.8.9",
+      "Version": "1.0.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "HEAD",
-      "RemoteSha": "fd261077d9c4f422260aaaeab5f6cc514f990ced",
+      "RemoteSha": "8678f34c424914ff05103e7606fd0d20cf187036",
       "RemoteHost": "api.github.com",
       "Remotes": "r-lib/lintr",
-      "Hash": "cf035f7a9f0dbfd1ee1f374e06159d4a",
+      "Hash": "980a9773b04ef265614f057519cb44f1",
       "Requirements": [
         "desc",
         "devtools",
@@ -1344,10 +1344,10 @@
     },
     "readr": {
       "Package": "readr",
-      "Version": "2.1.1",
+      "Version": "2.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e9df4b445fca203653f04ece2f97d51e",
+      "Hash": "9c59de1357dc209868b5feb5c9f0fe2f",
       "Requirements": [
         "R6",
         "cli",
@@ -1440,10 +1440,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.0.0",
+      "Version": "1.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ec923a35ba44bc86fbf95dacaccf65da",
+      "Hash": "3bf0219f19d9f5b3c682acbb3546a151",
       "Requirements": []
     },
     "rmarkdown": {
@@ -1734,10 +1734,10 @@
     },
     "tidyr": {
       "Package": "tidyr",
-      "Version": "1.1.4",
+      "Version": "1.2.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c8fbdbd9fcac223d6c6fe8e406f368e1",
+      "Hash": "d8b95b7fee945d7da6888cf7eb71a49c",
       "Requirements": [
         "cpp11",
         "dplyr",
