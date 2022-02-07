@@ -1,3 +1,7 @@
+# rtraining 0.7.12
+
+* maintenance release, minor updates to rtraining log
+
 # rtraining 0.7.11
 
 * maintenance release
