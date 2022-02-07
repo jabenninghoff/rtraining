@@ -178,7 +178,7 @@ Hadley has some good suggestions for R Notebooks in [30 R Markdown workflow](htt
 
 ## R Packages
 
-Notes from the book. I've started writing all code in the package structure described in the book and used by Hadley and the tidyverse. Doing so makes it easier to write tests, documentation, track dependencies, and provides convenient continous integration through `R CMD check`.
+Notes from the book. I've started writing all code in the package structure described in the book and used by Hadley and the tidyverse. Doing so makes it easier to write tests, documentation, track dependencies, and provides convenient continuous integration through `R CMD check`.
 
 ### System Setup
 
