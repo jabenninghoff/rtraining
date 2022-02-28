@@ -22,7 +22,8 @@ Suggests:
     modelr,
     jbplot,
     testthat (>= 3.0.0),
-    spelling
+    spelling,
+    dplyr
 Remotes:
     jabenninghoff/rdev
 Config/testthat/edition: 3
