@@ -883,16 +883,16 @@
     },
     "jbplot": {
       "Package": "jbplot",
-      "Version": "1.1.1",
+      "Version": "1.1.2",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "jbplot",
       "RemoteRef": "main",
-      "RemoteSha": "b122af2e9c83a54b91752e6656d9972633f139e1",
+      "RemoteSha": "0c33ffc7edfd3469adbf2b089cea57b8dfc60e44",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "38c6402423f694184206bd85593294f4",
+      "Hash": "e921c3271a4a6c979b7329dcaa9484bb",
       "Requirements": [
         "ggplot2"
       ]
