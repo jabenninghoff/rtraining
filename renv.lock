@@ -121,10 +121,10 @@
     },
     "RColorBrewer": {
       "Package": "RColorBrewer",
-      "Version": "1.1-2",
+      "Version": "1.1-3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e031418365a7f7a766181ab5a41a5716",
+      "Hash": "45f0398006e83a5b10b72a90663d8d8c",
       "Requirements": []
     },
     "Rcpp": {
@@ -883,16 +883,16 @@
     },
     "jbplot": {
       "Package": "jbplot",
-      "Version": "1.1.2",
+      "Version": "1.1.3",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "jbplot",
       "RemoteRef": "main",
-      "RemoteSha": "0c33ffc7edfd3469adbf2b089cea57b8dfc60e44",
+      "RemoteSha": "49c7fb6ae56eb3c1600063b31432b44c892a0acf",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "e921c3271a4a6c979b7329dcaa9484bb",
+      "Hash": "d0fe9689845fc64a0b970294a1571db2",
       "Requirements": [
         "ggplot2"
       ]
@@ -980,12 +980,12 @@
       "Version": "2.0.1.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "jimhester",
-      "RemoteRepo": "lintr",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "7dd6dff8a743b9fd1d7cce53a2c7eb48fdef2661",
       "RemoteHost": "api.github.com",
-      "Hash": "99e85576e150e468e935a2b5967cb4b0",
+      "RemoteUsername": "r-lib",
+      "RemoteRepo": "lintr",
+      "RemoteRef": "master",
+      "RemoteSha": "0fe23d23646bd3edbbefb5ad7e40568a2dd73148",
+      "Hash": "f8d47b798db2385c196346cc58e89412",
       "Requirements": [
         "codetools",
         "crayon",
@@ -1320,16 +1320,16 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "1.3.1",
+      "Version": "1.3.2",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "7d48df8c3d8a59b47d3e434e1a16193b09e6ddb3",
-      "RemoteHost": "api.github.com",
+      "RemoteRef": "main",
+      "RemoteSha": "fd468324ef122935e10636586b5f98e07f1e9a09",
       "Remotes": "r-lib/lintr",
-      "Hash": "36e094c60f214e7a32d345f8fbf59e9a",
+      "Hash": "d960c1dd133eccd9ec429fb7941a45c2",
       "Requirements": [
         "desc",
         "devtools",
