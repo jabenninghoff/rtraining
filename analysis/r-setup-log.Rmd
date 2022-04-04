@@ -19,7 +19,7 @@ My notes on my personal R setup. I started my R journey in [September 2020](http
 
 I prefer installing R and RStudio using [Homebrew](https://brew.sh). I use [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) to install all software on my systems, but installing R and RStudio is simple enough using the command line:
 
-<!-- note: lintr version <= 2.0.1 throws an error when using language identifiers: <https://github.com/jimhester/lintr/issues/505> -->
+<!-- note: lintr version <= 2.0.1 throws an error when using language identifiers: <https://github.com/r-lib/lintr/issues/505> -->
 
 ```sh
 brew install --formula r && brew install --cask rstudio
@@ -215,7 +215,7 @@ Path | R | Notes
 .Rprofile|`x`|Used by `renv` and to [attach development tools](https://r-pkgs.org/setup.html?#personal-startup-configuration)
 .github| |GitHub templates and workflows
 .gitignore|`x`|I use [R](https://github.com/github/gitignore/blob/master/R.gitignore) and macOS exclusions, and **always** exclude generated files outside of `docs/`
-.lintr| |[lintr](https://github.com/jimhester/lintr) default linters with 100 columns: `linters: with_defaults(line_length_linter(100))`
+.lintr| |[lintr](https://github.com/r-lib/lintr) default linters with 100 columns: `linters: with_defaults(line_length_linter(100))`
 DESCRIPTION|`x`|use "Suggests" for development tools, per [renv](https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-)
 LICENSE|`x`|Generated with [`use_mit_license()`](https://usethis.r-lib.org/reference/licenses.html)
 LICENSE.md| |See above, used by [pkgdown](https://pkgdown.r-lib.org)

@@ -30,7 +30,7 @@ Files in this project:
 - `.Rproj.user`:
 - `.git`:
 - `.gitignore`:
-- `.lintr`: [lintr](https://github.com/jimhester/lintr) configuration file
+- `.lintr`: [lintr](https://github.com/r-lib/lintr) configuration file
 - `DESCRIPTION`:
 - `LICENSE`:
 - `LICENSE.md`:
@@ -57,7 +57,7 @@ Resources for learning R.
 **Already using:** these are packages I'm already using in R. *Note:* much of this has been influenced by the work of [Hadley Wickham](http://hadley.nz/), who seems to be one of the (if not the most) significant contributors to the modern R and RStudio environment. Most of these have good integration with RStudio.
 
 - [renv](https://github.com/rstudio/renv) - for package version management by project
-- [styler](https://styler.r-lib.org/) and [lintr](https://github.com/jimhester/lintr) - for implementing the [tidyverse style guide](https://style.tidyverse.org/)
+- [styler](https://styler.r-lib.org/) and [lintr](https://github.com/r-lib/lintr) - for implementing the [tidyverse style guide](https://style.tidyverse.org/)
 - Various [tidyverse](https://www.tidyverse.org/) packages, including:
   - dplyr
   - ggplot2
