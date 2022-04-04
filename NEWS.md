@@ -1,3 +1,7 @@
+# rtraining 0.7.15
+
+* maintenance release, fix links
+
 # rtraining 0.7.14
 
 * maintenance release
