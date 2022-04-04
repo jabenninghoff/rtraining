@@ -179,7 +179,7 @@ There are some drawbacks to using R Notebooks:
 
 ## Publishing R Notebooks
 
-Since R Notebooks are saved as html files, it's possible to publish them on GitHub using GitHub pages. GitHub published a [tutorial](https://resources.github.com/whitepapers/github-and-rstudio/) in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn't quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn't directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in [rstudio/rmarkdown #1020](https://github.com/rstudio/rmarkdown/issues/1020) - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.
+Since R Notebooks are saved as html files, it's possible to publish them on GitHub using GitHub pages. GitHub published a [tutorial](https://resources.github.com/github-and-rstudio) in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn't quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn't directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in [rstudio/rmarkdown #1020](https://github.com/rstudio/rmarkdown/issues/1020) - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.
 
 ### Publishing with rmarkdown
 
