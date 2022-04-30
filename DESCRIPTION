@@ -16,8 +16,17 @@ RoxygenNote: 7.1.2
 X-rtraining-comment: use "Suggests" for development packages, per
     https://rstudio.github.io/renv/articles/faq.html#how-should-i-handle-development-dependencies-
 Suggests:
+    pkgdown,
+    rmarkdown,
+    FaultTree,
+    FaultTree.widget,
+    fs,
+    knitr,
+    purrr,
+    desc,
+    withr,
     devtools,
-    rdev (>= 0.8.9),
+    rdev,
     tidyverse,
     modelr,
     jbplot,
@@ -25,6 +34,7 @@ Suggests:
     spelling,
     dplyr
 Remotes:
+    jabenninghoff/jbplot,
     jabenninghoff/rdev
 Config/testthat/edition: 3
 Language: en-US
