@@ -649,10 +649,10 @@
     },
     "ggplot2": {
       "Package": "ggplot2",
-      "Version": "3.3.5",
+      "Version": "3.3.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d7566c471c7b17e095dd023b9ef155ad",
+      "Hash": "0fb26d0674c82705c6b701d1a61e02ea",
       "Requirements": [
         "MASS",
         "digest",
@@ -833,10 +833,10 @@
     },
     "httr": {
       "Package": "httr",
-      "Version": "1.4.2",
+      "Version": "1.4.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a525aba14184fec243f9eaec62fbed43",
+      "Hash": "88d1b310583777edf01ccd1216fb0b2b",
       "Requirements": [
         "R6",
         "curl",
@@ -885,16 +885,16 @@
     },
     "jbplot": {
       "Package": "jbplot",
-      "Version": "1.1.5",
+      "Version": "1.1.6",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "jbplot",
       "RemoteRef": "main",
-      "RemoteSha": "370ad9c1e0f23683d7340ced4c790ffb4513b96c",
+      "RemoteSha": "b9996ea07752549a519e8c75f325595cbc3cc311",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "644cb24bca097169f9640e21ca21c80f",
+      "Hash": "32d2eeb0cd30b7c14aa88dec3460a43d",
       "Requirements": [
         "ggplot2"
       ]
@@ -985,9 +985,9 @@
       "RemoteUsername": "r-lib",
       "RemoteRepo": "lintr",
       "RemoteRef": "master",
-      "RemoteSha": "36a18e00b9694da5b1c579891da1a19c3a7a250a",
+      "RemoteSha": "535e9e7d4bdb04b363ab704b51e0cd156a3f7e13",
       "RemoteHost": "api.github.com",
-      "Hash": "d9c3d2bc442b8d26e96a33e7b5d406d4",
+      "Hash": "c71afc05fa1b6bf28daabd2e32c2750f",
       "Requirements": [
         "codetools",
         "crayon",
@@ -1322,16 +1322,16 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "1.4.1",
+      "Version": "1.4.4",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "b923310fd773e968fe4db4570d651af062ce79c4",
+      "RemoteSha": "24edc8460ef106c806c693580fc504a8065ba551",
       "RemoteHost": "api.github.com",
       "Remotes": "r-lib/lintr",
-      "Hash": "4d97e8bc7a71a0d8a693b018288f0145",
+      "Hash": "7b2df0b223c654d809a59297fcc36913",
       "Requirements": [
         "desc",
         "devtools",
@@ -1481,13 +1481,14 @@
     },
     "roxygen2": {
       "Package": "roxygen2",
-      "Version": "7.1.2",
+      "Version": "7.2.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "eb9849556c4250305106e82edae35b72",
+      "Hash": "b390c1d54fcd977cda48588e6172daba",
       "Requirements": [
         "R6",
         "brew",
+        "cli",
         "commonmark",
         "cpp11",
         "desc",
@@ -1498,6 +1499,7 @@
         "rlang",
         "stringi",
         "stringr",
+        "withr",
         "xml2"
       ]
     },
@@ -1743,10 +1745,10 @@
     },
     "tibble": {
       "Package": "tibble",
-      "Version": "3.1.6",
+      "Version": "3.1.7",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8a8f02d1934dfd6431c671361510dd0b",
+      "Hash": "08415af406e3dd75049afef9552e7355",
       "Requirements": [
         "ellipsis",
         "fansi",
@@ -1971,10 +1973,10 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.30",
+      "Version": "0.31",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e83f48136b041845e50a6658feffb197",
+      "Hash": "a318c6f752b8dcfe9fb74d897418ab2b",
       "Requirements": []
     },
     "xml2": {
