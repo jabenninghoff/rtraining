@@ -1,3 +1,7 @@
+# rtraining 0.7.17
+
+* maintenance release
+
 # rtraining 0.7.16
 
 * maintenance release
