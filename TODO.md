@@ -24,7 +24,7 @@
   - wrapper for `rmarkdown::render_site()`
   - run the build in a temporary directory like `render_site()`
   - ~~re-use code from `render_site()` to create list of R Notebooks~~
-  - dynamically build the `_site.yml` file using [yaml](https://github.com/viking/r-yaml/) with configuration settings passed to the wrapper function
+  - dynamically build the `_site.yml` file using [yaml](https://github.com/vubiostat/r-yaml) with configuration settings passed to the wrapper function
   - dynamically build the `index.Rmd` using `DESCRIPTION`
   - support for additional links in the navbar
   - ~~order links by Title, not filename~~

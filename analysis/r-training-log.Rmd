@@ -54,7 +54,7 @@ Not R, but has advice on git best practices and a guide to fixing commit mistake
 
 Resources for learning R.
 
-**Already using:** these are packages I'm already using in R. *Note:* much of this has been influenced by the work of [Hadley Wickham](http://hadley.nz/), who seems to be one of the (if not the most) significant contributors to the modern R and RStudio environment. Most of these have good integration with RStudio.
+**Already using:** these are packages I'm already using in R. *Note:* much of this has been influenced by the work of [Hadley Wickham](https://hadley.nz/), who seems to be one of the (if not the most) significant contributors to the modern R and RStudio environment. Most of these have good integration with RStudio.
 
 - [renv](https://github.com/rstudio/renv) - for package version management by project
 - [styler](https://styler.r-lib.org/) and [lintr](https://github.com/r-lib/lintr) - for implementing the [tidyverse style guide](https://style.tidyverse.org/)
@@ -103,7 +103,7 @@ When in doubt, start with the tidyverse, or RStudio sponsored projects, or built
 **References:** other good reference sites.
 
 - [Yan Holtz](https://www.yan-holtz.com) has some good sites for data visualization:
-  - [the R Graph Gallery](https://www.r-graph-gallery.com) - charts made with R and ggplot2
+  - [the R Graph Gallery](https://r-graph-gallery.com/) - charts made with R and ggplot2
   - [from Data to Viz](https://www.data-to-viz.com) - recommendations on data visualization
   - He also has some tips on [R Markdown](https://holtzy.github.io/Pimp-my-rmd/)
 - [MIT Roxygen Quick Reference](https://stuff.mit.edu/afs/athena/software/r/current/RStudio/resources/roxygen_help.html)
@@ -170,7 +170,7 @@ navbar:
 
 Execute `rmarkdown::render_site()` to build `_site`, a directory of files ready to deploy as a standalone static website, or if you use an RStudio Project for your website directory. RStudio will add a Build tab to the IDE that you can use to build and preview your site.
 
-Read more at <http://rmarkdown.rstudio.com/rmarkdown_websites.html>."
+Read more at <https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html>."
 
 ### R Notebook Advice
 
