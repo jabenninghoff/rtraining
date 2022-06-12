@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://cran.rstudio.com"
+        "URL": "https://cloud.r-project.org"
       }
     ]
   },
@@ -1001,6 +1001,18 @@
         "rex",
         "xml2",
         "xmlparsedata"
+      ]
+    },
+    "lobstr": {
+      "Package": "lobstr",
+      "Version": "1.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3354c874f6008f7f1e418526df8ecd8a",
+      "Requirements": [
+        "Rcpp",
+        "crayon",
+        "rlang"
       ]
     },
     "lubridate": {
