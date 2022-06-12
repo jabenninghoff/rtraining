@@ -19,6 +19,9 @@ library(lobstr)
 
 This workbook includes answers and solutions to the quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html), organized by chapter. It includes excerpts from the book, copied here.
 
+**WARNING, SPOILERS!** If you haven't read Advanced R and intend to complete the quizzes and
+exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
+
 # 2 Names and values
 
 In R, it is important to understand the distinction between an object and its name. Doing so will help you:
@@ -29,7 +32,7 @@ In R, it is important to understand the distinction between an object and its na
 
 The goal of this chapter is to help you understand the distinction between names and values, and when R will copy an object.
 
-## Quiz
+## 2 Quiz
 
 1.  Given the following data frame, how do I create a new column called "3"
     that contains the sum of `1` and `2`? You may only use `$`, not `[[`.
@@ -242,5 +245,70 @@ ref(x)
 
 Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which
 points to the original int vector.
+
+---
+
+## 2.4.1 Exercises
+
+1.  In the following example, why are `object.size(y)` and `obj_size(y)`
+    so radically different? Consult the documentation of `object.size()`.
+
+```{r}
+y <- rep(list(runif(1e4)), 100)
+
+object.size(y)
+obj_size(y)
+```
+
+Answer: `object.size()` "does not detect if elements of a list are shared", which is the case here.
+That is, it does not detect the list has been replicated 100 times, and overestimates by a factor of
+100 compared to `object_size()`.
+
+---
+
+2.  Take the following list. Why is its size somewhat misleading?
+
+```{r}
+funs <- list(mean, sd, var)
+obj_size(funs)
+```
+
+Answer: it doesn't seem misleading to me, but the list includes the function objects, not the
+return values. Also, it calculates the size discarding the overlap between the functions. Per the
+code below, there is some:
+
+```{r}
+obj_size(mean) + obj_size(sd) + obj_size(var)
+```
+
+---
+
+3.  Predict the output of the following code:
+
+```{r}
+a <- runif(1e6)
+obj_size(a) # 8,000,048 B ~ 8MB
+# correct: from example above, runif(1e6) ~= 8MB
+
+b <- list(a, a)
+obj_size(b) # slightly larger than obj_size(a)
+# correct: two lists containing numeric vectors
+obj_size(a, b) # slightly larger than obj_size(b)
+# wrong: a is entirely contained within b
+
+b[[1]][[1]] <- 10
+obj_size(b) # copy of b, same size
+# wrong: double, since R copies an entire column, this adds the size of runif(1e6)
+obj_size(a, b) # still mostly overlaps, slightly larger than previous obj_size(a, b)
+# wrong: a is still entirely contained with b
+
+b[[2]][[1]] <- 10
+obj_size(b) # copy of b, same size
+# wrong: same size since it's still 2 numeric vectors of 1e6 length
+obj_size(a, b) # still mostly overlaps, slightly larger than previous obj_size(a, b)
+# wrong: there is no longer any overlap, so the size of obj_size(a, b) = obj_size(a) = obj_size(b)
+```
+
+Answer: answers inline.
 
 ---
