@@ -21,6 +21,7 @@ Suggests:
     knitr,
     modelr,
     pkgdown,
+    pkgload,
     purrr,
     rdev,
     rmarkdown,
