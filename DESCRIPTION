@@ -1,6 +1,6 @@
 Package: rtraining
 Title: R Training
-Version: 0.7.17
+Version: 0.7.17.9000
 Authors@R:
     person("John", "Benninghoff", , "jbenninghoff@mac.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6230-4742"))
