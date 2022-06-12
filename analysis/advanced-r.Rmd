@@ -58,11 +58,14 @@ x <- runif(1e6)
 y <- list(x, x, x)
 ```
 
-Answer: 3 times the size of x, 24 MB. Note: this is incorrect, as shown by obj_size:
+Answer: 3 times the size of x, 24 MB. Note: this is incorrect, as shown by `obj_size` and `obj_addr`:
 
 ```{r}
 obj_size(x)
 obj_size(y)
+obj_addr(y[[1]])
+obj_addr(y[[2]])
+obj_addr(y[[3]])
 ```
 
 ---
@@ -71,8 +74,94 @@ obj_size(y)
 
 ```{r}
 a <- c(1, 5, 3, 2)
+obj_addr(a)
+
 b <- a
+obj_addr(b)
+
 b[[1]] <- 10
+obj_addr(b)
 ```
 
 Answer: the third line (copy-on-write).
+
+## 2.2.2 Exercises
+
+1.  Explain the relationship between `a`, `b`, `c` and `d` in the following 
+    code:
+
+```{r}
+a <- 1:10
+b <- a
+c <- b
+d <- 1:10
+```
+
+Answer: a, b, and c all point to the same object (1:10). d points to an identical object at a
+different address.
+
+```{r}
+obj_addr(a)
+obj_addr(b)
+obj_addr(c)
+obj_addr(d)
+```
+
+---
+
+2.  The following code accesses the mean function in multiple ways. Do they all 
+    point to the same underlying function object? Verify this with 
+    `lobstr::obj_addr()`.
+    
+```{r, eval = FALSE}
+mean
+base::mean
+get("mean")
+evalq(mean)
+match.fun("mean")
+```
+
+Check the `obj_addr`:
+
+```{r}
+obj_addr(mean)
+obj_addr(base::mean)
+obj_addr(get("mean"))
+obj_addr(evalq(mean))
+obj_addr(match.fun("mean"))
+```
+
+Answer: they do.
+
+---
+
+3.  By default, base R data import functions, like `read.csv()`, will 
+    automatically convert non-syntactic names to syntactic ones. Why might 
+    this be problematic? What option allows you to suppress this behaviour?
+
+Answer: this could introduce problematic names, like `1`. Setting `check.names = FALSE` suppresses
+this behavior.
+
+---
+
+4.  What rules does `make.names()` use to convert non-syntactic names into
+    syntactic ones?
+
+Answer: from `?make.names`:
+
+> The character "X" is prepended if necessary. All invalid characters are translated to ".".
+> A missing value is translated to "NA". Names which match R keywords have a dot appended to them.
+> Duplicated values are altered by make.unique.
+  
+---
+
+5.  I slightly simplified the rules that govern syntactic names. Why is `.123e1`
+    not a syntactic name? Read `?make.names` for the full details.
+
+Answer: from `?make.names`:
+
+> A syntactically valid name consists of letters, numbers and the dot or underline characters and
+starts with a letter or the dot not followed by a number. Names such as ".2way" are not valid, and
+neither are the reserved words.
+
+---
