@@ -1,3 +1,9 @@
+# rtraining 0.8.0
+
+* Added Advanced R Workbook: Workbook for completing quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html), second edition.
+
+* maintenance updates, update links
+
 # rtraining 0.7.17
 
 * maintenance release
