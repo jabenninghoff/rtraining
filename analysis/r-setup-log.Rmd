@@ -59,7 +59,7 @@ Once R and RStudio have been installed, you'll need a development environment an
 
 ## Development Environment
 
-Well, obviously, I use [RStudio](https://rstudio.com/products/rstudio/download/). There are other IDEs available, and it's also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don't typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.
+Well, obviously, I use [RStudio](https://www.rstudio.com/products/rstudio/download/). There are other IDEs available, and it's also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don't typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.
 
 ```sh
 brew install github
@@ -109,8 +109,8 @@ echo "install.packages(${DEVPKG}, repos=\"https://cran.rstudio.com\", lib=\"${SI
 
 Any packages *not* needed to create projects I install within a project using renv - here are some good intros:
 
-- A [presentation at rstudio::conf 2020](https://rstudio.com/resources/rstudioconf-2020/renv-project-environments-for-r/)
-- The [RStudio Blog post](https://blog.rstudio.com/2019/11/06/renv-project-environments-for-r/)
+- A [presentation at rstudio::conf 2020](https://www.rstudio.com/resources/rstudioconf-2020/renv-project-environments-for-r/)
+- The [RStudio Blog post](https://www.rstudio.com/blog/renv-project-environments-for-r/)
 - An [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html)
 - [renv](https://github.com/rstudio/renv) on GitHub
 
@@ -178,7 +178,7 @@ There are some drawbacks to using R Notebooks:
 
 ## Publishing R Notebooks
 
-Since R Notebooks are saved as html files, it's possible to publish them on GitHub using GitHub pages. GitHub published a [tutorial](https://resources.github.com/github-and-rstudio) in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn't quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn't directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in [rstudio/rmarkdown #1020](https://github.com/rstudio/rmarkdown/issues/1020) - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.
+Since R Notebooks are saved as html files, it's possible to publish them on GitHub using GitHub pages. GitHub published a [tutorial](https://resources.github.com/github-and-rstudio/) in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn't quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn't directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in [rstudio/rmarkdown #1020](https://github.com/rstudio/rmarkdown/issues/1020) - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.
 
 ### Publishing with rmarkdown
 
