@@ -1,0 +1,78 @@
+---
+title: "Advanced R Workbook"
+date: '2022-06-12'
+output:
+  html_notebook:
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+---
+
+Workbook for completing quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html), second edition.
+
+```{r setup, message = FALSE, warning = FALSE}
+library(lobstr)
+```
+
+# Introduction
+
+This workbook includes answers and solutions to the quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html), organized by chapter. It includes excerpts from the book, copied here.
+
+# 2 Names and values
+
+In R, it is important to understand the distinction between an object and its name. Doing so will help you:
+
+* More accurately predict the performance and memory usage of your code. 
+* Write faster code by avoiding accidental copies, a major source of slow code. 
+* Better understand R's functional programming tools.
+
+The goal of this chapter is to help you understand the distinction between names and values, and when R will copy an object.
+
+## Quiz
+
+1.  Given the following data frame, how do I create a new column called "3"
+    that contains the sum of `1` and `2`? You may only use `$`, not `[[`.
+    What makes `1`, `2`, and `3` challenging as variable names?
+
+```{r}
+df <- data.frame(runif(3), runif(3))
+names(df) <- c(1, 2)
+```
+
+Answer: use the following code.
+
+```{r}
+df2 <- data.frame(df, df$`1` + df$`2`)
+names(df2) <- c(1, 2, 3)
+```
+
+Using numbers as names is problematic due to them being interpreted as numeric constants by default.
+
+---
+
+2.  In the following code, how much memory does `y` occupy?
+   
+```{r}
+x <- runif(1e6)
+y <- list(x, x, x)
+```
+
+Answer: 3 times the size of x, 24 MB. Note: this is incorrect, as shown by obj_size:
+
+```{r}
+obj_size(x)
+obj_size(y)
+```
+
+---
+
+3.  On which line does `a` get copied in the following example?
+
+```{r}
+a <- c(1, 5, 3, 2)
+b <- a
+b[[1]] <- 10
+```
+
+Answer: the third line (copy-on-write).
