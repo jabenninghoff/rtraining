@@ -165,3 +165,82 @@ starts with a letter or the dot not followed by a number. Names such as ".2way" 
 neither are the reserved words.
 
 ---
+
+## 2.3.6 Exercises
+
+1.  Why is `tracemem(1:10)` not useful?
+
+Answer: this is tracing an 'immutable' object which will always have the same address.
+
+---
+
+2.  Explain why `tracemem()` shows two copies when you run this code.
+    Hint: carefully look at the difference between this code and the code 
+    shown earlier in the section.
+     
+```{r}
+rm(list = ls())
+x <- c(1L, 2L, 3L)
+tracemem(x)
+
+x[[3]] <- 4
+untracemem(x)
+```
+
+Answer: unclear. The behavior in R 4.2.0 seems to have changed, since this code shows two copies:
+
+```{r}
+rm(list = ls())
+x <- c(1, 2, 3)
+tracemem(x)
+
+y <- x
+y[[3]] <- 4L
+y[[3]] <- 5L
+untracemem(x)
+```
+
+---
+
+3.  Sketch out the relationship between the following objects:
+
+```{r}
+a <- 1:10
+b <- list(a, a)
+c <- list(b, a, 1:10)
+
+print("first object")
+obj_addr(a)
+obj_addr(b[[1]])
+obj_addr(b[[2]])
+obj_addr(c[[2]])
+
+print("second object")
+obj_addr(b)
+obj_addr(c[[1]])
+
+print("third object")
+obj_addr(c)
+
+print("fourth object (?)")
+obj_addr(c[[3]])
+```
+
+Answer: four different objects with multiple names.
+
+---
+
+4.  What happens when you run this code? Draw a picture.
+
+```{r}
+x <- list(1:10)
+
+x[[2]] <- x
+
+ref(x)
+```
+
+Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which
+points to the original int vector.
+
+---
