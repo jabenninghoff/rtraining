@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2022-06-12" />
+
+<title>Advanced R Workbook</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">rtraining notebooks</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="FaultTree.html">FaultTree.widget Test</a>
+    </li>
+    <li>
+      <a href="advanced-r.html">Advanced R Workbook</a>
+    </li>
+    <li>
+      <a href="r-setup-log.html">R Setup Log</a>
+    </li>
+    <li>
+      <a href="r-training-log.html">R Training Log</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jabenninghoff/rtraining/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Advanced R Workbook</h1>
+<h4 class="date">2022-06-12</h4>
+
+</div>
+
+
+<p>Workbook for completing quizzes and exercises from <a
+href="https://adv-r.hadley.nz/index.html">Advanced R</a>, second
+edition.</p>
+<pre class="r"><code>library(lobstr)
+library(bench)</code></pre>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This workbook includes answers and solutions to the quizzes and
+exercises from <a href="https://adv-r.hadley.nz/index.html">Advanced
+R</a>, organized by chapter. It includes excerpts from the book, copied
+here.</p>
+<p><strong>WARNING, SPOILERS!</strong> If you haven’t read Advanced R
+and intend to complete the quizzes and exercises, don’t read this
+notebook. It contains my (potentially wrong) answers to both.</p>
+</div>
+<div id="names-and-values" class="section level1">
+<h1>2 Names and values</h1>
+<p>In R, it is important to understand the distinction between an object
+and its name. Doing so will help you:</p>
+<ul>
+<li>More accurately predict the performance and memory usage of your
+code.</li>
+<li>Write faster code by avoiding accidental copies, a major source of
+slow code.</li>
+<li>Better understand R’s functional programming tools.</li>
+</ul>
+<p>The goal of this chapter is to help you understand the distinction
+between names and values, and when R will copy an object.</p>
+<div id="quiz" class="section level2">
+<h2>2 Quiz</h2>
+<ol style="list-style-type: decimal">
+<li>Given the following data frame, how do I create a new column called
+“3” that contains the sum of <code>1</code> and <code>2</code>? You may
+only use <code>$</code>, not <code>[[</code>. What makes <code>1</code>,
+<code>2</code>, and <code>3</code> challenging as variable names?</li>
+</ol>
+<pre class="r"><code>df &lt;- data.frame(runif(3), runif(3))
+names(df) &lt;- c(1, 2)</code></pre>
+<p>Answer: use the following code.</p>
+<pre class="r"><code>df2 &lt;- data.frame(df, df$`1` + df$`2`)
+names(df2) &lt;- c(1, 2, 3)</code></pre>
+<p>Using numbers as names is problematic due to them being interpreted
+as numeric constants by default.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>In the following code, how much memory does <code>y</code>
+occupy?</li>
+</ol>
+<pre class="r"><code>x &lt;- runif(1e6)
+y &lt;- list(x, x, x)</code></pre>
+<p>Answer: 3 times the size of x, 24 MB. Note: this is incorrect, as
+shown by <code>obj_size</code> and <code>obj_addr</code>:</p>
+<pre class="r"><code>obj_size(x)</code></pre>
+<pre><code>## 8,000,048 B</code></pre>
+<pre class="r"><code>obj_size(y)</code></pre>
+<pre><code>## 8,000,128 B</code></pre>
+<pre class="r"><code>obj_addr(y[[1]])</code></pre>
+<pre><code>## [1] &quot;0x7f9531410000&quot;</code></pre>
+<pre class="r"><code>obj_addr(y[[2]])</code></pre>
+<pre><code>## [1] &quot;0x7f9531410000&quot;</code></pre>
+<pre class="r"><code>obj_addr(y[[3]])</code></pre>
+<pre><code>## [1] &quot;0x7f9531410000&quot;</code></pre>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>On which line does <code>a</code> get copied in the following
+example?</li>
+</ol>
+<pre class="r"><code>a &lt;- c(1, 5, 3, 2)
+obj_addr(a)</code></pre>
+<pre><code>## [1] &quot;0x7f94da478418&quot;</code></pre>
+<pre class="r"><code>b &lt;- a
+obj_addr(b)</code></pre>
+<pre><code>## [1] &quot;0x7f94da478418&quot;</code></pre>
+<pre class="r"><code>b[[1]] &lt;- 10
+obj_addr(b)</code></pre>
+<pre><code>## [1] &quot;0x7f94da484de8&quot;</code></pre>
+<p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
+</div>
+<div id="exercises" class="section level2">
+<h2>2.2.2 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Explain the relationship between <code>a</code>, <code>b</code>,
+<code>c</code> and <code>d</code> in the following code:</li>
+</ol>
+<pre class="r"><code>a &lt;- 1:10
+b &lt;- a
+c &lt;- b
+d &lt;- 1:10</code></pre>
+<p>Answer: a, b, and c all point to the same object (1:10). d points to
+an identical object at a different address.</p>
+<pre class="r"><code>obj_addr(a)</code></pre>
+<pre><code>## [1] &quot;0x7f94eb90b858&quot;</code></pre>
+<pre class="r"><code>obj_addr(b)</code></pre>
+<pre><code>## [1] &quot;0x7f94eb90b858&quot;</code></pre>
+<pre class="r"><code>obj_addr(c)</code></pre>
+<pre><code>## [1] &quot;0x7f94eb90b858&quot;</code></pre>
+<pre class="r"><code>obj_addr(d)</code></pre>
+<pre><code>## [1] &quot;0x7f94eb664e10&quot;</code></pre>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>The following code accesses the mean function in multiple ways. Do
+they all point to the same underlying function object? Verify this with
+<code>lobstr::obj_addr()</code>.</li>
+</ol>
+<pre class="r"><code>mean
+base::mean
+get(&quot;mean&quot;)
+evalq(mean)
+match.fun(&quot;mean&quot;)</code></pre>
+<p>Check the <code>obj_addr</code>:</p>
+<pre class="r"><code>obj_addr(mean)</code></pre>
+<pre><code>## [1] &quot;0x7f9509614610&quot;</code></pre>
+<pre class="r"><code>obj_addr(base::mean)</code></pre>
+<pre><code>## [1] &quot;0x7f9509614610&quot;</code></pre>
+<pre class="r"><code>obj_addr(get(&quot;mean&quot;))</code></pre>
+<pre><code>## [1] &quot;0x7f9509614610&quot;</code></pre>
+<pre class="r"><code>obj_addr(evalq(mean))</code></pre>
+<pre><code>## [1] &quot;0x7f9509614610&quot;</code></pre>
+<pre class="r"><code>obj_addr(match.fun(&quot;mean&quot;))</code></pre>
+<pre><code>## [1] &quot;0x7f9509614610&quot;</code></pre>
+<p>Answer: they do.</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>By default, base R data import functions, like
+<code>read.csv()</code>, will automatically convert non-syntactic names
+to syntactic ones. Why might this be problematic? What option allows you
+to suppress this behaviour?</li>
+</ol>
+<p>Answer: this could introduce problematic names, like <code>1</code>.
+Setting <code>check.names = FALSE</code> suppresses this behavior.</p>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>What rules does <code>make.names()</code> use to convert
+non-syntactic names into syntactic ones?</li>
+</ol>
+<p>Answer: from <code>?make.names</code>:</p>
+<blockquote>
+<p>The character “X” is prepended if necessary. All invalid characters
+are translated to “.”. A missing value is translated to “NA”. Names
+which match R keywords have a dot appended to them. Duplicated values
+are altered by make.unique.</p>
+</blockquote>
+<hr />
+<ol start="5" style="list-style-type: decimal">
+<li>I slightly simplified the rules that govern syntactic names. Why is
+<code>.123e1</code> not a syntactic name? Read <code>?make.names</code>
+for the full details.</li>
+</ol>
+<p>Answer: from <code>?make.names</code>:</p>
+<blockquote>
+<p>A syntactically valid name consists of letters, numbers and the dot
+or underline characters and starts with a letter or the dot not followed
+by a number. Names such as “.2way” are not valid, and neither are the
+reserved words.</p>
+</blockquote>
+<hr />
+</div>
+<div id="exercises-1" class="section level2">
+<h2>2.3.6 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Why is <code>tracemem(1:10)</code> not useful?</li>
+</ol>
+<p>Answer: this is tracing an ‘immutable’ object which will always have
+the same address.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Explain why <code>tracemem()</code> shows two copies when you run
+this code. Hint: carefully look at the difference between this code and
+the code shown earlier in the section.</li>
+</ol>
+<pre class="r"><code>rm(list = ls())
+x &lt;- c(1L, 2L, 3L)
+tracemem(x)</code></pre>
+<pre><code>## [1] &quot;&lt;0x7f94daf65b88&gt;&quot;</code></pre>
+<pre class="r"><code>x[[3]] &lt;- 4</code></pre>
+<pre><code>## tracemem[0x7f94daf65b88 -&gt; 0x7f94daf6cf88]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
+## tracemem[0x7f94daf6cf88 -&gt; 0x7f94da4a1c48]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre class="r"><code>untracemem(x)</code></pre>
+<p>Answer: unclear. The behavior in R 4.2.0 seems to have changed, since
+this code shows two copies:</p>
+<pre class="r"><code>rm(list = ls())
+x &lt;- c(1, 2, 3)
+tracemem(x)</code></pre>
+<pre><code>## [1] &quot;&lt;0x7f94dbb40f68&gt;&quot;</code></pre>
+<pre class="r"><code>y &lt;- x
+y[[3]] &lt;- 4L</code></pre>
+<pre><code>## tracemem[0x7f94dbb40f68 -&gt; 0x7f94dc03b428]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre class="r"><code>y[[3]] &lt;- 5L
+untracemem(x)</code></pre>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Sketch out the relationship between the following objects:</li>
+</ol>
+<pre class="r"><code>a &lt;- 1:10
+b &lt;- list(a, a)
+c &lt;- list(b, a, 1:10)
+
+print(&quot;first object&quot;)</code></pre>
+<pre><code>## [1] &quot;first object&quot;</code></pre>
+<pre class="r"><code>obj_addr(a)</code></pre>
+<pre><code>## [1] &quot;0x7f94ebf3e928&quot;</code></pre>
+<pre class="r"><code>obj_addr(b[[1]])</code></pre>
+<pre><code>## [1] &quot;0x7f94ebf3e928&quot;</code></pre>
+<pre class="r"><code>obj_addr(b[[2]])</code></pre>
+<pre><code>## [1] &quot;0x7f94ebf3e928&quot;</code></pre>
+<pre class="r"><code>obj_addr(c[[2]])</code></pre>
+<pre><code>## [1] &quot;0x7f94ebf3e928&quot;</code></pre>
+<pre class="r"><code>print(&quot;second object&quot;)</code></pre>
+<pre><code>## [1] &quot;second object&quot;</code></pre>
+<pre class="r"><code>obj_addr(b)</code></pre>
+<pre><code>## [1] &quot;0x7f94daf80ac8&quot;</code></pre>
+<pre class="r"><code>obj_addr(c[[1]])</code></pre>
+<pre><code>## [1] &quot;0x7f94daf80ac8&quot;</code></pre>
+<pre class="r"><code>print(&quot;third object&quot;)</code></pre>
+<pre><code>## [1] &quot;third object&quot;</code></pre>
+<pre class="r"><code>obj_addr(c)</code></pre>
+<pre><code>## [1] &quot;0x7f951997fc98&quot;</code></pre>
+<pre class="r"><code>print(&quot;fourth object (?)&quot;)</code></pre>
+<pre><code>## [1] &quot;fourth object (?)&quot;</code></pre>
+<pre class="r"><code>obj_addr(c[[3]])</code></pre>
+<pre><code>## [1] &quot;0x7f94d9840ab0&quot;</code></pre>
+<p>Answer: four different objects with multiple names.</p>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>What happens when you run this code? Draw a picture.</li>
+</ol>
+<pre class="r"><code>x &lt;- list(1:10)
+
+x[[2]] &lt;- x
+
+ref(x)</code></pre>
+<pre><code>## █ [1:0x7f94d9694488] &lt;list&gt; 
+## ├─[2:0x7f94eaef7f38] &lt;int&gt; 
+## └─█ [3:0x7f94da59e800] &lt;list&gt; 
+##   └─[2:0x7f94eaef7f38]</code></pre>
+<p>Initially x is a list of one element, an int vector 1:10. Then a
+second list element is added, which points to the original int
+vector.</p>
+<hr />
+</div>
+<div id="exercises-2" class="section level2">
+<h2>2.4.1 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>In the following example, why are <code>object.size(y)</code> and
+<code>obj_size(y)</code> so radically different? Consult the
+documentation of <code>object.size()</code>.</li>
+</ol>
+<pre class="r"><code>y &lt;- rep(list(runif(1e4)), 100)
+
+object.size(y)</code></pre>
+<pre><code>## 8005648 bytes</code></pre>
+<pre class="r"><code>obj_size(y)</code></pre>
+<pre><code>## 80,896 B</code></pre>
+<p>Answer: <code>object.size()</code> “does not detect if elements of a
+list are shared”, which is the case here. That is, it does not detect
+the list has been replicated 100 times, and overestimates by a factor of
+100 compared to <code>object_size()</code>.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Take the following list. Why is its size somewhat misleading?</li>
+</ol>
+<pre class="r"><code>funs &lt;- list(mean, sd, var)
+obj_size(funs)</code></pre>
+<pre><code>## 17,608 B</code></pre>
+<p>Answer: it doesn’t seem misleading to me, but the list includes the
+function objects, not the return values. Also, it calculates the size
+discarding the overlap between the functions. Per the code below, there
+is some:</p>
+<pre class="r"><code>obj_size(mean) + obj_size(sd) + obj_size(var)</code></pre>
+<pre><code>## 18,136 B</code></pre>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Predict the output of the following code:</li>
+</ol>
+<pre class="r"><code>a &lt;- runif(1e6)
+obj_size(a) # 8,000,048 B ~ 8MB</code></pre>
+<pre><code>## 8,000,048 B</code></pre>
+<pre class="r"><code># correct: from example above, runif(1e6) ~= 8MB
+
+b &lt;- list(a, a)
+obj_size(b) # slightly larger than obj_size(a)</code></pre>
+<pre><code>## 8,000,112 B</code></pre>
+<pre class="r"><code># correct: two lists containing numeric vectors
+obj_size(a, b) # slightly larger than obj_size(b)</code></pre>
+<pre><code>## 8,000,112 B</code></pre>
+<pre class="r"><code># wrong: a is entirely contained within b
+
+b[[1]][[1]] &lt;- 10
+obj_size(b) # copy of b, same size</code></pre>
+<pre><code>## 16,000,160 B</code></pre>
+<pre class="r"><code># wrong: double, since R copies an entire column, this adds the size of runif(1e6)
+obj_size(a, b) # still mostly overlaps, slightly larger than previous obj_size(a, b)</code></pre>
+<pre><code>## 16,000,160 B</code></pre>
+<pre class="r"><code># wrong: a is still entirely contained with b
+
+b[[2]][[1]] &lt;- 10
+obj_size(b) # copy of b, same size</code></pre>
+<pre><code>## 16,000,160 B</code></pre>
+<pre class="r"><code># wrong: same size since it&#39;s still 2 numeric vectors of 1e6 length
+obj_size(a, b) # still mostly overlaps, slightly larger than previous obj_size(a, b)</code></pre>
+<pre><code>## 24,000,208 B</code></pre>
+<pre class="r"><code># wrong: there is no longer any overlap, so the size of obj_size(a, b) = obj_size(a) = obj_size(b)</code></pre>
+<p>Answer: answers inline.</p>
+<hr />
+</div>
+<div id="exercises-3" class="section level2">
+<h2>2.5.3 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Explain why the following code doesn’t create a circular list.</li>
+</ol>
+<pre class="r"><code>x &lt;- list()
+x[[1]] &lt;- x</code></pre>
+<p>Answer: the name x is assigned to the empty list, and then the first
+element of x is mapped to the object that x points to, the empty
+list.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Wrap the two methods for subtracting medians into two functions,
+then use the ‘bench’ package <span class="citation">[@bench]</span> to
+carefully compare their speeds. How does performance change as the
+number of columns increase?</li>
+</ol>
+<pre class="r"><code>x_medians &lt;- function(ncol) {
+  x &lt;- data.frame(matrix(runif(5 * 1e4), ncol = ncol))
+  medians &lt;- vapply(x, median, numeric(1))
+  return(list(x = x, medians = medians))
+}
+
+df_medians &lt;- function(x, medians) {
+  # subtract medians using data.frame method
+  for (i in seq_along(medians)) {
+    x[[i]] &lt;- x[[i]] - medians[[i]]
+  }
+  x
+}
+
+ls_medians &lt;- function(x, medians) {
+  y &lt;- as.list(x)
+
+  for (i in seq_along(medians)) {
+    y[[i]] &lt;- y[[i]] - medians[[i]]
+  }
+  y
+}
+
+# confirm they both work
+xm &lt;- x_medians(5)
+head(df_medians(xm$x, xm$medians), 10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.0559227","2":"-0.09796890","3":"-0.50444948","4":"0.30288444","5":"0.02579168","_rn_":"1"},{"1":"-0.2023969","2":"-0.43791685","3":"0.37170768","4":"0.14281111","5":"0.16657747","_rn_":"2"},{"1":"0.2268851","2":"-0.30472770","3":"0.32162119","4":"0.06514362","5":"-0.23634450","_rn_":"3"},{"1":"0.2866184","2":"0.36843752","3":"0.28377008","4":"-0.36046436","5":"0.42134142","_rn_":"4"},{"1":"-0.2146006","2":"0.04476938","3":"-0.25747534","4":"0.14668604","5":"-0.21354888","_rn_":"5"},{"1":"-0.0342320","2":"0.24129226","3":"-0.24204006","4":"0.33827330","5":"0.11013057","_rn_":"6"},{"1":"0.4920195","2":"-0.23114059","3":"0.06754494","4":"-0.35800762","5":"-0.26843425","_rn_":"7"},{"1":"0.1046232","2":"0.14783348","3":"-0.28507719","4":"0.06126453","5":"0.49132778","_rn_":"8"},{"1":"0.2534116","2":"-0.07898163","3":"-0.44275095","4":"-0.47705378","5":"-0.28572150","_rn_":"9"},{"1":"0.3958566","2":"-0.13883482","3":"-0.07660448","4":"0.02704000","5":"0.17181685","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>head(as.data.frame(ls_medians(xm$x, xm$medians)), 10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.0559227","2":"-0.09796890","3":"-0.50444948","4":"0.30288444","5":"0.02579168","_rn_":"1"},{"1":"-0.2023969","2":"-0.43791685","3":"0.37170768","4":"0.14281111","5":"0.16657747","_rn_":"2"},{"1":"0.2268851","2":"-0.30472770","3":"0.32162119","4":"0.06514362","5":"-0.23634450","_rn_":"3"},{"1":"0.2866184","2":"0.36843752","3":"0.28377008","4":"-0.36046436","5":"0.42134142","_rn_":"4"},{"1":"-0.2146006","2":"0.04476938","3":"-0.25747534","4":"0.14668604","5":"-0.21354888","_rn_":"5"},{"1":"-0.0342320","2":"0.24129226","3":"-0.24204006","4":"0.33827330","5":"0.11013057","_rn_":"6"},{"1":"0.4920195","2":"-0.23114059","3":"0.06754494","4":"-0.35800762","5":"-0.26843425","_rn_":"7"},{"1":"0.1046232","2":"0.14783348","3":"-0.28507719","4":"0.06126453","5":"0.49132778","_rn_":"8"},{"1":"0.2534116","2":"-0.07898163","3":"-0.44275095","4":"-0.47705378","5":"-0.28572150","_rn_":"9"},{"1":"0.3958566","2":"-0.13883482","3":"-0.07660448","4":"0.02704000","5":"0.17181685","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code># benchmark
+mark(df_medians(xm$x, xm$medians))</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 df_medians(xm$x, xm$medians)   79.3µs    106µs     7855.     409KB     133.</code></pre>
+<pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 ls_medians(xm$x, xm$medians)   35.3µs     60µs    13649.     409KB     222.</code></pre>
+<pre class="r"><code>mark(as.data.frame(ls_medians(xm$x, xm$medians))) # as.data.frame introduces significant overhead</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   expression                                       min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt;                                  &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 as.data.frame(ls_medians(xm$x, xm$medians))    224µs    260µs     3686.     391KB     61.2</code></pre>
+<p>Answer: with 5 columns, the list method is about twice as fast.</p>
+<pre class="r"><code>xm &lt;- x_medians(10)
+mark(df_medians(xm$x, xm$medians))</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 df_medians(xm$x, xm$medians)    126µs    158µs     5798.     391KB     103.</code></pre>
+<pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 ls_medians(xm$x, xm$medians)   35.2µs   59.6µs    12770.     391KB     179.</code></pre>
+<pre class="r"><code>xm &lt;- x_medians(20)
+mark(df_medians(xm$x, xm$medians))</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 df_medians(xm$x, xm$medians)    226µs    281µs     3241.     400KB     32.0</code></pre>
+<pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 ls_medians(xm$x, xm$medians)   39.4µs   59.9µs    15354.     392KB     150.</code></pre>
+<p>With 10 columns, the list method is 3 times as fast. With 20, the
+list method is 5 times as fast. So, the list method is near constant
+time regardless of columns, whereas the data.frame method scales
+linearly with the number of columns.</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>What happens if you attempt to use <code>tracemem()</code> on an
+environment?</li>
+</ol>
+<pre class="r"><code>e &lt;- rlang::env()
+try(tracemem(e))</code></pre>
+<pre><code>## Error in tracemem(e) : 
+##   &#39;tracemem&#39; is not useful for promise and environment objects</code></pre>
+<p>Answer: it throws an error!</p>
+<hr />
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiBBZHZhbmNlZCBSIFdvcmtib29rCmRhdGU6ICcyMDIyLTA2LTEyJwpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogeWVzCiAgICB0b2NfZmxvYXQ6CiAgICAgIGNvbGxhcHNlZDogbm8KICAgICAgc21vb3RoX3Njcm9sbDogbm8KLS0tCgpXb3JrYm9vayBmb3IgY29tcGxldGluZyBxdWl6emVzIGFuZCBleGVyY2lzZXMgZnJvbSBbQWR2YW5jZWQgUl0oaHR0cHM6Ly9hZHYtci5oYWRsZXkubnovaW5kZXguaHRtbCksIHNlY29uZCBlZGl0aW9uLgoKYGBge3Igc2V0dXAsIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQpsaWJyYXJ5KGxvYnN0cikKbGlicmFyeShiZW5jaCkKYGBgCgojIEludHJvZHVjdGlvbgoKVGhpcyB3b3JrYm9vayBpbmNsdWRlcyBhbnN3ZXJzIGFuZCBzb2x1dGlvbnMgdG8gdGhlIHF1aXp6ZXMgYW5kIGV4ZXJjaXNlcyBmcm9tIFtBZHZhbmNlZCBSXShodHRwczovL2Fkdi1yLmhhZGxleS5uei9pbmRleC5odG1sKSwgb3JnYW5pemVkIGJ5IGNoYXB0ZXIuIEl0IGluY2x1ZGVzIGV4Y2VycHRzIGZyb20gdGhlIGJvb2ssIGNvcGllZCBoZXJlLgoKKipXQVJOSU5HLCBTUE9JTEVSUyEqKiBJZiB5b3UgaGF2ZW4ndCByZWFkIEFkdmFuY2VkIFIgYW5kIGludGVuZCB0byBjb21wbGV0ZSB0aGUgcXVpenplcyBhbmQKZXhlcmNpc2VzLCBkb24ndCByZWFkIHRoaXMgbm90ZWJvb2suIEl0IGNvbnRhaW5zIG15IChwb3RlbnRpYWxseSB3cm9uZykgYW5zd2VycyB0byBib3RoLgoKIyAyIE5hbWVzIGFuZCB2YWx1ZXMKCkluIFIsIGl0IGlzIGltcG9ydGFudCB0byB1bmRlcnN0YW5kIHRoZSBkaXN0aW5jdGlvbiBiZXR3ZWVuIGFuIG9iamVjdCBhbmQgaXRzIG5hbWUuIERvaW5nIHNvIHdpbGwgaGVscCB5b3U6CgoqIE1vcmUgYWNjdXJhdGVseSBwcmVkaWN0IHRoZSBwZXJmb3JtYW5jZSBhbmQgbWVtb3J5IHVzYWdlIG9mIHlvdXIgY29kZS4gCiogV3JpdGUgZmFzdGVyIGNvZGUgYnkgYXZvaWRpbmcgYWNjaWRlbnRhbCBjb3BpZXMsIGEgbWFqb3Igc291cmNlIG9mIHNsb3cgY29kZS4gCiogQmV0dGVyIHVuZGVyc3RhbmQgUidzIGZ1bmN0aW9uYWwgcHJvZ3JhbW1pbmcgdG9vbHMuCgpUaGUgZ29hbCBvZiB0aGlzIGNoYXB0ZXIgaXMgdG8gaGVscCB5b3UgdW5kZXJzdGFuZCB0aGUgZGlzdGluY3Rpb24gYmV0d2VlbiBuYW1lcyBhbmQgdmFsdWVzLCBhbmQgd2hlbiBSIHdpbGwgY29weSBhbiBvYmplY3QuCgojIyAyIFF1aXoKCjEuICBHaXZlbiB0aGUgZm9sbG93aW5nIGRhdGEgZnJhbWUsIGhvdyBkbyBJIGNyZWF0ZSBhIG5ldyBjb2x1bW4gY2FsbGVkICIzIgogICAgdGhhdCBjb250YWlucyB0aGUgc3VtIG9mIGAxYCBhbmQgYDJgPyBZb3UgbWF5IG9ubHkgdXNlIGAkYCwgbm90IGBbW2AuCiAgICBXaGF0IG1ha2VzIGAxYCwgYDJgLCBhbmQgYDNgIGNoYWxsZW5naW5nIGFzIHZhcmlhYmxlIG5hbWVzPwoKYGBge3J9CmRmIDwtIGRhdGEuZnJhbWUocnVuaWYoMyksIHJ1bmlmKDMpKQpuYW1lcyhkZikgPC0gYygxLCAyKQpgYGAKCkFuc3dlcjogdXNlIHRoZSBmb2xsb3dpbmcgY29kZS4KCmBgYHtyfQpkZjIgPC0gZGF0YS5mcmFtZShkZiwgZGYkYDFgICsgZGYkYDJgKQpuYW1lcyhkZjIpIDwtIGMoMSwgMiwgMykKYGBgCgpVc2luZyBudW1iZXJzIGFzIG5hbWVzIGlzIHByb2JsZW1hdGljIGR1ZSB0byB0aGVtIGJlaW5nIGludGVycHJldGVkIGFzIG51bWVyaWMgY29uc3RhbnRzIGJ5IGRlZmF1bHQuCgotLS0KCjIuICBJbiB0aGUgZm9sbG93aW5nIGNvZGUsIGhvdyBtdWNoIG1lbW9yeSBkb2VzIGB5YCBvY2N1cHk/CiAgIApgYGB7cn0KeCA8LSBydW5pZigxZTYpCnkgPC0gbGlzdCh4LCB4LCB4KQpgYGAKCkFuc3dlcjogMyB0aW1lcyB0aGUgc2l6ZSBvZiB4LCAyNCBNQi4gTm90ZTogdGhpcyBpcyBpbmNvcnJlY3QsIGFzIHNob3duIGJ5IGBvYmpfc2l6ZWAgYW5kIGBvYmpfYWRkcmA6CgpgYGB7cn0Kb2JqX3NpemUoeCkKb2JqX3NpemUoeSkKb2JqX2FkZHIoeVtbMV1dKQpvYmpfYWRkcih5W1syXV0pCm9ial9hZGRyKHlbWzNdXSkKYGBgCgotLS0KCjMuICBPbiB3aGljaCBsaW5lIGRvZXMgYGFgIGdldCBjb3BpZWQgaW4gdGhlIGZvbGxvd2luZyBleGFtcGxlPwoKYGBge3J9CmEgPC0gYygxLCA1LCAzLCAyKQpvYmpfYWRkcihhKQoKYiA8LSBhCm9ial9hZGRyKGIpCgpiW1sxXV0gPC0gMTAKb2JqX2FkZHIoYikKYGBgCgpBbnN3ZXI6IHRoZSB0aGlyZCBsaW5lIChjb3B5LW9uLXdyaXRlKS4gW2NvcHktb24tbW9kaWZ5XQoKIyMgMi4yLjIgRXhlcmNpc2VzCgoxLiAgRXhwbGFpbiB0aGUgcmVsYXRpb25zaGlwIGJldHdlZW4gYGFgLCBgYmAsIGBjYCBhbmQgYGRgIGluIHRoZSBmb2xsb3dpbmcgCiAgICBjb2RlOgoKYGBge3J9CmEgPC0gMToxMApiIDwtIGEKYyA8LSBiCmQgPC0gMToxMApgYGAKCkFuc3dlcjogYSwgYiwgYW5kIGMgYWxsIHBvaW50IHRvIHRoZSBzYW1lIG9iamVjdCAoMToxMCkuIGQgcG9pbnRzIHRvIGFuIGlkZW50aWNhbCBvYmplY3QgYXQgYQpkaWZmZXJlbnQgYWRkcmVzcy4KCmBgYHtyfQpvYmpfYWRkcihhKQpvYmpfYWRkcihiKQpvYmpfYWRkcihjKQpvYmpfYWRkcihkKQpgYGAKCi0tLQoKMi4gIFRoZSBmb2xsb3dpbmcgY29kZSBhY2Nlc3NlcyB0aGUgbWVhbiBmdW5jdGlvbiBpbiBtdWx0aXBsZSB3YXlzLiBEbyB0aGV5IGFsbCAKICAgIHBvaW50IHRvIHRoZSBzYW1lIHVuZGVybHlpbmcgZnVuY3Rpb24gb2JqZWN0PyBWZXJpZnkgdGhpcyB3aXRoIAogICAgYGxvYnN0cjo6b2JqX2FkZHIoKWAuCiAgICAKYGBge3IsIGV2YWwgPSBGQUxTRX0KbWVhbgpiYXNlOjptZWFuCmdldCgibWVhbiIpCmV2YWxxKG1lYW4pCm1hdGNoLmZ1bigibWVhbiIpCmBgYAoKQ2hlY2sgdGhlIGBvYmpfYWRkcmA6CgpgYGB7cn0Kb2JqX2FkZHIobWVhbikKb2JqX2FkZHIoYmFzZTo6bWVhbikKb2JqX2FkZHIoZ2V0KCJtZWFuIikpCm9ial9hZGRyKGV2YWxxKG1lYW4pKQpvYmpfYWRkcihtYXRjaC5mdW4oIm1lYW4iKSkKYGBgCgpBbnN3ZXI6IHRoZXkgZG8uCgotLS0KCjMuICBCeSBkZWZhdWx0LCBiYXNlIFIgZGF0YSBpbXBvcnQgZnVuY3Rpb25zLCBsaWtlIGByZWFkLmNzdigpYCwgd2lsbCAKICAgIGF1dG9tYXRpY2FsbHkgY29udmVydCBub24tc3ludGFjdGljIG5hbWVzIHRvIHN5bnRhY3RpYyBvbmVzLiBXaHkgbWlnaHQgCiAgICB0aGlzIGJlIHByb2JsZW1hdGljPyBXaGF0IG9wdGlvbiBhbGxvd3MgeW91IHRvIHN1cHByZXNzIHRoaXMgYmVoYXZpb3VyPwoKQW5zd2VyOiB0aGlzIGNvdWxkIGludHJvZHVjZSBwcm9ibGVtYXRpYyBuYW1lcywgbGlrZSBgMWAuIFNldHRpbmcgYGNoZWNrLm5hbWVzID0gRkFMU0VgIHN1cHByZXNzZXMKdGhpcyBiZWhhdmlvci4KCi0tLQoKNC4gIFdoYXQgcnVsZXMgZG9lcyBgbWFrZS5uYW1lcygpYCB1c2UgdG8gY29udmVydCBub24tc3ludGFjdGljIG5hbWVzIGludG8KICAgIHN5bnRhY3RpYyBvbmVzPwoKQW5zd2VyOiBmcm9tIGA/bWFrZS5uYW1lc2A6Cgo+IFRoZSBjaGFyYWN0ZXIgIlgiIGlzIHByZXBlbmRlZCBpZiBuZWNlc3NhcnkuIEFsbCBpbnZhbGlkIGNoYXJhY3RlcnMgYXJlIHRyYW5zbGF0ZWQgdG8gIi4iLgo+IEEgbWlzc2luZyB2YWx1ZSBpcyB0cmFuc2xhdGVkIHRvICJOQSIuIE5hbWVzIHdoaWNoIG1hdGNoIFIga2V5d29yZHMgaGF2ZSBhIGRvdCBhcHBlbmRlZCB0byB0aGVtLgo+IER1cGxpY2F0ZWQgdmFsdWVzIGFyZSBhbHRlcmVkIGJ5IG1ha2UudW5pcXVlLgogIAotLS0KCjUuICBJIHNsaWdodGx5IHNpbXBsaWZpZWQgdGhlIHJ1bGVzIHRoYXQgZ292ZXJuIHN5bnRhY3RpYyBuYW1lcy4gV2h5IGlzIGAuMTIzZTFgCiAgICBub3QgYSBzeW50YWN0aWMgbmFtZT8gUmVhZCBgP21ha2UubmFtZXNgIGZvciB0aGUgZnVsbCBkZXRhaWxzLgoKQW5zd2VyOiBmcm9tIGA/bWFrZS5uYW1lc2A6Cgo+IEEgc3ludGFjdGljYWxseSB2YWxpZCBuYW1lIGNvbnNpc3RzIG9mIGxldHRlcnMsIG51bWJlcnMgYW5kIHRoZSBkb3Qgb3IgdW5kZXJsaW5lIGNoYXJhY3RlcnMgYW5kCnN0YXJ0cyB3aXRoIGEgbGV0dGVyIG9yIHRoZSBkb3Qgbm90IGZvbGxvd2VkIGJ5IGEgbnVtYmVyLiBOYW1lcyBzdWNoIGFzICIuMndheSIgYXJlIG5vdCB2YWxpZCwgYW5kCm5laXRoZXIgYXJlIHRoZSByZXNlcnZlZCB3b3Jkcy4KCi0tLQoKIyMgMi4zLjYgRXhlcmNpc2VzCgoxLiAgV2h5IGlzIGB0cmFjZW1lbSgxOjEwKWAgbm90IHVzZWZ1bD8KCkFuc3dlcjogdGhpcyBpcyB0cmFjaW5nIGFuICdpbW11dGFibGUnIG9iamVjdCB3aGljaCB3aWxsIGFsd2F5cyBoYXZlIHRoZSBzYW1lIGFkZHJlc3MuCgotLS0KCjIuICBFeHBsYWluIHdoeSBgdHJhY2VtZW0oKWAgc2hvd3MgdHdvIGNvcGllcyB3aGVuIHlvdSBydW4gdGhpcyBjb2RlLgogICAgSGludDogY2FyZWZ1bGx5IGxvb2sgYXQgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGlzIGNvZGUgYW5kIHRoZSBjb2RlIAogICAgc2hvd24gZWFybGllciBpbiB0aGUgc2VjdGlvbi4KICAgICAKYGBge3J9CnJtKGxpc3QgPSBscygpKQp4IDwtIGMoMUwsIDJMLCAzTCkKdHJhY2VtZW0oeCkKCnhbWzNdXSA8LSA0CnVudHJhY2VtZW0oeCkKYGBgCgpBbnN3ZXI6IHVuY2xlYXIuIFRoZSBiZWhhdmlvciBpbiBSIDQuMi4wIHNlZW1zIHRvIGhhdmUgY2hhbmdlZCwgc2luY2UgdGhpcyBjb2RlIHNob3dzIHR3byBjb3BpZXM6CgpgYGB7cn0Kcm0obGlzdCA9IGxzKCkpCnggPC0gYygxLCAyLCAzKQp0cmFjZW1lbSh4KQoKeSA8LSB4CnlbWzNdXSA8LSA0TAp5W1szXV0gPC0gNUwKdW50cmFjZW1lbSh4KQpgYGAKCi0tLQoKMy4gIFNrZXRjaCBvdXQgdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHRoZSBmb2xsb3dpbmcgb2JqZWN0czoKCmBgYHtyfQphIDwtIDE6MTAKYiA8LSBsaXN0KGEsIGEpCmMgPC0gbGlzdChiLCBhLCAxOjEwKQoKcHJpbnQoImZpcnN0IG9iamVjdCIpCm9ial9hZGRyKGEpCm9ial9hZGRyKGJbWzFdXSkKb2JqX2FkZHIoYltbMl1dKQpvYmpfYWRkcihjW1syXV0pCgpwcmludCgic2Vjb25kIG9iamVjdCIpCm9ial9hZGRyKGIpCm9ial9hZGRyKGNbWzFdXSkKCnByaW50KCJ0aGlyZCBvYmplY3QiKQpvYmpfYWRkcihjKQoKcHJpbnQoImZvdXJ0aCBvYmplY3QgKD8pIikKb2JqX2FkZHIoY1tbM11dKQpgYGAKCkFuc3dlcjogZm91ciBkaWZmZXJlbnQgb2JqZWN0cyB3aXRoIG11bHRpcGxlIG5hbWVzLgoKLS0tCgo0LiAgV2hhdCBoYXBwZW5zIHdoZW4geW91IHJ1biB0aGlzIGNvZGU/IERyYXcgYSBwaWN0dXJlLgoKYGBge3J9CnggPC0gbGlzdCgxOjEwKQoKeFtbMl1dIDwtIHgKCnJlZih4KQpgYGAKCkluaXRpYWxseSB4IGlzIGEgbGlzdCBvZiBvbmUgZWxlbWVudCwgYW4gaW50IHZlY3RvciAxOjEwLiBUaGVuIGEgc2Vjb25kIGxpc3QgZWxlbWVudCBpcyBhZGRlZCwgd2hpY2gKcG9pbnRzIHRvIHRoZSBvcmlnaW5hbCBpbnQgdmVjdG9yLgoKLS0tCgojIyAyLjQuMSBFeGVyY2lzZXMKCjEuICBJbiB0aGUgZm9sbG93aW5nIGV4YW1wbGUsIHdoeSBhcmUgYG9iamVjdC5zaXplKHkpYCBhbmQgYG9ial9zaXplKHkpYAogICAgc28gcmFkaWNhbGx5IGRpZmZlcmVudD8gQ29uc3VsdCB0aGUgZG9jdW1lbnRhdGlvbiBvZiBgb2JqZWN0LnNpemUoKWAuCgpgYGB7cn0KeSA8LSByZXAobGlzdChydW5pZigxZTQpKSwgMTAwKQoKb2JqZWN0LnNpemUoeSkKb2JqX3NpemUoeSkKYGBgCgpBbnN3ZXI6IGBvYmplY3Quc2l6ZSgpYCAiZG9lcyBub3QgZGV0ZWN0IGlmIGVsZW1lbnRzIG9mIGEgbGlzdCBhcmUgc2hhcmVkIiwgd2hpY2ggaXMgdGhlIGNhc2UgaGVyZS4KVGhhdCBpcywgaXQgZG9lcyBub3QgZGV0ZWN0IHRoZSBsaXN0IGhhcyBiZWVuIHJlcGxpY2F0ZWQgMTAwIHRpbWVzLCBhbmQgb3ZlcmVzdGltYXRlcyBieSBhIGZhY3RvciBvZgoxMDAgY29tcGFyZWQgdG8gYG9iamVjdF9zaXplKClgLgoKLS0tCgoyLiAgVGFrZSB0aGUgZm9sbG93aW5nIGxpc3QuIFdoeSBpcyBpdHMgc2l6ZSBzb21ld2hhdCBtaXNsZWFkaW5nPwoKYGBge3J9CmZ1bnMgPC0gbGlzdChtZWFuLCBzZCwgdmFyKQpvYmpfc2l6ZShmdW5zKQpgYGAKCkFuc3dlcjogaXQgZG9lc24ndCBzZWVtIG1pc2xlYWRpbmcgdG8gbWUsIGJ1dCB0aGUgbGlzdCBpbmNsdWRlcyB0aGUgZnVuY3Rpb24gb2JqZWN0cywgbm90IHRoZQpyZXR1cm4gdmFsdWVzLiBBbHNvLCBpdCBjYWxjdWxhdGVzIHRoZSBzaXplIGRpc2NhcmRpbmcgdGhlIG92ZXJsYXAgYmV0d2VlbiB0aGUgZnVuY3Rpb25zLiBQZXIgdGhlCmNvZGUgYmVsb3csIHRoZXJlIGlzIHNvbWU6CgpgYGB7cn0Kb2JqX3NpemUobWVhbikgKyBvYmpfc2l6ZShzZCkgKyBvYmpfc2l6ZSh2YXIpCmBgYAoKLS0tCgozLiAgUHJlZGljdCB0aGUgb3V0cHV0IG9mIHRoZSBmb2xsb3dpbmcgY29kZToKCmBgYHtyfQphIDwtIHJ1bmlmKDFlNikKb2JqX3NpemUoYSkgIyA4LDAwMCwwNDggQiB+IDhNQgojIGNvcnJlY3Q6IGZyb20gZXhhbXBsZSBhYm92ZSwgcnVuaWYoMWU2KSB+PSA4TUIKCmIgPC0gbGlzdChhLCBhKQpvYmpfc2l6ZShiKSAjIHNsaWdodGx5IGxhcmdlciB0aGFuIG9ial9zaXplKGEpCiMgY29ycmVjdDogdHdvIGxpc3RzIGNvbnRhaW5pbmcgbnVtZXJpYyB2ZWN0b3JzCm9ial9zaXplKGEsIGIpICMgc2xpZ2h0bHkgbGFyZ2VyIHRoYW4gb2JqX3NpemUoYikKIyB3cm9uZzogYSBpcyBlbnRpcmVseSBjb250YWluZWQgd2l0aGluIGIKCmJbWzFdXVtbMV1dIDwtIDEwCm9ial9zaXplKGIpICMgY29weSBvZiBiLCBzYW1lIHNpemUKIyB3cm9uZzogZG91YmxlLCBzaW5jZSBSIGNvcGllcyBhbiBlbnRpcmUgY29sdW1uLCB0aGlzIGFkZHMgdGhlIHNpemUgb2YgcnVuaWYoMWU2KQpvYmpfc2l6ZShhLCBiKSAjIHN0aWxsIG1vc3RseSBvdmVybGFwcywgc2xpZ2h0bHkgbGFyZ2VyIHRoYW4gcHJldmlvdXMgb2JqX3NpemUoYSwgYikKIyB3cm9uZzogYSBpcyBzdGlsbCBlbnRpcmVseSBjb250YWluZWQgd2l0aCBiCgpiW1syXV1bWzFdXSA8LSAxMApvYmpfc2l6ZShiKSAjIGNvcHkgb2YgYiwgc2FtZSBzaXplCiMgd3Jvbmc6IHNhbWUgc2l6ZSBzaW5jZSBpdCdzIHN0aWxsIDIgbnVtZXJpYyB2ZWN0b3JzIG9mIDFlNiBsZW5ndGgKb2JqX3NpemUoYSwgYikgIyBzdGlsbCBtb3N0bHkgb3ZlcmxhcHMsIHNsaWdodGx5IGxhcmdlciB0aGFuIHByZXZpb3VzIG9ial9zaXplKGEsIGIpCiMgd3Jvbmc6IHRoZXJlIGlzIG5vIGxvbmdlciBhbnkgb3ZlcmxhcCwgc28gdGhlIHNpemUgb2Ygb2JqX3NpemUoYSwgYikgPSBvYmpfc2l6ZShhKSA9IG9ial9zaXplKGIpCmBgYAoKQW5zd2VyOiBhbnN3ZXJzIGlubGluZS4KCi0tLQoKIyMgMi41LjMgRXhlcmNpc2VzCgoxLiAgRXhwbGFpbiB3aHkgdGhlIGZvbGxvd2luZyBjb2RlIGRvZXNuJ3QgY3JlYXRlIGEgY2lyY3VsYXIgbGlzdC4KCmBgYHtyfQp4IDwtIGxpc3QoKQp4W1sxXV0gPC0geApgYGAKCkFuc3dlcjogdGhlIG5hbWUgeCBpcyBhc3NpZ25lZCB0byB0aGUgZW1wdHkgbGlzdCwgYW5kIHRoZW4gdGhlIGZpcnN0IGVsZW1lbnQgb2YgeCBpcyBtYXBwZWQgdG8gdGhlCm9iamVjdCB0aGF0IHggcG9pbnRzIHRvLCB0aGUgZW1wdHkgbGlzdC4KCi0tLQoKMi4gIFdyYXAgdGhlIHR3byBtZXRob2RzIGZvciBzdWJ0cmFjdGluZyBtZWRpYW5zIGludG8gdHdvIGZ1bmN0aW9ucywgdGhlbgogICAgdXNlIHRoZSAnYmVuY2gnIHBhY2thZ2UgW0BiZW5jaF0gdG8gY2FyZWZ1bGx5IGNvbXBhcmUgdGhlaXIgc3BlZWRzLiBIb3cgZG9lcwogICAgcGVyZm9ybWFuY2UgY2hhbmdlIGFzIHRoZSBudW1iZXIgb2YgY29sdW1ucyBpbmNyZWFzZT8KCmBgYHtyfQp4X21lZGlhbnMgPC0gZnVuY3Rpb24obmNvbCkgewogIHggPC0gZGF0YS5mcmFtZShtYXRyaXgocnVuaWYoNSAqIDFlNCksIG5jb2wgPSBuY29sKSkKICBtZWRpYW5zIDwtIHZhcHBseSh4LCBtZWRpYW4sIG51bWVyaWMoMSkpCiAgcmV0dXJuKGxpc3QoeCA9IHgsIG1lZGlhbnMgPSBtZWRpYW5zKSkKfQoKZGZfbWVkaWFucyA8LSBmdW5jdGlvbih4LCBtZWRpYW5zKSB7CiAgIyBzdWJ0cmFjdCBtZWRpYW5zIHVzaW5nIGRhdGEuZnJhbWUgbWV0aG9kCiAgZm9yIChpIGluIHNlcV9hbG9uZyhtZWRpYW5zKSkgewogICAgeFtbaV1dIDwtIHhbW2ldXSAtIG1lZGlhbnNbW2ldXQogIH0KICB4Cn0KCmxzX21lZGlhbnMgPC0gZnVuY3Rpb24oeCwgbWVkaWFucykgewogIHkgPC0gYXMubGlzdCh4KQoKICBmb3IgKGkgaW4gc2VxX2Fsb25nKG1lZGlhbnMpKSB7CiAgICB5W1tpXV0gPC0geVtbaV1dIC0gbWVkaWFuc1tbaV1dCiAgfQogIHkKfQoKIyBjb25maXJtIHRoZXkgYm90aCB3b3JrCnhtIDwtIHhfbWVkaWFucyg1KQpoZWFkKGRmX21lZGlhbnMoeG0keCwgeG0kbWVkaWFucyksIDEwKQpoZWFkKGFzLmRhdGEuZnJhbWUobHNfbWVkaWFucyh4bSR4LCB4bSRtZWRpYW5zKSksIDEwKQoKIyBiZW5jaG1hcmsKbWFyayhkZl9tZWRpYW5zKHhtJHgsIHhtJG1lZGlhbnMpKQptYXJrKGxzX21lZGlhbnMoeG0keCwgeG0kbWVkaWFucykpCm1hcmsoYXMuZGF0YS5mcmFtZShsc19tZWRpYW5zKHhtJHgsIHhtJG1lZGlhbnMpKSkgIyBhcy5kYXRhLmZyYW1lIGludHJvZHVjZXMgc2lnbmlmaWNhbnQgb3ZlcmhlYWQKYGBgCgpBbnN3ZXI6IHdpdGggNSBjb2x1bW5zLCB0aGUgbGlzdCBtZXRob2QgaXMgYWJvdXQgdHdpY2UgYXMgZmFzdC4KCmBgYHtyfQp4bSA8LSB4X21lZGlhbnMoMTApCm1hcmsoZGZfbWVkaWFucyh4bSR4LCB4bSRtZWRpYW5zKSkKbWFyayhsc19tZWRpYW5zKHhtJHgsIHhtJG1lZGlhbnMpKQoKeG0gPC0geF9tZWRpYW5zKDIwKQptYXJrKGRmX21lZGlhbnMoeG0keCwgeG0kbWVkaWFucykpCm1hcmsobHNfbWVkaWFucyh4bSR4LCB4bSRtZWRpYW5zKSkKYGBgCgpXaXRoIDEwIGNvbHVtbnMsIHRoZSBsaXN0IG1ldGhvZCBpcyAzIHRpbWVzIGFzIGZhc3QuIFdpdGggMjAsIHRoZSBsaXN0IG1ldGhvZCBpcyA1IHRpbWVzIGFzIGZhc3QuClNvLCB0aGUgbGlzdCBtZXRob2QgaXMgbmVhciBjb25zdGFudCB0aW1lIHJlZ2FyZGxlc3Mgb2YgY29sdW1ucywgd2hlcmVhcyB0aGUgZGF0YS5mcmFtZSBtZXRob2QKc2NhbGVzIGxpbmVhcmx5IHdpdGggdGhlIG51bWJlciBvZiBjb2x1bW5zLgoKLS0tCgozLiAgV2hhdCBoYXBwZW5zIGlmIHlvdSBhdHRlbXB0IHRvIHVzZSBgdHJhY2VtZW0oKWAgb24gYW4gZW52aXJvbm1lbnQ/CgpgYGB7cn0KZSA8LSBybGFuZzo6ZW52KCkKdHJ5KHRyYWNlbWVtKGUpKQpgYGAKCkFuc3dlcjogaXQgdGhyb3dzIGFuIGVycm9yIQoKLS0tCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("advanced-r.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
