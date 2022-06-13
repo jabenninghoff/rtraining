@@ -11,6 +11,7 @@ URL: https://jabenninghoff.github.io/rtraining,
     https://github.com/jabenninghoff/rtraining
 BugReports: https://github.com/jabenninghoff/rtraining/issues
 Suggests:
+    bench,
     desc,
     devtools,
     dplyr,
@@ -19,11 +20,13 @@ Suggests:
     fs,
     jbplot,
     knitr,
+    lobstr,
     modelr,
     pkgdown,
     pkgload,
     purrr,
     rdev,
+    rlang,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0),
