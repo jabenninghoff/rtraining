@@ -13,6 +13,7 @@ Workbook for completing quizzes and exercises from [Advanced R](https://adv-r.ha
 
 ```{r setup, message = FALSE, warning = FALSE}
 library(lobstr)
+library(bench)
 ```
 
 # Introduction
@@ -86,7 +87,7 @@ b[[1]] <- 10
 obj_addr(b)
 ```
 
-Answer: the third line (copy-on-write).
+Answer: the third line (copy-on-write). [copy-on-modify]
 
 ## 2.2.2 Exercises
 
@@ -310,5 +311,87 @@ obj_size(a, b) # still mostly overlaps, slightly larger than previous obj_size(a
 ```
 
 Answer: answers inline.
+
+---
+
+## 2.5.3 Exercises
+
+1.  Explain why the following code doesn't create a circular list.
+
+```{r}
+x <- list()
+x[[1]] <- x
+```
+
+Answer: the name x is assigned to the empty list, and then the first element of x is mapped to the
+object that x points to, the empty list.
+
+---
+
+2.  Wrap the two methods for subtracting medians into two functions, then
+    use the 'bench' package [@bench] to carefully compare their speeds. How does
+    performance change as the number of columns increase?
+
+```{r}
+x_medians <- function(ncol) {
+  x <- data.frame(matrix(runif(5 * 1e4), ncol = ncol))
+  medians <- vapply(x, median, numeric(1))
+  return(list(x = x, medians = medians))
+}
+
+df_medians <- function(x, medians) {
+  # subtract medians using data.frame method
+  for (i in seq_along(medians)) {
+    x[[i]] <- x[[i]] - medians[[i]]
+  }
+  x
+}
+
+ls_medians <- function(x, medians) {
+  y <- as.list(x)
+
+  for (i in seq_along(medians)) {
+    y[[i]] <- y[[i]] - medians[[i]]
+  }
+  y
+}
+
+# confirm they both work
+xm <- x_medians(5)
+head(df_medians(xm$x, xm$medians), 10)
+head(as.data.frame(ls_medians(xm$x, xm$medians)), 10)
+
+# benchmark
+mark(df_medians(xm$x, xm$medians))
+mark(ls_medians(xm$x, xm$medians))
+mark(as.data.frame(ls_medians(xm$x, xm$medians))) # as.data.frame introduces significant overhead
+```
+
+Answer: with 5 columns, the list method is about twice as fast.
+
+```{r}
+xm <- x_medians(10)
+mark(df_medians(xm$x, xm$medians))
+mark(ls_medians(xm$x, xm$medians))
+
+xm <- x_medians(20)
+mark(df_medians(xm$x, xm$medians))
+mark(ls_medians(xm$x, xm$medians))
+```
+
+With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast.
+So, the list method is near constant time regardless of columns, whereas the data.frame method
+scales linearly with the number of columns.
+
+---
+
+3.  What happens if you attempt to use `tracemem()` on an environment?
+
+```{r}
+e <- rlang::env()
+try(tracemem(e))
+```
+
+Answer: it throws an error!
 
 ---
