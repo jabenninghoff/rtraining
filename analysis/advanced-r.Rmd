@@ -395,3 +395,36 @@ try(tracemem(e))
 Answer: it throws an error!
 
 ---
+
+# 3 Vectors
+
+This chapter discusses the most important family of data types in base R: vectors. While you've probably already used many (if not all) of the different types of vectors, you may not have thought deeply about how they're interrelated. In this chapter, I won't cover individual vectors types in too much detail, but I will show you how all the types fit together as a whole. If you need more details, you can find them in R's documentation.
+
+Vectors come in two flavours: atomic vectors and lists. They differ in terms of their elements' types: for atomic vectors, all elements must have the same type; for lists, elements can have different types. While not a vector, `NULL` is closely related to vectors and often serves the role of a generic zero length vector. This diagram, which we'll be expanding on throughout this chapter, illustrates the basic relationships:
+
+Every vector can also have __attributes__, which you can think of as a named list of arbitrary metadata. Two attributes are particularly important. The __dimension__ attribute turns vectors into matrices and arrays and the __class__ attribute powers the S3 object system. While you'll learn how to use S3 in Chapter 13, here you'll learn about some of the most important S3 vectors: factors, date and times, data frames, and tibbles. And while 2D structures like matrices and data frames are not necessarily what come to mind when you think of vectors, you'll also learn why R considers them to be vectors.
+
+```{r}
+rm(list = ls())
+```
+
+## 3.2.5 Exercises
+
+1. How do you create raw and complex scalars? (See `?raw` and 
+   `?complex`.)
+
+2. Test your knowledge of the vector coercion rules by predicting the output of
+   the following uses of `c()`:
+
+```{r, eval=FALSE}
+c(1, FALSE)
+c("a", 1)
+c(TRUE, 1L)
+```
+
+3. Why is `1 == "1"` true? Why is `-1 < FALSE` true? Why is `"one" < 2` false?
+
+4. Why is the default missing value, `NA`, a logical vector? What's special
+   about logical vectors? (Hint: think about `c(FALSE, NA_character_)`.)
+
+5. Precisely what do `is.atomic()`, `is.numeric()`, and `is.vector()` test for?
