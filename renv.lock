@@ -927,7 +927,7 @@
       "RemoteSha": "b9996ea07752549a519e8c75f325595cbc3cc311",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "64c5838c7b4a87b8aa2fde30fc1b6a88",
+      "Hash": "32d2eeb0cd30b7c14aa88dec3460a43d",
       "Requirements": [
         "ggplot2"
       ]
@@ -1012,15 +1012,15 @@
     },
     "lintr": {
       "Package": "lintr",
-      "Version": "2.0.1.9000",
+      "Version": "3.0.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "lintr",
       "RemoteRef": "main",
-      "RemoteSha": "ad740618f6ed6df190edc594465f90fe4cbbe3b6",
+      "RemoteSha": "a0626c03f81586a0f4e50263cb9f4525fcaa97eb",
       "RemoteHost": "api.github.com",
-      "Hash": "1619162d0b0ffe84b1d4ef5f439b9e16",
+      "Hash": "6aa989a6ea6e35a498eae00c18c9a1e6",
       "Requirements": [
         "backports",
         "codetools",
@@ -1385,7 +1385,7 @@
       "RemoteSha": "01e7b1f8eb1cd7fea860cff4596ce894e4ec1632",
       "RemoteHost": "api.github.com",
       "Remotes": "r-lib/lintr",
-      "Hash": "5e6e3d0364a2af0dedebbaa330f22e8a",
+      "Hash": "f767a47e087320ae1ac655708c16257d",
       "Requirements": [
         "cli",
         "desc",
