@@ -413,18 +413,51 @@ rm(list = ls())
 1. How do you create raw and complex scalars? (See `?raw` and 
    `?complex`.)
 
+Answer: using either `raw()`, `complex()`, or `as.raw()`, `as.complex()`.
+
+---
+
 2. Test your knowledge of the vector coercion rules by predicting the output of
    the following uses of `c()`:
 
-```{r, eval=FALSE}
-c(1, FALSE)
-c("a", 1)
-c(TRUE, 1L)
+```{r}
+c(1, FALSE) # 1.0, 0.0 - double
+c("a", 1) # "a", "1" - character
+c(TRUE, 1L) # 1L, 1L - integer
+
+typeof(c(1, FALSE))
+typeof(c("a", 1))
+typeof(c(TRUE, 1L))
 ```
 
+Answer: guesses inline. [correct!]
+
+---
+
 3. Why is `1 == "1"` true? Why is `-1 < FALSE` true? Why is `"one" < 2` false?
+
+Answers:
+
+- `1 == "1"`: the 1 is coerced to "1"
+- `-1 < FALSE`: FALSE is coerced to 0
+- `"one" < 2: the 2 is coerced to "2"
+
+---
 
 4. Why is the default missing value, `NA`, a logical vector? What's special
    about logical vectors? (Hint: think about `c(FALSE, NA_character_)`.)
 
+Answer: NA must be logical so that it can exist in a logical vector.
+
+---
+
 5. Precisely what do `is.atomic()`, `is.numeric()`, and `is.vector()` test for?
+
+Answers:
+
+- `is.atomic(x)`: tests if x is an atomic vector (logical, integer, numeric, complex, character,
+  and raw) - is `FALSE` for lists
+- `is.numeric(x)`: tests if x is an atomic numeric vector
+- `is.vector(x, mode = "any")`: tests if x is an atomic vector OR a list or expression
+
+---
