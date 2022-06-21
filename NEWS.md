@@ -1,3 +1,11 @@
+# rtraining 0.8.1
+
+* Add demo from Wikipedia article on [R](https://en.wikipedia.org/wiki/R_(programming_language))
+
+* Updated Advanced R Workbook: added Chapter 3, 3.2.5 Exercises
+
+* Replace development lintr with CRAN release 3.0.0
+
 # rtraining 0.8.0
 
 * Added Advanced R Workbook: Workbook for completing quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html), second edition.
