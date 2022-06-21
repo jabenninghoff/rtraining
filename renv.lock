@@ -11,10 +11,10 @@
   "Packages": {
     "DBI": {
       "Package": "DBI",
-      "Version": "1.1.2",
+      "Version": "1.1.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "dcd1743af4336156873e3ce3c950b8b9",
+      "Hash": "b2866e62bab9378c3cc9476a1954226b",
       "Requirements": []
     },
     "FaultTree": {
@@ -84,10 +84,10 @@
     },
     "R.methodsS3": {
       "Package": "R.methodsS3",
-      "Version": "1.8.1",
+      "Version": "1.8.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4bf6453323755202d5909697b6f7c109",
+      "Hash": "278c286fd6e9e75d0c2e8f731ea445c8",
       "Requirements": []
     },
     "R.oo": {
@@ -137,10 +137,10 @@
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
-      "Version": "0.11.1.1.0",
+      "Version": "0.11.2.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "631929e53829901562986c504f86104b",
+      "Hash": "1d3c02a90401734e893954c7f8f92f3e",
       "Requirements": [
         "Rcpp"
       ]
@@ -918,16 +918,16 @@
     },
     "jbplot": {
       "Package": "jbplot",
-      "Version": "1.1.6",
+      "Version": "1.1.7",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "jbplot",
       "RemoteRef": "main",
-      "RemoteSha": "b9996ea07752549a519e8c75f325595cbc3cc311",
+      "RemoteSha": "050a0f77feb6360585228c173899174b3ea9a13c",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "32d2eeb0cd30b7c14aa88dec3460a43d",
+      "Hash": "86f8f1d3426a84bb486fdac0526e514a",
       "Requirements": [
         "ggplot2"
       ]
@@ -1013,14 +1013,9 @@
     "lintr": {
       "Package": "lintr",
       "Version": "3.0.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "r-lib",
-      "RemoteRepo": "lintr",
-      "RemoteRef": "main",
-      "RemoteSha": "a0626c03f81586a0f4e50263cb9f4525fcaa97eb",
-      "RemoteHost": "api.github.com",
-      "Hash": "6aa989a6ea6e35a498eae00c18c9a1e6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1214604176fb93fdcac030fc5d2177d9",
       "Requirements": [
         "backports",
         "codetools",
@@ -1147,10 +1142,10 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-157",
+      "Version": "3.1-158",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "dbca60742be0c9eddc5205e5c7ca1f44",
+      "Hash": "9469aeaeddf4f48a7ac70877d0b7ba36",
       "Requirements": [
         "lattice"
       ]
@@ -1271,10 +1266,10 @@
     },
     "processx": {
       "Package": "processx",
-      "Version": "3.6.0",
+      "Version": "3.6.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4acae60adac4791e8c8833d8494f270d",
+      "Hash": "a11891e28c1f1e5ddd773ba1b8c07cf6",
       "Requirements": [
         "R6",
         "ps"
@@ -1317,10 +1312,10 @@
     },
     "ps": {
       "Package": "ps",
-      "Version": "1.7.0",
+      "Version": "1.7.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "eef74b13f32cae6bb0d495e53317c44c",
+      "Hash": "8b93531308c01ad0e56d9eadcc0c4fcd",
       "Requirements": []
     },
     "purrr": {
@@ -1376,16 +1371,15 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "1.5.0",
+      "Version": "1.5.4",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "01e7b1f8eb1cd7fea860cff4596ce894e4ec1632",
+      "RemoteSha": "e6ea9b82fcfa4f9baf10db0d138f2c794b408084",
       "RemoteHost": "api.github.com",
-      "Remotes": "r-lib/lintr",
-      "Hash": "f767a47e087320ae1ac655708c16257d",
+      "Hash": "cc0a76875171c906701c2b1573dcbc94",
       "Requirements": [
         "cli",
         "desc",
@@ -1890,10 +1884,10 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.39",
+      "Version": "0.40",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "29f67ab15405b390b90e56ff22198ead",
+      "Hash": "e7b654da5e77bc4e5435a966329cd25f",
       "Requirements": [
         "xfun"
       ]
