@@ -235,7 +235,7 @@ inst/templates/rmarkdown|`x`|*Planned location for [R Markdown Templates](https:
 man|`x`|Generated with [roxygen2](https://roxygen2.r-lib.org)
 package.Rproj| |I use the same name for the package, .Rproj, directory, and GitHub repo
 pkgdown| |I store all [pkgdown](https://pkgdown.r-lib.org) files here
-*po*|`x`|Used for [Internationalization](https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Internationalization)
+*po*|`x`|Used for [Internationalization](https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Internationalization)
 renv| |Used by [renv](https://rstudio.github.io/renv/)
 renv.lock| |The renv [lockfile](https://rstudio.github.io/renv/reference/lockfiles.html)
 tests|`x`|Tests using [testthat](https://testthat.r-lib.org)

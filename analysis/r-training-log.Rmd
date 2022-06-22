@@ -97,7 +97,7 @@ When in doubt, start with the tidyverse, or RStudio sponsored projects, or built
 **Also helpful:** some additional helpful links, either from me or recommended by others.
 
 - [RStudio Education](https://education.rstudio.com/learn/beginner/) - the Beginners page
-- [janitor](https://garthtarr.github.io/meatR/janitor.html) - automate data cleanup
+- [janitor](https://sfirke.github.io/janitor/) - automate data cleanup
 - [purrr](https://purrr.tidyverse.org/) - for list iteration
 - [broom](https://github.com/tidymodels/broom) - for getting classic stats objects into tidy shapes that are easier to work with
 
