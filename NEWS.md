@@ -1,3 +1,7 @@
+# rtraining 0.8.2
+
+* Update links
+
 # rtraining 0.8.1
 
 * Add demo from Wikipedia article on [R](https://en.wikipedia.org/wiki/R_(programming_language))
