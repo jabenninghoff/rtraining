@@ -459,11 +459,11 @@ shown by <code>obj_size</code> and <code>obj_addr</code>:</p>
 <pre class="r"><code>obj_size(y)</code></pre>
 <pre><code>## 8,000,128 B</code></pre>
 <pre class="r"><code>obj_addr(y[[1]])</code></pre>
-<pre><code>## [1] &quot;0x7ff8200e8000&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd938b98000&quot;</code></pre>
 <pre class="r"><code>obj_addr(y[[2]])</code></pre>
-<pre><code>## [1] &quot;0x7ff8200e8000&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd938b98000&quot;</code></pre>
 <pre class="r"><code>obj_addr(y[[3]])</code></pre>
-<pre><code>## [1] &quot;0x7ff8200e8000&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd938b98000&quot;</code></pre>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>On which line does <code>a</code> get copied in the following
@@ -471,13 +471,13 @@ example?</li>
 </ol>
 <pre class="r"><code>a &lt;- c(1, 5, 3, 2)
 obj_addr(a)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f7f88b48&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd907d2aca8&quot;</code></pre>
 <pre class="r"><code>b &lt;- a
 obj_addr(b)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f7f88b48&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd907d2aca8&quot;</code></pre>
 <pre class="r"><code>b[[1]] &lt;- 10
 obj_addr(b)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f7e55e28&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd907d041a8&quot;</code></pre>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
 </div>
 <div id="exercises" class="section level2">
@@ -493,13 +493,13 @@ d &lt;- 1:10</code></pre>
 <p>Answer: a, b, and c all point to the same object (1:10). d points to
 an identical object at a different address.</p>
 <pre class="r"><code>obj_addr(a)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f526f0e8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd8f72c30b8&quot;</code></pre>
 <pre class="r"><code>obj_addr(b)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f526f0e8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd8f72c30b8&quot;</code></pre>
 <pre class="r"><code>obj_addr(c)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f526f0e8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd8f72c30b8&quot;</code></pre>
 <pre class="r"><code>obj_addr(d)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f5ff0c50&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd8f621fe78&quot;</code></pre>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>The following code accesses the mean function in multiple ways. Do
@@ -513,15 +513,15 @@ evalq(mean)
 match.fun(&quot;mean&quot;)</code></pre>
 <p>Check the <code>obj_addr</code>:</p>
 <pre class="r"><code>obj_addr(mean)</code></pre>
-<pre><code>## [1] &quot;0x7ff8304915c8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd924d23d90&quot;</code></pre>
 <pre class="r"><code>obj_addr(base::mean)</code></pre>
-<pre><code>## [1] &quot;0x7ff8304915c8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd924d23d90&quot;</code></pre>
 <pre class="r"><code>obj_addr(get(&quot;mean&quot;))</code></pre>
-<pre><code>## [1] &quot;0x7ff8304915c8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd924d23d90&quot;</code></pre>
 <pre class="r"><code>obj_addr(evalq(mean))</code></pre>
-<pre><code>## [1] &quot;0x7ff8304915c8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd924d23d90&quot;</code></pre>
 <pre class="r"><code>obj_addr(match.fun(&quot;mean&quot;))</code></pre>
-<pre><code>## [1] &quot;0x7ff8304915c8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd924d23d90&quot;</code></pre>
 <p>Answer: they do.</p>
 <hr />
 <ol start="3" style="list-style-type: decimal">
@@ -575,20 +575,20 @@ the code shown earlier in the section.</li>
 <pre class="r"><code>rm(list = ls())
 x &lt;- c(1L, 2L, 3L)
 tracemem(x)</code></pre>
-<pre><code>## [1] &quot;&lt;0x7ff7f4e13dc8&gt;&quot;</code></pre>
+<pre><code>## [1] &quot;&lt;0x7fd903dbf248&gt;&quot;</code></pre>
 <pre class="r"><code>x[[3]] &lt;- 4</code></pre>
-<pre><code>## tracemem[0x7ff7f4e13dc8 -&gt; 0x7ff8143ccb88]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
-## tracemem[0x7ff8143ccb88 -&gt; 0x7ff7f7b23c78]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre><code>## tracemem[0x7fd903dbf248 -&gt; 0x7fd903db9308]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
+## tracemem[0x7fd903db9308 -&gt; 0x7fd9042173d8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
 <pre class="r"><code>untracemem(x)</code></pre>
 <p>Answer: unclear. The behavior in R 4.2.0 seems to have changed, since
 this code shows two copies:</p>
 <pre class="r"><code>rm(list = ls())
 x &lt;- c(1, 2, 3)
 tracemem(x)</code></pre>
-<pre><code>## [1] &quot;&lt;0x7ff8036aae68&gt;&quot;</code></pre>
+<pre><code>## [1] &quot;&lt;0x7fd904d87eb8&gt;&quot;</code></pre>
 <pre class="r"><code>y &lt;- x
 y[[3]] &lt;- 4L</code></pre>
-<pre><code>## tracemem[0x7ff8036aae68 -&gt; 0x7ff8036572c8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre><code>## tracemem[0x7fd904d87eb8 -&gt; 0x7fd904b0b318]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
 <pre class="r"><code>y[[3]] &lt;- 5L
 untracemem(x)</code></pre>
 <hr />
@@ -602,27 +602,27 @@ c &lt;- list(b, a, 1:10)
 print(&quot;first object&quot;)</code></pre>
 <pre><code>## [1] &quot;first object&quot;</code></pre>
 <pre class="r"><code>obj_addr(a)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f19c8ba8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd9032a15b8&quot;</code></pre>
 <pre class="r"><code>obj_addr(b[[1]])</code></pre>
-<pre><code>## [1] &quot;0x7ff7f19c8ba8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd9032a15b8&quot;</code></pre>
 <pre class="r"><code>obj_addr(b[[2]])</code></pre>
-<pre><code>## [1] &quot;0x7ff7f19c8ba8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd9032a15b8&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[2]])</code></pre>
-<pre><code>## [1] &quot;0x7ff7f19c8ba8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd9032a15b8&quot;</code></pre>
 <pre class="r"><code>print(&quot;second object&quot;)</code></pre>
 <pre><code>## [1] &quot;second object&quot;</code></pre>
 <pre class="r"><code>obj_addr(b)</code></pre>
-<pre><code>## [1] &quot;0x7ff7f5b60988&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd904f06288&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[1]])</code></pre>
-<pre><code>## [1] &quot;0x7ff7f5b60988&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd904f06288&quot;</code></pre>
 <pre class="r"><code>print(&quot;third object&quot;)</code></pre>
 <pre><code>## [1] &quot;third object&quot;</code></pre>
 <pre class="r"><code>obj_addr(c)</code></pre>
-<pre><code>## [1] &quot;0x7ff801311658&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd904017bf8&quot;</code></pre>
 <pre class="r"><code>print(&quot;fourth object (?)&quot;)</code></pre>
 <pre><code>## [1] &quot;fourth object (?)&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[3]])</code></pre>
-<pre><code>## [1] &quot;0x7ff7f18740a8&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fd8f6fbfc08&quot;</code></pre>
 <p>Answer: four different objects with multiple names.</p>
 <hr />
 <ol start="4" style="list-style-type: decimal">
@@ -633,10 +633,10 @@ print(&quot;first object&quot;)</code></pre>
 x[[2]] &lt;- x
 
 ref(x)</code></pre>
-<pre><code>## █ [1:0x7ff7f1c69f48] &lt;list&gt; 
-## ├─[2:0x7ff807caf820] &lt;int&gt; 
-## └─█ [3:0x7ff7f2e80620] &lt;list&gt; 
-##   └─[2:0x7ff807caf820]</code></pre>
+<pre><code>## █ [1:0x7fd903be5708] &lt;list&gt; 
+## ├─[2:0x7fd8f6e5a6f8] &lt;int&gt; 
+## └─█ [3:0x7fd8f533ea48] &lt;list&gt; 
+##   └─[2:0x7fd8f6e5a6f8]</code></pre>
 <p>Initially x is a list of one element, an int vector 1:10. Then a
 second list element is added, which points to the original int
 vector.</p>
@@ -752,13 +752,13 @@ xm &lt;- x_medians(5)
 head(df_medians(xm$x, xm$medians), 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.102394723","2":"0.17902566","3":"-0.10089373","4":"0.21445639","5":"-0.37592780","_rn_":"1"},{"1":"-0.255442357","2":"0.28698373","3":"-0.25874371","4":"0.17035410","5":"0.22967007","_rn_":"2"},{"1":"0.215970509","2":"0.14422755","3":"0.29900415","4":"0.31775185","5":"-0.36365103","_rn_":"3"},{"1":"-0.104613621","2":"-0.20673793","3":"0.27564481","4":"0.30511202","5":"0.35354418","_rn_":"4"},{"1":"0.055536674","2":"0.22602866","3":"-0.28336414","4":"-0.29315306","5":"-0.01452990","_rn_":"5"},{"1":"-0.182121955","2":"-0.42534194","3":"0.13694030","4":"-0.11074475","5":"-0.40427593","_rn_":"6"},{"1":"-0.009803301","2":"0.44020300","3":"0.23212269","4":"0.43460702","5":"0.43936258","_rn_":"7"},{"1":"0.395812379","2":"-0.05343772","3":"0.22926228","4":"0.36628442","5":"-0.08114495","_rn_":"8"},{"1":"0.050644045","2":"0.01690106","3":"0.21096189","4":"-0.05235858","5":"0.41997523","_rn_":"9"},{"1":"0.025926900","2":"-0.41189273","3":"-0.03664709","4":"-0.31314729","5":"-0.49757023","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.38547197","2":"-0.08824480","3":"-0.27472737","4":"-0.26551280","5":"-0.33194054","_rn_":"1"},{"1":"0.14029801","2":"-0.04596551","3":"0.21515484","4":"-0.04720915","5":"-0.44383423","_rn_":"2"},{"1":"-0.20838045","2":"-0.45888692","3":"-0.12974320","4":"0.35493885","5":"0.43951457","_rn_":"3"},{"1":"-0.41502127","2":"-0.07562474","3":"0.07260004","4":"0.30780996","5":"-0.07948386","_rn_":"4"},{"1":"-0.02034712","2":"0.01599118","3":"-0.41473260","4":"0.27239006","5":"-0.40655990","_rn_":"5"},{"1":"0.48238403","2":"0.10840181","3":"-0.18516583","4":"-0.47736786","5":"0.04124224","_rn_":"6"},{"1":"-0.10134913","2":"-0.34802958","3":"-0.05502901","4":"-0.27414521","5":"-0.14400401","_rn_":"7"},{"1":"0.02947279","2":"0.29729614","3":"-0.11452664","4":"-0.25246340","5":"0.28155036","_rn_":"8"},{"1":"0.23062438","2":"0.42607125","3":"0.37665819","4":"0.43042069","5":"0.17802410","_rn_":"9"},{"1":"-0.40674687","2":"0.33716613","3":"-0.44582717","4":"-0.47076228","5":"-0.20547173","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>head(as.data.frame(ls_medians(xm$x, xm$medians)), 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.102394723","2":"0.17902566","3":"-0.10089373","4":"0.21445639","5":"-0.37592780","_rn_":"1"},{"1":"-0.255442357","2":"0.28698373","3":"-0.25874371","4":"0.17035410","5":"0.22967007","_rn_":"2"},{"1":"0.215970509","2":"0.14422755","3":"0.29900415","4":"0.31775185","5":"-0.36365103","_rn_":"3"},{"1":"-0.104613621","2":"-0.20673793","3":"0.27564481","4":"0.30511202","5":"0.35354418","_rn_":"4"},{"1":"0.055536674","2":"0.22602866","3":"-0.28336414","4":"-0.29315306","5":"-0.01452990","_rn_":"5"},{"1":"-0.182121955","2":"-0.42534194","3":"0.13694030","4":"-0.11074475","5":"-0.40427593","_rn_":"6"},{"1":"-0.009803301","2":"0.44020300","3":"0.23212269","4":"0.43460702","5":"0.43936258","_rn_":"7"},{"1":"0.395812379","2":"-0.05343772","3":"0.22926228","4":"0.36628442","5":"-0.08114495","_rn_":"8"},{"1":"0.050644045","2":"0.01690106","3":"0.21096189","4":"-0.05235858","5":"0.41997523","_rn_":"9"},{"1":"0.025926900","2":"-0.41189273","3":"-0.03664709","4":"-0.31314729","5":"-0.49757023","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.38547197","2":"-0.08824480","3":"-0.27472737","4":"-0.26551280","5":"-0.33194054","_rn_":"1"},{"1":"0.14029801","2":"-0.04596551","3":"0.21515484","4":"-0.04720915","5":"-0.44383423","_rn_":"2"},{"1":"-0.20838045","2":"-0.45888692","3":"-0.12974320","4":"0.35493885","5":"0.43951457","_rn_":"3"},{"1":"-0.41502127","2":"-0.07562474","3":"0.07260004","4":"0.30780996","5":"-0.07948386","_rn_":"4"},{"1":"-0.02034712","2":"0.01599118","3":"-0.41473260","4":"0.27239006","5":"-0.40655990","_rn_":"5"},{"1":"0.48238403","2":"0.10840181","3":"-0.18516583","4":"-0.47736786","5":"0.04124224","_rn_":"6"},{"1":"-0.10134913","2":"-0.34802958","3":"-0.05502901","4":"-0.27414521","5":"-0.14400401","_rn_":"7"},{"1":"0.02947279","2":"0.29729614","3":"-0.11452664","4":"-0.25246340","5":"0.28155036","_rn_":"8"},{"1":"0.23062438","2":"0.42607125","3":"0.37665819","4":"0.43042069","5":"0.17802410","_rn_":"9"},{"1":"-0.40674687","2":"0.33716613","3":"-0.44582717","4":"-0.47076228","5":"-0.20547173","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code># benchmark
@@ -766,40 +766,40 @@ mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>## # A tibble: 1 × 6
 ##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 df_medians(xm$x, xm$medians)    116µs    252µs     3567.     391KB     2.36</code></pre>
+## 1 df_medians(xm$x, xm$medians)    102µs    258µs     3280.     391KB     2.76</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>## # A tibble: 1 × 6
 ##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 ls_medians(xm$x, xm$medians)   72.6µs    189µs     4757.     391KB        0</code></pre>
+## 1 ls_medians(xm$x, xm$medians)   44.5µs    178µs     5300.     391KB        0</code></pre>
 <pre class="r"><code>mark(as.data.frame(ls_medians(xm$x, xm$medians))) # as.data.frame introduces significant overhead</code></pre>
 <pre><code>## # A tibble: 1 × 6
 ##   expression                                       min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt;                                  &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 as.data.frame(ls_medians(xm$x, xm$medians))    433µs    587µs     1498.     391KB     6.51</code></pre>
+## 1 as.data.frame(ls_medians(xm$x, xm$medians))    278µs    454µs     1935.     391KB     5.86</code></pre>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
 <pre class="r"><code>xm &lt;- x_medians(10)
 mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>## # A tibble: 1 × 6
 ##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 df_medians(xm$x, xm$medians)    174µs    288µs     3430.     391KB     3.42</code></pre>
+## 1 df_medians(xm$x, xm$medians)    187µs    356µs     2234.     391KB     4.02</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>## # A tibble: 1 × 6
 ##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 ls_medians(xm$x, xm$medians)   47.7µs    149µs     6812.     391KB     2.30</code></pre>
+## 1 ls_medians(xm$x, xm$medians)   56.6µs    175µs     5224.     391KB        0</code></pre>
 <pre class="r"><code>xm &lt;- x_medians(20)
 mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>## # A tibble: 1 × 6
 ##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 df_medians(xm$x, xm$medians)    273µs    428µs     2127.     400KB     2.14</code></pre>
+## 1 df_medians(xm$x, xm$medians)    274µs    423µs     2219.     400KB     6.53</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>## # A tibble: 1 × 6
 ##   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 ##   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-## 1 ls_medians(xm$x, xm$medians)     62µs    200µs     4780.     392KB     2.20</code></pre>
+## 1 ls_medians(xm$x, xm$medians)   63.3µs    197µs     4831.     392KB     2.32</code></pre>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the
 list method is 5 times as fast. So, the list method is near constant
 time regardless of columns, whereas the data.frame method scales
