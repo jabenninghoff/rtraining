@@ -461,3 +461,70 @@ Answers:
 - `is.vector(x, mode = "any")`: tests if x is an atomic vector OR a list or expression
 
 ---
+
+## 3.3.4 Exercises
+
+1.  How is `setNames()` implemented? How is `unname()` implemented?
+    Read the source code.
+
+```{r}
+setNames
+unname
+```
+
+Answer: using `names()`, and `dimnames()` for `unname()`.
+
+---
+
+2.  What does `dim()` return when applied to a 1-dimensional vector?
+    When might you use `NROW()` or `NCOL()`?
+
+```{r}
+dim(1:3)
+nrow(1:12)
+NROW(1:12)
+ncol(1:12)
+NCOL(1:12)
+```
+
+Answers: `NULL`. `NROW` and `NCOL` are useful when comparing `NULL` dimensional vectors with
+matrices and arrays.
+
+---
+
+3.  How would you describe the following three objects? What makes them
+    different from `1:5`?
+
+```{r}
+x1 <- array(1:5, c(1, 1, 5))
+x2 <- array(1:5, c(1, 5, 1))
+x3 <- array(1:5, c(5, 1, 1))
+
+x1
+x2
+x3
+```
+
+They have a 3-dimensional structure, arranged in different ways, along the z, x, and y axis.
+
+---
+
+4.  An early draft used this code to illustrate `structure()`:
+
+```{r}
+structure(1:5, comment = "my attribute")
+```
+
+    But when you print that object you don't see the comment attribute.
+    Why? Is the attribute missing, or is there something else special about
+    it? (Hint: try using help.)
+
+```{r}
+factor("green", levels = c("red", "amber", "green"))
+dput(factor("green", levels = c("red", "amber", "green")))
+```
+
+Answer: print doesn't display the attributes for arbitrary structures, only defined classes, like
+factors (for example, above).
+
+---
