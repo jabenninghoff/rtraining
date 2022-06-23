@@ -528,3 +528,57 @@ Answer: print doesn't display the attributes for arbitrary structures, only defi
 factors (for example, above).
 
 ---
+
+## 3.4.5 Exercises
+
+1.  What sort of object does `table()` return? What is its type? What 
+    attributes does it have? How does the dimensionality change as you
+    tabulate more variables?
+
+```{r}
+a <- letters[1:3]
+a_table <- table(a, sample(a))
+a_table
+
+typeof(a_table)
+attributes(a_table)
+
+b <- letters[1:4]
+b_table <- table(b, sample(b))
+b_table
+
+attributes(b_table)
+```
+
+Answer: an object of class "table", an array of integer values, with type "integer". Attributes
+listed above, the dimensionality is always n by n, where n is the number of variables tabulated.
+
+---
+
+2.  What happens to a factor when you modify its levels? 
+
+```{r}
+f1 <- factor(letters)
+f1
+levels(f1) <- rev(levels(f1))
+f1
+```
+
+Answer: ~~the factor will remain the same, but the attributes will change.~~ the factor and its
+levels are reversed.
+
+---
+
+3.  What does this code do? How do `f2` and `f3` differ from `f1`?
+
+```{r}
+f2 <- rev(factor(letters))
+f2
+f3 <- factor(letters, levels = rev(letters))
+f3
+```
+
+Answer: both create a reversed list of letters. f3 also has reversed levels but f2 does not.
+(correct!)
+
+---
