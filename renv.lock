@@ -511,10 +511,10 @@
     },
     "downlit": {
       "Package": "downlit",
-      "Version": "0.4.0",
+      "Version": "0.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ba63dc9ab5a31f3209892437e40c5f60",
+      "Hash": "4850b3f46b1e7dd8c666f68aacad6951",
       "Requirements": [
         "brio",
         "desc",
@@ -524,6 +524,7 @@
         "memoise",
         "rlang",
         "vctrs",
+        "withr",
         "yaml"
       ]
     },
@@ -927,7 +928,7 @@
       "RemoteSha": "fc34c0eba0d3eaf35376ac8f1cf61354fa2f1637",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "a6ad0ee68bb2a56a3d6ceb18a46ccc66",
+      "Hash": "465334cd95cb54f2999f05442ba2d746",
       "Requirements": [
         "ggplot2"
       ]
@@ -1032,13 +1033,14 @@
     },
     "lobstr": {
       "Package": "lobstr",
-      "Version": "1.1.1",
+      "Version": "1.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3354c874f6008f7f1e418526df8ecd8a",
+      "Hash": "f2a94f8fc9db382a642e965339635ad6",
       "Requirements": [
-        "Rcpp",
+        "cpp11",
         "crayon",
+        "prettyunits",
         "rlang"
       ]
     },
@@ -1205,10 +1207,10 @@
     },
     "pkgdown": {
       "Package": "pkgdown",
-      "Version": "2.0.4",
+      "Version": "2.0.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "170f882396f07f525a4d017a8e9d2790",
+      "Hash": "584e7c13c2cb3a1d4b32166dc411f3bb",
       "Requirements": [
         "bslib",
         "callr",
@@ -1371,15 +1373,15 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "1.5.5",
+      "Version": "1.5.6",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "8708f24fcf1cf14a9ea3f4eb80e0159e0376da14",
+      "RemoteSha": "d2abd77179efa55e10ab07214f713d6e7e7d512f",
       "RemoteHost": "api.github.com",
-      "Hash": "d1e284d62693406988445e5d5c1e8469",
+      "Hash": "b69f9ce076763f0a714ad587a77d6ebf",
       "Requirements": [
         "cli",
         "desc",
