@@ -622,3 +622,66 @@ dput(unlist(d))
 Answer: `c()` preserves the list structure. `unlist()` converts both to `double`.
 
 ---
+
+## 3.6.8 Exercises
+
+1.  Can you have a data frame with zero rows? What about zero columns?
+
+```{r}
+# from data.frame() examples:
+df <- data.frame(x = 1:3, y = 4:6, z = 7:9)
+
+df
+df[, FALSE]
+df[FALSE, ]
+df[FALSE, FALSE]
+```
+
+Answer: yes!
+
+---
+
+2.  What happens if you attempt to set rownames that are not unique?
+
+```{r}
+rownames(df)
+try(rownames(df) <- c("a", "a", "b"))
+```
+
+Answer: error, duplicates not allowed.
+
+---
+
+3.  If `df` is a data frame, what can you say about `t(df)`, and `t(t(df))`? 
+    Perform some experiments, making sure to try different column types.
+
+```{r}
+t(df)
+t(t(df))
+
+data.frame(x = 1:3, y = c("a", "b", "c"), z = 4L:6L, stringsAsFactors = FALSE)
+df2
+t(df2)
+t(t(df2))
+```
+
+Answer: `t()` coerces the vector types, so `t(t(df))` is the same as `df` only when all columns are
+the same type.
+
+---
+
+4.  What does `as.matrix()` do when applied to a data frame with 
+    columns of different types? How does it differ from `data.matrix()`?
+
+```{r}
+as.matrix(df)
+as.matrix(df2)
+data.matrix(df2)
+as.data.frame(data.matrix(df2))
+as.data.frame(data.matrix(data.frame(x = 1:3, y = c(0, 0.5, 1), z = 4:6)))
+```
+
+Answer: `as.matrix()` coerces all elements to the same type. `data.matrix()` coerces elements to
+either integer (when possible) or double (when not).
+
+---
