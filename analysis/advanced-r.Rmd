@@ -659,7 +659,7 @@ Answer: error, duplicates not allowed.
 t(df)
 t(t(df))
 
-data.frame(x = 1:3, y = c("a", "b", "c"), z = 4L:6L, stringsAsFactors = FALSE)
+df2 <- data.frame(x = 1:3, y = c("a", "b", "c"), z = 4L:6L, stringsAsFactors = FALSE)
 df2
 t(df2)
 t(t(df2))
