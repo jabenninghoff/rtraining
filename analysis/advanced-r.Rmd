@@ -582,3 +582,43 @@ Answer: both create a reversed list of letters. f3 also has reversed levels but 
 (correct!)
 
 ---
+
+## 3.5.4 Exercises
+
+1.  List all the ways that a list differs from an atomic vector.
+
+Answers:
+
+- Each element can be a different type
+- Each element is a reference to an object
+- List size can be smaller since elements are references
+- Lists can contain other lists
+
+---
+
+2.  Why do you need to use `unlist()` to convert a list to an 
+    atomic vector? Why doesn't `as.vector()` work? 
+
+```{r}
+is.vector(list(1:4))
+dput(as.vector(list(1:4)))
+```
+
+Answer: a list is considered a vector by `as.vector()`.
+
+---
+
+3.  Compare and contrast `c()` and `unlist()` when combining a 
+    date and date-time into a single vector.
+
+```{r}
+d <- list(date = as.Date("2022-06-25"), datetime = as.POSIXct("2022-06-25 09:59:40 CDT"))
+dput(d)
+
+dput(c(d)) # nolint: unneeded_concatenation_linter.
+dput(unlist(d))
+```
+
+Answer: `c()` preserves the list structure. `unlist()` converts both to `double`.
+
+---
