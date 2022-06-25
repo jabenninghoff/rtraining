@@ -1,3 +1,7 @@
+# rtraining 0.8.3
+
+* Updated Advanced R Workbook: completed Chapter 3
+
 # rtraining 0.8.2
 
 * Update links
