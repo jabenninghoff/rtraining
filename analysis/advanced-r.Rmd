@@ -685,3 +685,128 @@ Answer: `as.matrix()` coerces all elements to the same type. `data.matrix()` coe
 either integer (when possible) or double (when not).
 
 ---
+
+# 4 Subsetting
+
+R's subsetting operators are fast and powerful. Mastering them allows you to succinctly perform complex operations in a way that few other languages can match. Subsetting in R is easy to learn but hard to master because you need to internalise a number of interrelated concepts:
+
+* There are six ways to subset atomic vectors.
+
+* There are three subsetting operators, `[[`, `[`, and `$`.
+
+* Subsetting operators interact differently with different vector 
+  types (e.g., atomic vectors, lists, factors, matrices, and data frames).
+
+* Subsetting can be combined with assignment.
+
+Subsetting is a natural complement to `str()`. While `str()` shows you all the pieces of any object (its structure), subsetting allows you to pull out the pieces that you're interested in. For large, complex objects, I highly recommend using the interactive RStudio Viewer, which you can activate with `View(my_object)`.
+
+```{r}
+rm(list = ls())
+```
+
+## 4.2.6 Exercises
+
+1.  Fix each of the following common data frame subsetting errors:
+
+```{r, eval = FALSE}
+# nolint start: commented_code_linter.
+# mtcars[mtcars$cyl = 4, ]
+mtcars[mtcars$cyl == 4, ]
+
+# mtcars[-1:4, ]
+mtcars[-(1:4), ]
+
+# mtcars[mtcars$cyl <= 5]
+mtcars[mtcars$cyl <= 5, ]
+
+# mtcars[mtcars$cyl == 4 | 6, ]
+mtcars[mtcars$cyl == 4 | mtcars$cyl == 6, ]
+# nolint end
+```
+
+Answer: fixed!
+
+---
+
+2.  Why does the following code yield five missing values? (Hint: why is 
+    it different from `x[NA_real_]`?)
+
+```{r}
+x <- 1:5
+x[NA]
+
+x[NA_real_]
+x[TRUE]
+```
+
+Answer: NA is a logical constant of length 1.
+
+---
+
+3.  What does `upper.tri()` return? How does subsetting a matrix with it 
+    work? Do we need any additional subsetting rules to describe its behaviour?
+
+```{r}
+x <- outer(1:5, 1:5, FUN = "*")
+x
+x[upper.tri(x)]
+```
+
+Answer: `upper.tri()` returns a matrix of logicals, which can be used to subset the upper triangle.
+This is subsetting by matrix, which is new.
+
+---
+
+4.  Why does `mtcars[1:20]` return an error? How does it differ from the 
+    similar `mtcars[1:20, ]`?
+
+```{r}
+try(mtcars[1:20])
+mtcars[1:20, ]
+```
+
+Answer: `mtcars[1:20]` selects the first 20 columns, but there are only 11. `mtcars[1:20, ]` selects
+the first 20 rows of `r nrow(mtcars)`.
+
+---
+
+5.  Implement your own function that extracts the diagonal entries from a
+    matrix (it should behave like `diag(x)` where `x` is a matrix).
+
+```{r}
+m <- matrix(ncol = 3, byrow = TRUE, c(
+  1, 4, 7,
+  2, 5, 8,
+  3, 6, 9
+))
+m
+diag(m)
+
+my_diag <- function(x) {
+  diag_element <- function(n, x) {
+    x[n, n]
+  }
+  vapply(seq_len(nrow(m)), diag_element, 1, x)
+}
+my_diag(m)
+```
+
+Answer: code above.
+
+---
+
+5.  What does `df[is.na(df)] <- 0` do? How does it work?
+
+Answer: sets the `NA` values in `df` to `0`, by first selecting `NA` values then assigning `0`.
+
+```{r}
+df <- data.frame(x = c(1, 2, NA), y = c(4, NA, 6), z = c(NA, 8, 9))
+df
+df[is.na(df)] <- 0
+df
+```
+
+Correct!
+
+---
