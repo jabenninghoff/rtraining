@@ -810,3 +810,40 @@ df
 Correct!
 
 ---
+
+## 4.3.5 Exercises
+
+1.  Brainstorm as many ways as possible to extract the third value from the
+    `cyl` variable in the `mtcars` dataset.
+
+```{r}
+mtcars$cyl[3]
+mtcars$cyl[[3]]
+mtcars[["cyl"]][[3]]
+mtcars[3, 2]
+mtcars[[3, 2]]
+mtcars[["Datsun 710", "cyl"]]
+mtcars[-c(1:2, 4:32), -c(1, 3:11)]
+```
+
+Answer: code above (some variations omitted). There are many more.
+
+---
+
+2.  Given a linear model, e.g., `mod <- lm(mpg ~ wt, data = mtcars)`, extract
+    the residual degrees of freedom. Then extract the R squared from the model
+    summary (`summary(mod)`)
+
+```{r}
+mod <- lm(mpg ~ wt, data = mtcars)
+mod$df.residual
+
+mod_sum <- summary(mod)
+mod_sum$r.squared
+
+mod_sum
+```
+
+Answer: code above.
+
+---
