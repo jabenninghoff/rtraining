@@ -847,3 +847,57 @@ mod_sum
 Answer: code above.
 
 ---
+
+## 4.5.9 Exercises
+
+1.  How would you randomly permute the columns of a data frame? (This is an
+    important technique in random forests.) Can you simultaneously permute 
+    the rows and columns in one step?
+
+```{r}
+df <- data.frame(x = 1:5, y = 5:1, z = letters[1:5], row.names = 1:5)
+
+df[, sample(ncol(df))]
+
+df[sample(nrow(df)), sample(ncol(df))]
+```
+
+Answer: using `sample()`. Yes!
+
+---
+
+2.  How would you select a random sample of `m` rows from a data frame? 
+    What if the sample had to be contiguous (i.e., with an initial row, a 
+    final row, and every row in between)?
+
+```{r}
+sample_rows <- function(df, m, contiguous = FALSE) {
+  if (m > nrow(df)) {
+    stop("sample size '", m, "' is larger than the number of rows, '", nrow(df), "'")
+  }
+  if (contiguous) {
+    first_row <- sample(nrow(df) - m + 1, 1)
+    last_row <- first_row + m - 1
+    return(df[first_row:last_row, ])
+  }
+  df[sample(nrow(df), m), ]
+}
+
+sample_rows(df, 3)
+sample_rows(df, 3, contiguous = TRUE)
+try(sample_rows(df, 6))
+```
+
+Answer: code above.
+
+---
+    
+3.  How could you put the columns in a data frame in alphabetical order?
+
+```{r}
+mtcars[sort(colnames(mtcars))]
+```
+
+Answer: using `sort(colnames)`.
+
+---
