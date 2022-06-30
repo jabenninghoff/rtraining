@@ -901,3 +901,13 @@ mtcars[sort(colnames(mtcars))]
 Answer: using `sort(colnames)`.
 
 ---
+
+# 5 Control flow
+
+There are two primary tools of control flow: choices and loops. Choices, like `if` statements and `switch()` calls, allow you to run different code depending on the input. Loops, like `for` and `while`, allow you to repeatedly run code, typically with changing options. I'd expect that you're already familiar with the basics of these functions so I'll briefly cover some technical details and then introduce some useful, but lesser known, features.
+
+The condition system (messages, warnings, and errors), which you'll learn about in Chapter 8, also provides non-local control flow. 
+
+```{r}
+rm(list = ls())
+```
