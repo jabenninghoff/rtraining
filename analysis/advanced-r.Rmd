@@ -999,3 +999,58 @@ for (i in 1:3) {
 Answer: the index is updated at the beginning of each loop.
 
 ---
+
+# 6 Functions
+
+If you're reading this book, you've probably already created many R functions and know how to use them to reduce duplication in your code. In this chapter, you'll learn how to turn that informal, working knowledge into more rigorous, theoretical understanding. And while you'll see some interesting tricks and techniques along the way, keep in mind that what you'll learn here will be important for understanding the more advanced topics discussed later in the book.
+
+```{r}
+rm(list = ls())
+```
+
+## 6 Quiz
+
+Answer the following questions to see if you can safely skip this chapter. You can find the answers in Section \@ref(function-answers).
+
+1.  What are the three components of a function? a: arguments, code, return value [body, arguments,
+    environment]
+
+2.  What does the following code return? a: 11 [correct!]
+
+```{r, eval = FALSE}
+x <- 10
+f1 <- function(x) {
+  function() {
+    x + 10
+  }
+}
+f1(1)()
+```
+
+3.  How would you usually write this code? a: `1 + 2 * 3` [correct! ... `1 + (2 * 3)`]
+
+```{r, eval = FALSE}
+`+`(1, `*`(2, 3))
+```
+
+4.  How could you make this call easier to read? `mean(c(1:10, NA), na.rm = TRUE)` [correct!]
+
+```{r, eval = FALSE}
+mean(, TRUE, x = c(1:10, NA)) # nolint: missing_argument_linter.
+```
+
+5.  Does the following code throw an error when executed? Why or why not? a: no, due to lazy
+    evaluation, the `stop()` is never run [correct! ... second argument is never used]
+
+```{r, eval = FALSE}
+f2 <- function(a, b) {
+  a * 10
+}
+f2(10, stop("This is an error!"))
+```
+
+6.  What is an infix function? How do you write it? What's a replacement 
+    function? How do you write it? a: `function(x) x`. ??? [see 6.8.3 and 6.8.4]
+
+7.  How do you ensure that cleanup action occurs regardless of how a function 
+    exits? a: ??? [`on.exit()`]
