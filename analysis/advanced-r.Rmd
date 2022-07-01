@@ -911,3 +911,45 @@ The condition system (messages, warnings, and errors), which you'll learn about 
 ```{r}
 rm(list = ls())
 ```
+
+## 5.2.4 Exercises
+
+1.  What type of vector does each of the following calls to `ifelse()`
+    return? Read the documentation and write down the rules in your own words.
+
+```{r, eval = FALSE}
+ifelse(TRUE, 1, "no")
+typeof(ifelse(TRUE, 1, "no")) # double
+ifelse(FALSE, 1, "no")
+typeof(ifelse(FALSE, 1, "no")) # character
+ifelse(NA, 1, "no")
+typeof(ifelse(NA, 1, "no")) # logical
+ifelse(NULL, 1, "no")
+```
+
+
+Answer:
+
+- if `test` is true, return a vector of the same length as `test` (1) populated with "yes" - here 1
+  is a double, 1L would be integer
+- if `test` is false, return a vector of the same length as `test` (1) populated with "no" - here
+  "no" is a character
+- if `test` is `NA`, return `NA`, and if `test` is `NULL`, return `logical(0)`
+
+---
+
+2.  Why does the following code work?
+
+```{r}
+x <- 1:10
+if (length(x)) "not empty" else "empty"
+
+x <- numeric()
+if (length(x)) "not empty" else "empty"
+```
+
+Answer: in the first example, `length(x)` is nonzero, which evaluates to `TRUE`. In the second
+example, `numeric()` returns a vector of length 0 (the default), `length(x)` is zero, which
+evaluates to `FALSE`.
+
+---
