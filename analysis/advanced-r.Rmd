@@ -1143,3 +1143,44 @@ Answer: the `formals()`, `body()` and `environment()`.
 Answer: when it is created in the global environment.
 
 ---
+
+## 6.4.5 Exercises
+
+1. What does the following code return? Why? Describe how each of the three
+   `c`'s is interpreted.
+
+```{r, eval = FALSE}
+c <- 10
+c(c = c)
+```
+
+Answer: a named vector, `c 10`. The first and final c is a variable. The second c is a function
+name. the third c is a name.
+
+---
+
+2. What are the four principles that govern how R looks for values?
+
+Answer: name masking, functions versus variables, a fresh start, dynamic lookup.
+
+---
+
+3. What does the following function return? Make a prediction before 
+   running the code yourself.
+
+```{r, results = "hide"}
+f <- function(x) {
+  f <- function(x) { # return value of this is 101
+    f <- function() {
+      x^2
+    }
+    f() + 1
+  }
+  f(x) * 2
+}
+f(10)
+```
+
+Answer: 202. Correct!
+
+---
