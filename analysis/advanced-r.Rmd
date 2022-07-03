@@ -1333,3 +1333,80 @@ Answer: `plot.default()` discards `col` and several other arguments when calling
 `plot.window()`, and `title()`.
 
 ---
+
+## 6.7.5 Exercises
+
+1.  What does `load()` return? Why don't you normally see these values?
+
+Answer: from the docs, `load()` returns "A character vector of the names of objects created,
+invisibly."
+
+---
+
+2.  What does `write.table()` return? What would be more useful?
+
+Answer: it returns `invisible(NULL)`. Returning the written table or the argument `x` would be more
+useful.
+
+---
+
+3.  How does the `chdir` parameter of `source()` compare to `with_dir()`? Why 
+    might you prefer one to the other?
+
+Answer: both temporarily change the working directory. `chdir` is preferable since this is expected
+behavior for the function, unless you need to set a working directory other than the directory
+containing `file`.
+
+---
+
+4.  Write a function that opens a graphics device, runs the supplied code, and 
+    closes the graphics device (always, regardless of whether or not the 
+    plotting code works).
+
+```{r}
+with_png <- function(code, ...) {
+  png(...)
+  on.exit(dev.off(), add = TRUE, after = TRUE)
+  force(code)
+}
+
+with_png(
+  plot(1:10),
+  filename = "rendered/withpng-example.png",
+  # use 3 times default resolution which is close to retina display ppi (218-254 depending on model)
+  # https://support.apple.com/en-us/HT202471
+  width = 480 * 3, height = 480 * 3, res = 72 * 3
+)
+```
+
+![with_png output](rendered/withpng-example.png)
+
+Answer: code example above.
+
+---
+
+5.  We can use `on.exit()` to implement a simple version of `capture.output()`.
+
+```{r, eval = getRversion() >= "3.5"}
+# nolint start: object_name_linter, undesirable_function_linter.
+capture.output2 <- function(code) {
+  temp <- tempfile()
+  on.exit(file.remove(temp), add = TRUE, after = TRUE)
+  sink(temp)
+  on.exit(sink(), add = TRUE, after = TRUE)
+  force(code)
+  readLines(temp)
+}
+# nolint end
+capture.output2(cat("a", "b", "c", sep = "\n"))
+```
+
+Compare `capture.output()` to `capture.output2()`. How do the functions 
+differ? What features have I removed to make the key ideas easier to see? 
+How have I rewritten the key ideas so they're easier to understand?
+
+Answer: `capture.output2()` has fewer features and uses two separate calls to `on.exit()`. It simply
+returns the output (by line) from the executed code, and highlights the key idea, using `sink()` to
+capture output to a temporary file.
+
+---
