@@ -1285,3 +1285,51 @@ Answer: zero. `library()` uses `missing()` to return the list of available packa
 arguments.
 
 ---
+
+## 6.6.1 Exercises
+
+1.  Explain the following results:
+
+```{r}
+sum(1, 2, 3)
+mean(1, 2, 3)
+
+sum(1, 2, 3, na.omit = TRUE)
+mean(1, 2, 3, na.omit = TRUE)
+```
+
+Answer:
+
+- "`sum()` returns the sum of all the values present in its arguments." The first example is
+  straightforward. In the second sum example, `na.omit` isn't a valid argument (`na.rm` is), so the
+  `TRUE` value is passed to `...`, coerced to 1, and included in the sum.
+- `mean()` takes a single parameter, and passes on remaining arguments to `...`. In both cases, the
+  arguments after the `1` are silently dropped. The correct form would be `mean(c(1, 2, 3))`.
+
+---
+
+2.  Explain how to find the documentation for the named arguments in the 
+    following function call:
+
+```{r, fig.asp = 1, small_mar = TRUE, fig.width = 3}
+plot(1:10, col = "red", pch = 20, xlab = "x", col.lab = "blue")
+```
+
+Answer: in other functions, specifically `par()` and `plot.default()`.
+
+---
+
+3.  Why does `plot(1:10, col = "red")` only colour the points, not the axes 
+    or labels? Read the source code of `plot.default()` to find out.
+
+```r
+localAxis <- function(..., col, bg, pch, cex, lty, lwd) Axis(...)
+localBox <- function(..., col, bg, pch, cex, lty, lwd) box(...)
+localWindow <- function(..., col, bg, pch, cex, lty, lwd) plot.window(...)
+localTitle <- function(..., col, bg, pch, cex, lty, lwd) title(...)
+```
+
+Answer: `plot.default()` discards `col` and several other arguments when calling `Axis()`, `box()`,
+`plot.window()`, and `title()`.
+
+---
