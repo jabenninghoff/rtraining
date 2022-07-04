@@ -1,5 +1,5 @@
 ---
-title: "Advanced R Workbook"
+title: "Advanced R Workbook (Foundations)"
 date: '2022-06-12'
 output:
   html_notebook:
@@ -9,7 +9,7 @@ output:
       smooth_scroll: no
 ---
 
-Workbook for completing quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html), second edition.
+Workbook for completing quizzes and exercises from the "Foundations" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition.
 
 ```{r setup, message = FALSE, warning = FALSE}
 library(lobstr)
