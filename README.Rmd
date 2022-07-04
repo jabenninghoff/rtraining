@@ -38,6 +38,7 @@ Notebooks in this package:
 ```{r notebooks, echo = FALSE, results = 'asis'}
 notebooks <- dir_ls("analysis", glob = "*.Rmd") |>
   map_dfr(rmd_metadata) |>
+  arrange(date) |>
   mutate(bullet = paste0("- [", title, "](", url, ") (", date, "): ", description)) |>
   pull(bullet)
 
