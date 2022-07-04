@@ -23,10 +23,11 @@ Notebooks in this package:
 -   [FaultTree.widget
     Test](https://jabenninghoff.github.io/rtraining/FaultTree.html)
     (2021-09-30): Notebook for testing FaultTree.widget rendering fixes.
--   [Advanced R
-    Workbook](https://jabenninghoff.github.io/rtraining/advanced-r.html)
-    (2022-06-12): Workbook for completing quizzes and exercises from
-    [Advanced R](https://adv-r.hadley.nz/index.html), second edition.
+-   [Advanced R Workbook
+    (Foundations)](https://jabenninghoff.github.io/rtraining/advanced-r-1.html)
+    (2022-06-12): Workbook for completing quizzes and exercises from the
+    “Foundations” chapters of [Advanced
+    R](https://adv-r.hadley.nz/index.html), second edition.
 -   [R Setup
     Log](https://jabenninghoff.github.io/rtraining/r-setup-log.html)
     (2020-12-30): My notes on my personal R setup. I started my R
