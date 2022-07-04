@@ -14,6 +14,7 @@ Workbook for completing quizzes and exercises from the "Foundations" chapters of
 ```{r setup, message = FALSE, warning = FALSE}
 library(lobstr)
 library(bench)
+library(rlang)
 ```
 
 # Introduction
@@ -1571,5 +1572,111 @@ y %s% x
 ```
 
 Answer: code above.
+
+---
+
+# 7 Environments
+
+The environment is the data structure that powers scoping. This chapter dives deep into environments, describing their structure in depth, and using them to improve your understanding of the four scoping rules described in Section 6.4. 
+Understanding environments is not necessary for day-to-day use of R. But they are important to understand because they power many important R features like lexical scoping, namespaces, and R6 classes, and interact with evaluation to give you powerful tools for making domain specific languages, like dplyr and ggplot2.
+
+```{r}
+rm(list = ls())
+```
+
+## 7.2.7 Exercises
+
+1.  List three ways in which an environment differs from a list.
+
+Answer:
+
+- Every name in an environment must be unique
+- Environment names are not ordered
+- Environments have parents (except the empty environment)
+- Environments are not copied when modified
+
+---
+
+2.  Create an environment as illustrated by this picture.
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("assets/recursive-1.png")
+
+e1 <- env()
+e1$loop <- e1
+```
+
+Answer: code above.
+
+---
+
+3.  Create a pair of environments as illustrated by this picture.
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("assets/recursive-2.png")
+
+e2 <- env()
+e3 <- env()
+
+e2$loop <- e3
+e3$dedoop <- e2
+```
+
+Answer: code above.
+
+---
+
+4.  Explain why `e[[1]]` and `e[c("a", "b")]` don't make sense when `e` is
+    an environment.
+
+Answer: environment names are not ordered, and aren't copied when modified, so they aren't
+subsettable.
+
+---
+
+5.  Create a version of `env_poke()` that will only bind new names, never 
+    re-bind old names. Some programming languages only do this, and are known 
+    as [single assignment languages](http://en.wikipedia.org/wiki/Assignment_(computer_science)#Single_assignment).
+
+```{r}
+env_poke_new <- function(env, nm, value) {
+  if (!is.environment(env)) stop("env is not an enviornment")
+  if (nm %in% names(env)) stop("nm '", nm, "' already bound")
+  env[[nm]] <- value
+}
+
+e_test <- env(a = NULL, b = 2, c = "three")
+
+env_poke_new(e_test, "d", "success")
+try(env_poke_new(e_test, "a", "fail"))
+env_print(e_test)
+```
+
+Answer: code above.
+
+---
+
+6.  What does this function do? How does it differ from `<<-` and why
+    might you prefer it?
+
+```{r, error = TRUE}
+rm(a)
+rebind <- function(name, value, env = caller_env()) {
+  if (identical(env, empty_env())) {
+    stop("Can't find `", name, "`", call. = FALSE)
+  } else if (env_has(env, name)) {
+    env_poke(env, name, value)
+  } else {
+    rebind(name, value, env_parent(env))
+  }
+}
+try(rebind("a", 10))
+(a <- 5)
+rebind("a", 10)
+a
+```
+
+Answer: `<<-` will assign a value to the name in the global environment if the name is not found,
+`rebind()` does not.
 
 ---
