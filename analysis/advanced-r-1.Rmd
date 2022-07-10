@@ -1813,3 +1813,22 @@ e_str(fget)
 Answer: code above.
 
 ---
+
+## 7.5.5 Exercises
+
+1.  Write a function that lists all the variables defined in the environment
+    in which it was called. It should return the same results as `ls()`.
+
+```{r}
+my_ls <- function() {
+  vars <- sort(names(parent.frame()))
+  vars[!startsWith(vars, ".")]
+}
+
+ls()
+my_ls()
+```
+
+Answer: code above.
+
+---
