@@ -1858,3 +1858,34 @@ I also found it helpful to work through the underlying C code that implements th
 ```{r}
 rm(list = ls())
 ```
+
+## 8.2.4 Exercises
+
+1.  Write a wrapper around `file.remove()` that throws an error if the file
+    to be deleted does not exist.
+
+```{r}
+safe_file_remove <- function(...) {
+  if (!file.exists(...)) stop("file '", ..., "' does not exist")
+  file.remove(...)
+}
+
+tmp <- tempfile()
+
+file.create(tmp)
+safe_file_remove(tmp)
+file.remove(tmp)
+try(safe_file_remove(tmp))
+```
+
+Answer:
+
+---
+
+2.  What does the `appendLF` argument to `message()` do? How is it related to
+    `cat()`?
+
+Answer: `appendLF` controls whether or not a newline is added to the message; by default, `cat()`
+does not add a newline.
+
+---
