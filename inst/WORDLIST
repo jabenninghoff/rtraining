@@ -21,6 +21,8 @@ Rpres
 Rprofile
 Rproj
 SIRACon
+Seibel
+Tierney
 Wickham
 YAML
 Yan
@@ -38,6 +40,7 @@ github
 gitignore
 hadley
 homebrew
+http
 https
 ie
 internalise
@@ -53,6 +56,7 @@ macOS
 md
 miniUI
 nb
+nz
 openxlsx
 packrat
 pak
@@ -73,6 +77,8 @@ roxygen
 rstudio
 rtraining
 sethrobertson
+signalled
+signalling
 srf
 stringr
 styler
