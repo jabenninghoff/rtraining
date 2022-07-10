@@ -1636,7 +1636,7 @@ subsettable.
 
 5.  Create a version of `env_poke()` that will only bind new names, never 
     re-bind old names. Some programming languages only do this, and are known 
-    as [single assignment languages](http://en.wikipedia.org/wiki/Assignment_(computer_science)#Single_assignment).
+    as [single assignment languages](https://en.wikipedia.org/wiki/Assignment_(computer_science)#Single_assignment).
 
 ```{r}
 env_poke_new <- function(env, nm, value) {
@@ -1847,7 +1847,7 @@ I found two resources particularly useful when writing this chapter. You may als
   written, it provides a good overview of how the pieces fit together, and 
   some motivation for its design.
 
-* [_Beyond exception handling: conditions and restarts_](https://www.gigamonkeys.com/book/beyond-exception-handling-conditions-and-restarts.html)
+* [_Beyond exception handling: conditions and restarts_](https://gigamonkeys.com/book/beyond-exception-handling-conditions-and-restarts.html)
   by Peter Seibel. This describes exception handling in Lisp, which happens 
   to be very similar to R's approach. It provides useful motivation and 
   more sophisticated examples. I have provided an R translation of the 

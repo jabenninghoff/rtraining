@@ -187,11 +187,11 @@ Notes from the book. I've started writing all code in the package structure desc
 
 ### Naming Things
 
-Package names are pretty restricted, but Hadley has some good recommendation on [naming](https://r-pkgs.org/workflows101.html#naming) them, including the "[available](https://github.com/r-lib/available)" package, which I've started using.
+Package names are pretty restricted, but Hadley has some good recommendation on [naming](https://r-pkgs.org/Workflow101.html#naming) them, including the "[available](https://github.com/r-lib/available)" package, which I've started using.
 
 ### RStudio
 
-There are some helpful tips in the [RStudio](https://r-pkgs.org/workflows101.html#benefits-of-rstudio-projects) section, including 2 key shortcuts to remember:
+There are some helpful tips in the [RStudio](https://r-pkgs.org/Workflow101.html#benefits-of-rstudio-projects) section, including 2 key shortcuts to remember:
 
 - control-. to "Go to file/function"
 - alt-shift-k for the keyboard shortcut quick reference
@@ -203,7 +203,7 @@ Chapter 6, [The Package Within](https://r-pkgs.org/package-within.html), highlig
 
 ### R and Homebrew
 
-[7.3 Code Style](https://r-pkgs.org/r.html#code-style) includes a footnote that references my favorite open source project, [Homebrew](https://brew.sh):
+[7.4 Code Style](https://r-pkgs.org/Code.html#code-style) includes a footnote that references my favorite open source project, [Homebrew](https://brew.sh):
 
 > The [Robot Pedantry, Human Empathy](https://mikemcquaid.com/2018/06/05/robot-pedantry-human-empathy/) blog post by Mike McQuaid does an excellent job summarizing the benefit of automating tasks like code re-styling.
 
@@ -211,7 +211,7 @@ I've contributed to homebrew, but I've only recently realized how advanced a pro
 
 ### Package Conventions
 
-From [7.5 Respect the R landscape](https://r-pkgs.org/r.html#code-r-landscape):
+From [7.6 Respect the R landscape](https://r-pkgs.org/Code.html#sec-code-r-landscape):
 
 Avoid using any of the following:
 
