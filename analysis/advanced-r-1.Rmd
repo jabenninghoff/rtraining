@@ -1762,3 +1762,54 @@ fget("all_where", inherits = FALSE)
 Answer: code above.
 
 ---
+
+## 7.4.5 Exercises
+
+1.  How is `search_envs()` different from `env_parents(global_env())`?
+
+Answer: `search_envs()` includes the global environment. `env_parents(global_env())` doesn't include
+the global environment and also returns the empty environment (the top parent).
+
+---
+
+2.  Draw a diagram that shows the enclosing environments of this function:
+
+```{r, eval = FALSE}
+f1 <- function(x1) {
+  f2 <- function(x2) {
+    f3 <- function(x3) {
+      x1 + x2 + x3
+    }
+    f3(3)
+  }
+  f2(2)
+}
+f1(1)
+```
+
+Answer: No.
+
+---
+
+3.  Write an enhanced version of `str()` that provides more information 
+    about functions. Show where the function was found and what environment 
+    it was defined in.
+
+```{r}
+e_str <- function(object, ...) {
+  str(object, ...)
+  if (is.function(object)) {
+    message("fn_env():")
+    print(fn_env(object))
+    message("environment():")
+    print(environment(object))
+  }
+}
+
+e_str(print)
+e_str(fget)
+```
+
+Answer: code above.
+
+---
