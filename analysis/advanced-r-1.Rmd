@@ -2045,6 +2045,28 @@ Answer: code above. The question specifies to use `quietly = FALSE`, but this ap
 sense (to me). The alternative is to catch the 'Failed with error:' message which seems less
 reliable.
 
+```{r}
+my_check_installed2 <- function(pkg) {
+  tryCatch(
+    condition = function(cnd) {
+      abort(
+        "error_not_found",
+        message = paste0("package '", pkg, "' not found"),
+        pkg = pkg
+      )
+    },
+    requireNamespace(pkg, quietly = FALSE)
+  )
+}
+
+my_check_installed2("rlang")
+err2 <- catch_cnd(my_check_installed2("pkg"))
+err2
+err2$pkg
+```
+
+The alternative version, `my_check_installed2()` works but its Backtrace is harder to read.
+
 ---
 
 2.  Inside a package you often need to stop with an error when something
