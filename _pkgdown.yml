@@ -21,8 +21,8 @@ navbar:
       menu:
       - text: FaultTree.widget Test
         href: FaultTree.html
-      - text: Advanced R Workbook
-        href: advanced-r.html
+      - text: Advanced R Workbook (Foundations)
+        href: advanced-r-1.html
       - text: R Setup Log
         href: r-setup-log.html
       - text: R Training Log
