@@ -2035,6 +2035,7 @@ my_check_installed <- function(pkg) {
 }
 
 my_check_installed("rlang")
+# NOTE: this code causes renv::dependencies() to mistakenly report package 'pkg' as a dependency
 requireNamespace("pkg", quietly = FALSE)
 err <- catch_cnd(my_check_installed("pkg"))
 err
