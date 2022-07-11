@@ -1,3 +1,9 @@
+# rtraining 0.8.5
+
+* Renamed "Advanced R Workbook" to "Advanced R Workbook (Foundations)"; future notebooks will be added for each major section
+
+* Updated Advanced R Workbook (Foundations): completed Chapter 6-8, added Solutions section for comparing solutions against [Advanced R Solutions](https://advanced-r-solutions.rbind.io/index.html)
+
 # rtraining 0.8.4
 
 * Updated Advanced R Workbook: completed Chapter 4, 5
