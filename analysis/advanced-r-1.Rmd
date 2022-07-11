@@ -1312,6 +1312,12 @@ Answer:
 2.  Explain how to find the documentation for the named arguments in the 
     following function call:
 
+<!-- TODO: bugfix: the figure below renders incorrectly,
+     possibly due to https://github.com/rstudio/rstudio/issues/4521
+     see also: https://github.com/hadley/adv-r/blob/master/common.R
+     review build_analysis_site() conversion code
+  -->
+
 ```{r, fig.asp = 1, small_mar = TRUE, fig.width = 3}
 plot(1:10, col = "red", pch = 20, xlab = "x", col.lab = "blue")
 ```
