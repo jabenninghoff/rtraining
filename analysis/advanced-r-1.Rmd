@@ -2177,3 +2177,8 @@ Answer: this prevents user interrupts (control-c) from halting the code, which i
 pretty annoying if run with the defaults, requiring 99 interrupts (or just "Restart R").
 
 ---
+
+# Solutions
+
+Notes on comparing exercise solutions here against
+[Advanced R Solutions](https://advanced-r-solutions.rbind.io/index.html).
