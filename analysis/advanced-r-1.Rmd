@@ -15,6 +15,20 @@ Workbook for completing quizzes and exercises from the "Foundations" chapters of
 library(lobstr)
 library(bench)
 library(rlang)
+
+# from https://github.com/hadley/adv-r/blob/master/common.R
+knitr::opts_chunk$set(
+  comment = "#>",
+  fig.align = "center"
+)
+
+knitr::knit_hooks$set(
+  small_mar = function(before, options, envir) {
+    if (before) {
+      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+    }
+  }
+)
 ```
 
 # Introduction
@@ -1315,10 +1329,14 @@ Answer:
 <!-- TODO: bugfix: the figure below renders incorrectly,
      possibly due to https://github.com/rstudio/rstudio/issues/4521
      see also: https://github.com/hadley/adv-r/blob/master/common.R
-     review build_analysis_site() conversion code
+     and: https://yihui.org/knitr/options/#plots
+     workaround: use {r, fig.asp = 1}.
+     {r, fig.asp = 1, fig.width = 3} looks correct in RStudio, but doesn't render properly for
+     build_analysis_site(). {r, fig.asp = 1} works with build_analysis_site() but is not sized
+     properly in RStudio. {r, fig.asp = 1} is the best option for now.
   -->
 
-```{r, fig.asp = 1, small_mar = TRUE, fig.width = 3}
+```{r, small_mar = TRUE, fig.asp = 1}
 plot(1:10, col = "red", pch = 20, xlab = "x", col.lab = "blue")
 ```
 
