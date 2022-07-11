@@ -710,7 +710,7 @@ rm(list = ls())
 
 1.  Fix each of the following common data frame subsetting errors:
 
-```{r, eval = FALSE}
+```{r}
 # nolint start: commented_code_linter.
 # mtcars[mtcars$cyl = 4, ]
 mtcars[mtcars$cyl == 4, ]
@@ -918,7 +918,7 @@ rm(list = ls())
 1.  What type of vector does each of the following calls to `ifelse()`
     return? Read the documentation and write down the rules in your own words.
 
-```{r, eval = FALSE}
+```{r}
 ifelse(TRUE, 1, "no")
 typeof(ifelse(TRUE, 1, "no")) # double
 ifelse(FALSE, 1, "no")
@@ -1018,7 +1018,7 @@ Answer the following questions to see if you can safely skip this chapter. You c
 
 2.  What does the following code return? a: 11 [correct!]
 
-```{r, eval = FALSE}
+```{r}
 x <- 10
 f1 <- function(x) {
   function() {
@@ -1043,7 +1043,7 @@ mean(, TRUE, x = c(1:10, NA)) # nolint: missing_argument_linter.
 5.  Does the following code throw an error when executed? Why or why not? a: no, due to lazy
     evaluation, the `stop()` is never run [correct! ... second argument is never used]
 
-```{r, eval = FALSE}
+```{r}
 f2 <- function(a, b) {
   a * 10
 }
@@ -1150,7 +1150,7 @@ Answer: when it is created in the global environment.
 1. What does the following code return? Why? Describe how each of the three
    `c`'s is interpreted.
 
-```{r, eval = FALSE}
+```{r}
 c <- 10
 c(c = c)
 ```
@@ -1169,7 +1169,7 @@ Answer: name masking, functions versus variables, a fresh start, dynamic lookup.
 3. What does the following function return? Make a prediction before 
    running the code yourself.
 
-```{r, results = "hide"}
+```{r}
 f <- function(x) {
   f <- function(x) { # return value of this is 101
     f <- function() {
@@ -1222,7 +1222,7 @@ operators." This is undesirable because the intent of the function is to return 
 
 2.  What does this function return? Why? Which principle does it illustrate?
 
-```{r, results = "hide"}
+```{r}
 f2 <- function(x = z) {
   z <- 100
   x
@@ -1236,7 +1236,7 @@ Answer: 100, lazy evaluation. `x = z` isn't evaluated until `x`.
 
 3.  What does this function return? Why? Which principle does it illustrate?
 
-```{r, results = "hide"}
+```{r}
 y <- 10
 # styler: off
 f1 <- function(x = {y <- 1; 2}, y = 0) { # nolint brace_linter, semicolon_linter.
@@ -1456,7 +1456,7 @@ cor(x, y, use = "pairwise.complete.obs", method = "kendall")
 
 3. Explain why the following code fails:
 
-```{r, eval = FALSE}
+```{r}
 `modify<-` <- function(x, position, value) {
   x[position] <- value
   x
@@ -1599,9 +1599,9 @@ Answer:
 
 2.  Create an environment as illustrated by this picture.
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("assets/recursive-1.png")
+![](assets/recursive-1.png)
 
+```{r}
 e1 <- env()
 e1$loop <- e1
 ```
@@ -1612,9 +1612,9 @@ Answer: code above.
 
 3.  Create a pair of environments as illustrated by this picture.
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("assets/recursive-2.png")
+![](assets/recursive-2.png)
 
+```{r}
 e2 <- env()
 e3 <- env()
 
