@@ -53,10 +53,10 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-57",
+      "Version": "7.3-58",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "71476c1d88d1ebdf31580e5a257d5d31",
+      "Hash": "4bf2c61e656bbc238634c798c208d386",
       "Requirements": []
     },
     "Matrix": {
@@ -268,14 +268,16 @@
     },
     "bslib": {
       "Package": "bslib",
-      "Version": "0.3.1",
+      "Version": "0.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "56ae7e1987b340186a8a5a157c2ec358",
+      "Hash": "be5ee090716ce1671be6cd5d7c34d091",
       "Requirements": [
+        "cachem",
         "htmltools",
         "jquerylib",
         "jsonlite",
+        "memoise",
         "rlang",
         "sass"
       ]
@@ -303,10 +305,10 @@
     },
     "callr": {
       "Package": "callr",
-      "Version": "3.7.0",
+      "Version": "3.7.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "461aa75a11ce2400245190ef5d3995df",
+      "Hash": "2fda237f24bc56508f31394beaa56877",
       "Requirements": [
         "R6",
         "processx"
@@ -928,7 +930,7 @@
       "RemoteSha": "fc34c0eba0d3eaf35376ac8f1cf61354fa2f1637",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "465334cd95cb54f2999f05442ba2d746",
+      "Hash": "a6ad0ee68bb2a56a3d6ceb18a46ccc66",
       "Requirements": [
         "ggplot2"
       ]
@@ -1207,14 +1209,14 @@
     },
     "pkgdown": {
       "Package": "pkgdown",
-      "Version": "2.0.5",
+      "Version": "2.0.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "584e7c13c2cb3a1d4b32166dc411f3bb",
+      "Hash": "f958d0b2a5dabc5ffd414f062b1ffbe7",
       "Requirements": [
         "bslib",
         "callr",
-        "crayon",
+        "cli",
         "desc",
         "digest",
         "downlit",
@@ -1507,10 +1509,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.0.3",
+      "Version": "1.0.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9103a8f74b2114a5ed1136b471d8feca",
+      "Hash": "6539dd8c651e67e3b55b5ffea106362b",
       "Requirements": []
     },
     "rmarkdown": {
@@ -1601,10 +1603,10 @@
     },
     "sass": {
       "Package": "sass",
-      "Version": "0.4.1",
+      "Version": "0.4.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f37c0028d720bab3c513fd65d28c7234",
+      "Hash": "1b191143d7d3444d504277843f3a95fe",
       "Requirements": [
         "R6",
         "fs",
