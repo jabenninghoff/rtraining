@@ -1,3 +1,7 @@
+# rtraining 0.8.5.9000
+
+* Updated Advanced R Workbook (Foundations): add workaround for plot rendering issue
+
 # rtraining 0.8.5
 
 * Renamed "Advanced R Workbook" to "Advanced R Workbook (Foundations)"; future notebooks will be added for each major section
