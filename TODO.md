@@ -32,7 +32,7 @@
 - [x] Migrate site builder to rdev
 - [x] Review <https://github.com/rstudio/renv/> for ideas to include here
 - [ ] Review <https://github.com/jimbrig/rtraining/> for ideas to include here
-- [ ] Review [bslib](https://rstudio.github.io/bslib/index.html), [pkgdown](https://pkgdown.r-lib.org/articles/customise.html) documentation, and [bootswatch](https://bootswatch.com) themes to determine new site look and feel
+- [x] Review [bslib](https://rstudio.github.io/bslib/index.html), [pkgdown](https://pkgdown.r-lib.org/articles/customise.html) documentation, and [bootswatch](https://bootswatch.com) themes to determine new site look and feel
 
 ## GitHub
 
