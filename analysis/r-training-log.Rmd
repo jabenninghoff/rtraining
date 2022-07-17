@@ -3,6 +3,8 @@ title: "R Training Log"
 date: '2020-12-02'
 output:
   html_notebook:
+    theme:
+      version: 5
     toc: yes
     toc_float:
       collapsed: no
