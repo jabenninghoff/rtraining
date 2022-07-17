@@ -3,6 +3,8 @@ title: "R Setup Log"
 date: '2020-12-30'
 output:
   html_notebook:
+    theme:
+      version: 5
     toc: yes
     toc_float:
       collapsed: no

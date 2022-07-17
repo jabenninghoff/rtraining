@@ -3,6 +3,8 @@ title: "Advanced R Workbook (Foundations)"
 date: '2022-06-12'
 output:
   html_notebook:
+    theme:
+      version: 5
     toc: yes
     toc_float:
       collapsed: no

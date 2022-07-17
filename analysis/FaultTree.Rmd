@@ -3,6 +3,8 @@ title: "FaultTree.widget Test"
 date: '2021-09-30'
 output:
   html_notebook:
+    theme:
+      version: 5
     highlight: textmate
     toc: yes
     toc_float:
