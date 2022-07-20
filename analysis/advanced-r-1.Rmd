@@ -11,7 +11,7 @@ output:
       smooth_scroll: no
 ---
 
-Workbook for completing quizzes and exercises from the "Foundations" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition.
+Workbook for completing quizzes and exercises from the "Foundations" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io).
 
 ```{r setup, message = FALSE, warning = FALSE}
 library(lobstr)
@@ -37,8 +37,7 @@ knitr::knit_hooks$set(
 
 This workbook includes answers and solutions to the quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html), organized by chapter. It includes excerpts from the book, copied here.
 
-**WARNING, SPOILERS!** If you haven't read Advanced R and intend to complete the quizzes and
-exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
+**WARNING, SPOILERS!** If you haven't read Advanced R and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
 
 # 2 Names and values
 
@@ -118,8 +117,10 @@ c <- b
 d <- 1:10
 ```
 
-Answer: a, b, and c all point to the same object (1:10). d points to an identical object at a
-different address.
+Answer: a, b, and c all point to the same object (1:10). d points to an identical object at a different address.
+
+AR Solutions: `a`, `b`, and `c` point to the same object (with the same address in memory). This object has the value `1:10`. `d` points to a different object with the same value.
+
 
 ```{r}
 obj_addr(a)
@@ -154,14 +155,17 @@ obj_addr(match.fun("mean"))
 
 Answer: they do.
 
+AR Solutions: Yes, they point to the same object. We confirm this by inspecting the address of the underlying function object.
+
 ---
 
 3.  By default, base R data import functions, like `read.csv()`, will 
     automatically convert non-syntactic names to syntactic ones. Why might 
     this be problematic? What option allows you to suppress this behaviour?
 
-Answer: this could introduce problematic names, like `1`. Setting `check.names = FALSE` suppresses
-this behavior.
+Answer: this could introduce problematic names, like `1`. Setting `check.names = FALSE` suppresses this behavior.
+
+AR Solutions: Column names are often data, and the underlying `make.names()` transformation is non-invertible, so the default behaviour corrupts data. To avoid this, set `check.names = FALSE`.
 
 ---
 
@@ -170,10 +174,21 @@ this behavior.
 
 Answer: from `?make.names`:
 
-> The character "X" is prepended if necessary. All invalid characters are translated to ".".
-> A missing value is translated to "NA". Names which match R keywords have a dot appended to them.
-> Duplicated values are altered by make.unique.
-  
+> The character "X" is prepended if necessary. All invalid characters are translated to ".". A missing value is translated to "NA". Names which match R keywords have a dot appended to them. Duplicated values are altered by make.unique.
+
+AR Solutions: A valid name must start with a letter or a dot (not followed by a number) and may further contain numbers and underscores (`"_"`s are allowed since R version 1.9.0).
+
+Three main mechanisms ensure syntactically valid names (see `?make.names`):
+
+1. Names that do not start with a letter or a dot will be prepended with an `"X"`.
+   The same holds for names that begin with a dot followed by a number.
+2. Additionally, non-valid characters are replaced by a dot.
+3. Reserved R keywords (see `?reserved`) are suffixed by a dot.
+
+Interestingly, some of these transformations are influenced by the current locale. From `?make.names`:
+
+> The definition of a letter depends on the current locale, but only ASCII digits are considered to be digits.
+
 ---
 
 5.  I slightly simplified the rules that govern syntactic names. Why is `.123e1`
@@ -185,6 +200,8 @@ Answer: from `?make.names`:
 starts with a letter or the dot not followed by a number. Names such as ".2way" are not valid, and
 neither are the reserved words.
 
+AR Solutions: `.123e1` is not a syntactic name, because it starts with one dot which is followed by a number. This makes it a double, `1.23`.
+
 ---
 
 ## 2.3.6 Exercises
@@ -192,6 +209,8 @@ neither are the reserved words.
 1.  Why is `tracemem(1:10)` not useful?
 
 Answer: this is tracing an 'immutable' object which will always have the same address.
+
+AR Solutions: When `1:10` is called an object with an address in memory is created, but it is not bound to a name. Therefore, the object cannot be called or manipulated from R. As no copies will be made, it is not useful to track the object for copying.
 
 ---
 
@@ -221,6 +240,29 @@ y[[3]] <- 5L
 untracemem(x)
 ```
 
+AR Solutions: Initially the vector `x` has integer type. The replacement call assigns a double to the third element of `x`, which triggers copy-on-modify.
+
+```{r, eval = FALSE}
+x <- c(1L, 2L, 3L)
+tracemem(x)
+#> <0x66a4a70>
+
+x[[3]] <- 4
+#> tracemem[0x55eec7b3af38 -> 0x55eec774cc18]:
+```
+
+We can avoid the copy by sub-assigning an integer instead of a double:
+
+```{r, eval = FALSE}
+x <- c(1L, 2L, 3L)
+tracemem(x)
+#> <0x55eec6940ae0>
+
+x[[3]] <- 4L
+```
+
+Please be aware that running this code in RStudio will result in additional copies because of the reference from the environment pane.
+
 ---
 
 3.  Sketch out the relationship between the following objects:
@@ -249,6 +291,8 @@ obj_addr(c[[3]])
 
 Answer: four different objects with multiple names.
 
+AR Solutions: `a` contains a reference to an address with the value `1:10`. `b` contains a list of two references to the same address as `a`. `c` contains a list of `b` (containing two references to `a`), `a` (containing the same reference again) and a reference pointing to a different address containing the same value (`1:10`).
+
 ---
 
 4.  What happens when you run this code? Draw a picture.
@@ -264,6 +308,8 @@ ref(x)
 Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which
 points to the original int vector.
 
+AR Solutions: The initial reference tree of `x` shows that the name `x` binds to a list object. This object contains a reference to the integer vector `1:10`. When `x` is assigned to an element of itself, copy-on-modify takes place and the list is copied to a new address in memory. The list object previously bound to `x` is now referenced in the newly created list object. It is no longer bound to a name. The integer vector is referenced twice.
+
 ---
 
 ## 2.4.1 Exercises
@@ -278,9 +324,10 @@ object.size(y)
 obj_size(y)
 ```
 
-Answer: `object.size()` "does not detect if elements of a list are shared", which is the case here.
-That is, it does not detect the list has been replicated 100 times, and overestimates by a factor of
-100 compared to `object_size()`.
+Answer: `object.size()` "does not detect if elements of a list are shared", which is the case here. That is, it does not detect the list has been replicated 100 times, and overestimates by a factor of 100 compared to `object_size()`.
+
+AR Solutions: `object.size()` doesn't account for shared elements within lists. Therefore, the results differ by a factor of ~ 100.
+
 
 ---
 
@@ -291,13 +338,15 @@ funs <- list(mean, sd, var)
 obj_size(funs)
 ```
 
-Answer: it doesn't seem misleading to me, but the list includes the function objects, not the
-return values. Also, it calculates the size discarding the overlap between the functions. Per the
-code below, there is some:
+Answer: it doesn't seem misleading to me, but the list includes the function objects, not the return values. Also, it calculates the size discarding the overlap between the functions. Per the code below, there is some:
 
 ```{r}
 obj_size(mean) + obj_size(sd) + obj_size(var)
 ```
+
+AR Solutions: All three functions are built-in to R as part of the `{base}` and `{stats}` packages and hence always available. So, what does it mean to measure the size of something that's already included in R?
+
+(There's typically a more general question about what you want to know when you ask for the size of something — do you want to know how much data you'd need to send to communicate the object to someone else (e.g. serialise it), or do you want to know how much memory you'd free if you deleted it?)
 
 ---
 
@@ -329,6 +378,20 @@ obj_size(a, b) # still mostly overlaps, slightly larger than previous obj_size(a
 
 Answer: answers inline.
 
+AR Solutions:
+
+`a <- runif(1e6)`:
+
+- In R (on most platforms) a length-0 vector has 48 bytes of overhead.
+- A single double takes up an additional 8 bytes of memory.
+- So, a 1 million double should take up 8,000,048 bytes.
+
+For `b <- list(a, a)` both list elements contain references to the same memory address. Therefore, no additional memory is required for the second list element. The list itself requires 64 bytes, 48 bytes for an empty list and 8 bytes for each element (`obj_size(vector("list", 2))`). This lets us predict 8,000,048 B + 64 B = 8,000,112 B.
+
+`b[[1]][[1]] <- 10`: When we modify the first element of `b[[1]]` copy-on-modify occurs. Both elements will still have the same size (8,000,040 B), but the first one gets a new address in memory. As `b`'s elements don't share references anymore, its object size adds up to the sum of the elements and the length-2 list: 8,000,048 B + 8,000,048 B + 64 B = 16,000,160 B (16 MB). The second element of `b` still references the same address as `a`, so the combined size of `a` and `b` is the same as `b`.
+
+`b[[2]][[1]] <- 10`: When we modify the second element of `b`, this element will also point to a new memory address. This does not affect the size of the list. However, as `b` doesn't share references with `a` anymore, the memory usage of the combined objects increases.
+
 ---
 
 ## 2.5.3 Exercises
@@ -340,8 +403,23 @@ x <- list()
 x[[1]] <- x
 ```
 
-Answer: the name x is assigned to the empty list, and then the first element of x is mapped to the
-object that x points to, the empty list.
+Answer: the name x is assigned to the empty list, and then the first element of x is mapped to the object that x points to, the empty list.
+
+AR Solutions: In this situation copy-on-modify prevents the creation of a circular list. Let us step through the details:
+
+```{r, eval = FALSE}
+x <- list() # creates initial object
+obj_addr(x)
+#> [1] "0x55862f23ab80"
+tracemem(x)
+#> [1] "<0x55862f23ab80>"
+x[[1]] <- x # Copy-on-modify triggers new copy
+#> tracemem[0x55862f23ab80 -> 0x55862e8ce028]:
+obj_addr(x) # copied object has new memory address
+#> [1] "0x55862e8ce028"
+obj_addr(x[[1]]) # list element contains old memory address
+#> [1] "0x55862f23ab80"
+```
 
 ---
 
@@ -396,9 +474,13 @@ mark(df_medians(xm$x, xm$medians))
 mark(ls_medians(xm$x, xm$medians))
 ```
 
-With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast.
-So, the list method is near constant time regardless of columns, whereas the data.frame method
-scales linearly with the number of columns.
+With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast. So, the list method is near constant time regardless of columns, whereas the data.frame method scales linearly with the number of columns.
+
+AR Solutions:
+
+When working directly with the data frame, the execution time grows quadratically with the number of columns in the input data. This is because (e.g.) the first column must be copied n times, the second column n-1 times, and so on. When working with a list, the execution time increases only linearly.
+
+Obviously in the long run, linear growth creates shorter run-times, but there is some cost to this strategy — we have to convert between data structures with as.list() and list2DF(). Even though this is fast and probably doesn’t hurt much, the improved approach doesn’t really pay off in this scenario until we get to a data frame that is about 300 columns wide (with the exact value depending on the characteristics of the system running the code).
 
 ---
 
@@ -410,6 +492,10 @@ try(tracemem(e))
 ```
 
 Answer: it throws an error!
+
+AR Solutions: `tracemem()` cannot be used to mark and trace environments.
+
+The error occurs because "it is not useful to trace NULL, environments, promises, weak references, or external pointer objects, as these are not duplicated" (see `?tracemem`). Environments are always modified in place.
 
 ---
 
