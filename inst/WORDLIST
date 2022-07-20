@@ -1,6 +1,7 @@
 Backtrace
 CMD
 Changelog
+DF
 Dev
 DevOps
 FaultTree
@@ -46,6 +47,7 @@ http
 https
 ie
 internalise
+invertible
 io
 jpeg
 kableExtra
@@ -67,6 +69,7 @@ pkgdown
 png
 po
 purrr
+quadratically
 rdev
 readr
 rebase
@@ -78,6 +81,7 @@ rmarkdown
 roxygen
 rstudio
 rtraining
+serialise
 sethrobertson
 signalled
 signalling
