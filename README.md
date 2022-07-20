@@ -27,7 +27,9 @@ Notebooks in this package:
     (Foundations)](https://jabenninghoff.github.io/rtraining/advanced-r-1.html)
     (2022-06-12): Workbook for completing quizzes and exercises from the
     “Foundations” chapters of [Advanced
-    R](https://adv-r.hadley.nz/index.html), second edition.
+    R](https://adv-r.hadley.nz/index.html), second edition, with
+    comparisons to solutions from [Advanced R
+    Solutions](https://advanced-r-solutions.rbind.io).
 -   [R Setup
     Log](https://jabenninghoff.github.io/rtraining/r-setup-log.html)
     (2020-12-30): My notes on my personal R setup. I started my R
