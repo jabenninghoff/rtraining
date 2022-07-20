@@ -1,6 +1,8 @@
-# rtraining 0.8.5.9000
+# rtraining 0.8.6
 
-* Updated Advanced R Workbook (Foundations): add workaround for plot rendering issue
+* Updated Advanced R Workbook (Foundations): add AR Solutions for Chapter 2, add workaround for plot rendering issue
+
+* Update site to Bootstrap 5
 
 # rtraining 0.8.5
 
