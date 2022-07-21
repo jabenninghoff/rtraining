@@ -931,7 +931,7 @@
       "RemoteSha": "fc34c0eba0d3eaf35376ac8f1cf61354fa2f1637",
       "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "465334cd95cb54f2999f05442ba2d746",
+      "Hash": "a6ad0ee68bb2a56a3d6ceb18a46ccc66",
       "Requirements": [
         "ggplot2"
       ]
@@ -1116,6 +1116,16 @@
       "Requirements": [
         "htmltools",
         "shiny"
+      ]
+    },
+    "mockery": {
+      "Package": "mockery",
+      "Version": "0.4.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c28ce5f7c2293d76b91657f3fe30c50b",
+      "Requirements": [
+        "testthat"
       ]
     },
     "modelr": {
@@ -1386,15 +1396,15 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "1.5.9",
+      "Version": "1.6.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "dd9b8656dc04524902cca4b4e3f71ef5244eb2d1",
+      "RemoteSha": "ed1296c4626af16d0320d223a26da2173dc483af",
       "RemoteHost": "api.github.com",
-      "Hash": "c6ca973b4ddd98d5efbb847d2b9d91bf",
+      "Hash": "74c20fac76c63a90c5d541435ad19e65",
       "Requirements": [
         "cli",
         "desc",
@@ -1405,13 +1415,16 @@
         "lintr",
         "markdown",
         "miniUI",
+        "mockery",
         "pkgdown",
+        "pkgload",
         "purrr",
         "rcmdcheck",
         "remotes",
         "renv",
         "rlang",
         "rmarkdown",
+        "spelling",
         "styler",
         "tibble",
         "urlchecker",
