@@ -12,7 +12,6 @@ URL: https://jabenninghoff.github.io/rtraining/,
 BugReports: https://github.com/jabenninghoff/rtraining/issues
 Suggests:
     bench,
-    bslib,
     caTools,
     desc,
     devtools,
