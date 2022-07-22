@@ -35,15 +35,15 @@
     },
     "FaultTree.widget": {
       "Package": "FaultTree.widget",
-      "Version": "0.99.8",
+      "Version": "0.2.8.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "FaultTree.widget",
       "RemoteRef": "master",
-      "RemoteSha": "79d12296d83ac252825239b08cc0bc92a4b54671",
-      "Hash": "4a189f69325a79c8d79bcfed8a1e4255",
+      "RemoteSha": "1febe8fbb278c1b79db5c13c1bc7a58eef0e6aa8",
+      "Hash": "172e2a8399401e5223614eb045d10274",
       "Requirements": [
         "FaultTree",
         "htmlwidgets",
@@ -71,10 +71,10 @@
     },
     "R.cache": {
       "Package": "R.cache",
-      "Version": "0.15.0",
+      "Version": "0.16.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e92a8ea8388c47c82ed8aa435ed3be50",
+      "Hash": "fe539ca3f8efb7410c3ae2cf5fe6c0f8",
       "Requirements": [
         "R.methodsS3",
         "R.oo",
@@ -1823,12 +1823,11 @@
     },
     "tibble": {
       "Package": "tibble",
-      "Version": "3.1.7",
+      "Version": "3.1.8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "08415af406e3dd75049afef9552e7355",
+      "Hash": "56b6934ef0f8c68225949a8672fe1a8f",
       "Requirements": [
-        "ellipsis",
         "fansi",
         "lifecycle",
         "magrittr",
