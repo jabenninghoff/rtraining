@@ -1,3 +1,7 @@
+# rtraining 0.8.7
+
+* Updated Advanced R Workbook (Foundations): add AR Solutions for Chapter 3
+
 # rtraining 0.8.6
 
 * Updated Advanced R Workbook (Foundations): add AR Solutions for Chapter 2, add workaround for plot rendering issue
