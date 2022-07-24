@@ -13,6 +13,7 @@ IDEs
 McQuaid
 OOB
 ORCID
+POSIXct
 Pre
 README
 RStudio
@@ -28,11 +29,13 @@ Tierney
 Wickham
 YAML
 Yan
+atomics
 backtrace
 behaviour
 bookdown
 colour
 conf
+deduplicates
 devtools
 dplyr
 exts
@@ -57,6 +60,7 @@ lintr
 lockfile
 lubridate
 macOS
+magrittr
 md
 miniUI
 nb
@@ -68,6 +72,7 @@ pandoc
 pkgdown
 png
 po
+pre
 purrr
 quadratically
 rdev
@@ -89,10 +94,12 @@ srf
 stringr
 styler
 subsettable
+summarise
 testthat
 tibble
 tibbles
 tidyr
 tidyverse
 traceback
+unlist
 yihui
