@@ -10,6 +10,7 @@ Hadley's
 Holtz
 Homebrew
 IDEs
+LibPath
 McQuaid
 OOB
 ORCID
@@ -55,8 +56,10 @@ io
 jpeg
 kableExtra
 knitr
+libraryIQR
 linters
 lintr
+loc
 lockfile
 lubridate
 macOS
@@ -102,4 +105,5 @@ tidyr
 tidyverse
 traceback
 unlist
+vectorised
 yihui
