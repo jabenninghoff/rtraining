@@ -7,7 +7,7 @@ output:
       version: 5
     toc: yes
     toc_float:
-      collapsed: no
+      collapsed: yes
       smooth_scroll: no
 ---
 
