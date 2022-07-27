@@ -978,19 +978,27 @@ rm(list = ls())
 # nolint start: commented_code_linter.
 # mtcars[mtcars$cyl = 4, ]
 mtcars[mtcars$cyl == 4, ]
+# use `==`              (instead of `=`)
 
 # mtcars[-1:4, ]
 mtcars[-(1:4), ]
+# use `-(1:4)`          (instead of `-1:4`)
 
 # mtcars[mtcars$cyl <= 5]
 mtcars[mtcars$cyl <= 5, ]
+# `,` is missing
 
 # mtcars[mtcars$cyl == 4 | 6, ]
 mtcars[mtcars$cyl == 4 | mtcars$cyl == 6, ]
+# use `mtcars$cyl == 6` (instead of `6`)
+#  or `%in% c(4, 6)`    (instead of `== 4 | 6`)
+
 # nolint end
 ```
 
 Answer: fixed!
+
+AR solutions: see the comments below the fixed code.
 
 ---
 
@@ -1007,6 +1015,8 @@ x[TRUE]
 
 Answer: NA is a logical constant of length 1.
 
+AR Solutions: In contrast to `NA_real`, `NA` has logical type and logical vectors are recycled to the same length as the vector being subset, i.e. `x[NA]` is recycled to `x[c(NA, NA, NA, NA, NA)]`.
+
 ---
 
 3.  What does `upper.tri()` return? How does subsetting a matrix with it 
@@ -1018,8 +1028,11 @@ x
 x[upper.tri(x)]
 ```
 
-Answer: `upper.tri()` returns a matrix of logicals, which can be used to subset the upper triangle.
-This is subsetting by matrix, which is new.
+Answer: `upper.tri()` returns a matrix of logicals, which can be used to subset the upper triangle. This is subsetting by matrix, which is new.
+
+AR Solutions: `upper.tri(x)` returns a logical matrix, which contains `TRUE` values above the diagonal and `FALSE` values everywhere else. In `upper.tri()` the positions for `TRUE` and `FALSE` values are determined by comparing `x`'s row and column indices via `.row(dim(x)) < .col(dim(x))`.
+
+When subsetting with logical matrices, all elements that correspond to `TRUE` will be selected. Matrices extend vectors with a dimension attribute, so the vector forms of subsetting can be used (including logical subsetting). We should take care, that the dimensions of the subsetting matrix match the object of interest — otherwise unintended selections due to vector recycling may occur. Please also note, that this form of subsetting returns a vector instead of a matrix, as the subsetting alters the dimensions of the object.
 
 ---
 
@@ -1031,8 +1044,9 @@ try(mtcars[1:20])
 mtcars[1:20, ]
 ```
 
-Answer: `mtcars[1:20]` selects the first 20 columns, but there are only 11. `mtcars[1:20, ]` selects
-the first 20 rows of `r nrow(mtcars)`.
+Answer: `mtcars[1:20]` selects the first 20 columns, but there are only 11. `mtcars[1:20, ]` selects the first 20 rows of `r nrow(mtcars)`.
+
+AR Solutions: When subsetting a data frame with a single vector, it behaves the same way as subsetting a list of columns. So, `mtcars[1:20]` would return a data frame containing the first 20 columns of the dataset. However, as `mtcars` has only 11 columns, the index will be out of bounds and an error is thrown. `mtcars[1:20, ]` is subsetted with two vectors, so 2d subsetting kicks in, and the first index refers to rows.
 
 ---
 
@@ -1059,6 +1073,21 @@ my_diag(m)
 
 Answer: code above.
 
+AR Solutions: The elements in the diagonal of a matrix have the same row- and column indices. This characteristic can be used to create a suitable numeric matrix used for subsetting.
+
+```{r}
+diag2 <- function(x) {
+  n <- min(nrow(x), ncol(x))
+  idx <- cbind(seq_len(n), seq_len(n))
+  x[idx]
+}
+# Let's check if it works
+(x <- matrix(1:30, 5))
+
+diag(x)
+diag2(x)
+```
+
 ---
 
 5.  What does `df[is.na(df)] <- 0` do? How does it work?
@@ -1073,6 +1102,8 @@ df
 ```
 
 Correct!
+
+AR Solutions: This expression replaces the `NA`s in `df` with `0`. Here `is.na(df)` returns a logical matrix that encodes the position of the missing values in `df`. Subsetting and assignment are then combined to replace only the missing values.
 
 ---
 
@@ -1093,6 +1124,26 @@ mtcars[-c(1:2, 4:32), -c(1, 3:11)]
 
 Answer: code above (some variations omitted). There are many more.
 
+AR Solutions: Base R already provides an abundance of possibilities:
+
+```{r}
+# Select column first
+mtcars$cyl[[3]]
+mtcars[, "cyl"][[3]]
+mtcars[["cyl"]][[3]]
+with(mtcars, cyl[[3]])
+
+# Select row first
+mtcars[3, ]$cyl
+mtcars[3, "cyl"]
+mtcars[3, ][, "cyl"]
+mtcars[3, ][["cyl"]]
+
+# Select simultaneously
+mtcars[3, 2]
+mtcars[[c(2, 3)]]
+```
+
 ---
 
 2.  Given a linear model, e.g., `mod <- lm(mpg ~ wt, data = mtcars)`, extract
@@ -1111,6 +1162,23 @@ mod_sum
 
 Answer: code above.
 
+AR Solutions: `mod` is of type list, which opens up several possibilities. We use `$` or `[[` to extract a single element:
+
+```{r}
+mod <- lm(mpg ~ wt, data = mtcars)
+
+mod$df.residual
+mod[["df.residual"]]
+```
+
+The same also applies to `summary(mod)`, so we could use, e.g.:
+
+```{r}
+summary(mod)$r.squared
+```
+
+(Tip: The [`broom` package](https://github.com/tidymodels/broom) provides a very useful approach to work with models in a tidy way.)
+
 ---
 
 ## 4.5.9 Exercises
@@ -1128,6 +1196,16 @@ df[sample(nrow(df)), sample(ncol(df))]
 ```
 
 Answer: using `sample()`. Yes!
+
+AR Solutions: This can be achieved by combining `[` and `sample()`:
+
+```{r,eval = FALSE}
+# Permute columns
+mtcars[sample(ncol(mtcars))]
+
+# Permute columns and rows in one step
+mtcars[sample(nrow(mtcars)), sample(ncol(mtcars))]
+```
 
 ---
 
@@ -1155,6 +1233,21 @@ try(sample_rows(df, 6))
 
 Answer: code above.
 
+AR Solutions: Selecting `m` random rows from a data frame can be achieved through subsetting.
+
+```{r, eval = FALSE}
+m <- 10
+mtcars[sample(nrow(mtcars), m), ]
+```
+
+Holding successive lines together as a blocked sample requires only a certain amount of caution in order to obtain the correct start and end index.
+
+```{r, eval = FALSE}
+start <- sample(nrow(mtcars) - m + 1, 1)
+end <- start + m - 1
+mtcars[start:end, , drop = FALSE]
+```
+
 ---
     
 3.  How could you put the columns in a data frame in alphabetical order?
@@ -1164,6 +1257,13 @@ mtcars[sort(colnames(mtcars))]
 ```
 
 Answer: using `sort(colnames)`.
+
+AR Solutions: We combine `[` with `order()` or `sort()`:
+
+```{r, eval = FALSE}
+mtcars[order(names(mtcars))]
+mtcars[sort(names(mtcars))]
+```
 
 ---
 
