@@ -30,6 +30,13 @@ Notebooks in this package:
     R](https://adv-r.hadley.nz/index.html), second edition, with
     comparisons to solutions from [Advanced R
     Solutions](https://advanced-r-solutions.rbind.io).
+-   [Advanced R Workbook (Functional
+    programming)](https://jabenninghoff.github.io/rtraining/advanced-r-2.html)
+    (2022-07-31): Workbook for completing quizzes and exercises from the
+    “Functional programming” chapters of [Advanced
+    R](https://adv-r.hadley.nz/index.html), second edition, with
+    comparisons to solutions from [Advanced R
+    Solutions](https://advanced-r-solutions.rbind.io).
 -   [R Setup
     Log](https://jabenninghoff.github.io/rtraining/r-setup-log.html)
     (2020-12-30): My notes on my personal R setup. I started my R
