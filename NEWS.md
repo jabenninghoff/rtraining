@@ -1,3 +1,9 @@
+# rtraining 0.8.8
+
+* Updated Advanced R Workbook (Foundations): add AR Solutions for Chapter 4-8
+
+* Added Advanced R Workbook (Functional programming): Workbook for completing quizzes and exercises from the "Functional programming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io)
+
 # rtraining 0.8.7
 
 * Updated Advanced R Workbook (Foundations): add AR Solutions for Chapter 3
