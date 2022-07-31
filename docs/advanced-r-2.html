@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2022-07-31" />
+
+<title>Advanced R Workbook (Functional programming)</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link href="site_libs/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.1.3/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.4.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">rtraining notebooks</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="FaultTree.html">FaultTree.widget Test</a>
+    </li>
+    <li>
+      <a href="advanced-r-1.html">Advanced R Workbook (Foundations)</a>
+    </li>
+    <li>
+      <a href="advanced-r-2.html">Advanced R Workbook (Functional programming)</a>
+    </li>
+    <li>
+      <a href="r-setup-log.html">R Setup Log</a>
+    </li>
+    <li>
+      <a href="r-training-log.html">R Training Log</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jabenninghoff/rtraining/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Advanced R Workbook (Functional
+programming)</h1>
+<h4 class="date">2022-07-31</h4>
+
+</div>
+
+
+<p>Workbook for completing quizzes and exercises from the “Functional
+programming” chapters of <a
+href="https://adv-r.hadley.nz/index.html">Advanced R</a>, second
+edition, with comparisons to solutions from <a
+href="https://advanced-r-solutions.rbind.io">Advanced R
+Solutions</a>.</p>
+<pre class="r"><code># from https://github.com/hadley/adv-r/blob/master/common.R
+knitr::opts_chunk$set(
+  comment = &quot;#&gt;&quot;,
+  fig.align = &quot;center&quot;
+)
+
+knitr::knit_hooks$set(
+  small_mar = function(before, options, envir) {
+    if (before) {
+      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+    }
+  }
+)</code></pre>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This workbook includes answers and solutions to the quizzes and
+exercises from <a href="https://adv-r.hadley.nz/index.html">Advanced
+R</a> and <a href="https://advanced-r-solutions.rbind.io">Advanced R
+Solutions</a>, organized by chapter. It includes excerpts from both
+books, copied here.</p>
+<p><strong>WARNING, SPOILERS!</strong> If you haven’t read Advanced R
+and intend to complete the quizzes and exercises, don’t read this
+notebook. It contains my (potentially wrong) answers to both.</p>
+</div>
+<div id="functionals" class="section level1">
+<h1>9 Functionals</h1>
+<blockquote>
+<p>To become significantly more reliable, code must become more
+transparent. In particular, nested conditions and loops must be viewed
+with great suspicion. Complicated control flows confuse programmers.
+Messy code often hides bugs.</p>
+<p>— Bjarne Stroustrup</p>
+</blockquote>
+<p>A <strong>functional</strong> is a function that takes a function as
+an input and returns a vector as output. Here’s a simple functional: it
+calls the function provided as input with 1000 random uniform
+numbers.</p>
+<pre class="r"><code>randomise &lt;- function(f) f(runif(1e3))
+randomise(mean)</code></pre>
+<pre><code>#&gt; [1] 0.4948927</code></pre>
+<pre class="r"><code>randomise(mean)</code></pre>
+<pre><code>#&gt; [1] 0.4848683</code></pre>
+<pre class="r"><code>randomise(sum)</code></pre>
+<pre><code>#&gt; [1] 506.1185</code></pre>
+<p>The chances are that you’ve already used a functional. You might have
+used for-loop replacements like base R’s <code>lapply()</code>,
+<code>apply()</code>, and <code>tapply()</code>; or purrr’s
+<code>map()</code>; or maybe you’ve used a mathematical functional like
+<code>integrate()</code> or <code>optim()</code>.</p>
+<p>A common use of functionals is as an alternative to for loops. For
+loops have a bad rap in R because many people believe they are slow<a
+href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, but the
+real downside of for loops is that they’re very flexible: a loop conveys
+that you’re iterating, but not what should be done with the results.
+Just as it’s better to use <code>while</code> than <code>repeat</code>,
+and it’s better to use <code>for</code> than <code>while</code> (Section
+5.3.2), it’s better to use a functional than <code>for</code>. Each
+functional is tailored for a specific task, so when you recognise the
+functional you immediately know why it’s being used.</p>
+<p>If you’re an experienced for loop user, switching to functionals is
+typically a pattern matching exercise. You look at the for loop and find
+a functional that matches the basic form. If one doesn’t exist, don’t
+try and torture an existing functional to fit the form you need.
+Instead, just leave it as a for loop! (Or once you’ve repeated the same
+loop two or more times, maybe think about writing your own
+functional).</p>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>Typically it’s not the for loop itself that’s slow, but
+what you’re doing inside of it. A common culprit of slow loops is
+modifying a data structure, where each modification generates a copy.
+See Sections 2.5.1 and 24.6 for more details.<a href="#fnref1"
+class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiBBZHZhbmNlZCBSIFdvcmtib29rIChGdW5jdGlvbmFsIHByb2dyYW1taW5nKQpkYXRlOiAnMjAyMi0wNy0zMScKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0aGVtZToKICAgICAgdmVyc2lvbjogNQogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiB5ZXMKICAgICAgc21vb3RoX3Njcm9sbDogbm8KLS0tCgpXb3JrYm9vayBmb3IgY29tcGxldGluZyBxdWl6emVzIGFuZCBleGVyY2lzZXMgZnJvbSB0aGUgIkZ1bmN0aW9uYWwgcHJvZ3JhbW1pbmciIGNoYXB0ZXJzIG9mIFtBZHZhbmNlZCBSXShodHRwczovL2Fkdi1yLmhhZGxleS5uei9pbmRleC5odG1sKSwgc2Vjb25kIGVkaXRpb24sIHdpdGggY29tcGFyaXNvbnMgdG8gc29sdXRpb25zIGZyb20gW0FkdmFuY2VkIFIgU29sdXRpb25zXShodHRwczovL2FkdmFuY2VkLXItc29sdXRpb25zLnJiaW5kLmlvKS4KCmBgYHtyIHNldHVwLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0KIyBmcm9tIGh0dHBzOi8vZ2l0aHViLmNvbS9oYWRsZXkvYWR2LXIvYmxvYi9tYXN0ZXIvY29tbW9uLlIKa25pdHI6Om9wdHNfY2h1bmskc2V0KAogIGNvbW1lbnQgPSAiIz4iLAogIGZpZy5hbGlnbiA9ICJjZW50ZXIiCikKCmtuaXRyOjprbml0X2hvb2tzJHNldCgKICBzbWFsbF9tYXIgPSBmdW5jdGlvbihiZWZvcmUsIG9wdGlvbnMsIGVudmlyKSB7CiAgICBpZiAoYmVmb3JlKSB7CiAgICAgIHBhcihtYXIgPSBjKDQuMSwgNC4xLCAwLjUsIDAuNSkpICMgbm9saW50OiB1bmRlc2lyYWJsZV9mdW5jdGlvbl9saW50ZXIuCiAgICB9CiAgfQopCmBgYAoKIyBJbnRyb2R1Y3Rpb24KClRoaXMgd29ya2Jvb2sgaW5jbHVkZXMgYW5zd2VycyBhbmQgc29sdXRpb25zIHRvIHRoZSBxdWl6emVzIGFuZCBleGVyY2lzZXMgZnJvbSBbQWR2YW5jZWQgUl0oaHR0cHM6Ly9hZHYtci5oYWRsZXkubnovaW5kZXguaHRtbCkgYW5kIFtBZHZhbmNlZCBSIFNvbHV0aW9uc10oaHR0cHM6Ly9hZHZhbmNlZC1yLXNvbHV0aW9ucy5yYmluZC5pbyksIG9yZ2FuaXplZCBieSBjaGFwdGVyLiBJdCBpbmNsdWRlcyBleGNlcnB0cyBmcm9tIGJvdGggYm9va3MsIGNvcGllZCBoZXJlLgoKKipXQVJOSU5HLCBTUE9JTEVSUyEqKiBJZiB5b3UgaGF2ZW4ndCByZWFkIEFkdmFuY2VkIFIgYW5kIGludGVuZCB0byBjb21wbGV0ZSB0aGUgcXVpenplcyBhbmQgZXhlcmNpc2VzLCBkb24ndCByZWFkIHRoaXMgbm90ZWJvb2suIEl0IGNvbnRhaW5zIG15IChwb3RlbnRpYWxseSB3cm9uZykgYW5zd2VycyB0byBib3RoLgoKIyA5IEZ1bmN0aW9uYWxzCgo+IFRvIGJlY29tZSBzaWduaWZpY2FudGx5IG1vcmUgcmVsaWFibGUsIGNvZGUgbXVzdCBiZWNvbWUgbW9yZSB0cmFuc3BhcmVudC4KPiBJbiBwYXJ0aWN1bGFyLCBuZXN0ZWQgY29uZGl0aW9ucyBhbmQgbG9vcHMgbXVzdCBiZSB2aWV3ZWQgd2l0aCBncmVhdAo+IHN1c3BpY2lvbi4gQ29tcGxpY2F0ZWQgY29udHJvbCBmbG93cyBjb25mdXNlIHByb2dyYW1tZXJzLiBNZXNzeSBjb2RlIG9mdGVuCj4gaGlkZXMgYnVncy4KPgo+IC0tLSBCamFybmUgU3Ryb3VzdHJ1cAoKQSBfX2Z1bmN0aW9uYWxfXyBpcyBhIGZ1bmN0aW9uIHRoYXQgdGFrZXMgYSBmdW5jdGlvbiBhcyBhbiBpbnB1dCBhbmQgcmV0dXJucyBhIHZlY3RvciBhcyBvdXRwdXQuIEhlcmUncyBhIHNpbXBsZSBmdW5jdGlvbmFsOiBpdCBjYWxscyB0aGUgZnVuY3Rpb24gcHJvdmlkZWQgYXMgaW5wdXQgd2l0aCAxMDAwIHJhbmRvbSB1bmlmb3JtIG51bWJlcnMuIAoKYGBge3J9CnJhbmRvbWlzZSA8LSBmdW5jdGlvbihmKSBmKHJ1bmlmKDFlMykpCnJhbmRvbWlzZShtZWFuKQpyYW5kb21pc2UobWVhbikKcmFuZG9taXNlKHN1bSkKYGBgCgpUaGUgY2hhbmNlcyBhcmUgdGhhdCB5b3UndmUgYWxyZWFkeSB1c2VkIGEgZnVuY3Rpb25hbC4gWW91IG1pZ2h0IGhhdmUgdXNlZCBmb3ItbG9vcCByZXBsYWNlbWVudHMgbGlrZSBiYXNlIFIncyBgbGFwcGx5KClgLCBgYXBwbHkoKWAsIGFuZCBgdGFwcGx5KClgOyBvciBwdXJycidzIGBtYXAoKWA7IG9yIG1heWJlIHlvdSd2ZSB1c2VkIGEgbWF0aGVtYXRpY2FsIGZ1bmN0aW9uYWwgbGlrZSBgaW50ZWdyYXRlKClgIG9yIGBvcHRpbSgpYC4gCgpBIGNvbW1vbiB1c2Ugb2YgZnVuY3Rpb25hbHMgaXMgYXMgYW4gYWx0ZXJuYXRpdmUgdG8gZm9yIGxvb3BzLiBGb3IgbG9vcHMgaGF2ZSBhIGJhZCByYXAgaW4gUiBiZWNhdXNlIG1hbnkgcGVvcGxlIGJlbGlldmUgdGhleSBhcmUgc2xvd1tebm90LXNsb3ddLCBidXQgdGhlIHJlYWwgZG93bnNpZGUgb2YgZm9yIGxvb3BzIGlzIHRoYXQgdGhleSdyZSB2ZXJ5IGZsZXhpYmxlOiBhIGxvb3AgY29udmV5cyB0aGF0IHlvdSdyZSBpdGVyYXRpbmcsIGJ1dCBub3Qgd2hhdCBzaG91bGQgYmUgZG9uZSB3aXRoIHRoZSByZXN1bHRzLiBKdXN0IGFzIGl0J3MgYmV0dGVyIHRvIHVzZSBgd2hpbGVgIHRoYW4gYHJlcGVhdGAsIGFuZCBpdCdzIGJldHRlciB0byB1c2UgYGZvcmAgdGhhbiBgd2hpbGVgIChTZWN0aW9uIDUuMy4yKSwgaXQncyBiZXR0ZXIgdG8gdXNlIGEgZnVuY3Rpb25hbCB0aGFuIGBmb3JgLiBFYWNoIGZ1bmN0aW9uYWwgaXMgdGFpbG9yZWQgZm9yIGEgc3BlY2lmaWMgdGFzaywgc28gd2hlbiB5b3UgcmVjb2duaXNlIHRoZSBmdW5jdGlvbmFsIHlvdSBpbW1lZGlhdGVseSBrbm93IHdoeSBpdCdzIGJlaW5nIHVzZWQuCgpbXm5vdC1zbG93XTogVHlwaWNhbGx5IGl0J3Mgbm90IHRoZSBmb3IgbG9vcCBpdHNlbGYgdGhhdCdzIHNsb3csIGJ1dCB3aGF0IHlvdSdyZSBkb2luZyBpbnNpZGUgb2YgaXQuIEEgY29tbW9uIGN1bHByaXQgb2Ygc2xvdyBsb29wcyBpcyBtb2RpZnlpbmcgYSBkYXRhIHN0cnVjdHVyZSwgd2hlcmUgZWFjaCBtb2RpZmljYXRpb24gZ2VuZXJhdGVzIGEgY29weS4gU2VlIFNlY3Rpb25zIDIuNS4xIGFuZCAyNC42IGZvciBtb3JlIGRldGFpbHMuCgpJZiB5b3UncmUgYW4gZXhwZXJpZW5jZWQgZm9yIGxvb3AgdXNlciwgc3dpdGNoaW5nIHRvIGZ1bmN0aW9uYWxzIGlzIHR5cGljYWxseSBhIHBhdHRlcm4gbWF0Y2hpbmcgZXhlcmNpc2UuIFlvdSBsb29rIGF0IHRoZSBmb3IgbG9vcCBhbmQgZmluZCBhIGZ1bmN0aW9uYWwgdGhhdCBtYXRjaGVzIHRoZSBiYXNpYyBmb3JtLiBJZiBvbmUgZG9lc24ndCBleGlzdCwgZG9uJ3QgdHJ5IGFuZCB0b3J0dXJlIGFuIGV4aXN0aW5nIGZ1bmN0aW9uYWwgdG8gZml0IHRoZSBmb3JtIHlvdSBuZWVkLiBJbnN0ZWFkLCBqdXN0IGxlYXZlIGl0IGFzIGEgZm9yIGxvb3AhIChPciBvbmNlIHlvdSd2ZSByZXBlYXRlZCB0aGUgc2FtZSBsb29wIHR3byBvciBtb3JlIHRpbWVzLCBtYXliZSB0aGluayBhYm91dCB3cml0aW5nIHlvdXIgb3duIGZ1bmN0aW9uYWwpLgo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("advanced-r-2.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
