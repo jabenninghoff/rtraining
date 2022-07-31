@@ -1,0 +1,62 @@
+---
+title: "Advanced R Workbook (Functional programming)"
+date: '2022-07-31'
+output:
+  html_notebook:
+    theme:
+      version: 5
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+---
+
+Workbook for completing quizzes and exercises from the "Functional programming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io).
+
+```{r setup, message = FALSE, warning = FALSE}
+# from https://github.com/hadley/adv-r/blob/master/common.R
+knitr::opts_chunk$set(
+  comment = "#>",
+  fig.align = "center"
+)
+
+knitr::knit_hooks$set(
+  small_mar = function(before, options, envir) {
+    if (before) {
+      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+    }
+  }
+)
+```
+
+# Introduction
+
+This workbook includes answers and solutions to the quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html) and [Advanced R Solutions](https://advanced-r-solutions.rbind.io), organized by chapter. It includes excerpts from both books, copied here.
+
+**WARNING, SPOILERS!** If you haven't read Advanced R and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
+
+# 9 Functionals
+
+> To become significantly more reliable, code must become more transparent.
+> In particular, nested conditions and loops must be viewed with great
+> suspicion. Complicated control flows confuse programmers. Messy code often
+> hides bugs.
+>
+> --- Bjarne Stroustrup
+
+A __functional__ is a function that takes a function as an input and returns a vector as output. Here's a simple functional: it calls the function provided as input with 1000 random uniform numbers. 
+
+```{r}
+randomise <- function(f) f(runif(1e3))
+randomise(mean)
+randomise(mean)
+randomise(sum)
+```
+
+The chances are that you've already used a functional. You might have used for-loop replacements like base R's `lapply()`, `apply()`, and `tapply()`; or purrr's `map()`; or maybe you've used a mathematical functional like `integrate()` or `optim()`. 
+
+A common use of functionals is as an alternative to for loops. For loops have a bad rap in R because many people believe they are slow[^not-slow], but the real downside of for loops is that they're very flexible: a loop conveys that you're iterating, but not what should be done with the results. Just as it's better to use `while` than `repeat`, and it's better to use `for` than `while` (Section 5.3.2), it's better to use a functional than `for`. Each functional is tailored for a specific task, so when you recognise the functional you immediately know why it's being used.
+
+[^not-slow]: Typically it's not the for loop itself that's slow, but what you're doing inside of it. A common culprit of slow loops is modifying a data structure, where each modification generates a copy. See Sections 2.5.1 and 24.6 for more details.
+
+If you're an experienced for loop user, switching to functionals is typically a pattern matching exercise. You look at the for loop and find a functional that matches the basic form. If one doesn't exist, don't try and torture an existing functional to fit the form you need. Instead, just leave it as a for loop! (Or once you've repeated the same loop two or more times, maybe think about writing your own functional).
