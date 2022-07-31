@@ -50,6 +50,7 @@ homebrew
 http
 https
 ie
+initialised
 internalise
 invertible
 io
@@ -81,6 +82,7 @@ quadratically
 rdev
 readr
 rebase
+recurse
 recurses
 renv
 repo
