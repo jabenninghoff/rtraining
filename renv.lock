@@ -22,11 +22,11 @@
       "Version": "0.99.8",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "jto888",
       "RemoteRepo": "FaultTree",
       "RemoteRef": "master",
       "RemoteSha": "673effcaa80287fbc1dbe370b39b1f541c2dbe71",
-      "RemoteHost": "api.github.com",
       "Hash": "ac89f61b73433aca17e7f1e749ac1e96",
       "Requirements": [
         "Rcpp",
@@ -53,10 +53,10 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-58",
+      "Version": "7.3-58.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4bf2c61e656bbc238634c798c208d386",
+      "Hash": "762e1804143a332333c054759f89a706",
       "Requirements": []
     },
     "Matrix": {
