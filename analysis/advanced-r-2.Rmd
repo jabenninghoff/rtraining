@@ -325,3 +325,141 @@ bench::mark({
 It is actually slightly slower! AR Solutions wins!
 
 ---
+
+## 9.4.6 Exercises
+
+1.  Explain the results of `modify(mtcars, 1)`.
+
+```{r}
+modify(mtcars, 1)
+as_mapper(1)
+head(mtcars, 1)
+```
+
+Answer: `modify(mtcars, 1)` creates a mapper that plucks the first element of each column of `mtcars` and writes that value to every row.
+
+AR Solutions: `modify()` is based on `map()`, and in this case, the extractor interface will be used. It extracts the first element of each column in `mtcars`. `modify()` always returns the same structure as its input: in this case it forces the first row to be recycled 32 times. (Internally `modify()` uses `.x[] <- map(.x, .f, ...)` for assignment.)
+
+Notes: this code makes the recycling clear:
+
+```{r}
+unlist(map(mtcars, 1))
+```
+
+---
+
+2.  Rewrite the following code to use `iwalk()` instead of `walk2()`. What
+    are the advantages and disadvantages?
+
+```{r, eval = FALSE}
+cyls <- split(mtcars, mtcars$cyl)
+paths <- file.path(temp, paste0("cyl-", names(cyls), ".csv"))
+walk2(cyls, paths, write.csv)
+```
+
+Answer: code below.
+
+```{r}
+temp <- tempfile()
+dir.create(temp)
+
+cyls <- split(mtcars, mtcars$cyl)
+iwalk(cyls, ~ write.csv(.x, file.path(temp, paste0("cyl-", .y, ".csv"))))
+dir(temp)
+```
+
+The main advantage of using `iwalk()` is that it will use `seq_along()` if `x` does not have names. In this case, x has names, and the resulting code is a bit harder to understand, and requires a formula (or function).
+
+AR Solutions: `iwalk()` allows us to use a single variable, storing the output path in the names.
+
+```{r, eval = FALSE}
+temp <- tempfile()
+dir.create(temp)
+cyls <- split(mtcars, mtcars$cyl)
+names(cyls) <- file.path(temp, paste0("cyl-", names(cyls), ".csv"))
+iwalk(cyls, ~ write.csv(.x, .y))
+```
+
+We could do this in a single pipe by taking advantage of `set_names()`:
+
+```{r, eval = FALSE}
+mtcars %>%
+  split(mtcars$cyl) %>%
+  set_names(~ file.path(temp, paste0("cyl-", .x, ".csv"))) %>%
+  iwalk(~ write.csv(.x, .y))
+```
+
+---
+
+3.  Explain how the following code transforms a data frame using functions
+    stored in a list.
+
+```{r}
+if (exists("mtcars")) rm(mtcars)
+mtcars
+
+trans <- list(
+  disp = function(x) x * 0.0163871,
+  am = function(x) factor(x, labels = c("auto", "manual"))
+)
+
+nm <- names(trans)
+mtcars[nm] <- map2(trans, mtcars[nm], function(f, var) f(var))
+
+mtcars
+rm(mtcars)
+```
+
+Compare and contrast the `map2()` approach to this `map()` approach:
+
+```{r, eval = FALSE}
+mtcars[nm] <- map(nm, ~ trans[[.x]](mtcars[[.x]]))
+```
+
+Answer: the `map2()` code applies the anonymous functions to the corresponding column in `mtcars` based on their name in the list:
+
+- `mtcars[nm]` is equivalent to `mtcars[c("disp", "am")]`, so the code is modifying those two
+  columns
+- the mapping function, `function(f, var) f(var)` is run as `f(mtcars[["disp"]])` and
+  `f(mtcars[["am"]])`, with the corresponding function in `trans` as `f`, since `trans` and
+  `mtcars[nm]` are passed as parameters to the function
+
+The equivalent `map()` approach isn't as clean: it's harder to understand what `map()` is doing.
+
+AR Solutions: In the first approach
+
+```{r, eval = FALSE}
+mtcars[nm] <- map2(trans, mtcars[nm], function(f, var) f(var))
+```
+
+the list of the 2 functions (`trans`) and the 2 appropriately selected data frame columns (`mtcars[nm]`) are supplied to `map2()`. `map2()` creates an anonymous function (`f(var)`) which applies the functions to the variables when `map2()` iterates over their (similar) indices. On the left-hand side, the respective 2 elements of `mtcars` are being replaced by their new transformations.
+
+The `map()` variant
+
+```{r, eval = FALSE}
+mtcars[nm] <- map(nm, ~ trans[[.x]](mtcars[[.x]]))
+```
+
+does basically the same. However, it directly iterates over the names (`nm`) of the transformations. Therefore, the data frame columns are selected during the iteration.
+
+Besides the iteration pattern, the approaches differ in the possibilities for appropriate argument naming in the `.f` argument. In the `map2()` approach we iterate over the elements of `x` and `y`. Therefore, it is possible to choose appropriate placeholders like `f` and `var`. This makes the anonymous function more expressive at the cost of making it longer. We think using the formula interface in this way is preferable compared to the rather cryptic `mtcars[nm] <- map2(trans, mtcars[nm], ~ .x(.y))`.
+
+In the `map()` approach we map over the variable names. It is therefore not possible to introduce placeholders for the function and variable names. The formula syntax together with the `.x` pronoun is pretty compact. The object names and the brackets clearly indicate the application of transformations to specific columns of `mtcars`. In this case the iteration over the variable names comes in handy, as it highlights the importance of matching between `trans` and `mtcars` element names. Together with the replacement form on the left-hand side, this line is relatively easy to inspect.
+
+To summarise, in situations where `map()` and `map2()` provide solutions for an iteration problem, several points may be considered before deciding for one or the other approach.
+
+---
+
+4.  What does `write.csv()` return, i.e. what happens if you use it with 
+    `map2()` instead of `walk2()`?
+
+```{r}
+paths <- file.path(temp, paste0("cyl-", names(cyls), ".csv"))
+map2(cyls, paths, write.csv)
+```
+
+Answer: `write.csv()` is designed to return `NULL`, invisibly. While `walk2()` hides the `NULL` return values, `map2()` does not.
+
+AR Solutions: `write.csv()` returns `NULL`. As we call the function for its side effect (creating a CSV file), `walk2()` would be appropriate here. Otherwise, we receive a rather uninformative list of `NULL`s.
+
+---
