@@ -417,23 +417,23 @@ simple enough using the command line:</p>
 <p>I don’t recommend installing the <code>cask</code> variant of r
 because it creates problems with <code>brew doctor</code>:</p>
 <pre class="sh"><code>brew info --cask r</code></pre>
-<pre><code>## r: 4.2.1
-## https://www.r-project.org/
-## Not installed
-## From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r.rb
-## ==&gt; Name
-## R
-## ==&gt; Description
-## Environment for statistical computing and graphics
-## ==&gt; Artifacts
-## R-4.2.1.pkg (Pkg)
-## ==&gt; Caveats
-## Cask r installs files under /usr/local. The presence of such
-## files can cause warnings when running `brew doctor`, which is considered
-## to be a bug in Homebrew Cask.
-## 
-## ==&gt; Analytics
-## install: 970 (30 days), 2,838 (90 days), 11,589 (365 days)</code></pre>
+<pre><code>#&gt; r: 4.2.1
+#&gt; https://www.r-project.org/
+#&gt; Not installed
+#&gt; From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r.rb
+#&gt; ==&gt; Name
+#&gt; R
+#&gt; ==&gt; Description
+#&gt; Environment for statistical computing and graphics
+#&gt; ==&gt; Artifacts
+#&gt; R-4.2.1.pkg (Pkg)
+#&gt; ==&gt; Caveats
+#&gt; Cask r installs files under /usr/local. The presence of such
+#&gt; files can cause warnings when running `brew doctor`, which is considered
+#&gt; to be a bug in Homebrew Cask.
+#&gt; 
+#&gt; ==&gt; Analytics
+#&gt; install: 1,068 (30 days), 2,864 (90 days), 11,678 (365 days)</code></pre>
 <p>I tried “<a
 href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing
 all the things</a>” with <a
@@ -442,12 +442,12 @@ but didn’t like how the uninstall doesn’t clean up, and frankly, I
 haven’t found a need for more than the capabilities included with
 homebrew R:</p>
 <pre class="r"><code>capabilities()</code></pre>
-<pre><code>##        jpeg         png        tiff       tcltk         X11        aqua    http/ftp     sockets 
-##        TRUE        TRUE       FALSE        TRUE       FALSE        TRUE        TRUE        TRUE 
-##      libxml        fifo      cledit       iconv         NLS       Rprof     profmem       cairo 
-##       FALSE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE 
-##         ICU long.double     libcurl 
-##        TRUE        TRUE        TRUE</code></pre>
+<pre><code>#&gt;        jpeg         png        tiff       tcltk         X11        aqua    http/ftp     sockets 
+#&gt;        TRUE        TRUE       FALSE        TRUE       FALSE        TRUE        TRUE        TRUE 
+#&gt;      libxml        fifo      cledit       iconv         NLS       Rprof     profmem       cairo 
+#&gt;       FALSE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE 
+#&gt;         ICU long.double     libcurl 
+#&gt;        TRUE        TRUE        TRUE</code></pre>
 <p>Currently, this is everything except the X11 dependencies, which
 aren’t really needed:</p>
 <pre class="r"><code>?capabilities</code></pre>

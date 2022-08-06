@@ -466,11 +466,11 @@ shown by <code>obj_size</code> and <code>obj_addr</code>:</p>
 <pre class="r"><code>obj_size(y)</code></pre>
 <pre><code>#&gt; 8.00 MB</code></pre>
 <pre class="r"><code>obj_addr(y[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb69e38000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9b19128000&quot;</code></pre>
 <pre class="r"><code>obj_addr(y[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb69e38000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9b19128000&quot;</code></pre>
 <pre class="r"><code>obj_addr(y[[3]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb69e38000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9b19128000&quot;</code></pre>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>On which line does <code>a</code> get copied in the following
@@ -478,13 +478,13 @@ example?</li>
 </ol>
 <pre class="r"><code>a &lt;- c(1, 5, 3, 2)
 obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb7b034528&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a52d9b158&quot;</code></pre>
 <pre class="r"><code>b &lt;- a
 obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb7b034528&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a52d9b158&quot;</code></pre>
 <pre class="r"><code>b[[1]] &lt;- 10
 obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb7c321018&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a52d8f158&quot;</code></pre>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
 </div>
 <div id="exercises" class="section level2">
@@ -504,13 +504,13 @@ point to the same object (with the same address in memory). This object
 has the value <code>1:10</code>. <code>d</code> points to a different
 object with the same value.</p>
 <pre class="r"><code>obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4ab695e0&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a543f1878&quot;</code></pre>
 <pre class="r"><code>obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4ab695e0&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a543f1878&quot;</code></pre>
 <pre class="r"><code>obj_addr(c)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4ab695e0&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a543f1878&quot;</code></pre>
 <pre class="r"><code>obj_addr(d)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4aa01a30&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9aea419420&quot;</code></pre>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>The following code accesses the mean function in multiple ways. Do
@@ -524,15 +524,15 @@ evalq(mean)
 match.fun(&quot;mean&quot;)</code></pre>
 <p>Check the <code>obj_addr</code>:</p>
 <pre class="r"><code>obj_addr(mean)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4efda408&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9adb9a8220&quot;</code></pre>
 <pre class="r"><code>obj_addr(base::mean)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4efda408&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9adb9a8220&quot;</code></pre>
 <pre class="r"><code>obj_addr(get(&quot;mean&quot;))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4efda408&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9adb9a8220&quot;</code></pre>
 <pre class="r"><code>obj_addr(evalq(mean))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4efda408&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9adb9a8220&quot;</code></pre>
 <pre class="r"><code>obj_addr(match.fun(&quot;mean&quot;))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb4efda408&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9adb9a8220&quot;</code></pre>
 <p>Answer: they do.</p>
 <p>AR Solutions: Yes, they point to the same object. We confirm this by
 inspecting the address of the underlying function object.</p>
@@ -618,20 +618,20 @@ the code shown earlier in the section.</li>
 <pre class="r"><code>rm(list = ls())
 x &lt;- c(1L, 2L, 3L)
 tracemem(x)</code></pre>
-<pre><code>#&gt; [1] &quot;&lt;0x7fbb7b11efc8&gt;&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;&lt;0x7f9b0cd047c8&gt;&quot;</code></pre>
 <pre class="r"><code>x[[3]] &lt;- 4</code></pre>
-<pre><code>#&gt; tracemem[0x7fbb7b11efc8 -&gt; 0x7fbb7b17dbc8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
-#&gt; tracemem[0x7fbb7b17dbc8 -&gt; 0x7fbb4c65d368]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre><code>#&gt; tracemem[0x7f9b0cd047c8 -&gt; 0x7f9b0cd00a08]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
+#&gt; tracemem[0x7f9b0cd00a08 -&gt; 0x7f9a53113ec8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
 <pre class="r"><code>untracemem(x)</code></pre>
 <p>Answer: unclear. The behavior in R 4.2.0 seems to have changed, since
 this code shows two copies:</p>
 <pre class="r"><code>rm(list = ls())
 x &lt;- c(1, 2, 3)
 tracemem(x)</code></pre>
-<pre><code>#&gt; [1] &quot;&lt;0x7fbb897de248&gt;&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;&lt;0x7f9b0cd976f8&gt;&quot;</code></pre>
 <pre class="r"><code>y &lt;- x
 y[[3]] &lt;- 4L</code></pre>
-<pre><code>#&gt; tracemem[0x7fbb897de248 -&gt; 0x7fbb7f38a9e8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre><code>#&gt; tracemem[0x7f9b0cd976f8 -&gt; 0x7f9b0cd90508]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
 <pre class="r"><code>y[[3]] &lt;- 5L
 untracemem(x)</code></pre>
 <p>AR Solutions: Initially the vector <code>x</code> has integer type.
@@ -664,27 +664,27 @@ c &lt;- list(b, a, 1:10)
 print(&quot;first object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;first object&quot;</code></pre>
 <pre class="r"><code>obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb881afa60&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a580f2f90&quot;</code></pre>
 <pre class="r"><code>obj_addr(b[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb881afa60&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a580f2f90&quot;</code></pre>
 <pre class="r"><code>obj_addr(b[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb881afa60&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a580f2f90&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb881afa60&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a580f2f90&quot;</code></pre>
 <pre class="r"><code>print(&quot;second object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;second object&quot;</code></pre>
 <pre class="r"><code>obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb7b402148&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a530e8ec8&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb7b402148&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9a530e8ec8&quot;</code></pre>
 <pre class="r"><code>print(&quot;third object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;third object&quot;</code></pre>
 <pre class="r"><code>obj_addr(c)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb88411108&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9b0cd3c878&quot;</code></pre>
 <pre class="r"><code>print(&quot;fourth object (?)&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;fourth object (?)&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[3]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fbb7f40ae80&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7f9b0ccd0de0&quot;</code></pre>
 <p>Answer: four different objects with multiple names.</p>
 <p>AR Solutions: <code>a</code> contains a reference to an address with
 the value <code>1:10</code>. <code>b</code> contains a list of two
@@ -702,10 +702,10 @@ value (<code>1:10</code>).</p>
 x[[2]] &lt;- x
 
 ref(x)</code></pre>
-<pre><code>#&gt; █ [1:0x7fbb7b3afc08] &lt;list&gt; 
-#&gt; ├─[2:0x7fbb88c0fe00] &lt;int&gt; 
-#&gt; └─█ [3:0x7fbb7f5b8858] &lt;list&gt; 
-#&gt;   └─[2:0x7fbb88c0fe00]</code></pre>
+<pre><code>#&gt; █ [1:0x7f9a524cbc08] &lt;list&gt; 
+#&gt; ├─[2:0x7f9aed4aac18] &lt;int&gt; 
+#&gt; └─█ [3:0x7f9a52862588] &lt;list&gt; 
+#&gt;   └─[2:0x7f9aed4aac18]</code></pre>
 <p>Initially x is a list of one element, an int vector 1:10. Then a
 second list element is added, which points to the original int
 vector.</p>
@@ -882,13 +882,13 @@ xm &lt;- x_medians(5)
 head(df_medians(xm$x, xm$medians), 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.321589645","2":"-0.003017779","3":"-0.006020197","4":"-0.18789368","5":"0.01929394","_rn_":"1"},{"1":"0.310928724","2":"-0.231090758","3":"0.338661135","4":"0.24729057","5":"-0.27057070","_rn_":"2"},{"1":"0.422449584","2":"-0.118703532","3":"0.182468895","4":"-0.48556426","5":"-0.36398196","_rn_":"3"},{"1":"0.068526022","2":"0.238503590","3":"-0.215728244","4":"0.38548729","5":"-0.38047769","_rn_":"4"},{"1":"0.388790895","2":"0.047986717","3":"0.495923664","4":"0.21576548","5":"0.42277138","_rn_":"5"},{"1":"-0.053153779","2":"0.014988329","3":"0.490665312","4":"0.23822842","5":"-0.42144444","_rn_":"6"},{"1":"-0.333559593","2":"0.225109969","3":"0.247473425","4":"-0.38301045","5":"0.02190820","_rn_":"7"},{"1":"-0.231943389","2":"-0.252655278","3":"0.092811359","4":"0.08356977","5":"0.22662885","_rn_":"8"},{"1":"-0.003125183","2":"0.348475199","3":"-0.314883398","4":"-0.39012190","5":"-0.40578083","_rn_":"9"},{"1":"-0.036849812","2":"0.398017651","3":"-0.320962810","4":"0.38013026","5":"0.11764866","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.4619715","2":"0.2318275","3":"0.1485859","4":"0.1221146305","5":"-0.25348255","_rn_":"1"},{"1":"-0.3002358","2":"0.4122446","3":"-0.4417204","4":"0.2091043500","5":"-0.39136175","_rn_":"2"},{"1":"0.3255449","2":"-0.3327894","3":"-0.1695642","4":"0.1200309900","5":"-0.14500230","_rn_":"3"},{"1":"-0.2265302","2":"-0.4408079","3":"-0.0647130","4":"-0.0005261734","5":"-0.26664846","_rn_":"4"},{"1":"-0.1192533","2":"0.4153018","3":"0.0545553","4":"-0.3746239519","5":"0.22954965","_rn_":"5"},{"1":"0.2705191","2":"-0.2511186","3":"-0.1921848","4":"0.4694857640","5":"-0.06021226","_rn_":"6"},{"1":"0.4809771","2":"0.2246940","3":"0.4287148","4":"-0.1241265525","5":"0.48384304","_rn_":"7"},{"1":"-0.2574840","2":"-0.3342826","3":"-0.3253939","4":"0.3262088007","5":"0.19374784","_rn_":"8"},{"1":"-0.1976535","2":"-0.4789905","3":"-0.2393532","4":"-0.1862251280","5":"-0.01152118","_rn_":"9"},{"1":"-0.3699335","2":"-0.2561476","3":"-0.3286329","4":"0.2648579570","5":"0.10011535","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>head(as.data.frame(ls_medians(xm$x, xm$medians)), 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.321589645","2":"-0.003017779","3":"-0.006020197","4":"-0.18789368","5":"0.01929394","_rn_":"1"},{"1":"0.310928724","2":"-0.231090758","3":"0.338661135","4":"0.24729057","5":"-0.27057070","_rn_":"2"},{"1":"0.422449584","2":"-0.118703532","3":"0.182468895","4":"-0.48556426","5":"-0.36398196","_rn_":"3"},{"1":"0.068526022","2":"0.238503590","3":"-0.215728244","4":"0.38548729","5":"-0.38047769","_rn_":"4"},{"1":"0.388790895","2":"0.047986717","3":"0.495923664","4":"0.21576548","5":"0.42277138","_rn_":"5"},{"1":"-0.053153779","2":"0.014988329","3":"0.490665312","4":"0.23822842","5":"-0.42144444","_rn_":"6"},{"1":"-0.333559593","2":"0.225109969","3":"0.247473425","4":"-0.38301045","5":"0.02190820","_rn_":"7"},{"1":"-0.231943389","2":"-0.252655278","3":"0.092811359","4":"0.08356977","5":"0.22662885","_rn_":"8"},{"1":"-0.003125183","2":"0.348475199","3":"-0.314883398","4":"-0.39012190","5":"-0.40578083","_rn_":"9"},{"1":"-0.036849812","2":"0.398017651","3":"-0.320962810","4":"0.38013026","5":"0.11764866","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.4619715","2":"0.2318275","3":"0.1485859","4":"0.1221146305","5":"-0.25348255","_rn_":"1"},{"1":"-0.3002358","2":"0.4122446","3":"-0.4417204","4":"0.2091043500","5":"-0.39136175","_rn_":"2"},{"1":"0.3255449","2":"-0.3327894","3":"-0.1695642","4":"0.1200309900","5":"-0.14500230","_rn_":"3"},{"1":"-0.2265302","2":"-0.4408079","3":"-0.0647130","4":"-0.0005261734","5":"-0.26664846","_rn_":"4"},{"1":"-0.1192533","2":"0.4153018","3":"0.0545553","4":"-0.3746239519","5":"0.22954965","_rn_":"5"},{"1":"0.2705191","2":"-0.2511186","3":"-0.1921848","4":"0.4694857640","5":"-0.06021226","_rn_":"6"},{"1":"0.4809771","2":"0.2246940","3":"0.4287148","4":"-0.1241265525","5":"0.48384304","_rn_":"7"},{"1":"-0.2574840","2":"-0.3342826","3":"-0.3253939","4":"0.3262088007","5":"0.19374784","_rn_":"8"},{"1":"-0.1976535","2":"-0.4789905","3":"-0.2393532","4":"-0.1862251280","5":"-0.01152118","_rn_":"9"},{"1":"-0.3699335","2":"-0.2561476","3":"-0.3286329","4":"0.2648579570","5":"0.10011535","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code># benchmark
@@ -896,40 +896,40 @@ mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   87.6µs    212µs     4417.     391KB     2.30</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    109µs    264µs     3533.     391KB     2.86</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   38.8µs    154µs     7502.     391KB     2.01</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   41.8µs    174µs     6616.     391KB     2.25</code></pre>
 <pre class="r"><code>mark(as.data.frame(ls_medians(xm$x, xm$medians))) # as.data.frame introduces significant overhead</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                       min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                  &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$medians))    236µs    294µs     3097.     391KB     5.02</code></pre>
+#&gt; 1 as.data.frame(ls_medians(xm$x, xm$medians))    279µs    357µs     2644.     391KB     3.08</code></pre>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
 <pre class="r"><code>xm &lt;- x_medians(10)
 mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    143µs    200µs     4449.     391KB     5.68</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    155µs    222µs     3983.     391KB     6.47</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)     49µs    173µs     6834.     391KB        0</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   48.6µs   99.6µs     7581.     391KB     2.58</code></pre>
 <pre class="r"><code>xm &lt;- x_medians(20)
 mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    288µs    441µs     2128.     400KB     17.3</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    273µs    428µs     2418.     400KB     4.48</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   65.9µs    200µs     4633.     392KB        0</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   63.4µs    197µs     5479.     392KB     2.42</code></pre>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the
 list method is 5 times as fast. So, the list method is near constant
 time regardless of columns, whereas the data.frame method scales
@@ -1113,7 +1113,7 @@ as atomic vectors or lists.</p>
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x7fbb491c1510&gt;
+#&gt; &lt;bytecode: 0x7f9aebfe7398&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 <pre class="r"><code>unname</code></pre>
 <pre><code>#&gt; function (obj, force = FALSE) 
@@ -1124,7 +1124,7 @@ as atomic vectors or lists.</p>
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x7fbb9f011de8&gt;
+#&gt; &lt;bytecode: 0x7f9b2e828298&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <p>Answer: using <code>names()</code>, and <code>dimnames()</code> for
 <code>unname()</code>.</p>
@@ -1284,9 +1284,9 @@ b_table &lt;- table(b, sample(b))
 b_table</code></pre>
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 0 0 0 1
-#&gt;   b 0 1 0 0
-#&gt;   c 0 0 1 0
+#&gt;   a 0 0 1 0
+#&gt;   b 0 0 0 1
+#&gt;   c 0 1 0 0
 #&gt;   d 1 0 0 0</code></pre>
 <pre class="r"><code>attributes(b_table)</code></pre>
 <pre><code>#&gt; $dim
@@ -2013,7 +2013,7 @@ df[, sample(ncol(df))]</code></pre>
 <pre class="r"><code>df[sample(nrow(df)), sample(ncol(df))]</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["z"],"name":[2],"type":["chr"],"align":["left"]},{"label":["y"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"a","3":"5","_rn_":"1"},{"1":"2","2":"b","3":"4","_rn_":"2"},{"1":"3","2":"c","3":"3","_rn_":"3"},{"1":"5","2":"e","3":"1","_rn_":"5"},{"1":"4","2":"d","3":"2","_rn_":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["y"],"name":[1],"type":["int"],"align":["right"]},{"label":["x"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"5","2":"1","3":"a","_rn_":"1"},{"1":"4","2":"2","3":"b","_rn_":"2"},{"1":"2","2":"4","3":"d","_rn_":"4"},{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"1","2":"5","3":"e","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -2045,13 +2045,13 @@ initial row, a final row, and every row in between)?</li>
 sample_rows(df, 3)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"2","2":"4","3":"b","_rn_":"2"},{"1":"4","2":"2","3":"d","_rn_":"4"},{"1":"3","2":"3","3":"c","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"1","2":"5","3":"a","_rn_":"1"},{"1":"5","2":"1","3":"e","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>sample_rows(df, 3, contiguous = TRUE)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"4","2":"2","3":"d","_rn_":"4"},{"1":"5","2":"1","3":"e","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"5","3":"a","_rn_":"1"},{"1":"2","2":"4","3":"b","_rn_":"2"},{"1":"3","2":"3","3":"c","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>try(sample_rows(df, 6))</code></pre>
@@ -2330,7 +2330,7 @@ function. Which of the two approaches below is correct? Why?</li>
 </ol>
 <pre class="r"><code>function(x) 3()</code></pre>
 <pre><code>#&gt; function(x) 3()
-#&gt; &lt;environment: 0x7fbb88618330&gt;</code></pre>
+#&gt; &lt;environment: 0x7f9b0be455e0&gt;</code></pre>
 <pre class="r"><code>(function(x) 3)()</code></pre>
 <pre><code>#&gt; [1] 3</code></pre>
 <p>Answer: The second is correct, as the first is the form of defining a
@@ -2705,7 +2705,7 @@ two unique elements before <code>xlim</code> is computed.</p>
   print(x)
 }
 show_time()</code></pre>
-<pre><code>#&gt; [1] &quot;2022-07-31 11:56:14 CDT&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;2022-08-06 16:45:37 CDT&quot;</code></pre>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is
 evaluated. This is a confusing use of lazy evaluation.</p>
 <p>AR Solutions: Before <code>show_time()</code> accesses <code>x</code>
@@ -3047,7 +3047,7 @@ cor(m = &quot;k&quot;, y = y, u = &quot;p&quot;, x = x)</code></pre>
 <pre class="r"><code>x &lt;- sample(c(1:10, NA), 20, replace = TRUE)
 y &lt;- runif(20)
 cor(x, y, use = &quot;pairwise.complete.obs&quot;, method = &quot;kendall&quot;)</code></pre>
-<pre><code>#&gt; [1] 0.01879447</code></pre>
+<pre><code>#&gt; [1] 0.2926195</code></pre>
 <p>AR Solutions: None of these functions provides a <code>...</code>
 argument. Therefore, the function arguments are first matched exactly,
 then via partial matching and finally by position. This leads us to the
@@ -3105,7 +3105,7 @@ vector.</li>
 v &lt;- 1:20
 modrand(v) &lt;- NA
 v</code></pre>
-<pre><code>#&gt;  [1]  1  2 NA  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 NA 13 14 15 16 17 18 19 20</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: Let’s define <code>random&lt;-</code> like this:</p>
 <pre class="r"><code>`random&lt;-` &lt;- function(x, value) {
@@ -3193,68 +3193,68 @@ also allows to return the position on the search path
 objects only. This gives us the following statement to begin with:</p>
 <pre class="r"><code>repls &lt;- apropos(&quot;&lt;-&quot;, where = TRUE, mode = &quot;function&quot;)
 head(repls, 30)</code></pre>
-<pre><code>#&gt;                     35                     35                     35                     35 
+<pre><code>#&gt;                     36                     36                     36                     36 
 #&gt;        &quot;.rowNamesDF&lt;-&quot;                 &quot;[[&lt;-&quot;      &quot;[[&lt;-.data.frame&quot;          &quot;[[&lt;-.factor&quot; 
-#&gt;                     35                     35                     35                     35 
+#&gt;                     36                     36                     36                     36 
 #&gt; &quot;[[&lt;-.numeric_version&quot;         &quot;[[&lt;-.POSIXlt&quot;                  &quot;[&lt;-&quot;       &quot;[&lt;-.data.frame&quot; 
-#&gt;                     35                     35                     35                     35 
+#&gt;                     36                     36                     36                     36 
 #&gt;             &quot;[&lt;-.Date&quot;         &quot;[&lt;-.difftime&quot;           &quot;[&lt;-.factor&quot;  &quot;[&lt;-.numeric_version&quot; 
-#&gt;                     35                     35                     35                     16 
+#&gt;                     36                     36                     36                     17 
 #&gt;          &quot;[&lt;-.POSIXct&quot;          &quot;[&lt;-.POSIXlt&quot;                  &quot;@&lt;-&quot;                &quot;%@%&lt;-&quot; 
-#&gt;                     35                     35                     35                     35 
+#&gt;                     36                     36                     36                     36 
 #&gt;                   &quot;&lt;-&quot;                  &quot;&lt;&lt;-&quot;                  &quot;$&lt;-&quot;       &quot;$&lt;-.data.frame&quot; 
-#&gt;                     32                     35                     35                     32 
+#&gt;                     33                     36                     36                     33 
 #&gt;                 &quot;as&lt;-&quot;               &quot;attr&lt;-&quot;         &quot;attributes&lt;-&quot;               &quot;body&lt;-&quot; 
-#&gt;                     35                     35                     32                     35 
+#&gt;                     36                     36                     33                     36 
 #&gt;               &quot;body&lt;-&quot;              &quot;class&lt;-&quot;             &quot;coerce&lt;-&quot;           &quot;colnames&lt;-&quot; 
-#&gt;                     35                     21 
+#&gt;                     36                     22 
 #&gt;            &quot;comment&lt;-&quot;          &quot;contrasts&lt;-&quot;</code></pre>
 <p>To restrict <code>repl</code> to names of replacement functions from
 the <code>{base}</code> package, we select only matches containing the
 relevant position on the search path.</p>
 <pre class="r"><code>repls_base &lt;- repls[names(repls) == length(search())]
 repls_base</code></pre>
-<pre><code>#&gt;                        35                        35                        35 
+<pre><code>#&gt;                        36                        36                        36 
 #&gt;           &quot;.rowNamesDF&lt;-&quot;                    &quot;[[&lt;-&quot;         &quot;[[&lt;-.data.frame&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;             &quot;[[&lt;-.factor&quot;    &quot;[[&lt;-.numeric_version&quot;            &quot;[[&lt;-.POSIXlt&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;                     &quot;[&lt;-&quot;          &quot;[&lt;-.data.frame&quot;                &quot;[&lt;-.Date&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;            &quot;[&lt;-.difftime&quot;              &quot;[&lt;-.factor&quot;     &quot;[&lt;-.numeric_version&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;             &quot;[&lt;-.POSIXct&quot;             &quot;[&lt;-.POSIXlt&quot;                     &quot;@&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;                      &quot;&lt;-&quot;                     &quot;&lt;&lt;-&quot;                     &quot;$&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;          &quot;$&lt;-.data.frame&quot;                  &quot;attr&lt;-&quot;            &quot;attributes&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;                  &quot;body&lt;-&quot;                 &quot;class&lt;-&quot;              &quot;colnames&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;               &quot;comment&lt;-&quot;                  &quot;diag&lt;-&quot;                   &quot;dim&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;              &quot;dimnames&lt;-&quot;   &quot;dimnames&lt;-.data.frame&quot;              &quot;Encoding&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;           &quot;environment&lt;-&quot;               &quot;formals&lt;-&quot;                 &quot;is.na&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;         &quot;is.na&lt;-.default&quot;          &quot;is.na&lt;-.factor&quot; &quot;is.na&lt;-.numeric_version&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;                &quot;length&lt;-&quot;           &quot;length&lt;-.Date&quot;       &quot;length&lt;-.difftime&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;         &quot;length&lt;-.factor&quot;        &quot;length&lt;-.POSIXct&quot;        &quot;length&lt;-.POSIXlt&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;                &quot;levels&lt;-&quot;         &quot;levels&lt;-.factor&quot;                  &quot;mode&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;        &quot;mostattributes&lt;-&quot;                 &quot;names&lt;-&quot;         &quot;names&lt;-.POSIXlt&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;              &quot;oldClass&lt;-&quot;            &quot;parent.env&lt;-&quot;            &quot;regmatches&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;             &quot;row.names&lt;-&quot;  &quot;row.names&lt;-.data.frame&quot;     &quot;row.names&lt;-.default&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;              &quot;rownames&lt;-&quot;                 &quot;split&lt;-&quot;      &quot;split&lt;-.data.frame&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;         &quot;split&lt;-.default&quot;          &quot;storage.mode&lt;-&quot;                &quot;substr&lt;-&quot; 
-#&gt;                        35                        35                        35 
+#&gt;                        36                        36                        36 
 #&gt;             &quot;substring&lt;-&quot;                 &quot;units&lt;-&quot;        &quot;units&lt;-.difftime&quot;</code></pre>
 <p>To find out which of these functions are primitives, we first search
 for these functions via <code>mget()</code> and then subset the result
@@ -3316,17 +3316,17 @@ conventions from mathematics.</li>
 
 # taken from docs examples
 (x &lt;- c(sort(sample(1:20, 9)), NA))</code></pre>
-<pre><code>#&gt;  [1]  7  9 12 13 14 15 16 17 19 NA</code></pre>
+<pre><code>#&gt;  [1]  1  3  4  9 15 16 18 19 20 NA</code></pre>
 <pre class="r"><code>(y &lt;- c(sort(sample(3:23, 7)), NA))</code></pre>
-<pre><code>#&gt; [1]  7  9 10 14 15 18 23 NA</code></pre>
+<pre><code>#&gt; [1]  3  9 10 16 17 20 23 NA</code></pre>
 <pre class="r"><code>x %u% y</code></pre>
-<pre><code>#&gt;  [1]  7  9 12 13 14 15 16 17 19 NA 10 18 23</code></pre>
+<pre><code>#&gt;  [1]  1  3  4  9 15 16 18 19 20 NA 10 17 23</code></pre>
 <pre class="r"><code>x %n% y</code></pre>
-<pre><code>#&gt; [1]  7  9 14 15 NA</code></pre>
+<pre><code>#&gt; [1]  3  9 16 20 NA</code></pre>
 <pre class="r"><code>x %s% y</code></pre>
-<pre><code>#&gt; [1] 12 13 16 17 19</code></pre>
+<pre><code>#&gt; [1]  1  4 15 18 19</code></pre>
 <pre class="r"><code>y %s% x</code></pre>
-<pre><code>#&gt; [1] 10 18 23</code></pre>
+<pre><code>#&gt; [1] 10 17 23</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: These infix operators could be defined in the following
 way. (<code>%/%</code> is chosen instead of <code>%\%</code>, because
@@ -3405,14 +3405,14 @@ e1$loop &lt;- e1
 
 # Print the environment
 env_print(e1)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fbb7f2c2528&gt;
-#&gt; Parent: &lt;environment: 0x7fbb88618330&gt;
+<pre><code>#&gt; &lt;environment: 0x7f9adf32b148&gt;
+#&gt; Parent: &lt;environment: 0x7f9b0be455e0&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
 <pre class="r"><code># Verify that it contains itself
 lobstr::ref(e1)</code></pre>
-<pre><code>#&gt; █ [1:0x7fbb7f2c2528] &lt;env&gt; 
-#&gt; └─loop = [1:0x7fbb7f2c2528]</code></pre>
+<pre><code>#&gt; █ [1:0x7f9adf32b148] &lt;env&gt; 
+#&gt; └─loop = [1:0x7f9adf32b148]</code></pre>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>Create a pair of environments as illustrated by this picture.</li>
@@ -3432,13 +3432,13 @@ e1$loop &lt;- e2
 e2$dedoop &lt;- e1
 
 lobstr::ref(e1)</code></pre>
-<pre><code>#&gt; █ [1:0x7fbb88cbe228] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x7fbb8a746098] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x7fbb88cbe228]</code></pre>
+<pre><code>#&gt; █ [1:0x7f9adc360638] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x7f9aecc5ddd8] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x7f9adc360638]</code></pre>
 <pre class="r"><code>lobstr::ref(e2)</code></pre>
-<pre><code>#&gt; █ [1:0x7fbb8a746098] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x7fbb88cbe228] &lt;env&gt; 
-#&gt;            └─loop = [1:0x7fbb8a746098]</code></pre>
+<pre><code>#&gt; █ [1:0x7f9aecc5ddd8] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x7f9adc360638] &lt;env&gt; 
+#&gt;            └─loop = [1:0x7f9aecc5ddd8]</code></pre>
 <hr />
 <ol start="4" style="list-style-type: decimal">
 <li>Explain why <code>e[[1]]</code> and <code>e[c("a", "b")]</code>
@@ -3470,8 +3470,8 @@ env_poke_new(e_test, &quot;d&quot;, &quot;success&quot;)
 try(env_poke_new(e_test, &quot;a&quot;, &quot;fail&quot;))</code></pre>
 <pre><code>#&gt; Error in env_poke_new(e_test, &quot;a&quot;, &quot;fail&quot;) : nm &#39;a&#39; already bound</code></pre>
 <pre class="r"><code>env_print(e_test)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fbb8a53cd80&gt;
-#&gt; Parent: &lt;environment: 0x7fbb88618330&gt;
+<pre><code>#&gt; &lt;environment: 0x7f9b2d5807a0&gt;
+#&gt; Parent: &lt;environment: 0x7f9b0be455e0&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
 #&gt; • b: &lt;dbl&gt;
@@ -3567,7 +3567,7 @@ x &lt;- 5
 try(where(&quot;yyy&quot;))</code></pre>
 <pre><code>#&gt; Error : Can&#39;t find yyy</code></pre>
 <pre class="r"><code>where(&quot;x&quot;)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fbb88618330&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7f9b0be455e0&gt;</code></pre>
 <pre class="r"><code>where(&quot;mean&quot;)</code></pre>
 <pre><code>#&gt; &lt;environment: namespace:base&gt;</code></pre>
 <pre class="r"><code>all_where &lt;- function(name, env = caller_env(), found = list()) {
@@ -3585,16 +3585,16 @@ try(where(&quot;yyy&quot;))</code></pre>
 
 all_where(&quot;x&quot;)</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7fbb88618330&gt;</code></pre>
+#&gt; &lt;environment: 0x7f9b0be455e0&gt;</code></pre>
 <pre class="r"><code>local({
   x &lt;- 10
   all_where(&quot;x&quot;)
 })</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7fbb4ca56a80&gt;
+#&gt; &lt;environment: 0x7f9b0caa0bb0&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x7fbb88618330&gt;</code></pre>
+#&gt; &lt;environment: 0x7f9b0be455e0&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: <code>where()</code> searches (recursively) for a given
 name within a given environment and its ancestors. If
@@ -3628,10 +3628,10 @@ e1b &lt;- env(e1a, b = 10, c = 11)
 e1c &lt;- env(e1b, a = 12, d = 13)
 where2(&quot;a&quot;, e1c)</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7fbb4f0890e8&gt;
+#&gt; &lt;environment: 0x7f9a52d1d200&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x7fbb4f0f7388&gt;</code></pre>
+#&gt; &lt;environment: 0x7f9aef5aba48&gt;</code></pre>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>Write a function called <code>fget()</code> that finds only function
@@ -3664,7 +3664,7 @@ try(fget(&quot;x&quot;))</code></pre>
 <pre class="r"><code>try(fget(&quot;print&quot;, inherits = FALSE))</code></pre>
 <pre><code>#&gt; Error : Can&#39;t find print</code></pre>
 <pre class="r"><code>fget(&quot;all_where&quot;, inherits = FALSE)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fbb88618330&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7f9b0be455e0&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: We follow a similar approach to the previous exercise.
 This time we additionally check if the found object is a function and
@@ -3692,7 +3692,7 @@ mean &lt;- 10
 fget(&quot;mean&quot;, inherits = TRUE)</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod(&quot;mean&quot;)
-#&gt; &lt;bytecode: 0x7fbb4efda360&gt;
+#&gt; &lt;bytecode: 0x7f9adb9a8178&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <hr />
 </div>
@@ -3758,11 +3758,11 @@ e_str(print)</code></pre>
 <pre class="r"><code>e_str(fget)</code></pre>
 <pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)  
 #&gt;  - attr(*, &quot;srcref&quot;)= &#39;srcref&#39; int [1:8] 1 9 17 1 9 1 1 17
-#&gt;   ..- attr(*, &quot;srcfile&quot;)=Classes &#39;srcfilecopy&#39;, &#39;srcfile&#39; &lt;environment: 0x7fbb4d187ae8&gt;</code></pre>
+#&gt;   ..- attr(*, &quot;srcfile&quot;)=Classes &#39;srcfilecopy&#39;, &#39;srcfile&#39; &lt;environment: 0x7f9a523f1a28&gt;</code></pre>
 <pre><code>#&gt; fn_env():</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fbb88618330&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7f9b0be455e0&gt;</code></pre>
 <pre><code>#&gt; environment():</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fbb88618330&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7f9b0be455e0&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: To solve this problem, we need to write a function that
 takes the name of a function and looks for that function returning both
@@ -3925,11 +3925,11 @@ file.create(tmp)</code></pre>
 <pre><code>#&gt; [1] TRUE</code></pre>
 <pre class="r"><code>file.remove(tmp)</code></pre>
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//
-#&gt; RtmpBzrC2m/file13e427fc1a02c&#39;, reason &#39;No such file or directory&#39;</code></pre>
+#&gt; RtmpbZeb02/file64eb3a9a8a95&#39;, reason &#39;No such file or directory&#39;</code></pre>
 <pre><code>#&gt; [1] FALSE</code></pre>
 <pre class="r"><code>try(safe_file_remove(tmp))</code></pre>
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpBzrC2m/file13e427fc1a02c&#39; does not exist</code></pre>
+#&gt;   file &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpbZeb02/file64eb3a9a8a95&#39; does not exist</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: We prefer the following solution for its clarity and
 simplicity:</p>
@@ -4089,7 +4089,7 @@ works.</li>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x7fbb4fbfbb18&gt;
+#&gt; &lt;bytecode: 0x7f9adc0f0320&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 <pre class="r"><code>catch_cnd(stop(&quot;error&quot;))</code></pre>
 <pre><code>#&gt; &lt;simpleError in force(expr): error&gt;</code></pre>

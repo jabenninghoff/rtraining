@@ -557,11 +557,11 @@ diamonds2 &lt;- diamonds %&gt;%
 ggplot(data = diamonds2) +
   geom_point(mapping = aes(x = carat, y = resid)) +
   theme_quo()</code></pre>
-<p><img src="r-training-log_files/figure-html/models-1.png" width="768" /></p>
+<p><img src="r-training-log_files/figure-html/models-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ggplot(data = diamonds2) +
   geom_boxplot(mapping = aes(x = cut, y = resid)) +
   theme_quo()</code></pre>
-<p><img src="r-training-log_files/figure-html/models-2.png" width="768" /></p>
+<p><img src="r-training-log_files/figure-html/models-2.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="non-tidy-data" class="section level3">
 <h3>Non-Tidy Data</h3>
@@ -748,8 +748,8 @@ local({
   }
   write.gif(X, &quot;rendered/mandelbrot.gif&quot;, col = jet.colors, delay = 100)
 })</code></pre>
-<pre><code>## Warning in complex(real = rep(seq(-2.2, 1, length.out = dx), each = dy), : partial argument match of
-## &#39;imag&#39; to &#39;imaginary&#39;</code></pre>
+<pre><code>#&gt; Warning in complex(real = rep(seq(-2.2, 1, length.out = dx), each = dy), : partial argument match of
+#&gt; &#39;imag&#39; to &#39;imaginary&#39;</code></pre>
 <pre class="r"><code># nolint end</code></pre>
 </div>
 </div>
