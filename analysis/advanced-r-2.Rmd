@@ -683,3 +683,194 @@ modify_if(mtcars, is.numeric, scale01)
 ```
 
 ---
+
+## 9.7.3 Exercises
+
+1.  How does `apply()` arrange the output? Read the documentation and perform 
+    some experiments.
+
+```{r, eval = FALSE}
+# experiments
+m1 <- matrix(1:4, nrow = 1)
+apply(m1, 1, sum)
+apply(m1, 2, sum)
+apply(m1, c(1, 2), `*`, 2)
+apply(m1, 1, `*`, 2)
+apply(m1, 1, `*`, 2, simplify = FALSE)
+apply(m1, 2, `*`, 2)
+apply(m1, 1, sum, simplify = FALSE)
+
+m1a <- matrix(1:4, ncol = 1)
+apply(m1a, 1, `*`, 2)
+
+m2 <- matrix(1:20, ncol = 4)
+apply(m2, 1, sum)
+
+m3 <- array(1:24, dim = c(2, 3, 4))
+apply(m3, 1, sum)
+apply(m3, 2, sum)
+apply(m3, 3, sum)
+apply(m3, 1, `*`, 2)
+apply(m3, 2, `*`, 2)
+apply(m3, 3, `*`, 2)
+apply(m3, c(1, 2, 3), `*`, 2)
+```
+
+Answer: the documentation states:
+
+> If each call to `FUN` returns a vector of length `n`, and simplify is `TRUE`, then apply returns an array of dimension `c(n, dim(X)[MARGIN])` if `n > 1`. If `n` equals 1, `apply` returns a vector if `MARGIN` has length 1 and an array of `dimension dim(X)[MARGIN]` otherwise. If `n` is 0, the result has length 0 but not necessarily the 'correct' dimension.
+> 
+> If the calls to `FUN` return vectors of different lengths, or if simplify is `FALSE`, apply returns a list of `length prod(dim(X)[MARGIN])` with `dim` set to `MARGIN` if this has length greater than one.
+
+With exploration, under normal circumstances:
+
+- If `MARGIN` includes all dimensions of an array or matrix (`c(1, 2)` or `c(1, 2, 3)`), the output
+  is arranged in the same shape as the input
+- Otherwise, the return value drops a dimension if modifying a vector in place (as with `*`), or
+  returns a vector when summarizing (as with `sum`)
+- Matrices of a single row are simplified to a vector
+- Matrices of a single column are returned as a matrix
+- When `simplify = FALSE` is set, a list is returned
+
+However, even with all this, the "rules" aren't clear to me.
+
+AR Solutions: Basically `apply()` applies a function over the margins of an array. In the two-dimensional case, the margins are just the rows and columns of a matrix. Let's make this concrete.
+
+```{r}
+arr2 <- array(1:12, dim = c(3, 4))
+rownames(arr2) <- paste0("row", 1:3)
+colnames(arr2) <- paste0("col", 1:4)
+arr2
+```
+
+When we apply the `head()` function over the first margin of `arr2()` (i.e. the rows), the results are contained in the columns of the output, transposing the array compared to the original input.
+
+```{r}
+apply(arr2, 1, function(x) x[1:2])
+```
+
+And vice versa if we apply over the second margin (the columns):
+
+```{r}
+apply(arr2, 2, function(x) x[1:2])
+```
+
+The output of `apply()` is organised first by the margins being operated over, then the results of the function. This can become quite confusing for higher dimensional arrays.
+
+Notes: AR Solutions' explanation is better, but the output is still confusing.
+
+---
+
+2.  What do `eapply()` and `rapply()` do? Does purrr have equivalents?
+
+Answer: `eapply()` applies a function to named values in an environment. `rapply()` is a recursive `lapply()`. There are no equivalents in purrr.
+
+AR Solutions: `eapply()` is a variant of `lapply()`, which iterates over the (named) elements of an environment. In `purrr` there is no equivalent for `eapply()` as `purrr` mainly provides functions that operate on vectors and functions, but not on environments.
+
+`rapply()` applies a function to all elements of a list recursively. This function makes it possible to limit the application of the function to specified classes (default `classes = ANY`). One may also specify how elements of other classes should remain: as their identity (`how = replace`) or another value (`default = NULL`). The closest equivalent in `purrr` is `modify_depth()`, which allows you to modify elements at a specified depth in a nested list.
+
+Notes: I wasn't aware of `purrr::modify_depth()`.
+
+---
+
+3.  Challenge: read about the 
+    [fixed point algorithm](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-12.html#%25_idx_1096).
+    Complete the exercises using R.
+
+Answer: the fixed point algorithm is defined below, with an example solution:
+
+```
+(define tolerance 0.00001)
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
+(fixed-point cos 1.0)
+0.7390822985224023
+
+(fixed-point (lambda (y) (+ (sin y) (cos y)))
+             1.0)
+1.2587315962971173
+
+(define (sqrt x)
+  (fixed-point (lambda (y) (/ x y))
+               1.0))
+```
+
+Implementation in R:
+
+```{r}
+fixed_point <- function(f, x) {
+  tolerance <- 0.00001
+  close_enough <- function(v1, v2) {
+    abs(v1 - v2) < tolerance
+  }
+
+  if (close_enough(f(x), x)) {
+    f(x)
+  } else {
+    fixed_point(f, f(x))
+  }
+}
+
+fixed_point(cos, 1.0)
+fixed_point(function(y) sin(y) + cos(y), 1.0)
+```
+
+AR Solutions: A number $x$ is called a fixed point of a function $f$ if it satisfies the equation $f(x) = x$. For some functions we may find a fixed point by beginning with a starting value and applying $f$ repeatedly. Here `fixed_point()` acts as a functional because it takes a function as an argument.
+
+```{r, error = TRUE}
+fixed_point_ar <- function(f, x_init, n_max = 10000, tol = 0.0001) {
+  n <- 0
+  x <- x_init
+  y <- f(x)
+
+  is_fixed_point <- function(x, y) {
+    abs(x - y) < tol
+  }
+
+  while (!is_fixed_point(x, y)) {
+    x <- y
+    y <- f(y)
+
+    # Make sure we eventually stop
+    n <- n + 1
+    if (n > n_max) {
+      stop("Failed to converge.", call. = FALSE)
+    }
+  }
+
+  x
+}
+
+# Functions with fixed points
+fixed_point_ar(sin, x_init = 1)
+fixed_point_ar(cos, x_init = 1)
+
+# Functions without fixed points
+add_one <- function(x) x + 1
+try(fixed_point_ar(add_one, x_init = 1))
+```
+
+Notes: AR Solutions offers a different approach using a `while()` loop that is guaranteed to stop. My approach using recursive calls does stop eventually with a stack limit error:
+
+```{r}
+fixed_point(add_one, 1)
+```
+
+Comparing benchmarks:
+
+```{r}
+bench::mark(fixed_point_ar(cos, x_init = 1, tol = 0.00001))
+bench::mark(fixed_point(cos, 1))
+```
+
+As usual, AR Solutions is faster. :-(
+
+---
