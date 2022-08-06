@@ -20,32 +20,32 @@ Feel free to use and/or fork this project!
 
 Notebooks in this package:
 
--   [FaultTree.widget
-    Test](https://jabenninghoff.github.io/rtraining/FaultTree.html)
-    (2021-09-30): Notebook for testing FaultTree.widget rendering fixes.
--   [Advanced R Workbook
-    (Foundations)](https://jabenninghoff.github.io/rtraining/advanced-r-1.html)
-    (2022-06-12): Workbook for completing quizzes and exercises from the
-    “Foundations” chapters of [Advanced
-    R](https://adv-r.hadley.nz/index.html), second edition, with
-    comparisons to solutions from [Advanced R
-    Solutions](https://advanced-r-solutions.rbind.io).
--   [Advanced R Workbook (Functional
-    programming)](https://jabenninghoff.github.io/rtraining/advanced-r-2.html)
-    (2022-07-31): Workbook for completing quizzes and exercises from the
-    “Functional programming” chapters of [Advanced
-    R](https://adv-r.hadley.nz/index.html), second edition, with
-    comparisons to solutions from [Advanced R
-    Solutions](https://advanced-r-solutions.rbind.io).
--   [R Setup
-    Log](https://jabenninghoff.github.io/rtraining/r-setup-log.html)
-    (2020-12-30): My notes on my personal R setup. I started my R
-    journey in [September
-    2020](https://www.information-safety.org/2020/09/11/working-with-r/)
-    after [SIRACon 2020](https://societyinforisk.org/event-3899786).
--   [R Training
-    Log](https://jabenninghoff.github.io/rtraining/r-training-log.html)
-    (2020-12-02): Notes on learning R and RStudio.
+- [FaultTree.widget
+  Test](https://jabenninghoff.github.io/rtraining/FaultTree.html)
+  (2021-09-30): Notebook for testing FaultTree.widget rendering fixes.
+- [Advanced R Workbook
+  (Foundations)](https://jabenninghoff.github.io/rtraining/advanced-r-1.html)
+  (2022-06-12): Workbook for completing quizzes and exercises from the
+  “Foundations” chapters of [Advanced
+  R](https://adv-r.hadley.nz/index.html), second edition, with
+  comparisons to solutions from [Advanced R
+  Solutions](https://advanced-r-solutions.rbind.io).
+- [Advanced R Workbook (Functional
+  programming)](https://jabenninghoff.github.io/rtraining/advanced-r-2.html)
+  (2022-07-31): Workbook for completing quizzes and exercises from the
+  “Functional programming” chapters of [Advanced
+  R](https://adv-r.hadley.nz/index.html), second edition, with
+  comparisons to solutions from [Advanced R
+  Solutions](https://advanced-r-solutions.rbind.io).
+- [R Setup
+  Log](https://jabenninghoff.github.io/rtraining/r-setup-log.html)
+  (2020-12-30): My notes on my personal R setup. I started my R journey
+  in [September
+  2020](https://www.information-safety.org/2020/09/11/working-with-r/)
+  after [SIRACon 2020](https://societyinforisk.org/event-3899786).
+- [R Training
+  Log](https://jabenninghoff.github.io/rtraining/r-training-log.html)
+  (2020-12-02): Notes on learning R and RStudio.
 
 ## Installation
 
@@ -66,5 +66,5 @@ renv::install("jabenninghoff/rtraining")
 
 ## Development
 
--   Changelog: See “Changelog” or `NEWS.md`.
--   Planned: [TODO](TODO.md)
+- Changelog: See “Changelog” or `NEWS.md`.
+- Planned: [TODO](TODO.md)
