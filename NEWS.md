@@ -1,3 +1,7 @@
+# rtraining 0.8.9
+
+* Updated Advanced R Workbook (Functional programming): add solutions for Chapter 9
+
 # rtraining 0.8.8
 
 * Updated Advanced R Workbook (Foundations): add AR Solutions for Chapter 4-8
