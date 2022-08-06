@@ -398,7 +398,10 @@ href="https://adv-r.hadley.nz/index.html">Advanced R</a>, second
 edition, with comparisons to solutions from <a
 href="https://advanced-r-solutions.rbind.io">Advanced R
 Solutions</a>.</p>
-<pre class="r"><code># from https://github.com/hadley/adv-r/blob/master/common.R
+<pre class="r"><code>library(purrr)
+library(palmerpenguins) # nolint: unused_import_linter. Imported for `penguins` tibble.
+
+# from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
   comment = &quot;#&gt;&quot;,
   fig.align = &quot;center&quot;
@@ -437,11 +440,11 @@ calls the function provided as input with 1000 random uniform
 numbers.</p>
 <pre class="r"><code>randomise &lt;- function(f) f(runif(1e3))
 randomise(mean)</code></pre>
-<pre><code>#&gt; [1] 0.4948927</code></pre>
+<pre><code>#&gt; [1] 0.5000044</code></pre>
 <pre class="r"><code>randomise(mean)</code></pre>
-<pre><code>#&gt; [1] 0.4848683</code></pre>
+<pre><code>#&gt; [1] 0.5064886</code></pre>
 <pre class="r"><code>randomise(sum)</code></pre>
-<pre><code>#&gt; [1] 506.1185</code></pre>
+<pre><code>#&gt; [1] 501.8298</code></pre>
 <p>The chances are that you’ve already used a functional. You might have
 used for-loop replacements like base R’s <code>lapply()</code>,
 <code>apply()</code>, and <code>tapply()</code>; or purrr’s
@@ -464,6 +467,1058 @@ try and torture an existing functional to fit the form you need.
 Instead, just leave it as a for loop! (Or once you’ve repeated the same
 loop two or more times, maybe think about writing your own
 functional).</p>
+<div id="exercises" class="section level2">
+<h2>9.2.6 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Use <code>as_mapper()</code> to explore how purrr generates
+anonymous functions for the integer, character, and list helpers. What
+helper allows you to extract attributes? Read the documentation to find
+out.</li>
+</ol>
+<pre class="r"><code>map_dbl</code></pre>
+<pre><code>#&gt; function (.x, .f, ...) 
+#&gt; {
+#&gt;     .f &lt;- as_mapper(.f, ...)
+#&gt;     .Call(map_impl, environment(), &quot;.x&quot;, &quot;.f&quot;, &quot;double&quot;)
+#&gt; }
+#&gt; &lt;bytecode: 0x7faebcff8a70&gt;
+#&gt; &lt;environment: namespace:purrr&gt;</code></pre>
+<pre class="r"><code>map_dbl(mtcars, ~ length(unique(.x)))</code></pre>
+<pre><code>#&gt;  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
+#&gt;   25    3   27   22   22   29   30    2    2    3    6</code></pre>
+<pre class="r"><code>as_mapper(~ length(unique(.x)))</code></pre>
+<pre><code>#&gt; &lt;lambda&gt;
+#&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
+#&gt; length(unique(.x))
+#&gt; &lt;environment: 0x7faec88c7020&gt;
+#&gt; attr(,&quot;class&quot;)
+#&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
+<pre class="r"><code>function(..., .x = ..1, .y = ..2, . = ..1) length(unique(.x))</code></pre>
+<pre><code>#&gt; function(..., .x = ..1, .y = ..2, . = ..1) length(unique(.x))
+#&gt; &lt;environment: 0x7faec88c7020&gt;</code></pre>
+<pre class="r"><code>as_mapper(mean)</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; UseMethod(&quot;mean&quot;)
+#&gt; &lt;bytecode: 0x7faf0f3d4450&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code>as_mapper(function(x) mean(x, na.rm = TRUE))</code></pre>
+<pre><code>#&gt; function(x) mean(x, na.rm = TRUE)
+#&gt; &lt;environment: 0x7faec88c7020&gt;</code></pre>
+<pre class="r"><code>as_mapper(~ mean(.x, na.rm = TRUE))</code></pre>
+<pre><code>#&gt; &lt;lambda&gt;
+#&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
+#&gt; mean(.x, na.rm = TRUE)
+#&gt; &lt;environment: 0x7faec88c7020&gt;
+#&gt; attr(,&quot;class&quot;)
+#&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
+<p>Answer: Exploration above. <code>attr_getter()</code> supports
+extraction of attributes.</p>
+<p>AR Solutions: <code>map()</code> offers multiple ways (functions,
+formulas, and extractor functions) to specify its function argument
+(<code>.f</code>). Initially, the various inputs have to be transformed
+into a valid function, which is then applied. The creation of this valid
+function is the job of <code>as_mapper()</code> and it is called every
+time <code>map()</code> is used.</p>
+<p>Given character, numeric or list input <code>as_mapper()</code> will
+create an extractor function. Characters select by name, while numeric
+input selects by positions and a list allows a mix of these two
+approaches. This extractor interface can be very useful, when working
+with nested data.</p>
+<p>The extractor function is implemented as a call to
+<code>purrr::pluck()</code>, which accepts a list of accessors
+(accessors “access” some part of your data object).</p>
+<pre class="r"><code>as_mapper(c(1, 2)) # equivalent to function(x) x[[1]][[2]]</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; pluck(x, 1, 2, .default = NULL)
+#&gt; &lt;environment: 0x7faebe41f6d0&gt;</code></pre>
+<pre class="r"><code>as_mapper(c(&quot;a&quot;, &quot;b&quot;)) # equivalent to function(x) x[[&quot;a&quot;]][[&quot;b]]</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; pluck(x, &quot;a&quot;, &quot;b&quot;, .default = NULL)
+#&gt; &lt;environment: 0x7faebe36ec50&gt;</code></pre>
+<pre class="r"><code>as_mapper(list(1, &quot;b&quot;)) # equivalent to function(x) x[[1]][[&quot;b]]</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; pluck(x, 1, &quot;b&quot;, .default = NULL)
+#&gt; &lt;environment: 0x7faebce163a8&gt;</code></pre>
+<p>Besides mixing positions and names, it is also possible to pass along
+an accessor function. This is basically an anonymous function that gets
+information about some aspect of the input data. You are free to define
+your own accessor functions.</p>
+<p>If you need to access certain attributes, the helper
+<code>attr_getter(y)</code> is already predefined and will create the
+appropriate accessor function for you.</p>
+<pre class="r"><code># Define custom accessor function
+get_class &lt;- function(x) attr(x, &quot;class&quot;)
+pluck(mtcars, get_class)</code></pre>
+<pre><code>#&gt; [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># Use attr_getter() as a helper
+pluck(mtcars, attr_getter(&quot;class&quot;))</code></pre>
+<pre><code>#&gt; [1] &quot;data.frame&quot;</code></pre>
+<p>Note: AR Solutions provides good additional insight into
+<code>as_mapper()</code>.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li><code>map(1:3, ~ runif(2))</code> is a useful pattern for generating
+random numbers, but <code>map(1:3, runif(2))</code> is not. Why not? Can
+you explain why it returns the result that it does?</li>
+</ol>
+<pre class="r"><code>map(1:3, ~ runif(2))</code></pre>
+<pre><code>#&gt; [[1]]
+#&gt; [1] 0.3326270 0.9031587
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] 0.6751143 0.6874987
+#&gt; 
+#&gt; [[3]]
+#&gt; [1] 0.20840117 0.07102223</code></pre>
+<pre class="r"><code>map(1:3, runif(2))</code></pre>
+<pre><code>#&gt; [[1]]
+#&gt; NULL
+#&gt; 
+#&gt; [[2]]
+#&gt; NULL
+#&gt; 
+#&gt; [[3]]
+#&gt; NULL</code></pre>
+<p>Answer: <code>~ runif(2)</code> generates a mapper that returns 2
+random values from the uniform distribution, where <code>runif(2)</code>
+creates a <code>pluck()</code> mapper with 2 random values, which will
+(nearly) always return <code>NULL</code>, as demonstrated by the code
+below:</p>
+<pre class="r"><code>as_mapper(~ runif(2))</code></pre>
+<pre><code>#&gt; &lt;lambda&gt;
+#&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
+#&gt; runif(2)
+#&gt; &lt;environment: 0x7faec88c7020&gt;
+#&gt; attr(,&quot;class&quot;)
+#&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
+<pre class="r"><code>as_mapper(runif(2))</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; pluck(x, 0.333175834501162, 0.70098049659282, .default = NULL)
+#&gt; &lt;environment: 0x7faecd811190&gt;</code></pre>
+<p>A more reasonable use of a pluck mapper for <code>1:3</code> is
+<code>1</code>:</p>
+<pre class="r"><code>map(1:3, 1)</code></pre>
+<pre><code>#&gt; [[1]]
+#&gt; [1] 1
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] 2
+#&gt; 
+#&gt; [[3]]
+#&gt; [1] 3</code></pre>
+<p>AR Solutions: The first pattern creates multiple random numbers,
+because <code>~ runif(2)</code> successfully uses the formula interface.
+Internally <code>map()</code> applies <code>as_mapper()</code> to this
+formula, which converts <code>~ runif(2)</code> into an anonymous
+function. Afterwards <code>runif(2)</code> is applied three times (one
+time during each iteration), leading to three different pairs of random
+numbers.</p>
+<p>In the second pattern <code>runif(2)</code> is evaluated once, then
+the results are passed to <code>map()</code>. Consequently
+<code>as_mapper()</code> creates an extractor function based on the
+return values from <code>runif(2)</code> (via <code>pluck()</code>).
+This leads to three <code>NULL</code>s (<code>pluck()</code>’s
+<code>.default</code> return), because no values corresponding to the
+index can be found.</p>
+<p>Note: AR Solutions provides additional detail, but is otherwise the
+same.</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li><p>Use the appropriate <code>map()</code> function to:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Compute the standard deviation of every column in a numeric data
+frame.</p></li>
+<li><p>Compute the standard deviation of every numeric column in a mixed
+data frame. (Hint: you’ll need to do it in two steps.)</p></li>
+<li><p>Compute the number of levels for every factor in a data
+frame.</p></li>
+</ol></li>
+</ol>
+<pre class="r"><code># a
+map_dbl(mtcars, sd)</code></pre>
+<pre><code>#&gt;         mpg         cyl        disp          hp        drat          wt        qsec          vs 
+#&gt;   6.0269481   1.7859216 123.9386938  68.5628685   0.5346787   0.9784574   1.7869432   0.5040161 
+#&gt;          am        gear        carb 
+#&gt;   0.4989909   0.7378041   1.6152000</code></pre>
+<pre class="r"><code># b
+map_dbl(iris[map_lgl(iris, is.numeric)], sd)</code></pre>
+<pre><code>#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+#&gt;    0.8280661    0.4358663    1.7652982    0.7622377</code></pre>
+<pre class="r"><code># c
+map_int(warpbreaks, nlevels)</code></pre>
+<pre><code>#&gt;  breaks    wool tension 
+#&gt;       0       2       3</code></pre>
+<pre class="r"><code># c, excluding non-factor columns
+map_int(warpbreaks[map_lgl(warpbreaks, is.factor)], nlevels)</code></pre>
+<pre><code>#&gt;    wool tension 
+#&gt;       2       3</code></pre>
+<p>Answer: code above.</p>
+<p>AR Solutions: To solve this exercise we take advantage of calling the
+type stable variants of <code>map()</code>, which give us more concise
+output, and use <code>map_lgl()</code> to select the columns of the data
+frame (later you’ll learn about <code>keep()</code>, which simplifies
+this pattern a little).</p>
+<pre class="r"><code>map_dbl(mtcars, sd)</code></pre>
+<pre><code>#&gt;         mpg         cyl        disp          hp        drat          wt        qsec          vs 
+#&gt;   6.0269481   1.7859216 123.9386938  68.5628685   0.5346787   0.9784574   1.7869432   0.5040161 
+#&gt;          am        gear        carb 
+#&gt;   0.4989909   0.7378041   1.6152000</code></pre>
+<pre class="r"><code>penguins_numeric &lt;- map_lgl(penguins, is.numeric)
+map_dbl(penguins[penguins_numeric], sd, na.rm = TRUE)</code></pre>
+<pre><code>#&gt;    bill_length_mm     bill_depth_mm flipper_length_mm       body_mass_g              year 
+#&gt;         5.4595837         1.9747932        14.0617137       801.9545357         0.8183559</code></pre>
+<pre class="r"><code>penguins_factor &lt;- map_lgl(penguins, is.factor)
+map_int(penguins[penguins_factor], ~ length(levels(.x)))</code></pre>
+<pre><code>#&gt; species  island     sex 
+#&gt;       3       3       2</code></pre>
+<p>Note: my code is more concise, both with selections and use of
+<code>nlevels()</code>, although using <code>keep()</code> is
+preferable.</p>
+<pre class="r"><code>map_int(keep(warpbreaks, is.factor), nlevels)</code></pre>
+<pre><code>#&gt;    wool tension 
+#&gt;       2       3</code></pre>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>The following code simulates the performance of a t-test for
+non-normal data. Extract the p-value from each test, then
+visualise.</li>
+</ol>
+<pre class="r"><code>trials &lt;- map(1:100, ~ t.test(rpois(10, 10), rpois(7, 10)))
+hist(map_dbl(trials, &quot;p.value&quot;), breaks = 10)</code></pre>
+<p><img src="advanced-r-2_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Answer: code above.</p>
+<p>AR Solutions: There are many ways to visualise this data. However,
+since there are only 100 data points, we choose a dot plot to visualise
+the distribution. (Unfortunately, <code>{ggplot2}</code>s
+<code>geom_dotplot()</code> doesn’t compute proper counts as it was
+created to visualise distribution densities instead of frequencies, so a
+histogram would be a suitable alternative).</p>
+<pre class="r"><code># Advanced R Solutions uses different code for trials
+trials &lt;- map(1:100, ~ t.test(rpois(10, 10), rpois(10, 7)))
+
+library(ggplot2)
+
+df_trials &lt;- tibble::tibble(p_value = map_dbl(trials, &quot;p.value&quot;))
+
+df_trials %&gt;%
+  ggplot(aes(x = p_value, fill = p_value &lt; 0.05)) +
+  geom_dotplot(binwidth = 0.01) + # geom_histogram() as alternative
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.position = &quot;top&quot;
+  )</code></pre>
+<p><img src="advanced-r-2_files/figure-html/unnamed-chunk-12-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Notes: the code AR Solutions uses for trials,
+<code>trials &lt;- map(1:100, ~ t.test(rpois(10, 10), rpois(10, 7)))</code>,
+appears to be correct compared to Advanced R.</p>
+<hr />
+<ol start="5" style="list-style-type: decimal">
+<li>The following code uses a map nested inside another map to apply a
+function to every element of a nested list. Why does it fail, and what
+do you need to do to make it work?</li>
+</ol>
+<pre class="r"><code>x &lt;- list(
+  list(1, c(3, 9)),
+  list(c(3, 6), 7, c(4, 7, 6))
+)
+
+triple &lt;- function(x) x * 3
+try(map(x, map, .f = triple))</code></pre>
+<pre><code>#&gt; Error in .f(.x[[i]], ...) : unused argument (function (.x, .f, ...) 
+#&gt; {
+#&gt;     .f &lt;- as_mapper(.f, ...)
+#&gt;     .Call(map_impl, environment(), &quot;.x&quot;, &quot;.f&quot;, &quot;list&quot;)
+#&gt; })</code></pre>
+<p>Answer: the call fails since the <code>.f = triple</code> specifies
+the function for the outer <code>map()</code>, and the <code>map</code>
+is passed as an additional argument to <code>triple()</code>, which
+generates the error since <code>triple()</code> only takes a single
+argument. The solution is to pass triple as an additional argument to
+the outer <code>map()</code>:</p>
+<pre class="r"><code>map(x, map, triple)</code></pre>
+<pre><code>#&gt; [[1]]
+#&gt; [[1]][[1]]
+#&gt; [1] 3
+#&gt; 
+#&gt; [[1]][[2]]
+#&gt; [1]  9 27
+#&gt; 
+#&gt; 
+#&gt; [[2]]
+#&gt; [[2]][[1]]
+#&gt; [1]  9 18
+#&gt; 
+#&gt; [[2]][[2]]
+#&gt; [1] 21
+#&gt; 
+#&gt; [[2]][[3]]
+#&gt; [1] 12 21 18</code></pre>
+<p>AR Solutions: This function call fails, because <code>triple()</code>
+is specified as the <code>.f</code> argument and consequently belongs to
+the outer <code>map()</code>. The unnamed argument <code>map</code> is
+treated as an argument of <code>triple()</code>, which causes the
+error.</p>
+<p>There are a number of ways we could resolve the problem. However,
+there is not much to choose between them for this simple example,
+although it is good to know your options for more complicated cases.</p>
+<pre class="r"><code># Don&#39;t name the argument
+map(x, map, triple)
+
+# Use magrittr-style anonymous function
+map(x, . %&gt;% map(triple))
+
+# Use purrr-style anonymous function
+map(x, ~ map(.x, triple))</code></pre>
+<p>Note: I don’t like the magrittr-style anonymous function option. The
+others are good.</p>
+<hr />
+<ol start="6" style="list-style-type: decimal">
+<li>Use <code>map()</code> to fit linear models to the
+<code>mtcars</code> dataset using the formulas stored in this list:</li>
+</ol>
+<pre class="r"><code>formulas &lt;- list(
+  mpg ~ disp,
+  mpg ~ I(1 / disp),
+  mpg ~ disp + wt,
+  mpg ~ I(1 / disp) + wt
+)</code></pre>
+<p>Answer: the following code works, but doesn’t display the text of the
+formula in the <code>Call:</code></p>
+<pre class="r"><code>map(formulas, lm, mtcars)</code></pre>
+<pre><code>#&gt; [[1]]
+#&gt; 
+#&gt; Call:
+#&gt; .f(formula = .x[[i]], data = ..1)
+#&gt; 
+#&gt; Coefficients:
+#&gt; (Intercept)         disp  
+#&gt;    29.59985     -0.04122  
+#&gt; 
+#&gt; 
+#&gt; [[2]]
+#&gt; 
+#&gt; Call:
+#&gt; .f(formula = .x[[i]], data = ..1)
+#&gt; 
+#&gt; Coefficients:
+#&gt; (Intercept)    I(1/disp)  
+#&gt;       10.75      1557.67  
+#&gt; 
+#&gt; 
+#&gt; [[3]]
+#&gt; 
+#&gt; Call:
+#&gt; .f(formula = .x[[i]], data = ..1)
+#&gt; 
+#&gt; Coefficients:
+#&gt; (Intercept)         disp           wt  
+#&gt;    34.96055     -0.01772     -3.35083  
+#&gt; 
+#&gt; 
+#&gt; [[4]]
+#&gt; 
+#&gt; Call:
+#&gt; .f(formula = .x[[i]], data = ..1)
+#&gt; 
+#&gt; Coefficients:
+#&gt; (Intercept)    I(1/disp)           wt  
+#&gt;      19.024     1142.560       -1.798</code></pre>
+<p>AR Solutions: The data (<code>mtcars</code>) is constant for all
+these models and so we iterate over the <code>formulas</code> provided.
+As the formula is the first argument of <code>lm()</code>, we don’t need
+to specify it explicitly.</p>
+<pre class="r"><code>models &lt;- map(formulas, lm, data = mtcars)</code></pre>
+<p>Note: AR Solutions specifies <code>data = mtcars</code> but is
+otherwise the same.</p>
+<hr />
+<ol start="7" style="list-style-type: decimal">
+<li>Fit the model <code>mpg ~ disp</code> to each of the bootstrap
+replicates of <code>mtcars</code> in the list below, then extract the
+<span class="math inline">\(R^2\)</span> of the model fit (Hint: you can
+compute the <span class="math inline">\(R^2\)</span> with
+<code>summary()</code>.)</li>
+</ol>
+<pre class="r"><code>bootstrap &lt;- function(df) {
+  df[sample(nrow(df), replace = TRUE), , drop = FALSE]
+}
+
+bootstraps &lt;- map(1:10, ~ bootstrap(mtcars))
+
+map_dbl(bootstraps, ~ summary(lm(mpg ~ disp, .x))$r.squared)</code></pre>
+<pre><code>#&gt;  [1] 0.7586411 0.7319829 0.7144559 0.6264798 0.6478943 0.5598521 0.8412925 0.7031912 0.6842202
+#&gt; [10] 0.7342344</code></pre>
+<p>Answer: code above.</p>
+<p>AR Solutions: To accomplish this task, we take advantage of the “list
+in, list out”-functionality of <code>map()</code>. This allows us to
+chain multiple transformations together. We start by fitting the models.
+We then calculate the summaries and extract the <span
+class="math inline">\(R^2\)</span> values. For the last call we use
+<code>map_dbl()</code>, which provides convenient output.</p>
+<pre class="r"><code>bootstraps %&gt;%
+  map(~ lm(mpg ~ disp, data = .x)) %&gt;%
+  map(summary) %&gt;%
+  map_dbl(&quot;r.squared&quot;)</code></pre>
+<pre><code>#&gt;  [1] 0.7586411 0.7319829 0.7144559 0.6264798 0.6478943 0.5598521 0.8412925 0.7031912 0.6842202
+#&gt; [10] 0.7342344</code></pre>
+<p>Note: while AR Solutions is arguably <em>slightly</em> more readable,
+my code should be faster:</p>
+<pre class="r"><code>bench::mark({
+  map_dbl(bootstraps, ~ summary(lm(mpg ~ disp, .x))$r.squared)
+})</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 6
+#&gt;   expression                                                         min median itr/s…¹ mem_a…² gc/se…³
+#&gt;   &lt;bch:expr&gt;                                                      &lt;bch:&gt; &lt;bch:&gt;   &lt;dbl&gt; &lt;bch:b&gt;   &lt;dbl&gt;
+#&gt; 1 { map_dbl(bootstraps, ~summary(lm(mpg ~ disp, .x))$r.squared) } 5.72ms 7.22ms    133.  63.7KB    9.32
+#&gt; # … with abbreviated variable names ¹​`itr/sec`, ²​mem_alloc, ³​`gc/sec`</code></pre>
+<pre class="r"><code>bench::mark({
+  bootstraps %&gt;%
+    map(~ lm(mpg ~ disp, data = .x)) %&gt;%
+    map(summary) %&gt;%
+    map_dbl(&quot;r.squared&quot;)
+})</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 6
+#&gt;   expression                                                                                        min
+#&gt;   &lt;bch:expr&gt;                                                                                   &lt;bch:tm&gt;
+#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ disp, data = .x)) %&gt;% map(summary) %&gt;% map_dbl(&quot;r.squared&quot;) }   5.49ms
+#&gt; # … with 4 more variables: median &lt;bch:tm&gt;, `itr/sec` &lt;dbl&gt;, mem_alloc &lt;bch:byt&gt;, `gc/sec` &lt;dbl&gt;
+#&gt; # ℹ Use `colnames()` to see all variable names</code></pre>
+<p>It is actually slightly slower! AR Solutions wins!</p>
+<hr />
+</div>
+<div id="exercises-1" class="section level2">
+<h2>9.4.6 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Explain the results of <code>modify(mtcars, 1)</code>.</li>
+</ol>
+<pre class="r"><code>modify(mtcars, 1)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4 Wag"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Datsun 710"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Hornet 4 Drive"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Hornet Sportabout"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Valiant"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Duster 360"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 240D"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 230"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 280"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 280C"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 450SE"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 450SL"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 450SLC"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Cadillac Fleetwood"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Lincoln Continental"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Chrysler Imperial"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Fiat 128"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Honda Civic"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Toyota Corolla"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Toyota Corona"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Dodge Challenger"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"AMC Javelin"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Camaro Z28"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Pontiac Firebird"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Fiat X1-9"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Porsche 914-2"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Lotus Europa"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Ford Pantera L"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Ferrari Dino"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Maserati Bora"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>as_mapper(1)</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; pluck(x, 1, .default = NULL)
+#&gt; &lt;environment: 0x7faebf139ae0&gt;</code></pre>
+<pre class="r"><code>head(mtcars, 1)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Answer: <code>modify(mtcars, 1)</code> creates a mapper that plucks
+the first element of each column of <code>mtcars</code> and writes that
+value to every row.</p>
+<p>AR Solutions: <code>modify()</code> is based on <code>map()</code>,
+and in this case, the extractor interface will be used. It extracts the
+first element of each column in <code>mtcars</code>.
+<code>modify()</code> always returns the same structure as its input: in
+this case it forces the first row to be recycled 32 times. (Internally
+<code>modify()</code> uses <code>.x[] &lt;- map(.x, .f, ...)</code> for
+assignment.)</p>
+<p>Notes: this code makes the recycling clear:</p>
+<pre class="r"><code>unlist(map(mtcars, 1))</code></pre>
+<pre><code>#&gt;    mpg    cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb 
+#&gt;  21.00   6.00 160.00 110.00   3.90   2.62  16.46   0.00   1.00   4.00   4.00</code></pre>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Rewrite the following code to use <code>iwalk()</code> instead of
+<code>walk2()</code>. What are the advantages and disadvantages?</li>
+</ol>
+<pre class="r"><code>cyls &lt;- split(mtcars, mtcars$cyl)
+paths &lt;- file.path(temp, paste0(&quot;cyl-&quot;, names(cyls), &quot;.csv&quot;))
+walk2(cyls, paths, write.csv)</code></pre>
+<p>Answer: code below.</p>
+<pre class="r"><code>temp &lt;- tempfile()
+dir.create(temp)
+
+cyls &lt;- split(mtcars, mtcars$cyl)
+iwalk(cyls, ~ write.csv(.x, file.path(temp, paste0(&quot;cyl-&quot;, .y, &quot;.csv&quot;))))
+dir(temp)</code></pre>
+<pre><code>#&gt; [1] &quot;cyl-4.csv&quot; &quot;cyl-6.csv&quot; &quot;cyl-8.csv&quot;</code></pre>
+<p>The main advantage of using <code>iwalk()</code> is that it will use
+<code>seq_along()</code> if <code>x</code> does not have names. In this
+case, x has names, and the resulting code is a bit harder to understand,
+and requires a formula (or function).</p>
+<p>AR Solutions: <code>iwalk()</code> allows us to use a single
+variable, storing the output path in the names.</p>
+<pre class="r"><code>temp &lt;- tempfile()
+dir.create(temp)
+cyls &lt;- split(mtcars, mtcars$cyl)
+names(cyls) &lt;- file.path(temp, paste0(&quot;cyl-&quot;, names(cyls), &quot;.csv&quot;))
+iwalk(cyls, ~ write.csv(.x, .y))</code></pre>
+<p>We could do this in a single pipe by taking advantage of
+<code>set_names()</code>:</p>
+<pre class="r"><code>mtcars %&gt;%
+  split(mtcars$cyl) %&gt;%
+  set_names(~ file.path(temp, paste0(&quot;cyl-&quot;, .x, &quot;.csv&quot;))) %&gt;%
+  iwalk(~ write.csv(.x, .y))</code></pre>
+<p>Notes: the AR Solutions use of names and the pipe is clever.</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Explain how the following code transforms a data frame using
+functions stored in a list.</li>
+</ol>
+<pre class="r"><code>if (exists(&quot;mtcars&quot;)) rm(mtcars)</code></pre>
+<pre><code>#&gt; Warning in rm(mtcars): object &#39;mtcars&#39; not found</code></pre>
+<pre class="r"><code>mtcars</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21.0","2":"6","3":"160.0","4":"110","5":"3.90","6":"2.620","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4"},{"1":"21.0","2":"6","3":"160.0","4":"110","5":"3.90","6":"2.875","7":"17.02","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4 Wag"},{"1":"22.8","2":"4","3":"108.0","4":"93","5":"3.85","6":"2.320","7":"18.61","8":"1","9":"1","10":"4","11":"1","_rn_":"Datsun 710"},{"1":"21.4","2":"6","3":"258.0","4":"110","5":"3.08","6":"3.215","7":"19.44","8":"1","9":"0","10":"3","11":"1","_rn_":"Hornet 4 Drive"},{"1":"18.7","2":"8","3":"360.0","4":"175","5":"3.15","6":"3.440","7":"17.02","8":"0","9":"0","10":"3","11":"2","_rn_":"Hornet Sportabout"},{"1":"18.1","2":"6","3":"225.0","4":"105","5":"2.76","6":"3.460","7":"20.22","8":"1","9":"0","10":"3","11":"1","_rn_":"Valiant"},{"1":"14.3","2":"8","3":"360.0","4":"245","5":"3.21","6":"3.570","7":"15.84","8":"0","9":"0","10":"3","11":"4","_rn_":"Duster 360"},{"1":"24.4","2":"4","3":"146.7","4":"62","5":"3.69","6":"3.190","7":"20.00","8":"1","9":"0","10":"4","11":"2","_rn_":"Merc 240D"},{"1":"22.8","2":"4","3":"140.8","4":"95","5":"3.92","6":"3.150","7":"22.90","8":"1","9":"0","10":"4","11":"2","_rn_":"Merc 230"},{"1":"19.2","2":"6","3":"167.6","4":"123","5":"3.92","6":"3.440","7":"18.30","8":"1","9":"0","10":"4","11":"4","_rn_":"Merc 280"},{"1":"17.8","2":"6","3":"167.6","4":"123","5":"3.92","6":"3.440","7":"18.90","8":"1","9":"0","10":"4","11":"4","_rn_":"Merc 280C"},{"1":"16.4","2":"8","3":"275.8","4":"180","5":"3.07","6":"4.070","7":"17.40","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SE"},{"1":"17.3","2":"8","3":"275.8","4":"180","5":"3.07","6":"3.730","7":"17.60","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SL"},{"1":"15.2","2":"8","3":"275.8","4":"180","5":"3.07","6":"3.780","7":"18.00","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SLC"},{"1":"10.4","2":"8","3":"472.0","4":"205","5":"2.93","6":"5.250","7":"17.98","8":"0","9":"0","10":"3","11":"4","_rn_":"Cadillac Fleetwood"},{"1":"10.4","2":"8","3":"460.0","4":"215","5":"3.00","6":"5.424","7":"17.82","8":"0","9":"0","10":"3","11":"4","_rn_":"Lincoln Continental"},{"1":"14.7","2":"8","3":"440.0","4":"230","5":"3.23","6":"5.345","7":"17.42","8":"0","9":"0","10":"3","11":"4","_rn_":"Chrysler Imperial"},{"1":"32.4","2":"4","3":"78.7","4":"66","5":"4.08","6":"2.200","7":"19.47","8":"1","9":"1","10":"4","11":"1","_rn_":"Fiat 128"},{"1":"30.4","2":"4","3":"75.7","4":"52","5":"4.93","6":"1.615","7":"18.52","8":"1","9":"1","10":"4","11":"2","_rn_":"Honda Civic"},{"1":"33.9","2":"4","3":"71.1","4":"65","5":"4.22","6":"1.835","7":"19.90","8":"1","9":"1","10":"4","11":"1","_rn_":"Toyota Corolla"},{"1":"21.5","2":"4","3":"120.1","4":"97","5":"3.70","6":"2.465","7":"20.01","8":"1","9":"0","10":"3","11":"1","_rn_":"Toyota Corona"},{"1":"15.5","2":"8","3":"318.0","4":"150","5":"2.76","6":"3.520","7":"16.87","8":"0","9":"0","10":"3","11":"2","_rn_":"Dodge Challenger"},{"1":"15.2","2":"8","3":"304.0","4":"150","5":"3.15","6":"3.435","7":"17.30","8":"0","9":"0","10":"3","11":"2","_rn_":"AMC Javelin"},{"1":"13.3","2":"8","3":"350.0","4":"245","5":"3.73","6":"3.840","7":"15.41","8":"0","9":"0","10":"3","11":"4","_rn_":"Camaro Z28"},{"1":"19.2","2":"8","3":"400.0","4":"175","5":"3.08","6":"3.845","7":"17.05","8":"0","9":"0","10":"3","11":"2","_rn_":"Pontiac Firebird"},{"1":"27.3","2":"4","3":"79.0","4":"66","5":"4.08","6":"1.935","7":"18.90","8":"1","9":"1","10":"4","11":"1","_rn_":"Fiat X1-9"},{"1":"26.0","2":"4","3":"120.3","4":"91","5":"4.43","6":"2.140","7":"16.70","8":"0","9":"1","10":"5","11":"2","_rn_":"Porsche 914-2"},{"1":"30.4","2":"4","3":"95.1","4":"113","5":"3.77","6":"1.513","7":"16.90","8":"1","9":"1","10":"5","11":"2","_rn_":"Lotus Europa"},{"1":"15.8","2":"8","3":"351.0","4":"264","5":"4.22","6":"3.170","7":"14.50","8":"0","9":"1","10":"5","11":"4","_rn_":"Ford Pantera L"},{"1":"19.7","2":"6","3":"145.0","4":"175","5":"3.62","6":"2.770","7":"15.50","8":"0","9":"1","10":"5","11":"6","_rn_":"Ferrari Dino"},{"1":"15.0","2":"8","3":"301.0","4":"335","5":"3.54","6":"3.570","7":"14.60","8":"0","9":"1","10":"5","11":"8","_rn_":"Maserati Bora"},{"1":"21.4","2":"4","3":"121.0","4":"109","5":"4.11","6":"2.780","7":"18.60","8":"1","9":"1","10":"4","11":"2","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>trans &lt;- list(
+  disp = function(x) x * 0.0163871,
+  am = function(x) factor(x, labels = c(&quot;auto&quot;, &quot;manual&quot;))
+)
+
+nm &lt;- names(trans)
+mtcars[nm] &lt;- map2(trans, mtcars[nm], function(f, var) f(var))
+
+mtcars</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["fct"],"align":["left"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21.0","2":"6","3":"2.621936","4":"110","5":"3.90","6":"2.620","7":"16.46","8":"0","9":"manual","10":"4","11":"4","_rn_":"Mazda RX4"},{"1":"21.0","2":"6","3":"2.621936","4":"110","5":"3.90","6":"2.875","7":"17.02","8":"0","9":"manual","10":"4","11":"4","_rn_":"Mazda RX4 Wag"},{"1":"22.8","2":"4","3":"1.769807","4":"93","5":"3.85","6":"2.320","7":"18.61","8":"1","9":"manual","10":"4","11":"1","_rn_":"Datsun 710"},{"1":"21.4","2":"6","3":"4.227872","4":"110","5":"3.08","6":"3.215","7":"19.44","8":"1","9":"auto","10":"3","11":"1","_rn_":"Hornet 4 Drive"},{"1":"18.7","2":"8","3":"5.899356","4":"175","5":"3.15","6":"3.440","7":"17.02","8":"0","9":"auto","10":"3","11":"2","_rn_":"Hornet Sportabout"},{"1":"18.1","2":"6","3":"3.687098","4":"105","5":"2.76","6":"3.460","7":"20.22","8":"1","9":"auto","10":"3","11":"1","_rn_":"Valiant"},{"1":"14.3","2":"8","3":"5.899356","4":"245","5":"3.21","6":"3.570","7":"15.84","8":"0","9":"auto","10":"3","11":"4","_rn_":"Duster 360"},{"1":"24.4","2":"4","3":"2.403988","4":"62","5":"3.69","6":"3.190","7":"20.00","8":"1","9":"auto","10":"4","11":"2","_rn_":"Merc 240D"},{"1":"22.8","2":"4","3":"2.307304","4":"95","5":"3.92","6":"3.150","7":"22.90","8":"1","9":"auto","10":"4","11":"2","_rn_":"Merc 230"},{"1":"19.2","2":"6","3":"2.746478","4":"123","5":"3.92","6":"3.440","7":"18.30","8":"1","9":"auto","10":"4","11":"4","_rn_":"Merc 280"},{"1":"17.8","2":"6","3":"2.746478","4":"123","5":"3.92","6":"3.440","7":"18.90","8":"1","9":"auto","10":"4","11":"4","_rn_":"Merc 280C"},{"1":"16.4","2":"8","3":"4.519562","4":"180","5":"3.07","6":"4.070","7":"17.40","8":"0","9":"auto","10":"3","11":"3","_rn_":"Merc 450SE"},{"1":"17.3","2":"8","3":"4.519562","4":"180","5":"3.07","6":"3.730","7":"17.60","8":"0","9":"auto","10":"3","11":"3","_rn_":"Merc 450SL"},{"1":"15.2","2":"8","3":"4.519562","4":"180","5":"3.07","6":"3.780","7":"18.00","8":"0","9":"auto","10":"3","11":"3","_rn_":"Merc 450SLC"},{"1":"10.4","2":"8","3":"7.734711","4":"205","5":"2.93","6":"5.250","7":"17.98","8":"0","9":"auto","10":"3","11":"4","_rn_":"Cadillac Fleetwood"},{"1":"10.4","2":"8","3":"7.538066","4":"215","5":"3.00","6":"5.424","7":"17.82","8":"0","9":"auto","10":"3","11":"4","_rn_":"Lincoln Continental"},{"1":"14.7","2":"8","3":"7.210324","4":"230","5":"3.23","6":"5.345","7":"17.42","8":"0","9":"auto","10":"3","11":"4","_rn_":"Chrysler Imperial"},{"1":"32.4","2":"4","3":"1.289665","4":"66","5":"4.08","6":"2.200","7":"19.47","8":"1","9":"manual","10":"4","11":"1","_rn_":"Fiat 128"},{"1":"30.4","2":"4","3":"1.240503","4":"52","5":"4.93","6":"1.615","7":"18.52","8":"1","9":"manual","10":"4","11":"2","_rn_":"Honda Civic"},{"1":"33.9","2":"4","3":"1.165123","4":"65","5":"4.22","6":"1.835","7":"19.90","8":"1","9":"manual","10":"4","11":"1","_rn_":"Toyota Corolla"},{"1":"21.5","2":"4","3":"1.968091","4":"97","5":"3.70","6":"2.465","7":"20.01","8":"1","9":"auto","10":"3","11":"1","_rn_":"Toyota Corona"},{"1":"15.5","2":"8","3":"5.211098","4":"150","5":"2.76","6":"3.520","7":"16.87","8":"0","9":"auto","10":"3","11":"2","_rn_":"Dodge Challenger"},{"1":"15.2","2":"8","3":"4.981678","4":"150","5":"3.15","6":"3.435","7":"17.30","8":"0","9":"auto","10":"3","11":"2","_rn_":"AMC Javelin"},{"1":"13.3","2":"8","3":"5.735485","4":"245","5":"3.73","6":"3.840","7":"15.41","8":"0","9":"auto","10":"3","11":"4","_rn_":"Camaro Z28"},{"1":"19.2","2":"8","3":"6.554840","4":"175","5":"3.08","6":"3.845","7":"17.05","8":"0","9":"auto","10":"3","11":"2","_rn_":"Pontiac Firebird"},{"1":"27.3","2":"4","3":"1.294581","4":"66","5":"4.08","6":"1.935","7":"18.90","8":"1","9":"manual","10":"4","11":"1","_rn_":"Fiat X1-9"},{"1":"26.0","2":"4","3":"1.971368","4":"91","5":"4.43","6":"2.140","7":"16.70","8":"0","9":"manual","10":"5","11":"2","_rn_":"Porsche 914-2"},{"1":"30.4","2":"4","3":"1.558413","4":"113","5":"3.77","6":"1.513","7":"16.90","8":"1","9":"manual","10":"5","11":"2","_rn_":"Lotus Europa"},{"1":"15.8","2":"8","3":"5.751872","4":"264","5":"4.22","6":"3.170","7":"14.50","8":"0","9":"manual","10":"5","11":"4","_rn_":"Ford Pantera L"},{"1":"19.7","2":"6","3":"2.376130","4":"175","5":"3.62","6":"2.770","7":"15.50","8":"0","9":"manual","10":"5","11":"6","_rn_":"Ferrari Dino"},{"1":"15.0","2":"8","3":"4.932517","4":"335","5":"3.54","6":"3.570","7":"14.60","8":"0","9":"manual","10":"5","11":"8","_rn_":"Maserati Bora"},{"1":"21.4","2":"4","3":"1.982839","4":"109","5":"4.11","6":"2.780","7":"18.60","8":"1","9":"manual","10":"4","11":"2","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>rm(mtcars)</code></pre>
+<p>Compare and contrast the <code>map2()</code> approach to this
+<code>map()</code> approach:</p>
+<pre class="r"><code>mtcars[nm] &lt;- map(nm, ~ trans[[.x]](mtcars[[.x]]))</code></pre>
+<p>Answer: the <code>map2()</code> code applies the anonymous functions
+to the corresponding column in <code>mtcars</code> based on their name
+in the list:</p>
+<ul>
+<li><code>mtcars[nm]</code> is equivalent to
+<code>mtcars[c("disp", "am")]</code>, so the code is modifying those two
+columns</li>
+<li>the mapping function, <code>function(f, var) f(var)</code> is run as
+<code>f(mtcars[["disp"]])</code> and <code>f(mtcars[["am"]])</code>,
+with the corresponding function in <code>trans</code> as <code>f</code>,
+since <code>trans</code> and <code>mtcars[nm]</code> are passed as
+parameters to the function</li>
+</ul>
+<p>The equivalent <code>map()</code> approach isn’t as clean: it’s
+harder to understand what <code>map()</code> is doing.</p>
+<p>AR Solutions: In the first approach</p>
+<pre class="r"><code>mtcars[nm] &lt;- map2(trans, mtcars[nm], function(f, var) f(var))</code></pre>
+<p>the list of the 2 functions (<code>trans</code>) and the 2
+appropriately selected data frame columns (<code>mtcars[nm]</code>) are
+supplied to <code>map2()</code>. <code>map2()</code> creates an
+anonymous function (<code>f(var)</code>) which applies the functions to
+the variables when <code>map2()</code> iterates over their (similar)
+indices. On the left-hand side, the respective 2 elements of
+<code>mtcars</code> are being replaced by their new transformations.</p>
+<p>The <code>map()</code> variant</p>
+<pre class="r"><code>mtcars[nm] &lt;- map(nm, ~ trans[[.x]](mtcars[[.x]]))</code></pre>
+<p>does basically the same. However, it directly iterates over the names
+(<code>nm</code>) of the transformations. Therefore, the data frame
+columns are selected during the iteration.</p>
+<p>Besides the iteration pattern, the approaches differ in the
+possibilities for appropriate argument naming in the <code>.f</code>
+argument. In the <code>map2()</code> approach we iterate over the
+elements of <code>x</code> and <code>y</code>. Therefore, it is possible
+to choose appropriate placeholders like <code>f</code> and
+<code>var</code>. This makes the anonymous function more expressive at
+the cost of making it longer. We think using the formula interface in
+this way is preferable compared to the rather cryptic
+<code>mtcars[nm] &lt;- map2(trans, mtcars[nm], ~ .x(.y))</code>.</p>
+<p>In the <code>map()</code> approach we map over the variable names. It
+is therefore not possible to introduce placeholders for the function and
+variable names. The formula syntax together with the <code>.x</code>
+pronoun is pretty compact. The object names and the brackets clearly
+indicate the application of transformations to specific columns of
+<code>mtcars</code>. In this case the iteration over the variable names
+comes in handy, as it highlights the importance of matching between
+<code>trans</code> and <code>mtcars</code> element names. Together with
+the replacement form on the left-hand side, this line is relatively easy
+to inspect.</p>
+<p>To summarise, in situations where <code>map()</code> and
+<code>map2()</code> provide solutions for an iteration problem, several
+points may be considered before deciding for one or the other
+approach.</p>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>What does <code>write.csv()</code> return, i.e. what happens if you
+use it with <code>map2()</code> instead of <code>walk2()</code>?</li>
+</ol>
+<pre class="r"><code>paths &lt;- file.path(temp, paste0(&quot;cyl-&quot;, names(cyls), &quot;.csv&quot;))
+map2(cyls, paths, write.csv)</code></pre>
+<pre><code>#&gt; $`4`
+#&gt; NULL
+#&gt; 
+#&gt; $`6`
+#&gt; NULL
+#&gt; 
+#&gt; $`8`
+#&gt; NULL</code></pre>
+<p>Answer: <code>write.csv()</code> is designed to return
+<code>NULL</code>, invisibly. While <code>walk2()</code> hides the
+<code>NULL</code> return values, <code>map2()</code> does not.</p>
+<p>AR Solutions: <code>write.csv()</code> returns <code>NULL</code>. As
+we call the function for its side effect (creating a CSV file),
+<code>walk2()</code> would be appropriate here. Otherwise, we receive a
+rather uninformative list of <code>NULL</code>s.</p>
+<hr />
+</div>
+<div id="exercises-2" class="section level2">
+<h2>9.6.3 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Why isn’t <code>is.na()</code> a predicate function? What base R
+function is closest to being a predicate version of
+<code>is.na()</code>?</li>
+</ol>
+<p>Answer: <code>is.na(x)</code> returns <code>logical(0)</code> when
+<code>x</code> is <code>NULL</code>, which violates the rule that
+predicate functions only return <code>TRUE</code> or <code>FALSE</code>.
+<code>anyNA(x, recursive = FALSE)</code> appears to be a predicate
+version of <code>is.na()</code>.</p>
+<p>AR Solutions: <code>is.na()</code> is not a predicate function,
+because it returns a logical <em>vector</em> the same length as the
+input, not a single <code>TRUE</code> or <code>FALSE</code>.</p>
+<p><code>anyNA()</code> is the closest equivalent because it always
+returns a single <code>TRUE</code> or <code>FALSE</code> if there are
+any missing values present. You could also imagine an
+<code>allNA()</code> which would return <code>TRUE</code> if all values
+were missing, but that’s considerably less useful so base R does not
+provide it.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li><code>simple_reduce()</code> has a problem when <code>x</code> is
+length 0 or length 1. Describe the source of the problem and how you
+might go about fixing it.</li>
+</ol>
+<pre class="r"><code>simple_reduce &lt;- function(x, f) {
+  out &lt;- x[[1]]
+  for (i in seq(2, length(x))) {
+    out &lt;- f(out, x[[i]])
+  }
+  out
+}</code></pre>
+<p>Answer: using <code>seq()</code> results in a backwards count when
+<code>x</code> is length 0 or 1.</p>
+<pre class="r"><code>seq(2, 0)</code></pre>
+<pre><code>#&gt; [1] 2 1 0</code></pre>
+<pre class="r"><code>seq(2, 1)</code></pre>
+<pre><code>#&gt; [1] 2 1</code></pre>
+<p>The fix is to check the length of <code>x</code> and return itself
+when length is 0 and throw an error when length is 1, as
+<code>reduce()</code> does.</p>
+<p>AR Solutions: The loop inside <code>simple_reduce()</code> always
+starts with the index 2, and <code>seq()</code> can count both up
+<em>and</em> down:</p>
+<p>Therefore, subsetting length-0 and length-1 vectors via
+<code>[[</code> will lead to a <em>subscript out of bounds</em> error.
+To avoid this, we allow <code>simple_reduce()</code> to return before
+the for loop is started and include a default argument for 0-length
+vectors.</p>
+<pre class="r"><code>simple_reduce &lt;- function(x, f, default) {
+  if (length(x) == 0L) {
+    return(default)
+  }
+  if (length(x) == 1L) {
+    return(x[[1L]])
+  }
+
+  out &lt;- x[[1]]
+  for (i in seq(2, length(x))) {
+    out &lt;- f(out, x[[i]])
+  }
+
+  out
+}</code></pre>
+<p>Our new <code>simple_reduce()</code> now works as intended:</p>
+<pre class="r"><code>try(simple_reduce(integer(0), `+`))</code></pre>
+<pre><code>#&gt; Error in simple_reduce(integer(0), `+`) : 
+#&gt;   argument &quot;default&quot; is missing, with no default</code></pre>
+<pre class="r"><code>simple_reduce(integer(0), `+`, default = 0L)</code></pre>
+<pre><code>#&gt; [1] 0</code></pre>
+<pre class="r"><code>simple_reduce(1, `+`)</code></pre>
+<pre><code>#&gt; [1] 1</code></pre>
+<pre class="r"><code>simple_reduce(1:3, `+`)</code></pre>
+<pre><code>#&gt; [1] 6</code></pre>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Implement the <code>span()</code> function from Haskell: given a
+list <code>x</code> and a predicate function <code>f</code>,
+<code>span(x, f)</code> returns the location of the longest sequential
+run of elements where the predicate is true. (Hint: you might find
+<code>rle()</code> helpful.)</li>
+</ol>
+<pre class="r"><code>test &lt;- c(as.list(letters[1:21]), as.list(1:20), as.list(letters[22:26]), as.list(20:39))
+test2 &lt;- c(as.list(letters[1:21]), as.list(1:20), as.list(letters[22:26]), as.list(20:40))
+
+span &lt;- function(x, f) {
+  runs &lt;- rle(map_lgl(x, f))
+  max_true &lt;- max_index &lt;- 0
+  index &lt;- 1
+  for (i in seq_along(runs$values)) {
+    if (runs$values[i] &amp;&amp; runs$lengths[i] &gt; max_true) {
+      max_true &lt;- runs$lengths[i]
+      max_index &lt;- index
+    }
+    index &lt;- index + runs$lengths[i]
+  }
+  max_index
+}
+
+span(test, is.numeric)</code></pre>
+<pre><code>#&gt; [1] 22</code></pre>
+<pre class="r"><code>span(test2, is.numeric)</code></pre>
+<pre><code>#&gt; [1] 47</code></pre>
+<pre class="r"><code>span(1, is.numeric)</code></pre>
+<pre><code>#&gt; [1] 1</code></pre>
+<pre class="r"><code>span(&quot;a&quot;, is.numeric)</code></pre>
+<pre><code>#&gt; [1] 0</code></pre>
+<pre class="r"><code>span(list(&quot;a&quot;, 1:10, 1:20), is.numeric)</code></pre>
+<pre><code>#&gt; [1] 2</code></pre>
+<p>Answer: code above.</p>
+<p>AR Solutions: Our <code>span_r()</code> function returns the indices
+of the (first occurring) longest sequential run of elements where the
+predicate is true. If the predicate is never true, the longest run has
+length 0, in which case we return <code>integer(0)</code>.</p>
+<pre class="r"><code>span_r &lt;- function(x, f) {
+  idx &lt;- unname(map_lgl(x, ~ f(.x)))
+  rle &lt;- rle(idx)
+
+  # Check if the predicate is never true
+  if (!any(rle$values)) {
+    return(integer(0))
+  }
+
+  # Find the length of the longest sequence of true values
+  longest &lt;- max(rle$lengths[rle$values])
+  # Find the position of the (first) longest run in rle
+  longest_idx &lt;- which(rle$values &amp; rle$lengths == longest)[1]
+
+  # Add up all lengths in rle before the longest run
+  ind_before_longest &lt;- sum(rle$lengths[seq_len(longest_idx - 1)])
+
+  out_start &lt;- ind_before_longest + 1L
+  out_end &lt;- ind_before_longest + longest
+  out_start:out_end
+}
+
+# Check that it works
+span_r(c(0, 0, 0, 0, 0), is.na)</code></pre>
+<pre><code>#&gt; integer(0)</code></pre>
+<pre class="r"><code>span_r(c(NA, 0, 0, 0, 0), is.na)</code></pre>
+<pre><code>#&gt; [1] 1</code></pre>
+<pre class="r"><code>span_r(c(NA, 0, NA, NA, NA), is.na)</code></pre>
+<pre><code>#&gt; [1] 3 4 5</code></pre>
+<p>Notes: AR Solutions shows how to find the index of the longest
+sequence using <code>which()</code>, which is new to me, and returns
+more information by returning indexes of the entire span. The AR
+Solutions approach is also significantly faster (which I did not
+expect).</p>
+<pre class="r"><code>bench::mark(span_r(test2, is.numeric))</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 6
+#&gt;   expression                     min   median `itr/sec` mem_alloc `gc/sec`
+#&gt;   &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 span_r(test2, is.numeric)   98.8µs    128µs     6360.    4.01KB     11.1</code></pre>
+<pre class="r"><code>bench::mark(span(test2, is.numeric))</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 6
+#&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`
+#&gt;   &lt;bch:expr&gt;              &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 span(test2, is.numeric)    160µs    191µs     4027.    4.01KB     6.41</code></pre>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>Implement <code>arg_max()</code>. It should take a function and a
+vector of inputs, and return the elements of the input where the
+function returns the highest value. For example,
+<code>arg_max(-10:5, function(x) x ^ 2)</code> should return -10.
+<code>arg_max(-5:5, function(x) x ^ 2)</code> should return
+<code>c(-5, 5)</code>. Also implement the matching
+<code>arg_min()</code> function.</li>
+</ol>
+<p>Answer: code below.</p>
+<pre class="r"><code>arg_max &lt;- function(x, f) {
+  val &lt;- map_dbl(x, f)
+  val_max &lt;- max(val)
+  x[which(val == val_max)]
+}
+
+arg_max(-10:5, function(x) x^2)</code></pre>
+<pre><code>#&gt; [1] -10</code></pre>
+<pre class="r"><code>arg_max(-5:5, function(x) x^2)</code></pre>
+<pre><code>#&gt; [1] -5  5</code></pre>
+<pre class="r"><code>arg_min &lt;- function(x, f) {
+  val &lt;- map_dbl(x, f)
+  val_min &lt;- min(val)
+  x[which(val == val_min)]
+}
+
+arg_min(-10:5, function(x) x^2)</code></pre>
+<pre><code>#&gt; [1] 0</code></pre>
+<pre class="r"><code>arg_min(c(-5:-1, 1:5), function(x) x^2)</code></pre>
+<pre><code>#&gt; [1] -1  1</code></pre>
+<p>AR Solutions: Both functions take a vector of inputs and a function
+as an argument. The function output is then used to subset the input
+accordingly.</p>
+<pre class="r"><code>arg_max &lt;- function(x, f) {
+  y &lt;- map_dbl(x, f)
+  x[y == max(y)]
+}
+
+arg_min &lt;- function(x, f) {
+  y &lt;- map_dbl(x, f)
+  x[y == min(y)]
+}
+
+arg_max(-10:5, function(x) x^2)</code></pre>
+<pre><code>#&gt; [1] -10</code></pre>
+<pre class="r"><code>arg_min(-10:5, function(x) x^2)</code></pre>
+<pre><code>#&gt; [1] 0</code></pre>
+<p>Notes: using <code>which()</code> is unnecessary, AR Solutions is a
+better approach.</p>
+<hr />
+<ol start="5" style="list-style-type: decimal">
+<li>The function below scales a vector so it falls in the range [0, 1].
+How would you apply it to every column of a data frame? How would you
+apply it to every numeric column in a data frame?</li>
+</ol>
+<pre class="r"><code>scale01 &lt;- function(x) {
+  rng &lt;- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}</code></pre>
+<p>Answer: code below.</p>
+<pre class="r"><code># every column
+modify(mtcars, scale01)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.4510638","2":"0.5","3":"0.22175106","4":"0.20494700","5":"0.52534562","6":"0.28304781","7":"0.23333333","8":"0","9":"1","10":"0.5","11":"0.4285714","_rn_":"Mazda RX4"},{"1":"0.4510638","2":"0.5","3":"0.22175106","4":"0.20494700","5":"0.52534562","6":"0.34824853","7":"0.30000000","8":"0","9":"1","10":"0.5","11":"0.4285714","_rn_":"Mazda RX4 Wag"},{"1":"0.5276596","2":"0.0","3":"0.09204290","4":"0.14487633","5":"0.50230415","6":"0.20634109","7":"0.48928571","8":"1","9":"1","10":"0.5","11":"0.0000000","_rn_":"Datsun 710"},{"1":"0.4680851","2":"0.5","3":"0.46620105","4":"0.20494700","5":"0.14746544","6":"0.43518282","7":"0.58809524","8":"1","9":"0","10":"0.0","11":"0.0000000","_rn_":"Hornet 4 Drive"},{"1":"0.3531915","2":"1.0","3":"0.72062859","4":"0.43462898","5":"0.17972350","6":"0.49271286","7":"0.30000000","8":"0","9":"0","10":"0.0","11":"0.1428571","_rn_":"Hornet Sportabout"},{"1":"0.3276596","2":"0.5","3":"0.38388626","4":"0.18727915","5":"0.00000000","6":"0.49782664","7":"0.68095238","8":"1","9":"0","10":"0.0","11":"0.0000000","_rn_":"Valiant"},{"1":"0.1659574","2":"1.0","3":"0.72062859","4":"0.68197880","5":"0.20737327","6":"0.52595244","7":"0.15952381","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Duster 360"},{"1":"0.5957447","2":"0.0","3":"0.18857570","4":"0.03533569","5":"0.42857143","6":"0.42879059","7":"0.65476190","8":"1","9":"0","10":"0.5","11":"0.1428571","_rn_":"Merc 240D"},{"1":"0.5276596","2":"0.0","3":"0.17385882","4":"0.15194346","5":"0.53456221","6":"0.41856303","7":"1.00000000","8":"1","9":"0","10":"0.5","11":"0.1428571","_rn_":"Merc 230"},{"1":"0.3744681","2":"0.5","3":"0.24070841","4":"0.25088339","5":"0.53456221","6":"0.49271286","7":"0.45238095","8":"1","9":"0","10":"0.5","11":"0.4285714","_rn_":"Merc 280"},{"1":"0.3148936","2":"0.5","3":"0.24070841","4":"0.25088339","5":"0.53456221","6":"0.49271286","7":"0.52380952","8":"1","9":"0","10":"0.5","11":"0.4285714","_rn_":"Merc 280C"},{"1":"0.2553191","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.65379698","7":"0.34523810","8":"0","9":"0","10":"0.0","11":"0.2857143","_rn_":"Merc 450SE"},{"1":"0.2936170","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.56686269","7":"0.36904762","8":"0","9":"0","10":"0.0","11":"0.2857143","_rn_":"Merc 450SL"},{"1":"0.2042553","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.57964715","7":"0.41666667","8":"0","9":"0","10":"0.0","11":"0.2857143","_rn_":"Merc 450SLC"},{"1":"0.0000000","2":"1.0","3":"1.00000000","4":"0.54063604","5":"0.07834101","6":"0.95551010","7":"0.41428571","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Cadillac Fleetwood"},{"1":"0.0000000","2":"1.0","3":"0.97006735","4":"0.57597173","5":"0.11059908","6":"1.00000000","7":"0.39523810","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Lincoln Continental"},{"1":"0.1829787","2":"1.0","3":"0.92017960","4":"0.62897527","5":"0.21658986","6":"0.97980056","7":"0.34761905","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Chrysler Imperial"},{"1":"0.9361702","2":"0.0","3":"0.01895735","4":"0.04946996","5":"0.60829493","6":"0.17565840","7":"0.59166667","8":"1","9":"1","10":"0.5","11":"0.0000000","_rn_":"Fiat 128"},{"1":"0.8510638","2":"0.0","3":"0.01147418","4":"0.00000000","5":"1.00000000","6":"0.02608029","7":"0.47857143","8":"1","9":"1","10":"0.5","11":"0.1428571","_rn_":"Honda Civic"},{"1":"1.0000000","2":"0.0","3":"0.00000000","4":"0.04593640","5":"0.67281106","6":"0.08233188","7":"0.64285714","8":"1","9":"1","10":"0.5","11":"0.0000000","_rn_":"Toyota Corolla"},{"1":"0.4723404","2":"0.0","3":"0.12222499","4":"0.15901060","5":"0.43317972","6":"0.24341601","7":"0.65595238","8":"1","9":"0","10":"0.0","11":"0.0000000","_rn_":"Toyota Corona"},{"1":"0.2170213","2":"1.0","3":"0.61586431","4":"0.34628975","5":"0.00000000","6":"0.51316799","7":"0.28214286","8":"0","9":"0","10":"0.0","11":"0.1428571","_rn_":"Dodge Challenger"},{"1":"0.2042553","2":"1.0","3":"0.58094288","4":"0.34628975","5":"0.17972350","6":"0.49143442","7":"0.33333333","8":"0","9":"0","10":"0.0","11":"0.1428571","_rn_":"AMC Javelin"},{"1":"0.1234043","2":"1.0","3":"0.69568471","4":"0.68197880","5":"0.44700461","6":"0.59498849","7":"0.10833333","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Camaro Z28"},{"1":"0.3744681","2":"1.0","3":"0.82040409","4":"0.43462898","5":"0.14746544","6":"0.59626694","7":"0.30357143","8":"0","9":"0","10":"0.0","11":"0.1428571","_rn_":"Pontiac Firebird"},{"1":"0.7191489","2":"0.0","3":"0.01970566","4":"0.04946996","5":"0.60829493","6":"0.10790079","7":"0.52380952","8":"1","9":"1","10":"0.5","11":"0.0000000","_rn_":"Fiat X1-9"},{"1":"0.6638298","2":"0.0","3":"0.12272387","4":"0.13780919","5":"0.76958525","6":"0.16031705","7":"0.26190476","8":"0","9":"1","10":"1.0","11":"0.1428571","_rn_":"Porsche 914-2"},{"1":"0.8510638","2":"0.0","3":"0.05986530","4":"0.21554770","5":"0.46543779","6":"0.00000000","7":"0.28571429","8":"1","9":"1","10":"1.0","11":"0.1428571","_rn_":"Lotus Europa"},{"1":"0.2297872","2":"1.0","3":"0.69817910","4":"0.74911661","5":"0.67281106","6":"0.42367681","7":"0.00000000","8":"0","9":"1","10":"1.0","11":"0.4285714","_rn_":"Ford Pantera L"},{"1":"0.3957447","2":"0.5","3":"0.18433525","4":"0.43462898","5":"0.39631336","6":"0.32140118","7":"0.11904762","8":"0","9":"1","10":"1.0","11":"0.7142857","_rn_":"Ferrari Dino"},{"1":"0.1957447","2":"1.0","3":"0.57345972","4":"1.00000000","5":"0.35944700","6":"0.52595244","7":"0.01190476","8":"0","9":"1","10":"1.0","11":"1.0000000","_rn_":"Maserati Bora"},{"1":"0.4680851","2":"0.0","3":"0.12446994","4":"0.20141343","5":"0.62211982","6":"0.32395807","7":"0.48809524","8":"1","9":"1","10":"0.5","11":"0.1428571","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code># every numeric column
+modify_if(iris, is.numeric, scale01)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Sepal.Length"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Petal.Length"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Petal.Width"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Species"],"name":[5],"type":["fct"],"align":["left"]}],"data":[{"1":"0.22222222","2":"0.62500000","3":"0.06779661","4":"0.04166667","5":"setosa"},{"1":"0.16666667","2":"0.41666667","3":"0.06779661","4":"0.04166667","5":"setosa"},{"1":"0.11111111","2":"0.50000000","3":"0.05084746","4":"0.04166667","5":"setosa"},{"1":"0.08333333","2":"0.45833333","3":"0.08474576","4":"0.04166667","5":"setosa"},{"1":"0.19444444","2":"0.66666667","3":"0.06779661","4":"0.04166667","5":"setosa"},{"1":"0.30555556","2":"0.79166667","3":"0.11864407","4":"0.12500000","5":"setosa"},{"1":"0.08333333","2":"0.58333333","3":"0.06779661","4":"0.08333333","5":"setosa"},{"1":"0.19444444","2":"0.58333333","3":"0.08474576","4":"0.04166667","5":"setosa"},{"1":"0.02777778","2":"0.37500000","3":"0.06779661","4":"0.04166667","5":"setosa"},{"1":"0.16666667","2":"0.45833333","3":"0.08474576","4":"0.00000000","5":"setosa"},{"1":"0.30555556","2":"0.70833333","3":"0.08474576","4":"0.04166667","5":"setosa"},{"1":"0.13888889","2":"0.58333333","3":"0.10169492","4":"0.04166667","5":"setosa"},{"1":"0.13888889","2":"0.41666667","3":"0.06779661","4":"0.00000000","5":"setosa"},{"1":"0.00000000","2":"0.41666667","3":"0.01694915","4":"0.00000000","5":"setosa"},{"1":"0.41666667","2":"0.83333333","3":"0.03389831","4":"0.04166667","5":"setosa"},{"1":"0.38888889","2":"1.00000000","3":"0.08474576","4":"0.12500000","5":"setosa"},{"1":"0.30555556","2":"0.79166667","3":"0.05084746","4":"0.12500000","5":"setosa"},{"1":"0.22222222","2":"0.62500000","3":"0.06779661","4":"0.08333333","5":"setosa"},{"1":"0.38888889","2":"0.75000000","3":"0.11864407","4":"0.08333333","5":"setosa"},{"1":"0.22222222","2":"0.75000000","3":"0.08474576","4":"0.08333333","5":"setosa"},{"1":"0.30555556","2":"0.58333333","3":"0.11864407","4":"0.04166667","5":"setosa"},{"1":"0.22222222","2":"0.70833333","3":"0.08474576","4":"0.12500000","5":"setosa"},{"1":"0.08333333","2":"0.66666667","3":"0.00000000","4":"0.04166667","5":"setosa"},{"1":"0.22222222","2":"0.54166667","3":"0.11864407","4":"0.16666667","5":"setosa"},{"1":"0.13888889","2":"0.58333333","3":"0.15254237","4":"0.04166667","5":"setosa"},{"1":"0.19444444","2":"0.41666667","3":"0.10169492","4":"0.04166667","5":"setosa"},{"1":"0.19444444","2":"0.58333333","3":"0.10169492","4":"0.12500000","5":"setosa"},{"1":"0.25000000","2":"0.62500000","3":"0.08474576","4":"0.04166667","5":"setosa"},{"1":"0.25000000","2":"0.58333333","3":"0.06779661","4":"0.04166667","5":"setosa"},{"1":"0.11111111","2":"0.50000000","3":"0.10169492","4":"0.04166667","5":"setosa"},{"1":"0.13888889","2":"0.45833333","3":"0.10169492","4":"0.04166667","5":"setosa"},{"1":"0.30555556","2":"0.58333333","3":"0.08474576","4":"0.12500000","5":"setosa"},{"1":"0.25000000","2":"0.87500000","3":"0.08474576","4":"0.00000000","5":"setosa"},{"1":"0.33333333","2":"0.91666667","3":"0.06779661","4":"0.04166667","5":"setosa"},{"1":"0.16666667","2":"0.45833333","3":"0.08474576","4":"0.04166667","5":"setosa"},{"1":"0.19444444","2":"0.50000000","3":"0.03389831","4":"0.04166667","5":"setosa"},{"1":"0.33333333","2":"0.62500000","3":"0.05084746","4":"0.04166667","5":"setosa"},{"1":"0.16666667","2":"0.66666667","3":"0.06779661","4":"0.00000000","5":"setosa"},{"1":"0.02777778","2":"0.41666667","3":"0.05084746","4":"0.04166667","5":"setosa"},{"1":"0.22222222","2":"0.58333333","3":"0.08474576","4":"0.04166667","5":"setosa"},{"1":"0.19444444","2":"0.62500000","3":"0.05084746","4":"0.08333333","5":"setosa"},{"1":"0.05555556","2":"0.12500000","3":"0.05084746","4":"0.08333333","5":"setosa"},{"1":"0.02777778","2":"0.50000000","3":"0.05084746","4":"0.04166667","5":"setosa"},{"1":"0.19444444","2":"0.62500000","3":"0.10169492","4":"0.20833333","5":"setosa"},{"1":"0.22222222","2":"0.75000000","3":"0.15254237","4":"0.12500000","5":"setosa"},{"1":"0.13888889","2":"0.41666667","3":"0.06779661","4":"0.08333333","5":"setosa"},{"1":"0.22222222","2":"0.75000000","3":"0.10169492","4":"0.04166667","5":"setosa"},{"1":"0.08333333","2":"0.50000000","3":"0.06779661","4":"0.04166667","5":"setosa"},{"1":"0.27777778","2":"0.70833333","3":"0.08474576","4":"0.04166667","5":"setosa"},{"1":"0.19444444","2":"0.54166667","3":"0.06779661","4":"0.04166667","5":"setosa"},{"1":"0.75000000","2":"0.50000000","3":"0.62711864","4":"0.54166667","5":"versicolor"},{"1":"0.58333333","2":"0.50000000","3":"0.59322034","4":"0.58333333","5":"versicolor"},{"1":"0.72222222","2":"0.45833333","3":"0.66101695","4":"0.58333333","5":"versicolor"},{"1":"0.33333333","2":"0.12500000","3":"0.50847458","4":"0.50000000","5":"versicolor"},{"1":"0.61111111","2":"0.33333333","3":"0.61016949","4":"0.58333333","5":"versicolor"},{"1":"0.38888889","2":"0.33333333","3":"0.59322034","4":"0.50000000","5":"versicolor"},{"1":"0.55555556","2":"0.54166667","3":"0.62711864","4":"0.62500000","5":"versicolor"},{"1":"0.16666667","2":"0.16666667","3":"0.38983051","4":"0.37500000","5":"versicolor"},{"1":"0.63888889","2":"0.37500000","3":"0.61016949","4":"0.50000000","5":"versicolor"},{"1":"0.25000000","2":"0.29166667","3":"0.49152542","4":"0.54166667","5":"versicolor"},{"1":"0.19444444","2":"0.00000000","3":"0.42372881","4":"0.37500000","5":"versicolor"},{"1":"0.44444444","2":"0.41666667","3":"0.54237288","4":"0.58333333","5":"versicolor"},{"1":"0.47222222","2":"0.08333333","3":"0.50847458","4":"0.37500000","5":"versicolor"},{"1":"0.50000000","2":"0.37500000","3":"0.62711864","4":"0.54166667","5":"versicolor"},{"1":"0.36111111","2":"0.37500000","3":"0.44067797","4":"0.50000000","5":"versicolor"},{"1":"0.66666667","2":"0.45833333","3":"0.57627119","4":"0.54166667","5":"versicolor"},{"1":"0.36111111","2":"0.41666667","3":"0.59322034","4":"0.58333333","5":"versicolor"},{"1":"0.41666667","2":"0.29166667","3":"0.52542373","4":"0.37500000","5":"versicolor"},{"1":"0.52777778","2":"0.08333333","3":"0.59322034","4":"0.58333333","5":"versicolor"},{"1":"0.36111111","2":"0.20833333","3":"0.49152542","4":"0.41666667","5":"versicolor"},{"1":"0.44444444","2":"0.50000000","3":"0.64406780","4":"0.70833333","5":"versicolor"},{"1":"0.50000000","2":"0.33333333","3":"0.50847458","4":"0.50000000","5":"versicolor"},{"1":"0.55555556","2":"0.20833333","3":"0.66101695","4":"0.58333333","5":"versicolor"},{"1":"0.50000000","2":"0.33333333","3":"0.62711864","4":"0.45833333","5":"versicolor"},{"1":"0.58333333","2":"0.37500000","3":"0.55932203","4":"0.50000000","5":"versicolor"},{"1":"0.63888889","2":"0.41666667","3":"0.57627119","4":"0.54166667","5":"versicolor"},{"1":"0.69444444","2":"0.33333333","3":"0.64406780","4":"0.54166667","5":"versicolor"},{"1":"0.66666667","2":"0.41666667","3":"0.67796610","4":"0.66666667","5":"versicolor"},{"1":"0.47222222","2":"0.37500000","3":"0.59322034","4":"0.58333333","5":"versicolor"},{"1":"0.38888889","2":"0.25000000","3":"0.42372881","4":"0.37500000","5":"versicolor"},{"1":"0.33333333","2":"0.16666667","3":"0.47457627","4":"0.41666667","5":"versicolor"},{"1":"0.33333333","2":"0.16666667","3":"0.45762712","4":"0.37500000","5":"versicolor"},{"1":"0.41666667","2":"0.29166667","3":"0.49152542","4":"0.45833333","5":"versicolor"},{"1":"0.47222222","2":"0.29166667","3":"0.69491525","4":"0.62500000","5":"versicolor"},{"1":"0.30555556","2":"0.41666667","3":"0.59322034","4":"0.58333333","5":"versicolor"},{"1":"0.47222222","2":"0.58333333","3":"0.59322034","4":"0.62500000","5":"versicolor"},{"1":"0.66666667","2":"0.45833333","3":"0.62711864","4":"0.58333333","5":"versicolor"},{"1":"0.55555556","2":"0.12500000","3":"0.57627119","4":"0.50000000","5":"versicolor"},{"1":"0.36111111","2":"0.41666667","3":"0.52542373","4":"0.50000000","5":"versicolor"},{"1":"0.33333333","2":"0.20833333","3":"0.50847458","4":"0.50000000","5":"versicolor"},{"1":"0.33333333","2":"0.25000000","3":"0.57627119","4":"0.45833333","5":"versicolor"},{"1":"0.50000000","2":"0.41666667","3":"0.61016949","4":"0.54166667","5":"versicolor"},{"1":"0.41666667","2":"0.25000000","3":"0.50847458","4":"0.45833333","5":"versicolor"},{"1":"0.19444444","2":"0.12500000","3":"0.38983051","4":"0.37500000","5":"versicolor"},{"1":"0.36111111","2":"0.29166667","3":"0.54237288","4":"0.50000000","5":"versicolor"},{"1":"0.38888889","2":"0.41666667","3":"0.54237288","4":"0.45833333","5":"versicolor"},{"1":"0.38888889","2":"0.37500000","3":"0.54237288","4":"0.50000000","5":"versicolor"},{"1":"0.52777778","2":"0.37500000","3":"0.55932203","4":"0.50000000","5":"versicolor"},{"1":"0.22222222","2":"0.20833333","3":"0.33898305","4":"0.41666667","5":"versicolor"},{"1":"0.38888889","2":"0.33333333","3":"0.52542373","4":"0.50000000","5":"versicolor"},{"1":"0.55555556","2":"0.54166667","3":"0.84745763","4":"1.00000000","5":"virginica"},{"1":"0.41666667","2":"0.29166667","3":"0.69491525","4":"0.75000000","5":"virginica"},{"1":"0.77777778","2":"0.41666667","3":"0.83050847","4":"0.83333333","5":"virginica"},{"1":"0.55555556","2":"0.37500000","3":"0.77966102","4":"0.70833333","5":"virginica"},{"1":"0.61111111","2":"0.41666667","3":"0.81355932","4":"0.87500000","5":"virginica"},{"1":"0.91666667","2":"0.41666667","3":"0.94915254","4":"0.83333333","5":"virginica"},{"1":"0.16666667","2":"0.20833333","3":"0.59322034","4":"0.66666667","5":"virginica"},{"1":"0.83333333","2":"0.37500000","3":"0.89830508","4":"0.70833333","5":"virginica"},{"1":"0.66666667","2":"0.20833333","3":"0.81355932","4":"0.70833333","5":"virginica"},{"1":"0.80555556","2":"0.66666667","3":"0.86440678","4":"1.00000000","5":"virginica"},{"1":"0.61111111","2":"0.50000000","3":"0.69491525","4":"0.79166667","5":"virginica"},{"1":"0.58333333","2":"0.29166667","3":"0.72881356","4":"0.75000000","5":"virginica"},{"1":"0.69444444","2":"0.41666667","3":"0.76271186","4":"0.83333333","5":"virginica"},{"1":"0.38888889","2":"0.20833333","3":"0.67796610","4":"0.79166667","5":"virginica"},{"1":"0.41666667","2":"0.33333333","3":"0.69491525","4":"0.95833333","5":"virginica"},{"1":"0.58333333","2":"0.50000000","3":"0.72881356","4":"0.91666667","5":"virginica"},{"1":"0.61111111","2":"0.41666667","3":"0.76271186","4":"0.70833333","5":"virginica"},{"1":"0.94444444","2":"0.75000000","3":"0.96610169","4":"0.87500000","5":"virginica"},{"1":"0.94444444","2":"0.25000000","3":"1.00000000","4":"0.91666667","5":"virginica"},{"1":"0.47222222","2":"0.08333333","3":"0.67796610","4":"0.58333333","5":"virginica"},{"1":"0.72222222","2":"0.50000000","3":"0.79661017","4":"0.91666667","5":"virginica"},{"1":"0.36111111","2":"0.33333333","3":"0.66101695","4":"0.79166667","5":"virginica"},{"1":"0.94444444","2":"0.33333333","3":"0.96610169","4":"0.79166667","5":"virginica"},{"1":"0.55555556","2":"0.29166667","3":"0.66101695","4":"0.70833333","5":"virginica"},{"1":"0.66666667","2":"0.54166667","3":"0.79661017","4":"0.83333333","5":"virginica"},{"1":"0.80555556","2":"0.50000000","3":"0.84745763","4":"0.70833333","5":"virginica"},{"1":"0.52777778","2":"0.33333333","3":"0.64406780","4":"0.70833333","5":"virginica"},{"1":"0.50000000","2":"0.41666667","3":"0.66101695","4":"0.70833333","5":"virginica"},{"1":"0.58333333","2":"0.33333333","3":"0.77966102","4":"0.83333333","5":"virginica"},{"1":"0.80555556","2":"0.41666667","3":"0.81355932","4":"0.62500000","5":"virginica"},{"1":"0.86111111","2":"0.33333333","3":"0.86440678","4":"0.75000000","5":"virginica"},{"1":"1.00000000","2":"0.75000000","3":"0.91525424","4":"0.79166667","5":"virginica"},{"1":"0.58333333","2":"0.33333333","3":"0.77966102","4":"0.87500000","5":"virginica"},{"1":"0.55555556","2":"0.33333333","3":"0.69491525","4":"0.58333333","5":"virginica"},{"1":"0.50000000","2":"0.25000000","3":"0.77966102","4":"0.54166667","5":"virginica"},{"1":"0.94444444","2":"0.41666667","3":"0.86440678","4":"0.91666667","5":"virginica"},{"1":"0.55555556","2":"0.58333333","3":"0.77966102","4":"0.95833333","5":"virginica"},{"1":"0.58333333","2":"0.45833333","3":"0.76271186","4":"0.70833333","5":"virginica"},{"1":"0.47222222","2":"0.41666667","3":"0.64406780","4":"0.70833333","5":"virginica"},{"1":"0.72222222","2":"0.45833333","3":"0.74576271","4":"0.83333333","5":"virginica"},{"1":"0.66666667","2":"0.45833333","3":"0.77966102","4":"0.95833333","5":"virginica"},{"1":"0.72222222","2":"0.45833333","3":"0.69491525","4":"0.91666667","5":"virginica"},{"1":"0.41666667","2":"0.29166667","3":"0.69491525","4":"0.75000000","5":"virginica"},{"1":"0.69444444","2":"0.50000000","3":"0.83050847","4":"0.91666667","5":"virginica"},{"1":"0.66666667","2":"0.54166667","3":"0.79661017","4":"1.00000000","5":"virginica"},{"1":"0.66666667","2":"0.41666667","3":"0.71186441","4":"0.91666667","5":"virginica"},{"1":"0.55555556","2":"0.20833333","3":"0.67796610","4":"0.75000000","5":"virginica"},{"1":"0.61111111","2":"0.41666667","3":"0.71186441","4":"0.79166667","5":"virginica"},{"1":"0.52777778","2":"0.58333333","3":"0.74576271","4":"0.91666667","5":"virginica"},{"1":"0.44444444","2":"0.41666667","3":"0.69491525","4":"0.70833333","5":"virginica"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>AR Solutions: To apply a function to every column of a data frame, we
+can use <code>purrr::modify()</code> (or <code>purrr::map_dfr()</code>),
+which also conveniently returns a data frame. To limit the application
+to numeric columns, the scoped version <code>modify_if()</code> can be
+used.</p>
+<pre class="r"><code>modify_if(mtcars, is.numeric, scale01)</code></pre>
+<hr />
+</div>
+<div id="exercises-3" class="section level2">
+<h2>9.7.3 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>How does <code>apply()</code> arrange the output? Read the
+documentation and perform some experiments.</li>
+</ol>
+<pre class="r"><code># experiments
+m1 &lt;- matrix(1:4, nrow = 1)
+apply(m1, 1, sum)
+apply(m1, 2, sum)
+apply(m1, c(1, 2), `*`, 2)
+apply(m1, 1, `*`, 2)
+apply(m1, 1, `*`, 2, simplify = FALSE)
+apply(m1, 2, `*`, 2)
+apply(m1, 1, sum, simplify = FALSE)
+
+m1a &lt;- matrix(1:4, ncol = 1)
+apply(m1a, 1, `*`, 2)
+
+m2 &lt;- matrix(1:20, ncol = 4)
+apply(m2, 1, sum)
+
+m3 &lt;- array(1:24, dim = c(2, 3, 4))
+apply(m3, 1, sum)
+apply(m3, 2, sum)
+apply(m3, 3, sum)
+apply(m3, 1, `*`, 2)
+apply(m3, 2, `*`, 2)
+apply(m3, 3, `*`, 2)
+apply(m3, c(1, 2, 3), `*`, 2)</code></pre>
+<p>Answer: the documentation states:</p>
+<blockquote>
+<p>If each call to <code>FUN</code> returns a vector of length
+<code>n</code>, and simplify is <code>TRUE</code>, then apply returns an
+array of dimension <code>c(n, dim(X)[MARGIN])</code> if
+<code>n &gt; 1</code>. If <code>n</code> equals 1, <code>apply</code>
+returns a vector if <code>MARGIN</code> has length 1 and an array of
+<code>dimension dim(X)[MARGIN]</code> otherwise. If <code>n</code> is 0,
+the result has length 0 but not necessarily the ‘correct’ dimension.</p>
+<p>If the calls to <code>FUN</code> return vectors of different lengths,
+or if simplify is <code>FALSE</code>, apply returns a list of
+<code>length prod(dim(X)[MARGIN])</code> with <code>dim</code> set to
+<code>MARGIN</code> if this has length greater than one.</p>
+</blockquote>
+<p>With exploration, under normal circumstances:</p>
+<ul>
+<li>If <code>MARGIN</code> includes all dimensions of an array or matrix
+(<code>c(1, 2)</code> or <code>c(1, 2, 3)</code>), the output is
+arranged in the same shape as the input</li>
+<li>Otherwise, the return value drops a dimension if modifying a vector
+in place (as with <code>*</code>), or returns a vector when summarizing
+(as with <code>sum</code>)</li>
+<li>Matrices of a single row are simplified to a vector</li>
+<li>Matrices of a single column are returned as a matrix</li>
+<li>When <code>simplify = FALSE</code> is set, a list is returned</li>
+</ul>
+<p>However, even with all this, the “rules” aren’t clear to me.</p>
+<p>AR Solutions: Basically <code>apply()</code> applies a function over
+the margins of an array. In the two-dimensional case, the margins are
+just the rows and columns of a matrix. Let’s make this concrete.</p>
+<pre class="r"><code>arr2 &lt;- array(1:12, dim = c(3, 4))
+rownames(arr2) &lt;- paste0(&quot;row&quot;, 1:3)
+colnames(arr2) &lt;- paste0(&quot;col&quot;, 1:4)
+arr2</code></pre>
+<pre><code>#&gt;      col1 col2 col3 col4
+#&gt; row1    1    4    7   10
+#&gt; row2    2    5    8   11
+#&gt; row3    3    6    9   12</code></pre>
+<p>When we apply the <code>head()</code> function over the first margin
+of <code>arr2()</code> (i.e. the rows), the results are contained in the
+columns of the output, transposing the array compared to the original
+input.</p>
+<pre class="r"><code>apply(arr2, 1, function(x) x[1:2])</code></pre>
+<pre><code>#&gt;      row1 row2 row3
+#&gt; col1    1    2    3
+#&gt; col2    4    5    6</code></pre>
+<p>And vice versa if we apply over the second margin (the columns):</p>
+<pre class="r"><code>apply(arr2, 2, function(x) x[1:2])</code></pre>
+<pre><code>#&gt;      col1 col2 col3 col4
+#&gt; row1    1    4    7   10
+#&gt; row2    2    5    8   11</code></pre>
+<p>The output of <code>apply()</code> is organised first by the margins
+being operated over, then the results of the function. This can become
+quite confusing for higher dimensional arrays.</p>
+<p>Notes: AR Solutions’ explanation is better, but the output is still
+confusing.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>What do <code>eapply()</code> and <code>rapply()</code> do? Does
+purrr have equivalents?</li>
+</ol>
+<p>Answer: <code>eapply()</code> applies a function to named values in
+an environment. <code>rapply()</code> is a recursive
+<code>lapply()</code>. There are no equivalents in purrr.</p>
+<p>AR Solutions: <code>eapply()</code> is a variant of
+<code>lapply()</code>, which iterates over the (named) elements of an
+environment. In <code>purrr</code> there is no equivalent for
+<code>eapply()</code> as <code>purrr</code> mainly provides functions
+that operate on vectors and functions, but not on environments.</p>
+<p><code>rapply()</code> applies a function to all elements of a list
+recursively. This function makes it possible to limit the application of
+the function to specified classes (default <code>classes = ANY</code>).
+One may also specify how elements of other classes should remain: as
+their identity (<code>how = replace</code>) or another value
+(<code>default = NULL</code>). The closest equivalent in
+<code>purrr</code> is <code>modify_depth()</code>, which allows you to
+modify elements at a specified depth in a nested list.</p>
+<p>Notes: I wasn’t aware of <code>purrr::modify_depth()</code>.</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Challenge: read about the <a
+href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-12.html#%25_idx_1096">fixed
+point algorithm</a>. Complete the exercises using R.</li>
+</ol>
+<p>Answer: the fixed point algorithm is defined below, with an example
+solution:</p>
+<pre><code>(define tolerance 0.00001)
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (&lt; (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
+(fixed-point cos 1.0)
+0.7390822985224023
+
+(fixed-point (lambda (y) (+ (sin y) (cos y)))
+             1.0)
+1.2587315962971173
+
+(define (sqrt x)
+  (fixed-point (lambda (y) (/ x y))
+               1.0))</code></pre>
+<p>Implementation in R:</p>
+<pre class="r"><code>fixed_point &lt;- function(f, x) {
+  tolerance &lt;- 0.00001
+  close_enough &lt;- function(v1, v2) {
+    abs(v1 - v2) &lt; tolerance
+  }
+
+  if (close_enough(f(x), x)) {
+    f(x)
+  } else {
+    fixed_point(f, f(x))
+  }
+}
+
+fixed_point(cos, 1.0)</code></pre>
+<pre><code>#&gt; [1] 0.7390823</code></pre>
+<pre class="r"><code>fixed_point(function(y) sin(y) + cos(y), 1.0)</code></pre>
+<pre><code>#&gt; [1] 1.258732</code></pre>
+<p>AR Solutions: A number <span class="math inline">\(x\)</span> is
+called a fixed point of a function <span
+class="math inline">\(f\)</span> if it satisfies the equation <span
+class="math inline">\(f(x) = x\)</span>. For some functions we may find
+a fixed point by beginning with a starting value and applying <span
+class="math inline">\(f\)</span> repeatedly. Here
+<code>fixed_point()</code> acts as a functional because it takes a
+function as an argument.</p>
+<pre class="r"><code>fixed_point_ar &lt;- function(f, x_init, n_max = 10000, tol = 0.0001) {
+  n &lt;- 0
+  x &lt;- x_init
+  y &lt;- f(x)
+
+  is_fixed_point &lt;- function(x, y) {
+    abs(x - y) &lt; tol
+  }
+
+  while (!is_fixed_point(x, y)) {
+    x &lt;- y
+    y &lt;- f(y)
+
+    # Make sure we eventually stop
+    n &lt;- n + 1
+    if (n &gt; n_max) {
+      stop(&quot;Failed to converge.&quot;, call. = FALSE)
+    }
+  }
+
+  x
+}
+
+# Functions with fixed points
+fixed_point_ar(sin, x_init = 1)</code></pre>
+<pre><code>#&gt; [1] 0.08430922</code></pre>
+<pre class="r"><code>fixed_point_ar(cos, x_init = 1)</code></pre>
+<pre><code>#&gt; [1] 0.7391302</code></pre>
+<pre class="r"><code># Functions without fixed points
+add_one &lt;- function(x) x + 1
+try(fixed_point_ar(add_one, x_init = 1))</code></pre>
+<pre><code>#&gt; Error : Failed to converge.</code></pre>
+<p>Notes: AR Solutions offers a different approach using a
+<code>while()</code> loop that is guaranteed to stop. My approach using
+recursive calls does stop eventually with a stack limit error (however,
+this stops <code>build_analysis_site()</code>):</p>
+<pre class="r"><code>fixed_point(add_one, 1)</code></pre>
+<p>Comparing benchmarks:</p>
+<pre class="r"><code>bench::mark(fixed_point_ar(cos, x_init = 1, tol = 0.00001))</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 6
+#&gt;   expression                                        min   median `itr/sec` mem_alloc `gc/sec`
+#&gt;   &lt;bch:expr&gt;                                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 fixed_point_ar(cos, x_init = 1, tol = 1e-05)   19.1µs   25.9µs    30191.        0B     15.1</code></pre>
+<pre class="r"><code>bench::mark(fixed_point(cos, 1))</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 6
+#&gt;   expression               min   median `itr/sec` mem_alloc `gc/sec`
+#&gt;   &lt;bch:expr&gt;          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 fixed_point(cos, 1)   55.4µs   67.5µs    13114.        0B     13.9</code></pre>
+<p>As usual, AR Solutions is faster. :-(</p>
+<hr />
+</div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
@@ -476,7 +1531,7 @@ class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiBBZHZhbmNlZCBSIFdvcmtib29rIChGdW5jdGlvbmFsIHByb2dyYW1taW5nKQpkYXRlOiAnMjAyMi0wNy0zMScKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0aGVtZToKICAgICAgdmVyc2lvbjogNQogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiB5ZXMKICAgICAgc21vb3RoX3Njcm9sbDogbm8KLS0tCgpXb3JrYm9vayBmb3IgY29tcGxldGluZyBxdWl6emVzIGFuZCBleGVyY2lzZXMgZnJvbSB0aGUgIkZ1bmN0aW9uYWwgcHJvZ3JhbW1pbmciIGNoYXB0ZXJzIG9mIFtBZHZhbmNlZCBSXShodHRwczovL2Fkdi1yLmhhZGxleS5uei9pbmRleC5odG1sKSwgc2Vjb25kIGVkaXRpb24sIHdpdGggY29tcGFyaXNvbnMgdG8gc29sdXRpb25zIGZyb20gW0FkdmFuY2VkIFIgU29sdXRpb25zXShodHRwczovL2FkdmFuY2VkLXItc29sdXRpb25zLnJiaW5kLmlvKS4KCmBgYHtyIHNldHVwLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0KIyBmcm9tIGh0dHBzOi8vZ2l0aHViLmNvbS9oYWRsZXkvYWR2LXIvYmxvYi9tYXN0ZXIvY29tbW9uLlIKa25pdHI6Om9wdHNfY2h1bmskc2V0KAogIGNvbW1lbnQgPSAiIz4iLAogIGZpZy5hbGlnbiA9ICJjZW50ZXIiCikKCmtuaXRyOjprbml0X2hvb2tzJHNldCgKICBzbWFsbF9tYXIgPSBmdW5jdGlvbihiZWZvcmUsIG9wdGlvbnMsIGVudmlyKSB7CiAgICBpZiAoYmVmb3JlKSB7CiAgICAgIHBhcihtYXIgPSBjKDQuMSwgNC4xLCAwLjUsIDAuNSkpICMgbm9saW50OiB1bmRlc2lyYWJsZV9mdW5jdGlvbl9saW50ZXIuCiAgICB9CiAgfQopCmBgYAoKIyBJbnRyb2R1Y3Rpb24KClRoaXMgd29ya2Jvb2sgaW5jbHVkZXMgYW5zd2VycyBhbmQgc29sdXRpb25zIHRvIHRoZSBxdWl6emVzIGFuZCBleGVyY2lzZXMgZnJvbSBbQWR2YW5jZWQgUl0oaHR0cHM6Ly9hZHYtci5oYWRsZXkubnovaW5kZXguaHRtbCkgYW5kIFtBZHZhbmNlZCBSIFNvbHV0aW9uc10oaHR0cHM6Ly9hZHZhbmNlZC1yLXNvbHV0aW9ucy5yYmluZC5pbyksIG9yZ2FuaXplZCBieSBjaGFwdGVyLiBJdCBpbmNsdWRlcyBleGNlcnB0cyBmcm9tIGJvdGggYm9va3MsIGNvcGllZCBoZXJlLgoKKipXQVJOSU5HLCBTUE9JTEVSUyEqKiBJZiB5b3UgaGF2ZW4ndCByZWFkIEFkdmFuY2VkIFIgYW5kIGludGVuZCB0byBjb21wbGV0ZSB0aGUgcXVpenplcyBhbmQgZXhlcmNpc2VzLCBkb24ndCByZWFkIHRoaXMgbm90ZWJvb2suIEl0IGNvbnRhaW5zIG15IChwb3RlbnRpYWxseSB3cm9uZykgYW5zd2VycyB0byBib3RoLgoKIyA5IEZ1bmN0aW9uYWxzCgo+IFRvIGJlY29tZSBzaWduaWZpY2FudGx5IG1vcmUgcmVsaWFibGUsIGNvZGUgbXVzdCBiZWNvbWUgbW9yZSB0cmFuc3BhcmVudC4KPiBJbiBwYXJ0aWN1bGFyLCBuZXN0ZWQgY29uZGl0aW9ucyBhbmQgbG9vcHMgbXVzdCBiZSB2aWV3ZWQgd2l0aCBncmVhdAo+IHN1c3BpY2lvbi4gQ29tcGxpY2F0ZWQgY29udHJvbCBmbG93cyBjb25mdXNlIHByb2dyYW1tZXJzLiBNZXNzeSBjb2RlIG9mdGVuCj4gaGlkZXMgYnVncy4KPgo+IC0tLSBCamFybmUgU3Ryb3VzdHJ1cAoKQSBfX2Z1bmN0aW9uYWxfXyBpcyBhIGZ1bmN0aW9uIHRoYXQgdGFrZXMgYSBmdW5jdGlvbiBhcyBhbiBpbnB1dCBhbmQgcmV0dXJucyBhIHZlY3RvciBhcyBvdXRwdXQuIEhlcmUncyBhIHNpbXBsZSBmdW5jdGlvbmFsOiBpdCBjYWxscyB0aGUgZnVuY3Rpb24gcHJvdmlkZWQgYXMgaW5wdXQgd2l0aCAxMDAwIHJhbmRvbSB1bmlmb3JtIG51bWJlcnMuIAoKYGBge3J9CnJhbmRvbWlzZSA8LSBmdW5jdGlvbihmKSBmKHJ1bmlmKDFlMykpCnJhbmRvbWlzZShtZWFuKQpyYW5kb21pc2UobWVhbikKcmFuZG9taXNlKHN1bSkKYGBgCgpUaGUgY2hhbmNlcyBhcmUgdGhhdCB5b3UndmUgYWxyZWFkeSB1c2VkIGEgZnVuY3Rpb25hbC4gWW91IG1pZ2h0IGhhdmUgdXNlZCBmb3ItbG9vcCByZXBsYWNlbWVudHMgbGlrZSBiYXNlIFIncyBgbGFwcGx5KClgLCBgYXBwbHkoKWAsIGFuZCBgdGFwcGx5KClgOyBvciBwdXJycidzIGBtYXAoKWA7IG9yIG1heWJlIHlvdSd2ZSB1c2VkIGEgbWF0aGVtYXRpY2FsIGZ1bmN0aW9uYWwgbGlrZSBgaW50ZWdyYXRlKClgIG9yIGBvcHRpbSgpYC4gCgpBIGNvbW1vbiB1c2Ugb2YgZnVuY3Rpb25hbHMgaXMgYXMgYW4gYWx0ZXJuYXRpdmUgdG8gZm9yIGxvb3BzLiBGb3IgbG9vcHMgaGF2ZSBhIGJhZCByYXAgaW4gUiBiZWNhdXNlIG1hbnkgcGVvcGxlIGJlbGlldmUgdGhleSBhcmUgc2xvd1tebm90LXNsb3ddLCBidXQgdGhlIHJlYWwgZG93bnNpZGUgb2YgZm9yIGxvb3BzIGlzIHRoYXQgdGhleSdyZSB2ZXJ5IGZsZXhpYmxlOiBhIGxvb3AgY29udmV5cyB0aGF0IHlvdSdyZSBpdGVyYXRpbmcsIGJ1dCBub3Qgd2hhdCBzaG91bGQgYmUgZG9uZSB3aXRoIHRoZSByZXN1bHRzLiBKdXN0IGFzIGl0J3MgYmV0dGVyIHRvIHVzZSBgd2hpbGVgIHRoYW4gYHJlcGVhdGAsIGFuZCBpdCdzIGJldHRlciB0byB1c2UgYGZvcmAgdGhhbiBgd2hpbGVgIChTZWN0aW9uIDUuMy4yKSwgaXQncyBiZXR0ZXIgdG8gdXNlIGEgZnVuY3Rpb25hbCB0aGFuIGBmb3JgLiBFYWNoIGZ1bmN0aW9uYWwgaXMgdGFpbG9yZWQgZm9yIGEgc3BlY2lmaWMgdGFzaywgc28gd2hlbiB5b3UgcmVjb2duaXNlIHRoZSBmdW5jdGlvbmFsIHlvdSBpbW1lZGlhdGVseSBrbm93IHdoeSBpdCdzIGJlaW5nIHVzZWQuCgpbXm5vdC1zbG93XTogVHlwaWNhbGx5IGl0J3Mgbm90IHRoZSBmb3IgbG9vcCBpdHNlbGYgdGhhdCdzIHNsb3csIGJ1dCB3aGF0IHlvdSdyZSBkb2luZyBpbnNpZGUgb2YgaXQuIEEgY29tbW9uIGN1bHByaXQgb2Ygc2xvdyBsb29wcyBpcyBtb2RpZnlpbmcgYSBkYXRhIHN0cnVjdHVyZSwgd2hlcmUgZWFjaCBtb2RpZmljYXRpb24gZ2VuZXJhdGVzIGEgY29weS4gU2VlIFNlY3Rpb25zIDIuNS4xIGFuZCAyNC42IGZvciBtb3JlIGRldGFpbHMuCgpJZiB5b3UncmUgYW4gZXhwZXJpZW5jZWQgZm9yIGxvb3AgdXNlciwgc3dpdGNoaW5nIHRvIGZ1bmN0aW9uYWxzIGlzIHR5cGljYWxseSBhIHBhdHRlcm4gbWF0Y2hpbmcgZXhlcmNpc2UuIFlvdSBsb29rIGF0IHRoZSBmb3IgbG9vcCBhbmQgZmluZCBhIGZ1bmN0aW9uYWwgdGhhdCBtYXRjaGVzIHRoZSBiYXNpYyBmb3JtLiBJZiBvbmUgZG9lc24ndCBleGlzdCwgZG9uJ3QgdHJ5IGFuZCB0b3J0dXJlIGFuIGV4aXN0aW5nIGZ1bmN0aW9uYWwgdG8gZml0IHRoZSBmb3JtIHlvdSBuZWVkLiBJbnN0ZWFkLCBqdXN0IGxlYXZlIGl0IGFzIGEgZm9yIGxvb3AhIChPciBvbmNlIHlvdSd2ZSByZXBlYXRlZCB0aGUgc2FtZSBsb29wIHR3byBvciBtb3JlIHRpbWVzLCBtYXliZSB0aGluayBhYm91dCB3cml0aW5nIHlvdXIgb3duIGZ1bmN0aW9uYWwpLgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiBBZHZhbmNlZCBSIFdvcmtib29rIChGdW5jdGlvbmFsIHByb2dyYW1taW5nKQpkYXRlOiAnMjAyMi0wNy0zMScKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0aGVtZToKICAgICAgdmVyc2lvbjogNQogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiB5ZXMKICAgICAgc21vb3RoX3Njcm9sbDogbm8KLS0tCgpXb3JrYm9vayBmb3IgY29tcGxldGluZyBxdWl6emVzIGFuZCBleGVyY2lzZXMgZnJvbSB0aGUgIkZ1bmN0aW9uYWwgcHJvZ3JhbW1pbmciIGNoYXB0ZXJzIG9mIFtBZHZhbmNlZCBSXShodHRwczovL2Fkdi1yLmhhZGxleS5uei9pbmRleC5odG1sKSwgc2Vjb25kIGVkaXRpb24sIHdpdGggY29tcGFyaXNvbnMgdG8gc29sdXRpb25zIGZyb20gW0FkdmFuY2VkIFIgU29sdXRpb25zXShodHRwczovL2FkdmFuY2VkLXItc29sdXRpb25zLnJiaW5kLmlvKS4KCmBgYHtyIHNldHVwLCBtZXNzYWdlID0gRkFMU0UsIHdhcm5pbmcgPSBGQUxTRX0KbGlicmFyeShwdXJycikKbGlicmFyeShwYWxtZXJwZW5ndWlucykgIyBub2xpbnQ6IHVudXNlZF9pbXBvcnRfbGludGVyLiBJbXBvcnRlZCBmb3IgYHBlbmd1aW5zYCB0aWJibGUuCgojIGZyb20gaHR0cHM6Ly9naXRodWIuY29tL2hhZGxleS9hZHYtci9ibG9iL21hc3Rlci9jb21tb24uUgprbml0cjo6b3B0c19jaHVuayRzZXQoCiAgY29tbWVudCA9ICIjPiIsCiAgZmlnLmFsaWduID0gImNlbnRlciIKKQoKa25pdHI6OmtuaXRfaG9va3Mkc2V0KAogIHNtYWxsX21hciA9IGZ1bmN0aW9uKGJlZm9yZSwgb3B0aW9ucywgZW52aXIpIHsKICAgIGlmIChiZWZvcmUpIHsKICAgICAgcGFyKG1hciA9IGMoNC4xLCA0LjEsIDAuNSwgMC41KSkgIyBub2xpbnQ6IHVuZGVzaXJhYmxlX2Z1bmN0aW9uX2xpbnRlci4KICAgIH0KICB9CikKYGBgCgojIEludHJvZHVjdGlvbgoKVGhpcyB3b3JrYm9vayBpbmNsdWRlcyBhbnN3ZXJzIGFuZCBzb2x1dGlvbnMgdG8gdGhlIHF1aXp6ZXMgYW5kIGV4ZXJjaXNlcyBmcm9tIFtBZHZhbmNlZCBSXShodHRwczovL2Fkdi1yLmhhZGxleS5uei9pbmRleC5odG1sKSBhbmQgW0FkdmFuY2VkIFIgU29sdXRpb25zXShodHRwczovL2FkdmFuY2VkLXItc29sdXRpb25zLnJiaW5kLmlvKSwgb3JnYW5pemVkIGJ5IGNoYXB0ZXIuIEl0IGluY2x1ZGVzIGV4Y2VycHRzIGZyb20gYm90aCBib29rcywgY29waWVkIGhlcmUuCgoqKldBUk5JTkcsIFNQT0lMRVJTISoqIElmIHlvdSBoYXZlbid0IHJlYWQgQWR2YW5jZWQgUiBhbmQgaW50ZW5kIHRvIGNvbXBsZXRlIHRoZSBxdWl6emVzIGFuZCBleGVyY2lzZXMsIGRvbid0IHJlYWQgdGhpcyBub3RlYm9vay4gSXQgY29udGFpbnMgbXkgKHBvdGVudGlhbGx5IHdyb25nKSBhbnN3ZXJzIHRvIGJvdGguCgojIDkgRnVuY3Rpb25hbHMKCj4gVG8gYmVjb21lIHNpZ25pZmljYW50bHkgbW9yZSByZWxpYWJsZSwgY29kZSBtdXN0IGJlY29tZSBtb3JlIHRyYW5zcGFyZW50Lgo+IEluIHBhcnRpY3VsYXIsIG5lc3RlZCBjb25kaXRpb25zIGFuZCBsb29wcyBtdXN0IGJlIHZpZXdlZCB3aXRoIGdyZWF0Cj4gc3VzcGljaW9uLiBDb21wbGljYXRlZCBjb250cm9sIGZsb3dzIGNvbmZ1c2UgcHJvZ3JhbW1lcnMuIE1lc3N5IGNvZGUgb2Z0ZW4KPiBoaWRlcyBidWdzLgo+Cj4gLS0tIEJqYXJuZSBTdHJvdXN0cnVwCgpBIF9fZnVuY3Rpb25hbF9fIGlzIGEgZnVuY3Rpb24gdGhhdCB0YWtlcyBhIGZ1bmN0aW9uIGFzIGFuIGlucHV0IGFuZCByZXR1cm5zIGEgdmVjdG9yIGFzIG91dHB1dC4gSGVyZSdzIGEgc2ltcGxlIGZ1bmN0aW9uYWw6IGl0IGNhbGxzIHRoZSBmdW5jdGlvbiBwcm92aWRlZCBhcyBpbnB1dCB3aXRoIDEwMDAgcmFuZG9tIHVuaWZvcm0gbnVtYmVycy4gCgpgYGB7cn0KcmFuZG9taXNlIDwtIGZ1bmN0aW9uKGYpIGYocnVuaWYoMWUzKSkKcmFuZG9taXNlKG1lYW4pCnJhbmRvbWlzZShtZWFuKQpyYW5kb21pc2Uoc3VtKQpgYGAKClRoZSBjaGFuY2VzIGFyZSB0aGF0IHlvdSd2ZSBhbHJlYWR5IHVzZWQgYSBmdW5jdGlvbmFsLiBZb3UgbWlnaHQgaGF2ZSB1c2VkIGZvci1sb29wIHJlcGxhY2VtZW50cyBsaWtlIGJhc2UgUidzIGBsYXBwbHkoKWAsIGBhcHBseSgpYCwgYW5kIGB0YXBwbHkoKWA7IG9yIHB1cnJyJ3MgYG1hcCgpYDsgb3IgbWF5YmUgeW91J3ZlIHVzZWQgYSBtYXRoZW1hdGljYWwgZnVuY3Rpb25hbCBsaWtlIGBpbnRlZ3JhdGUoKWAgb3IgYG9wdGltKClgLiAKCkEgY29tbW9uIHVzZSBvZiBmdW5jdGlvbmFscyBpcyBhcyBhbiBhbHRlcm5hdGl2ZSB0byBmb3IgbG9vcHMuIEZvciBsb29wcyBoYXZlIGEgYmFkIHJhcCBpbiBSIGJlY2F1c2UgbWFueSBwZW9wbGUgYmVsaWV2ZSB0aGV5IGFyZSBzbG93W15ub3Qtc2xvd10sIGJ1dCB0aGUgcmVhbCBkb3duc2lkZSBvZiBmb3IgbG9vcHMgaXMgdGhhdCB0aGV5J3JlIHZlcnkgZmxleGlibGU6IGEgbG9vcCBjb252ZXlzIHRoYXQgeW91J3JlIGl0ZXJhdGluZywgYnV0IG5vdCB3aGF0IHNob3VsZCBiZSBkb25lIHdpdGggdGhlIHJlc3VsdHMuIEp1c3QgYXMgaXQncyBiZXR0ZXIgdG8gdXNlIGB3aGlsZWAgdGhhbiBgcmVwZWF0YCwgYW5kIGl0J3MgYmV0dGVyIHRvIHVzZSBgZm9yYCB0aGFuIGB3aGlsZWAgKFNlY3Rpb24gNS4zLjIpLCBpdCdzIGJldHRlciB0byB1c2UgYSBmdW5jdGlvbmFsIHRoYW4gYGZvcmAuIEVhY2ggZnVuY3Rpb25hbCBpcyB0YWlsb3JlZCBmb3IgYSBzcGVjaWZpYyB0YXNrLCBzbyB3aGVuIHlvdSByZWNvZ25pc2UgdGhlIGZ1bmN0aW9uYWwgeW91IGltbWVkaWF0ZWx5IGtub3cgd2h5IGl0J3MgYmVpbmcgdXNlZC4KCltebm90LXNsb3ddOiBUeXBpY2FsbHkgaXQncyBub3QgdGhlIGZvciBsb29wIGl0c2VsZiB0aGF0J3Mgc2xvdywgYnV0IHdoYXQgeW91J3JlIGRvaW5nIGluc2lkZSBvZiBpdC4gQSBjb21tb24gY3VscHJpdCBvZiBzbG93IGxvb3BzIGlzIG1vZGlmeWluZyBhIGRhdGEgc3RydWN0dXJlLCB3aGVyZSBlYWNoIG1vZGlmaWNhdGlvbiBnZW5lcmF0ZXMgYSBjb3B5LiBTZWUgU2VjdGlvbnMgMi41LjEgYW5kIDI0LjYgZm9yIG1vcmUgZGV0YWlscy4KCklmIHlvdSdyZSBhbiBleHBlcmllbmNlZCBmb3IgbG9vcCB1c2VyLCBzd2l0Y2hpbmcgdG8gZnVuY3Rpb25hbHMgaXMgdHlwaWNhbGx5IGEgcGF0dGVybiBtYXRjaGluZyBleGVyY2lzZS4gWW91IGxvb2sgYXQgdGhlIGZvciBsb29wIGFuZCBmaW5kIGEgZnVuY3Rpb25hbCB0aGF0IG1hdGNoZXMgdGhlIGJhc2ljIGZvcm0uIElmIG9uZSBkb2Vzbid0IGV4aXN0LCBkb24ndCB0cnkgYW5kIHRvcnR1cmUgYW4gZXhpc3RpbmcgZnVuY3Rpb25hbCB0byBmaXQgdGhlIGZvcm0geW91IG5lZWQuIEluc3RlYWQsIGp1c3QgbGVhdmUgaXQgYXMgYSBmb3IgbG9vcCEgKE9yIG9uY2UgeW91J3ZlIHJlcGVhdGVkIHRoZSBzYW1lIGxvb3AgdHdvIG9yIG1vcmUgdGltZXMsIG1heWJlIHRoaW5rIGFib3V0IHdyaXRpbmcgeW91ciBvd24gZnVuY3Rpb25hbCkuCgojIyA5LjIuNiBFeGVyY2lzZXMKCjEuICBVc2UgYGFzX21hcHBlcigpYCB0byBleHBsb3JlIGhvdyBwdXJyciBnZW5lcmF0ZXMgYW5vbnltb3VzIGZ1bmN0aW9ucyBmb3IKICAgIHRoZSBpbnRlZ2VyLCBjaGFyYWN0ZXIsIGFuZCBsaXN0IGhlbHBlcnMuIFdoYXQgaGVscGVyIGFsbG93cyB5b3UgdG8gCiAgICBleHRyYWN0IGF0dHJpYnV0ZXM/IFJlYWQgdGhlIGRvY3VtZW50YXRpb24gdG8gZmluZCBvdXQuCgpgYGB7cn0KbWFwX2RibAptYXBfZGJsKG10Y2FycywgfiBsZW5ndGgodW5pcXVlKC54KSkpCmFzX21hcHBlcih+IGxlbmd0aCh1bmlxdWUoLngpKSkKZnVuY3Rpb24oLi4uLCAueCA9IC4uMSwgLnkgPSAuLjIsIC4gPSAuLjEpIGxlbmd0aCh1bmlxdWUoLngpKQphc19tYXBwZXIobWVhbikKYXNfbWFwcGVyKGZ1bmN0aW9uKHgpIG1lYW4oeCwgbmEucm0gPSBUUlVFKSkKYXNfbWFwcGVyKH4gbWVhbigueCwgbmEucm0gPSBUUlVFKSkKYGBgCgpBbnN3ZXI6IEV4cGxvcmF0aW9uIGFib3ZlLiBgYXR0cl9nZXR0ZXIoKWAgc3VwcG9ydHMgZXh0cmFjdGlvbiBvZiBhdHRyaWJ1dGVzLgoKQVIgU29sdXRpb25zOiBgbWFwKClgIG9mZmVycyBtdWx0aXBsZSB3YXlzIChmdW5jdGlvbnMsIGZvcm11bGFzLCBhbmQgZXh0cmFjdG9yIGZ1bmN0aW9ucykgdG8gc3BlY2lmeSBpdHMgZnVuY3Rpb24gYXJndW1lbnQgKGAuZmApLiBJbml0aWFsbHksIHRoZSB2YXJpb3VzIGlucHV0cyBoYXZlIHRvIGJlIHRyYW5zZm9ybWVkIGludG8gYSB2YWxpZCBmdW5jdGlvbiwgd2hpY2ggaXMgdGhlbiBhcHBsaWVkLiBUaGUgY3JlYXRpb24gb2YgdGhpcyB2YWxpZCBmdW5jdGlvbiBpcyB0aGUgam9iIG9mIGBhc19tYXBwZXIoKWAgYW5kIGl0IGlzIGNhbGxlZCBldmVyeSB0aW1lIGBtYXAoKWAgaXMgdXNlZC4KCkdpdmVuIGNoYXJhY3RlciwgbnVtZXJpYyBvciBsaXN0IGlucHV0IGBhc19tYXBwZXIoKWAgd2lsbCBjcmVhdGUgYW4gZXh0cmFjdG9yIGZ1bmN0aW9uLiBDaGFyYWN0ZXJzIHNlbGVjdCBieSBuYW1lLCB3aGlsZSBudW1lcmljIGlucHV0IHNlbGVjdHMgYnkgcG9zaXRpb25zIGFuZCBhIGxpc3QgYWxsb3dzIGEgbWl4IG9mIHRoZXNlIHR3byBhcHByb2FjaGVzLiBUaGlzIGV4dHJhY3RvciBpbnRlcmZhY2UgY2FuIGJlIHZlcnkgdXNlZnVsLCB3aGVuIHdvcmtpbmcgd2l0aCBuZXN0ZWQgZGF0YS4KClRoZSBleHRyYWN0b3IgZnVuY3Rpb24gaXMgaW1wbGVtZW50ZWQgYXMgYSBjYWxsIHRvIGBwdXJycjo6cGx1Y2soKWAsIHdoaWNoIGFjY2VwdHMgYSBsaXN0IG9mIGFjY2Vzc29ycyAoYWNjZXNzb3JzICJhY2Nlc3MiIHNvbWUgcGFydCBvZiB5b3VyIGRhdGEgb2JqZWN0KS4KCmBgYHtyfQphc19tYXBwZXIoYygxLCAyKSkgIyBlcXVpdmFsZW50IHRvIGZ1bmN0aW9uKHgpIHhbWzFdXVtbMl1dCmFzX21hcHBlcihjKCJhIiwgImIiKSkgIyBlcXVpdmFsZW50IHRvIGZ1bmN0aW9uKHgpIHhbWyJhIl1dW1siYl1dCmFzX21hcHBlcihsaXN0KDEsICJiIikpICMgZXF1aXZhbGVudCB0byBmdW5jdGlvbih4KSB4W1sxXV1bWyJiXV0KYGBgCgpCZXNpZGVzIG1peGluZyBwb3NpdGlvbnMgYW5kIG5hbWVzLCBpdCBpcyBhbHNvIHBvc3NpYmxlIHRvIHBhc3MgYWxvbmcgYW4gYWNjZXNzb3IgZnVuY3Rpb24uIFRoaXMgaXMgYmFzaWNhbGx5IGFuIGFub255bW91cyBmdW5jdGlvbiB0aGF0IGdldHMgaW5mb3JtYXRpb24gYWJvdXQgc29tZSBhc3BlY3Qgb2YgdGhlIGlucHV0IGRhdGEuIFlvdSBhcmUgZnJlZSB0byBkZWZpbmUgeW91ciBvd24gYWNjZXNzb3IgZnVuY3Rpb25zLiAKCklmIHlvdSBuZWVkIHRvIGFjY2VzcyBjZXJ0YWluIGF0dHJpYnV0ZXMsIHRoZSBoZWxwZXIgYGF0dHJfZ2V0dGVyKHkpYCBpcyBhbHJlYWR5IHByZWRlZmluZWQgYW5kIHdpbGwgY3JlYXRlIHRoZSBhcHByb3ByaWF0ZSBhY2Nlc3NvciBmdW5jdGlvbiBmb3IgeW91LgoKYGBge3J9CiMgRGVmaW5lIGN1c3RvbSBhY2Nlc3NvciBmdW5jdGlvbgpnZXRfY2xhc3MgPC0gZnVuY3Rpb24oeCkgYXR0cih4LCAiY2xhc3MiKQpwbHVjayhtdGNhcnMsIGdldF9jbGFzcykKCiMgVXNlIGF0dHJfZ2V0dGVyKCkgYXMgYSBoZWxwZXIKcGx1Y2sobXRjYXJzLCBhdHRyX2dldHRlcigiY2xhc3MiKSkKYGBgCgpOb3RlOiBBUiBTb2x1dGlvbnMgcHJvdmlkZXMgZ29vZCBhZGRpdGlvbmFsIGluc2lnaHQgaW50byBgYXNfbWFwcGVyKClgLgoKLS0tCgoyLiAgYG1hcCgxOjMsIH4gcnVuaWYoMikpYCBpcyBhIHVzZWZ1bCBwYXR0ZXJuIGZvciBnZW5lcmF0aW5nIHJhbmRvbQogICAgbnVtYmVycywgYnV0IGBtYXAoMTozLCBydW5pZigyKSlgIGlzIG5vdC4gV2h5IG5vdD8gQ2FuIHlvdSBleHBsYWluIHdoeSAKICAgIGl0IHJldHVybnMgdGhlIHJlc3VsdCB0aGF0IGl0IGRvZXM/CgpgYGB7cn0KbWFwKDE6MywgfiBydW5pZigyKSkKbWFwKDE6MywgcnVuaWYoMikpCmBgYAoKQW5zd2VyOiBgfiBydW5pZigyKWAgZ2VuZXJhdGVzIGEgbWFwcGVyIHRoYXQgcmV0dXJucyAyIHJhbmRvbSB2YWx1ZXMgZnJvbSB0aGUgdW5pZm9ybSBkaXN0cmlidXRpb24sIHdoZXJlIGBydW5pZigyKWAgY3JlYXRlcyBhIGBwbHVjaygpYCBtYXBwZXIgd2l0aCAyIHJhbmRvbSB2YWx1ZXMsIHdoaWNoIHdpbGwgKG5lYXJseSkgYWx3YXlzIHJldHVybiBgTlVMTGAsIGFzIGRlbW9uc3RyYXRlZCBieSB0aGUgY29kZSBiZWxvdzogCgpgYGB7cn0KYXNfbWFwcGVyKH4gcnVuaWYoMikpCmFzX21hcHBlcihydW5pZigyKSkKYGBgCgpBIG1vcmUgcmVhc29uYWJsZSB1c2Ugb2YgYSBwbHVjayBtYXBwZXIgZm9yIGAxOjNgIGlzIGAxYDoKCmBgYHtyfQptYXAoMTozLCAxKQpgYGAKCkFSIFNvbHV0aW9uczogVGhlIGZpcnN0IHBhdHRlcm4gY3JlYXRlcyBtdWx0aXBsZSByYW5kb20gbnVtYmVycywgYmVjYXVzZSBgfiBydW5pZigyKWAgc3VjY2Vzc2Z1bGx5IHVzZXMgdGhlIGZvcm11bGEgaW50ZXJmYWNlLiBJbnRlcm5hbGx5IGBtYXAoKWAgYXBwbGllcyBgYXNfbWFwcGVyKClgIHRvIHRoaXMgZm9ybXVsYSwgd2hpY2ggY29udmVydHMgYH4gcnVuaWYoMilgIGludG8gYW4gYW5vbnltb3VzIGZ1bmN0aW9uLiBBZnRlcndhcmRzIGBydW5pZigyKWAgaXMgYXBwbGllZCB0aHJlZSB0aW1lcyAob25lIHRpbWUgZHVyaW5nIGVhY2ggaXRlcmF0aW9uKSwgbGVhZGluZyB0byB0aHJlZSBkaWZmZXJlbnQgcGFpcnMgb2YgcmFuZG9tIG51bWJlcnMuCgpJbiB0aGUgc2Vjb25kIHBhdHRlcm4gYHJ1bmlmKDIpYCBpcyBldmFsdWF0ZWQgb25jZSwgdGhlbiB0aGUgcmVzdWx0cyBhcmUgcGFzc2VkIHRvIGBtYXAoKWAuIENvbnNlcXVlbnRseSBgYXNfbWFwcGVyKClgIGNyZWF0ZXMgYW4gZXh0cmFjdG9yIGZ1bmN0aW9uIGJhc2VkIG9uIHRoZSByZXR1cm4gdmFsdWVzIGZyb20gYHJ1bmlmKDIpYCAodmlhIGBwbHVjaygpYCkuIFRoaXMgbGVhZHMgdG8gdGhyZWUgYE5VTExgcyAoYHBsdWNrKClgJ3MgYC5kZWZhdWx0YCByZXR1cm4pLCBiZWNhdXNlIG5vIHZhbHVlcyBjb3JyZXNwb25kaW5nIHRvIHRoZSBpbmRleCBjYW4gYmUgZm91bmQuCgpOb3RlOiBBUiBTb2x1dGlvbnMgcHJvdmlkZXMgYWRkaXRpb25hbCBkZXRhaWwsIGJ1dCBpcyBvdGhlcndpc2UgdGhlIHNhbWUuCgotLS0KCjMuICBVc2UgdGhlIGFwcHJvcHJpYXRlIGBtYXAoKWAgZnVuY3Rpb24gdG86CiAgICAKICAgIGEpIENvbXB1dGUgdGhlIHN0YW5kYXJkIGRldmlhdGlvbiBvZiBldmVyeSBjb2x1bW4gaW4gYSBudW1lcmljIGRhdGEgZnJhbWUuCiAgICAKICAgIGEpIENvbXB1dGUgdGhlIHN0YW5kYXJkIGRldmlhdGlvbiBvZiBldmVyeSBudW1lcmljIGNvbHVtbiBpbiBhIG1peGVkIGRhdGEKICAgICAgIGZyYW1lLiAoSGludDogeW91J2xsIG5lZWQgdG8gZG8gaXQgaW4gdHdvIHN0ZXBzLikKICAgICAgIAogICAgYSkgQ29tcHV0ZSB0aGUgbnVtYmVyIG9mIGxldmVscyBmb3IgZXZlcnkgZmFjdG9yIGluIGEgZGF0YSBmcmFtZS4KCmBgYHtyfQojIGEKbWFwX2RibChtdGNhcnMsIHNkKQojIGIKbWFwX2RibChpcmlzW21hcF9sZ2woaXJpcywgaXMubnVtZXJpYyldLCBzZCkKIyBjCm1hcF9pbnQod2FycGJyZWFrcywgbmxldmVscykKIyBjLCBleGNsdWRpbmcgbm9uLWZhY3RvciBjb2x1bW5zCm1hcF9pbnQod2FycGJyZWFrc1ttYXBfbGdsKHdhcnBicmVha3MsIGlzLmZhY3RvcildLCBubGV2ZWxzKQpgYGAKCkFuc3dlcjogY29kZSBhYm92ZS4KCkFSIFNvbHV0aW9uczogVG8gc29sdmUgdGhpcyBleGVyY2lzZSB3ZSB0YWtlIGFkdmFudGFnZSBvZiBjYWxsaW5nIHRoZSB0eXBlIHN0YWJsZSB2YXJpYW50cyBvZiBgbWFwKClgLCB3aGljaCBnaXZlIHVzIG1vcmUgY29uY2lzZSBvdXRwdXQsIGFuZCB1c2UgYG1hcF9sZ2woKWAgdG8gc2VsZWN0IHRoZSBjb2x1bW5zIG9mIHRoZSBkYXRhIGZyYW1lIChsYXRlciB5b3UnbGwgbGVhcm4gYWJvdXQgYGtlZXAoKWAsIHdoaWNoIHNpbXBsaWZpZXMgdGhpcyBwYXR0ZXJuIGEgbGl0dGxlKS4KCmBgYHtyfQptYXBfZGJsKG10Y2Fycywgc2QpCnBlbmd1aW5zX251bWVyaWMgPC0gbWFwX2xnbChwZW5ndWlucywgaXMubnVtZXJpYykKbWFwX2RibChwZW5ndWluc1twZW5ndWluc19udW1lcmljXSwgc2QsIG5hLnJtID0gVFJVRSkKcGVuZ3VpbnNfZmFjdG9yIDwtIG1hcF9sZ2wocGVuZ3VpbnMsIGlzLmZhY3RvcikKbWFwX2ludChwZW5ndWluc1twZW5ndWluc19mYWN0b3JdLCB+IGxlbmd0aChsZXZlbHMoLngpKSkKYGBgCgpOb3RlOiBteSBjb2RlIGlzIG1vcmUgY29uY2lzZSwgYm90aCB3aXRoIHNlbGVjdGlvbnMgYW5kIHVzZSBvZiBgbmxldmVscygpYCwgYWx0aG91Z2ggdXNpbmcgYGtlZXAoKWAgaXMgcHJlZmVyYWJsZS4KCmBgYHtyfQptYXBfaW50KGtlZXAod2FycGJyZWFrcywgaXMuZmFjdG9yKSwgbmxldmVscykKYGBgCgotLS0KCjQuICBUaGUgZm9sbG93aW5nIGNvZGUgc2ltdWxhdGVzIHRoZSBwZXJmb3JtYW5jZSBvZiBhIHQtdGVzdCBmb3Igbm9uLW5vcm1hbCAKICAgIGRhdGEuIEV4dHJhY3QgdGhlIHAtdmFsdWUgZnJvbSBlYWNoIHRlc3QsIHRoZW4gdmlzdWFsaXNlLgoKYGBge3J9CnRyaWFscyA8LSBtYXAoMToxMDAsIH4gdC50ZXN0KHJwb2lzKDEwLCAxMCksIHJwb2lzKDcsIDEwKSkpCmhpc3QobWFwX2RibCh0cmlhbHMsICJwLnZhbHVlIiksIGJyZWFrcyA9IDEwKQpgYGAKCkFuc3dlcjogY29kZSBhYm92ZS4KCkFSIFNvbHV0aW9uczogVGhlcmUgYXJlIG1hbnkgd2F5cyB0byB2aXN1YWxpc2UgdGhpcyBkYXRhLiBIb3dldmVyLCBzaW5jZSB0aGVyZSBhcmUgb25seSAxMDAgZGF0YSBwb2ludHMsIHdlIGNob29zZSBhIGRvdCBwbG90IHRvIHZpc3VhbGlzZSB0aGUgZGlzdHJpYnV0aW9uLiAoVW5mb3J0dW5hdGVseSwgYHtnZ3Bsb3QyfWBzIGBnZW9tX2RvdHBsb3QoKWAgZG9lc24ndCBjb21wdXRlIHByb3BlciBjb3VudHMgYXMgaXQgd2FzIGNyZWF0ZWQgdG8gdmlzdWFsaXNlIGRpc3RyaWJ1dGlvbiBkZW5zaXRpZXMgaW5zdGVhZCBvZiBmcmVxdWVuY2llcywgc28gYSBoaXN0b2dyYW0gd291bGQgYmUgYSBzdWl0YWJsZSBhbHRlcm5hdGl2ZSkuCgpgYGB7cn0KIyBBZHZhbmNlZCBSIFNvbHV0aW9ucyB1c2VzIGRpZmZlcmVudCBjb2RlIGZvciB0cmlhbHMKdHJpYWxzIDwtIG1hcCgxOjEwMCwgfiB0LnRlc3QocnBvaXMoMTAsIDEwKSwgcnBvaXMoMTAsIDcpKSkKCmxpYnJhcnkoZ2dwbG90MikKCmRmX3RyaWFscyA8LSB0aWJibGU6OnRpYmJsZShwX3ZhbHVlID0gbWFwX2RibCh0cmlhbHMsICJwLnZhbHVlIikpCgpkZl90cmlhbHMgJT4lCiAgZ2dwbG90KGFlcyh4ID0gcF92YWx1ZSwgZmlsbCA9IHBfdmFsdWUgPCAwLjA1KSkgKwogIGdlb21fZG90cGxvdChiaW53aWR0aCA9IDAuMDEpICsgIyBnZW9tX2hpc3RvZ3JhbSgpIGFzIGFsdGVybmF0aXZlCiAgdGhlbWUoCiAgICBheGlzLnRleHQueSA9IGVsZW1lbnRfYmxhbmsoKSwKICAgIGF4aXMudGlja3MueSA9IGVsZW1lbnRfYmxhbmsoKSwKICAgIGxlZ2VuZC5wb3NpdGlvbiA9ICJ0b3AiCiAgKQpgYGAKCk5vdGVzOiB0aGUgY29kZSBBUiBTb2x1dGlvbnMgdXNlcyBmb3IgdHJpYWxzLCBgdHJpYWxzIDwtIG1hcCgxOjEwMCwgfiB0LnRlc3QocnBvaXMoMTAsIDEwKSwgcnBvaXMoMTAsIDcpKSlgLCBhcHBlYXJzIHRvIGJlIGNvcnJlY3QgY29tcGFyZWQgdG8gQWR2YW5jZWQgUi4KCi0tLQoKNS4gIFRoZSBmb2xsb3dpbmcgY29kZSB1c2VzIGEgbWFwIG5lc3RlZCBpbnNpZGUgYW5vdGhlciBtYXAgdG8gYXBwbHkgYQogICAgZnVuY3Rpb24gdG8gZXZlcnkgZWxlbWVudCBvZiBhIG5lc3RlZCBsaXN0LiBXaHkgZG9lcyBpdCBmYWlsLCBhbmQgCiAgICB3aGF0IGRvIHlvdSBuZWVkIHRvIGRvIHRvIG1ha2UgaXQgd29yaz8KCmBgYHtyLCBlcnJvciA9IFRSVUV9CnggPC0gbGlzdCgKICBsaXN0KDEsIGMoMywgOSkpLAogIGxpc3QoYygzLCA2KSwgNywgYyg0LCA3LCA2KSkKKQoKdHJpcGxlIDwtIGZ1bmN0aW9uKHgpIHggKiAzCnRyeShtYXAoeCwgbWFwLCAuZiA9IHRyaXBsZSkpCmBgYAoKQW5zd2VyOiB0aGUgY2FsbCBmYWlscyBzaW5jZSB0aGUgYC5mID0gdHJpcGxlYCBzcGVjaWZpZXMgdGhlIGZ1bmN0aW9uIGZvciB0aGUgb3V0ZXIgYG1hcCgpYCwgYW5kIHRoZSBgbWFwYCBpcyBwYXNzZWQgYXMgYW4gYWRkaXRpb25hbCBhcmd1bWVudCB0byBgdHJpcGxlKClgLCB3aGljaCBnZW5lcmF0ZXMgdGhlIGVycm9yIHNpbmNlIGB0cmlwbGUoKWAgb25seSB0YWtlcyBhIHNpbmdsZSBhcmd1bWVudC4gVGhlIHNvbHV0aW9uIGlzIHRvIHBhc3MgdHJpcGxlIGFzIGFuIGFkZGl0aW9uYWwgYXJndW1lbnQgdG8gdGhlIG91dGVyIGBtYXAoKWA6IAoKYGBge3J9Cm1hcCh4LCBtYXAsIHRyaXBsZSkKYGBgCgpBUiBTb2x1dGlvbnM6IFRoaXMgZnVuY3Rpb24gY2FsbCBmYWlscywgYmVjYXVzZSBgdHJpcGxlKClgIGlzIHNwZWNpZmllZCBhcyB0aGUgYC5mYCBhcmd1bWVudCBhbmQgY29uc2VxdWVudGx5IGJlbG9uZ3MgdG8gdGhlIG91dGVyIGBtYXAoKWAuIFRoZSB1bm5hbWVkIGFyZ3VtZW50IGBtYXBgIGlzIHRyZWF0ZWQgYXMgYW4gYXJndW1lbnQgb2YgYHRyaXBsZSgpYCwgd2hpY2ggY2F1c2VzIHRoZSBlcnJvci4KClRoZXJlIGFyZSBhIG51bWJlciBvZiB3YXlzIHdlIGNvdWxkIHJlc29sdmUgdGhlIHByb2JsZW0uIEhvd2V2ZXIsIHRoZXJlIGlzIG5vdCBtdWNoIHRvIGNob29zZSBiZXR3ZWVuIHRoZW0gZm9yIHRoaXMgc2ltcGxlIGV4YW1wbGUsIGFsdGhvdWdoIGl0IGlzIGdvb2QgdG8ga25vdyB5b3VyIG9wdGlvbnMgZm9yIG1vcmUgY29tcGxpY2F0ZWQgY2FzZXMuCgpgYGB7ciwgZXZhbCA9IEZBTFNFfQojIERvbid0IG5hbWUgdGhlIGFyZ3VtZW50Cm1hcCh4LCBtYXAsIHRyaXBsZSkKCiMgVXNlIG1hZ3JpdHRyLXN0eWxlIGFub255bW91cyBmdW5jdGlvbgptYXAoeCwgLiAlPiUgbWFwKHRyaXBsZSkpCgojIFVzZSBwdXJyci1zdHlsZSBhbm9ueW1vdXMgZnVuY3Rpb24KbWFwKHgsIH4gbWFwKC54LCB0cmlwbGUpKQpgYGAKCk5vdGU6IEkgZG9uJ3QgbGlrZSB0aGUgbWFncml0dHItc3R5bGUgYW5vbnltb3VzIGZ1bmN0aW9uIG9wdGlvbi4gVGhlIG90aGVycyBhcmUgZ29vZC4KCi0tLQoKNi4gIFVzZSBgbWFwKClgIHRvIGZpdCBsaW5lYXIgbW9kZWxzIHRvIHRoZSBgbXRjYXJzYCBkYXRhc2V0IHVzaW5nIHRoZSBmb3JtdWxhcwogICAgc3RvcmVkIGluIHRoaXMgbGlzdDoKCmBgYHtyfQpmb3JtdWxhcyA8LSBsaXN0KAogIG1wZyB+IGRpc3AsCiAgbXBnIH4gSSgxIC8gZGlzcCksCiAgbXBnIH4gZGlzcCArIHd0LAogIG1wZyB+IEkoMSAvIGRpc3ApICsgd3QKKQpgYGAKCkFuc3dlcjogdGhlIGZvbGxvd2luZyBjb2RlIHdvcmtzLCBidXQgZG9lc24ndCBkaXNwbGF5IHRoZSB0ZXh0IG9mIHRoZSBmb3JtdWxhIGluIHRoZSBgQ2FsbDpgCgpgYGB7cn0KbWFwKGZvcm11bGFzLCBsbSwgbXRjYXJzKQpgYGAKCkFSIFNvbHV0aW9uczogVGhlIGRhdGEgKGBtdGNhcnNgKSBpcyBjb25zdGFudCBmb3IgYWxsIHRoZXNlIG1vZGVscyBhbmQgc28gd2UgaXRlcmF0ZSBvdmVyIHRoZSBgZm9ybXVsYXNgIHByb3ZpZGVkLiBBcyB0aGUgZm9ybXVsYSBpcyB0aGUgZmlyc3QgYXJndW1lbnQgb2YgYGxtKClgLCB3ZSBkb24ndCBuZWVkIHRvIHNwZWNpZnkgaXQgZXhwbGljaXRseS4KCmBgYHtyfQptb2RlbHMgPC0gbWFwKGZvcm11bGFzLCBsbSwgZGF0YSA9IG10Y2FycykKYGBgCgpOb3RlOiBBUiBTb2x1dGlvbnMgc3BlY2lmaWVzIGBkYXRhID0gbXRjYXJzYCBidXQgaXMgb3RoZXJ3aXNlIHRoZSBzYW1lLgoKLS0tCgo3LiAgRml0IHRoZSBtb2RlbCBgbXBnIH4gZGlzcGAgdG8gZWFjaCBvZiB0aGUgYm9vdHN0cmFwIHJlcGxpY2F0ZXMgb2YgYG10Y2Fyc2AgCiAgICBpbiB0aGUgbGlzdCBiZWxvdywgdGhlbiBleHRyYWN0IHRoZSAkUl4yJCBvZiB0aGUgbW9kZWwgZml0IChIaW50OiB5b3UgY2FuCiAgICBjb21wdXRlIHRoZSAkUl4yJCB3aXRoIGBzdW1tYXJ5KClgLikKCmBgYHtyfQpib290c3RyYXAgPC0gZnVuY3Rpb24oZGYpIHsKICBkZltzYW1wbGUobnJvdyhkZiksIHJlcGxhY2UgPSBUUlVFKSwgLCBkcm9wID0gRkFMU0VdCn0KCmJvb3RzdHJhcHMgPC0gbWFwKDE6MTAsIH4gYm9vdHN0cmFwKG10Y2FycykpCgptYXBfZGJsKGJvb3RzdHJhcHMsIH4gc3VtbWFyeShsbShtcGcgfiBkaXNwLCAueCkpJHIuc3F1YXJlZCkKYGBgCgpBbnN3ZXI6IGNvZGUgYWJvdmUuCgpBUiBTb2x1dGlvbnM6IFRvIGFjY29tcGxpc2ggdGhpcyB0YXNrLCB3ZSB0YWtlIGFkdmFudGFnZSBvZiB0aGUgImxpc3QgaW4sIGxpc3Qgb3V0Ii1mdW5jdGlvbmFsaXR5IG9mIGBtYXAoKWAuIFRoaXMgYWxsb3dzIHVzIHRvIGNoYWluIG11bHRpcGxlIHRyYW5zZm9ybWF0aW9ucyB0b2dldGhlci4gV2Ugc3RhcnQgYnkgZml0dGluZyB0aGUgbW9kZWxzLiBXZSB0aGVuIGNhbGN1bGF0ZSB0aGUgc3VtbWFyaWVzIGFuZCBleHRyYWN0IHRoZSAkUl4yJCB2YWx1ZXMuIEZvciB0aGUgbGFzdCBjYWxsIHdlIHVzZSBgbWFwX2RibCgpYCwgd2hpY2ggcHJvdmlkZXMgY29udmVuaWVudCBvdXRwdXQuCgpgYGB7cn0KYm9vdHN0cmFwcyAlPiUKICBtYXAofiBsbShtcGcgfiBkaXNwLCBkYXRhID0gLngpKSAlPiUKICBtYXAoc3VtbWFyeSkgJT4lCiAgbWFwX2RibCgici5zcXVhcmVkIikKYGBgCgpOb3RlOiB3aGlsZSBBUiBTb2x1dGlvbnMgaXMgYXJndWFibHkgKnNsaWdodGx5KiBtb3JlIHJlYWRhYmxlLCBteSBjb2RlIHNob3VsZCBiZSBmYXN0ZXI6CgpgYGB7cn0KYmVuY2g6Om1hcmsoewogIG1hcF9kYmwoYm9vdHN0cmFwcywgfiBzdW1tYXJ5KGxtKG1wZyB+IGRpc3AsIC54KSkkci5zcXVhcmVkKQp9KQoKYmVuY2g6Om1hcmsoewogIGJvb3RzdHJhcHMgJT4lCiAgICBtYXAofiBsbShtcGcgfiBkaXNwLCBkYXRhID0gLngpKSAlPiUKICAgIG1hcChzdW1tYXJ5KSAlPiUKICAgIG1hcF9kYmwoInIuc3F1YXJlZCIpCn0pCmBgYAoKSXQgaXMgYWN0dWFsbHkgc2xpZ2h0bHkgc2xvd2VyISBBUiBTb2x1dGlvbnMgd2lucyEKCi0tLQoKIyMgOS40LjYgRXhlcmNpc2VzCgoxLiAgRXhwbGFpbiB0aGUgcmVzdWx0cyBvZiBgbW9kaWZ5KG10Y2FycywgMSlgLgoKYGBge3J9Cm1vZGlmeShtdGNhcnMsIDEpCmFzX21hcHBlcigxKQpoZWFkKG10Y2FycywgMSkKYGBgCgpBbnN3ZXI6IGBtb2RpZnkobXRjYXJzLCAxKWAgY3JlYXRlcyBhIG1hcHBlciB0aGF0IHBsdWNrcyB0aGUgZmlyc3QgZWxlbWVudCBvZiBlYWNoIGNvbHVtbiBvZiBgbXRjYXJzYCBhbmQgd3JpdGVzIHRoYXQgdmFsdWUgdG8gZXZlcnkgcm93LgoKQVIgU29sdXRpb25zOiBgbW9kaWZ5KClgIGlzIGJhc2VkIG9uIGBtYXAoKWAsIGFuZCBpbiB0aGlzIGNhc2UsIHRoZSBleHRyYWN0b3IgaW50ZXJmYWNlIHdpbGwgYmUgdXNlZC4gSXQgZXh0cmFjdHMgdGhlIGZpcnN0IGVsZW1lbnQgb2YgZWFjaCBjb2x1bW4gaW4gYG10Y2Fyc2AuIGBtb2RpZnkoKWAgYWx3YXlzIHJldHVybnMgdGhlIHNhbWUgc3RydWN0dXJlIGFzIGl0cyBpbnB1dDogaW4gdGhpcyBjYXNlIGl0IGZvcmNlcyB0aGUgZmlyc3Qgcm93IHRvIGJlIHJlY3ljbGVkIDMyIHRpbWVzLiAoSW50ZXJuYWxseSBgbW9kaWZ5KClgIHVzZXMgYC54W10gPC0gbWFwKC54LCAuZiwgLi4uKWAgZm9yIGFzc2lnbm1lbnQuKQoKTm90ZXM6IHRoaXMgY29kZSBtYWtlcyB0aGUgcmVjeWNsaW5nIGNsZWFyOgoKYGBge3J9CnVubGlzdChtYXAobXRjYXJzLCAxKSkKYGBgCgotLS0KCjIuICBSZXdyaXRlIHRoZSBmb2xsb3dpbmcgY29kZSB0byB1c2UgYGl3YWxrKClgIGluc3RlYWQgb2YgYHdhbGsyKClgLiBXaGF0CiAgICBhcmUgdGhlIGFkdmFudGFnZXMgYW5kIGRpc2FkdmFudGFnZXM/CgpgYGB7ciwgZXZhbCA9IEZBTFNFfQpjeWxzIDwtIHNwbGl0KG10Y2FycywgbXRjYXJzJGN5bCkKcGF0aHMgPC0gZmlsZS5wYXRoKHRlbXAsIHBhc3RlMCgiY3lsLSIsIG5hbWVzKGN5bHMpLCAiLmNzdiIpKQp3YWxrMihjeWxzLCBwYXRocywgd3JpdGUuY3N2KQpgYGAKCkFuc3dlcjogY29kZSBiZWxvdy4KCmBgYHtyfQp0ZW1wIDwtIHRlbXBmaWxlKCkKZGlyLmNyZWF0ZSh0ZW1wKQoKY3lscyA8LSBzcGxpdChtdGNhcnMsIG10Y2FycyRjeWwpCml3YWxrKGN5bHMsIH4gd3JpdGUuY3N2KC54LCBmaWxlLnBhdGgodGVtcCwgcGFzdGUwKCJjeWwtIiwgLnksICIuY3N2IikpKSkKZGlyKHRlbXApCmBgYAoKVGhlIG1haW4gYWR2YW50YWdlIG9mIHVzaW5nIGBpd2FsaygpYCBpcyB0aGF0IGl0IHdpbGwgdXNlIGBzZXFfYWxvbmcoKWAgaWYgYHhgIGRvZXMgbm90IGhhdmUgbmFtZXMuIEluIHRoaXMgY2FzZSwgeCBoYXMgbmFtZXMsIGFuZCB0aGUgcmVzdWx0aW5nIGNvZGUgaXMgYSBiaXQgaGFyZGVyIHRvIHVuZGVyc3RhbmQsIGFuZCByZXF1aXJlcyBhIGZvcm11bGEgKG9yIGZ1bmN0aW9uKS4KCkFSIFNvbHV0aW9uczogYGl3YWxrKClgIGFsbG93cyB1cyB0byB1c2UgYSBzaW5nbGUgdmFyaWFibGUsIHN0b3JpbmcgdGhlIG91dHB1dCBwYXRoIGluIHRoZSBuYW1lcy4KCmBgYHtyLCBldmFsID0gRkFMU0V9CnRlbXAgPC0gdGVtcGZpbGUoKQpkaXIuY3JlYXRlKHRlbXApCmN5bHMgPC0gc3BsaXQobXRjYXJzLCBtdGNhcnMkY3lsKQpuYW1lcyhjeWxzKSA8LSBmaWxlLnBhdGgodGVtcCwgcGFzdGUwKCJjeWwtIiwgbmFtZXMoY3lscyksICIuY3N2IikpCml3YWxrKGN5bHMsIH4gd3JpdGUuY3N2KC54LCAueSkpCmBgYAoKV2UgY291bGQgZG8gdGhpcyBpbiBhIHNpbmdsZSBwaXBlIGJ5IHRha2luZyBhZHZhbnRhZ2Ugb2YgYHNldF9uYW1lcygpYDoKCmBgYHtyLCBldmFsID0gRkFMU0V9Cm10Y2FycyAlPiUKICBzcGxpdChtdGNhcnMkY3lsKSAlPiUKICBzZXRfbmFtZXMofiBmaWxlLnBhdGgodGVtcCwgcGFzdGUwKCJjeWwtIiwgLngsICIuY3N2IikpKSAlPiUKICBpd2Fsayh+IHdyaXRlLmNzdigueCwgLnkpKQpgYGAKCk5vdGVzOiB0aGUgQVIgU29sdXRpb25zIHVzZSBvZiBuYW1lcyBhbmQgdGhlIHBpcGUgaXMgY2xldmVyLgoKLS0tCgozLiAgRXhwbGFpbiBob3cgdGhlIGZvbGxvd2luZyBjb2RlIHRyYW5zZm9ybXMgYSBkYXRhIGZyYW1lIHVzaW5nIGZ1bmN0aW9ucwogICAgc3RvcmVkIGluIGEgbGlzdC4KCmBgYHtyfQppZiAoZXhpc3RzKCJtdGNhcnMiKSkgcm0obXRjYXJzKQptdGNhcnMKCnRyYW5zIDwtIGxpc3QoCiAgZGlzcCA9IGZ1bmN0aW9uKHgpIHggKiAwLjAxNjM4NzEsCiAgYW0gPSBmdW5jdGlvbih4KSBmYWN0b3IoeCwgbGFiZWxzID0gYygiYXV0byIsICJtYW51YWwiKSkKKQoKbm0gPC0gbmFtZXModHJhbnMpCm10Y2Fyc1tubV0gPC0gbWFwMih0cmFucywgbXRjYXJzW25tXSwgZnVuY3Rpb24oZiwgdmFyKSBmKHZhcikpCgptdGNhcnMKcm0obXRjYXJzKQpgYGAKCkNvbXBhcmUgYW5kIGNvbnRyYXN0IHRoZSBgbWFwMigpYCBhcHByb2FjaCB0byB0aGlzIGBtYXAoKWAgYXBwcm9hY2g6CgpgYGB7ciwgZXZhbCA9IEZBTFNFfQptdGNhcnNbbm1dIDwtIG1hcChubSwgfiB0cmFuc1tbLnhdXShtdGNhcnNbWy54XV0pKQpgYGAKCkFuc3dlcjogdGhlIGBtYXAyKClgIGNvZGUgYXBwbGllcyB0aGUgYW5vbnltb3VzIGZ1bmN0aW9ucyB0byB0aGUgY29ycmVzcG9uZGluZyBjb2x1bW4gaW4gYG10Y2Fyc2AgYmFzZWQgb24gdGhlaXIgbmFtZSBpbiB0aGUgbGlzdDoKCi0gYG10Y2Fyc1tubV1gIGlzIGVxdWl2YWxlbnQgdG8gYG10Y2Fyc1tjKCJkaXNwIiwgImFtIildYCwgc28gdGhlIGNvZGUgaXMgbW9kaWZ5aW5nIHRob3NlIHR3bwogIGNvbHVtbnMKLSB0aGUgbWFwcGluZyBmdW5jdGlvbiwgYGZ1bmN0aW9uKGYsIHZhcikgZih2YXIpYCBpcyBydW4gYXMgYGYobXRjYXJzW1siZGlzcCJdXSlgIGFuZAogIGBmKG10Y2Fyc1tbImFtIl1dKWAsIHdpdGggdGhlIGNvcnJlc3BvbmRpbmcgZnVuY3Rpb24gaW4gYHRyYW5zYCBhcyBgZmAsIHNpbmNlIGB0cmFuc2AgYW5kCiAgYG10Y2Fyc1tubV1gIGFyZSBwYXNzZWQgYXMgcGFyYW1ldGVycyB0byB0aGUgZnVuY3Rpb24KClRoZSBlcXVpdmFsZW50IGBtYXAoKWAgYXBwcm9hY2ggaXNuJ3QgYXMgY2xlYW46IGl0J3MgaGFyZGVyIHRvIHVuZGVyc3RhbmQgd2hhdCBgbWFwKClgIGlzIGRvaW5nLgoKQVIgU29sdXRpb25zOiBJbiB0aGUgZmlyc3QgYXBwcm9hY2gKCmBgYHtyLCBldmFsID0gRkFMU0V9Cm10Y2Fyc1tubV0gPC0gbWFwMih0cmFucywgbXRjYXJzW25tXSwgZnVuY3Rpb24oZiwgdmFyKSBmKHZhcikpCmBgYAoKdGhlIGxpc3Qgb2YgdGhlIDIgZnVuY3Rpb25zIChgdHJhbnNgKSBhbmQgdGhlIDIgYXBwcm9wcmlhdGVseSBzZWxlY3RlZCBkYXRhIGZyYW1lIGNvbHVtbnMgKGBtdGNhcnNbbm1dYCkgYXJlIHN1cHBsaWVkIHRvIGBtYXAyKClgLiBgbWFwMigpYCBjcmVhdGVzIGFuIGFub255bW91cyBmdW5jdGlvbiAoYGYodmFyKWApIHdoaWNoIGFwcGxpZXMgdGhlIGZ1bmN0aW9ucyB0byB0aGUgdmFyaWFibGVzIHdoZW4gYG1hcDIoKWAgaXRlcmF0ZXMgb3ZlciB0aGVpciAoc2ltaWxhcikgaW5kaWNlcy4gT24gdGhlIGxlZnQtaGFuZCBzaWRlLCB0aGUgcmVzcGVjdGl2ZSAyIGVsZW1lbnRzIG9mIGBtdGNhcnNgIGFyZSBiZWluZyByZXBsYWNlZCBieSB0aGVpciBuZXcgdHJhbnNmb3JtYXRpb25zLgoKVGhlIGBtYXAoKWAgdmFyaWFudAoKYGBge3IsIGV2YWwgPSBGQUxTRX0KbXRjYXJzW25tXSA8LSBtYXAobm0sIH4gdHJhbnNbWy54XV0obXRjYXJzW1sueF1dKSkKYGBgCgpkb2VzIGJhc2ljYWxseSB0aGUgc2FtZS4gSG93ZXZlciwgaXQgZGlyZWN0bHkgaXRlcmF0ZXMgb3ZlciB0aGUgbmFtZXMgKGBubWApIG9mIHRoZSB0cmFuc2Zvcm1hdGlvbnMuIFRoZXJlZm9yZSwgdGhlIGRhdGEgZnJhbWUgY29sdW1ucyBhcmUgc2VsZWN0ZWQgZHVyaW5nIHRoZSBpdGVyYXRpb24uCgpCZXNpZGVzIHRoZSBpdGVyYXRpb24gcGF0dGVybiwgdGhlIGFwcHJvYWNoZXMgZGlmZmVyIGluIHRoZSBwb3NzaWJpbGl0aWVzIGZvciBhcHByb3ByaWF0ZSBhcmd1bWVudCBuYW1pbmcgaW4gdGhlIGAuZmAgYXJndW1lbnQuIEluIHRoZSBgbWFwMigpYCBhcHByb2FjaCB3ZSBpdGVyYXRlIG92ZXIgdGhlIGVsZW1lbnRzIG9mIGB4YCBhbmQgYHlgLiBUaGVyZWZvcmUsIGl0IGlzIHBvc3NpYmxlIHRvIGNob29zZSBhcHByb3ByaWF0ZSBwbGFjZWhvbGRlcnMgbGlrZSBgZmAgYW5kIGB2YXJgLiBUaGlzIG1ha2VzIHRoZSBhbm9ueW1vdXMgZnVuY3Rpb24gbW9yZSBleHByZXNzaXZlIGF0IHRoZSBjb3N0IG9mIG1ha2luZyBpdCBsb25nZXIuIFdlIHRoaW5rIHVzaW5nIHRoZSBmb3JtdWxhIGludGVyZmFjZSBpbiB0aGlzIHdheSBpcyBwcmVmZXJhYmxlIGNvbXBhcmVkIHRvIHRoZSByYXRoZXIgY3J5cHRpYyBgbXRjYXJzW25tXSA8LSBtYXAyKHRyYW5zLCBtdGNhcnNbbm1dLCB+IC54KC55KSlgLgoKSW4gdGhlIGBtYXAoKWAgYXBwcm9hY2ggd2UgbWFwIG92ZXIgdGhlIHZhcmlhYmxlIG5hbWVzLiBJdCBpcyB0aGVyZWZvcmUgbm90IHBvc3NpYmxlIHRvIGludHJvZHVjZSBwbGFjZWhvbGRlcnMgZm9yIHRoZSBmdW5jdGlvbiBhbmQgdmFyaWFibGUgbmFtZXMuIFRoZSBmb3JtdWxhIHN5bnRheCB0b2dldGhlciB3aXRoIHRoZSBgLnhgIHByb25vdW4gaXMgcHJldHR5IGNvbXBhY3QuIFRoZSBvYmplY3QgbmFtZXMgYW5kIHRoZSBicmFja2V0cyBjbGVhcmx5IGluZGljYXRlIHRoZSBhcHBsaWNhdGlvbiBvZiB0cmFuc2Zvcm1hdGlvbnMgdG8gc3BlY2lmaWMgY29sdW1ucyBvZiBgbXRjYXJzYC4gSW4gdGhpcyBjYXNlIHRoZSBpdGVyYXRpb24gb3ZlciB0aGUgdmFyaWFibGUgbmFtZXMgY29tZXMgaW4gaGFuZHksIGFzIGl0IGhpZ2hsaWdodHMgdGhlIGltcG9ydGFuY2Ugb2YgbWF0Y2hpbmcgYmV0d2VlbiBgdHJhbnNgIGFuZCBgbXRjYXJzYCBlbGVtZW50IG5hbWVzLiBUb2dldGhlciB3aXRoIHRoZSByZXBsYWNlbWVudCBmb3JtIG9uIHRoZSBsZWZ0LWhhbmQgc2lkZSwgdGhpcyBsaW5lIGlzIHJlbGF0aXZlbHkgZWFzeSB0byBpbnNwZWN0LgoKVG8gc3VtbWFyaXNlLCBpbiBzaXR1YXRpb25zIHdoZXJlIGBtYXAoKWAgYW5kIGBtYXAyKClgIHByb3ZpZGUgc29sdXRpb25zIGZvciBhbiBpdGVyYXRpb24gcHJvYmxlbSwgc2V2ZXJhbCBwb2ludHMgbWF5IGJlIGNvbnNpZGVyZWQgYmVmb3JlIGRlY2lkaW5nIGZvciBvbmUgb3IgdGhlIG90aGVyIGFwcHJvYWNoLgoKLS0tCgo0LiAgV2hhdCBkb2VzIGB3cml0ZS5jc3YoKWAgcmV0dXJuLCBpLmUuIHdoYXQgaGFwcGVucyBpZiB5b3UgdXNlIGl0IHdpdGggCiAgICBgbWFwMigpYCBpbnN0ZWFkIG9mIGB3YWxrMigpYD8KCmBgYHtyfQpwYXRocyA8LSBmaWxlLnBhdGgodGVtcCwgcGFzdGUwKCJjeWwtIiwgbmFtZXMoY3lscyksICIuY3N2IikpCm1hcDIoY3lscywgcGF0aHMsIHdyaXRlLmNzdikKYGBgCgpBbnN3ZXI6IGB3cml0ZS5jc3YoKWAgaXMgZGVzaWduZWQgdG8gcmV0dXJuIGBOVUxMYCwgaW52aXNpYmx5LiBXaGlsZSBgd2FsazIoKWAgaGlkZXMgdGhlIGBOVUxMYCByZXR1cm4gdmFsdWVzLCBgbWFwMigpYCBkb2VzIG5vdC4KCkFSIFNvbHV0aW9uczogYHdyaXRlLmNzdigpYCByZXR1cm5zIGBOVUxMYC4gQXMgd2UgY2FsbCB0aGUgZnVuY3Rpb24gZm9yIGl0cyBzaWRlIGVmZmVjdCAoY3JlYXRpbmcgYSBDU1YgZmlsZSksIGB3YWxrMigpYCB3b3VsZCBiZSBhcHByb3ByaWF0ZSBoZXJlLiBPdGhlcndpc2UsIHdlIHJlY2VpdmUgYSByYXRoZXIgdW5pbmZvcm1hdGl2ZSBsaXN0IG9mIGBOVUxMYHMuCgotLS0KCiMjIDkuNi4zIEV4ZXJjaXNlcwoKMS4gIFdoeSBpc24ndCBgaXMubmEoKWAgYSBwcmVkaWNhdGUgZnVuY3Rpb24/IFdoYXQgYmFzZSBSIGZ1bmN0aW9uIGlzIGNsb3Nlc3QKICAgIHRvIGJlaW5nIGEgcHJlZGljYXRlIHZlcnNpb24gb2YgYGlzLm5hKClgPwoKQW5zd2VyOiBgaXMubmEoeClgIHJldHVybnMgYGxvZ2ljYWwoMClgIHdoZW4gYHhgIGlzIGBOVUxMYCwgd2hpY2ggdmlvbGF0ZXMgdGhlIHJ1bGUgdGhhdCBwcmVkaWNhdGUgZnVuY3Rpb25zIG9ubHkgcmV0dXJuIGBUUlVFYCBvciBgRkFMU0VgLiBgYW55TkEoeCwgcmVjdXJzaXZlID0gRkFMU0UpYCBhcHBlYXJzIHRvIGJlIGEgcHJlZGljYXRlIHZlcnNpb24gb2YgYGlzLm5hKClgLgoKQVIgU29sdXRpb25zOiBgaXMubmEoKWAgaXMgbm90IGEgcHJlZGljYXRlIGZ1bmN0aW9uLCBiZWNhdXNlIGl0IHJldHVybnMgYSBsb2dpY2FsIF92ZWN0b3JfIHRoZSBzYW1lIGxlbmd0aCBhcyB0aGUgaW5wdXQsIG5vdCBhIHNpbmdsZSBgVFJVRWAgb3IgYEZBTFNFYC4KCmBhbnlOQSgpYCBpcyB0aGUgY2xvc2VzdCBlcXVpdmFsZW50IGJlY2F1c2UgaXQgYWx3YXlzIHJldHVybnMgYSBzaW5nbGUgYFRSVUVgIG9yIGBGQUxTRWAgaWYgdGhlcmUgYXJlIGFueSBtaXNzaW5nIHZhbHVlcyBwcmVzZW50LiBZb3UgY291bGQgYWxzbyBpbWFnaW5lIGFuIGBhbGxOQSgpYCB3aGljaCB3b3VsZCByZXR1cm4gYFRSVUVgIGlmIGFsbCB2YWx1ZXMgd2VyZSBtaXNzaW5nLCBidXQgdGhhdCdzIGNvbnNpZGVyYWJseSBsZXNzIHVzZWZ1bCBzbyBiYXNlIFIgZG9lcyBub3QgcHJvdmlkZSBpdC4KCi0tLQoKMi4gIGBzaW1wbGVfcmVkdWNlKClgIGhhcyBhIHByb2JsZW0gd2hlbiBgeGAgaXMgbGVuZ3RoIDAgb3IgbGVuZ3RoIDEuIERlc2NyaWJlCiAgICB0aGUgc291cmNlIG9mIHRoZSBwcm9ibGVtIGFuZCBob3cgeW91IG1pZ2h0IGdvIGFib3V0IGZpeGluZyBpdC4KCmBgYHtyfQpzaW1wbGVfcmVkdWNlIDwtIGZ1bmN0aW9uKHgsIGYpIHsKICBvdXQgPC0geFtbMV1dCiAgZm9yIChpIGluIHNlcSgyLCBsZW5ndGgoeCkpKSB7CiAgICBvdXQgPC0gZihvdXQsIHhbW2ldXSkKICB9CiAgb3V0Cn0KYGBgCgpBbnN3ZXI6IHVzaW5nIGBzZXEoKWAgcmVzdWx0cyBpbiBhIGJhY2t3YXJkcyBjb3VudCB3aGVuIGB4YCBpcyBsZW5ndGggMCBvciAxLgoKYGBge3J9CnNlcSgyLCAwKQpzZXEoMiwgMSkKYGBgCgpUaGUgZml4IGlzIHRvIGNoZWNrIHRoZSBsZW5ndGggb2YgYHhgIGFuZCByZXR1cm4gaXRzZWxmIHdoZW4gbGVuZ3RoIGlzIDAgYW5kIHRocm93IGFuIGVycm9yIHdoZW4gbGVuZ3RoIGlzIDEsIGFzIGByZWR1Y2UoKWAgZG9lcy4KCkFSIFNvbHV0aW9uczogVGhlIGxvb3AgaW5zaWRlIGBzaW1wbGVfcmVkdWNlKClgIGFsd2F5cyBzdGFydHMgd2l0aCB0aGUgaW5kZXggMiwgYW5kIGBzZXEoKWAgY2FuIGNvdW50IGJvdGggdXAgX2FuZF8gZG93bjoKClRoZXJlZm9yZSwgc3Vic2V0dGluZyBsZW5ndGgtMCBhbmQgbGVuZ3RoLTEgdmVjdG9ycyB2aWEgYFtbYCB3aWxsIGxlYWQgdG8gYSAqc3Vic2NyaXB0IG91dCBvZiBib3VuZHMqIGVycm9yLiBUbyBhdm9pZCB0aGlzLCB3ZSBhbGxvdyBgc2ltcGxlX3JlZHVjZSgpYCB0byByZXR1cm4gYmVmb3JlIHRoZSBmb3IgbG9vcCBpcyBzdGFydGVkIGFuZCBpbmNsdWRlIGEgZGVmYXVsdCBhcmd1bWVudCBmb3IgMC1sZW5ndGggdmVjdG9ycy4KCmBgYHtyfQpzaW1wbGVfcmVkdWNlIDwtIGZ1bmN0aW9uKHgsIGYsIGRlZmF1bHQpIHsKICBpZiAobGVuZ3RoKHgpID09IDBMKSB7CiAgICByZXR1cm4oZGVmYXVsdCkKICB9CiAgaWYgKGxlbmd0aCh4KSA9PSAxTCkgewogICAgcmV0dXJuKHhbWzFMXV0pCiAgfQoKICBvdXQgPC0geFtbMV1dCiAgZm9yIChpIGluIHNlcSgyLCBsZW5ndGgoeCkpKSB7CiAgICBvdXQgPC0gZihvdXQsIHhbW2ldXSkKICB9CgogIG91dAp9CmBgYAoKT3VyIG5ldyBgc2ltcGxlX3JlZHVjZSgpYCBub3cgd29ya3MgYXMgaW50ZW5kZWQ6CgpgYGB7ciwgZXJyb3IgPSBUUlVFfQp0cnkoc2ltcGxlX3JlZHVjZShpbnRlZ2VyKDApLCBgK2ApKQpzaW1wbGVfcmVkdWNlKGludGVnZXIoMCksIGArYCwgZGVmYXVsdCA9IDBMKQpzaW1wbGVfcmVkdWNlKDEsIGArYCkKc2ltcGxlX3JlZHVjZSgxOjMsIGArYCkKYGBgCgotLS0KCjMuICBJbXBsZW1lbnQgdGhlIGBzcGFuKClgIGZ1bmN0aW9uIGZyb20gSGFza2VsbDogZ2l2ZW4gYSBsaXN0IGB4YCBhbmQgYSAKICAgIHByZWRpY2F0ZSBmdW5jdGlvbiBgZmAsIGBzcGFuKHgsIGYpYCByZXR1cm5zIHRoZSBsb2NhdGlvbiBvZiB0aGUgbG9uZ2VzdCAKICAgIHNlcXVlbnRpYWwgcnVuIG9mIGVsZW1lbnRzIHdoZXJlIHRoZSBwcmVkaWNhdGUgaXMgdHJ1ZS4gKEhpbnQ6IHlvdSAKICAgIG1pZ2h0IGZpbmQgYHJsZSgpYCBoZWxwZnVsLikKCmBgYHtyfQp0ZXN0IDwtIGMoYXMubGlzdChsZXR0ZXJzWzE6MjFdKSwgYXMubGlzdCgxOjIwKSwgYXMubGlzdChsZXR0ZXJzWzIyOjI2XSksIGFzLmxpc3QoMjA6MzkpKQp0ZXN0MiA8LSBjKGFzLmxpc3QobGV0dGVyc1sxOjIxXSksIGFzLmxpc3QoMToyMCksIGFzLmxpc3QobGV0dGVyc1syMjoyNl0pLCBhcy5saXN0KDIwOjQwKSkKCnNwYW4gPC0gZnVuY3Rpb24oeCwgZikgewogIHJ1bnMgPC0gcmxlKG1hcF9sZ2woeCwgZikpCiAgbWF4X3RydWUgPC0gbWF4X2luZGV4IDwtIDAKICBpbmRleCA8LSAxCiAgZm9yIChpIGluIHNlcV9hbG9uZyhydW5zJHZhbHVlcykpIHsKICAgIGlmIChydW5zJHZhbHVlc1tpXSAmJiBydW5zJGxlbmd0aHNbaV0gPiBtYXhfdHJ1ZSkgewogICAgICBtYXhfdHJ1ZSA8LSBydW5zJGxlbmd0aHNbaV0KICAgICAgbWF4X2luZGV4IDwtIGluZGV4CiAgICB9CiAgICBpbmRleCA8LSBpbmRleCArIHJ1bnMkbGVuZ3Roc1tpXQogIH0KICBtYXhfaW5kZXgKfQoKc3Bhbih0ZXN0LCBpcy5udW1lcmljKQpzcGFuKHRlc3QyLCBpcy5udW1lcmljKQpzcGFuKDEsIGlzLm51bWVyaWMpCnNwYW4oImEiLCBpcy5udW1lcmljKQpzcGFuKGxpc3QoImEiLCAxOjEwLCAxOjIwKSwgaXMubnVtZXJpYykKYGBgCgpBbnN3ZXI6IGNvZGUgYWJvdmUuCgpBUiBTb2x1dGlvbnM6IE91ciBgc3Bhbl9yKClgIGZ1bmN0aW9uIHJldHVybnMgdGhlIGluZGljZXMgb2YgdGhlIChmaXJzdCBvY2N1cnJpbmcpIGxvbmdlc3Qgc2VxdWVudGlhbCBydW4gb2YgZWxlbWVudHMgd2hlcmUgdGhlIHByZWRpY2F0ZSBpcyB0cnVlLiBJZiB0aGUgcHJlZGljYXRlIGlzIG5ldmVyIHRydWUsIHRoZSBsb25nZXN0IHJ1biBoYXMgbGVuZ3RoIDAsIGluIHdoaWNoIGNhc2Ugd2UgcmV0dXJuIGBpbnRlZ2VyKDApYC4KCmBgYHtyfQpzcGFuX3IgPC0gZnVuY3Rpb24oeCwgZikgewogIGlkeCA8LSB1bm5hbWUobWFwX2xnbCh4LCB+IGYoLngpKSkKICBybGUgPC0gcmxlKGlkeCkKCiAgIyBDaGVjayBpZiB0aGUgcHJlZGljYXRlIGlzIG5ldmVyIHRydWUKICBpZiAoIWFueShybGUkdmFsdWVzKSkgewogICAgcmV0dXJuKGludGVnZXIoMCkpCiAgfQoKICAjIEZpbmQgdGhlIGxlbmd0aCBvZiB0aGUgbG9uZ2VzdCBzZXF1ZW5jZSBvZiB0cnVlIHZhbHVlcwogIGxvbmdlc3QgPC0gbWF4KHJsZSRsZW5ndGhzW3JsZSR2YWx1ZXNdKQogICMgRmluZCB0aGUgcG9zaXRpb24gb2YgdGhlIChmaXJzdCkgbG9uZ2VzdCBydW4gaW4gcmxlCiAgbG9uZ2VzdF9pZHggPC0gd2hpY2gocmxlJHZhbHVlcyAmIHJsZSRsZW5ndGhzID09IGxvbmdlc3QpWzFdCgogICMgQWRkIHVwIGFsbCBsZW5ndGhzIGluIHJsZSBiZWZvcmUgdGhlIGxvbmdlc3QgcnVuCiAgaW5kX2JlZm9yZV9sb25nZXN0IDwtIHN1bShybGUkbGVuZ3Roc1tzZXFfbGVuKGxvbmdlc3RfaWR4IC0gMSldKQoKICBvdXRfc3RhcnQgPC0gaW5kX2JlZm9yZV9sb25nZXN0ICsgMUwKICBvdXRfZW5kIDwtIGluZF9iZWZvcmVfbG9uZ2VzdCArIGxvbmdlc3QKICBvdXRfc3RhcnQ6b3V0X2VuZAp9CgojIENoZWNrIHRoYXQgaXQgd29ya3MKc3Bhbl9yKGMoMCwgMCwgMCwgMCwgMCksIGlzLm5hKQpzcGFuX3IoYyhOQSwgMCwgMCwgMCwgMCksIGlzLm5hKQpzcGFuX3IoYyhOQSwgMCwgTkEsIE5BLCBOQSksIGlzLm5hKQpgYGAKCk5vdGVzOiBBUiBTb2x1dGlvbnMgc2hvd3MgaG93IHRvIGZpbmQgdGhlIGluZGV4IG9mIHRoZSBsb25nZXN0IHNlcXVlbmNlIHVzaW5nIGB3aGljaCgpYCwgd2hpY2ggaXMgbmV3IHRvIG1lLCBhbmQgcmV0dXJucyBtb3JlIGluZm9ybWF0aW9uIGJ5IHJldHVybmluZyBpbmRleGVzIG9mIHRoZSBlbnRpcmUgc3Bhbi4gVGhlIEFSIFNvbHV0aW9ucyBhcHByb2FjaCBpcyBhbHNvIHNpZ25pZmljYW50bHkgZmFzdGVyICh3aGljaCBJIGRpZCBub3QgZXhwZWN0KS4KCmBgYHtyfQpiZW5jaDo6bWFyayhzcGFuX3IodGVzdDIsIGlzLm51bWVyaWMpKQpiZW5jaDo6bWFyayhzcGFuKHRlc3QyLCBpcy5udW1lcmljKSkKYGBgCgotLS0KCjQuICBJbXBsZW1lbnQgYGFyZ19tYXgoKWAuIEl0IHNob3VsZCB0YWtlIGEgZnVuY3Rpb24gYW5kIGEgdmVjdG9yIG9mIGlucHV0cywgCiAgICBhbmQgcmV0dXJuIHRoZSBlbGVtZW50cyBvZiB0aGUgaW5wdXQgd2hlcmUgdGhlIGZ1bmN0aW9uIHJldHVybnMgdGhlIGhpZ2hlc3QgCiAgICB2YWx1ZS4gRm9yIGV4YW1wbGUsIGBhcmdfbWF4KC0xMDo1LCBmdW5jdGlvbih4KSB4IF4gMilgIHNob3VsZCByZXR1cm4gLTEwLgogICAgYGFyZ19tYXgoLTU6NSwgZnVuY3Rpb24oeCkgeCBeIDIpYCBzaG91bGQgcmV0dXJuIGBjKC01LCA1KWAuCiAgICBBbHNvIGltcGxlbWVudCB0aGUgbWF0Y2hpbmcgYGFyZ19taW4oKWAgZnVuY3Rpb24uCgpBbnN3ZXI6IGNvZGUgYmVsb3cuCgpgYGB7cn0KYXJnX21heCA8LSBmdW5jdGlvbih4LCBmKSB7CiAgdmFsIDwtIG1hcF9kYmwoeCwgZikKICB2YWxfbWF4IDwtIG1heCh2YWwpCiAgeFt3aGljaCh2YWwgPT0gdmFsX21heCldCn0KCmFyZ19tYXgoLTEwOjUsIGZ1bmN0aW9uKHgpIHheMikKYXJnX21heCgtNTo1LCBmdW5jdGlvbih4KSB4XjIpCgphcmdfbWluIDwtIGZ1bmN0aW9uKHgsIGYpIHsKICB2YWwgPC0gbWFwX2RibCh4LCBmKQogIHZhbF9taW4gPC0gbWluKHZhbCkKICB4W3doaWNoKHZhbCA9PSB2YWxfbWluKV0KfQoKYXJnX21pbigtMTA6NSwgZnVuY3Rpb24oeCkgeF4yKQphcmdfbWluKGMoLTU6LTEsIDE6NSksIGZ1bmN0aW9uKHgpIHheMikKYGBgCgpBUiBTb2x1dGlvbnM6IEJvdGggZnVuY3Rpb25zIHRha2UgYSB2ZWN0b3Igb2YgaW5wdXRzIGFuZCBhIGZ1bmN0aW9uIGFzIGFuIGFyZ3VtZW50LiBUaGUgZnVuY3Rpb24gb3V0cHV0IGlzIHRoZW4gdXNlZCB0byBzdWJzZXQgdGhlIGlucHV0IGFjY29yZGluZ2x5LgoKYGBge3J9CmFyZ19tYXggPC0gZnVuY3Rpb24oeCwgZikgewogIHkgPC0gbWFwX2RibCh4LCBmKQogIHhbeSA9PSBtYXgoeSldCn0KCmFyZ19taW4gPC0gZnVuY3Rpb24oeCwgZikgewogIHkgPC0gbWFwX2RibCh4LCBmKQogIHhbeSA9PSBtaW4oeSldCn0KCmFyZ19tYXgoLTEwOjUsIGZ1bmN0aW9uKHgpIHheMikKYXJnX21pbigtMTA6NSwgZnVuY3Rpb24oeCkgeF4yKQpgYGAKCk5vdGVzOiB1c2luZyBgd2hpY2goKWAgaXMgdW5uZWNlc3NhcnksIEFSIFNvbHV0aW9ucyBpcyBhIGJldHRlciBhcHByb2FjaC4KCi0tLQoKNS4gIFRoZSBmdW5jdGlvbiBiZWxvdyBzY2FsZXMgYSB2ZWN0b3Igc28gaXQgZmFsbHMgaW4gdGhlIHJhbmdlIFswLCAxXS4gSG93CiAgICB3b3VsZCB5b3UgYXBwbHkgaXQgdG8gZXZlcnkgY29sdW1uIG9mIGEgZGF0YSBmcmFtZT8gSG93IHdvdWxkIHlvdSBhcHBseSBpdCAKICAgIHRvIGV2ZXJ5IG51bWVyaWMgY29sdW1uIGluIGEgZGF0YSBmcmFtZT8KCmBgYHtyfQpzY2FsZTAxIDwtIGZ1bmN0aW9uKHgpIHsKICBybmcgPC0gcmFuZ2UoeCwgbmEucm0gPSBUUlVFKQogICh4IC0gcm5nWzFdKSAvIChybmdbMl0gLSBybmdbMV0pCn0KYGBgCgpBbnN3ZXI6IGNvZGUgYmVsb3cuCgpgYGB7cn0KIyBldmVyeSBjb2x1bW4KbW9kaWZ5KG10Y2Fycywgc2NhbGUwMSkKCiMgZXZlcnkgbnVtZXJpYyBjb2x1bW4KbW9kaWZ5X2lmKGlyaXMsIGlzLm51bWVyaWMsIHNjYWxlMDEpCmBgYAoKQVIgU29sdXRpb25zOiBUbyBhcHBseSBhIGZ1bmN0aW9uIHRvIGV2ZXJ5IGNvbHVtbiBvZiBhIGRhdGEgZnJhbWUsIHdlIGNhbiB1c2UgYHB1cnJyOjptb2RpZnkoKWAgKG9yIGBwdXJycjo6bWFwX2RmcigpYCksIHdoaWNoIGFsc28gY29udmVuaWVudGx5IHJldHVybnMgYSBkYXRhIGZyYW1lLiBUbyBsaW1pdCB0aGUgYXBwbGljYXRpb24gdG8gbnVtZXJpYyBjb2x1bW5zLCB0aGUgc2NvcGVkIHZlcnNpb24gYG1vZGlmeV9pZigpYCBjYW4gYmUgdXNlZC4KCmBgYHtyLCBldmFsID0gRkFMU0V9Cm1vZGlmeV9pZihtdGNhcnMsIGlzLm51bWVyaWMsIHNjYWxlMDEpCmBgYAoKLS0tCgojIyA5LjcuMyBFeGVyY2lzZXMKCjEuICBIb3cgZG9lcyBgYXBwbHkoKWAgYXJyYW5nZSB0aGUgb3V0cHV0PyBSZWFkIHRoZSBkb2N1bWVudGF0aW9uIGFuZCBwZXJmb3JtIAogICAgc29tZSBleHBlcmltZW50cy4KCmBgYHtyLCBldmFsID0gRkFMU0V9CiMgZXhwZXJpbWVudHMKbTEgPC0gbWF0cml4KDE6NCwgbnJvdyA9IDEpCmFwcGx5KG0xLCAxLCBzdW0pCmFwcGx5KG0xLCAyLCBzdW0pCmFwcGx5KG0xLCBjKDEsIDIpLCBgKmAsIDIpCmFwcGx5KG0xLCAxLCBgKmAsIDIpCmFwcGx5KG0xLCAxLCBgKmAsIDIsIHNpbXBsaWZ5ID0gRkFMU0UpCmFwcGx5KG0xLCAyLCBgKmAsIDIpCmFwcGx5KG0xLCAxLCBzdW0sIHNpbXBsaWZ5ID0gRkFMU0UpCgptMWEgPC0gbWF0cml4KDE6NCwgbmNvbCA9IDEpCmFwcGx5KG0xYSwgMSwgYCpgLCAyKQoKbTIgPC0gbWF0cml4KDE6MjAsIG5jb2wgPSA0KQphcHBseShtMiwgMSwgc3VtKQoKbTMgPC0gYXJyYXkoMToyNCwgZGltID0gYygyLCAzLCA0KSkKYXBwbHkobTMsIDEsIHN1bSkKYXBwbHkobTMsIDIsIHN1bSkKYXBwbHkobTMsIDMsIHN1bSkKYXBwbHkobTMsIDEsIGAqYCwgMikKYXBwbHkobTMsIDIsIGAqYCwgMikKYXBwbHkobTMsIDMsIGAqYCwgMikKYXBwbHkobTMsIGMoMSwgMiwgMyksIGAqYCwgMikKYGBgCgpBbnN3ZXI6IHRoZSBkb2N1bWVudGF0aW9uIHN0YXRlczoKCj4gSWYgZWFjaCBjYWxsIHRvIGBGVU5gIHJldHVybnMgYSB2ZWN0b3Igb2YgbGVuZ3RoIGBuYCwgYW5kIHNpbXBsaWZ5IGlzIGBUUlVFYCwgdGhlbiBhcHBseSByZXR1cm5zIGFuIGFycmF5IG9mIGRpbWVuc2lvbiBgYyhuLCBkaW0oWClbTUFSR0lOXSlgIGlmIGBuID4gMWAuIElmIGBuYCBlcXVhbHMgMSwgYGFwcGx5YCByZXR1cm5zIGEgdmVjdG9yIGlmIGBNQVJHSU5gIGhhcyBsZW5ndGggMSBhbmQgYW4gYXJyYXkgb2YgYGRpbWVuc2lvbiBkaW0oWClbTUFSR0lOXWAgb3RoZXJ3aXNlLiBJZiBgbmAgaXMgMCwgdGhlIHJlc3VsdCBoYXMgbGVuZ3RoIDAgYnV0IG5vdCBuZWNlc3NhcmlseSB0aGUgJ2NvcnJlY3QnIGRpbWVuc2lvbi4KPiAKPiBJZiB0aGUgY2FsbHMgdG8gYEZVTmAgcmV0dXJuIHZlY3RvcnMgb2YgZGlmZmVyZW50IGxlbmd0aHMsIG9yIGlmIHNpbXBsaWZ5IGlzIGBGQUxTRWAsIGFwcGx5IHJldHVybnMgYSBsaXN0IG9mIGBsZW5ndGggcHJvZChkaW0oWClbTUFSR0lOXSlgIHdpdGggYGRpbWAgc2V0IHRvIGBNQVJHSU5gIGlmIHRoaXMgaGFzIGxlbmd0aCBncmVhdGVyIHRoYW4gb25lLgoKV2l0aCBleHBsb3JhdGlvbiwgdW5kZXIgbm9ybWFsIGNpcmN1bXN0YW5jZXM6CgotIElmIGBNQVJHSU5gIGluY2x1ZGVzIGFsbCBkaW1lbnNpb25zIG9mIGFuIGFycmF5IG9yIG1hdHJpeCAoYGMoMSwgMilgIG9yIGBjKDEsIDIsIDMpYCksIHRoZSBvdXRwdXQKICBpcyBhcnJhbmdlZCBpbiB0aGUgc2FtZSBzaGFwZSBhcyB0aGUgaW5wdXQKLSBPdGhlcndpc2UsIHRoZSByZXR1cm4gdmFsdWUgZHJvcHMgYSBkaW1lbnNpb24gaWYgbW9kaWZ5aW5nIGEgdmVjdG9yIGluIHBsYWNlIChhcyB3aXRoIGAqYCksIG9yCiAgcmV0dXJucyBhIHZlY3RvciB3aGVuIHN1bW1hcml6aW5nIChhcyB3aXRoIGBzdW1gKQotIE1hdHJpY2VzIG9mIGEgc2luZ2xlIHJvdyBhcmUgc2ltcGxpZmllZCB0byBhIHZlY3RvcgotIE1hdHJpY2VzIG9mIGEgc2luZ2xlIGNvbHVtbiBhcmUgcmV0dXJuZWQgYXMgYSBtYXRyaXgKLSBXaGVuIGBzaW1wbGlmeSA9IEZBTFNFYCBpcyBzZXQsIGEgbGlzdCBpcyByZXR1cm5lZAoKSG93ZXZlciwgZXZlbiB3aXRoIGFsbCB0aGlzLCB0aGUgInJ1bGVzIiBhcmVuJ3QgY2xlYXIgdG8gbWUuCgpBUiBTb2x1dGlvbnM6IEJhc2ljYWxseSBgYXBwbHkoKWAgYXBwbGllcyBhIGZ1bmN0aW9uIG92ZXIgdGhlIG1hcmdpbnMgb2YgYW4gYXJyYXkuIEluIHRoZSB0d28tZGltZW5zaW9uYWwgY2FzZSwgdGhlIG1hcmdpbnMgYXJlIGp1c3QgdGhlIHJvd3MgYW5kIGNvbHVtbnMgb2YgYSBtYXRyaXguIExldCdzIG1ha2UgdGhpcyBjb25jcmV0ZS4KCmBgYHtyfQphcnIyIDwtIGFycmF5KDE6MTIsIGRpbSA9IGMoMywgNCkpCnJvd25hbWVzKGFycjIpIDwtIHBhc3RlMCgicm93IiwgMTozKQpjb2xuYW1lcyhhcnIyKSA8LSBwYXN0ZTAoImNvbCIsIDE6NCkKYXJyMgpgYGAKCldoZW4gd2UgYXBwbHkgdGhlIGBoZWFkKClgIGZ1bmN0aW9uIG92ZXIgdGhlIGZpcnN0IG1hcmdpbiBvZiBgYXJyMigpYCAoaS5lLiB0aGUgcm93cyksIHRoZSByZXN1bHRzIGFyZSBjb250YWluZWQgaW4gdGhlIGNvbHVtbnMgb2YgdGhlIG91dHB1dCwgdHJhbnNwb3NpbmcgdGhlIGFycmF5IGNvbXBhcmVkIHRvIHRoZSBvcmlnaW5hbCBpbnB1dC4KCmBgYHtyfQphcHBseShhcnIyLCAxLCBmdW5jdGlvbih4KSB4WzE6Ml0pCmBgYAoKQW5kIHZpY2UgdmVyc2EgaWYgd2UgYXBwbHkgb3ZlciB0aGUgc2Vjb25kIG1hcmdpbiAodGhlIGNvbHVtbnMpOgoKYGBge3J9CmFwcGx5KGFycjIsIDIsIGZ1bmN0aW9uKHgpIHhbMToyXSkKYGBgCgpUaGUgb3V0cHV0IG9mIGBhcHBseSgpYCBpcyBvcmdhbmlzZWQgZmlyc3QgYnkgdGhlIG1hcmdpbnMgYmVpbmcgb3BlcmF0ZWQgb3ZlciwgdGhlbiB0aGUgcmVzdWx0cyBvZiB0aGUgZnVuY3Rpb24uIFRoaXMgY2FuIGJlY29tZSBxdWl0ZSBjb25mdXNpbmcgZm9yIGhpZ2hlciBkaW1lbnNpb25hbCBhcnJheXMuCgpOb3RlczogQVIgU29sdXRpb25zJyBleHBsYW5hdGlvbiBpcyBiZXR0ZXIsIGJ1dCB0aGUgb3V0cHV0IGlzIHN0aWxsIGNvbmZ1c2luZy4KCi0tLQoKMi4gIFdoYXQgZG8gYGVhcHBseSgpYCBhbmQgYHJhcHBseSgpYCBkbz8gRG9lcyBwdXJyciBoYXZlIGVxdWl2YWxlbnRzPwoKQW5zd2VyOiBgZWFwcGx5KClgIGFwcGxpZXMgYSBmdW5jdGlvbiB0byBuYW1lZCB2YWx1ZXMgaW4gYW4gZW52aXJvbm1lbnQuIGByYXBwbHkoKWAgaXMgYSByZWN1cnNpdmUgYGxhcHBseSgpYC4gVGhlcmUgYXJlIG5vIGVxdWl2YWxlbnRzIGluIHB1cnJyLgoKQVIgU29sdXRpb25zOiBgZWFwcGx5KClgIGlzIGEgdmFyaWFudCBvZiBgbGFwcGx5KClgLCB3aGljaCBpdGVyYXRlcyBvdmVyIHRoZSAobmFtZWQpIGVsZW1lbnRzIG9mIGFuIGVudmlyb25tZW50LiBJbiBgcHVycnJgIHRoZXJlIGlzIG5vIGVxdWl2YWxlbnQgZm9yIGBlYXBwbHkoKWAgYXMgYHB1cnJyYCBtYWlubHkgcHJvdmlkZXMgZnVuY3Rpb25zIHRoYXQgb3BlcmF0ZSBvbiB2ZWN0b3JzIGFuZCBmdW5jdGlvbnMsIGJ1dCBub3Qgb24gZW52aXJvbm1lbnRzLgoKYHJhcHBseSgpYCBhcHBsaWVzIGEgZnVuY3Rpb24gdG8gYWxsIGVsZW1lbnRzIG9mIGEgbGlzdCByZWN1cnNpdmVseS4gVGhpcyBmdW5jdGlvbiBtYWtlcyBpdCBwb3NzaWJsZSB0byBsaW1pdCB0aGUgYXBwbGljYXRpb24gb2YgdGhlIGZ1bmN0aW9uIHRvIHNwZWNpZmllZCBjbGFzc2VzIChkZWZhdWx0IGBjbGFzc2VzID0gQU5ZYCkuIE9uZSBtYXkgYWxzbyBzcGVjaWZ5IGhvdyBlbGVtZW50cyBvZiBvdGhlciBjbGFzc2VzIHNob3VsZCByZW1haW46IGFzIHRoZWlyIGlkZW50aXR5IChgaG93ID0gcmVwbGFjZWApIG9yIGFub3RoZXIgdmFsdWUgKGBkZWZhdWx0ID0gTlVMTGApLiBUaGUgY2xvc2VzdCBlcXVpdmFsZW50IGluIGBwdXJycmAgaXMgYG1vZGlmeV9kZXB0aCgpYCwgd2hpY2ggYWxsb3dzIHlvdSB0byBtb2RpZnkgZWxlbWVudHMgYXQgYSBzcGVjaWZpZWQgZGVwdGggaW4gYSBuZXN0ZWQgbGlzdC4KCk5vdGVzOiBJIHdhc24ndCBhd2FyZSBvZiBgcHVycnI6Om1vZGlmeV9kZXB0aCgpYC4KCi0tLQoKMy4gIENoYWxsZW5nZTogcmVhZCBhYm91dCB0aGUgCiAgICBbZml4ZWQgcG9pbnQgYWxnb3JpdGhtXShodHRwczovL21pdHByZXNzLm1pdC5lZHUvc2l0ZXMvZGVmYXVsdC9maWxlcy9zaWNwL2Z1bGwtdGV4dC9ib29rL2Jvb2stWi1ILTEyLmh0bWwjJTI1X2lkeF8xMDk2KS4KICAgIENvbXBsZXRlIHRoZSBleGVyY2lzZXMgdXNpbmcgUi4KCkFuc3dlcjogdGhlIGZpeGVkIHBvaW50IGFsZ29yaXRobSBpcyBkZWZpbmVkIGJlbG93LCB3aXRoIGFuIGV4YW1wbGUgc29sdXRpb246CgpgYGAKKGRlZmluZSB0b2xlcmFuY2UgMC4wMDAwMSkKKGRlZmluZSAoZml4ZWQtcG9pbnQgZiBmaXJzdC1ndWVzcykKICAoZGVmaW5lIChjbG9zZS1lbm91Z2g/IHYxIHYyKQogICAgKDwgKGFicyAoLSB2MSB2MikpIHRvbGVyYW5jZSkpCiAgKGRlZmluZSAodHJ5IGd1ZXNzKQogICAgKGxldCAoKG5leHQgKGYgZ3Vlc3MpKSkKICAgICAgKGlmIChjbG9zZS1lbm91Z2g/IGd1ZXNzIG5leHQpCiAgICAgICAgICBuZXh0CiAgICAgICAgICAodHJ5IG5leHQpKSkpCiAgKHRyeSBmaXJzdC1ndWVzcykpCgooZml4ZWQtcG9pbnQgY29zIDEuMCkKMC43MzkwODIyOTg1MjI0MDIzCgooZml4ZWQtcG9pbnQgKGxhbWJkYSAoeSkgKCsgKHNpbiB5KSAoY29zIHkpKSkKICAgICAgICAgICAgIDEuMCkKMS4yNTg3MzE1OTYyOTcxMTczCgooZGVmaW5lIChzcXJ0IHgpCiAgKGZpeGVkLXBvaW50IChsYW1iZGEgKHkpICgvIHggeSkpCiAgICAgICAgICAgICAgIDEuMCkpCmBgYAoKSW1wbGVtZW50YXRpb24gaW4gUjoKCmBgYHtyfQpmaXhlZF9wb2ludCA8LSBmdW5jdGlvbihmLCB4KSB7CiAgdG9sZXJhbmNlIDwtIDAuMDAwMDEKICBjbG9zZV9lbm91Z2ggPC0gZnVuY3Rpb24odjEsIHYyKSB7CiAgICBhYnModjEgLSB2MikgPCB0b2xlcmFuY2UKICB9CgogIGlmIChjbG9zZV9lbm91Z2goZih4KSwgeCkpIHsKICAgIGYoeCkKICB9IGVsc2UgewogICAgZml4ZWRfcG9pbnQoZiwgZih4KSkKICB9Cn0KCmZpeGVkX3BvaW50KGNvcywgMS4wKQpmaXhlZF9wb2ludChmdW5jdGlvbih5KSBzaW4oeSkgKyBjb3MoeSksIDEuMCkKYGBgCgpBUiBTb2x1dGlvbnM6IEEgbnVtYmVyICR4JCBpcyBjYWxsZWQgYSBmaXhlZCBwb2ludCBvZiBhIGZ1bmN0aW9uICRmJCBpZiBpdCBzYXRpc2ZpZXMgdGhlIGVxdWF0aW9uICRmKHgpID0geCQuIEZvciBzb21lIGZ1bmN0aW9ucyB3ZSBtYXkgZmluZCBhIGZpeGVkIHBvaW50IGJ5IGJlZ2lubmluZyB3aXRoIGEgc3RhcnRpbmcgdmFsdWUgYW5kIGFwcGx5aW5nICRmJCByZXBlYXRlZGx5LiBIZXJlIGBmaXhlZF9wb2ludCgpYCBhY3RzIGFzIGEgZnVuY3Rpb25hbCBiZWNhdXNlIGl0IHRha2VzIGEgZnVuY3Rpb24gYXMgYW4gYXJndW1lbnQuCgpgYGB7ciwgZXJyb3IgPSBUUlVFfQpmaXhlZF9wb2ludF9hciA8LSBmdW5jdGlvbihmLCB4X2luaXQsIG5fbWF4ID0gMTAwMDAsIHRvbCA9IDAuMDAwMSkgewogIG4gPC0gMAogIHggPC0geF9pbml0CiAgeSA8LSBmKHgpCgogIGlzX2ZpeGVkX3BvaW50IDwtIGZ1bmN0aW9uKHgsIHkpIHsKICAgIGFicyh4IC0geSkgPCB0b2wKICB9CgogIHdoaWxlICghaXNfZml4ZWRfcG9pbnQoeCwgeSkpIHsKICAgIHggPC0geQogICAgeSA8LSBmKHkpCgogICAgIyBNYWtlIHN1cmUgd2UgZXZlbnR1YWxseSBzdG9wCiAgICBuIDwtIG4gKyAxCiAgICBpZiAobiA+IG5fbWF4KSB7CiAgICAgIHN0b3AoIkZhaWxlZCB0byBjb252ZXJnZS4iLCBjYWxsLiA9IEZBTFNFKQogICAgfQogIH0KCiAgeAp9CgojIEZ1bmN0aW9ucyB3aXRoIGZpeGVkIHBvaW50cwpmaXhlZF9wb2ludF9hcihzaW4sIHhfaW5pdCA9IDEpCmZpeGVkX3BvaW50X2FyKGNvcywgeF9pbml0ID0gMSkKCiMgRnVuY3Rpb25zIHdpdGhvdXQgZml4ZWQgcG9pbnRzCmFkZF9vbmUgPC0gZnVuY3Rpb24oeCkgeCArIDEKdHJ5KGZpeGVkX3BvaW50X2FyKGFkZF9vbmUsIHhfaW5pdCA9IDEpKQpgYGAKCk5vdGVzOiBBUiBTb2x1dGlvbnMgb2ZmZXJzIGEgZGlmZmVyZW50IGFwcHJvYWNoIHVzaW5nIGEgYHdoaWxlKClgIGxvb3AgdGhhdCBpcyBndWFyYW50ZWVkIHRvIHN0b3AuIE15IGFwcHJvYWNoIHVzaW5nIHJlY3Vyc2l2ZSBjYWxscyBkb2VzIHN0b3AgZXZlbnR1YWxseSB3aXRoIGEgc3RhY2sgbGltaXQgZXJyb3IgKGhvd2V2ZXIsIHRoaXMgc3RvcHMgYGJ1aWxkX2FuYWx5c2lzX3NpdGUoKWApOgoKYGBge3IsIGV2YWwgPSBGQUxTRX0KZml4ZWRfcG9pbnQoYWRkX29uZSwgMSkKYGBgCgpDb21wYXJpbmcgYmVuY2htYXJrczoKCmBgYHtyfQpiZW5jaDo6bWFyayhmaXhlZF9wb2ludF9hcihjb3MsIHhfaW5pdCA9IDEsIHRvbCA9IDAuMDAwMDEpKQpiZW5jaDo6bWFyayhmaXhlZF9wb2ludChjb3MsIDEpKQpgYGAKCkFzIHVzdWFsLCBBUiBTb2x1dGlvbnMgaXMgZmFzdGVyLiA6LSgKCi0tLQo=</div>
 
 
 </div>
