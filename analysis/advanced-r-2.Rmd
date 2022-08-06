@@ -389,6 +389,8 @@ mtcars %>%
   iwalk(~ write.csv(.x, .y))
 ```
 
+Notes: the AR Solutions use of names and the pipe is clever.
+
 ---
 
 3.  Explain how the following code transforms a data frame using functions
@@ -461,5 +463,223 @@ map2(cyls, paths, write.csv)
 Answer: `write.csv()` is designed to return `NULL`, invisibly. While `walk2()` hides the `NULL` return values, `map2()` does not.
 
 AR Solutions: `write.csv()` returns `NULL`. As we call the function for its side effect (creating a CSV file), `walk2()` would be appropriate here. Otherwise, we receive a rather uninformative list of `NULL`s.
+
+---
+
+## 9.6.3 Exercises
+
+1.  Why isn't `is.na()` a predicate function? What base R function is closest
+    to being a predicate version of `is.na()`?
+
+Answer: `is.na(x)` returns `logical(0)` when `x` is `NULL`, which violates the rule that predicate functions only return `TRUE` or `FALSE`. `anyNA(x, recursive = FALSE)` appears to be a predicate version of `is.na()`.
+
+AR Solutions: `is.na()` is not a predicate function, because it returns a logical _vector_ the same length as the input, not a single `TRUE` or `FALSE`.
+
+`anyNA()` is the closest equivalent because it always returns a single `TRUE` or `FALSE` if there are any missing values present. You could also imagine an `allNA()` which would return `TRUE` if all values were missing, but that's considerably less useful so base R does not provide it.
+
+---
+
+2.  `simple_reduce()` has a problem when `x` is length 0 or length 1. Describe
+    the source of the problem and how you might go about fixing it.
+
+```{r}
+simple_reduce <- function(x, f) {
+  out <- x[[1]]
+  for (i in seq(2, length(x))) {
+    out <- f(out, x[[i]])
+  }
+  out
+}
+```
+
+Answer: using `seq()` results in a backwards count when `x` is length 0 or 1.
+
+```{r}
+seq(2, 0)
+seq(2, 1)
+```
+
+The fix is to check the length of `x` and return itself when length is 0 and throw an error when length is 1, as `reduce()` does.
+
+AR Solutions: The loop inside `simple_reduce()` always starts with the index 2, and `seq()` can count both up _and_ down:
+
+Therefore, subsetting length-0 and length-1 vectors via `[[` will lead to a *subscript out of bounds* error. To avoid this, we allow `simple_reduce()` to return before the for loop is started and include a default argument for 0-length vectors.
+
+```{r}
+simple_reduce <- function(x, f, default) {
+  if (length(x) == 0L) {
+    return(default)
+  }
+  if (length(x) == 1L) {
+    return(x[[1L]])
+  }
+
+  out <- x[[1]]
+  for (i in seq(2, length(x))) {
+    out <- f(out, x[[i]])
+  }
+
+  out
+}
+```
+
+Our new `simple_reduce()` now works as intended:
+
+```{r, error = TRUE}
+try(simple_reduce(integer(0), `+`))
+simple_reduce(integer(0), `+`, default = 0L)
+simple_reduce(1, `+`)
+simple_reduce(1:3, `+`)
+```
+
+---
+
+3.  Implement the `span()` function from Haskell: given a list `x` and a 
+    predicate function `f`, `span(x, f)` returns the location of the longest 
+    sequential run of elements where the predicate is true. (Hint: you 
+    might find `rle()` helpful.)
+
+```{r}
+test <- c(as.list(letters[1:21]), as.list(1:20), as.list(letters[22:26]), as.list(20:39))
+test2 <- c(as.list(letters[1:21]), as.list(1:20), as.list(letters[22:26]), as.list(20:40))
+
+span <- function(x, f) {
+  runs <- rle(map_lgl(x, f))
+  max_true <- max_index <- 0
+  index <- 1
+  for (i in seq_along(runs$values)) {
+    if (runs$values[i] && runs$lengths[i] > max_true) {
+      max_true <- runs$lengths[i]
+      max_index <- index
+    }
+    index <- index + runs$lengths[i]
+  }
+  max_index
+}
+
+span(test, is.numeric)
+span(test2, is.numeric)
+span(1, is.numeric)
+span("a", is.numeric)
+span(list("a", 1:10, 1:20), is.numeric)
+```
+
+Answer: code above.
+
+AR Solutions: Our `span_r()` function returns the indices of the (first occurring) longest sequential run of elements where the predicate is true. If the predicate is never true, the longest run has length 0, in which case we return `integer(0)`.
+
+```{r}
+span_r <- function(x, f) {
+  idx <- unname(map_lgl(x, ~ f(.x)))
+  rle <- rle(idx)
+
+  # Check if the predicate is never true
+  if (!any(rle$values)) {
+    return(integer(0))
+  }
+
+  # Find the length of the longest sequence of true values
+  longest <- max(rle$lengths[rle$values])
+  # Find the position of the (first) longest run in rle
+  longest_idx <- which(rle$values & rle$lengths == longest)[1]
+
+  # Add up all lengths in rle before the longest run
+  ind_before_longest <- sum(rle$lengths[seq_len(longest_idx - 1)])
+
+  out_start <- ind_before_longest + 1L
+  out_end <- ind_before_longest + longest
+  out_start:out_end
+}
+
+# Check that it works
+span_r(c(0, 0, 0, 0, 0), is.na)
+span_r(c(NA, 0, 0, 0, 0), is.na)
+span_r(c(NA, 0, NA, NA, NA), is.na)
+```
+
+Notes: AR Solutions shows how to find the index of the longest sequence using `which()`, which is new to me, and returns more information by returning indexes of the entire span. The AR Solutions approach is also significantly faster (which I did not expect).
+
+```{r}
+bench::mark(span_r(test2, is.numeric))
+bench::mark(span(test2, is.numeric))
+```
+
+---
+
+4.  Implement `arg_max()`. It should take a function and a vector of inputs, 
+    and return the elements of the input where the function returns the highest 
+    value. For example, `arg_max(-10:5, function(x) x ^ 2)` should return -10.
+    `arg_max(-5:5, function(x) x ^ 2)` should return `c(-5, 5)`.
+    Also implement the matching `arg_min()` function.
+
+Answer: code below.
+
+```{r}
+arg_max <- function(x, f) {
+  val <- map_dbl(x, f)
+  val_max <- max(val)
+  x[which(val == val_max)]
+}
+
+arg_max(-10:5, function(x) x^2)
+arg_max(-5:5, function(x) x^2)
+
+arg_min <- function(x, f) {
+  val <- map_dbl(x, f)
+  val_min <- min(val)
+  x[which(val == val_min)]
+}
+
+arg_min(-10:5, function(x) x^2)
+arg_min(c(-5:-1, 1:5), function(x) x^2)
+```
+
+AR Solutions: Both functions take a vector of inputs and a function as an argument. The function output is then used to subset the input accordingly.
+
+```{r}
+arg_max <- function(x, f) {
+  y <- map_dbl(x, f)
+  x[y == max(y)]
+}
+
+arg_min <- function(x, f) {
+  y <- map_dbl(x, f)
+  x[y == min(y)]
+}
+
+arg_max(-10:5, function(x) x^2)
+arg_min(-10:5, function(x) x^2)
+```
+
+Notes: using `which()` is unnecessary, AR Solutions is a better approach.
+
+---
+
+5.  The function below scales a vector so it falls in the range [0, 1]. How
+    would you apply it to every column of a data frame? How would you apply it 
+    to every numeric column in a data frame?
+
+```{r}
+scale01 <- function(x) {
+  rng <- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+```
+
+Answer: code below.
+
+```{r}
+# every column
+modify(mtcars, scale01)
+
+# every numeric column
+modify_if(iris, is.numeric, scale01)
+```
+
+AR Solutions: To apply a function to every column of a data frame, we can use `purrr::modify()` (or `purrr::map_dfr()`), which also conveniently returns a data frame. To limit the application to numeric columns, the scoped version `modify_if()` can be used.
+
+```{r, eval = FALSE}
+modify_if(mtcars, is.numeric, scale01)
+```
 
 ---
