@@ -38,12 +38,15 @@ behaviour
 bookdown
 colour
 conf
+customise
 customised
 deduplicates
 devtools
 dplyr
+ecdf
 exts
 flavours
+frac
 geoms
 ggplot
 github
@@ -108,6 +111,7 @@ styler
 subsettable
 summarise
 testthat
+th
 tibble
 tibbles
 tidyr
