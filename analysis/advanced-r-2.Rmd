@@ -874,3 +874,48 @@ bench::mark(fixed_point(cos, 1))
 As usual, AR Solutions is faster. :-(
 
 ---
+
+# 10 Function factories
+
+```{r}
+rm(list = ls())
+```
+
+A __function factory__ is a function that makes functions. Here's a very simple example: we use a function factory (`power1()`) to make two child functions (`square()` and `cube()`):
+
+```{r}
+power1 <- function(exp) {
+  function(x) {
+    x^exp
+  }
+}
+square <- power1(2)
+cube <- power1(3)
+```
+
+Don't worry if this doesn't make sense yet, it should by the end of the chapter!
+
+I'll call `square()` and `cube()` __manufactured functions__, but this is just a term to ease communication with other humans: from R's perspective they are no different to functions created any other way. 
+
+```{r}
+square(3)
+cube(3)
+```
+
+You have already learned about the individual components that make function factories possible:
+
+* In Section 6.2.3, you learned about R's first-class 
+  functions. In R, you bind a function to a name in the same way as you bind
+  any object to a name: with `<-`.
+
+* In Section 7.4.2, you learned that a function
+  captures (encloses) the environment in which it is created.
+
+* In Section 7.4.4, you learned that a function 
+  creates a new execution environment every time it is run. This environment
+  is usually ephemeral, but here it becomes the enclosing environment of 
+  the manufactured function.
+
+In this chapter, you'll learn how the non-obvious combination of these three features leads to the function factory. You'll also see examples of their usage in visualisation and statistics.
+
+Of the three main functional programming tools (functionals, function factories, and function operators), function factories are the least used. Generally, they don't tend to reduce overall code complexity but instead partition complexity into more easily digested chunks. Function factories are also an important building block for the very useful function operators, which you'll learn about in Chapter 11.
