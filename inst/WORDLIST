@@ -63,6 +63,7 @@ io
 jpeg
 kableExtra
 knitr
+labelling
 libraryIQR
 linters
 lintr
@@ -80,7 +81,9 @@ organised
 packrat
 pak
 pandoc
+parametrised
 pkgdown
+plotmath
 png
 po
 pre

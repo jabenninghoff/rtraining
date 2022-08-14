@@ -16,6 +16,8 @@ Workbook for completing quizzes and exercises from the "Functional programming" 
 ```{r setup, message = FALSE, warning = FALSE}
 library(purrr)
 library(palmerpenguins) # nolint: unused_import_linter. Imported for `penguins` tibble.
+library(ggplot2)
+library(scales)
 
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
@@ -1125,5 +1127,38 @@ nc3()
 ```
 
 AR Solutions: Without the super assignment `<<-`, the counter will always return 1. The counter always starts in a new execution environment within the same enclosing environment, which contains an unchanged value for `i` (in this case it remains 0).
+
+---
+
+## 10.3.4 Exercises
+
+1.  Compare and contrast `ggplot2::label_bquote()` with 
+    `scales::number_format()`
+
+Answer: `ggplot2::label_bquote()` "offers a flexible way of labelling facet rows or columns with plotmath expressions. Backquoted variables will be replaced with their value in the facet."
+
+The example shows a scatterplot of weight and miles per gallon faceted by engine type (v-shaped).
+
+```{r}
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  facet_grid(vs ~ ., labeller = label_bquote(vs == .(vs)))
+```
+
+`scales::number_format()` has been superseded by `scales::label_number()`:
+
+"Use `label_number()` force decimal display of numbers (i.e. don't use scientific notation). `label_comma()` is a special case that inserts a comma every three digits."
+
+```{r}
+demo_continuous(c(-1e6, 1e6), labels = label_number())
+```
+
+`ggplot2::label_bquote()` is a special-purpose function for facets, while `scales::number_format()` can be applied more generally. Both are function factories that can be applied to changing labels.
+
+AR Solutions: Both functions will help you in styling your output, e.g. in your plots and they do this by returning the desired formatting function to you.
+
+`ggplot2::label_bquote()` takes relatively straightforward [plotmath](https://stat.ethz.ch/R-manual/R-patched/library/grDevices/html/plotmath.html) expressions and uses them for faceting labels in `{ggplot2}`. Because this function is used in `{ggplot2}` it needs to return a function of `class = "labeller"`.
+
+`scales::number_format()` initially `force()`s the computation of all parameters. It's essentially a parametrised wrapper around `scales::number()` and will help you format numbers appropriately. It will return a simple function.
 
 ---
