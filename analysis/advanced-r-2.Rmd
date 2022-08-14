@@ -18,6 +18,7 @@ library(purrr)
 library(palmerpenguins) # nolint: unused_import_linter. Imported for `penguins` tibble.
 library(ggplot2)
 library(scales)
+library(rlang)
 
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
@@ -1248,5 +1249,51 @@ AR Solutions:
 A benchmark on `x1` reveals a performance improvement of factor 2 for `ll_poisson2()` over `ll_poisson1()`
 
 As the redundant calculations within `ll_poisson1()` become more expensive with growing length of `x1`, we expect even further relative performance improvements for `ll_poisson2()`. The following benchmark reveals a relative performance improvement of factor 20 for `ll_poisson2()` when `x1` is of length 100,000.
+
+---
+
+## 10.5.1 Exercises
+
+1. Which of the following commands is equivalent to `with(x, f(z))`?
+
+    (a) `x$f(x$z)`.
+    (b) `f(x$z)`.
+    (c) `x$f(z)`.
+    (d) `f(z)`.
+    (e) It depends.
+
+Answer: (e). depending on the value of `x`, it could be any of (a) through (d).
+
+AR Solutions: (e) "It depends" is the correct answer. Usually `with()` is used with a data frame, so you'd usually expect (b), but if `x` is a list, it could be any of the options.
+
+---
+
+2. Compare and contrast the effects of `env_bind()` vs. `attach()` for the 
+   following code.
+
+```{r}
+funs <- list(
+  mean = function(x) mean(x, na.rm = TRUE),
+  sum = function(x) sum(x, na.rm = TRUE)
+)
+
+# nolint start: undesirable_function_linter.
+attach(funs)
+mean <- function(x) stop("Hi!")
+detach(funs)
+# nolint end
+
+env_bind(globalenv(), !!!funs)
+mean <- function(x) stop("Hi!")
+env_unbind(globalenv(), names(funs))
+```
+
+Answer: `attach()` places the function names in the search path, and the `env_bind()` code places the function names in the global environment. Both have the effect of masking `mean()` and `sum()`, but as the chapter points out, when unbinding, "there’s no guarantee that they haven’t been rebound in the meantime, and you might be deleting an object that someone else created."
+
+AR Solutions: `attach()` adds `funs` to the search path. Therefore, the provided functions are found before their respective versions from the `{base}` package. Further, they cannot get accidentally overwritten by similar named functions in the global environment. One annoying downside of using `attach()` is the possibility to attach the same object multiple times, making it necessary to call `detach()` equally often.
+
+In contrast `rlang::env_bind()` just adds the functions in `fun` to the global environment. No further side effects are introduced, and the functions are overwritten when similarly named functions are defined.
+
+Notes: AR Solutions provides a more complete answer.
 
 ---
