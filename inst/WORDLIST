@@ -13,6 +13,7 @@ Homebrew
 IDEs
 LibPath
 McQuaid
+Memoising
 OOB
 ORCID
 POSIXct
@@ -74,11 +75,15 @@ lubridate
 macOS
 magrittr
 md
+memoise
+memoised
+memoising
 miniUI
 nb
 nz
 openxlsx
 optimisation
+optionality
 organised
 packrat
 pak

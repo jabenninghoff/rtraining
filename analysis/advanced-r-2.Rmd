@@ -1397,3 +1397,237 @@ As the `tryCatch()` part is hidden in the internal `purrr:::capture_output()` fu
 Take a look at *Advanced R* or the documentation of `safely()` to see how you can take advantage of this behaviour, e.g. when fitting many models.
 
 ---
+
+## 11.3.1 Exercises
+
+1.  Weigh the pros and cons of 
+    `download.file %>% dot_every(10) %>% delay_by(0.1)` versus
+    `download.file %>% delay_by(0.1) %>% dot_every(10)`.
+
+Answer: in the first version, `download.file %>% dot_every(10) %>% delay_by(0.1)`, `delay_by` is the outer function, so a delay is added after the dot is written. In the second version, a dot is added after the delay. The first version seems better since the feedback dots aren't delayed.
+
+AR Solutions: Both commands will print a dot every 10 downloads and will take the same amount of time to run, so the differences may seem quite subtle.
+
+In the first case, first the dot functionality is added to `download.file()`. Then the delay is added to this already tweaked function. This implies, that the printing of the dot will also be delayed, and the first dot will be printed as soon as the download for the 10th URL starts.
+
+In the latter case the delay is added first and the dot-functionality is wrapped around it. This order will print the first dot immediately after the 9th download is finished, then the short delay occurs before the 10th download actually starts.
+
+Note: the first case seems like the better option.
+
+---
+
+2.  Should you memoise `file.download()`? Why or why not?
+
+Answer: `download.file()` should not be memoised! As mentioned in the chapter, the function is not pure (the output doesn't depend only on the input), and has side effects (saving a file to disk).
+
+AR Solutions: Memoising `file.download()` will only work if the files are immutable, i.e. if the file at a given URL is always the same. There's no point memoising unless this is true. Even if this is true, however, memoise has to store the results in memory, and large files will potentially take up a lot of memory.
+
+This implies that it's probably not beneficial to memoise `file.download()` in most cases. The only exception is if you are downloading small files many times, and the file at a given URL is guaranteed not to change.
+
+Note: AR Solutions offers a reasonable exception case when memoising makes sense.
+
+---
+
+3.  Create a function operator that reports whenever a file is created or 
+    deleted in the working directory, using `dir()` and `setdiff()`. What other 
+    global function effects might you want to track?
+
+```{r}
+wd_changes <- function(f) {
+  function(...) {
+    before <- dir()
+    ret <- withVisible(f(...))
+    after <- dir()
+    removed <- setdiff(before, after)
+    added <- setdiff(after, before)
+    if (length(removed) != 0) cat("removed files: ", removed, "\n")
+    if (length(added) != 0) cat("added files: ", added, "\n")
+    if (ret$visible) {
+      ret$value
+    } else {
+      invisible(ret$value)
+    }
+  }
+}
+```
+
+Answer: code above. Other effects you might want to track include changes to the global environment, output, and conditions.
+
+AR Solutions: We start with a function that reports the difference between two vectors containing file names:
+
+```{r}
+dir_compare <- function(old, new) {
+  if (setequal(old, new)) {
+    return()
+  }
+
+  added <- setdiff(new, old)
+  removed <- setdiff(old, new)
+
+  changes <- c(
+    if (length(added) > 0) paste0(" * '", added, "' was added"),
+    if (length(removed) > 0) paste0(" * '", removed, "' was removed")
+  )
+  message(paste(changes, collapse = "\n"))
+}
+dir_compare(c("x", "y"), c("x", "y"))
+dir_compare(c("x", "y"), c("x", "a"))
+```
+
+Then we wrap it up in a function operator
+
+```{r}
+track_dir <- function(f) {
+  force(f)
+  function(...) {
+    dir_old <- dir()
+    on.exit(dir_compare(dir_old, dir()), add = TRUE)
+
+    f(...)
+  }
+}
+```
+
+And try it out by creating wrappers around `file.create()` and `file.remove()`:
+
+```{r}
+file_create <- track_dir(file.create)
+file_remove <- track_dir(file.remove)
+file_create("delete_me")
+file_remove("delete_me")
+```
+
+To create a more serious version of `track_dir()` one might provide optionality to set the `full.names` and `recursive` arguments of `dir()` to `TRUE`. This would enable to also track the creation/deletion of hidden files and files in folders contained in the working directory.
+
+Other global effects that might be worth tracking include changes regarding:
+
+- the search path and possibly introduced `conflicts()`
+- `options()` and `par()` which modify global settings
+- the path of the working directory
+- environment variables
+
+Notes: AR Solutions use of multiple functions, messages and `on.exit` is preferable.
+
+---
+
+4.  Write a function operator that logs a timestamp and message to a file 
+    every time a function is run.
+
+```{r}
+log_call <- function(f, logfile = "log_call.log") {
+  name <- deparse(enexpr(f))
+  force(f)
+  force(logfile)
+
+  function(...) {
+    m <- paste0(Sys.time(), " log_call: ", name)
+    write(m, file = logfile, append = TRUE)
+    f(...)
+  }
+}
+```
+
+Answer: code above.
+
+AR Solutions: Our `logger()` function operator takes a function and a file path as input. One timestamp is written to the file under `log_path` when we call `logger()` and another timestamp is written to the same file each time the new function gets called.
+
+```{r}
+append_line <- function(path, ...) {
+  cat(..., "\n", sep = "", file = path, append = TRUE)
+}
+
+logger <- function(f, log_path) {
+  force(f)
+  force(log_path)
+
+  append_line(log_path, "created at: ", as.character(Sys.time()))
+  function(...) {
+    append_line(log_path, "called at: ", as.character(Sys.time()))
+    f(...)
+  }
+}
+```
+
+Note: AR Solutions creates a function `append_line()` instead of using `write()`, and adds a "created at: " time, but is otherwise functionally the same. My solution also logs the name of the function called.
+
+---
+
+5.  Modify `delay_by()` so that instead of delaying by a fixed amount of time, 
+    it ensures that a certain amount of time has elapsed since the function 
+    was last called. That is, if you called 
+    `g <- delay_by(1, f); g(); Sys.sleep(2); g()` there shouldn't be an 
+    extra delay.
+
+```{r}
+sleep_if <- function(start, end, delay) {
+  sleep_time <- delay - as.numeric(end - start)
+  if (sleep_time > 0) Sys.sleep(sleep_time)
+}
+
+delay_by <- function(f, delay) {
+  force(f)
+  force(delay)
+
+  last_called <- NULL
+  function(...) {
+    if (!is.null(last_called)) {
+      sleep_if(last_called, Sys.time(), delay)
+    }
+    on.exit(last_called <<- Sys.time(), add = TRUE) # nolint: undesirable_operator_linter.
+
+    f(...)
+  }
+}
+
+f <- function() {
+  0
+}
+g <- delay_by(f, 1)
+h <- delay_by(f, 1)
+
+system.time({
+  h()
+  h()
+})
+
+system.time({
+  g()
+  Sys.sleep(2)
+  g()
+})
+```
+
+Answer: code above.
+
+AR Solutions:
+
+To ensure that the function created by `delay_by()` waits that a certain amount of time has passed since its last execution, we incorporate three little changes into our new `delay_atleast()` as indicated in the corresponding comments below.
+
+```{r, eval = FALSE}
+delay_atleast <- function(amount, f) {
+  force(f)
+  force(amount)
+
+  # Store the last time the function was run
+  last_time <- NULL
+
+  # Return modified "delay-aware" function
+  function(...) {
+    if (!is.null(last_time)) {
+      wait <- (last_time - Sys.time()) + amount
+      if (wait > 0) {
+        Sys.sleep(wait)
+      }
+    }
+
+    # Update the time after the function has finished
+    on.exit(last_time <<- Sys.time()) # nolint: undesirable_operator_linter.
+
+    f(...)
+  }
+}
+```
+
+Notes: this was tricky; I had to consult AR Solutions for an answer.
+
+---
