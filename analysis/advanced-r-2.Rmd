@@ -1297,3 +1297,32 @@ In contrast `rlang::env_bind()` just adds the functions in `fun` to the global e
 Notes: AR Solutions provides a more complete answer.
 
 ---
+
+# 11 Function operators
+
+```{r}
+rm(list = ls())
+```
+
+In this chapter, you'll learn about function operators. A __function operator__ is a function that takes one (or more) functions as input and returns a function as output. The following code shows a simple function operator, `chatty()`. It wraps a function, making a new function that prints out its first argument. You might create a function like this because it gives you a window to see how functionals, like `map_int()`, work.
+
+```{r, eval = TRUE}
+chatty <- function(f) {
+  force(f)
+
+  function(x, ...) {
+    res <- f(x, ...)
+    cat("Processing ", x, "\n", sep = "")
+    res
+  }
+}
+f <- function(x) x^2
+s <- c(3, 2, 1)
+purrr::map_dbl(s, chatty(f))
+```
+
+Function operators are closely related to function factories; indeed they're just a function factory that takes a function as input. Like factories, there's nothing you can't do without them, but they often allow you to factor out complexity in order to make your code more readable and reusable. 
+
+Function operators are typically paired with functionals. If you're using a for-loop, there's rarely a reason to use a function operator, as it will make your code more complex for little gain.
+
+If you're familiar with Python, decorators is just another name for function operators.
