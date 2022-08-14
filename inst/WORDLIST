@@ -29,6 +29,7 @@ SIRACon
 Seibel
 Stroustrup
 Tierney
+Vectorised
 Wickham
 YAML
 Yan
@@ -123,6 +124,8 @@ tidyverse
 traceback
 unlist
 vectorised
+vectorized
+vectorizes
 visualisation
 visualise
 yihui
