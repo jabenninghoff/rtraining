@@ -1162,3 +1162,91 @@ AR Solutions: Both functions will help you in styling your output, e.g. in your 
 `scales::number_format()` initially `force()`s the computation of all parameters. It's essentially a parametrised wrapper around `scales::number()` and will help you format numbers appropriately. It will return a simple function.
 
 ---
+
+## 10.4.4 Exercises
+
+1.  In `boot_model()`, why don't I need to force the evaluation of `df` 
+    or `model`?
+
+Answer: assuming `model` actually refers to `formula`, both are evaluated when `mod <- lm(formula, data = df)` is run.
+
+AR Solutions: `boot_model()` ultimately returns a function, and whenever you return a function you need to make sure all the inputs are explicitly evaluated. Here that happens automatically because we use `df` and `formula` in `lm()` before returning the function.
+
+---
+
+2.  Why might you formulate the Box-Cox transformation like this?
+
+```{r}
+boxcox3 <- function(x) {
+  function(lambda) {
+    if (lambda == 0) {
+      log(x)
+    } else {
+      (x^lambda - 1) / lambda
+    }
+  }
+}
+```
+
+Answer: `boxcox3` returns a function where `x` is fixed and `lambda` can vary, which allows for easy exploration of different values of lambda, for example using `lapply()` or `optimize()`.
+
+AR Solutions: `boxcox3()` returns a function where `x` is fixed (though it is not forced, so it may be manipulated later). This allows us to apply and test different transformations for different inputs and give them a descriptive name.
+
+Note: I missed the fact that `x` is not forced.
+
+---
+
+3.  Why don't you need to worry that `boot_permute()` stores a copy of the 
+    data inside the function that it generates?
+
+Answer: as R is copy-on-write, and `boot_permute()` stores an unmodified copy of the data, the function contains only a reference to the original data.
+
+AR Solutions: We don't need to worry that it stores a copy of the data, because it actually doesn't store one; it's just a name that points to the same underlying object in memory.
+
+---
+
+4.  How much time does `ll_poisson2()` save compared to `ll_poisson1()`?
+    Use `bench::mark()` to see how much faster the optimisation occurs.
+    How does changing the length of `x` change the results?
+
+```{r}
+ll_poisson1 <- function(x) {
+  n <- length(x)
+
+  function(lambda) {
+    log(lambda) * sum(x) - n * lambda - sum(lfactorial(x))
+  }
+}
+
+ll_poisson2 <- function(x) {
+  n <- length(x)
+  sum_x <- sum(x)
+  c <- sum(lfactorial(x))
+
+  function(lambda) {
+    log(lambda) * sum_x - n * lambda - c
+  }
+}
+
+x1 <- c(41, 30, 31, 38, 29, 24, 30, 29, 31, 38)
+
+bench::mark(optimize(ll_poisson1(x1), c(0, 100), maximum = TRUE))
+bench::mark(optimize(ll_poisson2(x1), c(0, 100), maximum = TRUE))
+
+x <- rpois(1e3, 100L)
+bench::mark(optimize(ll_poisson1(x), c(0, 100), maximum = TRUE))
+bench::mark(optimize(ll_poisson2(x), c(0, 100), maximum = TRUE))
+```
+
+
+Answer: `ll_poisson2()` is nearly twice as fast with `x1` and nearly 10 times as fast when the length of `x` is 100.
+
+Notes: consulting AR Solutions was needed to understand how to benchmark the two functions.
+
+AR Solutions:
+
+A benchmark on `x1` reveals a performance improvement of factor 2 for `ll_poisson2()` over `ll_poisson1()`
+
+As the redundant calculations within `ll_poisson1()` become more expensive with growing length of `x1`, we expect even further relative performance improvements for `ll_poisson2()`. The following benchmark reveals a relative performance improvement of factor 20 for `ll_poisson2()` when `x1` is of length 100,000.
+
+---
