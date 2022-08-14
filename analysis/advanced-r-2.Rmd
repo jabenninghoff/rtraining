@@ -1326,3 +1326,74 @@ Function operators are closely related to function factories; indeed they're jus
 Function operators are typically paired with functionals. If you're using a for-loop, there's rarely a reason to use a function operator, as it will make your code more complex for little gain.
 
 If you're familiar with Python, decorators is just another name for function operators.
+
+## 11.2.3 Exercises
+
+1.  Base R provides a function operator in the form of `Vectorize()`. 
+    What does it do? When might you use it?
+
+Answer: according to the R documentation, "`Vectorize` creates a function wrapper that vectorizes the action of its argument `FUN`." "The arguments named in the `vectorize.args` argument to `Vectorize` are the arguments passed in the `...` list to `mapply`. Only those that are actually passed will be vectorized; default values will not." and returns "A function with the same arguments as `FUN`, wrapping a call to `mapply`."
+
+In other words, it is a function operator that uses `mapply()` to iterate across the arguments. This is potentially simpler to understand than use of `mapply()`.
+
+In the R documentation example, the vectorized `rep.int` is called for each pair of values: 
+
+```{r}
+vrep <- Vectorize(rep.int)
+vrep(1:4, 4:1)
+```
+
+AR Solutions: In R a lot of functions are "vectorised". Vectorised has two meanings. First, it means (broadly) that a function inputs a vector or vectors and does something to each element. Secondly, it usually implies that these operations are implemented in a compiled language such as C or Fortran, so that the implementation is very fast.
+
+However, despite what the function's name implies, `Vectorize()` is not able to speed up the provided function. It rather changes the input format of the supplied arguments (`vectorize.args`), so that they can be iterated over.
+
+`Vectorize()` provides a convenient and concise notation to iterate over multiple arguments but has some major drawbacks that mean you generally shouldn't use it. See [this post](https://www.jimhester.com/post/2018-04-12-vectorize/) for more details.
+
+Notes: Jim Hester's article points out that most R functions are already vectorized, including `paste()`!
+
+```{r}
+color <- c("blue", "red", "green")
+object <- c("ball", "hat", "coat")
+name <- c("Sally", "Hank", "Darla")
+
+paste("A", color, object, "for", name)
+```
+
+It also argues against use of `Vectorize()` because a) the functions it generates are not type stable, b) obfuscates the function code, c) can degrade performance, and d) can't improve performance.
+
+He recommends using existing vectorized functions and either `vapply()` or `map()`.
+
+---
+
+2.  Read the source code for `possibly()`. How does it work?
+
+```{r}
+possibly
+```
+
+Answer: `possibly()` returns a function that uses `tryCatch()` to return `otherwise` if the mapper `.f` errors, unless interrupted, forcing evaluation of `otherwise` before the mapper is called.
+
+AR Solutions: `possibly()` modifies functions to return a specified default value (`otherwise`) in case of an error and to suppress any error messages (`quiet = TRUE`).
+
+While reading the source code, we notice that `possibly()` internally uses `purrr::as_mapper()`. This enables users to supply not only functions, but also formulas or atomics via the same syntax as known from other functions in the `{purrr}` package. Besides this, the new default value (`otherwise`) gets evaluated once to make it (almost) immutable.
+
+The main functionality of `possibly()` is provided by `base::tryCatch()`. In this part the supplied function (`.f`) gets wrapped and the error and interrupt handling are specified.
+
+---
+
+3.  Read the source code for `safely()`. How does it work?
+
+```{r}
+safely
+purrr:::capture_error # nolint: undesirable_operator_linter.
+```
+
+Answer: `safely()` returns a function that uses the internal `capture_error()` function to store the evaluation of the mapper `.f` in `result`, and any error in `error`.
+
+AR Solutions: `safely()` modifies functions to return a list, containing the elements `result` and `error`. It works in a similar fashion as `possibly()` and besides using `as_mapper()`, `safely()` also provides the `otherwise` and `quiet` arguments. However, in order to provide the result and the error in a consistent way, the `tryCatch()` part of the implementation returns a list with similar structure for both cases. In the case of successful evaluation `error` equals `NULL` and in case of an error `result` equals `otherwise`, which is `NULL` by default.
+
+As the `tryCatch()` part is hidden in the internal `purrr:::capture_output()` function, we provide it here in addition to `safely()`.
+
+Take a look at *Advanced R* or the documentation of `safely()` to see how you can take advantage of this behaviour, e.g. when fitting many models.
+
+---
