@@ -14,7 +14,9 @@ IDEs
 LibPath
 McQuaid
 Memoising
+OO
 OOB
+OOP
 ORCID
 POSIXct
 Pre
@@ -80,6 +82,7 @@ memoised
 memoising
 miniUI
 nb
+nitty
 nz
 openxlsx
 optimisation
@@ -128,6 +131,7 @@ tidyr
 tidyverse
 traceback
 unlist
+vctrs
 vectorised
 vectorized
 vectorizes
