@@ -1028,7 +1028,7 @@ Note: the AR Solutions version appropriately uses `force()`.
 ---
 
 4.  Create a function that creates functions that compute the i^th^
-    [central moment](http://en.wikipedia.org/wiki/Central_moment) of a numeric 
+    [central moment](https://en.wikipedia.org/wiki/Central_moment) of a numeric 
     vector. You can test it by running the following code:
 
 ```{r}
