@@ -14,6 +14,8 @@ output:
 Workbook for completing quizzes and exercises from the "Object-oriented programming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io).
 
 ```{r setup, message = FALSE, warning = FALSE}
+library(sloop)
+
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
   comment = "#>",
@@ -48,3 +50,129 @@ S3 is R's first and simplest OO system. S3 is informal and ad hoc, but there is 
 S3 is very flexible, which means it allows you to do things that are quite ill-advised. If you're coming from a strict environment like Java this will seem pretty frightening, but it gives R programmers a tremendous amount of freedom.  It may be very difficult to prevent people from doing something you don't want them to do, but your users will never be held back because there is something you haven't implemented yet. Since S3 has few built-in constraints, the key to its successful use is applying the constraints yourself. This chapter will therefore teach you the conventions you should (almost) always follow.
 
 The goal of this chapter is to show you how the S3 system works, not how to use it effectively to create new classes and generics. I'd recommend coupling the theoretical knowledge from this chapter with the practical knowledge encoded in the [vctrs package](https://vctrs.r-lib.org).
+
+## 13.2.1 Exercises
+
+1.  Describe the difference between `t.test()` and `t.data.frame()`.
+    When is each function called?
+
+```{r}
+ftype(t.test)
+ftype(t.data.frame)
+s3_dispatch(t.test(formula()))
+s3_dispatch(t(data.frame()))
+```
+
+Answer: As noted by `sloop::ftype()` and the docs, `t.test()` is a S3 generic, and `t.data.frame()` is an S3 method for `t()` (transpose). `t.data.frame()` is called as a method when calling `t(x)` when `x` is a `data.frame`. `t.test()` calls either `t.test.default` or `t.test.formula`.
+
+AR Solutions: Because of S3's `generic.class()` naming scheme, both functions may initially look similar, while they are in fact unrelated.
+
+- `t.test()` is a *generic* function that performs a t-test. 
+- `t.data.frame()` is a *method* that gets called by the generic `t()` to transpose data frame input.
+
+Due to R's S3 dispatch rules, `t.test()` would also get called when `t()` is applied to an object of class `test`
+
+---
+
+2.  Make a list of commonly used base R functions that contain `.` in their
+    name but are not S3 methods.
+
+```{r}
+ftype(as.character)
+ftype(as.data.frame)
+ftype(data.frame)
+ftype(eval.parent)
+ftype(file.path)
+ftype(file.copy)
+ftype(is.null)
+ftype(is.data.frame)
+ftype(Sys.localeconv)
+ftype(Sys.time)
+```
+
+Answer:
+
+- All of the `as.` functions
+- `data.frame`
+- All of the `file.` functions
+- All of the `is.` functions
+- All of the `Sys.` functions
+
+AR Solutions: In recent years "snake_case"-style has become increasingly common when naming functions and variables in R. But many functions in base R will continue to be "point.separated", which is why some inconsistency in your R code most likely cannot be avoided. (`install.packages(), read.csv(), list.files(), download.file(), data.frame(), as.character(), Sys.Date(), all.equal(), do.call(), on.exit()`)
+
+---
+
+3.  What does the `as.data.frame.data.frame()` method do? Why is
+    it confusing? How could you avoid this confusion in your own
+    code?
+
+```{r}
+s3_dispatch(as.data.frame(data.frame()))
+```
+
+Answer: `as.data.frame.data.frame()` is the method used to coerce a `data.frame` to a `data.frame`. This is confusing because the class contains a period (as does the function call); avoiding periods improves readability: `as_dataframe.dataframe` makes the generic and method clear.
+
+AR Solutions: The function `as.data.frame.data.frame()` implements the `data.frame()` *method* for the `as.data.frame()` *generic*, which coerces objects to data frames.
+
+The name is confusing, because it does not clearly communicate the type of the function, which could be a regular function, a generic or a method. Even if we assume a method, the amount of `.`'s makes it difficult to separate the generic- and the class-part of the name. Is it the `data.frame.data.frame()` method for the `as()` generic? Is it the `frame.data.frame()` method for the `as.data()` generic?
+
+We could avoid this confusion by applying a different naming convention (e.g. "snake_case") for our class and function names.
+
+---
+
+4.  Describe the difference in behaviour in these two calls.
+
+```{r}
+set.seed(1014)
+some_days <- as.Date("2017-01-31") + sample(10, 5)
+mean(some_days)
+mean(unclass(some_days))
+
+s3_dispatch(mean(some_days))
+s3_dispatch(mean(unclass(some_days)))
+```
+
+Answer: the first call calculates the mean using `mean.Date()`, and so returns a date. using `unclass()` changes the date to its underlying value (double) which calculates the mean using `mean.default()`.
+
+AR Solutions: `mean()` is a generic function, which will select the appropriate method based on the class of the input. `some_days` has the class `Date` and `mean.Date(some_days)` will be used to calculate the mean date of `some_days`.
+
+After `unclass()` has removed the class attribute from `some_date`, the default method is chosen. `mean.default(unclass(some_days))` then calculates the mean of the underlying double.
+
+---
+
+5.  What class of object does the following code return? What base type is it 
+    built on? What attributes does it use?
+
+```{r}
+x <- ecdf(rpois(100, 10))
+x
+
+str(x)
+```
+
+Answer: the code returns an object of class `ecdf`, which is build on the `stepfun` object, and the `function` base type. It additionally includes the `call` attribute.
+
+AR Solutions: It returns an object of the class `ecdf` (empirical cumulative distribution function) with the superclasses `stepfun` and `function`. The `ecdf` object is built on the base type `closure` (a function). The expression, which was used to create it (`rpois(100, 10)`), is stored in the `call` attribute.
+
+```{r}
+typeof(x)
+```
+
+---
+
+6.  What class of object does the following code return? What base type is it 
+    built on? What attributes does it use?
+
+```{r}
+x <- table(rpois(100, 5))
+x
+
+str(x)
+str(unclass(x))
+```
+
+Answer: per the docs, the code returns an object of class `table`, which is built on `array`, which uses the `dimnames` attribute in combination with a vector.
+
+AR Solutions: This code returns a `table` object, which is built upon the `integer` type. The attribute `dimnames` is used to name the elements of the integer vector.
+
+---
