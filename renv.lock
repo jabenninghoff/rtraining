@@ -1721,6 +1721,20 @@
         "xtable"
       ]
     },
+    "sloop": {
+      "Package": "sloop",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1e77d63fe609b5b27a3d59a1f5c7a6c0",
+      "Requirements": [
+        "codetools",
+        "crayon",
+        "purrr",
+        "rlang",
+        "tibble"
+      ]
+    },
     "sourcetools": {
       "Package": "sourcetools",
       "Version": "0.1.7",
