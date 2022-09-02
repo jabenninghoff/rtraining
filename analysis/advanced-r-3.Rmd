@@ -176,3 +176,304 @@ Answer: per the docs, the code returns an object of class `table`, which is buil
 AR Solutions: This code returns a `table` object, which is built upon the `integer` type. The attribute `dimnames` is used to name the elements of the integer vector.
 
 ---
+
+## 13.3.4 Exercises
+
+1.  Write a constructor for `data.frame` objects. What base type is a data
+    frame built on? What attributes does it use? What are the restrictions
+    placed on the individual elements? What about the names?
+
+```{r}
+dput(data.frame())
+dput(data.frame(a = 1:2, b = 3:4))
+unclass(data.frame(a = 1:2, b = 3:4))
+```
+
+Answer: code below. The data frame is built on the list base type, and includes the names, row.names, and class attributes. This implementation requires values to be a list, names to be a character, and row.names to be an integer.
+
+```{r}
+new_data.frame <- function(values = list(), # nolint: object_name_linter.
+                           names = character(length(values)),
+                           row.names = integer(length(values))) { # nolint: object_name_linter.
+  stopifnot(
+    is.list(values),
+    is.character(names),
+    is.integer(row.names)
+  )
+  structure(values, names = names, row.names = row.names, class = "data.frame")
+}
+
+new_data.frame()
+new_data.frame(list(1:3, 4:6, 7:9))
+new_data.frame(list(1:3, 4:6, 7:9), names = c("a", "b", "c"), row.names = 1:3)
+```
+
+AR Solutions: Data frames are built on named lists of vectors, which all have the same length. Besides the `class` and the column names (`names`), the `row.names` are their only further attribute. This must be a character vector with the same length as the other vectors.
+
+We need to provide the number of rows as an input to make it possible to create data frames with 0 columns but multiple rows.
+
+This leads to the following constructor:
+
+```{r, error = TRUE}
+new_data.frame <- function(x, n, row.names = NULL) { # nolint: object_name_linter.
+  # nolint start: consecutive_stopifnot_linter.
+  # Check if the underlying object is a list
+  stopifnot(is.list(x))
+
+  # Check all inputs are the same length
+  # (This check also allows that x has length 0)
+  stopifnot(all(lengths(x) == n))
+  # nolint end
+
+  if (is.null(row.names)) {
+    # Use special row names helper from base R
+    row.names <- .set_row_names(n) # nolint: object_name_linter.
+  } else {
+    # Otherwise check that they're a character vector with the
+    # correct length
+    stopifnot(is.character(row.names), length(row.names) == n)
+  }
+
+  structure(
+    x,
+    class = "data.frame",
+    row.names = row.names
+  )
+}
+
+# Test
+x <- list(a = 1, b = 2)
+new_data.frame(x, n = 1)
+new_data.frame(x, n = 1, row.names = "l1")
+
+# Create a data frame with 0 columns and 2 rows
+new_data.frame(list(), n = 2)
+```
+
+Note: AR Solutions approach also validates that all inputs are same length, and supports creation of dataframes with 0 columns but multiple rows.
+
+---
+
+2.  Enhance my `factor()` helper to have better behaviour when one or
+    more `values` is not found in `levels`. What does `base::factor()` do
+    in this situation?
+
+```{r}
+new_factor <- function(x = integer(), levels = character()) {
+  stopifnot(
+    is.integer(x),
+    is.character(levels)
+  )
+
+  structure(
+    x,
+    levels = levels,
+    class = "factor"
+  )
+}
+```
+
+Answer: the fix is to update `validate_factor()` to allow `NA` values, since the helper already fills in `NA` when `values` is not found in `levels`. This matches the behavior of `base::factor()`. 
+
+```{r}
+validate_factor <- function(x) {
+  values <- unclass(x)
+  levels <- attr(x, "levels")
+
+  if (!all(is.na(values) | values > 0)) {
+    stop(
+      "All non-missing `x` values must be greater than zero",
+      call. = FALSE
+    )
+  }
+
+  if (length(levels) < max(values, na.rm = TRUE)) {
+    stop(
+      "There must be at least as many `levels` as possible values in `x`",
+      call. = FALSE
+    )
+  }
+
+  x
+}
+
+my_factor <- function(x = character(), levels = unique(x)) {
+  ind <- match(x, levels)
+  validate_factor(new_factor(ind, levels))
+}
+
+factor(c("a", "a", "b"), levels = "a")
+my_factor(c("a", "a", "b"), levels = "a")
+```
+
+AR Solutions: `base::factor()` converts these values (silently) into `NA`s.
+
+The `factor()` helper including the constructor (`new_factor()`) and its validator (`validate_factor()`) were given in *Advanced R*. However, as the goal of this question is to throw an early error within the helper, we only repeat the code for the helper:
+
+To improve the `factor()` helper we choose to return an informative error message instead.
+
+```{r, error = TRUE}
+factor2 <- function(x, levels = unique(x)) {
+  new_levels <- match(x, levels)
+
+  # Error if levels don't include all values
+  missing <- unique(setdiff(x, levels))
+  if (length(missing) > 0) {
+    stop(
+      "The following values do not occur in the levels of x: ",
+      paste0("'", missing, "'", collapse = ", "), ".",
+      call. = FALSE
+    )
+  }
+
+  validate_factor(new_factor(new_levels, levels))
+}
+
+# Test
+try(factor2(c("a", "b", "c"), levels = c("a", "b")))
+```
+
+---
+
+3.  Carefully read the source code of `factor()`. What does it do that
+    my constructor does not?
+
+```{r}
+factor(c("a", "a", "b", "c"), labels = c("alpha", "beta", "beta"))
+class(factor(1:10, ordered = TRUE))
+```
+
+Answer: the base implementation:
+
+- sets the value to `character(0)` if the value is null
+- retains value names
+- allows an upper bound on the number of levels, `nmax`
+- coerces the value to character
+- provides a method for excluding values from levels, `exclude`
+- provides `labels` for remapping factors
+- adds an "ordered" class if the value is ordered (`ordered = TRUE`)
+
+Note: labels are an interesting and unexpected feature of `factor()`
+
+```{r}
+factor
+```
+
+AR Solutions: The original implementation (`base::factor()`) allows more flexible input for `x`. It coerces `x` to character or replaces it with `character(0)` (in case of `NULL`). It also ensures that the `levels` are unique. This is achieved by setting them via `base::levels<-`, which fails when duplicate values are supplied.
+
+Note: I missed the fact that `base::levels<-` fails when duplicate values are supplied.
+
+---
+    
+4.  Factors have an optional "contrasts" attribute. Read the help for `C()`, 
+    and briefly describe the purpose of the attribute. What type should it 
+    have? Rewrite the `new_factor()` constructor to include this attribute.
+
+Answer: per the "contrast {stats}" documentation, contrast matrices are used in fitting analysis of variance and regression models, so the attribute should be a matrix.
+
+```{r}
+new_factor <- function(x = integer(), levels = character(), contr = matrix()) {
+  stopifnot(is.integer(x), is.character(levels), is.matrix(contr))
+
+  structure(
+    x,
+    levels = levels,
+    class = "factor",
+    contrasts = contr
+  )
+}
+```
+
+AR Solutions: When factor variables (representing nominal or ordinal information) are used in statistical models, they are typically encoded as dummy variables and by default each level is compared with the first factor level. However, many different encodings ("contrasts") are possible, see [Contrast](https://en.wikipedia.org/wiki/Contrast_(statistics)).
+
+Within R's formula interface you can wrap a factor in `stats::C()` and specify the contrast of your choice. Alternatively, you can set the `contrasts` attribute of your factor variable, which accepts matrix input. (See `?contr.helmert` or similar for details.)
+
+Our updated `new_factor()` constructor gets a `contrasts` argument, which accepts a numeric matrix or `NULL` (default).
+
+```{r}
+# Updated new_factor() constructor
+new_factor <- function(x = integer(),
+                       levels = character(),
+                       contrasts = NULL) {
+  # nolint start: consecutive_stopifnot_linter.
+  stopifnot(is.integer(x))
+  stopifnot(is.character(levels))
+  # nolint end
+
+  if (!is.null(constrasts)) { # nolint: object_usage_linter. not sure why lintr flags this.
+    stopifnot(is.matrix(contrasts) && is.numeric(contrasts)) # nolint: conjunct_test_linter.
+  }
+
+  structure(
+    x,
+    levels = levels,
+    class = "factor",
+    contrasts = contrasts
+  )
+}
+```
+
+---
+
+5.  Read the documentation for `utils::as.roman()`. How would you write a
+    constructor for this class? Does it need a validator? What might a helper 
+    do?
+
+```{r}
+dput(as.roman(3899))
+
+new_roman <- function(x = integer()) {
+  stopifnot(is.integer(x))
+
+  structure(
+    x,
+    class = "roman"
+  )
+}
+
+new_roman(2022L)
+```
+
+Answer: the structure of the class "roman" is simple, an integer with a defined class. A simple constructor would take an integer and return an object of class "roman" as above. A validator is probably not needed, but could validate that the integer is within the supported range of integers (1-3899). A helper might coerce the number to be an integer using `as.integer()`.
+
+AR Solutions: This function transforms numeric input into Roman numbers. It is built on the integer type, which results in the following constructor.
+
+```{r}
+new_roman <- function(x = integer()) {
+  stopifnot(is.integer(x))
+  structure(x, class = "roman")
+}
+```
+
+The documentation tells us, that only values between 1 and 3899 are uniquely represented, which we then include in our validation function.
+
+```{r}
+validate_roman <- function(x) {
+  values <- unclass(x)
+
+  if (any(values < 1 | values > 3899)) {
+    stop(
+      "Roman numbers must fall between 1 and 3899.",
+      call. = FALSE
+    )
+  }
+
+  x
+}
+```
+
+For convenience, we allow the user to also pass real values to a helper function.
+
+```{r, error = TRUE}
+roman <- function(x = integer()) {
+  x <- as.integer(x)
+
+  validate_roman(new_roman(x))
+}
+
+# Test
+roman(c(1, 753, 2019))
+try(roman(0))
+```
+
+---
