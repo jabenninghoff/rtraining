@@ -15,6 +15,8 @@ Workbook for completing quizzes and exercises from the "Object-oriented programm
 
 ```{r setup, message = FALSE, warning = FALSE}
 library(sloop)
+library(purrr)
+library(dplyr)
 
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
@@ -474,6 +476,204 @@ roman <- function(x = integer()) {
 # Test
 roman(c(1, 753, 2019))
 try(roman(0))
+```
+
+---
+
+## 13.4.4 Exercises
+
+1.  Read the source code for `t()` and `t.test()` and confirm that
+    `t.test()` is an S3 generic and not an S3 method. What happens if
+    you create an object with class `test` and call `t()` with it? Why?
+
+```{r}
+x <- structure(1:10, class = "test")
+t(x)
+```
+
+Answer: both `t()` and `t.test()` simply call `UseMethod()`, and are S3 generics.
+
+```{r}
+t
+t.test
+```
+
+Creating an object with class `test` and calling `t()` uses the default method since `t.test()` is not a registered method for `t()`, as this code shows:
+
+```{r}
+methods("t")
+s3_dispatch(t(x))
+```
+
+AR Solutions: We can see that `t.test()` is a generic because it calls `UseMethod()`.
+
+```{r}
+# or simply call
+ftype(t.test)
+```
+
+Interestingly, R also provides helpers, which list functions that look like methods, but in fact are not:
+
+```{r}
+tools::nonS3methods("stats")
+```
+
+When we create an object with class `test`, `t()` dispatches to the `t.default()` method. This happens, because `UseMethod()` simply searches for functions named `paste0("generic", ".", c(class(x), "default"))`.
+
+However, in older versions of R (pre R 4.0.0; when *Advanced R* was written) this behaviour was slightly different. Instead of dispatching to the `t.default()` method, the `t.test()` generic was erroneously treated as a method of `t()` which then dispatched to `t.test.default()` or (when defined) to `t.test.test()`.
+
+---
+
+2.  What generics does the `table` class have methods for?
+
+Answer: `s3_methods_class()` answers this question:
+
+```{r warning = FALSE}
+s3_methods_class("table")
+```
+
+AR Solutions: This is a simple application of `sloop::s3_methods_class()`.
+
+Interestingly, the `table` class has a number of methods designed to help plotting with base graphics.
+
+```{r}
+x <- rpois(100, 5)
+plot(table(x))
+```
+
+---
+
+3.  What generics does the `ecdf` class have methods for?
+
+Answer:
+
+```{r warning = FALSE}
+s3_methods_class("ecdf")
+```
+
+AR Solutions: We use the same approach as above.
+
+The methods are primarily designed for display (`plot()`, `print()`, `summary()`), but you can also extract quantiles with `quantile()`.
+
+---
+
+4.  Which base generic has the greatest number of defined methods?
+
+Answer: using code from 6.2.5, identify generics and count defined methods:
+
+```{r, warning = FALSE}
+# from 6.2.5 exercises, this code makes a list of all functions in the base package
+funs <- Filter(is.function, mget(ls("package:base", all.names = TRUE), inherits = TRUE))
+
+get_method_count <- function(fname) {
+  data.frame(
+    name = fname,
+    # this code should work but doesn't:
+    # method_count = nrow(s3_methods_generic(fname)) # nolint: commented_code_linter.
+    method_count = length(methods(fname))
+  )
+}
+
+map_dfr(names(funs), get_method_count) |>
+  arrange(desc(method_count))
+```
+
+This brute-force code unsurprisingly identifies `print()` as having the greatest number of methods. A bug in `s3_methods_generic()` prevents its use (error below).
+
+```
+Error in gsub(paste0("^", generic_esc, "[.,]"), "", info$method) : 
+invalid regular expression '^([.,]', reason 'Missing ')''
+```
+
+AR Solutions: A little experimentation (and thinking about the most popular functions) suggests that the `print()` generic has the most defined methods.
+
+Let's verify this programmatically with the tools we have learned in this and the previous chapters.
+
+```{r, message = FALSE}
+ls(all.names = TRUE, envir = baseenv()) %>%
+  mget(envir = baseenv()) %>%
+  keep(is_function) %>%
+  names() %>%
+  keep(is_s3_generic) %>%
+  map(~ set_names(nrow(s3_methods_generic(.x)), .x)) %>%
+  flatten_int() %>%
+  sort(decreasing = TRUE) %>%
+  head()
+```
+
+---
+
+5.  Carefully read the documentation for `UseMethod()` and explain why the
+    following code returns the results that it does. What two usual rules
+    of function evaluation does `UseMethod()` violate?
+
+```{r}
+g <- function(x) {
+  x <- 10
+  y <- 10 # nolint: object_usage_linter.
+  UseMethod("g")
+}
+g.default <- function(x) c(x = x, y = y)
+x <- 1
+y <- 1
+g(x)
+```
+
+Answer: the documentation states in **Technical Details**:
+
+> `UseMethod` creates a new function call with arguments matched as they came in to the generic. Any local variables defined before the call to `UseMethod` are retained (unlike S).
+
+So, `UseMethod()` creates a new function call where `x` matches `x <- 1` and the local variable `y <- 10` is retained. This is passed to `g.default()`. This violates both lazy evaluation and lexical scoping.
+
+AR Solutions: Let's take this step by step. If you call `g.default(x)` directly you get `c(1, 1)` as you might expect. 
+
+The value bound to `x` comes from the argument, the value from `y` comes from the global environment.
+
+But when we call `g(x)` we get `c(1, 10)`.
+
+This is seemingly inconsistent: why does `x` come from the value defined inside of `g()`, and `y` still come from the global environment? It's because `UseMethod()` calls `g.default()` in a special way so that variables defined inside the generic are available to methods. The exception are arguments supplied to the function: they are passed on as is and cannot be affected by code inside the generic.
+
+---
+
+6.  What are the arguments to `[`? Why is this a hard question to answer?
+
+Answer: the possible arguments include the `x`, the object being extracted (or replaced), indices (`i`, `j`, `...`), `name`, `drop`, `exact`, and `value`.
+
+This is a hard question to answer since `[` is an irregular primitive function that can be called in multiple ways, none of which support using all possible arguments.
+
+AR Solutions: The subsetting operator `[` is a primitive and a generic function, which can be confirmed via `ftype()`.
+
+```{r}
+ftype(`[`)
+```
+
+For primitive functions `formals([)` returns `NULL` so we need to find another way to determine the functions arguments. One possible way to figure out `[`'s arguments would be to inspect the underlying C source code, which can be searched for via `pryr::show_c_source(.Primitive("["))`.
+When we inspect the arguments of some of `[`'s methods, we see that the arguments vary with the class of `x`.
+
+```{r}
+names(formals(`[.data.frame`))
+names(formals(`[.table`))
+names(formals(`[.Date`))
+names(formals(`[.AsIs`))
+```
+
+To finally get a better overview, we have to put in a little more effort and also use `s3_methods_generic()` again.
+
+```{r, message = FALSE, warning = FALSE}
+s3_methods_generic("[") %>%
+  filter(visible) %>%
+  mutate(
+    method = paste0("[.", class),
+    argnames = purrr::map(method, ~ names(formals(.x))),
+    args = purrr::map(method, ~ formals(.x)),
+    args = purrr::map2( # nolint: duplicate_argument_linter.
+      argnames, args,
+      ~ paste(.x, .y, sep = " = ")
+    ),
+    args = purrr::set_names(args, method) # nolint: duplicate_argument_linter.
+  ) %>%
+  pull(args) %>%
+  head()
 ```
 
 ---
