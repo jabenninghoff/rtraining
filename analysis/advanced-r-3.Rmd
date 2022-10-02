@@ -677,3 +677,91 @@ s3_methods_generic("[") %>%
 ```
 
 ---
+
+## 13.5.1 Exercises
+
+1.  Categorise the objects returned by `lm()`, `factor()`, `table()`, 
+    `as.Date()`, `as.POSIXct()`, `ecdf()`, `ordered()`, `I()` into the
+    styles described above.
+
+Answer:
+
+- `lm()`, `ecdf()`: scalar
+- `factor()`, `as.Date()`, `as.POSIXct()`, `ordered`: vector
+- `table()`: data frame
+- `I()`: same as the source object
+
+AR Solutions: We can categorise the return values into the various object styles by observing how the [number of observations](https://vctrs.r-lib.org/articles/type-size.html#size) is calculated: For vector style classes, `length(x)` represents the number of observations. Record style objects use a list of equal length elements to represent individual components. For data frames and matrices, the observations are represented by the rows. Scalar style objects use a list to represent a single thing.
+
+This leads us to:
+
+- Vector object-style: `factor()`, `table()`, `as.Date()`, `as.POSIXct()`, `ordered()`
+- Record object-style: not observed
+- Data frame object-style: not observed
+- Scalar object-style: `lm()`, `ecdf()`  
+
+The object style of `I()` depends on the input since this function returns a "copy of the object with class `AsIs` prepended to the class(es)".
+
+---
+
+2.  What would a constructor function for `lm` objects, `new_lm()`, look like?
+    Use `?lm` and experimentation to figure out the required fields and their
+    types.
+
+Answer: the only required field is `formula`, provided that the variables listed in the formula exist (and are both vectors). `formula` must be of type "`formula`".
+
+```{r}
+mpg <- pull(mtcars, mpg)
+wt <- pull(mtcars, wt)
+lm(mpg ~ wt)
+```
+
+AR Solutions: The constructor needs to populate the attributes of an `lm` object and check their types for correctness. Let's start by creating a simple `lm` object and explore its underlying base type and attributes:
+
+```{r}
+mod <- lm(cyl ~ ., data = mtcars)
+typeof(mod)
+attributes(mod)
+```
+
+As `mod` is built upon a list, we can simply use `map(mod, typeof)` to find out the base types of its elements. (Additionally, we inspect `?lm`, to learn more about the individual attributes.)
+
+```{r}
+map_chr(mod, typeof)
+```
+
+Now we should have enough information to write a constructor for new `lm` objects.
+
+```{r}
+new_lm <- function(coefficients, residuals, effects, rank, fitted.values, assign,
+                   qr, df.residual, xlevels, call, terms, model # nolint: object_name_linter.
+) {
+  stopifnot(
+    is.double(coefficients), is.double(residuals),
+    is.double(effects), is.integer(rank), is.double(fitted.values),
+    is.integer(assign), is.list(qr), is.integer(df.residual),
+    is.list(xlevels), is.language(call), is.language(terms),
+    is.list(model)
+  )
+
+  structure(
+    list(
+      coefficients = coefficients,
+      residuals = residuals,
+      effects = effects,
+      rank = rank,
+      fitted.values = fitted.values,
+      assign = assign,
+      qr = qr,
+      df.residual = df.residual,
+      xlevels = xlevels,
+      call = call,
+      terms = terms,
+      model = model
+    ),
+    class = "lm"
+  )
+}
+```
+
+---

@@ -1,6 +1,7 @@
 Backtrace
 Bjarne
 CMD
+Categorise
 Changelog
 DF
 Dev
@@ -40,6 +41,7 @@ atomics
 backtrace
 behaviour
 bookdown
+categorise
 colour
 conf
 customise
