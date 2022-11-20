@@ -14,14 +14,14 @@
 
 <title>Advanced R Workbook (Foundations)</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.1.3/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.0/bs3compat.js"></script>
+<script src="site_libs/bs3compat-0.4.1/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.1/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.1/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -148,11 +148,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -181,8 +185,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -190,16 +194,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -351,6 +348,9 @@ div.tocify {
       <a href="advanced-r-2.html">Advanced R Workbook (Functional programming)</a>
     </li>
     <li>
+      <a href="advanced-r-3.html">Advanced R Workbook (Object-oriented programming)</a>
+    </li>
+    <li>
       <a href="r-setup-log.html">R Setup Log</a>
     </li>
     <li>
@@ -466,11 +466,11 @@ shown by <code>obj_size</code> and <code>obj_addr</code>:</p>
 <pre class="r"><code>obj_size(y)</code></pre>
 <pre><code>#&gt; 8.00 MB</code></pre>
 <pre class="r"><code>obj_addr(y[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7feca0db8000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feec0af8000&quot;</code></pre>
 <pre class="r"><code>obj_addr(y[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7feca0db8000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feec0af8000&quot;</code></pre>
 <pre class="r"><code>obj_addr(y[[3]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7feca0db8000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feec0af8000&quot;</code></pre>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>On which line does <code>a</code> get copied in the following
@@ -478,13 +478,13 @@ example?</li>
 </ol>
 <pre class="r"><code>a &lt;- c(1, 5, 3, 2)
 obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec5fd93558&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fee898b8438&quot;</code></pre>
 <pre class="r"><code>b &lt;- a
 obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec5fd93558&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fee898b8438&quot;</code></pre>
 <pre class="r"><code>b[[1]] &lt;- 10
 obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec8acaa8a8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fee898e3838&quot;</code></pre>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
 </div>
 <div id="exercises" class="section level2">
@@ -504,13 +504,13 @@ point to the same object (with the same address in memory). This object
 has the value <code>1:10</code>. <code>d</code> points to a different
 object with the same value.</p>
 <pre class="r"><code>obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7a2463c0&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feea9126060&quot;</code></pre>
 <pre class="r"><code>obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7a2463c0&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feea9126060&quot;</code></pre>
 <pre class="r"><code>obj_addr(c)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7a2463c0&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feea9126060&quot;</code></pre>
 <pre class="r"><code>obj_addr(d)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec8f2a1a40&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feebf9797b8&quot;</code></pre>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>The following code accesses the mean function in multiple ways. Do
@@ -524,15 +524,15 @@ evalq(mean)
 match.fun(&quot;mean&quot;)</code></pre>
 <p>Check the <code>obj_addr</code>:</p>
 <pre class="r"><code>obj_addr(mean)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7cd175b8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feede819a78&quot;</code></pre>
 <pre class="r"><code>obj_addr(base::mean)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7cd175b8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feede819a78&quot;</code></pre>
 <pre class="r"><code>obj_addr(get(&quot;mean&quot;))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7cd175b8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feede819a78&quot;</code></pre>
 <pre class="r"><code>obj_addr(evalq(mean))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7cd175b8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feede819a78&quot;</code></pre>
 <pre class="r"><code>obj_addr(match.fun(&quot;mean&quot;))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7cd175b8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feede819a78&quot;</code></pre>
 <p>Answer: they do.</p>
 <p>AR Solutions: Yes, they point to the same object. We confirm this by
 inspecting the address of the underlying function object.</p>
@@ -618,20 +618,20 @@ the code shown earlier in the section.</li>
 <pre class="r"><code>rm(list = ls())
 x &lt;- c(1L, 2L, 3L)
 tracemem(x)</code></pre>
-<pre><code>#&gt; [1] &quot;&lt;0x7fec8aeef548&gt;&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;&lt;0x7fee898ecc88&gt;&quot;</code></pre>
 <pre class="r"><code>x[[3]] &lt;- 4</code></pre>
-<pre><code>#&gt; tracemem[0x7fec8aeef548 -&gt; 0x7fec8aedaa88]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
-#&gt; tracemem[0x7fec8aedaa88 -&gt; 0x7fec5fa6f8d8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre><code>#&gt; tracemem[0x7fee898ecc88 -&gt; 0x7fee898f60c8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
+#&gt; tracemem[0x7fee898f60c8 -&gt; 0x7fee8931d378]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
 <pre class="r"><code>untracemem(x)</code></pre>
 <p>Answer: unclear. The behavior in R 4.2.0 seems to have changed, since
 this code shows two copies:</p>
 <pre class="r"><code>rm(list = ls())
 x &lt;- c(1, 2, 3)
 tracemem(x)</code></pre>
-<pre><code>#&gt; [1] &quot;&lt;0x7fec5f891d38&gt;&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;&lt;0x7fee7f361558&gt;&quot;</code></pre>
 <pre class="r"><code>y &lt;- x
 y[[3]] &lt;- 4L</code></pre>
-<pre><code>#&gt; tracemem[0x7fec5f891d38 -&gt; 0x7fecad8e96a8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre><code>#&gt; tracemem[0x7fee7f361558 -&gt; 0x7fee890fa6f8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
 <pre class="r"><code>y[[3]] &lt;- 5L
 untracemem(x)</code></pre>
 <p>AR Solutions: Initially the vector <code>x</code> has integer type.
@@ -664,27 +664,27 @@ c &lt;- list(b, a, 1:10)
 print(&quot;first object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;first object&quot;</code></pre>
 <pre class="r"><code>obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7872d778&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feea87e9ef8&quot;</code></pre>
 <pre class="r"><code>obj_addr(b[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7872d778&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feea87e9ef8&quot;</code></pre>
 <pre class="r"><code>obj_addr(b[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7872d778&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feea87e9ef8&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7872d778&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feea87e9ef8&quot;</code></pre>
 <pre class="r"><code>print(&quot;second object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;second object&quot;</code></pre>
 <pre class="r"><code>obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec5ce4ab88&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fee7f3f2ac8&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec5ce4ab88&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fee7f3f2ac8&quot;</code></pre>
 <pre class="r"><code>print(&quot;third object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;third object&quot;</code></pre>
 <pre class="r"><code>obj_addr(c)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec7986ff28&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fee898f3338&quot;</code></pre>
 <pre class="r"><code>print(&quot;fourth object (?)&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;fourth object (?)&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[3]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7fec78790f28&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7feede9d8728&quot;</code></pre>
 <p>Answer: four different objects with multiple names.</p>
 <p>AR Solutions: <code>a</code> contains a reference to an address with
 the value <code>1:10</code>. <code>b</code> contains a list of two
@@ -702,10 +702,10 @@ value (<code>1:10</code>).</p>
 x[[2]] &lt;- x
 
 ref(x)</code></pre>
-<pre><code>#&gt; █ [1:0x7fecad0a1c88] &lt;list&gt; 
-#&gt; ├─[2:0x7fec8961c688] &lt;int&gt; 
-#&gt; └─█ [3:0x7fec88a8ca78] &lt;list&gt; 
-#&gt;   └─[2:0x7fec8961c688]</code></pre>
+<pre><code>#&gt; █ [1:0x7fee898cd048] &lt;list&gt; 
+#&gt; ├─[2:0x7fee7e44b740] &lt;int&gt; 
+#&gt; └─█ [3:0x7fee7f497360] &lt;list&gt; 
+#&gt;   └─[2:0x7fee7e44b740]</code></pre>
 <p>Initially x is a list of one element, an int vector 1:10. Then a
 second list element is added, which points to the original int
 vector.</p>
@@ -882,13 +882,13 @@ xm &lt;- x_medians(5)
 head(df_medians(xm$x, xm$medians), 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.27711476","2":"-0.46856610","3":"-0.366759063","4":"-0.41804834","5":"0.33083524","_rn_":"1"},{"1":"-0.29657930","2":"0.12546935","3":"0.358875475","4":"-0.26421983","5":"-0.07386073","_rn_":"2"},{"1":"0.19664211","2":"-0.42401440","3":"-0.105925951","4":"0.46456604","5":"0.34616075","_rn_":"3"},{"1":"0.22938599","2":"0.31286236","3":"0.088548109","4":"0.03791671","5":"-0.05359006","_rn_":"4"},{"1":"0.08362909","2":"-0.43788431","3":"-0.471362812","4":"-0.32147339","5":"-0.04097837","_rn_":"5"},{"1":"-0.34790467","2":"-0.04315579","3":"-0.004319882","4":"0.32038595","5":"-0.30259904","_rn_":"6"},{"1":"-0.23678461","2":"-0.11218934","3":"0.214717940","4":"0.11658092","5":"0.14870115","_rn_":"7"},{"1":"0.03352877","2":"-0.42658981","3":"0.111788740","4":"-0.36920168","5":"0.07418776","_rn_":"8"},{"1":"-0.26839194","2":"-0.28820403","3":"0.295940083","4":"0.37308293","5":"-0.08349692","_rn_":"9"},{"1":"-0.38072873","2":"0.35976517","3":"-0.352686043","4":"0.31384422","5":"0.05006663","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.30540445","2":"0.36926805","3":"-0.083704885","4":"-0.103055827","5":"-0.228072529","_rn_":"1"},{"1":"0.29061447","2":"-0.38923543","3":"0.046507145","4":"0.259092208","5":"-0.119730018","_rn_":"2"},{"1":"-0.13470736","2":"0.29590058","3":"0.062402191","4":"-0.085031841","5":"-0.438936346","_rn_":"3"},{"1":"-0.41533873","2":"-0.32064927","3":"-0.039528239","4":"-0.419372935","5":"-0.072288064","_rn_":"4"},{"1":"-0.26245195","2":"-0.17866472","3":"-0.278280761","4":"-0.001656499","5":"-0.098552619","_rn_":"5"},{"1":"-0.01091421","2":"0.02614150","3":"0.390835750","4":"0.207686581","5":"-0.170522868","_rn_":"6"},{"1":"0.12932766","2":"-0.34944544","3":"0.005991073","4":"0.385081910","5":"-0.001720746","_rn_":"7"},{"1":"0.13157912","2":"0.08679195","3":"0.396739381","4":"-0.429748306","5":"-0.299294686","_rn_":"8"},{"1":"-0.12125870","2":"0.38751211","3":"-0.018157595","4":"-0.126627597","5":"0.202248186","_rn_":"9"},{"1":"-0.07857404","2":"-0.38312050","3":"-0.426063993","4":"-0.384916359","5":"0.453896705","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>head(as.data.frame(ls_medians(xm$x, xm$medians)), 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.27711476","2":"-0.46856610","3":"-0.366759063","4":"-0.41804834","5":"0.33083524","_rn_":"1"},{"1":"-0.29657930","2":"0.12546935","3":"0.358875475","4":"-0.26421983","5":"-0.07386073","_rn_":"2"},{"1":"0.19664211","2":"-0.42401440","3":"-0.105925951","4":"0.46456604","5":"0.34616075","_rn_":"3"},{"1":"0.22938599","2":"0.31286236","3":"0.088548109","4":"0.03791671","5":"-0.05359006","_rn_":"4"},{"1":"0.08362909","2":"-0.43788431","3":"-0.471362812","4":"-0.32147339","5":"-0.04097837","_rn_":"5"},{"1":"-0.34790467","2":"-0.04315579","3":"-0.004319882","4":"0.32038595","5":"-0.30259904","_rn_":"6"},{"1":"-0.23678461","2":"-0.11218934","3":"0.214717940","4":"0.11658092","5":"0.14870115","_rn_":"7"},{"1":"0.03352877","2":"-0.42658981","3":"0.111788740","4":"-0.36920168","5":"0.07418776","_rn_":"8"},{"1":"-0.26839194","2":"-0.28820403","3":"0.295940083","4":"0.37308293","5":"-0.08349692","_rn_":"9"},{"1":"-0.38072873","2":"0.35976517","3":"-0.352686043","4":"0.31384422","5":"0.05006663","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.30540445","2":"0.36926805","3":"-0.083704885","4":"-0.103055827","5":"-0.228072529","_rn_":"1"},{"1":"0.29061447","2":"-0.38923543","3":"0.046507145","4":"0.259092208","5":"-0.119730018","_rn_":"2"},{"1":"-0.13470736","2":"0.29590058","3":"0.062402191","4":"-0.085031841","5":"-0.438936346","_rn_":"3"},{"1":"-0.41533873","2":"-0.32064927","3":"-0.039528239","4":"-0.419372935","5":"-0.072288064","_rn_":"4"},{"1":"-0.26245195","2":"-0.17866472","3":"-0.278280761","4":"-0.001656499","5":"-0.098552619","_rn_":"5"},{"1":"-0.01091421","2":"0.02614150","3":"0.390835750","4":"0.207686581","5":"-0.170522868","_rn_":"6"},{"1":"0.12932766","2":"-0.34944544","3":"0.005991073","4":"0.385081910","5":"-0.001720746","_rn_":"7"},{"1":"0.13157912","2":"0.08679195","3":"0.396739381","4":"-0.429748306","5":"-0.299294686","_rn_":"8"},{"1":"-0.12125870","2":"0.38751211","3":"-0.018157595","4":"-0.126627597","5":"0.202248186","_rn_":"9"},{"1":"-0.07857404","2":"-0.38312050","3":"-0.426063993","4":"-0.384916359","5":"0.453896705","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code># benchmark
@@ -896,40 +896,40 @@ mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   82.7µs    114µs     6761.     409KB     75.2</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   82.6µs    120µs     6519.     409KB     113.</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   35.2µs   59.3µs    14083.     409KB     135.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   33.5µs   56.5µs    15319.     409KB     151.</code></pre>
 <pre class="r"><code>mark(as.data.frame(ls_medians(xm$x, xm$medians))) # as.data.frame introduces significant overhead</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                       min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                  &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$medians))    226µs    267µs     3573.     391KB     38.3</code></pre>
+#&gt; 1 as.data.frame(ls_medians(xm$x, xm$medians))    225µs    268µs     3527.     391KB     38.1</code></pre>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
 <pre class="r"><code>xm &lt;- x_medians(10)
 mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    133µs    165µs     5614.     391KB     57.1</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    127µs    152µs     6079.     391KB     63.1</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   35.3µs   60.3µs    13593.     391KB     142.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   34.6µs   57.9µs    17339.     391KB     176.</code></pre>
 <pre class="r"><code>xm &lt;- x_medians(20)
 mark(df_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    220µs    256µs     3620.     400KB     40.0</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    225µs    265µs     3413.     400KB     41.0</code></pre>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   36.8µs   61.4µs    13229.     392KB     93.2</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   37.4µs   60.1µs    14351.     392KB     148.</code></pre>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the
 list method is 5 times as fast. So, the list method is near constant
 time regardless of columns, whereas the data.frame method scales
@@ -1113,7 +1113,7 @@ as atomic vectors or lists.</p>
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x7fec7f10af98&gt;
+#&gt; &lt;bytecode: 0x7fee9f795a20&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 <pre class="r"><code>unname</code></pre>
 <pre><code>#&gt; function (obj, force = FALSE) 
@@ -1124,7 +1124,7 @@ as atomic vectors or lists.</p>
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x7fecac928fa8&gt;
+#&gt; &lt;bytecode: 0x7feedfc60f60&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <p>Answer: using <code>names()</code>, and <code>dimnames()</code> for
 <code>unname()</code>.</p>
@@ -1260,9 +1260,9 @@ a_table &lt;- table(a, sample(a))
 a_table</code></pre>
 <pre><code>#&gt;    
 #&gt; a   a b c
-#&gt;   a 0 1 0
+#&gt;   a 0 0 1
 #&gt;   b 1 0 0
-#&gt;   c 0 0 1</code></pre>
+#&gt;   c 0 1 0</code></pre>
 <pre class="r"><code>typeof(a_table)</code></pre>
 <pre><code>#&gt; [1] &quot;integer&quot;</code></pre>
 <pre class="r"><code>attributes(a_table)</code></pre>
@@ -1284,10 +1284,10 @@ b_table &lt;- table(b, sample(b))
 b_table</code></pre>
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 0 0 0 1
-#&gt;   b 1 0 0 0
-#&gt;   c 0 1 0 0
-#&gt;   d 0 0 1 0</code></pre>
+#&gt;   a 0 1 0 0
+#&gt;   b 0 0 0 1
+#&gt;   c 0 0 1 0
+#&gt;   d 1 0 0 0</code></pre>
 <pre class="r"><code>attributes(b_table)</code></pre>
 <pre><code>#&gt; $dim
 #&gt; [1] 4 4
@@ -1455,11 +1455,9 @@ date + 3599
 convert their input first into <code>POSIXct</code> and
 <code>Date</code>, respectively.</p>
 <pre class="r"><code>c(dttm_ct, date)</code></pre>
-<pre><code>#&gt; [1] &quot;1970-01-01 01:00:00 UTC&quot; &quot;1970-01-02 00:00:00 UTC&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;1969-12-31 19:00:00 CST&quot; &quot;1970-01-01 18:00:00 CST&quot;</code></pre>
 <pre class="r"><code>unclass(c(dttm_ct, date))</code></pre>
-<pre><code>#&gt; [1]  3600 86400
-#&gt; attr(,&quot;tzone&quot;)
-#&gt; [1] &quot;UTC&quot;</code></pre>
+<pre><code>#&gt; [1]  3600 86400</code></pre>
 <pre class="r"><code>c(date, dttm_ct)</code></pre>
 <pre><code>#&gt; [1] &quot;1970-01-02&quot; &quot;1970-01-01&quot;</code></pre>
 <pre class="r"><code>unclass(c(date, dttm_ct))</code></pre>
@@ -2007,13 +2005,13 @@ permute the rows and columns in one step?</li>
 df[, sample(ncol(df))]</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["z"],"name":[1],"type":["chr"],"align":["left"]},{"label":["x"],"name":[2],"type":["int"],"align":["right"]},{"label":["y"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"a","2":"1","3":"5","_rn_":"1"},{"1":"b","2":"2","3":"4","_rn_":"2"},{"1":"c","2":"3","3":"3","_rn_":"3"},{"1":"d","2":"4","3":"2","_rn_":"4"},{"1":"e","2":"5","3":"1","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"5","3":"a","_rn_":"1"},{"1":"2","2":"4","3":"b","_rn_":"2"},{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"4","2":"2","3":"d","_rn_":"4"},{"1":"5","2":"1","3":"e","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>df[sample(nrow(df)), sample(ncol(df))]</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["y"],"name":[1],"type":["int"],"align":["right"]},{"label":["z"],"name":[2],"type":["chr"],"align":["left"]},{"label":["x"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"5","2":"a","3":"1","_rn_":"1"},{"1":"1","2":"e","3":"5","_rn_":"5"},{"1":"2","2":"d","3":"4","_rn_":"4"},{"1":"4","2":"b","3":"2","_rn_":"2"},{"1":"3","2":"c","3":"3","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["y"],"name":[1],"type":["int"],"align":["right"]},{"label":["x"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"2","2":"4","3":"d","_rn_":"4"},{"1":"5","2":"1","3":"a","_rn_":"1"},{"1":"1","2":"5","3":"e","_rn_":"5"},{"1":"4","2":"2","3":"b","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -2045,13 +2043,13 @@ initial row, a final row, and every row in between)?</li>
 sample_rows(df, 3)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"1","2":"5","3":"a","_rn_":"1"},{"1":"2","2":"4","3":"b","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"5","2":"1","3":"e","_rn_":"5"},{"1":"4","2":"2","3":"d","_rn_":"4"},{"1":"2","2":"4","3":"b","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>sample_rows(df, 3, contiguous = TRUE)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"5","3":"a","_rn_":"1"},{"1":"2","2":"4","3":"b","_rn_":"2"},{"1":"3","2":"3","3":"c","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"2","2":"4","3":"b","_rn_":"2"},{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"4","2":"2","3":"d","_rn_":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>try(sample_rows(df, 6))</code></pre>
@@ -2330,7 +2328,7 @@ function. Which of the two approaches below is correct? Why?</li>
 </ol>
 <pre class="r"><code>function(x) 3()</code></pre>
 <pre><code>#&gt; function(x) 3()
-#&gt; &lt;environment: 0x7fec5e9f6390&gt;</code></pre>
+#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
 <pre class="r"><code>(function(x) 3)()</code></pre>
 <pre><code>#&gt; [1] 3</code></pre>
 <p>Answer: The second is correct, as the first is the form of defining a
@@ -2705,7 +2703,7 @@ two unique elements before <code>xlim</code> is computed.</p>
   print(x)
 }
 show_time()</code></pre>
-<pre><code>#&gt; [1] &quot;2022-08-14 20:08:35 CDT&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;2022-11-20 13:32:45 CST&quot;</code></pre>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is
 evaluated. This is a confusing use of lazy evaluation.</p>
 <p>AR Solutions: Before <code>show_time()</code> accesses <code>x</code>
@@ -3047,7 +3045,7 @@ cor(m = &quot;k&quot;, y = y, u = &quot;p&quot;, x = x)</code></pre>
 <pre class="r"><code>x &lt;- sample(c(1:10, NA), 20, replace = TRUE)
 y &lt;- runif(20)
 cor(x, y, use = &quot;pairwise.complete.obs&quot;, method = &quot;kendall&quot;)</code></pre>
-<pre><code>#&gt; [1] -0.2496535</code></pre>
+<pre><code>#&gt; [1] -0.2639914</code></pre>
 <p>AR Solutions: None of these functions provides a <code>...</code>
 argument. Therefore, the function arguments are first matched exactly,
 then via partial matching and finally by position. This leads us to the
@@ -3105,7 +3103,7 @@ vector.</li>
 v &lt;- 1:20
 modrand(v) &lt;- NA
 v</code></pre>
-<pre><code>#&gt;  [1]  1  2  3  4 NA  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 NA 12 13 14 15 16 17 18 19 20</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: Let’s define <code>random&lt;-</code> like this:</p>
 <pre class="r"><code>`random&lt;-` &lt;- function(x, value) {
@@ -3193,68 +3191,68 @@ also allows to return the position on the search path
 objects only. This gives us the following statement to begin with:</p>
 <pre class="r"><code>repls &lt;- apropos(&quot;&lt;-&quot;, where = TRUE, mode = &quot;function&quot;)
 head(repls, 30)</code></pre>
-<pre><code>#&gt;                     22                     22                     22                     22 
+<pre><code>#&gt;                     21                     21                     21                     21 
 #&gt;        &quot;.rowNamesDF&lt;-&quot;                 &quot;[[&lt;-&quot;      &quot;[[&lt;-.data.frame&quot;          &quot;[[&lt;-.factor&quot; 
-#&gt;                     22                     22                     22                     22 
+#&gt;                     21                     21                     21                     21 
 #&gt; &quot;[[&lt;-.numeric_version&quot;         &quot;[[&lt;-.POSIXlt&quot;                  &quot;[&lt;-&quot;       &quot;[&lt;-.data.frame&quot; 
-#&gt;                     22                     22                     22                     22 
+#&gt;                     21                     21                     21                     21 
 #&gt;             &quot;[&lt;-.Date&quot;         &quot;[&lt;-.difftime&quot;           &quot;[&lt;-.factor&quot;  &quot;[&lt;-.numeric_version&quot; 
-#&gt;                     22                     22                     22                      3 
+#&gt;                     21                     21                     21                      3 
 #&gt;          &quot;[&lt;-.POSIXct&quot;          &quot;[&lt;-.POSIXlt&quot;                  &quot;@&lt;-&quot;                &quot;%@%&lt;-&quot; 
-#&gt;                     22                     22                     22                     22 
+#&gt;                     21                     21                     21                     21 
 #&gt;                   &quot;&lt;-&quot;                  &quot;&lt;&lt;-&quot;                  &quot;$&lt;-&quot;       &quot;$&lt;-.data.frame&quot; 
-#&gt;                     19                     22                     22                     19 
+#&gt;                     19                     21                     21                     19 
 #&gt;                 &quot;as&lt;-&quot;               &quot;attr&lt;-&quot;         &quot;attributes&lt;-&quot;               &quot;body&lt;-&quot; 
-#&gt;                     22                     22                     19                     22 
+#&gt;                     21                     21                     19                     21 
 #&gt;               &quot;body&lt;-&quot;              &quot;class&lt;-&quot;             &quot;coerce&lt;-&quot;           &quot;colnames&lt;-&quot; 
-#&gt;                     22                      8 
+#&gt;                     21                      7 
 #&gt;            &quot;comment&lt;-&quot;          &quot;contrasts&lt;-&quot;</code></pre>
 <p>To restrict <code>repl</code> to names of replacement functions from
 the <code>{base}</code> package, we select only matches containing the
 relevant position on the search path.</p>
 <pre class="r"><code>repls_base &lt;- repls[names(repls) == length(search())]
 repls_base</code></pre>
-<pre><code>#&gt;                        22                        22                        22 
+<pre><code>#&gt;                        21                        21                        21 
 #&gt;           &quot;.rowNamesDF&lt;-&quot;                    &quot;[[&lt;-&quot;         &quot;[[&lt;-.data.frame&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;             &quot;[[&lt;-.factor&quot;    &quot;[[&lt;-.numeric_version&quot;            &quot;[[&lt;-.POSIXlt&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;                     &quot;[&lt;-&quot;          &quot;[&lt;-.data.frame&quot;                &quot;[&lt;-.Date&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;            &quot;[&lt;-.difftime&quot;              &quot;[&lt;-.factor&quot;     &quot;[&lt;-.numeric_version&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;             &quot;[&lt;-.POSIXct&quot;             &quot;[&lt;-.POSIXlt&quot;                     &quot;@&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;                      &quot;&lt;-&quot;                     &quot;&lt;&lt;-&quot;                     &quot;$&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;          &quot;$&lt;-.data.frame&quot;                  &quot;attr&lt;-&quot;            &quot;attributes&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;                  &quot;body&lt;-&quot;                 &quot;class&lt;-&quot;              &quot;colnames&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;               &quot;comment&lt;-&quot;                  &quot;diag&lt;-&quot;                   &quot;dim&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;              &quot;dimnames&lt;-&quot;   &quot;dimnames&lt;-.data.frame&quot;              &quot;Encoding&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;           &quot;environment&lt;-&quot;               &quot;formals&lt;-&quot;                 &quot;is.na&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;         &quot;is.na&lt;-.default&quot;          &quot;is.na&lt;-.factor&quot; &quot;is.na&lt;-.numeric_version&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;                &quot;length&lt;-&quot;           &quot;length&lt;-.Date&quot;       &quot;length&lt;-.difftime&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;         &quot;length&lt;-.factor&quot;        &quot;length&lt;-.POSIXct&quot;        &quot;length&lt;-.POSIXlt&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;                &quot;levels&lt;-&quot;         &quot;levels&lt;-.factor&quot;                  &quot;mode&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;        &quot;mostattributes&lt;-&quot;                 &quot;names&lt;-&quot;         &quot;names&lt;-.POSIXlt&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;              &quot;oldClass&lt;-&quot;            &quot;parent.env&lt;-&quot;            &quot;regmatches&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;             &quot;row.names&lt;-&quot;  &quot;row.names&lt;-.data.frame&quot;     &quot;row.names&lt;-.default&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;              &quot;rownames&lt;-&quot;                 &quot;split&lt;-&quot;      &quot;split&lt;-.data.frame&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;         &quot;split&lt;-.default&quot;          &quot;storage.mode&lt;-&quot;                &quot;substr&lt;-&quot; 
-#&gt;                        22                        22                        22 
+#&gt;                        21                        21                        21 
 #&gt;             &quot;substring&lt;-&quot;                 &quot;units&lt;-&quot;        &quot;units&lt;-.difftime&quot;</code></pre>
 <p>To find out which of these functions are primitives, we first search
 for these functions via <code>mget()</code> and then subset the result
@@ -3316,17 +3314,17 @@ conventions from mathematics.</li>
 
 # taken from docs examples
 (x &lt;- c(sort(sample(1:20, 9)), NA))</code></pre>
-<pre><code>#&gt;  [1]  3  5  6 11 13 14 16 17 20 NA</code></pre>
+<pre><code>#&gt;  [1]  2  3  4  8 11 14 17 18 20 NA</code></pre>
 <pre class="r"><code>(y &lt;- c(sort(sample(3:23, 7)), NA))</code></pre>
-<pre><code>#&gt; [1]  8  9 12 14 18 19 21 NA</code></pre>
+<pre><code>#&gt; [1]  5 10 13 17 18 19 20 NA</code></pre>
 <pre class="r"><code>x %u% y</code></pre>
-<pre><code>#&gt;  [1]  3  5  6 11 13 14 16 17 20 NA  8  9 12 18 19 21</code></pre>
+<pre><code>#&gt;  [1]  2  3  4  8 11 14 17 18 20 NA  5 10 13 19</code></pre>
 <pre class="r"><code>x %n% y</code></pre>
-<pre><code>#&gt; [1] 14 NA</code></pre>
+<pre><code>#&gt; [1] 17 18 20 NA</code></pre>
 <pre class="r"><code>x %s% y</code></pre>
-<pre><code>#&gt; [1]  3  5  6 11 13 16 17 20</code></pre>
+<pre><code>#&gt; [1]  2  3  4  8 11 14</code></pre>
 <pre class="r"><code>y %s% x</code></pre>
-<pre><code>#&gt; [1]  8  9 12 18 19 21</code></pre>
+<pre><code>#&gt; [1]  5 10 13 19</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: These infix operators could be defined in the following
 way. (<code>%/%</code> is chosen instead of <code>%\%</code>, because
@@ -3405,14 +3403,14 @@ e1$loop &lt;- e1
 
 # Print the environment
 env_print(e1)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fecba509210&gt;
-#&gt; Parent: &lt;environment: 0x7fec5e9f6390&gt;
+<pre><code>#&gt; &lt;environment: 0x7fee8a256320&gt;
+#&gt; Parent: &lt;environment: 0x7fee9df698e8&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
 <pre class="r"><code># Verify that it contains itself
 lobstr::ref(e1)</code></pre>
-<pre><code>#&gt; █ [1:0x7fecba509210] &lt;env&gt; 
-#&gt; └─loop = [1:0x7fecba509210]</code></pre>
+<pre><code>#&gt; █ [1:0x7fee8a256320] &lt;env&gt; 
+#&gt; └─loop = [1:0x7fee8a256320]</code></pre>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>Create a pair of environments as illustrated by this picture.</li>
@@ -3432,13 +3430,13 @@ e1$loop &lt;- e2
 e2$dedoop &lt;- e1
 
 lobstr::ref(e1)</code></pre>
-<pre><code>#&gt; █ [1:0x7fecba6829c0] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x7fecba6d0a30] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x7fecba6829c0]</code></pre>
+<pre><code>#&gt; █ [1:0x7fee89d84ce8] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x7fee89dca000] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x7fee89d84ce8]</code></pre>
 <pre class="r"><code>lobstr::ref(e2)</code></pre>
-<pre><code>#&gt; █ [1:0x7fecba6d0a30] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x7fecba6829c0] &lt;env&gt; 
-#&gt;            └─loop = [1:0x7fecba6d0a30]</code></pre>
+<pre><code>#&gt; █ [1:0x7fee89dca000] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x7fee89d84ce8] &lt;env&gt; 
+#&gt;            └─loop = [1:0x7fee89dca000]</code></pre>
 <hr />
 <ol start="4" style="list-style-type: decimal">
 <li>Explain why <code>e[[1]]</code> and <code>e[c("a", "b")]</code>
@@ -3470,8 +3468,8 @@ env_poke_new(e_test, &quot;d&quot;, &quot;success&quot;)
 try(env_poke_new(e_test, &quot;a&quot;, &quot;fail&quot;))</code></pre>
 <pre><code>#&gt; Error in env_poke_new(e_test, &quot;a&quot;, &quot;fail&quot;) : nm &#39;a&#39; already bound</code></pre>
 <pre class="r"><code>env_print(e_test)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fec5feb7a38&gt;
-#&gt; Parent: &lt;environment: 0x7fec5e9f6390&gt;
+<pre><code>#&gt; &lt;environment: 0x7fee8ba86038&gt;
+#&gt; Parent: &lt;environment: 0x7fee9df698e8&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
 #&gt; • b: &lt;dbl&gt;
@@ -3567,7 +3565,7 @@ x &lt;- 5
 try(where(&quot;yyy&quot;))</code></pre>
 <pre><code>#&gt; Error : Can&#39;t find yyy</code></pre>
 <pre class="r"><code>where(&quot;x&quot;)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fec5e9f6390&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
 <pre class="r"><code>where(&quot;mean&quot;)</code></pre>
 <pre><code>#&gt; &lt;environment: namespace:base&gt;</code></pre>
 <pre class="r"><code>all_where &lt;- function(name, env = caller_env(), found = list()) {
@@ -3585,16 +3583,16 @@ try(where(&quot;yyy&quot;))</code></pre>
 
 all_where(&quot;x&quot;)</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7fec5e9f6390&gt;</code></pre>
+#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
 <pre class="r"><code>local({
   x &lt;- 10
   all_where(&quot;x&quot;)
 })</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7fec5ed5e710&gt;
+#&gt; &lt;environment: 0x7fee7ea07628&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x7fec5e9f6390&gt;</code></pre>
+#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: <code>where()</code> searches (recursively) for a given
 name within a given environment and its ancestors. If
@@ -3628,10 +3626,10 @@ e1b &lt;- env(e1a, b = 10, c = 11)
 e1c &lt;- env(e1b, a = 12, d = 13)
 where2(&quot;a&quot;, e1c)</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7fec8be40c50&gt;
+#&gt; &lt;environment: 0x7fee7e65dfc8&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x7fec5efc0948&gt;</code></pre>
+#&gt; &lt;environment: 0x7fee7db04a40&gt;</code></pre>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>Write a function called <code>fget()</code> that finds only function
@@ -3664,7 +3662,7 @@ try(fget(&quot;x&quot;))</code></pre>
 <pre class="r"><code>try(fget(&quot;print&quot;, inherits = FALSE))</code></pre>
 <pre><code>#&gt; Error : Can&#39;t find print</code></pre>
 <pre class="r"><code>fget(&quot;all_where&quot;, inherits = FALSE)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fec5e9f6390&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: We follow a similar approach to the previous exercise.
 This time we additionally check if the found object is a function and
@@ -3692,7 +3690,7 @@ mean &lt;- 10
 fget(&quot;mean&quot;, inherits = TRUE)</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod(&quot;mean&quot;)
-#&gt; &lt;bytecode: 0x7fec7cd17510&gt;
+#&gt; &lt;bytecode: 0x7feede819bc8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <hr />
 </div>
@@ -3758,11 +3756,11 @@ e_str(print)</code></pre>
 <pre class="r"><code>e_str(fget)</code></pre>
 <pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)  
 #&gt;  - attr(*, &quot;srcref&quot;)= &#39;srcref&#39; int [1:8] 1 9 17 1 9 1 1 17
-#&gt;   ..- attr(*, &quot;srcfile&quot;)=Classes &#39;srcfilecopy&#39;, &#39;srcfile&#39; &lt;environment: 0x7fec792a1d20&gt;</code></pre>
+#&gt;   ..- attr(*, &quot;srcfile&quot;)=Classes &#39;srcfilecopy&#39;, &#39;srcfile&#39; &lt;environment: 0x7feea8f18808&gt;</code></pre>
 <pre><code>#&gt; fn_env():</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fec5e9f6390&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
 <pre><code>#&gt; environment():</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7fec5e9f6390&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: To solve this problem, we need to write a function that
 takes the name of a function and looks for that function returning both
@@ -3925,11 +3923,11 @@ file.create(tmp)</code></pre>
 <pre><code>#&gt; [1] TRUE</code></pre>
 <pre class="r"><code>file.remove(tmp)</code></pre>
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//
-#&gt; RtmpQWt9Yh/file91b238a1215d&#39;, reason &#39;No such file or directory&#39;</code></pre>
+#&gt; Rtmpgc0Mas/file1b2879739eb8&#39;, reason &#39;No such file or directory&#39;</code></pre>
 <pre><code>#&gt; [1] FALSE</code></pre>
 <pre class="r"><code>try(safe_file_remove(tmp))</code></pre>
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpQWt9Yh/file91b238a1215d&#39; does not exist</code></pre>
+#&gt;   file &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//Rtmpgc0Mas/file1b2879739eb8&#39; does not exist</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: We prefer the following solution for its clarity and
 simplicity:</p>
@@ -4089,7 +4087,7 @@ works.</li>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x7feca994d7e8&gt;
+#&gt; &lt;bytecode: 0x7fee89d97810&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 <pre class="r"><code>catch_cnd(stop(&quot;error&quot;))</code></pre>
 <pre><code>#&gt; &lt;simpleError in force(expr): error&gt;</code></pre>

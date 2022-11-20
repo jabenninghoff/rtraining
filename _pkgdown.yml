@@ -27,6 +27,8 @@ navbar:
         href: advanced-r-1.html
       - text: Advanced R Workbook (Functional programming)
         href: advanced-r-2.html
+      - text: Advanced R Workbook (Object-oriented programming)
+        href: advanced-r-3.html
       - text: R Setup Log
         href: r-setup-log.html
       - text: R Training Log

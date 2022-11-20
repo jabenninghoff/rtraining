@@ -14,14 +14,14 @@
 
 <title>FaultTree.widget Test</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.1.3/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.0/bs3compat.js"></script>
+<script src="site_libs/bs3compat-0.4.1/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.1/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.1/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -152,11 +152,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -185,8 +189,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -194,16 +198,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -361,6 +358,9 @@ div.tocify {
       <a href="advanced-r-2.html">Advanced R Workbook (Functional programming)</a>
     </li>
     <li>
+      <a href="advanced-r-3.html">Advanced R Workbook (Object-oriented programming)</a>
+    </li>
+    <li>
       <a href="r-setup-log.html">R Setup Log</a>
     </li>
     <li>
@@ -426,12 +426,12 @@ tree1 &lt;- addDemand(tree1, at = 1, mttf = 1.0, name = &quot;External power&quo
 tree1 &lt;- ftree.calc(tree1)
 
 ftree2widget(tree1, height = 500, width = 800)</code></pre>
-<div id="htmlwidget-98e87adc751e47d632c6" style="width:800px;height:500px;" class="ftree_widget1 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-98e87adc751e47d632c6">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2b8c1b6f76d9c1c8298b" style="width:800px;height:500px;" class="ftree_widget1 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2b8c1b6f76d9c1c8298b">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 <p>Check rendering without height and width specified:</p>
 <pre class="r"><code>ftree2widget(tree1)</code></pre>
-<div id="htmlwidget-b9c7e759f3f01f3c8925" style="width:768px;height:432px;" class="ftree_widget1 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b9c7e759f3f01f3c8925">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-052c39e1c1e82010409b" style="width:768px;height:432px;" class="ftree_widget1 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-052c39e1c1e82010409b">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="solution" class="section level1">
 <h1>Solution</h1>
