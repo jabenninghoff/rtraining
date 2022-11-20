@@ -1,3 +1,9 @@
+# rtraining 0.8.11
+
+* Added Advanced R Workbook (Object-oriented programming): Workbook for completing quizzes and exercises from the "Object-oriented programming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io)
+
+* Updated Advanced R Workbook (Object-oriented programming): add solutions for Chapter 13
+
 # rtraining 0.8.10
 
 * Updated Advanced R Workbook (Functional programming): add solutions for Chapter 10, 11
