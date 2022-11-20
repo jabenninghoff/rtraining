@@ -40,6 +40,7 @@ Yan
 atomics
 backtrace
 behaviour
+behaviours
 bookdown
 categorise
 colour
@@ -124,6 +125,7 @@ srf
 standardised
 stringr
 styler
+subclasses
 subsettable
 summarise
 testthat

@@ -765,3 +765,135 @@ new_lm <- function(coefficients, residuals, effects, rank, fitted.values, assign
 ```
 
 ---
+
+## 13.6.3 Exercises
+
+1.  How does `[.Date` support subclasses? How does it fail to support 
+    subclasses?
+
+```{r}
+`[.Date`
+`.Date`
+```
+
+Answer: by passing the object's class to `.Date`, `[.Date` avoids the problem of `[.secret` and can return subclasses of `Date`. However, the `.Date` method can return objects that don't contain the class `Date`.
+
+AR Solutions: `[.Date` calls `.Date` with the result of calling `[` on the parent class, along with `oldClass()`:
+
+`.Date` is kind of like a constructor for date classes, although it doesn't check the input is the correct type:
+
+`oldClass()` is basically the same as `class()`, except that it doesn't return implicit classes, i.e. it's basically `attr(x, "class")` (looking at the C code that's exactly what it does, except that it also handles S4 objects).
+
+As `oldClass()` is "basically" `class()`, we can rewrite `[.Date` to make the implementation more clear:
+
+```{r}                                                            
+`[.Date` <- function(x, ..., drop = TRUE) {
+  out <- NextMethod("[")
+  class(out) <- class(x)
+  out
+}
+```
+                                                        
+So, `[.Date` ensures that the output has the same class as in the input. But what about other attributes that a subclass might possess? They get lost:
+
+```{r}
+x <- structure(1:4, test = "test", class = c("myDate", "Date"))
+attributes(x[1])
+```
+
+Note: this is a better explanation of how it fails to support subclasses; it drops non-class attributes.
+
+---
+
+2.  R has two classes for representing date time data, `POSIXct` and
+    `POSIXlt`, which both inherit from `POSIXt`. Which generics have
+    different behaviours for the two classes? Which generics share the same
+    behaviour?
+
+Answer: if a generic is defined for either class, it must have different behaviors. Generics that aren't defined for either class must have the same behavior. We can get the list of generics defined for either class using `sloop::s3_methods_class()`. These generics have different behaviors for the two classes:
+
+```{r, warning = FALSE}
+ct_generics <- s3_methods_class("POSIXct")$generic
+lt_generics <- s3_methods_class("POSIXlt")$generic
+defined_generics <- union(ct_generics, lt_generics)
+defined_generics
+```
+
+We adapt work from previous exercises to get the list of all generics, and identify S3 generics that aren't defined for either class, which must have the same behavior:
+
+```{r}
+s3_generic_funs <- Filter(is_s3_generic, names(funs))
+union(setdiff(defined_generics, s3_generic_funs), setdiff(s3_generic_funs, defined_generics))
+```
+
+Note: this code doesn't quite work, since `Summary` is a generic according to `isGeneric` and is not according to `is_s3_generic`, and `weighted.mean` is a non-base S3 generic.
+
+AR Solutions: To answer this question, we have to get the respective generics
+
+```{r, warning = FALSE}
+generics_t <- s3_methods_class("POSIXt")$generic
+generics_ct <- s3_methods_class("POSIXct")$generic
+generics_lt <- s3_methods_class("POSIXlt")$generic
+```
+
+The generics in `generics_t` with a method for the superclass `POSIXt` potentially share the same behaviour for both subclasses. However, if a generic has a specific method for one of the subclasses, it has to be subtracted:
+
+```{r}
+# These generics provide subclass-specific methods
+union(generics_ct, generics_lt)
+
+# These generics share (inherited) methods for both subclasses
+setdiff(generics_t, union(generics_ct, generics_lt))
+```
+
+Note: again, advanced R gives a better answer to this question, by comparing to the generics supported by the parent class.
+
+---
+
+3.  What do you expect this code to return? What does it actually return?
+    Why?
+
+```{r}
+generic2 <- function(x) UseMethod("generic2")
+generic2.a1 <- function(x) "a1"
+generic2.a2 <- function(x) "a2"
+generic2.b <- function(x) {
+  class(x) <- "a1"
+  NextMethod()
+}
+generic2(structure(list(), class = c("b", "a2")))
+```
+
+Answer: I'd expect this code to return `"a2"` with a class of `c("a1", "a2")`. It actually returns "a2" with a class of `character`. This is because when `generic2.b` calls `NextMethod()`, `generic2.a2` is called which returns a bare `"a2"`, dropping the class assigned by `generic2.b`.
+
+```{r}
+class(generic2(structure(list(), class = c("b", "a2"))))
+```
+
+
+AR Solutions: When we execute the code above, this is what is happening:
+
+- we pass an object of classes `b` and `a2` to `generic2()`, which prompts R to look for a method`generic2.b()`
+- the method `generic2.b()` then changes the class to `a1` and calls `NextMethod()`
+- One would think that this will lead R to call `generic2.a1()`, but in fact, as mentioned in *Advanced R*, `NextMethod()` 
+    > doesn’t actually work with the class attribute of the object, but instead uses a special global variable (.Class) to keep track of which method to call next.
+    
+   This is why `generic2.a2()` is called instead.
+
+```{r}
+generic2(structure(list(), class = c("b", "a2")))
+```
+
+Let's just double check the statement above and evaluate `.Class` explicitly within the `generic2.b()` method.
+
+```{r}
+generic2.b <- function(x) {
+  class(x) <- "a1"
+  print(.Class) # nolint: object_usage_linter.
+  NextMethod()
+}
+
+generic2(structure(list(), class = c("b", "a2")))
+```
+
+---
