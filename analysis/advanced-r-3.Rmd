@@ -897,3 +897,131 @@ generic2(structure(list(), class = c("b", "a2")))
 ```
 
 ---
+
+## 13.7.5 Exercises
+
+1.  Explain the differences in dispatch below:
+
+```{r}
+length.integer <- function(x) 10
+
+x1 <- 1:5
+class(x1)
+s3_dispatch(length(x1))
+
+x2 <- structure(x1, class = "integer")
+class(x2)
+s3_dispatch(length(x2))
+```
+
+Answer: `x1` dispatches using implicit class, which is `c("integer", "numeric")`. `x2` has an explicit class, so it is dispatched to `length.integer`.
+
+```{r}
+s3_class(x1)
+s3_class(x2)
+```
+
+AR Solutions: `class()` returns `integer` in both cases. However, while the class of `x1` is created implicitly and inherits from the `numeric` class, the class of `x2` is set explicitly. This is important because `length()` is an internal generic and internal generics only dispatch to methods when the class attribute has been set, i.e. internal generics do not use implicit classes.
+
+An object has no explicit class if `attr(x, "class")` returns `NULL`:
+
+```{r}
+attr(x1, "class")
+attr(x2, "class")
+```
+
+To see the relevant classes for the S3 dispatch, one can use `sloop::s3_class()`:
+
+```{r}
+s3_class(x1) # implicit
+
+s3_class(x2) # explicit
+```
+
+For a better understanding of `s3_dipatch()`'s output we quote from `?s3_dispatch`:
+- => method exists and is found by `UseMethod()`.
+- -> method exists and is used by `NextMethod()`.
+- \* method exists but is not used.
+- Nothing (and greyed out in console): method does not exist.
+
+Note: AR Solutions includes an additional important detail, that "internal generics only dispatch to methods when the class attribute has been set", which explains why the internal generic is used for `x1`.
+
+---
+
+2.  What classes have a method for the `Math` group generic in base R? Read
+    the source code. How do the methods work?
+
+Answer: four base classes have a method for `Math`: `data.frame`, `Date`, `difftime`, `factor`, and `POSIXt`.
+
+```{r}
+s3_methods_generic("Math") |>
+  filter(source == "base") # nolint: undesirable_function_linter. source is not used as a function.
+```
+
+```{r}
+Math.data.frame
+Math.Date
+Math.difftime
+Math.factor
+Math.POSIXt
+```
+
+- `Math.data.frame` performs math if all columns (variables) are either numeric, logical or complex,
+  and errors if any are not
+- `Math.difftime` performs only certain math functions: `abs`, `sign`, `floor`, `ceiling`, `trunc`,
+  `round`, and `signif`, and errors for other functions
+- `Math.Date`, `Math.factor`, and `Math.POSIXt` always error
+
+AR Solutions: : The following functions belong to this group (see ?`Math`):
+
+- `abs`, `sign`, `sqrt`, `floor`, `ceiling`, `trunc`, `round`, `signif`
+- `exp`, `log`, `expm1`, `log1p`, `cos`, `sin`, `tan`, `cospi`, `sinpi`, `tanpi`, `acos`, `asin`,
+  `atan`, `cosh`, `sinh`, `tanh`, `acosh`, `asinh`, `atanh`
+- `lgamma`, `gamma`, `digamma`, `trigamma`
+- `cumsum`, `cumprod`, `cummax`, `cummin`
+
+The following classes have a method for this group generic:
+
+```{r}
+s3_methods_generic("Math")
+```
+
+To explain the basic idea, we just overwrite the data frame method:
+
+```{r}
+Math.data.frame <- function(x) "hello"
+```
+
+Now all functions from the math generic group, will return `"hello"`
+
+```{r}
+abs(mtcars)
+exp(mtcars)
+lgamma(mtcars)
+```
+
+Of course, different functions should perform different calculations. Here `.Generic` comes into play, which provides us with the calling generic as a string
+
+```{r}
+Math.data.frame <- function(x, ...) {
+  .Generic # nolint: object_usage_linter.
+}
+abs(mtcars)
+exp(mtcars)
+lgamma(mtcars)
+rm(Math.data.frame)
+```
+
+The original source code of `Math.data.frame()` is a good example on how to invoke the string returned by `.Generic` into a specific method. `Math.factor()` is a good example of a method, which is simply defined for better error messages.
+
+Note: I prefer my answer to the AR Solutions answer.
+
+---
+
+3.  `Math.difftime()` is more complicated than I described. Why?
+
+Answer: the explanation in the text omits the fact that `Math.difftime()` first checks that the math function being called.
+
+AR Solutions: `Math.difftime()` also excludes cases apart from `abs`, `sign`, `floor`, `ceiling`, `trunc`, `round` and `signif` and needs to return a fitting error message.
+
+---
