@@ -7,6 +7,7 @@ DF
 Dev
 DevOps
 FaultTree
+GG
 Hadley
 Hadley's
 Holtz
@@ -23,6 +24,7 @@ POSIXct
 Pre
 README
 RStudio
+Rademaker
 Rbuildignore
 Rmd
 Roxygen
@@ -37,6 +39,7 @@ Vectorised
 Wickham
 YAML
 Yan
+asknumbers
 atomics
 backtrace
 behaviour
@@ -105,6 +108,7 @@ programmatically
 purrr
 purrr's
 quadratically
+quattro
 rdev
 readr
 rebase
@@ -136,6 +140,7 @@ tibbles
 tidyr
 tidyverse
 traceback
+travelled
 unlist
 validator
 vctrs
@@ -144,4 +149,5 @@ vectorized
 vectorizes
 visualisation
 visualise
+wd
 yihui
