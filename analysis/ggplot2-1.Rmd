@@ -1,0 +1,21 @@
+---
+title: "ggplot2 (Getting started)"
+date: '2022-11-20'
+output:
+  html_notebook:
+    theme:
+      version: 5
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+---
+
+Workbook for completing quizzes and exercises from the "Getting started" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
+
+```{r setup, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  fig.align = "center"
+)
+```
