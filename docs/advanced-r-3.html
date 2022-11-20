@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2022-08-15" />
+
+<title>Advanced R Workbook (Object-oriented programming)</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link href="site_libs/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.1.3/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.4.1/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.1/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.1/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">rtraining notebooks</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="FaultTree.html">FaultTree.widget Test</a>
+    </li>
+    <li>
+      <a href="advanced-r-1.html">Advanced R Workbook (Foundations)</a>
+    </li>
+    <li>
+      <a href="advanced-r-2.html">Advanced R Workbook (Functional programming)</a>
+    </li>
+    <li>
+      <a href="advanced-r-3.html">Advanced R Workbook (Object-oriented programming)</a>
+    </li>
+    <li>
+      <a href="r-setup-log.html">R Setup Log</a>
+    </li>
+    <li>
+      <a href="r-training-log.html">R Training Log</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jabenninghoff/rtraining/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Advanced R Workbook (Object-oriented
+programming)</h1>
+<h4 class="date">2022-08-15</h4>
+
+</div>
+
+
+<p>Workbook for completing quizzes and exercises from the
+“Object-oriented programming” chapters of <a
+href="https://adv-r.hadley.nz/index.html">Advanced R</a>, second
+edition, with comparisons to solutions from <a
+href="https://advanced-r-solutions.rbind.io">Advanced R
+Solutions</a>.</p>
+<pre class="r"><code>library(sloop)
+library(purrr)
+library(dplyr)
+
+# from https://github.com/hadley/adv-r/blob/master/common.R
+knitr::opts_chunk$set(
+  comment = &quot;#&gt;&quot;,
+  fig.align = &quot;center&quot;
+)
+
+knitr::knit_hooks$set(
+  small_mar = function(before, options, envir) {
+    if (before) {
+      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+    }
+  }
+)</code></pre>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This workbook includes answers and solutions to the quizzes and
+exercises from <a href="https://adv-r.hadley.nz/index.html">Advanced
+R</a> and <a href="https://advanced-r-solutions.rbind.io">Advanced R
+Solutions</a>, organized by chapter. It includes excerpts from both
+books, copied here.</p>
+<p><strong>WARNING, SPOILERS!</strong> If you haven’t read Advanced R
+and intend to complete the quizzes and exercises, don’t read this
+notebook. It contains my (potentially wrong) answers to both.</p>
+</div>
+<div id="base-types" class="section level1">
+<h1>12 Base types</h1>
+<p>To talk about objects and OOP in R we first need to clear up a
+fundamental confusion about two uses of the word “object”. So far in
+this book, we’ve used the word in the general sense captured by John
+Chambers’ pithy quote: “Everything that exists in R is an object”.
+However, while everything <em>is</em> an object, not everything is
+object-oriented. This confusion arises because the base objects come
+from S, and were developed before anyone thought that S might need an
+OOP system. The tools and nomenclature evolved organically over many
+years without a single guiding principle.</p>
+<p>Most of the time, the distinction between objects and object-oriented
+objects is not important. But here we need to get into the nitty gritty
+details so we’ll use the terms <strong>base objects</strong> and
+<strong>OO objects</strong> to distinguish them.</p>
+</div>
+<div id="s3" class="section level1">
+<h1>13 S3</h1>
+<p>S3 is R’s first and simplest OO system. S3 is informal and ad hoc,
+but there is a certain elegance in its minimalism: you can’t take away
+any part of it and still have a useful OO system. For these reasons, you
+should use it, unless you have a compelling reason to do otherwise. S3
+is the only OO system used in the base and stats packages, and it’s the
+most commonly used system in CRAN packages.</p>
+<p>S3 is very flexible, which means it allows you to do things that are
+quite ill-advised. If you’re coming from a strict environment like Java
+this will seem pretty frightening, but it gives R programmers a
+tremendous amount of freedom. It may be very difficult to prevent people
+from doing something you don’t want them to do, but your users will
+never be held back because there is something you haven’t implemented
+yet. Since S3 has few built-in constraints, the key to its successful
+use is applying the constraints yourself. This chapter will therefore
+teach you the conventions you should (almost) always follow.</p>
+<p>The goal of this chapter is to show you how the S3 system works, not
+how to use it effectively to create new classes and generics. I’d
+recommend coupling the theoretical knowledge from this chapter with the
+practical knowledge encoded in the <a
+href="https://vctrs.r-lib.org">vctrs package</a>.</p>
+<div id="exercises" class="section level2">
+<h2>13.2.1 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Describe the difference between <code>t.test()</code> and
+<code>t.data.frame()</code>. When is each function called?</li>
+</ol>
+<pre class="r"><code>ftype(t.test)</code></pre>
+<pre><code>#&gt; [1] &quot;S3&quot;      &quot;generic&quot;</code></pre>
+<pre class="r"><code>ftype(t.data.frame)</code></pre>
+<pre><code>#&gt; [1] &quot;S3&quot;     &quot;method&quot;</code></pre>
+<pre class="r"><code>s3_dispatch(t.test(formula()))</code></pre>
+<pre><code>#&gt; =&gt; t.test.formula
+#&gt;  * t.test.default</code></pre>
+<pre class="r"><code>s3_dispatch(t(data.frame()))</code></pre>
+<pre><code>#&gt; =&gt; t.data.frame
+#&gt; -&gt; t.default</code></pre>
+<p>Answer: As noted by <code>sloop::ftype()</code> and the docs,
+<code>t.test()</code> is a S3 generic, and <code>t.data.frame()</code>
+is an S3 method for <code>t()</code> (transpose).
+<code>t.data.frame()</code> is called as a method when calling
+<code>t(x)</code> when <code>x</code> is a <code>data.frame</code>.
+<code>t.test()</code> calls either <code>t.test.default</code> or
+<code>t.test.formula</code>.</p>
+<p>AR Solutions: Because of S3’s <code>generic.class()</code> naming
+scheme, both functions may initially look similar, while they are in
+fact unrelated.</p>
+<ul>
+<li><code>t.test()</code> is a <em>generic</em> function that performs a
+t-test.</li>
+<li><code>t.data.frame()</code> is a <em>method</em> that gets called by
+the generic <code>t()</code> to transpose data frame input.</li>
+</ul>
+<p>Due to R’s S3 dispatch rules, <code>t.test()</code> would also get
+called when <code>t()</code> is applied to an object of class
+<code>test</code></p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Make a list of commonly used base R functions that contain
+<code>.</code> in their name but are not S3 methods.</li>
+</ol>
+<pre class="r"><code>ftype(as.character)</code></pre>
+<pre><code>#&gt; [1] &quot;primitive&quot; &quot;generic&quot;</code></pre>
+<pre class="r"><code>ftype(as.data.frame)</code></pre>
+<pre><code>#&gt; [1] &quot;S3&quot;      &quot;generic&quot;</code></pre>
+<pre class="r"><code>ftype(data.frame)</code></pre>
+<pre><code>#&gt; [1] &quot;function&quot;</code></pre>
+<pre class="r"><code>ftype(eval.parent)</code></pre>
+<pre><code>#&gt; [1] &quot;function&quot;</code></pre>
+<pre class="r"><code>ftype(file.path)</code></pre>
+<pre><code>#&gt; [1] &quot;internal&quot;</code></pre>
+<pre class="r"><code>ftype(file.copy)</code></pre>
+<pre><code>#&gt; [1] &quot;internal&quot;</code></pre>
+<pre class="r"><code>ftype(is.null)</code></pre>
+<pre><code>#&gt; [1] &quot;primitive&quot;</code></pre>
+<pre class="r"><code>ftype(is.data.frame)</code></pre>
+<pre><code>#&gt; [1] &quot;function&quot;</code></pre>
+<pre class="r"><code>ftype(Sys.localeconv)</code></pre>
+<pre><code>#&gt; [1] &quot;internal&quot;</code></pre>
+<pre class="r"><code>ftype(Sys.time)</code></pre>
+<pre><code>#&gt; [1] &quot;internal&quot;</code></pre>
+<p>Answer:</p>
+<ul>
+<li>All of the <code>as.</code> functions</li>
+<li><code>data.frame</code></li>
+<li>All of the <code>file.</code> functions</li>
+<li>All of the <code>is.</code> functions</li>
+<li>All of the <code>Sys.</code> functions</li>
+</ul>
+<p>AR Solutions: In recent years “snake_case”-style has become
+increasingly common when naming functions and variables in R. But many
+functions in base R will continue to be “point.separated”, which is why
+some inconsistency in your R code most likely cannot be avoided.
+(<code>install.packages(), read.csv(), list.files(), download.file(), data.frame(), as.character(), Sys.Date(), all.equal(), do.call(), on.exit()</code>)</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>What does the <code>as.data.frame.data.frame()</code> method do? Why
+is it confusing? How could you avoid this confusion in your own
+code?</li>
+</ol>
+<pre class="r"><code>s3_dispatch(as.data.frame(data.frame()))</code></pre>
+<pre><code>#&gt; =&gt; as.data.frame.data.frame
+#&gt;  * as.data.frame.default</code></pre>
+<p>Answer: <code>as.data.frame.data.frame()</code> is the method used to
+coerce a <code>data.frame</code> to a <code>data.frame</code>. This is
+confusing because the class contains a period (as does the function
+call); avoiding periods improves readability:
+<code>as_dataframe.dataframe</code> makes the generic and method
+clear.</p>
+<p>AR Solutions: The function <code>as.data.frame.data.frame()</code>
+implements the <code>data.frame()</code> <em>method</em> for the
+<code>as.data.frame()</code> <em>generic</em>, which coerces objects to
+data frames.</p>
+<p>The name is confusing, because it does not clearly communicate the
+type of the function, which could be a regular function, a generic or a
+method. Even if we assume a method, the amount of <code>.</code>’s makes
+it difficult to separate the generic- and the class-part of the name. Is
+it the <code>data.frame.data.frame()</code> method for the
+<code>as()</code> generic? Is it the <code>frame.data.frame()</code>
+method for the <code>as.data()</code> generic?</p>
+<p>We could avoid this confusion by applying a different naming
+convention (e.g. “snake_case”) for our class and function names.</p>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>Describe the difference in behaviour in these two calls.</li>
+</ol>
+<pre class="r"><code>set.seed(1014)
+some_days &lt;- as.Date(&quot;2017-01-31&quot;) + sample(10, 5)
+mean(some_days)</code></pre>
+<pre><code>#&gt; [1] &quot;2017-02-06&quot;</code></pre>
+<pre class="r"><code>mean(unclass(some_days))</code></pre>
+<pre><code>#&gt; [1] 17203.4</code></pre>
+<pre class="r"><code>s3_dispatch(mean(some_days))</code></pre>
+<pre><code>#&gt; =&gt; mean.Date
+#&gt;  * mean.default</code></pre>
+<pre class="r"><code>s3_dispatch(mean(unclass(some_days)))</code></pre>
+<pre><code>#&gt;    mean.double
+#&gt;    mean.numeric
+#&gt; =&gt; mean.default</code></pre>
+<p>Answer: the first call calculates the mean using
+<code>mean.Date()</code>, and so returns a date. using
+<code>unclass()</code> changes the date to its underlying value (double)
+which calculates the mean using <code>mean.default()</code>.</p>
+<p>AR Solutions: <code>mean()</code> is a generic function, which will
+select the appropriate method based on the class of the input.
+<code>some_days</code> has the class <code>Date</code> and
+<code>mean.Date(some_days)</code> will be used to calculate the mean
+date of <code>some_days</code>.</p>
+<p>After <code>unclass()</code> has removed the class attribute from
+<code>some_date</code>, the default method is chosen.
+<code>mean.default(unclass(some_days))</code> then calculates the mean
+of the underlying double.</p>
+<hr />
+<ol start="5" style="list-style-type: decimal">
+<li>What class of object does the following code return? What base type
+is it built on? What attributes does it use?</li>
+</ol>
+<pre class="r"><code>x &lt;- ecdf(rpois(100, 10))
+x</code></pre>
+<pre><code>#&gt; Empirical CDF 
+#&gt; Call: ecdf(rpois(100, 10))
+#&gt;  x[1:18] =      2,      3,      4,  ...,     18,     19</code></pre>
+<pre class="r"><code>str(x)</code></pre>
+<pre><code>#&gt; function (v)  
+#&gt;  - attr(*, &quot;class&quot;)= chr [1:3] &quot;ecdf&quot; &quot;stepfun&quot; &quot;function&quot;
+#&gt;  - attr(*, &quot;call&quot;)= language ecdf(rpois(100, 10))</code></pre>
+<p>Answer: the code returns an object of class <code>ecdf</code>, which
+is build on the <code>stepfun</code> object, and the
+<code>function</code> base type. It additionally includes the
+<code>call</code> attribute.</p>
+<p>AR Solutions: It returns an object of the class <code>ecdf</code>
+(empirical cumulative distribution function) with the superclasses
+<code>stepfun</code> and <code>function</code>. The <code>ecdf</code>
+object is built on the base type <code>closure</code> (a function). The
+expression, which was used to create it (<code>rpois(100, 10)</code>),
+is stored in the <code>call</code> attribute.</p>
+<pre class="r"><code>typeof(x)</code></pre>
+<pre><code>#&gt; [1] &quot;closure&quot;</code></pre>
+<hr />
+<ol start="6" style="list-style-type: decimal">
+<li>What class of object does the following code return? What base type
+is it built on? What attributes does it use?</li>
+</ol>
+<pre class="r"><code>x &lt;- table(rpois(100, 5))
+x</code></pre>
+<pre><code>#&gt; 
+#&gt;  1  2  3  4  5  6  7  8  9 10 
+#&gt;  7  5 18 14 15 15 14  4  5  3</code></pre>
+<pre class="r"><code>str(x)</code></pre>
+<pre><code>#&gt;  &#39;table&#39; int [1:10(1d)] 7 5 18 14 15 15 14 4 5 3
+#&gt;  - attr(*, &quot;dimnames&quot;)=List of 1
+#&gt;   ..$ : chr [1:10] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...</code></pre>
+<pre class="r"><code>str(unclass(x))</code></pre>
+<pre><code>#&gt;  int [1:10(1d)] 7 5 18 14 15 15 14 4 5 3
+#&gt;  - attr(*, &quot;dimnames&quot;)=List of 1
+#&gt;   ..$ : chr [1:10] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...</code></pre>
+<p>Answer: per the docs, the code returns an object of class
+<code>table</code>, which is built on <code>array</code>, which uses the
+<code>dimnames</code> attribute in combination with a vector.</p>
+<p>AR Solutions: This code returns a <code>table</code> object, which is
+built upon the <code>integer</code> type. The attribute
+<code>dimnames</code> is used to name the elements of the integer
+vector.</p>
+<hr />
+</div>
+<div id="exercises-1" class="section level2">
+<h2>13.3.4 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Write a constructor for <code>data.frame</code> objects. What base
+type is a data frame built on? What attributes does it use? What are the
+restrictions placed on the individual elements? What about the
+names?</li>
+</ol>
+<pre class="r"><code>dput(data.frame())</code></pre>
+<pre><code>#&gt; structure(list(), names = character(0), row.names = integer(0), class = &quot;data.frame&quot;)</code></pre>
+<pre class="r"><code>dput(data.frame(a = 1:2, b = 3:4))</code></pre>
+<pre><code>#&gt; structure(list(a = 1:2, b = 3:4), class = &quot;data.frame&quot;, row.names = c(NA, 
+#&gt; -2L))</code></pre>
+<pre class="r"><code>unclass(data.frame(a = 1:2, b = 3:4))</code></pre>
+<pre><code>#&gt; $a
+#&gt; [1] 1 2
+#&gt; 
+#&gt; $b
+#&gt; [1] 3 4
+#&gt; 
+#&gt; attr(,&quot;row.names&quot;)
+#&gt; [1] 1 2</code></pre>
+<p>Answer: code below. The data frame is built on the list base type,
+and includes the names, row.names, and class attributes. This
+implementation requires values to be a list, names to be a character,
+and row.names to be an integer.</p>
+<pre class="r"><code>new_data.frame &lt;- function(values = list(), # nolint: object_name_linter.
+                           names = character(length(values)),
+                           row.names = integer(length(values))) { # nolint: object_name_linter.
+  stopifnot(
+    is.list(values),
+    is.character(names),
+    is.integer(row.names)
+  )
+  structure(values, names = names, row.names = row.names, class = &quot;data.frame&quot;)
+}
+
+new_data.frame()</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[],"data":[],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>new_data.frame(list(1:3, 4:6, 7:9))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":[""],"name":[1],"type":["int"],"align":["right"]},{"label":[""],"name":[2],"type":["int"],"align":["right"]},{"label":[""],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"4","3":"7","_rn_":"0"},{"1":"2","2":"5","3":"8","_rn_":"0.1"},{"1":"3","2":"6","3":"9","_rn_":"0.2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>new_data.frame(list(1:3, 4:6, 7:9), names = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), row.names = 1:3)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["a"],"name":[1],"type":["int"],"align":["right"]},{"label":["b"],"name":[2],"type":["int"],"align":["right"]},{"label":["c"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"4","3":"7","_rn_":"1"},{"1":"2","2":"5","3":"8","_rn_":"2"},{"1":"3","2":"6","3":"9","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>AR Solutions: Data frames are built on named lists of vectors, which
+all have the same length. Besides the <code>class</code> and the column
+names (<code>names</code>), the <code>row.names</code> are their only
+further attribute. This must be a character vector with the same length
+as the other vectors.</p>
+<p>We need to provide the number of rows as an input to make it possible
+to create data frames with 0 columns but multiple rows.</p>
+<p>This leads to the following constructor:</p>
+<pre class="r"><code>new_data.frame &lt;- function(x, n, row.names = NULL) { # nolint: object_name_linter.
+  # nolint start: consecutive_stopifnot_linter.
+  # Check if the underlying object is a list
+  stopifnot(is.list(x))
+
+  # Check all inputs are the same length
+  # (This check also allows that x has length 0)
+  stopifnot(all(lengths(x) == n))
+  # nolint end
+
+  if (is.null(row.names)) {
+    # Use special row names helper from base R
+    row.names &lt;- .set_row_names(n) # nolint: object_name_linter.
+  } else {
+    # Otherwise check that they&#39;re a character vector with the
+    # correct length
+    stopifnot(is.character(row.names), length(row.names) == n)
+  }
+
+  structure(
+    x,
+    class = &quot;data.frame&quot;,
+    row.names = row.names
+  )
+}
+
+# Test
+x &lt;- list(a = 1, b = 2)
+new_data.frame(x, n = 1)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["a"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["b"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>new_data.frame(x, n = 1, row.names = &quot;l1&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["a"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["b"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"2","_rn_":"l1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code># Create a data frame with 0 columns and 2 rows
+new_data.frame(list(), n = 2)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[],"data":[],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Note: AR Solutions approach also validates that all inputs are same
+length, and supports creation of dataframes with 0 columns but multiple
+rows.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Enhance my <code>factor()</code> helper to have better behaviour
+when one or more <code>values</code> is not found in
+<code>levels</code>. What does <code>base::factor()</code> do in this
+situation?</li>
+</ol>
+<pre class="r"><code>new_factor &lt;- function(x = integer(), levels = character()) {
+  stopifnot(
+    is.integer(x),
+    is.character(levels)
+  )
+
+  structure(
+    x,
+    levels = levels,
+    class = &quot;factor&quot;
+  )
+}</code></pre>
+<p>Answer: the fix is to update <code>validate_factor()</code> to allow
+<code>NA</code> values, since the helper already fills in
+<code>NA</code> when <code>values</code> is not found in
+<code>levels</code>. This matches the behavior of
+<code>base::factor()</code>.</p>
+<pre class="r"><code>validate_factor &lt;- function(x) {
+  values &lt;- unclass(x)
+  levels &lt;- attr(x, &quot;levels&quot;)
+
+  if (!all(is.na(values) | values &gt; 0)) {
+    stop(
+      &quot;All non-missing `x` values must be greater than zero&quot;,
+      call. = FALSE
+    )
+  }
+
+  if (length(levels) &lt; max(values, na.rm = TRUE)) {
+    stop(
+      &quot;There must be at least as many `levels` as possible values in `x`&quot;,
+      call. = FALSE
+    )
+  }
+
+  x
+}
+
+my_factor &lt;- function(x = character(), levels = unique(x)) {
+  ind &lt;- match(x, levels)
+  validate_factor(new_factor(ind, levels))
+}
+
+factor(c(&quot;a&quot;, &quot;a&quot;, &quot;b&quot;), levels = &quot;a&quot;)</code></pre>
+<pre><code>#&gt; [1] a    a    &lt;NA&gt;
+#&gt; Levels: a</code></pre>
+<pre class="r"><code>my_factor(c(&quot;a&quot;, &quot;a&quot;, &quot;b&quot;), levels = &quot;a&quot;)</code></pre>
+<pre><code>#&gt; [1] a    a    &lt;NA&gt;
+#&gt; Levels: a</code></pre>
+<p>AR Solutions: <code>base::factor()</code> converts these values
+(silently) into <code>NA</code>s.</p>
+<p>The <code>factor()</code> helper including the constructor
+(<code>new_factor()</code>) and its validator
+(<code>validate_factor()</code>) were given in <em>Advanced R</em>.
+However, as the goal of this question is to throw an early error within
+the helper, we only repeat the code for the helper:</p>
+<p>To improve the <code>factor()</code> helper we choose to return an
+informative error message instead.</p>
+<pre class="r"><code>factor2 &lt;- function(x, levels = unique(x)) {
+  new_levels &lt;- match(x, levels)
+
+  # Error if levels don&#39;t include all values
+  missing &lt;- unique(setdiff(x, levels))
+  if (length(missing) &gt; 0) {
+    stop(
+      &quot;The following values do not occur in the levels of x: &quot;,
+      paste0(&quot;&#39;&quot;, missing, &quot;&#39;&quot;, collapse = &quot;, &quot;), &quot;.&quot;,
+      call. = FALSE
+    )
+  }
+
+  validate_factor(new_factor(new_levels, levels))
+}
+
+# Test
+try(factor2(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), levels = c(&quot;a&quot;, &quot;b&quot;)))</code></pre>
+<pre><code>#&gt; Error : The following values do not occur in the levels of x: &#39;c&#39;.</code></pre>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Carefully read the source code of <code>factor()</code>. What does
+it do that my constructor does not?</li>
+</ol>
+<pre class="r"><code>factor(c(&quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;), labels = c(&quot;alpha&quot;, &quot;beta&quot;, &quot;beta&quot;))</code></pre>
+<pre><code>#&gt; [1] alpha alpha beta  beta 
+#&gt; Levels: alpha beta</code></pre>
+<pre class="r"><code>class(factor(1:10, ordered = TRUE))</code></pre>
+<pre><code>#&gt; [1] &quot;ordered&quot; &quot;factor&quot;</code></pre>
+<p>Answer: the base implementation:</p>
+<ul>
+<li>sets the value to <code>character(0)</code> if the value is
+null</li>
+<li>retains value names</li>
+<li>allows an upper bound on the number of levels,
+<code>nmax</code></li>
+<li>coerces the value to character</li>
+<li>provides a method for excluding values from levels,
+<code>exclude</code></li>
+<li>provides <code>labels</code> for remapping factors</li>
+<li>adds an “ordered” class if the value is ordered
+(<code>ordered = TRUE</code>)</li>
+</ul>
+<p>Note: labels are an interesting and unexpected feature of
+<code>factor()</code></p>
+<pre class="r"><code>factor</code></pre>
+<pre><code>#&gt; function (x = character(), levels, labels = levels, exclude = NA, 
+#&gt;     ordered = is.ordered(x), nmax = NA) 
+#&gt; {
+#&gt;     if (is.null(x)) 
+#&gt;         x &lt;- character()
+#&gt;     nx &lt;- names(x)
+#&gt;     if (missing(levels)) {
+#&gt;         y &lt;- unique(x, nmax = nmax)
+#&gt;         ind &lt;- order(y)
+#&gt;         levels &lt;- unique(as.character(y)[ind])
+#&gt;     }
+#&gt;     force(ordered)
+#&gt;     if (!is.character(x)) 
+#&gt;         x &lt;- as.character(x)
+#&gt;     levels &lt;- levels[is.na(match(levels, exclude))]
+#&gt;     f &lt;- match(x, levels)
+#&gt;     if (!is.null(nx)) 
+#&gt;         names(f) &lt;- nx
+#&gt;     if (missing(labels)) {
+#&gt;         levels(f) &lt;- as.character(levels)
+#&gt;     }
+#&gt;     else {
+#&gt;         nlab &lt;- length(labels)
+#&gt;         if (nlab == length(levels)) {
+#&gt;             nlevs &lt;- unique(xlevs &lt;- as.character(labels))
+#&gt;             at &lt;- attributes(f)
+#&gt;             at$levels &lt;- nlevs
+#&gt;             f &lt;- match(xlevs, nlevs)[f]
+#&gt;             attributes(f) &lt;- at
+#&gt;         }
+#&gt;         else if (nlab == 1L) 
+#&gt;             levels(f) &lt;- paste0(labels, seq_along(levels))
+#&gt;         else stop(gettextf(&quot;invalid &#39;labels&#39;; length %d should be 1 or %d&quot;, 
+#&gt;             nlab, length(levels)), domain = NA)
+#&gt;     }
+#&gt;     class(f) &lt;- c(if (ordered) &quot;ordered&quot;, &quot;factor&quot;)
+#&gt;     f
+#&gt; }
+#&gt; &lt;bytecode: 0x7feede813c70&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<p>AR Solutions: The original implementation
+(<code>base::factor()</code>) allows more flexible input for
+<code>x</code>. It coerces <code>x</code> to character or replaces it
+with <code>character(0)</code> (in case of <code>NULL</code>). It also
+ensures that the <code>levels</code> are unique. This is achieved by
+setting them via <code>base::levels&lt;-</code>, which fails when
+duplicate values are supplied.</p>
+<p>Note: I missed the fact that <code>base::levels&lt;-</code> fails
+when duplicate values are supplied.</p>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>Factors have an optional “contrasts” attribute. Read the help for
+<code>C()</code>, and briefly describe the purpose of the attribute.
+What type should it have? Rewrite the <code>new_factor()</code>
+constructor to include this attribute.</li>
+</ol>
+<p>Answer: per the “contrast {stats}” documentation, contrast matrices
+are used in fitting analysis of variance and regression models, so the
+attribute should be a matrix.</p>
+<pre class="r"><code>new_factor &lt;- function(x = integer(), levels = character(), contr = matrix()) {
+  stopifnot(is.integer(x), is.character(levels), is.matrix(contr))
+
+  structure(
+    x,
+    levels = levels,
+    class = &quot;factor&quot;,
+    contrasts = contr
+  )
+}</code></pre>
+<p>AR Solutions: When factor variables (representing nominal or ordinal
+information) are used in statistical models, they are typically encoded
+as dummy variables and by default each level is compared with the first
+factor level. However, many different encodings (“contrasts”) are
+possible, see <a
+href="https://en.wikipedia.org/wiki/Contrast_(statistics)">Contrast</a>.</p>
+<p>Within R’s formula interface you can wrap a factor in
+<code>stats::C()</code> and specify the contrast of your choice.
+Alternatively, you can set the <code>contrasts</code> attribute of your
+factor variable, which accepts matrix input. (See
+<code>?contr.helmert</code> or similar for details.)</p>
+<p>Our updated <code>new_factor()</code> constructor gets a
+<code>contrasts</code> argument, which accepts a numeric matrix or
+<code>NULL</code> (default).</p>
+<pre class="r"><code># Updated new_factor() constructor
+new_factor &lt;- function(x = integer(),
+                       levels = character(),
+                       contrasts = NULL) {
+  # nolint start: consecutive_stopifnot_linter.
+  stopifnot(is.integer(x))
+  stopifnot(is.character(levels))
+  # nolint end
+
+  if (!is.null(constrasts)) { # nolint: object_usage_linter. not sure why lintr flags this.
+    stopifnot(is.matrix(contrasts) &amp;&amp; is.numeric(contrasts)) # nolint: conjunct_test_linter.
+  }
+
+  structure(
+    x,
+    levels = levels,
+    class = &quot;factor&quot;,
+    contrasts = contrasts
+  )
+}</code></pre>
+<hr />
+<ol start="5" style="list-style-type: decimal">
+<li>Read the documentation for <code>utils::as.roman()</code>. How would
+you write a constructor for this class? Does it need a validator? What
+might a helper do?</li>
+</ol>
+<pre class="r"><code>dput(as.roman(3899))</code></pre>
+<pre><code>#&gt; structure(3899L, class = &quot;roman&quot;)</code></pre>
+<pre class="r"><code>new_roman &lt;- function(x = integer()) {
+  stopifnot(is.integer(x))
+
+  structure(
+    x,
+    class = &quot;roman&quot;
+  )
+}
+
+new_roman(2022L)</code></pre>
+<pre><code>#&gt; [1] MMXXII</code></pre>
+<p>Answer: the structure of the class “roman” is simple, an integer with
+a defined class. A simple constructor would take an integer and return
+an object of class “roman” as above. A validator is probably not needed,
+but could validate that the integer is within the supported range of
+integers (1-3899). A helper might coerce the number to be an integer
+using <code>as.integer()</code>.</p>
+<p>AR Solutions: This function transforms numeric input into Roman
+numbers. It is built on the integer type, which results in the following
+constructor.</p>
+<pre class="r"><code>new_roman &lt;- function(x = integer()) {
+  stopifnot(is.integer(x))
+  structure(x, class = &quot;roman&quot;)
+}</code></pre>
+<p>The documentation tells us, that only values between 1 and 3899 are
+uniquely represented, which we then include in our validation
+function.</p>
+<pre class="r"><code>validate_roman &lt;- function(x) {
+  values &lt;- unclass(x)
+
+  if (any(values &lt; 1 | values &gt; 3899)) {
+    stop(
+      &quot;Roman numbers must fall between 1 and 3899.&quot;,
+      call. = FALSE
+    )
+  }
+
+  x
+}</code></pre>
+<p>For convenience, we allow the user to also pass real values to a
+helper function.</p>
+<pre class="r"><code>roman &lt;- function(x = integer()) {
+  x &lt;- as.integer(x)
+
+  validate_roman(new_roman(x))
+}
+
+# Test
+roman(c(1, 753, 2019))</code></pre>
+<pre><code>#&gt; [1] I       DCCLIII MMXIX</code></pre>
+<pre class="r"><code>try(roman(0))</code></pre>
+<pre><code>#&gt; Error : Roman numbers must fall between 1 and 3899.</code></pre>
+<hr />
+</div>
+<div id="exercises-2" class="section level2">
+<h2>13.4.4 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Read the source code for <code>t()</code> and <code>t.test()</code>
+and confirm that <code>t.test()</code> is an S3 generic and not an S3
+method. What happens if you create an object with class
+<code>test</code> and call <code>t()</code> with it? Why?</li>
+</ol>
+<pre class="r"><code>x &lt;- structure(1:10, class = &quot;test&quot;)
+t(x)</code></pre>
+<pre><code>#&gt;      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+#&gt; [1,]    1    2    3    4    5    6    7    8    9    10
+#&gt; attr(,&quot;class&quot;)
+#&gt; [1] &quot;test&quot;</code></pre>
+<p>Answer: both <code>t()</code> and <code>t.test()</code> simply call
+<code>UseMethod()</code>, and are S3 generics.</p>
+<pre class="r"><code>t</code></pre>
+<pre><code>#&gt; function (x) 
+#&gt; UseMethod(&quot;t&quot;)
+#&gt; &lt;bytecode: 0x7feea9484b70&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code>t.test</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; UseMethod(&quot;t.test&quot;)
+#&gt; &lt;bytecode: 0x7fee9e381e30&gt;
+#&gt; &lt;environment: namespace:stats&gt;</code></pre>
+<p>Creating an object with class <code>test</code> and calling
+<code>t()</code> uses the default method since <code>t.test()</code> is
+not a registered method for <code>t()</code>, as this code shows:</p>
+<pre class="r"><code>methods(&quot;t&quot;)</code></pre>
+<pre><code>#&gt; [1] t.data.frame  t.default     t.gtable*     t.ts*         t.vctrs_sclr* t.vctrs_vctr*
+#&gt; see &#39;?methods&#39; for accessing help and source code</code></pre>
+<pre class="r"><code>s3_dispatch(t(x))</code></pre>
+<pre><code>#&gt; =&gt; t.test
+#&gt;  * t.default</code></pre>
+<p>AR Solutions: We can see that <code>t.test()</code> is a generic
+because it calls <code>UseMethod()</code>.</p>
+<pre class="r"><code># or simply call
+ftype(t.test)</code></pre>
+<pre><code>#&gt; [1] &quot;S3&quot;      &quot;generic&quot;</code></pre>
+<p>Interestingly, R also provides helpers, which list functions that
+look like methods, but in fact are not:</p>
+<pre class="r"><code>tools::nonS3methods(&quot;stats&quot;)</code></pre>
+<pre><code>#&gt; [1] &quot;anova.lmlist&quot;        &quot;expand.model.frame&quot;  &quot;fitted.values&quot;       &quot;influence.measures&quot; 
+#&gt; [5] &quot;lag.plot&quot;            &quot;t.test&quot;              &quot;plot.spec.phase&quot;     &quot;plot.spec.coherency&quot;</code></pre>
+<p>When we create an object with class <code>test</code>,
+<code>t()</code> dispatches to the <code>t.default()</code> method. This
+happens, because <code>UseMethod()</code> simply searches for functions
+named <code>paste0("generic", ".", c(class(x), "default"))</code>.</p>
+<p>However, in older versions of R (pre R 4.0.0; when <em>Advanced
+R</em> was written) this behaviour was slightly different. Instead of
+dispatching to the <code>t.default()</code> method, the
+<code>t.test()</code> generic was erroneously treated as a method of
+<code>t()</code> which then dispatched to <code>t.test.default()</code>
+or (when defined) to <code>t.test.test()</code>.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>What generics does the <code>table</code> class have methods
+for?</li>
+</ol>
+<p>Answer: <code>s3_methods_class()</code> answers this question:</p>
+<pre class="r"><code>s3_methods_class(&quot;table&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["generic"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["visible"],"name":[3],"type":["lgl"],"align":["right"]},{"label":["source"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"[","2":"table","3":"TRUE","4":"base"},{"1":"aperm","2":"table","3":"TRUE","4":"base"},{"1":"as_tibble","2":"table","3":"FALSE","4":"registered S3method"},{"1":"as.data.frame","2":"table","3":"TRUE","4":"base"},{"1":"Axis","2":"table","3":"FALSE","4":"registered S3method"},{"1":"lines","2":"table","3":"FALSE","4":"registered S3method"},{"1":"plot","2":"table","3":"FALSE","4":"registered S3method"},{"1":"points","2":"table","3":"FALSE","4":"registered S3method"},{"1":"print","2":"table","3":"TRUE","4":"base"},{"1":"summary","2":"table","3":"TRUE","4":"base"},{"1":"tail","2":"table","3":"FALSE","4":"registered S3method"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>AR Solutions: This is a simple application of
+<code>sloop::s3_methods_class()</code>.</p>
+<p>Interestingly, the <code>table</code> class has a number of methods
+designed to help plotting with base graphics.</p>
+<pre class="r"><code>x &lt;- rpois(100, 5)
+plot(table(x))</code></pre>
+<p><img src="advanced-r-3_files/figure-html/unnamed-chunk-28-1.png" width="768" style="display: block; margin: auto;" /></p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>What generics does the <code>ecdf</code> class have methods
+for?</li>
+</ol>
+<p>Answer:</p>
+<pre class="r"><code>s3_methods_class(&quot;ecdf&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["generic"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["visible"],"name":[3],"type":["lgl"],"align":["right"]},{"label":["source"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"plot","2":"ecdf","3":"TRUE","4":"stats"},{"1":"print","2":"ecdf","3":"FALSE","4":"registered S3method"},{"1":"quantile","2":"ecdf","3":"FALSE","4":"registered S3method"},{"1":"summary","2":"ecdf","3":"FALSE","4":"registered S3method"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>AR Solutions: We use the same approach as above.</p>
+<p>The methods are primarily designed for display (<code>plot()</code>,
+<code>print()</code>, <code>summary()</code>), but you can also extract
+quantiles with <code>quantile()</code>.</p>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>Which base generic has the greatest number of defined methods?</li>
+</ol>
+<p>Answer: using code from 6.2.5, identify generics and count defined
+methods:</p>
+<pre class="r"><code># from 6.2.5 exercises, this code makes a list of all functions in the base package
+funs &lt;- Filter(is.function, mget(ls(&quot;package:base&quot;, all.names = TRUE), inherits = TRUE))
+
+get_method_count &lt;- function(fname) {
+  data.frame(
+    name = fname,
+    # this code should work but doesn&#39;t:
+    # method_count = nrow(s3_methods_generic(fname)) # nolint: commented_code_linter.
+    method_count = length(methods(fname))
+  )
+}
+
+map_dfr(names(funs), get_method_count) |&gt;
+  arrange(desc(method_count))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["method_count"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"print","2":"377"},{"1":"format","2":"180"},{"1":"[","2":"74"},{"1":"as.character","2":"54"},{"1":"summary","2":"44"},{"1":"[[","2":"38"},{"1":"plot","2":"37"},{"1":"as.data.frame","2":"34"},{"1":"$","2":"29"},{"1":"[<-","2":"26"},{"1":"$<-","2":"24"},{"1":"[[<-","2":"22"},{"1":"as.list","2":"20"},{"1":"c","2":"19"},{"1":"file","2":"17"},{"1":"all.equal","2":"12"},{"1":"rep","2":"12"},{"1":"xtfrm","2":"12"},{"1":"unique","2":"10"},{"1":"duplicated","2":"9"},{"1":"names","2":"9"},{"1":"as.Date","2":"8"},{"1":"as.matrix","2":"8"},{"1":"length","2":"8"},{"1":"mean","2":"8"},{"1":"names<-","2":"8"},{"1":"+","2":"7"},{"1":"as.double","2":"7"},{"1":"as.POSIXlt","2":"7"},{"1":"length<-","2":"7"},{"1":"row","2":"7"},{"1":"anyDuplicated","2":"6"},{"1":"as.POSIXct","2":"6"},{"1":"as.vector","2":"6"},{"1":"diff","2":"6"},{"1":"t","2":"6"},{"1":"write","2":"6"},{"1":"-","2":"5"},{"1":"|","2":"5"},{"1":"anyNA","2":"5"},{"1":"close","2":"5"},{"1":"conditionMessage","2":"5"},{"1":"is.na","2":"5"},{"1":"is.na<-","2":"5"},{"1":"labels","2":"5"},{"1":"max","2":"5"},{"1":"min","2":"5"},{"1":"subset","2":"5"},{"1":"!","2":"4"},{"1":"/","2":"4"},{"1":"&","2":"4"},{"1":"as.environment","2":"4"},{"1":"cbind","2":"4"},{"1":"cut","2":"4"},{"1":"dimnames<-","2":"4"},{"1":"open","2":"4"},{"1":"rbind","2":"4"},{"1":"split","2":"4"},{"1":"sum","2":"4"},{"1":"*","2":"3"},{"1":"==","2":"3"},{"1":"as.integer","2":"3"},{"1":"as.logical","2":"3"},{"1":"dim","2":"3"},{"1":"dimnames","2":"3"},{"1":"is.numeric","2":"3"},{"1":"kappa","2":"3"},{"1":"levels","2":"3"},{"1":"levels<-","2":"3"},{"1":"ls","2":"3"},{"1":"match","2":"3"},{"1":"merge","2":"3"},{"1":"pretty","2":"3"},{"1":"row.names<-","2":"3"},{"1":"seq","2":"3"},{"1":"sort","2":"3"},{"1":"!=","2":"2"},{"1":"%/%","2":"2"},{"1":"%%","2":"2"},{"1":"^","2":"2"},{"1":"<","2":"2"},{"1":"<=","2":"2"},{"1":">","2":"2"},{"1":">=","2":"2"},{"1":"aperm","2":"2"},{"1":"as.table","2":"2"},{"1":"body<-","2":"2"},{"1":"by","2":"2"},{"1":"dim<-","2":"2"},{"1":"dir","2":"2"},{"1":"drop","2":"2"},{"1":"droplevels","2":"2"},{"1":"formals<-","2":"2"},{"1":"getDLLRegisteredRoutines","2":"2"},{"1":"julian","2":"2"},{"1":"library","2":"2"},{"1":"list","2":"2"},{"1":"months","2":"2"},{"1":"qr","2":"2"},{"1":"quarters","2":"2"},{"1":"range","2":"2"},{"1":"rev","2":"2"},{"1":"round","2":"2"},{"1":"row.names","2":"2"},{"1":"rowsum","2":"2"},{"1":"solve","2":"2"},{"1":"split<-","2":"2"},{"1":"system","2":"2"},{"1":"toString","2":"2"},{"1":"transform","2":"2"},{"1":"trunc","2":"2"},{"1":"unlist","2":"2"},{"1":"weekdays","2":"2"},{"1":"which","2":"2"},{"1":"within","2":"2"},{"1":"as.array","2":"1"},{"1":"as.expression","2":"1"},{"1":"as.function","2":"1"},{"1":"as.null","2":"1"},{"1":"as.single","2":"1"},{"1":"attr","2":"1"},{"1":"chol","2":"1"},{"1":"conditionCall","2":"1"},{"1":"determinant","2":"1"},{"1":"dump","2":"1"},{"1":"eval","2":"1"},{"1":"factor","2":"1"},{"1":"flush","2":"1"},{"1":"gc","2":"1"},{"1":"interaction","2":"1"},{"1":"is.finite","2":"1"},{"1":"is.infinite","2":"1"},{"1":"is.nan","2":"1"},{"1":"isSymmetric","2":"1"},{"1":"kronecker","2":"1"},{"1":"lengths","2":"1"},{"1":"library.dynam","2":"1"},{"1":"mtfrm","2":"1"},{"1":"order","2":"1"},{"1":"remove","2":"1"},{"1":"save","2":"1"},{"1":"scale","2":"1"},{"1":"seek","2":"1"},{"1":"sequence","2":"1"},{"1":"sink","2":"1"},{"1":"source","2":"1"},{"1":"truncate","2":"1"},{"1":"units","2":"1"},{"1":"units<-","2":"1"},{"1":"url","2":"1"},{"1":"with","2":"1"},{"1":"-.Date","2":"0"},{"1":"-.POSIXt","2":"0"},{"1":":","2":"0"},{"1":"::","2":"0"},{"1":":::","2":"0"},{"1":"!.hexmode","2":"0"},{"1":"!.octmode","2":"0"},{"1":".__H__.cbind","2":"0"},{"1":".__H__.rbind","2":"0"},{"1":"...elt","2":"0"},{"1":"...length","2":"0"},{"1":"...names","2":"0"},{"1":"..getNamespace","2":"0"},{"1":".amatch_bounds","2":"0"},{"1":".amatch_costs","2":"0"},{"1":".bincode","2":"0"},{"1":".C","2":"0"},{"1":".cache_class","2":"0"},{"1":".Call","2":"0"},{"1":".Call.graphics","2":"0"},{"1":".class2","2":"0"},{"1":".col","2":"0"},{"1":".colMeans","2":"0"},{"1":".colSums","2":"0"},{"1":".Date","2":"0"},{"1":".decode_numeric_version","2":"0"},{"1":".Defunct","2":"0"},{"1":".deparseOpts","2":"0"},{"1":".Deprecated","2":"0"},{"1":".detach","2":"0"},{"1":".difftime","2":"0"},{"1":".doSortWrap","2":"0"},{"1":".doTrace","2":"0"},{"1":".doWrap","2":"0"},{"1":".dynLibs","2":"0"},{"1":".encode_numeric_version","2":"0"},{"1":".expand_R_libs_env_var","2":"0"},{"1":".External","2":"0"},{"1":".External.graphics","2":"0"},{"1":".External2","2":"0"},{"1":".First.sys","2":"0"},{"1":".format.zeros","2":"0"},{"1":".Fortran","2":"0"},{"1":".getNamespace","2":"0"},{"1":".getNamespaceInfo","2":"0"},{"1":".getRequiredPackages","2":"0"},{"1":".getRequiredPackages2","2":"0"},{"1":".gt","2":"0"},{"1":".gtn","2":"0"},{"1":".handleSimpleError","2":"0"},{"1":".Internal","2":"0"},{"1":".isMethodsDispatchOn","2":"0"},{"1":".isOpen","2":"0"},{"1":".kappa_tri","2":"0"},{"1":".kronecker","2":"0"},{"1":".libPaths","2":"0"},{"1":".make_numeric_version","2":"0"},{"1":".makeMessage","2":"0"},{"1":".mapply","2":"0"},{"1":".maskedMsg","2":"0"},{"1":".mergeExportMethods","2":"0"},{"1":".mergeImportMethods","2":"0"},{"1":".NotYetImplemented","2":"0"},{"1":".NotYetUsed","2":"0"},{"1":".OptRequireMethods","2":"0"},{"1":".packages","2":"0"},{"1":".packageStartupMessage","2":"0"},{"1":".POSIXct","2":"0"},{"1":".POSIXlt","2":"0"},{"1":".pretty","2":"0"},{"1":".Primitive","2":"0"},{"1":".primTrace","2":"0"},{"1":".primUntrace","2":"0"},{"1":".rmpkg","2":"0"},{"1":".row","2":"0"},{"1":".row_names_info","2":"0"},{"1":".rowMeans","2":"0"},{"1":".rowNamesDF<-","2":"0"},{"1":".rowSums","2":"0"},{"1":".S3method","2":"0"},{"1":".Script","2":"0"},{"1":".set_row_names","2":"0"},{"1":".signalSimpleWarning","2":"0"},{"1":".standard_regexps","2":"0"},{"1":".subset","2":"0"},{"1":".subset2","2":"0"},{"1":".TAOCP1997init","2":"0"},{"1":".traceback","2":"0"},{"1":".tryResumeInterrupt","2":"0"},{"1":".valid.factor","2":"0"},{"1":"(","2":"0"},{"1":"[.AsIs","2":"0"},{"1":"[.data.frame","2":"0"},{"1":"[.Date","2":"0"},{"1":"[.difftime","2":"0"},{"1":"[.Dlist","2":"0"},{"1":"[.DLLInfoList","2":"0"},{"1":"[.factor","2":"0"},{"1":"[.hexmode","2":"0"},{"1":"[.listof","2":"0"},{"1":"[.noquote","2":"0"},{"1":"[.numeric_version","2":"0"},{"1":"[.octmode","2":"0"},{"1":"[.POSIXct","2":"0"},{"1":"[.POSIXlt","2":"0"},{"1":"[.simple.list","2":"0"},{"1":"[.table","2":"0"},{"1":"[.warnings","2":"0"},{"1":"[[.data.frame","2":"0"},{"1":"[[.Date","2":"0"},{"1":"[[.factor","2":"0"},{"1":"[[.numeric_version","2":"0"},{"1":"[[.POSIXct","2":"0"},{"1":"[[.POSIXlt","2":"0"},{"1":"[[<-.data.frame","2":"0"},{"1":"[[<-.factor","2":"0"},{"1":"[[<-.numeric_version","2":"0"},{"1":"[[<-.POSIXlt","2":"0"},{"1":"[<-.data.frame","2":"0"},{"1":"[<-.Date","2":"0"},{"1":"[<-.difftime","2":"0"},{"1":"[<-.factor","2":"0"},{"1":"[<-.numeric_version","2":"0"},{"1":"[<-.POSIXct","2":"0"},{"1":"[<-.POSIXlt","2":"0"},{"1":"{","2":"0"},{"1":"@","2":"0"},{"1":"@<-","2":"0"},{"1":"*.difftime","2":"0"},{"1":"/.difftime","2":"0"},{"1":"&.hexmode","2":"0"},{"1":"&.octmode","2":"0"},{"1":"&&","2":"0"},{"1":"%*%","2":"0"},{"1":"%in%","2":"0"},{"1":"%o%","2":"0"},{"1":"%x%","2":"0"},{"1":"+.Date","2":"0"},{"1":"+.POSIXt","2":"0"},{"1":"<-","2":"0"},{"1":"<<-","2":"0"},{"1":"=","2":"0"},{"1":"|.hexmode","2":"0"},{"1":"|.octmode","2":"0"},{"1":"||","2":"0"},{"1":"~","2":"0"},{"1":"$.DLLInfo","2":"0"},{"1":"$.package_version","2":"0"},{"1":"$<-.data.frame","2":"0"},{"1":"abbreviate","2":"0"},{"1":"abs","2":"0"},{"1":"acos","2":"0"},{"1":"acosh","2":"0"},{"1":"activeBindingFunction","2":"0"},{"1":"addNA","2":"0"},{"1":"addTaskCallback","2":"0"},{"1":"agrep","2":"0"},{"1":"agrepl","2":"0"},{"1":"alist","2":"0"},{"1":"all","2":"0"},{"1":"all.equal.character","2":"0"},{"1":"all.equal.default","2":"0"},{"1":"all.equal.environment","2":"0"},{"1":"all.equal.envRefClass","2":"0"},{"1":"all.equal.factor","2":"0"},{"1":"all.equal.formula","2":"0"},{"1":"all.equal.function","2":"0"},{"1":"all.equal.language","2":"0"},{"1":"all.equal.list","2":"0"},{"1":"all.equal.numeric","2":"0"},{"1":"all.equal.POSIXt","2":"0"},{"1":"all.equal.raw","2":"0"},{"1":"all.names","2":"0"},{"1":"all.vars","2":"0"},{"1":"allowInterrupts","2":"0"},{"1":"any","2":"0"},{"1":"anyDuplicated.array","2":"0"},{"1":"anyDuplicated.data.frame","2":"0"},{"1":"anyDuplicated.default","2":"0"},{"1":"anyDuplicated.matrix","2":"0"},{"1":"anyNA.data.frame","2":"0"},{"1":"anyNA.numeric_version","2":"0"},{"1":"anyNA.POSIXlt","2":"0"},{"1":"aperm.default","2":"0"},{"1":"aperm.table","2":"0"},{"1":"append","2":"0"},{"1":"apply","2":"0"},{"1":"Arg","2":"0"},{"1":"args","2":"0"},{"1":"array","2":"0"},{"1":"arrayInd","2":"0"},{"1":"as.array.default","2":"0"},{"1":"as.call","2":"0"},{"1":"as.character.condition","2":"0"},{"1":"as.character.Date","2":"0"},{"1":"as.character.default","2":"0"},{"1":"as.character.error","2":"0"},{"1":"as.character.factor","2":"0"},{"1":"as.character.hexmode","2":"0"},{"1":"as.character.numeric_version","2":"0"},{"1":"as.character.octmode","2":"0"},{"1":"as.character.POSIXt","2":"0"},{"1":"as.character.srcref","2":"0"},{"1":"as.complex","2":"0"},{"1":"as.data.frame.array","2":"0"},{"1":"as.data.frame.AsIs","2":"0"},{"1":"as.data.frame.character","2":"0"},{"1":"as.data.frame.complex","2":"0"},{"1":"as.data.frame.data.frame","2":"0"},{"1":"as.data.frame.Date","2":"0"},{"1":"as.data.frame.default","2":"0"},{"1":"as.data.frame.difftime","2":"0"},{"1":"as.data.frame.factor","2":"0"},{"1":"as.data.frame.integer","2":"0"},{"1":"as.data.frame.list","2":"0"},{"1":"as.data.frame.logical","2":"0"},{"1":"as.data.frame.matrix","2":"0"},{"1":"as.data.frame.model.matrix","2":"0"},{"1":"as.data.frame.noquote","2":"0"},{"1":"as.data.frame.numeric","2":"0"},{"1":"as.data.frame.numeric_version","2":"0"},{"1":"as.data.frame.ordered","2":"0"},{"1":"as.data.frame.POSIXct","2":"0"},{"1":"as.data.frame.POSIXlt","2":"0"},{"1":"as.data.frame.raw","2":"0"},{"1":"as.data.frame.table","2":"0"},{"1":"as.data.frame.ts","2":"0"},{"1":"as.data.frame.vector","2":"0"},{"1":"as.Date.character","2":"0"},{"1":"as.Date.default","2":"0"},{"1":"as.Date.factor","2":"0"},{"1":"as.Date.numeric","2":"0"},{"1":"as.Date.POSIXct","2":"0"},{"1":"as.Date.POSIXlt","2":"0"},{"1":"as.difftime","2":"0"},{"1":"as.double.difftime","2":"0"},{"1":"as.double.POSIXlt","2":"0"},{"1":"as.expression.default","2":"0"},{"1":"as.factor","2":"0"},{"1":"as.function.default","2":"0"},{"1":"as.hexmode","2":"0"},{"1":"as.list.data.frame","2":"0"},{"1":"as.list.Date","2":"0"},{"1":"as.list.default","2":"0"},{"1":"as.list.difftime","2":"0"},{"1":"as.list.environment","2":"0"},{"1":"as.list.factor","2":"0"},{"1":"as.list.function","2":"0"},{"1":"as.list.numeric_version","2":"0"},{"1":"as.list.POSIXct","2":"0"},{"1":"as.list.POSIXlt","2":"0"},{"1":"as.logical.factor","2":"0"},{"1":"as.matrix.data.frame","2":"0"},{"1":"as.matrix.default","2":"0"},{"1":"as.matrix.noquote","2":"0"},{"1":"as.matrix.POSIXlt","2":"0"},{"1":"as.name","2":"0"},{"1":"as.null.default","2":"0"},{"1":"as.numeric","2":"0"},{"1":"as.numeric_version","2":"0"},{"1":"as.octmode","2":"0"},{"1":"as.ordered","2":"0"},{"1":"as.package_version","2":"0"},{"1":"as.pairlist","2":"0"},{"1":"as.POSIXct.Date","2":"0"},{"1":"as.POSIXct.default","2":"0"},{"1":"as.POSIXct.numeric","2":"0"},{"1":"as.POSIXct.POSIXlt","2":"0"},{"1":"as.POSIXlt.character","2":"0"},{"1":"as.POSIXlt.Date","2":"0"},{"1":"as.POSIXlt.default","2":"0"},{"1":"as.POSIXlt.factor","2":"0"},{"1":"as.POSIXlt.numeric","2":"0"},{"1":"as.POSIXlt.POSIXct","2":"0"},{"1":"as.qr","2":"0"},{"1":"as.raw","2":"0"},{"1":"as.single.default","2":"0"},{"1":"as.symbol","2":"0"},{"1":"as.table.default","2":"0"},{"1":"as.vector.data.frame","2":"0"},{"1":"as.vector.factor","2":"0"},{"1":"as.vector.POSIXlt","2":"0"},{"1":"asin","2":"0"},{"1":"asinh","2":"0"},{"1":"asNamespace","2":"0"},{"1":"asplit","2":"0"},{"1":"asS3","2":"0"},{"1":"asS4","2":"0"},{"1":"assign","2":"0"},{"1":"atan","2":"0"},{"1":"atan2","2":"0"},{"1":"atanh","2":"0"},{"1":"attach","2":"0"},{"1":"attachNamespace","2":"0"},{"1":"attr.all.equal","2":"0"},{"1":"attr<-","2":"0"},{"1":"attributes","2":"0"},{"1":"attributes<-","2":"0"},{"1":"autoload","2":"0"},{"1":"autoloader","2":"0"},{"1":"backsolve","2":"0"},{"1":"baseenv","2":"0"},{"1":"basename","2":"0"},{"1":"besselI","2":"0"},{"1":"besselJ","2":"0"},{"1":"besselK","2":"0"},{"1":"besselY","2":"0"},{"1":"beta","2":"0"},{"1":"bindingIsActive","2":"0"},{"1":"bindingIsLocked","2":"0"},{"1":"bindtextdomain","2":"0"},{"1":"bitwAnd","2":"0"},{"1":"bitwNot","2":"0"},{"1":"bitwOr","2":"0"},{"1":"bitwShiftL","2":"0"},{"1":"bitwShiftR","2":"0"},{"1":"bitwXor","2":"0"},{"1":"body","2":"0"},{"1":"bquote","2":"0"},{"1":"break","2":"0"},{"1":"browser","2":"0"},{"1":"browserCondition","2":"0"},{"1":"browserSetDebug","2":"0"},{"1":"browserText","2":"0"},{"1":"builtins","2":"0"},{"1":"by.data.frame","2":"0"},{"1":"by.default","2":"0"},{"1":"bzfile","2":"0"},{"1":"c.Date","2":"0"},{"1":"c.difftime","2":"0"},{"1":"c.factor","2":"0"},{"1":"c.noquote","2":"0"},{"1":"c.numeric_version","2":"0"},{"1":"c.POSIXct","2":"0"},{"1":"c.POSIXlt","2":"0"},{"1":"c.warnings","2":"0"},{"1":"call","2":"0"},{"1":"callCC","2":"0"},{"1":"capabilities","2":"0"},{"1":"casefold","2":"0"},{"1":"cat","2":"0"},{"1":"cbind.data.frame","2":"0"},{"1":"ceiling","2":"0"},{"1":"char.expand","2":"0"},{"1":"character","2":"0"},{"1":"charmatch","2":"0"},{"1":"charToRaw","2":"0"},{"1":"chartr","2":"0"},{"1":"check_tzones","2":"0"},{"1":"chkDots","2":"0"},{"1":"chol.default","2":"0"},{"1":"chol2inv","2":"0"},{"1":"choose","2":"0"},{"1":"class","2":"0"},{"1":"class<-","2":"0"},{"1":"clearPushBack","2":"0"},{"1":"close.connection","2":"0"},{"1":"close.srcfile","2":"0"},{"1":"close.srcfilealias","2":"0"},{"1":"closeAllConnections","2":"0"},{"1":"col","2":"0"},{"1":"colMeans","2":"0"},{"1":"colnames","2":"0"},{"1":"colnames<-","2":"0"},{"1":"colSums","2":"0"},{"1":"commandArgs","2":"0"},{"1":"comment","2":"0"},{"1":"comment<-","2":"0"},{"1":"complex","2":"0"},{"1":"computeRestarts","2":"0"},{"1":"conditionCall.condition","2":"0"},{"1":"conditionMessage.condition","2":"0"},{"1":"conflictRules","2":"0"},{"1":"conflicts","2":"0"},{"1":"Conj","2":"0"},{"1":"contributors","2":"0"},{"1":"cos","2":"0"},{"1":"cosh","2":"0"},{"1":"cospi","2":"0"},{"1":"crossprod","2":"0"},{"1":"Cstack_info","2":"0"},{"1":"cummax","2":"0"},{"1":"cummin","2":"0"},{"1":"cumprod","2":"0"},{"1":"cumsum","2":"0"},{"1":"curlGetHeaders","2":"0"},{"1":"cut.Date","2":"0"},{"1":"cut.default","2":"0"},{"1":"cut.POSIXt","2":"0"},{"1":"data.class","2":"0"},{"1":"data.frame","2":"0"},{"1":"data.matrix","2":"0"},{"1":"date","2":"0"},{"1":"debug","2":"0"},{"1":"debuggingState","2":"0"},{"1":"debugonce","2":"0"},{"1":"default.stringsAsFactors","2":"0"},{"1":"delayedAssign","2":"0"},{"1":"deparse","2":"0"},{"1":"deparse1","2":"0"},{"1":"det","2":"0"},{"1":"detach","2":"0"},{"1":"determinant.matrix","2":"0"},{"1":"dget","2":"0"},{"1":"diag","2":"0"},{"1":"diag<-","2":"0"},{"1":"diff.Date","2":"0"},{"1":"diff.default","2":"0"},{"1":"diff.difftime","2":"0"},{"1":"diff.POSIXt","2":"0"},{"1":"difftime","2":"0"},{"1":"digamma","2":"0"},{"1":"dim.data.frame","2":"0"},{"1":"dimnames.data.frame","2":"0"},{"1":"dimnames<-.data.frame","2":"0"},{"1":"dir.create","2":"0"},{"1":"dir.exists","2":"0"},{"1":"dirname","2":"0"},{"1":"do.call","2":"0"},{"1":"dontCheck","2":"0"},{"1":"double","2":"0"},{"1":"dput","2":"0"},{"1":"dQuote","2":"0"},{"1":"droplevels.data.frame","2":"0"},{"1":"droplevels.factor","2":"0"},{"1":"duplicated.array","2":"0"},{"1":"duplicated.data.frame","2":"0"},{"1":"duplicated.default","2":"0"},{"1":"duplicated.matrix","2":"0"},{"1":"duplicated.numeric_version","2":"0"},{"1":"duplicated.POSIXlt","2":"0"},{"1":"duplicated.warnings","2":"0"},{"1":"dyn.load","2":"0"},{"1":"dyn.unload","2":"0"},{"1":"dynGet","2":"0"},{"1":"eapply","2":"0"},{"1":"eigen","2":"0"},{"1":"emptyenv","2":"0"},{"1":"enc2native","2":"0"},{"1":"enc2utf8","2":"0"},{"1":"encodeString","2":"0"},{"1":"Encoding","2":"0"},{"1":"Encoding<-","2":"0"},{"1":"endsWith","2":"0"},{"1":"enquote","2":"0"},{"1":"env.profile","2":"0"},{"1":"environment","2":"0"},{"1":"environment<-","2":"0"},{"1":"environmentIsLocked","2":"0"},{"1":"environmentName","2":"0"},{"1":"errorCondition","2":"0"},{"1":"eval.parent","2":"0"},{"1":"evalq","2":"0"},{"1":"exists","2":"0"},{"1":"exp","2":"0"},{"1":"expand.grid","2":"0"},{"1":"expm1","2":"0"},{"1":"expression","2":"0"},{"1":"extSoftVersion","2":"0"},{"1":"factorial","2":"0"},{"1":"fifo","2":"0"},{"1":"file.access","2":"0"},{"1":"file.append","2":"0"},{"1":"file.choose","2":"0"},{"1":"file.copy","2":"0"},{"1":"file.create","2":"0"},{"1":"file.exists","2":"0"},{"1":"file.info","2":"0"},{"1":"file.link","2":"0"},{"1":"file.mode","2":"0"},{"1":"file.mtime","2":"0"},{"1":"file.path","2":"0"},{"1":"file.remove","2":"0"},{"1":"file.rename","2":"0"},{"1":"file.show","2":"0"},{"1":"file.size","2":"0"},{"1":"file.symlink","2":"0"},{"1":"Filter","2":"0"},{"1":"Find","2":"0"},{"1":"find.package","2":"0"},{"1":"findInterval","2":"0"},{"1":"findPackageEnv","2":"0"},{"1":"findRestart","2":"0"},{"1":"floor","2":"0"},{"1":"flush.connection","2":"0"},{"1":"for","2":"0"},{"1":"force","2":"0"},{"1":"forceAndCall","2":"0"},{"1":"formals","2":"0"},{"1":"format.AsIs","2":"0"},{"1":"format.data.frame","2":"0"},{"1":"format.Date","2":"0"},{"1":"format.default","2":"0"},{"1":"format.difftime","2":"0"},{"1":"format.factor","2":"0"},{"1":"format.hexmode","2":"0"},{"1":"format.info","2":"0"},{"1":"format.libraryIQR","2":"0"},{"1":"format.numeric_version","2":"0"},{"1":"format.octmode","2":"0"},{"1":"format.packageInfo","2":"0"},{"1":"format.POSIXct","2":"0"},{"1":"format.POSIXlt","2":"0"},{"1":"format.pval","2":"0"},{"1":"format.summaryDefault","2":"0"},{"1":"formatC","2":"0"},{"1":"formatDL","2":"0"},{"1":"forwardsolve","2":"0"},{"1":"function","2":"0"},{"1":"gamma","2":"0"},{"1":"gc.time","2":"0"},{"1":"gcinfo","2":"0"},{"1":"gctorture","2":"0"},{"1":"gctorture2","2":"0"},{"1":"get","2":"0"},{"1":"get0","2":"0"},{"1":"getAllConnections","2":"0"},{"1":"getCallingDLL","2":"0"},{"1":"getCallingDLLe","2":"0"},{"1":"getConnection","2":"0"},{"1":"getDLLRegisteredRoutines.character","2":"0"},{"1":"getDLLRegisteredRoutines.DLLInfo","2":"0"},{"1":"getElement","2":"0"},{"1":"geterrmessage","2":"0"},{"1":"getExportedValue","2":"0"},{"1":"getHook","2":"0"},{"1":"getLoadedDLLs","2":"0"},{"1":"getNamespace","2":"0"},{"1":"getNamespaceExports","2":"0"},{"1":"getNamespaceImports","2":"0"},{"1":"getNamespaceInfo","2":"0"},{"1":"getNamespaceName","2":"0"},{"1":"getNamespaceUsers","2":"0"},{"1":"getNamespaceVersion","2":"0"},{"1":"getNativeSymbolInfo","2":"0"},{"1":"getOption","2":"0"},{"1":"getRversion","2":"0"},{"1":"getSrcLines","2":"0"},{"1":"getTaskCallbackNames","2":"0"},{"1":"gettext","2":"0"},{"1":"gettextf","2":"0"},{"1":"getwd","2":"0"},{"1":"gl","2":"0"},{"1":"globalCallingHandlers","2":"0"},{"1":"globalenv","2":"0"},{"1":"gregexec","2":"0"},{"1":"gregexpr","2":"0"},{"1":"grep","2":"0"},{"1":"grepl","2":"0"},{"1":"grepRaw","2":"0"},{"1":"grouping","2":"0"},{"1":"gsub","2":"0"},{"1":"gzcon","2":"0"},{"1":"gzfile","2":"0"},{"1":"I","2":"0"},{"1":"iconv","2":"0"},{"1":"iconvlist","2":"0"},{"1":"icuGetCollate","2":"0"},{"1":"icuSetCollate","2":"0"},{"1":"identical","2":"0"},{"1":"identity","2":"0"},{"1":"if","2":"0"},{"1":"ifelse","2":"0"},{"1":"Im","2":"0"},{"1":"importIntoEnv","2":"0"},{"1":"infoRDS","2":"0"},{"1":"inherits","2":"0"},{"1":"integer","2":"0"},{"1":"interactive","2":"0"},{"1":"intersect","2":"0"},{"1":"intToBits","2":"0"},{"1":"intToUtf8","2":"0"},{"1":"inverse.rle","2":"0"},{"1":"invisible","2":"0"},{"1":"invokeRestart","2":"0"},{"1":"invokeRestartInteractively","2":"0"},{"1":"is.array","2":"0"},{"1":"is.atomic","2":"0"},{"1":"is.call","2":"0"},{"1":"is.character","2":"0"},{"1":"is.complex","2":"0"},{"1":"is.data.frame","2":"0"},{"1":"is.double","2":"0"},{"1":"is.element","2":"0"},{"1":"is.environment","2":"0"},{"1":"is.expression","2":"0"},{"1":"is.factor","2":"0"},{"1":"is.function","2":"0"},{"1":"is.integer","2":"0"},{"1":"is.language","2":"0"},{"1":"is.list","2":"0"},{"1":"is.loaded","2":"0"},{"1":"is.logical","2":"0"},{"1":"is.matrix","2":"0"},{"1":"is.na.data.frame","2":"0"},{"1":"is.na.numeric_version","2":"0"},{"1":"is.na.POSIXlt","2":"0"},{"1":"is.na<-.default","2":"0"},{"1":"is.na<-.factor","2":"0"},{"1":"is.na<-.numeric_version","2":"0"},{"1":"is.name","2":"0"},{"1":"is.null","2":"0"},{"1":"is.numeric_version","2":"0"},{"1":"is.numeric.Date","2":"0"},{"1":"is.numeric.difftime","2":"0"},{"1":"is.numeric.POSIXt","2":"0"},{"1":"is.object","2":"0"},{"1":"is.ordered","2":"0"},{"1":"is.package_version","2":"0"},{"1":"is.pairlist","2":"0"},{"1":"is.primitive","2":"0"},{"1":"is.qr","2":"0"},{"1":"is.R","2":"0"},{"1":"is.raw","2":"0"},{"1":"is.recursive","2":"0"},{"1":"is.single","2":"0"},{"1":"is.symbol","2":"0"},{"1":"is.table","2":"0"},{"1":"is.unsorted","2":"0"},{"1":"is.vector","2":"0"},{"1":"isa","2":"0"},{"1":"isatty","2":"0"},{"1":"isBaseNamespace","2":"0"},{"1":"isdebugged","2":"0"},{"1":"isFALSE","2":"0"},{"1":"isIncomplete","2":"0"},{"1":"isNamespace","2":"0"},{"1":"isNamespaceLoaded","2":"0"},{"1":"ISOdate","2":"0"},{"1":"ISOdatetime","2":"0"},{"1":"isOpen","2":"0"},{"1":"isRestart","2":"0"},{"1":"isS4","2":"0"},{"1":"isSeekable","2":"0"},{"1":"isSymmetric.matrix","2":"0"},{"1":"isTRUE","2":"0"},{"1":"jitter","2":"0"},{"1":"julian.Date","2":"0"},{"1":"julian.POSIXt","2":"0"},{"1":"kappa.default","2":"0"},{"1":"kappa.lm","2":"0"},{"1":"kappa.qr","2":"0"},{"1":"l10n_info","2":"0"},{"1":"La_library","2":"0"},{"1":"La_version","2":"0"},{"1":"La.svd","2":"0"},{"1":"labels.default","2":"0"},{"1":"lapply","2":"0"},{"1":"lazyLoad","2":"0"},{"1":"lazyLoadDBexec","2":"0"},{"1":"lazyLoadDBfetch","2":"0"},{"1":"lbeta","2":"0"},{"1":"lchoose","2":"0"},{"1":"length.POSIXlt","2":"0"},{"1":"length<-.Date","2":"0"},{"1":"length<-.difftime","2":"0"},{"1":"length<-.factor","2":"0"},{"1":"length<-.POSIXct","2":"0"},{"1":"length<-.POSIXlt","2":"0"},{"1":"levels.default","2":"0"},{"1":"levels<-.factor","2":"0"},{"1":"lfactorial","2":"0"},{"1":"lgamma","2":"0"},{"1":"libcurlVersion","2":"0"},{"1":"library.dynam.unload","2":"0"},{"1":"licence","2":"0"},{"1":"license","2":"0"},{"1":"list.dirs","2":"0"},{"1":"list.files","2":"0"},{"1":"list2DF","2":"0"},{"1":"list2env","2":"0"},{"1":"load","2":"0"},{"1":"loadedNamespaces","2":"0"},{"1":"loadingNamespaceInfo","2":"0"},{"1":"loadNamespace","2":"0"},{"1":"local","2":"0"},{"1":"lockBinding","2":"0"},{"1":"lockEnvironment","2":"0"},{"1":"log","2":"0"},{"1":"log10","2":"0"},{"1":"log1p","2":"0"},{"1":"log2","2":"0"},{"1":"logb","2":"0"},{"1":"logical","2":"0"},{"1":"lower.tri","2":"0"},{"1":"make.names","2":"0"},{"1":"make.unique","2":"0"},{"1":"makeActiveBinding","2":"0"},{"1":"Map","2":"0"},{"1":"mapply","2":"0"},{"1":"margin.table","2":"0"},{"1":"marginSums","2":"0"},{"1":"mat.or.vec","2":"0"},{"1":"match.arg","2":"0"},{"1":"match.call","2":"0"},{"1":"match.fun","2":"0"},{"1":"Math.data.frame","2":"0"},{"1":"Math.Date","2":"0"},{"1":"Math.difftime","2":"0"},{"1":"Math.factor","2":"0"},{"1":"Math.POSIXt","2":"0"},{"1":"matrix","2":"0"},{"1":"max.col","2":"0"},{"1":"mean.Date","2":"0"},{"1":"mean.default","2":"0"},{"1":"mean.difftime","2":"0"},{"1":"mean.POSIXct","2":"0"},{"1":"mean.POSIXlt","2":"0"},{"1":"mem.maxNSize","2":"0"},{"1":"mem.maxVSize","2":"0"},{"1":"memCompress","2":"0"},{"1":"memDecompress","2":"0"},{"1":"memory.profile","2":"0"},{"1":"merge.data.frame","2":"0"},{"1":"merge.default","2":"0"},{"1":"message","2":"0"},{"1":"mget","2":"0"},{"1":"missing","2":"0"},{"1":"Mod","2":"0"},{"1":"mode","2":"0"},{"1":"mode<-","2":"0"},{"1":"months.Date","2":"0"},{"1":"months.POSIXt","2":"0"},{"1":"mostattributes<-","2":"0"},{"1":"mtfrm.default","2":"0"},{"1":"names.POSIXlt","2":"0"},{"1":"names<-.POSIXlt","2":"0"},{"1":"namespaceExport","2":"0"},{"1":"namespaceImport","2":"0"},{"1":"namespaceImportClasses","2":"0"},{"1":"namespaceImportFrom","2":"0"},{"1":"namespaceImportMethods","2":"0"},{"1":"nargs","2":"0"},{"1":"nchar","2":"0"},{"1":"ncol","2":"0"},{"1":"NCOL","2":"0"},{"1":"Negate","2":"0"},{"1":"new.env","2":"0"},{"1":"next","2":"0"},{"1":"NextMethod","2":"0"},{"1":"ngettext","2":"0"},{"1":"nlevels","2":"0"},{"1":"noquote","2":"0"},{"1":"norm","2":"0"},{"1":"normalizePath","2":"0"},{"1":"nrow","2":"0"},{"1":"NROW","2":"0"},{"1":"nullfile","2":"0"},{"1":"numeric","2":"0"},{"1":"numeric_version","2":"0"},{"1":"numToBits","2":"0"},{"1":"numToInts","2":"0"},{"1":"nzchar","2":"0"},{"1":"objects","2":"0"},{"1":"oldClass","2":"0"},{"1":"oldClass<-","2":"0"},{"1":"OlsonNames","2":"0"},{"1":"on.exit","2":"0"},{"1":"open.connection","2":"0"},{"1":"open.srcfile","2":"0"},{"1":"open.srcfilealias","2":"0"},{"1":"open.srcfilecopy","2":"0"},{"1":"Ops.data.frame","2":"0"},{"1":"Ops.Date","2":"0"},{"1":"Ops.difftime","2":"0"},{"1":"Ops.factor","2":"0"},{"1":"Ops.numeric_version","2":"0"},{"1":"Ops.ordered","2":"0"},{"1":"Ops.POSIXt","2":"0"},{"1":"options","2":"0"},{"1":"ordered","2":"0"},{"1":"outer","2":"0"},{"1":"package_version","2":"0"},{"1":"packageEvent","2":"0"},{"1":"packageHasNamespace","2":"0"},{"1":"packageNotFoundError","2":"0"},{"1":"packageStartupMessage","2":"0"},{"1":"packBits","2":"0"},{"1":"pairlist","2":"0"},{"1":"parent.env","2":"0"},{"1":"parent.env<-","2":"0"},{"1":"parent.frame","2":"0"},{"1":"parse","2":"0"},{"1":"parseNamespaceFile","2":"0"},{"1":"paste","2":"0"},{"1":"paste0","2":"0"},{"1":"path.expand","2":"0"},{"1":"path.package","2":"0"},{"1":"pcre_config","2":"0"},{"1":"pipe","2":"0"},{"1":"pmatch","2":"0"},{"1":"pmax","2":"0"},{"1":"pmax.int","2":"0"},{"1":"pmin","2":"0"},{"1":"pmin.int","2":"0"},{"1":"polyroot","2":"0"},{"1":"pos.to.env","2":"0"},{"1":"Position","2":"0"},{"1":"pretty.default","2":"0"},{"1":"prettyNum","2":"0"},{"1":"print.AsIs","2":"0"},{"1":"print.by","2":"0"},{"1":"print.condition","2":"0"},{"1":"print.connection","2":"0"},{"1":"print.data.frame","2":"0"},{"1":"print.Date","2":"0"},{"1":"print.default","2":"0"},{"1":"print.difftime","2":"0"},{"1":"print.Dlist","2":"0"},{"1":"print.DLLInfo","2":"0"},{"1":"print.DLLInfoList","2":"0"},{"1":"print.DLLRegisteredRoutines","2":"0"},{"1":"print.eigen","2":"0"},{"1":"print.factor","2":"0"},{"1":"print.function","2":"0"},{"1":"print.hexmode","2":"0"},{"1":"print.libraryIQR","2":"0"},{"1":"print.listof","2":"0"},{"1":"print.NativeRoutineList","2":"0"},{"1":"print.noquote","2":"0"},{"1":"print.numeric_version","2":"0"},{"1":"print.octmode","2":"0"},{"1":"print.packageInfo","2":"0"},{"1":"print.POSIXct","2":"0"},{"1":"print.POSIXlt","2":"0"},{"1":"print.proc_time","2":"0"},{"1":"print.restart","2":"0"},{"1":"print.rle","2":"0"},{"1":"print.simple.list","2":"0"},{"1":"print.srcfile","2":"0"},{"1":"print.srcref","2":"0"},{"1":"print.summary.table","2":"0"},{"1":"print.summary.warnings","2":"0"},{"1":"print.summaryDefault","2":"0"},{"1":"print.table","2":"0"},{"1":"print.warnings","2":"0"},{"1":"prmatrix","2":"0"},{"1":"proc.time","2":"0"},{"1":"prod","2":"0"},{"1":"prop.table","2":"0"},{"1":"proportions","2":"0"},{"1":"provideDimnames","2":"0"},{"1":"psigamma","2":"0"},{"1":"pushBack","2":"0"},{"1":"pushBackLength","2":"0"},{"1":"q","2":"0"},{"1":"qr.coef","2":"0"},{"1":"qr.default","2":"0"},{"1":"qr.fitted","2":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>This brute-force code unsurprisingly identifies <code>print()</code>
+as having the greatest number of methods. A bug in
+<code>s3_methods_generic()</code> prevents its use (error below).</p>
+<pre><code>Error in gsub(paste0(&quot;^&quot;, generic_esc, &quot;[.,]&quot;), &quot;&quot;, info$method) : 
+invalid regular expression &#39;^([.,]&#39;, reason &#39;Missing &#39;)&#39;&#39;</code></pre>
+<p>AR Solutions: A little experimentation (and thinking about the most
+popular functions) suggests that the <code>print()</code> generic has
+the most defined methods.</p>
+<p>Let’s verify this programmatically with the tools we have learned in
+this and the previous chapters.</p>
+<pre class="r"><code>ls(all.names = TRUE, envir = baseenv()) %&gt;%
+  mget(envir = baseenv()) %&gt;%
+  keep(is_function) %&gt;%
+  names() %&gt;%
+  keep(is_s3_generic) %&gt;%
+  map(~ set_names(nrow(s3_methods_generic(.x)), .x)) %&gt;%
+  flatten_int() %&gt;%
+  sort(decreasing = TRUE) %&gt;%
+  head()</code></pre>
+<pre><code>#&gt;        print       format            [ as.character      summary           [[ 
+#&gt;          377          180           72           54           42           38</code></pre>
+<hr />
+<ol start="5" style="list-style-type: decimal">
+<li>Carefully read the documentation for <code>UseMethod()</code> and
+explain why the following code returns the results that it does. What
+two usual rules of function evaluation does <code>UseMethod()</code>
+violate?</li>
+</ol>
+<pre class="r"><code>g &lt;- function(x) {
+  x &lt;- 10
+  y &lt;- 10 # nolint: object_usage_linter.
+  UseMethod(&quot;g&quot;)
+}
+g.default &lt;- function(x) c(x = x, y = y)
+x &lt;- 1
+y &lt;- 1
+g(x)</code></pre>
+<pre><code>#&gt;  x  y 
+#&gt;  1 10</code></pre>
+<p>Answer: the documentation states in <strong>Technical
+Details</strong>:</p>
+<blockquote>
+<p><code>UseMethod</code> creates a new function call with arguments
+matched as they came in to the generic. Any local variables defined
+before the call to <code>UseMethod</code> are retained (unlike S).</p>
+</blockquote>
+<p>So, <code>UseMethod()</code> creates a new function call where
+<code>x</code> matches <code>x &lt;- 1</code> and the local variable
+<code>y &lt;- 10</code> is retained. This is passed to
+<code>g.default()</code>. This violates both lazy evaluation and lexical
+scoping.</p>
+<p>AR Solutions: Let’s take this step by step. If you call
+<code>g.default(x)</code> directly you get <code>c(1, 1)</code> as you
+might expect.</p>
+<p>The value bound to <code>x</code> comes from the argument, the value
+from <code>y</code> comes from the global environment.</p>
+<p>But when we call <code>g(x)</code> we get <code>c(1, 10)</code>.</p>
+<p>This is seemingly inconsistent: why does <code>x</code> come from the
+value defined inside of <code>g()</code>, and <code>y</code> still come
+from the global environment? It’s because <code>UseMethod()</code> calls
+<code>g.default()</code> in a special way so that variables defined
+inside the generic are available to methods. The exception are arguments
+supplied to the function: they are passed on as is and cannot be
+affected by code inside the generic.</p>
+<hr />
+<ol start="6" style="list-style-type: decimal">
+<li>What are the arguments to <code>[</code>? Why is this a hard
+question to answer?</li>
+</ol>
+<p>Answer: the possible arguments include the <code>x</code>, the object
+being extracted (or replaced), indices (<code>i</code>, <code>j</code>,
+<code>...</code>), <code>name</code>, <code>drop</code>,
+<code>exact</code>, and <code>value</code>.</p>
+<p>This is a hard question to answer since <code>[</code> is an
+irregular primitive function that can be called in multiple ways, none
+of which support using all possible arguments.</p>
+<p>AR Solutions: The subsetting operator <code>[</code> is a primitive
+and a generic function, which can be confirmed via
+<code>ftype()</code>.</p>
+<pre class="r"><code>ftype(`[`)</code></pre>
+<pre><code>#&gt; [1] &quot;primitive&quot; &quot;generic&quot;</code></pre>
+<p>For primitive functions <code>formals([)</code> returns
+<code>NULL</code> so we need to find another way to determine the
+functions arguments. One possible way to figure out <code>[</code>’s
+arguments would be to inspect the underlying C source code, which can be
+searched for via <code>pryr::show_c_source(.Primitive("["))</code>. When
+we inspect the arguments of some of <code>[</code>’s methods, we see
+that the arguments vary with the class of <code>x</code>.</p>
+<pre class="r"><code>names(formals(`[.data.frame`))</code></pre>
+<pre><code>#&gt; [1] &quot;x&quot;    &quot;i&quot;    &quot;j&quot;    &quot;drop&quot;</code></pre>
+<pre class="r"><code>names(formals(`[.table`))</code></pre>
+<pre><code>#&gt; [1] &quot;x&quot;    &quot;i&quot;    &quot;j&quot;    &quot;...&quot;  &quot;drop&quot;</code></pre>
+<pre class="r"><code>names(formals(`[.Date`))</code></pre>
+<pre><code>#&gt; [1] &quot;x&quot;    &quot;...&quot;  &quot;drop&quot;</code></pre>
+<pre class="r"><code>names(formals(`[.AsIs`))</code></pre>
+<pre><code>#&gt; [1] &quot;x&quot;   &quot;i&quot;   &quot;...&quot;</code></pre>
+<p>To finally get a better overview, we have to put in a little more
+effort and also use <code>s3_methods_generic()</code> again.</p>
+<pre class="r"><code>s3_methods_generic(&quot;[&quot;) %&gt;%
+  filter(visible) %&gt;%
+  mutate(
+    method = paste0(&quot;[.&quot;, class),
+    argnames = purrr::map(method, ~ names(formals(.x))),
+    args = purrr::map(method, ~ formals(.x)),
+    args = purrr::map2( # nolint: duplicate_argument_linter.
+      argnames, args,
+      ~ paste(.x, .y, sep = &quot; = &quot;)
+    ),
+    args = purrr::set_names(args, method) # nolint: duplicate_argument_linter.
+  ) %&gt;%
+  pull(args) %&gt;%
+  head()</code></pre>
+<pre><code>#&gt; $`[.AsIs`
+#&gt; [1] &quot;x = &quot;   &quot;i = &quot;   &quot;... = &quot;
+#&gt; 
+#&gt; $`[.data.frame`
+#&gt; [1] &quot;x = &quot;                                              
+#&gt; [2] &quot;i = &quot;                                              
+#&gt; [3] &quot;j = &quot;                                              
+#&gt; [4] &quot;drop = if (missing(i)) TRUE else length(cols) == 1&quot;
+#&gt; 
+#&gt; $`[.Date`
+#&gt; [1] &quot;x = &quot;        &quot;... = &quot;      &quot;drop = TRUE&quot;
+#&gt; 
+#&gt; $`[.difftime`
+#&gt; [1] &quot;x = &quot;        &quot;... = &quot;      &quot;drop = TRUE&quot;
+#&gt; 
+#&gt; $`[.Dlist`
+#&gt; [1] &quot;x = &quot;   &quot;i = &quot;   &quot;... = &quot;
+#&gt; 
+#&gt; $`[.DLLInfoList`
+#&gt; [1] &quot;x = &quot;   &quot;... = &quot;</code></pre>
+<hr />
+</div>
+<div id="exercises-3" class="section level2">
+<h2>13.5.1 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Categorise the objects returned by <code>lm()</code>,
+<code>factor()</code>, <code>table()</code>, <code>as.Date()</code>,
+<code>as.POSIXct()</code>, <code>ecdf()</code>, <code>ordered()</code>,
+<code>I()</code> into the styles described above.</li>
+</ol>
+<p>Answer:</p>
+<ul>
+<li><code>lm()</code>, <code>ecdf()</code>: scalar</li>
+<li><code>factor()</code>, <code>as.Date()</code>,
+<code>as.POSIXct()</code>, <code>ordered</code>: vector</li>
+<li><code>table()</code>: data frame</li>
+<li><code>I()</code>: same as the source object</li>
+</ul>
+<p>AR Solutions: We can categorise the return values into the various
+object styles by observing how the <a
+href="https://vctrs.r-lib.org/articles/type-size.html#size">number of
+observations</a> is calculated: For vector style classes,
+<code>length(x)</code> represents the number of observations. Record
+style objects use a list of equal length elements to represent
+individual components. For data frames and matrices, the observations
+are represented by the rows. Scalar style objects use a list to
+represent a single thing.</p>
+<p>This leads us to:</p>
+<ul>
+<li>Vector object-style: <code>factor()</code>, <code>table()</code>,
+<code>as.Date()</code>, <code>as.POSIXct()</code>,
+<code>ordered()</code></li>
+<li>Record object-style: not observed</li>
+<li>Data frame object-style: not observed</li>
+<li>Scalar object-style: <code>lm()</code>, <code>ecdf()</code></li>
+</ul>
+<p>The object style of <code>I()</code> depends on the input since this
+function returns a “copy of the object with class <code>AsIs</code>
+prepended to the class(es)”.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>What would a constructor function for <code>lm</code> objects,
+<code>new_lm()</code>, look like? Use <code>?lm</code> and
+experimentation to figure out the required fields and their types.</li>
+</ol>
+<p>Answer: the only required field is <code>formula</code>, provided
+that the variables listed in the formula exist (and are both vectors).
+<code>formula</code> must be of type “<code>formula</code>”.</p>
+<pre class="r"><code>mpg &lt;- pull(mtcars, mpg)
+wt &lt;- pull(mtcars, wt)
+lm(mpg ~ wt)</code></pre>
+<pre><code>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = mpg ~ wt)
+#&gt; 
+#&gt; Coefficients:
+#&gt; (Intercept)           wt  
+#&gt;      37.285       -5.344</code></pre>
+<p>AR Solutions: The constructor needs to populate the attributes of an
+<code>lm</code> object and check their types for correctness. Let’s
+start by creating a simple <code>lm</code> object and explore its
+underlying base type and attributes:</p>
+<pre class="r"><code>mod &lt;- lm(cyl ~ ., data = mtcars)
+typeof(mod)</code></pre>
+<pre><code>#&gt; [1] &quot;list&quot;</code></pre>
+<pre class="r"><code>attributes(mod)</code></pre>
+<pre><code>#&gt; $names
+#&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;          &quot;fitted.values&quot; &quot;assign&quot;       
+#&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;   &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;        
+#&gt; 
+#&gt; $class
+#&gt; [1] &quot;lm&quot;</code></pre>
+<p>As <code>mod</code> is built upon a list, we can simply use
+<code>map(mod, typeof)</code> to find out the base types of its
+elements. (Additionally, we inspect <code>?lm</code>, to learn more
+about the individual attributes.)</p>
+<pre class="r"><code>map_chr(mod, typeof)</code></pre>
+<pre><code>#&gt;  coefficients     residuals       effects          rank fitted.values        assign            qr 
+#&gt;      &quot;double&quot;      &quot;double&quot;      &quot;double&quot;     &quot;integer&quot;      &quot;double&quot;     &quot;integer&quot;        &quot;list&quot; 
+#&gt;   df.residual       xlevels          call         terms         model 
+#&gt;     &quot;integer&quot;        &quot;list&quot;    &quot;language&quot;    &quot;language&quot;        &quot;list&quot;</code></pre>
+<p>Now we should have enough information to write a constructor for new
+<code>lm</code> objects.</p>
+<pre class="r"><code>new_lm &lt;- function(coefficients, residuals, effects, rank, fitted.values, assign,
+                   qr, df.residual, xlevels, call, terms, model # nolint: object_name_linter.
+) {
+  stopifnot(
+    is.double(coefficients), is.double(residuals),
+    is.double(effects), is.integer(rank), is.double(fitted.values),
+    is.integer(assign), is.list(qr), is.integer(df.residual),
+    is.list(xlevels), is.language(call), is.language(terms),
+    is.list(model)
+  )
+
+  structure(
+    list(
+      coefficients = coefficients,
+      residuals = residuals,
+      effects = effects,
+      rank = rank,
+      fitted.values = fitted.values,
+      assign = assign,
+      qr = qr,
+      df.residual = df.residual,
+      xlevels = xlevels,
+      call = call,
+      terms = terms,
+      model = model
+    ),
+    class = &quot;lm&quot;
+  )
+}</code></pre>
+<hr />
+</div>
+<div id="exercises-4" class="section level2">
+<h2>13.6.3 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>How does <code>[.Date</code> support subclasses? How does it fail to
+support subclasses?</li>
+</ol>
+<pre class="r"><code>`[.Date`</code></pre>
+<pre><code>#&gt; function (x, ..., drop = TRUE) 
+#&gt; {
+#&gt;     .Date(NextMethod(&quot;[&quot;), oldClass(x))
+#&gt; }
+#&gt; &lt;bytecode: 0x7feebec82628&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code>`.Date`</code></pre>
+<pre><code>#&gt; function (xx, cl = &quot;Date&quot;) 
+#&gt; `class&lt;-`(xx, cl)
+#&gt; &lt;bytecode: 0x7fee89a21010&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<p>Answer: by passing the object’s class to <code>.Date</code>,
+<code>[.Date</code> avoids the problem of <code>[.secret</code> and can
+return subclasses of <code>Date</code>. However, the <code>.Date</code>
+method can return objects that don’t contain the class
+<code>Date</code>.</p>
+<p>AR Solutions: <code>[.Date</code> calls <code>.Date</code> with the
+result of calling <code>[</code> on the parent class, along with
+<code>oldClass()</code>:</p>
+<p><code>.Date</code> is kind of like a constructor for date classes,
+although it doesn’t check the input is the correct type:</p>
+<p><code>oldClass()</code> is basically the same as
+<code>class()</code>, except that it doesn’t return implicit classes,
+i.e. it’s basically <code>attr(x, "class")</code> (looking at the C code
+that’s exactly what it does, except that it also handles S4
+objects).</p>
+<p>As <code>oldClass()</code> is “basically” <code>class()</code>, we
+can rewrite <code>[.Date</code> to make the implementation more
+clear:</p>
+<pre class="r"><code>`[.Date` &lt;- function(x, ..., drop = TRUE) {
+  out &lt;- NextMethod(&quot;[&quot;)
+  class(out) &lt;- class(x)
+  out
+}</code></pre>
+<p>So, <code>[.Date</code> ensures that the output has the same class as
+in the input. But what about other attributes that a subclass might
+possess? They get lost:</p>
+<pre class="r"><code>x &lt;- structure(1:4, test = &quot;test&quot;, class = c(&quot;myDate&quot;, &quot;Date&quot;))
+attributes(x[1])</code></pre>
+<pre><code>#&gt; $class
+#&gt; [1] &quot;myDate&quot; &quot;Date&quot;</code></pre>
+<p>Note: this is a better explanation of how it fails to support
+subclasses; it drops non-class attributes.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>R has two classes for representing date time data,
+<code>POSIXct</code> and <code>POSIXlt</code>, which both inherit from
+<code>POSIXt</code>. Which generics have different behaviours for the
+two classes? Which generics share the same behaviour?</li>
+</ol>
+<p>Answer: if a generic is defined for either class, it must have
+different behaviors. Generics that aren’t defined for either class must
+have the same behavior. We can get the list of generics defined for
+either class using <code>sloop::s3_methods_class()</code>. These
+generics have different behaviors for the two classes:</p>
+<pre class="r"><code>ct_generics &lt;- s3_methods_class(&quot;POSIXct&quot;)$generic
+lt_generics &lt;- s3_methods_class(&quot;POSIXlt&quot;)$generic
+defined_generics &lt;- union(ct_generics, lt_generics)
+defined_generics</code></pre>
+<pre><code>#&gt;  [1] &quot;[&quot;             &quot;[[&quot;            &quot;[&lt;-&quot;           &quot;as.data.frame&quot; &quot;as.Date&quot;       &quot;as.list&quot;      
+#&gt;  [7] &quot;as.POSIXlt&quot;    &quot;c&quot;             &quot;format&quot;        &quot;length&lt;-&quot;      &quot;mean&quot;          &quot;print&quot;        
+#&gt; [13] &quot;rep&quot;           &quot;split&quot;         &quot;summary&quot;       &quot;Summary&quot;       &quot;weighted.mean&quot; &quot;xtfrm&quot;        
+#&gt; [19] &quot;[[&lt;-&quot;          &quot;anyNA&quot;         &quot;as.double&quot;     &quot;as.matrix&quot;     &quot;as.POSIXct&quot;    &quot;as.vector&quot;    
+#&gt; [25] &quot;duplicated&quot;    &quot;is.na&quot;         &quot;length&quot;        &quot;names&quot;         &quot;names&lt;-&quot;       &quot;sort&quot;         
+#&gt; [31] &quot;unique&quot;</code></pre>
+<p>We adapt work from previous exercises to get the list of all
+generics, and identify S3 generics that aren’t defined for either class,
+which must have the same behavior:</p>
+<pre class="r"><code>s3_generic_funs &lt;- Filter(is_s3_generic, names(funs))
+union(setdiff(defined_generics, s3_generic_funs), setdiff(s3_generic_funs, defined_generics))</code></pre>
+<pre><code>#&gt;   [1] &quot;Summary&quot;                  &quot;weighted.mean&quot;            &quot;-&quot;                       
+#&gt;   [4] &quot;!=&quot;                       &quot;*&quot;                        &quot;/&quot;                       
+#&gt;   [7] &quot;&amp;&quot;                        &quot;%/%&quot;                      &quot;%%&quot;                      
+#&gt;  [10] &quot;^&quot;                        &quot;+&quot;                        &quot;&lt;&quot;                       
+#&gt;  [13] &quot;&lt;=&quot;                       &quot;==&quot;                       &quot;&gt;&quot;                       
+#&gt;  [16] &quot;&gt;=&quot;                       &quot;|&quot;                        &quot;$&quot;                       
+#&gt;  [19] &quot;$&lt;-&quot;                      &quot;abs&quot;                      &quot;acos&quot;                    
+#&gt;  [22] &quot;acosh&quot;                    &quot;all&quot;                      &quot;all.equal&quot;               
+#&gt;  [25] &quot;any&quot;                      &quot;anyDuplicated&quot;            &quot;aperm&quot;                   
+#&gt;  [28] &quot;Arg&quot;                      &quot;as.array&quot;                 &quot;as.call&quot;                 
+#&gt;  [31] &quot;as.character&quot;             &quot;as.complex&quot;               &quot;as.environment&quot;          
+#&gt;  [34] &quot;as.expression&quot;            &quot;as.function&quot;              &quot;as.integer&quot;              
+#&gt;  [37] &quot;as.logical&quot;               &quot;as.null&quot;                  &quot;as.numeric&quot;              
+#&gt;  [40] &quot;as.raw&quot;                   &quot;as.single&quot;                &quot;as.table&quot;                
+#&gt;  [43] &quot;asin&quot;                     &quot;asinh&quot;                    &quot;atan&quot;                    
+#&gt;  [46] &quot;atanh&quot;                    &quot;by&quot;                       &quot;cbind&quot;                   
+#&gt;  [49] &quot;ceiling&quot;                  &quot;chol&quot;                     &quot;close&quot;                   
+#&gt;  [52] &quot;conditionCall&quot;            &quot;conditionMessage&quot;         &quot;Conj&quot;                    
+#&gt;  [55] &quot;cos&quot;                      &quot;cosh&quot;                     &quot;cospi&quot;                   
+#&gt;  [58] &quot;cummax&quot;                   &quot;cummin&quot;                   &quot;cumprod&quot;                 
+#&gt;  [61] &quot;cumsum&quot;                   &quot;cut&quot;                      &quot;determinant&quot;             
+#&gt;  [64] &quot;diff&quot;                     &quot;digamma&quot;                  &quot;dim&quot;                     
+#&gt;  [67] &quot;dim&lt;-&quot;                    &quot;dimnames&quot;                 &quot;dimnames&lt;-&quot;              
+#&gt;  [70] &quot;droplevels&quot;               &quot;exp&quot;                      &quot;expm1&quot;                   
+#&gt;  [73] &quot;floor&quot;                    &quot;flush&quot;                    &quot;gamma&quot;                   
+#&gt;  [76] &quot;getDLLRegisteredRoutines&quot; &quot;Im&quot;                       &quot;is.array&quot;                
+#&gt;  [79] &quot;is.finite&quot;                &quot;is.infinite&quot;              &quot;is.matrix&quot;               
+#&gt;  [82] &quot;is.na&lt;-&quot;                  &quot;is.nan&quot;                   &quot;is.numeric&quot;              
+#&gt;  [85] &quot;isSymmetric&quot;              &quot;julian&quot;                   &quot;kappa&quot;                   
+#&gt;  [88] &quot;labels&quot;                   &quot;levels&quot;                   &quot;levels&lt;-&quot;                
+#&gt;  [91] &quot;lgamma&quot;                   &quot;log&quot;                      &quot;log10&quot;                   
+#&gt;  [94] &quot;log1p&quot;                    &quot;log2&quot;                     &quot;max&quot;                     
+#&gt;  [97] &quot;merge&quot;                    &quot;min&quot;                      &quot;Mod&quot;                     
+#&gt; [100] &quot;months&quot;                   &quot;mtfrm&quot;                    &quot;open&quot;                    
+#&gt; [103] &quot;plot&quot;                     &quot;pretty&quot;                   &quot;prod&quot;                    
+#&gt; [106] &quot;qr&quot;                       &quot;quarters&quot;                 &quot;range&quot;                   
+#&gt; [109] &quot;rbind&quot;                    &quot;Re&quot;                       &quot;rev&quot;                     
+#&gt; [112] &quot;round&quot;                    &quot;row.names&quot;                &quot;row.names&lt;-&quot;             
+#&gt; [115] &quot;rowsum&quot;                   &quot;scale&quot;                    &quot;seek&quot;                    
+#&gt; [118] &quot;seq&quot;                      &quot;seq.int&quot;                  &quot;sequence&quot;                
+#&gt; [121] &quot;sign&quot;                     &quot;signif&quot;                   &quot;sin&quot;                     
+#&gt; [124] &quot;sinh&quot;                     &quot;sinpi&quot;                    &quot;solve&quot;                   
+#&gt; [127] &quot;split&lt;-&quot;                  &quot;sqrt&quot;                     &quot;subset&quot;                  
+#&gt; [130] &quot;sum&quot;                      &quot;t&quot;                        &quot;tan&quot;                     
+#&gt; [133] &quot;tanh&quot;                     &quot;tanpi&quot;                    &quot;toString&quot;                
+#&gt; [136] &quot;transform&quot;                &quot;trigamma&quot;                 &quot;trunc&quot;                   
+#&gt; [139] &quot;truncate&quot;                 &quot;units&quot;                    &quot;units&lt;-&quot;                 
+#&gt; [142] &quot;unlist&quot;                   &quot;weekdays&quot;                 &quot;with&quot;                    
+#&gt; [145] &quot;within&quot;</code></pre>
+<p>Note: this code doesn’t quite work, since <code>Summary</code> is a
+generic according to <code>isGeneric</code> and is not according to
+<code>is_s3_generic</code>, and <code>weighted.mean</code> is a non-base
+S3 generic.</p>
+<p>AR Solutions: To answer this question, we have to get the respective
+generics</p>
+<pre class="r"><code>generics_t &lt;- s3_methods_class(&quot;POSIXt&quot;)$generic
+generics_ct &lt;- s3_methods_class(&quot;POSIXct&quot;)$generic
+generics_lt &lt;- s3_methods_class(&quot;POSIXlt&quot;)$generic</code></pre>
+<p>The generics in <code>generics_t</code> with a method for the
+superclass <code>POSIXt</code> potentially share the same behaviour for
+both subclasses. However, if a generic has a specific method for one of
+the subclasses, it has to be subtracted:</p>
+<pre class="r"><code># These generics provide subclass-specific methods
+union(generics_ct, generics_lt)</code></pre>
+<pre><code>#&gt;  [1] &quot;[&quot;             &quot;[[&quot;            &quot;[&lt;-&quot;           &quot;as.data.frame&quot; &quot;as.Date&quot;       &quot;as.list&quot;      
+#&gt;  [7] &quot;as.POSIXlt&quot;    &quot;c&quot;             &quot;format&quot;        &quot;length&lt;-&quot;      &quot;mean&quot;          &quot;print&quot;        
+#&gt; [13] &quot;rep&quot;           &quot;split&quot;         &quot;summary&quot;       &quot;Summary&quot;       &quot;weighted.mean&quot; &quot;xtfrm&quot;        
+#&gt; [19] &quot;[[&lt;-&quot;          &quot;anyNA&quot;         &quot;as.double&quot;     &quot;as.matrix&quot;     &quot;as.POSIXct&quot;    &quot;as.vector&quot;    
+#&gt; [25] &quot;duplicated&quot;    &quot;is.na&quot;         &quot;length&quot;        &quot;names&quot;         &quot;names&lt;-&quot;       &quot;sort&quot;         
+#&gt; [31] &quot;unique&quot;</code></pre>
+<pre class="r"><code># These generics share (inherited) methods for both subclasses
+setdiff(generics_t, union(generics_ct, generics_lt))</code></pre>
+<pre><code>#&gt;  [1] &quot;-&quot;            &quot;+&quot;            &quot;all.equal&quot;    &quot;as.character&quot; &quot;Axis&quot;         &quot;compare&quot;     
+#&gt;  [7] &quot;cut&quot;          &quot;diff&quot;         &quot;fullseq&quot;      &quot;hist&quot;         &quot;is.numeric&quot;   &quot;julian&quot;      
+#&gt; [13] &quot;Math&quot;         &quot;months&quot;       &quot;Ops&quot;          &quot;pretty&quot;       &quot;quantile&quot;     &quot;quarters&quot;    
+#&gt; [19] &quot;rescale_mid&quot;  &quot;rescale&quot;      &quot;round&quot;        &quot;scale_type&quot;   &quot;seq&quot;          &quot;str&quot;         
+#&gt; [25] &quot;trunc&quot;        &quot;weekdays&quot;</code></pre>
+<p>Note: again, advanced R gives a better answer to this question, by
+comparing to the generics supported by the parent class.</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>What do you expect this code to return? What does it actually
+return? Why?</li>
+</ol>
+<pre class="r"><code>generic2 &lt;- function(x) UseMethod(&quot;generic2&quot;)
+generic2.a1 &lt;- function(x) &quot;a1&quot;
+generic2.a2 &lt;- function(x) &quot;a2&quot;
+generic2.b &lt;- function(x) {
+  class(x) &lt;- &quot;a1&quot;
+  NextMethod()
+}
+generic2(structure(list(), class = c(&quot;b&quot;, &quot;a2&quot;)))</code></pre>
+<pre><code>#&gt; [1] &quot;a2&quot;</code></pre>
+<p>Answer: I’d expect this code to return <code>"a2"</code> with a class
+of <code>c("a1", "a2")</code>. It actually returns “a2” with a class of
+<code>character</code>. This is because when <code>generic2.b</code>
+calls <code>NextMethod()</code>, <code>generic2.a2</code> is called
+which returns a bare <code>"a2"</code>, dropping the class assigned by
+<code>generic2.b</code>.</p>
+<pre class="r"><code>class(generic2(structure(list(), class = c(&quot;b&quot;, &quot;a2&quot;))))</code></pre>
+<pre><code>#&gt; [1] &quot;character&quot;</code></pre>
+<p>AR Solutions: When we execute the code above, this is what is
+happening:</p>
+<ul>
+<li><p>we pass an object of classes <code>b</code> and <code>a2</code>
+to <code>generic2()</code>, which prompts R to look for a
+method<code>generic2.b()</code></p></li>
+<li><p>the method <code>generic2.b()</code> then changes the class to
+<code>a1</code> and calls <code>NextMethod()</code></p></li>
+<li><p>One would think that this will lead R to call
+<code>generic2.a1()</code>, but in fact, as mentioned in <em>Advanced
+R</em>, <code>NextMethod()</code> &gt; doesn’t actually work with the
+class attribute of the object, but instead uses a special global
+variable (.Class) to keep track of which method to call next.</p>
+<p>This is why <code>generic2.a2()</code> is called instead.</p></li>
+</ul>
+<pre class="r"><code>generic2(structure(list(), class = c(&quot;b&quot;, &quot;a2&quot;)))</code></pre>
+<pre><code>#&gt; [1] &quot;a2&quot;</code></pre>
+<p>Let’s just double check the statement above and evaluate
+<code>.Class</code> explicitly within the <code>generic2.b()</code>
+method.</p>
+<pre class="r"><code>generic2.b &lt;- function(x) {
+  class(x) &lt;- &quot;a1&quot;
+  print(.Class) # nolint: object_usage_linter.
+  NextMethod()
+}
+
+generic2(structure(list(), class = c(&quot;b&quot;, &quot;a2&quot;)))</code></pre>
+<pre><code>#&gt; [1] &quot;b&quot;  &quot;a2&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;a2&quot;</code></pre>
+<hr />
+</div>
+<div id="exercises-5" class="section level2">
+<h2>13.7.5 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Explain the differences in dispatch below:</li>
+</ol>
+<pre class="r"><code>length.integer &lt;- function(x) 10
+
+x1 &lt;- 1:5
+class(x1)</code></pre>
+<pre><code>#&gt; [1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>s3_dispatch(length(x1))</code></pre>
+<pre><code>#&gt;  * length.integer
+#&gt;    length.numeric
+#&gt;    length.default
+#&gt; =&gt; length (internal)</code></pre>
+<pre class="r"><code>x2 &lt;- structure(x1, class = &quot;integer&quot;)
+class(x2)</code></pre>
+<pre><code>#&gt; [1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>s3_dispatch(length(x2))</code></pre>
+<pre><code>#&gt; =&gt; length.integer
+#&gt;    length.default
+#&gt;  * length (internal)</code></pre>
+<p>Answer: <code>x1</code> dispatches using implicit class, which is
+<code>c("integer", "numeric")</code>. <code>x2</code> has an explicit
+class, so it is dispatched to <code>length.integer</code>.</p>
+<pre class="r"><code>s3_class(x1)</code></pre>
+<pre><code>#&gt; [1] &quot;integer&quot; &quot;numeric&quot;</code></pre>
+<pre class="r"><code>s3_class(x2)</code></pre>
+<pre><code>#&gt; [1] &quot;integer&quot;</code></pre>
+<p>AR Solutions: <code>class()</code> returns <code>integer</code> in
+both cases. However, while the class of <code>x1</code> is created
+implicitly and inherits from the <code>numeric</code> class, the class
+of <code>x2</code> is set explicitly. This is important because
+<code>length()</code> is an internal generic and internal generics only
+dispatch to methods when the class attribute has been set, i.e. internal
+generics do not use implicit classes.</p>
+<p>An object has no explicit class if <code>attr(x, "class")</code>
+returns <code>NULL</code>:</p>
+<pre class="r"><code>attr(x1, &quot;class&quot;)</code></pre>
+<pre><code>#&gt; NULL</code></pre>
+<pre class="r"><code>attr(x2, &quot;class&quot;)</code></pre>
+<pre><code>#&gt; [1] &quot;integer&quot;</code></pre>
+<p>To see the relevant classes for the S3 dispatch, one can use
+<code>sloop::s3_class()</code>:</p>
+<pre class="r"><code>s3_class(x1) # implicit</code></pre>
+<pre><code>#&gt; [1] &quot;integer&quot; &quot;numeric&quot;</code></pre>
+<pre class="r"><code>s3_class(x2) # explicit</code></pre>
+<pre><code>#&gt; [1] &quot;integer&quot;</code></pre>
+<p>For a better understanding of <code>s3_dipatch()</code>’s output we
+quote from <code>?s3_dispatch</code>: - =&gt; method exists and is found
+by <code>UseMethod()</code>. - -&gt; method exists and is used by
+<code>NextMethod()</code>. - * method exists but is not used. - Nothing
+(and greyed out in console): method does not exist.</p>
+<p>Note: AR Solutions includes an additional important detail, that
+“internal generics only dispatch to methods when the class attribute has
+been set”, which explains why the internal generic is used for
+<code>x1</code>.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>What classes have a method for the <code>Math</code> group generic
+in base R? Read the source code. How do the methods work?</li>
+</ol>
+<p>Answer: four base classes have a method for <code>Math</code>:
+<code>data.frame</code>, <code>Date</code>, <code>difftime</code>,
+<code>factor</code>, and <code>POSIXt</code>.</p>
+<pre class="r"><code>s3_methods_generic(&quot;Math&quot;) |&gt;
+  filter(source == &quot;base&quot;) # nolint: undesirable_function_linter. source is not used as a function.</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["generic"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["visible"],"name":[3],"type":["lgl"],"align":["right"]},{"label":["source"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Math","2":"data.frame","3":"TRUE","4":"base"},{"1":"Math","2":"Date","3":"TRUE","4":"base"},{"1":"Math","2":"difftime","3":"TRUE","4":"base"},{"1":"Math","2":"factor","3":"TRUE","4":"base"},{"1":"Math","2":"POSIXt","3":"TRUE","4":"base"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>Math.data.frame</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; {
+#&gt;     mode.ok &lt;- vapply(x, function(x) is.numeric(x) || is.logical(x) || 
+#&gt;         is.complex(x), NA)
+#&gt;     if (all(mode.ok)) {
+#&gt;         x[] &lt;- lapply(X = x, FUN = .Generic, ...)
+#&gt;         return(x)
+#&gt;     }
+#&gt;     else {
+#&gt;         vnames &lt;- names(x)
+#&gt;         if (is.null(vnames)) 
+#&gt;             vnames &lt;- seq_along(x)
+#&gt;         stop(&quot;non-numeric-alike variable(s) in data frame: &quot;, 
+#&gt;             paste(vnames[!mode.ok], collapse = &quot;, &quot;))
+#&gt;     }
+#&gt; }
+#&gt; &lt;bytecode: 0x7fee9e033d78&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code>Math.Date</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; stop(gettextf(&quot;%s not defined for \&quot;Date\&quot; objects&quot;, .Generic), 
+#&gt;     domain = NA)
+#&gt; &lt;bytecode: 0x7fee9e038ed8&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code>Math.difftime</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; {
+#&gt;     switch(.Generic, abs = , sign = , floor = , ceiling = , trunc = , 
+#&gt;         round = , signif = {
+#&gt;             units &lt;- attr(x, &quot;units&quot;)
+#&gt;             .difftime(NextMethod(), units)
+#&gt;         }, stop(gettextf(&quot;&#39;%s&#39; not defined for \&quot;difftime\&quot; objects&quot;, 
+#&gt;             .Generic), domain = NA))
+#&gt; }
+#&gt; &lt;bytecode: 0x7fee9e038490&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code>Math.factor</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; stop(gettextf(&quot;%s not meaningful for factors&quot;, sQuote(.Generic)))
+#&gt; &lt;bytecode: 0x7fee9e03f690&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code>Math.POSIXt</code></pre>
+<pre><code>#&gt; function (x, ...) 
+#&gt; {
+#&gt;     stop(gettextf(&quot;&#39;%s&#39; not defined for \&quot;POSIXt\&quot; objects&quot;, 
+#&gt;         .Generic), domain = NA)
+#&gt; }
+#&gt; &lt;bytecode: 0x7fee9e03eba0&gt;
+#&gt; &lt;environment: namespace:base&gt;</code></pre>
+<ul>
+<li><code>Math.data.frame</code> performs math if all columns
+(variables) are either numeric, logical or complex, and errors if any
+are not</li>
+<li><code>Math.difftime</code> performs only certain math functions:
+<code>abs</code>, <code>sign</code>, <code>floor</code>,
+<code>ceiling</code>, <code>trunc</code>, <code>round</code>, and
+<code>signif</code>, and errors for other functions</li>
+<li><code>Math.Date</code>, <code>Math.factor</code>, and
+<code>Math.POSIXt</code> always error</li>
+</ul>
+<p>AR Solutions: : The following functions belong to this group (see
+?<code>Math</code>):</p>
+<ul>
+<li><code>abs</code>, <code>sign</code>, <code>sqrt</code>,
+<code>floor</code>, <code>ceiling</code>, <code>trunc</code>,
+<code>round</code>, <code>signif</code></li>
+<li><code>exp</code>, <code>log</code>, <code>expm1</code>,
+<code>log1p</code>, <code>cos</code>, <code>sin</code>,
+<code>tan</code>, <code>cospi</code>, <code>sinpi</code>,
+<code>tanpi</code>, <code>acos</code>, <code>asin</code>,
+<code>atan</code>, <code>cosh</code>, <code>sinh</code>,
+<code>tanh</code>, <code>acosh</code>, <code>asinh</code>,
+<code>atanh</code></li>
+<li><code>lgamma</code>, <code>gamma</code>, <code>digamma</code>,
+<code>trigamma</code></li>
+<li><code>cumsum</code>, <code>cumprod</code>, <code>cummax</code>,
+<code>cummin</code></li>
+</ul>
+<p>The following classes have a method for this group generic:</p>
+<pre class="r"><code>s3_methods_generic(&quot;Math&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["generic"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["visible"],"name":[3],"type":["lgl"],"align":["right"]},{"label":["source"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Math","2":"data.frame","3":"TRUE","4":"base"},{"1":"Math","2":"Date","3":"TRUE","4":"base"},{"1":"Math","2":"difftime","3":"TRUE","4":"base"},{"1":"Math","2":"factor","3":"TRUE","4":"base"},{"1":"Math","2":"POSIXt","3":"TRUE","4":"base"},{"1":"Math","2":"quosure","3":"FALSE","4":"registered S3method"},{"1":"Math","2":"vctrs_sclr","3":"FALSE","4":"registered S3method"},{"1":"Math","2":"vctrs_vctr","3":"FALSE","4":"registered S3method"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>To explain the basic idea, we just overwrite the data frame
+method:</p>
+<pre class="r"><code>Math.data.frame &lt;- function(x) &quot;hello&quot;</code></pre>
+<p>Now all functions from the math generic group, will return
+<code>"hello"</code></p>
+<pre class="r"><code>abs(mtcars)</code></pre>
+<pre><code>#&gt; [1] &quot;hello&quot;</code></pre>
+<pre class="r"><code>exp(mtcars)</code></pre>
+<pre><code>#&gt; [1] &quot;hello&quot;</code></pre>
+<pre class="r"><code>lgamma(mtcars)</code></pre>
+<pre><code>#&gt; [1] &quot;hello&quot;</code></pre>
+<p>Of course, different functions should perform different calculations.
+Here <code>.Generic</code> comes into play, which provides us with the
+calling generic as a string</p>
+<pre class="r"><code>Math.data.frame &lt;- function(x, ...) {
+  .Generic # nolint: object_usage_linter.
+}
+abs(mtcars)</code></pre>
+<pre><code>#&gt; [1] &quot;abs&quot;</code></pre>
+<pre class="r"><code>exp(mtcars)</code></pre>
+<pre><code>#&gt; [1] &quot;exp&quot;</code></pre>
+<pre class="r"><code>lgamma(mtcars)</code></pre>
+<pre><code>#&gt; [1] &quot;lgamma&quot;</code></pre>
+<pre class="r"><code>rm(Math.data.frame)</code></pre>
+<p>The original source code of <code>Math.data.frame()</code> is a good
+example on how to invoke the string returned by <code>.Generic</code>
+into a specific method. <code>Math.factor()</code> is a good example of
+a method, which is simply defined for better error messages.</p>
+<p>Note: I prefer my answer to the AR Solutions answer.</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li><code>Math.difftime()</code> is more complicated than I described.
+Why?</li>
+</ol>
+<p>Answer: the explanation in the text omits the fact that
+<code>Math.difftime()</code> first checks that the math function being
+called.</p>
+<p>AR Solutions: <code>Math.difftime()</code> also excludes cases apart
+from <code>abs</code>, <code>sign</code>, <code>floor</code>,
+<code>ceiling</code>, <code>trunc</code>, <code>round</code> and
+<code>signif</code> and needs to return a fitting error message.</p>
+<hr />
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiBBZHZhbmNlZCBSIFdvcmtib29rIChPYmplY3Qtb3JpZW50ZWQgcHJvZ3JhbW1pbmcpCmRhdGU6ICcyMDIyLTA4LTE1JwpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRoZW1lOgogICAgICB2ZXJzaW9uOiA1CiAgICB0b2M6IHllcwogICAgdG9jX2Zsb2F0OgogICAgICBjb2xsYXBzZWQ6IHllcwogICAgICBzbW9vdGhfc2Nyb2xsOiBubwotLS0KCldvcmtib29rIGZvciBjb21wbGV0aW5nIHF1aXp6ZXMgYW5kIGV4ZXJjaXNlcyBmcm9tIHRoZSAiT2JqZWN0LW9yaWVudGVkIHByb2dyYW1taW5nIiBjaGFwdGVycyBvZiBbQWR2YW5jZWQgUl0oaHR0cHM6Ly9hZHYtci5oYWRsZXkubnovaW5kZXguaHRtbCksIHNlY29uZCBlZGl0aW9uLCB3aXRoIGNvbXBhcmlzb25zIHRvIHNvbHV0aW9ucyBmcm9tIFtBZHZhbmNlZCBSIFNvbHV0aW9uc10oaHR0cHM6Ly9hZHZhbmNlZC1yLXNvbHV0aW9ucy5yYmluZC5pbykuCgpgYGB7ciBzZXR1cCwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9CmxpYnJhcnkoc2xvb3ApCmxpYnJhcnkocHVycnIpCmxpYnJhcnkoZHBseXIpCgojIGZyb20gaHR0cHM6Ly9naXRodWIuY29tL2hhZGxleS9hZHYtci9ibG9iL21hc3Rlci9jb21tb24uUgprbml0cjo6b3B0c19jaHVuayRzZXQoCiAgY29tbWVudCA9ICIjPiIsCiAgZmlnLmFsaWduID0gImNlbnRlciIKKQoKa25pdHI6OmtuaXRfaG9va3Mkc2V0KAogIHNtYWxsX21hciA9IGZ1bmN0aW9uKGJlZm9yZSwgb3B0aW9ucywgZW52aXIpIHsKICAgIGlmIChiZWZvcmUpIHsKICAgICAgcGFyKG1hciA9IGMoNC4xLCA0LjEsIDAuNSwgMC41KSkgIyBub2xpbnQ6IHVuZGVzaXJhYmxlX2Z1bmN0aW9uX2xpbnRlci4KICAgIH0KICB9CikKYGBgCgojIEludHJvZHVjdGlvbgoKVGhpcyB3b3JrYm9vayBpbmNsdWRlcyBhbnN3ZXJzIGFuZCBzb2x1dGlvbnMgdG8gdGhlIHF1aXp6ZXMgYW5kIGV4ZXJjaXNlcyBmcm9tIFtBZHZhbmNlZCBSXShodHRwczovL2Fkdi1yLmhhZGxleS5uei9pbmRleC5odG1sKSBhbmQgW0FkdmFuY2VkIFIgU29sdXRpb25zXShodHRwczovL2FkdmFuY2VkLXItc29sdXRpb25zLnJiaW5kLmlvKSwgb3JnYW5pemVkIGJ5IGNoYXB0ZXIuIEl0IGluY2x1ZGVzIGV4Y2VycHRzIGZyb20gYm90aCBib29rcywgY29waWVkIGhlcmUuCgoqKldBUk5JTkcsIFNQT0lMRVJTISoqIElmIHlvdSBoYXZlbid0IHJlYWQgQWR2YW5jZWQgUiBhbmQgaW50ZW5kIHRvIGNvbXBsZXRlIHRoZSBxdWl6emVzIGFuZCBleGVyY2lzZXMsIGRvbid0IHJlYWQgdGhpcyBub3RlYm9vay4gSXQgY29udGFpbnMgbXkgKHBvdGVudGlhbGx5IHdyb25nKSBhbnN3ZXJzIHRvIGJvdGguCgojIDEyIEJhc2UgdHlwZXMKClRvIHRhbGsgYWJvdXQgb2JqZWN0cyBhbmQgT09QIGluIFIgd2UgZmlyc3QgbmVlZCB0byBjbGVhciB1cCBhIGZ1bmRhbWVudGFsIGNvbmZ1c2lvbiBhYm91dCB0d28gdXNlcyBvZiB0aGUgd29yZCAib2JqZWN0Ii4gU28gZmFyIGluIHRoaXMgYm9vaywgd2UndmUgdXNlZCB0aGUgd29yZCBpbiB0aGUgZ2VuZXJhbCBzZW5zZSBjYXB0dXJlZCBieSBKb2huIENoYW1iZXJzJyBwaXRoeSBxdW90ZTogIkV2ZXJ5dGhpbmcgdGhhdCBleGlzdHMgaW4gUiBpcyBhbiBvYmplY3QiLiBIb3dldmVyLCB3aGlsZSBldmVyeXRoaW5nIF9pc18gYW4gb2JqZWN0LCBub3QgZXZlcnl0aGluZyBpcyBvYmplY3Qtb3JpZW50ZWQuIFRoaXMgY29uZnVzaW9uIGFyaXNlcyBiZWNhdXNlIHRoZSBiYXNlIG9iamVjdHMgY29tZSBmcm9tIFMsIGFuZCB3ZXJlIGRldmVsb3BlZCBiZWZvcmUgYW55b25lIHRob3VnaHQgdGhhdCBTIG1pZ2h0IG5lZWQgYW4gT09QIHN5c3RlbS4gVGhlIHRvb2xzIGFuZCBub21lbmNsYXR1cmUgZXZvbHZlZCBvcmdhbmljYWxseSBvdmVyIG1hbnkgeWVhcnMgd2l0aG91dCBhIHNpbmdsZSBndWlkaW5nIHByaW5jaXBsZS4KCk1vc3Qgb2YgdGhlIHRpbWUsIHRoZSBkaXN0aW5jdGlvbiBiZXR3ZWVuIG9iamVjdHMgYW5kIG9iamVjdC1vcmllbnRlZCBvYmplY3RzIGlzIG5vdCBpbXBvcnRhbnQuIEJ1dCBoZXJlIHdlIG5lZWQgdG8gZ2V0IGludG8gdGhlIG5pdHR5IGdyaXR0eSBkZXRhaWxzIHNvIHdlJ2xsIHVzZSB0aGUgdGVybXMgX19iYXNlIG9iamVjdHNfXyBhbmQgX19PTyBvYmplY3RzX18gdG8gZGlzdGluZ3Vpc2ggdGhlbS4KCiMgMTMgUzMKClMzIGlzIFIncyBmaXJzdCBhbmQgc2ltcGxlc3QgT08gc3lzdGVtLiBTMyBpcyBpbmZvcm1hbCBhbmQgYWQgaG9jLCBidXQgdGhlcmUgaXMgYSBjZXJ0YWluIGVsZWdhbmNlIGluIGl0cyBtaW5pbWFsaXNtOiB5b3UgY2FuJ3QgdGFrZSBhd2F5IGFueSBwYXJ0IG9mIGl0IGFuZCBzdGlsbCBoYXZlIGEgdXNlZnVsIE9PIHN5c3RlbS4gRm9yIHRoZXNlIHJlYXNvbnMsIHlvdSBzaG91bGQgdXNlIGl0LCB1bmxlc3MgeW91IGhhdmUgYSBjb21wZWxsaW5nIHJlYXNvbiB0byBkbyBvdGhlcndpc2UuIFMzIGlzIHRoZSBvbmx5IE9PIHN5c3RlbSB1c2VkIGluIHRoZSBiYXNlIGFuZCBzdGF0cyBwYWNrYWdlcywgYW5kIGl0J3MgdGhlIG1vc3QgY29tbW9ubHkgdXNlZCBzeXN0ZW0gaW4gQ1JBTiBwYWNrYWdlcy4KClMzIGlzIHZlcnkgZmxleGlibGUsIHdoaWNoIG1lYW5zIGl0IGFsbG93cyB5b3UgdG8gZG8gdGhpbmdzIHRoYXQgYXJlIHF1aXRlIGlsbC1hZHZpc2VkLiBJZiB5b3UncmUgY29taW5nIGZyb20gYSBzdHJpY3QgZW52aXJvbm1lbnQgbGlrZSBKYXZhIHRoaXMgd2lsbCBzZWVtIHByZXR0eSBmcmlnaHRlbmluZywgYnV0IGl0IGdpdmVzIFIgcHJvZ3JhbW1lcnMgYSB0cmVtZW5kb3VzIGFtb3VudCBvZiBmcmVlZG9tLiAgSXQgbWF5IGJlIHZlcnkgZGlmZmljdWx0IHRvIHByZXZlbnQgcGVvcGxlIGZyb20gZG9pbmcgc29tZXRoaW5nIHlvdSBkb24ndCB3YW50IHRoZW0gdG8gZG8sIGJ1dCB5b3VyIHVzZXJzIHdpbGwgbmV2ZXIgYmUgaGVsZCBiYWNrIGJlY2F1c2UgdGhlcmUgaXMgc29tZXRoaW5nIHlvdSBoYXZlbid0IGltcGxlbWVudGVkIHlldC4gU2luY2UgUzMgaGFzIGZldyBidWlsdC1pbiBjb25zdHJhaW50cywgdGhlIGtleSB0byBpdHMgc3VjY2Vzc2Z1bCB1c2UgaXMgYXBwbHlpbmcgdGhlIGNvbnN0cmFpbnRzIHlvdXJzZWxmLiBUaGlzIGNoYXB0ZXIgd2lsbCB0aGVyZWZvcmUgdGVhY2ggeW91IHRoZSBjb252ZW50aW9ucyB5b3Ugc2hvdWxkIChhbG1vc3QpIGFsd2F5cyBmb2xsb3cuCgpUaGUgZ29hbCBvZiB0aGlzIGNoYXB0ZXIgaXMgdG8gc2hvdyB5b3UgaG93IHRoZSBTMyBzeXN0ZW0gd29ya3MsIG5vdCBob3cgdG8gdXNlIGl0IGVmZmVjdGl2ZWx5IHRvIGNyZWF0ZSBuZXcgY2xhc3NlcyBhbmQgZ2VuZXJpY3MuIEknZCByZWNvbW1lbmQgY291cGxpbmcgdGhlIHRoZW9yZXRpY2FsIGtub3dsZWRnZSBmcm9tIHRoaXMgY2hhcHRlciB3aXRoIHRoZSBwcmFjdGljYWwga25vd2xlZGdlIGVuY29kZWQgaW4gdGhlIFt2Y3RycyBwYWNrYWdlXShodHRwczovL3ZjdHJzLnItbGliLm9yZykuCgojIyAxMy4yLjEgRXhlcmNpc2VzCgoxLiAgRGVzY3JpYmUgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiBgdC50ZXN0KClgIGFuZCBgdC5kYXRhLmZyYW1lKClgLgogICAgV2hlbiBpcyBlYWNoIGZ1bmN0aW9uIGNhbGxlZD8KCmBgYHtyfQpmdHlwZSh0LnRlc3QpCmZ0eXBlKHQuZGF0YS5mcmFtZSkKczNfZGlzcGF0Y2godC50ZXN0KGZvcm11bGEoKSkpCnMzX2Rpc3BhdGNoKHQoZGF0YS5mcmFtZSgpKSkKYGBgCgpBbnN3ZXI6IEFzIG5vdGVkIGJ5IGBzbG9vcDo6ZnR5cGUoKWAgYW5kIHRoZSBkb2NzLCBgdC50ZXN0KClgIGlzIGEgUzMgZ2VuZXJpYywgYW5kIGB0LmRhdGEuZnJhbWUoKWAgaXMgYW4gUzMgbWV0aG9kIGZvciBgdCgpYCAodHJhbnNwb3NlKS4gYHQuZGF0YS5mcmFtZSgpYCBpcyBjYWxsZWQgYXMgYSBtZXRob2Qgd2hlbiBjYWxsaW5nIGB0KHgpYCB3aGVuIGB4YCBpcyBhIGBkYXRhLmZyYW1lYC4gYHQudGVzdCgpYCBjYWxscyBlaXRoZXIgYHQudGVzdC5kZWZhdWx0YCBvciBgdC50ZXN0LmZvcm11bGFgLgoKQVIgU29sdXRpb25zOiBCZWNhdXNlIG9mIFMzJ3MgYGdlbmVyaWMuY2xhc3MoKWAgbmFtaW5nIHNjaGVtZSwgYm90aCBmdW5jdGlvbnMgbWF5IGluaXRpYWxseSBsb29rIHNpbWlsYXIsIHdoaWxlIHRoZXkgYXJlIGluIGZhY3QgdW5yZWxhdGVkLgoKLSBgdC50ZXN0KClgIGlzIGEgKmdlbmVyaWMqIGZ1bmN0aW9uIHRoYXQgcGVyZm9ybXMgYSB0LXRlc3QuIAotIGB0LmRhdGEuZnJhbWUoKWAgaXMgYSAqbWV0aG9kKiB0aGF0IGdldHMgY2FsbGVkIGJ5IHRoZSBnZW5lcmljIGB0KClgIHRvIHRyYW5zcG9zZSBkYXRhIGZyYW1lIGlucHV0LgoKRHVlIHRvIFIncyBTMyBkaXNwYXRjaCBydWxlcywgYHQudGVzdCgpYCB3b3VsZCBhbHNvIGdldCBjYWxsZWQgd2hlbiBgdCgpYCBpcyBhcHBsaWVkIHRvIGFuIG9iamVjdCBvZiBjbGFzcyBgdGVzdGAKCi0tLQoKMi4gIE1ha2UgYSBsaXN0IG9mIGNvbW1vbmx5IHVzZWQgYmFzZSBSIGZ1bmN0aW9ucyB0aGF0IGNvbnRhaW4gYC5gIGluIHRoZWlyCiAgICBuYW1lIGJ1dCBhcmUgbm90IFMzIG1ldGhvZHMuCgpgYGB7cn0KZnR5cGUoYXMuY2hhcmFjdGVyKQpmdHlwZShhcy5kYXRhLmZyYW1lKQpmdHlwZShkYXRhLmZyYW1lKQpmdHlwZShldmFsLnBhcmVudCkKZnR5cGUoZmlsZS5wYXRoKQpmdHlwZShmaWxlLmNvcHkpCmZ0eXBlKGlzLm51bGwpCmZ0eXBlKGlzLmRhdGEuZnJhbWUpCmZ0eXBlKFN5cy5sb2NhbGVjb252KQpmdHlwZShTeXMudGltZSkKYGBgCgpBbnN3ZXI6CgotIEFsbCBvZiB0aGUgYGFzLmAgZnVuY3Rpb25zCi0gYGRhdGEuZnJhbWVgCi0gQWxsIG9mIHRoZSBgZmlsZS5gIGZ1bmN0aW9ucwotIEFsbCBvZiB0aGUgYGlzLmAgZnVuY3Rpb25zCi0gQWxsIG9mIHRoZSBgU3lzLmAgZnVuY3Rpb25zCgpBUiBTb2x1dGlvbnM6IEluIHJlY2VudCB5ZWFycyAic25ha2VfY2FzZSItc3R5bGUgaGFzIGJlY29tZSBpbmNyZWFzaW5nbHkgY29tbW9uIHdoZW4gbmFtaW5nIGZ1bmN0aW9ucyBhbmQgdmFyaWFibGVzIGluIFIuIEJ1dCBtYW55IGZ1bmN0aW9ucyBpbiBiYXNlIFIgd2lsbCBjb250aW51ZSB0byBiZSAicG9pbnQuc2VwYXJhdGVkIiwgd2hpY2ggaXMgd2h5IHNvbWUgaW5jb25zaXN0ZW5jeSBpbiB5b3VyIFIgY29kZSBtb3N0IGxpa2VseSBjYW5ub3QgYmUgYXZvaWRlZC4gKGBpbnN0YWxsLnBhY2thZ2VzKCksIHJlYWQuY3N2KCksIGxpc3QuZmlsZXMoKSwgZG93bmxvYWQuZmlsZSgpLCBkYXRhLmZyYW1lKCksIGFzLmNoYXJhY3RlcigpLCBTeXMuRGF0ZSgpLCBhbGwuZXF1YWwoKSwgZG8uY2FsbCgpLCBvbi5leGl0KClgKQoKLS0tCgozLiAgV2hhdCBkb2VzIHRoZSBgYXMuZGF0YS5mcmFtZS5kYXRhLmZyYW1lKClgIG1ldGhvZCBkbz8gV2h5IGlzCiAgICBpdCBjb25mdXNpbmc/IEhvdyBjb3VsZCB5b3UgYXZvaWQgdGhpcyBjb25mdXNpb24gaW4geW91ciBvd24KICAgIGNvZGU/CgpgYGB7cn0KczNfZGlzcGF0Y2goYXMuZGF0YS5mcmFtZShkYXRhLmZyYW1lKCkpKQpgYGAKCkFuc3dlcjogYGFzLmRhdGEuZnJhbWUuZGF0YS5mcmFtZSgpYCBpcyB0aGUgbWV0aG9kIHVzZWQgdG8gY29lcmNlIGEgYGRhdGEuZnJhbWVgIHRvIGEgYGRhdGEuZnJhbWVgLiBUaGlzIGlzIGNvbmZ1c2luZyBiZWNhdXNlIHRoZSBjbGFzcyBjb250YWlucyBhIHBlcmlvZCAoYXMgZG9lcyB0aGUgZnVuY3Rpb24gY2FsbCk7IGF2b2lkaW5nIHBlcmlvZHMgaW1wcm92ZXMgcmVhZGFiaWxpdHk6IGBhc19kYXRhZnJhbWUuZGF0YWZyYW1lYCBtYWtlcyB0aGUgZ2VuZXJpYyBhbmQgbWV0aG9kIGNsZWFyLgoKQVIgU29sdXRpb25zOiBUaGUgZnVuY3Rpb24gYGFzLmRhdGEuZnJhbWUuZGF0YS5mcmFtZSgpYCBpbXBsZW1lbnRzIHRoZSBgZGF0YS5mcmFtZSgpYCAqbWV0aG9kKiBmb3IgdGhlIGBhcy5kYXRhLmZyYW1lKClgICpnZW5lcmljKiwgd2hpY2ggY29lcmNlcyBvYmplY3RzIHRvIGRhdGEgZnJhbWVzLgoKVGhlIG5hbWUgaXMgY29uZnVzaW5nLCBiZWNhdXNlIGl0IGRvZXMgbm90IGNsZWFybHkgY29tbXVuaWNhdGUgdGhlIHR5cGUgb2YgdGhlIGZ1bmN0aW9uLCB3aGljaCBjb3VsZCBiZSBhIHJlZ3VsYXIgZnVuY3Rpb24sIGEgZ2VuZXJpYyBvciBhIG1ldGhvZC4gRXZlbiBpZiB3ZSBhc3N1bWUgYSBtZXRob2QsIHRoZSBhbW91bnQgb2YgYC5gJ3MgbWFrZXMgaXQgZGlmZmljdWx0IHRvIHNlcGFyYXRlIHRoZSBnZW5lcmljLSBhbmQgdGhlIGNsYXNzLXBhcnQgb2YgdGhlIG5hbWUuIElzIGl0IHRoZSBgZGF0YS5mcmFtZS5kYXRhLmZyYW1lKClgIG1ldGhvZCBmb3IgdGhlIGBhcygpYCBnZW5lcmljPyBJcyBpdCB0aGUgYGZyYW1lLmRhdGEuZnJhbWUoKWAgbWV0aG9kIGZvciB0aGUgYGFzLmRhdGEoKWAgZ2VuZXJpYz8KCldlIGNvdWxkIGF2b2lkIHRoaXMgY29uZnVzaW9uIGJ5IGFwcGx5aW5nIGEgZGlmZmVyZW50IG5hbWluZyBjb252ZW50aW9uIChlLmcuICJzbmFrZV9jYXNlIikgZm9yIG91ciBjbGFzcyBhbmQgZnVuY3Rpb24gbmFtZXMuCgotLS0KCjQuICBEZXNjcmliZSB0aGUgZGlmZmVyZW5jZSBpbiBiZWhhdmlvdXIgaW4gdGhlc2UgdHdvIGNhbGxzLgoKYGBge3J9CnNldC5zZWVkKDEwMTQpCnNvbWVfZGF5cyA8LSBhcy5EYXRlKCIyMDE3LTAxLTMxIikgKyBzYW1wbGUoMTAsIDUpCm1lYW4oc29tZV9kYXlzKQptZWFuKHVuY2xhc3Moc29tZV9kYXlzKSkKCnMzX2Rpc3BhdGNoKG1lYW4oc29tZV9kYXlzKSkKczNfZGlzcGF0Y2gobWVhbih1bmNsYXNzKHNvbWVfZGF5cykpKQpgYGAKCkFuc3dlcjogdGhlIGZpcnN0IGNhbGwgY2FsY3VsYXRlcyB0aGUgbWVhbiB1c2luZyBgbWVhbi5EYXRlKClgLCBhbmQgc28gcmV0dXJucyBhIGRhdGUuIHVzaW5nIGB1bmNsYXNzKClgIGNoYW5nZXMgdGhlIGRhdGUgdG8gaXRzIHVuZGVybHlpbmcgdmFsdWUgKGRvdWJsZSkgd2hpY2ggY2FsY3VsYXRlcyB0aGUgbWVhbiB1c2luZyBgbWVhbi5kZWZhdWx0KClgLgoKQVIgU29sdXRpb25zOiBgbWVhbigpYCBpcyBhIGdlbmVyaWMgZnVuY3Rpb24sIHdoaWNoIHdpbGwgc2VsZWN0IHRoZSBhcHByb3ByaWF0ZSBtZXRob2QgYmFzZWQgb24gdGhlIGNsYXNzIG9mIHRoZSBpbnB1dC4gYHNvbWVfZGF5c2AgaGFzIHRoZSBjbGFzcyBgRGF0ZWAgYW5kIGBtZWFuLkRhdGUoc29tZV9kYXlzKWAgd2lsbCBiZSB1c2VkIHRvIGNhbGN1bGF0ZSB0aGUgbWVhbiBkYXRlIG9mIGBzb21lX2RheXNgLgoKQWZ0ZXIgYHVuY2xhc3MoKWAgaGFzIHJlbW92ZWQgdGhlIGNsYXNzIGF0dHJpYnV0ZSBmcm9tIGBzb21lX2RhdGVgLCB0aGUgZGVmYXVsdCBtZXRob2QgaXMgY2hvc2VuLiBgbWVhbi5kZWZhdWx0KHVuY2xhc3Moc29tZV9kYXlzKSlgIHRoZW4gY2FsY3VsYXRlcyB0aGUgbWVhbiBvZiB0aGUgdW5kZXJseWluZyBkb3VibGUuCgotLS0KCjUuICBXaGF0IGNsYXNzIG9mIG9iamVjdCBkb2VzIHRoZSBmb2xsb3dpbmcgY29kZSByZXR1cm4/IFdoYXQgYmFzZSB0eXBlIGlzIGl0IAogICAgYnVpbHQgb24/IFdoYXQgYXR0cmlidXRlcyBkb2VzIGl0IHVzZT8KCmBgYHtyfQp4IDwtIGVjZGYocnBvaXMoMTAwLCAxMCkpCngKCnN0cih4KQpgYGAKCkFuc3dlcjogdGhlIGNvZGUgcmV0dXJucyBhbiBvYmplY3Qgb2YgY2xhc3MgYGVjZGZgLCB3aGljaCBpcyBidWlsZCBvbiB0aGUgYHN0ZXBmdW5gIG9iamVjdCwgYW5kIHRoZSBgZnVuY3Rpb25gIGJhc2UgdHlwZS4gSXQgYWRkaXRpb25hbGx5IGluY2x1ZGVzIHRoZSBgY2FsbGAgYXR0cmlidXRlLgoKQVIgU29sdXRpb25zOiBJdCByZXR1cm5zIGFuIG9iamVjdCBvZiB0aGUgY2xhc3MgYGVjZGZgIChlbXBpcmljYWwgY3VtdWxhdGl2ZSBkaXN0cmlidXRpb24gZnVuY3Rpb24pIHdpdGggdGhlIHN1cGVyY2xhc3NlcyBgc3RlcGZ1bmAgYW5kIGBmdW5jdGlvbmAuIFRoZSBgZWNkZmAgb2JqZWN0IGlzIGJ1aWx0IG9uIHRoZSBiYXNlIHR5cGUgYGNsb3N1cmVgIChhIGZ1bmN0aW9uKS4gVGhlIGV4cHJlc3Npb24sIHdoaWNoIHdhcyB1c2VkIHRvIGNyZWF0ZSBpdCAoYHJwb2lzKDEwMCwgMTApYCksIGlzIHN0b3JlZCBpbiB0aGUgYGNhbGxgIGF0dHJpYnV0ZS4KCmBgYHtyfQp0eXBlb2YoeCkKYGBgCgotLS0KCjYuICBXaGF0IGNsYXNzIG9mIG9iamVjdCBkb2VzIHRoZSBmb2xsb3dpbmcgY29kZSByZXR1cm4/IFdoYXQgYmFzZSB0eXBlIGlzIGl0IAogICAgYnVpbHQgb24/IFdoYXQgYXR0cmlidXRlcyBkb2VzIGl0IHVzZT8KCmBgYHtyfQp4IDwtIHRhYmxlKHJwb2lzKDEwMCwgNSkpCngKCnN0cih4KQpzdHIodW5jbGFzcyh4KSkKYGBgCgpBbnN3ZXI6IHBlciB0aGUgZG9jcywgdGhlIGNvZGUgcmV0dXJucyBhbiBvYmplY3Qgb2YgY2xhc3MgYHRhYmxlYCwgd2hpY2ggaXMgYnVpbHQgb24gYGFycmF5YCwgd2hpY2ggdXNlcyB0aGUgYGRpbW5hbWVzYCBhdHRyaWJ1dGUgaW4gY29tYmluYXRpb24gd2l0aCBhIHZlY3Rvci4KCkFSIFNvbHV0aW9uczogVGhpcyBjb2RlIHJldHVybnMgYSBgdGFibGVgIG9iamVjdCwgd2hpY2ggaXMgYnVpbHQgdXBvbiB0aGUgYGludGVnZXJgIHR5cGUuIFRoZSBhdHRyaWJ1dGUgYGRpbW5hbWVzYCBpcyB1c2VkIHRvIG5hbWUgdGhlIGVsZW1lbnRzIG9mIHRoZSBpbnRlZ2VyIHZlY3Rvci4KCi0tLQoKIyMgMTMuMy40IEV4ZXJjaXNlcwoKMS4gIFdyaXRlIGEgY29uc3RydWN0b3IgZm9yIGBkYXRhLmZyYW1lYCBvYmplY3RzLiBXaGF0IGJhc2UgdHlwZSBpcyBhIGRhdGEKICAgIGZyYW1lIGJ1aWx0IG9uPyBXaGF0IGF0dHJpYnV0ZXMgZG9lcyBpdCB1c2U/IFdoYXQgYXJlIHRoZSByZXN0cmljdGlvbnMKICAgIHBsYWNlZCBvbiB0aGUgaW5kaXZpZHVhbCBlbGVtZW50cz8gV2hhdCBhYm91dCB0aGUgbmFtZXM/CgpgYGB7cn0KZHB1dChkYXRhLmZyYW1lKCkpCmRwdXQoZGF0YS5mcmFtZShhID0gMToyLCBiID0gMzo0KSkKdW5jbGFzcyhkYXRhLmZyYW1lKGEgPSAxOjIsIGIgPSAzOjQpKQpgYGAKCkFuc3dlcjogY29kZSBiZWxvdy4gVGhlIGRhdGEgZnJhbWUgaXMgYnVpbHQgb24gdGhlIGxpc3QgYmFzZSB0eXBlLCBhbmQgaW5jbHVkZXMgdGhlIG5hbWVzLCByb3cubmFtZXMsIGFuZCBjbGFzcyBhdHRyaWJ1dGVzLiBUaGlzIGltcGxlbWVudGF0aW9uIHJlcXVpcmVzIHZhbHVlcyB0byBiZSBhIGxpc3QsIG5hbWVzIHRvIGJlIGEgY2hhcmFjdGVyLCBhbmQgcm93Lm5hbWVzIHRvIGJlIGFuIGludGVnZXIuCgpgYGB7cn0KbmV3X2RhdGEuZnJhbWUgPC0gZnVuY3Rpb24odmFsdWVzID0gbGlzdCgpLCAjIG5vbGludDogb2JqZWN0X25hbWVfbGludGVyLgogICAgICAgICAgICAgICAgICAgICAgICAgICBuYW1lcyA9IGNoYXJhY3RlcihsZW5ndGgodmFsdWVzKSksCiAgICAgICAgICAgICAgICAgICAgICAgICAgIHJvdy5uYW1lcyA9IGludGVnZXIobGVuZ3RoKHZhbHVlcykpKSB7ICMgbm9saW50OiBvYmplY3RfbmFtZV9saW50ZXIuCiAgc3RvcGlmbm90KAogICAgaXMubGlzdCh2YWx1ZXMpLAogICAgaXMuY2hhcmFjdGVyKG5hbWVzKSwKICAgIGlzLmludGVnZXIocm93Lm5hbWVzKQogICkKICBzdHJ1Y3R1cmUodmFsdWVzLCBuYW1lcyA9IG5hbWVzLCByb3cubmFtZXMgPSByb3cubmFtZXMsIGNsYXNzID0gImRhdGEuZnJhbWUiKQp9CgpuZXdfZGF0YS5mcmFtZSgpCm5ld19kYXRhLmZyYW1lKGxpc3QoMTozLCA0OjYsIDc6OSkpCm5ld19kYXRhLmZyYW1lKGxpc3QoMTozLCA0OjYsIDc6OSksIG5hbWVzID0gYygiYSIsICJiIiwgImMiKSwgcm93Lm5hbWVzID0gMTozKQpgYGAKCkFSIFNvbHV0aW9uczogRGF0YSBmcmFtZXMgYXJlIGJ1aWx0IG9uIG5hbWVkIGxpc3RzIG9mIHZlY3RvcnMsIHdoaWNoIGFsbCBoYXZlIHRoZSBzYW1lIGxlbmd0aC4gQmVzaWRlcyB0aGUgYGNsYXNzYCBhbmQgdGhlIGNvbHVtbiBuYW1lcyAoYG5hbWVzYCksIHRoZSBgcm93Lm5hbWVzYCBhcmUgdGhlaXIgb25seSBmdXJ0aGVyIGF0dHJpYnV0ZS4gVGhpcyBtdXN0IGJlIGEgY2hhcmFjdGVyIHZlY3RvciB3aXRoIHRoZSBzYW1lIGxlbmd0aCBhcyB0aGUgb3RoZXIgdmVjdG9ycy4KCldlIG5lZWQgdG8gcHJvdmlkZSB0aGUgbnVtYmVyIG9mIHJvd3MgYXMgYW4gaW5wdXQgdG8gbWFrZSBpdCBwb3NzaWJsZSB0byBjcmVhdGUgZGF0YSBmcmFtZXMgd2l0aCAwIGNvbHVtbnMgYnV0IG11bHRpcGxlIHJvd3MuCgpUaGlzIGxlYWRzIHRvIHRoZSBmb2xsb3dpbmcgY29uc3RydWN0b3I6CgpgYGB7ciwgZXJyb3IgPSBUUlVFfQpuZXdfZGF0YS5mcmFtZSA8LSBmdW5jdGlvbih4LCBuLCByb3cubmFtZXMgPSBOVUxMKSB7ICMgbm9saW50OiBvYmplY3RfbmFtZV9saW50ZXIuCiAgIyBub2xpbnQgc3RhcnQ6IGNvbnNlY3V0aXZlX3N0b3BpZm5vdF9saW50ZXIuCiAgIyBDaGVjayBpZiB0aGUgdW5kZXJseWluZyBvYmplY3QgaXMgYSBsaXN0CiAgc3RvcGlmbm90KGlzLmxpc3QoeCkpCgogICMgQ2hlY2sgYWxsIGlucHV0cyBhcmUgdGhlIHNhbWUgbGVuZ3RoCiAgIyAoVGhpcyBjaGVjayBhbHNvIGFsbG93cyB0aGF0IHggaGFzIGxlbmd0aCAwKQogIHN0b3BpZm5vdChhbGwobGVuZ3Rocyh4KSA9PSBuKSkKICAjIG5vbGludCBlbmQKCiAgaWYgKGlzLm51bGwocm93Lm5hbWVzKSkgewogICAgIyBVc2Ugc3BlY2lhbCByb3cgbmFtZXMgaGVscGVyIGZyb20gYmFzZSBSCiAgICByb3cubmFtZXMgPC0gLnNldF9yb3dfbmFtZXMobikgIyBub2xpbnQ6IG9iamVjdF9uYW1lX2xpbnRlci4KICB9IGVsc2UgewogICAgIyBPdGhlcndpc2UgY2hlY2sgdGhhdCB0aGV5J3JlIGEgY2hhcmFjdGVyIHZlY3RvciB3aXRoIHRoZQogICAgIyBjb3JyZWN0IGxlbmd0aAogICAgc3RvcGlmbm90KGlzLmNoYXJhY3Rlcihyb3cubmFtZXMpLCBsZW5ndGgocm93Lm5hbWVzKSA9PSBuKQogIH0KCiAgc3RydWN0dXJlKAogICAgeCwKICAgIGNsYXNzID0gImRhdGEuZnJhbWUiLAogICAgcm93Lm5hbWVzID0gcm93Lm5hbWVzCiAgKQp9CgojIFRlc3QKeCA8LSBsaXN0KGEgPSAxLCBiID0gMikKbmV3X2RhdGEuZnJhbWUoeCwgbiA9IDEpCm5ld19kYXRhLmZyYW1lKHgsIG4gPSAxLCByb3cubmFtZXMgPSAibDEiKQoKIyBDcmVhdGUgYSBkYXRhIGZyYW1lIHdpdGggMCBjb2x1bW5zIGFuZCAyIHJvd3MKbmV3X2RhdGEuZnJhbWUobGlzdCgpLCBuID0gMikKYGBgCgpOb3RlOiBBUiBTb2x1dGlvbnMgYXBwcm9hY2ggYWxzbyB2YWxpZGF0ZXMgdGhhdCBhbGwgaW5wdXRzIGFyZSBzYW1lIGxlbmd0aCwgYW5kIHN1cHBvcnRzIGNyZWF0aW9uIG9mIGRhdGFmcmFtZXMgd2l0aCAwIGNvbHVtbnMgYnV0IG11bHRpcGxlIHJvd3MuCgotLS0KCjIuICBFbmhhbmNlIG15IGBmYWN0b3IoKWAgaGVscGVyIHRvIGhhdmUgYmV0dGVyIGJlaGF2aW91ciB3aGVuIG9uZSBvcgogICAgbW9yZSBgdmFsdWVzYCBpcyBub3QgZm91bmQgaW4gYGxldmVsc2AuIFdoYXQgZG9lcyBgYmFzZTo6ZmFjdG9yKClgIGRvCiAgICBpbiB0aGlzIHNpdHVhdGlvbj8KCmBgYHtyfQpuZXdfZmFjdG9yIDwtIGZ1bmN0aW9uKHggPSBpbnRlZ2VyKCksIGxldmVscyA9IGNoYXJhY3RlcigpKSB7CiAgc3RvcGlmbm90KAogICAgaXMuaW50ZWdlcih4KSwKICAgIGlzLmNoYXJhY3RlcihsZXZlbHMpCiAgKQoKICBzdHJ1Y3R1cmUoCiAgICB4LAogICAgbGV2ZWxzID0gbGV2ZWxzLAogICAgY2xhc3MgPSAiZmFjdG9yIgogICkKfQpgYGAKCkFuc3dlcjogdGhlIGZpeCBpcyB0byB1cGRhdGUgYHZhbGlkYXRlX2ZhY3RvcigpYCB0byBhbGxvdyBgTkFgIHZhbHVlcywgc2luY2UgdGhlIGhlbHBlciBhbHJlYWR5IGZpbGxzIGluIGBOQWAgd2hlbiBgdmFsdWVzYCBpcyBub3QgZm91bmQgaW4gYGxldmVsc2AuIFRoaXMgbWF0Y2hlcyB0aGUgYmVoYXZpb3Igb2YgYGJhc2U6OmZhY3RvcigpYC4gCgpgYGB7cn0KdmFsaWRhdGVfZmFjdG9yIDwtIGZ1bmN0aW9uKHgpIHsKICB2YWx1ZXMgPC0gdW5jbGFzcyh4KQogIGxldmVscyA8LSBhdHRyKHgsICJsZXZlbHMiKQoKICBpZiAoIWFsbChpcy5uYSh2YWx1ZXMpIHwgdmFsdWVzID4gMCkpIHsKICAgIHN0b3AoCiAgICAgICJBbGwgbm9uLW1pc3NpbmcgYHhgIHZhbHVlcyBtdXN0IGJlIGdyZWF0ZXIgdGhhbiB6ZXJvIiwKICAgICAgY2FsbC4gPSBGQUxTRQogICAgKQogIH0KCiAgaWYgKGxlbmd0aChsZXZlbHMpIDwgbWF4KHZhbHVlcywgbmEucm0gPSBUUlVFKSkgewogICAgc3RvcCgKICAgICAgIlRoZXJlIG11c3QgYmUgYXQgbGVhc3QgYXMgbWFueSBgbGV2ZWxzYCBhcyBwb3NzaWJsZSB2YWx1ZXMgaW4gYHhgIiwKICAgICAgY2FsbC4gPSBGQUxTRQogICAgKQogIH0KCiAgeAp9CgpteV9mYWN0b3IgPC0gZnVuY3Rpb24oeCA9IGNoYXJhY3RlcigpLCBsZXZlbHMgPSB1bmlxdWUoeCkpIHsKICBpbmQgPC0gbWF0Y2goeCwgbGV2ZWxzKQogIHZhbGlkYXRlX2ZhY3RvcihuZXdfZmFjdG9yKGluZCwgbGV2ZWxzKSkKfQoKZmFjdG9yKGMoImEiLCAiYSIsICJiIiksIGxldmVscyA9ICJhIikKbXlfZmFjdG9yKGMoImEiLCAiYSIsICJiIiksIGxldmVscyA9ICJhIikKYGBgCgpBUiBTb2x1dGlvbnM6IGBiYXNlOjpmYWN0b3IoKWAgY29udmVydHMgdGhlc2UgdmFsdWVzIChzaWxlbnRseSkgaW50byBgTkFgcy4KClRoZSBgZmFjdG9yKClgIGhlbHBlciBpbmNsdWRpbmcgdGhlIGNvbnN0cnVjdG9yIChgbmV3X2ZhY3RvcigpYCkgYW5kIGl0cyB2YWxpZGF0b3IgKGB2YWxpZGF0ZV9mYWN0b3IoKWApIHdlcmUgZ2l2ZW4gaW4gKkFkdmFuY2VkIFIqLiBIb3dldmVyLCBhcyB0aGUgZ29hbCBvZiB0aGlzIHF1ZXN0aW9uIGlzIHRvIHRocm93IGFuIGVhcmx5IGVycm9yIHdpdGhpbiB0aGUgaGVscGVyLCB3ZSBvbmx5IHJlcGVhdCB0aGUgY29kZSBmb3IgdGhlIGhlbHBlcjoKClRvIGltcHJvdmUgdGhlIGBmYWN0b3IoKWAgaGVscGVyIHdlIGNob29zZSB0byByZXR1cm4gYW4gaW5mb3JtYXRpdmUgZXJyb3IgbWVzc2FnZSBpbnN0ZWFkLgoKYGBge3IsIGVycm9yID0gVFJVRX0KZmFjdG9yMiA8LSBmdW5jdGlvbih4LCBsZXZlbHMgPSB1bmlxdWUoeCkpIHsKICBuZXdfbGV2ZWxzIDwtIG1hdGNoKHgsIGxldmVscykKCiAgIyBFcnJvciBpZiBsZXZlbHMgZG9uJ3QgaW5jbHVkZSBhbGwgdmFsdWVzCiAgbWlzc2luZyA8LSB1bmlxdWUoc2V0ZGlmZih4LCBsZXZlbHMpKQogIGlmIChsZW5ndGgobWlzc2luZykgPiAwKSB7CiAgICBzdG9wKAogICAgICAiVGhlIGZvbGxvd2luZyB2YWx1ZXMgZG8gbm90IG9jY3VyIGluIHRoZSBsZXZlbHMgb2YgeDogIiwKICAgICAgcGFzdGUwKCInIiwgbWlzc2luZywgIiciLCBjb2xsYXBzZSA9ICIsICIpLCAiLiIsCiAgICAgIGNhbGwuID0gRkFMU0UKICAgICkKICB9CgogIHZhbGlkYXRlX2ZhY3RvcihuZXdfZmFjdG9yKG5ld19sZXZlbHMsIGxldmVscykpCn0KCiMgVGVzdAp0cnkoZmFjdG9yMihjKCJhIiwgImIiLCAiYyIpLCBsZXZlbHMgPSBjKCJhIiwgImIiKSkpCmBgYAoKLS0tCgozLiAgQ2FyZWZ1bGx5IHJlYWQgdGhlIHNvdXJjZSBjb2RlIG9mIGBmYWN0b3IoKWAuIFdoYXQgZG9lcyBpdCBkbyB0aGF0CiAgICBteSBjb25zdHJ1Y3RvciBkb2VzIG5vdD8KCmBgYHtyfQpmYWN0b3IoYygiYSIsICJhIiwgImIiLCAiYyIpLCBsYWJlbHMgPSBjKCJhbHBoYSIsICJiZXRhIiwgImJldGEiKSkKY2xhc3MoZmFjdG9yKDE6MTAsIG9yZGVyZWQgPSBUUlVFKSkKYGBgCgpBbnN3ZXI6IHRoZSBiYXNlIGltcGxlbWVudGF0aW9uOgoKLSBzZXRzIHRoZSB2YWx1ZSB0byBgY2hhcmFjdGVyKDApYCBpZiB0aGUgdmFsdWUgaXMgbnVsbAotIHJldGFpbnMgdmFsdWUgbmFtZXMKLSBhbGxvd3MgYW4gdXBwZXIgYm91bmQgb24gdGhlIG51bWJlciBvZiBsZXZlbHMsIGBubWF4YAotIGNvZXJjZXMgdGhlIHZhbHVlIHRvIGNoYXJhY3RlcgotIHByb3ZpZGVzIGEgbWV0aG9kIGZvciBleGNsdWRpbmcgdmFsdWVzIGZyb20gbGV2ZWxzLCBgZXhjbHVkZWAKLSBwcm92aWRlcyBgbGFiZWxzYCBmb3IgcmVtYXBwaW5nIGZhY3RvcnMKLSBhZGRzIGFuICJvcmRlcmVkIiBjbGFzcyBpZiB0aGUgdmFsdWUgaXMgb3JkZXJlZCAoYG9yZGVyZWQgPSBUUlVFYCkKCk5vdGU6IGxhYmVscyBhcmUgYW4gaW50ZXJlc3RpbmcgYW5kIHVuZXhwZWN0ZWQgZmVhdHVyZSBvZiBgZmFjdG9yKClgCgpgYGB7cn0KZmFjdG9yCmBgYAoKQVIgU29sdXRpb25zOiBUaGUgb3JpZ2luYWwgaW1wbGVtZW50YXRpb24gKGBiYXNlOjpmYWN0b3IoKWApIGFsbG93cyBtb3JlIGZsZXhpYmxlIGlucHV0IGZvciBgeGAuIEl0IGNvZXJjZXMgYHhgIHRvIGNoYXJhY3RlciBvciByZXBsYWNlcyBpdCB3aXRoIGBjaGFyYWN0ZXIoMClgIChpbiBjYXNlIG9mIGBOVUxMYCkuIEl0IGFsc28gZW5zdXJlcyB0aGF0IHRoZSBgbGV2ZWxzYCBhcmUgdW5pcXVlLiBUaGlzIGlzIGFjaGlldmVkIGJ5IHNldHRpbmcgdGhlbSB2aWEgYGJhc2U6OmxldmVsczwtYCwgd2hpY2ggZmFpbHMgd2hlbiBkdXBsaWNhdGUgdmFsdWVzIGFyZSBzdXBwbGllZC4KCk5vdGU6IEkgbWlzc2VkIHRoZSBmYWN0IHRoYXQgYGJhc2U6OmxldmVsczwtYCBmYWlscyB3aGVuIGR1cGxpY2F0ZSB2YWx1ZXMgYXJlIHN1cHBsaWVkLgoKLS0tCiAgICAKNC4gIEZhY3RvcnMgaGF2ZSBhbiBvcHRpb25hbCAiY29udHJhc3RzIiBhdHRyaWJ1dGUuIFJlYWQgdGhlIGhlbHAgZm9yIGBDKClgLCAKICAgIGFuZCBicmllZmx5IGRlc2NyaWJlIHRoZSBwdXJwb3NlIG9mIHRoZSBhdHRyaWJ1dGUuIFdoYXQgdHlwZSBzaG91bGQgaXQgCiAgICBoYXZlPyBSZXdyaXRlIHRoZSBgbmV3X2ZhY3RvcigpYCBjb25zdHJ1Y3RvciB0byBpbmNsdWRlIHRoaXMgYXR0cmlidXRlLgoKQW5zd2VyOiBwZXIgdGhlICJjb250cmFzdCB7c3RhdHN9IiBkb2N1bWVudGF0aW9uLCBjb250cmFzdCBtYXRyaWNlcyBhcmUgdXNlZCBpbiBmaXR0aW5nIGFuYWx5c2lzIG9mIHZhcmlhbmNlIGFuZCByZWdyZXNzaW9uIG1vZGVscywgc28gdGhlIGF0dHJpYnV0ZSBzaG91bGQgYmUgYSBtYXRyaXguCgpgYGB7cn0KbmV3X2ZhY3RvciA8LSBmdW5jdGlvbih4ID0gaW50ZWdlcigpLCBsZXZlbHMgPSBjaGFyYWN0ZXIoKSwgY29udHIgPSBtYXRyaXgoKSkgewogIHN0b3BpZm5vdChpcy5pbnRlZ2VyKHgpLCBpcy5jaGFyYWN0ZXIobGV2ZWxzKSwgaXMubWF0cml4KGNvbnRyKSkKCiAgc3RydWN0dXJlKAogICAgeCwKICAgIGxldmVscyA9IGxldmVscywKICAgIGNsYXNzID0gImZhY3RvciIsCiAgICBjb250cmFzdHMgPSBjb250cgogICkKfQpgYGAKCkFSIFNvbHV0aW9uczogV2hlbiBmYWN0b3IgdmFyaWFibGVzIChyZXByZXNlbnRpbmcgbm9taW5hbCBvciBvcmRpbmFsIGluZm9ybWF0aW9uKSBhcmUgdXNlZCBpbiBzdGF0aXN0aWNhbCBtb2RlbHMsIHRoZXkgYXJlIHR5cGljYWxseSBlbmNvZGVkIGFzIGR1bW15IHZhcmlhYmxlcyBhbmQgYnkgZGVmYXVsdCBlYWNoIGxldmVsIGlzIGNvbXBhcmVkIHdpdGggdGhlIGZpcnN0IGZhY3RvciBsZXZlbC4gSG93ZXZlciwgbWFueSBkaWZmZXJlbnQgZW5jb2RpbmdzICgiY29udHJhc3RzIikgYXJlIHBvc3NpYmxlLCBzZWUgW0NvbnRyYXN0XShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9Db250cmFzdF8oc3RhdGlzdGljcykpLgoKV2l0aGluIFIncyBmb3JtdWxhIGludGVyZmFjZSB5b3UgY2FuIHdyYXAgYSBmYWN0b3IgaW4gYHN0YXRzOjpDKClgIGFuZCBzcGVjaWZ5IHRoZSBjb250cmFzdCBvZiB5b3VyIGNob2ljZS4gQWx0ZXJuYXRpdmVseSwgeW91IGNhbiBzZXQgdGhlIGBjb250cmFzdHNgIGF0dHJpYnV0ZSBvZiB5b3VyIGZhY3RvciB2YXJpYWJsZSwgd2hpY2ggYWNjZXB0cyBtYXRyaXggaW5wdXQuIChTZWUgYD9jb250ci5oZWxtZXJ0YCBvciBzaW1pbGFyIGZvciBkZXRhaWxzLikKCk91ciB1cGRhdGVkIGBuZXdfZmFjdG9yKClgIGNvbnN0cnVjdG9yIGdldHMgYSBgY29udHJhc3RzYCBhcmd1bWVudCwgd2hpY2ggYWNjZXB0cyBhIG51bWVyaWMgbWF0cml4IG9yIGBOVUxMYCAoZGVmYXVsdCkuCgpgYGB7cn0KIyBVcGRhdGVkIG5ld19mYWN0b3IoKSBjb25zdHJ1Y3RvcgpuZXdfZmFjdG9yIDwtIGZ1bmN0aW9uKHggPSBpbnRlZ2VyKCksCiAgICAgICAgICAgICAgICAgICAgICAgbGV2ZWxzID0gY2hhcmFjdGVyKCksCiAgICAgICAgICAgICAgICAgICAgICAgY29udHJhc3RzID0gTlVMTCkgewogICMgbm9saW50IHN0YXJ0OiBjb25zZWN1dGl2ZV9zdG9waWZub3RfbGludGVyLgogIHN0b3BpZm5vdChpcy5pbnRlZ2VyKHgpKQogIHN0b3BpZm5vdChpcy5jaGFyYWN0ZXIobGV2ZWxzKSkKICAjIG5vbGludCBlbmQKCiAgaWYgKCFpcy5udWxsKGNvbnN0cmFzdHMpKSB7ICMgbm9saW50OiBvYmplY3RfdXNhZ2VfbGludGVyLiBub3Qgc3VyZSB3aHkgbGludHIgZmxhZ3MgdGhpcy4KICAgIHN0b3BpZm5vdChpcy5tYXRyaXgoY29udHJhc3RzKSAmJiBpcy5udW1lcmljKGNvbnRyYXN0cykpICMgbm9saW50OiBjb25qdW5jdF90ZXN0X2xpbnRlci4KICB9CgogIHN0cnVjdHVyZSgKICAgIHgsCiAgICBsZXZlbHMgPSBsZXZlbHMsCiAgICBjbGFzcyA9ICJmYWN0b3IiLAogICAgY29udHJhc3RzID0gY29udHJhc3RzCiAgKQp9CmBgYAoKLS0tCgo1LiAgUmVhZCB0aGUgZG9jdW1lbnRhdGlvbiBmb3IgYHV0aWxzOjphcy5yb21hbigpYC4gSG93IHdvdWxkIHlvdSB3cml0ZSBhCiAgICBjb25zdHJ1Y3RvciBmb3IgdGhpcyBjbGFzcz8gRG9lcyBpdCBuZWVkIGEgdmFsaWRhdG9yPyBXaGF0IG1pZ2h0IGEgaGVscGVyIAogICAgZG8/CgpgYGB7cn0KZHB1dChhcy5yb21hbigzODk5KSkKCm5ld19yb21hbiA8LSBmdW5jdGlvbih4ID0gaW50ZWdlcigpKSB7CiAgc3RvcGlmbm90KGlzLmludGVnZXIoeCkpCgogIHN0cnVjdHVyZSgKICAgIHgsCiAgICBjbGFzcyA9ICJyb21hbiIKICApCn0KCm5ld19yb21hbigyMDIyTCkKYGBgCgpBbnN3ZXI6IHRoZSBzdHJ1Y3R1cmUgb2YgdGhlIGNsYXNzICJyb21hbiIgaXMgc2ltcGxlLCBhbiBpbnRlZ2VyIHdpdGggYSBkZWZpbmVkIGNsYXNzLiBBIHNpbXBsZSBjb25zdHJ1Y3RvciB3b3VsZCB0YWtlIGFuIGludGVnZXIgYW5kIHJldHVybiBhbiBvYmplY3Qgb2YgY2xhc3MgInJvbWFuIiBhcyBhYm92ZS4gQSB2YWxpZGF0b3IgaXMgcHJvYmFibHkgbm90IG5lZWRlZCwgYnV0IGNvdWxkIHZhbGlkYXRlIHRoYXQgdGhlIGludGVnZXIgaXMgd2l0aGluIHRoZSBzdXBwb3J0ZWQgcmFuZ2Ugb2YgaW50ZWdlcnMgKDEtMzg5OSkuIEEgaGVscGVyIG1pZ2h0IGNvZXJjZSB0aGUgbnVtYmVyIHRvIGJlIGFuIGludGVnZXIgdXNpbmcgYGFzLmludGVnZXIoKWAuCgpBUiBTb2x1dGlvbnM6IFRoaXMgZnVuY3Rpb24gdHJhbnNmb3JtcyBudW1lcmljIGlucHV0IGludG8gUm9tYW4gbnVtYmVycy4gSXQgaXMgYnVpbHQgb24gdGhlIGludGVnZXIgdHlwZSwgd2hpY2ggcmVzdWx0cyBpbiB0aGUgZm9sbG93aW5nIGNvbnN0cnVjdG9yLgoKYGBge3J9Cm5ld19yb21hbiA8LSBmdW5jdGlvbih4ID0gaW50ZWdlcigpKSB7CiAgc3RvcGlmbm90KGlzLmludGVnZXIoeCkpCiAgc3RydWN0dXJlKHgsIGNsYXNzID0gInJvbWFuIikKfQpgYGAKClRoZSBkb2N1bWVudGF0aW9uIHRlbGxzIHVzLCB0aGF0IG9ubHkgdmFsdWVzIGJldHdlZW4gMSBhbmQgMzg5OSBhcmUgdW5pcXVlbHkgcmVwcmVzZW50ZWQsIHdoaWNoIHdlIHRoZW4gaW5jbHVkZSBpbiBvdXIgdmFsaWRhdGlvbiBmdW5jdGlvbi4KCmBgYHtyfQp2YWxpZGF0ZV9yb21hbiA8LSBmdW5jdGlvbih4KSB7CiAgdmFsdWVzIDwtIHVuY2xhc3MoeCkKCiAgaWYgKGFueSh2YWx1ZXMgPCAxIHwgdmFsdWVzID4gMzg5OSkpIHsKICAgIHN0b3AoCiAgICAgICJSb21hbiBudW1iZXJzIG11c3QgZmFsbCBiZXR3ZWVuIDEgYW5kIDM4OTkuIiwKICAgICAgY2FsbC4gPSBGQUxTRQogICAgKQogIH0KCiAgeAp9CmBgYAoKRm9yIGNvbnZlbmllbmNlLCB3ZSBhbGxvdyB0aGUgdXNlciB0byBhbHNvIHBhc3MgcmVhbCB2YWx1ZXMgdG8gYSBoZWxwZXIgZnVuY3Rpb24uCgpgYGB7ciwgZXJyb3IgPSBUUlVFfQpyb21hbiA8LSBmdW5jdGlvbih4ID0gaW50ZWdlcigpKSB7CiAgeCA8LSBhcy5pbnRlZ2VyKHgpCgogIHZhbGlkYXRlX3JvbWFuKG5ld19yb21hbih4KSkKfQoKIyBUZXN0CnJvbWFuKGMoMSwgNzUzLCAyMDE5KSkKdHJ5KHJvbWFuKDApKQpgYGAKCi0tLQoKIyMgMTMuNC40IEV4ZXJjaXNlcwoKMS4gIFJlYWQgdGhlIHNvdXJjZSBjb2RlIGZvciBgdCgpYCBhbmQgYHQudGVzdCgpYCBhbmQgY29uZmlybSB0aGF0CiAgICBgdC50ZXN0KClgIGlzIGFuIFMzIGdlbmVyaWMgYW5kIG5vdCBhbiBTMyBtZXRob2QuIFdoYXQgaGFwcGVucyBpZgogICAgeW91IGNyZWF0ZSBhbiBvYmplY3Qgd2l0aCBjbGFzcyBgdGVzdGAgYW5kIGNhbGwgYHQoKWAgd2l0aCBpdD8gV2h5PwoKYGBge3J9CnggPC0gc3RydWN0dXJlKDE6MTAsIGNsYXNzID0gInRlc3QiKQp0KHgpCmBgYAoKQW5zd2VyOiBib3RoIGB0KClgIGFuZCBgdC50ZXN0KClgIHNpbXBseSBjYWxsIGBVc2VNZXRob2QoKWAsIGFuZCBhcmUgUzMgZ2VuZXJpY3MuCgpgYGB7cn0KdAp0LnRlc3QKYGBgCgpDcmVhdGluZyBhbiBvYmplY3Qgd2l0aCBjbGFzcyBgdGVzdGAgYW5kIGNhbGxpbmcgYHQoKWAgdXNlcyB0aGUgZGVmYXVsdCBtZXRob2Qgc2luY2UgYHQudGVzdCgpYCBpcyBub3QgYSByZWdpc3RlcmVkIG1ldGhvZCBmb3IgYHQoKWAsIGFzIHRoaXMgY29kZSBzaG93czoKCmBgYHtyfQptZXRob2RzKCJ0IikKczNfZGlzcGF0Y2godCh4KSkKYGBgCgpBUiBTb2x1dGlvbnM6IFdlIGNhbiBzZWUgdGhhdCBgdC50ZXN0KClgIGlzIGEgZ2VuZXJpYyBiZWNhdXNlIGl0IGNhbGxzIGBVc2VNZXRob2QoKWAuCgpgYGB7cn0KIyBvciBzaW1wbHkgY2FsbApmdHlwZSh0LnRlc3QpCmBgYAoKSW50ZXJlc3RpbmdseSwgUiBhbHNvIHByb3ZpZGVzIGhlbHBlcnMsIHdoaWNoIGxpc3QgZnVuY3Rpb25zIHRoYXQgbG9vayBsaWtlIG1ldGhvZHMsIGJ1dCBpbiBmYWN0IGFyZSBub3Q6CgpgYGB7cn0KdG9vbHM6Om5vblMzbWV0aG9kcygic3RhdHMiKQpgYGAKCldoZW4gd2UgY3JlYXRlIGFuIG9iamVjdCB3aXRoIGNsYXNzIGB0ZXN0YCwgYHQoKWAgZGlzcGF0Y2hlcyB0byB0aGUgYHQuZGVmYXVsdCgpYCBtZXRob2QuIFRoaXMgaGFwcGVucywgYmVjYXVzZSBgVXNlTWV0aG9kKClgIHNpbXBseSBzZWFyY2hlcyBmb3IgZnVuY3Rpb25zIG5hbWVkIGBwYXN0ZTAoImdlbmVyaWMiLCAiLiIsIGMoY2xhc3MoeCksICJkZWZhdWx0IikpYC4KCkhvd2V2ZXIsIGluIG9sZGVyIHZlcnNpb25zIG9mIFIgKHByZSBSIDQuMC4wOyB3aGVuICpBZHZhbmNlZCBSKiB3YXMgd3JpdHRlbikgdGhpcyBiZWhhdmlvdXIgd2FzIHNsaWdodGx5IGRpZmZlcmVudC4gSW5zdGVhZCBvZiBkaXNwYXRjaGluZyB0byB0aGUgYHQuZGVmYXVsdCgpYCBtZXRob2QsIHRoZSBgdC50ZXN0KClgIGdlbmVyaWMgd2FzIGVycm9uZW91c2x5IHRyZWF0ZWQgYXMgYSBtZXRob2Qgb2YgYHQoKWAgd2hpY2ggdGhlbiBkaXNwYXRjaGVkIHRvIGB0LnRlc3QuZGVmYXVsdCgpYCBvciAod2hlbiBkZWZpbmVkKSB0byBgdC50ZXN0LnRlc3QoKWAuCgotLS0KCjIuICBXaGF0IGdlbmVyaWNzIGRvZXMgdGhlIGB0YWJsZWAgY2xhc3MgaGF2ZSBtZXRob2RzIGZvcj8KCkFuc3dlcjogYHMzX21ldGhvZHNfY2xhc3MoKWAgYW5zd2VycyB0aGlzIHF1ZXN0aW9uOgoKYGBge3Igd2FybmluZyA9IEZBTFNFfQpzM19tZXRob2RzX2NsYXNzKCJ0YWJsZSIpCmBgYAoKQVIgU29sdXRpb25zOiBUaGlzIGlzIGEgc2ltcGxlIGFwcGxpY2F0aW9uIG9mIGBzbG9vcDo6czNfbWV0aG9kc19jbGFzcygpYC4KCkludGVyZXN0aW5nbHksIHRoZSBgdGFibGVgIGNsYXNzIGhhcyBhIG51bWJlciBvZiBtZXRob2RzIGRlc2lnbmVkIHRvIGhlbHAgcGxvdHRpbmcgd2l0aCBiYXNlIGdyYXBoaWNzLgoKYGBge3J9CnggPC0gcnBvaXMoMTAwLCA1KQpwbG90KHRhYmxlKHgpKQpgYGAKCi0tLQoKMy4gIFdoYXQgZ2VuZXJpY3MgZG9lcyB0aGUgYGVjZGZgIGNsYXNzIGhhdmUgbWV0aG9kcyBmb3I/CgpBbnN3ZXI6CgpgYGB7ciB3YXJuaW5nID0gRkFMU0V9CnMzX21ldGhvZHNfY2xhc3MoImVjZGYiKQpgYGAKCkFSIFNvbHV0aW9uczogV2UgdXNlIHRoZSBzYW1lIGFwcHJvYWNoIGFzIGFib3ZlLgoKVGhlIG1ldGhvZHMgYXJlIHByaW1hcmlseSBkZXNpZ25lZCBmb3IgZGlzcGxheSAoYHBsb3QoKWAsIGBwcmludCgpYCwgYHN1bW1hcnkoKWApLCBidXQgeW91IGNhbiBhbHNvIGV4dHJhY3QgcXVhbnRpbGVzIHdpdGggYHF1YW50aWxlKClgLgoKLS0tCgo0LiAgV2hpY2ggYmFzZSBnZW5lcmljIGhhcyB0aGUgZ3JlYXRlc3QgbnVtYmVyIG9mIGRlZmluZWQgbWV0aG9kcz8KCkFuc3dlcjogdXNpbmcgY29kZSBmcm9tIDYuMi41LCBpZGVudGlmeSBnZW5lcmljcyBhbmQgY291bnQgZGVmaW5lZCBtZXRob2RzOgoKYGBge3IsIHdhcm5pbmcgPSBGQUxTRX0KIyBmcm9tIDYuMi41IGV4ZXJjaXNlcywgdGhpcyBjb2RlIG1ha2VzIGEgbGlzdCBvZiBhbGwgZnVuY3Rpb25zIGluIHRoZSBiYXNlIHBhY2thZ2UKZnVucyA8LSBGaWx0ZXIoaXMuZnVuY3Rpb24sIG1nZXQobHMoInBhY2thZ2U6YmFzZSIsIGFsbC5uYW1lcyA9IFRSVUUpLCBpbmhlcml0cyA9IFRSVUUpKQoKZ2V0X21ldGhvZF9jb3VudCA8LSBmdW5jdGlvbihmbmFtZSkgewogIGRhdGEuZnJhbWUoCiAgICBuYW1lID0gZm5hbWUsCiAgICAjIHRoaXMgY29kZSBzaG91bGQgd29yayBidXQgZG9lc24ndDoKICAgICMgbWV0aG9kX2NvdW50ID0gbnJvdyhzM19tZXRob2RzX2dlbmVyaWMoZm5hbWUpKSAjIG5vbGludDogY29tbWVudGVkX2NvZGVfbGludGVyLgogICAgbWV0aG9kX2NvdW50ID0gbGVuZ3RoKG1ldGhvZHMoZm5hbWUpKQogICkKfQoKbWFwX2RmcihuYW1lcyhmdW5zKSwgZ2V0X21ldGhvZF9jb3VudCkgfD4KICBhcnJhbmdlKGRlc2MobWV0aG9kX2NvdW50KSkKYGBgCgpUaGlzIGJydXRlLWZvcmNlIGNvZGUgdW5zdXJwcmlzaW5nbHkgaWRlbnRpZmllcyBgcHJpbnQoKWAgYXMgaGF2aW5nIHRoZSBncmVhdGVzdCBudW1iZXIgb2YgbWV0aG9kcy4gQSBidWcgaW4gYHMzX21ldGhvZHNfZ2VuZXJpYygpYCBwcmV2ZW50cyBpdHMgdXNlIChlcnJvciBiZWxvdykuCgpgYGAKRXJyb3IgaW4gZ3N1YihwYXN0ZTAoIl4iLCBnZW5lcmljX2VzYywgIlsuLF0iKSwgIiIsIGluZm8kbWV0aG9kKSA6IAppbnZhbGlkIHJlZ3VsYXIgZXhwcmVzc2lvbiAnXihbLixdJywgcmVhc29uICdNaXNzaW5nICcpJycKYGBgCgpBUiBTb2x1dGlvbnM6IEEgbGl0dGxlIGV4cGVyaW1lbnRhdGlvbiAoYW5kIHRoaW5raW5nIGFib3V0IHRoZSBtb3N0IHBvcHVsYXIgZnVuY3Rpb25zKSBzdWdnZXN0cyB0aGF0IHRoZSBgcHJpbnQoKWAgZ2VuZXJpYyBoYXMgdGhlIG1vc3QgZGVmaW5lZCBtZXRob2RzLgoKTGV0J3MgdmVyaWZ5IHRoaXMgcHJvZ3JhbW1hdGljYWxseSB3aXRoIHRoZSB0b29scyB3ZSBoYXZlIGxlYXJuZWQgaW4gdGhpcyBhbmQgdGhlIHByZXZpb3VzIGNoYXB0ZXJzLgoKYGBge3IsIG1lc3NhZ2UgPSBGQUxTRX0KbHMoYWxsLm5hbWVzID0gVFJVRSwgZW52aXIgPSBiYXNlZW52KCkpICU+JQogIG1nZXQoZW52aXIgPSBiYXNlZW52KCkpICU+JQogIGtlZXAoaXNfZnVuY3Rpb24pICU+JQogIG5hbWVzKCkgJT4lCiAga2VlcChpc19zM19nZW5lcmljKSAlPiUKICBtYXAofiBzZXRfbmFtZXMobnJvdyhzM19tZXRob2RzX2dlbmVyaWMoLngpKSwgLngpKSAlPiUKICBmbGF0dGVuX2ludCgpICU+JQogIHNvcnQoZGVjcmVhc2luZyA9IFRSVUUpICU+JQogIGhlYWQoKQpgYGAKCi0tLQoKNS4gIENhcmVmdWxseSByZWFkIHRoZSBkb2N1bWVudGF0aW9uIGZvciBgVXNlTWV0aG9kKClgIGFuZCBleHBsYWluIHdoeSB0aGUKICAgIGZvbGxvd2luZyBjb2RlIHJldHVybnMgdGhlIHJlc3VsdHMgdGhhdCBpdCBkb2VzLiBXaGF0IHR3byB1c3VhbCBydWxlcwogICAgb2YgZnVuY3Rpb24gZXZhbHVhdGlvbiBkb2VzIGBVc2VNZXRob2QoKWAgdmlvbGF0ZT8KCmBgYHtyfQpnIDwtIGZ1bmN0aW9uKHgpIHsKICB4IDwtIDEwCiAgeSA8LSAxMCAjIG5vbGludDogb2JqZWN0X3VzYWdlX2xpbnRlci4KICBVc2VNZXRob2QoImciKQp9CmcuZGVmYXVsdCA8LSBmdW5jdGlvbih4KSBjKHggPSB4LCB5ID0geSkKeCA8LSAxCnkgPC0gMQpnKHgpCmBgYAoKQW5zd2VyOiB0aGUgZG9jdW1lbnRhdGlvbiBzdGF0ZXMgaW4gKipUZWNobmljYWwgRGV0YWlscyoqOgoKPiBgVXNlTWV0aG9kYCBjcmVhdGVzIGEgbmV3IGZ1bmN0aW9uIGNhbGwgd2l0aCBhcmd1bWVudHMgbWF0Y2hlZCBhcyB0aGV5IGNhbWUgaW4gdG8gdGhlIGdlbmVyaWMuIEFueSBsb2NhbCB2YXJpYWJsZXMgZGVmaW5lZCBiZWZvcmUgdGhlIGNhbGwgdG8gYFVzZU1ldGhvZGAgYXJlIHJldGFpbmVkICh1bmxpa2UgUykuCgpTbywgYFVzZU1ldGhvZCgpYCBjcmVhdGVzIGEgbmV3IGZ1bmN0aW9uIGNhbGwgd2hlcmUgYHhgIG1hdGNoZXMgYHggPC0gMWAgYW5kIHRoZSBsb2NhbCB2YXJpYWJsZSBgeSA8LSAxMGAgaXMgcmV0YWluZWQuIFRoaXMgaXMgcGFzc2VkIHRvIGBnLmRlZmF1bHQoKWAuIFRoaXMgdmlvbGF0ZXMgYm90aCBsYXp5IGV2YWx1YXRpb24gYW5kIGxleGljYWwgc2NvcGluZy4KCkFSIFNvbHV0aW9uczogTGV0J3MgdGFrZSB0aGlzIHN0ZXAgYnkgc3RlcC4gSWYgeW91IGNhbGwgYGcuZGVmYXVsdCh4KWAgZGlyZWN0bHkgeW91IGdldCBgYygxLCAxKWAgYXMgeW91IG1pZ2h0IGV4cGVjdC4gCgpUaGUgdmFsdWUgYm91bmQgdG8gYHhgIGNvbWVzIGZyb20gdGhlIGFyZ3VtZW50LCB0aGUgdmFsdWUgZnJvbSBgeWAgY29tZXMgZnJvbSB0aGUgZ2xvYmFsIGVudmlyb25tZW50LgoKQnV0IHdoZW4gd2UgY2FsbCBgZyh4KWAgd2UgZ2V0IGBjKDEsIDEwKWAuCgpUaGlzIGlzIHNlZW1pbmdseSBpbmNvbnNpc3RlbnQ6IHdoeSBkb2VzIGB4YCBjb21lIGZyb20gdGhlIHZhbHVlIGRlZmluZWQgaW5zaWRlIG9mIGBnKClgLCBhbmQgYHlgIHN0aWxsIGNvbWUgZnJvbSB0aGUgZ2xvYmFsIGVudmlyb25tZW50PyBJdCdzIGJlY2F1c2UgYFVzZU1ldGhvZCgpYCBjYWxscyBgZy5kZWZhdWx0KClgIGluIGEgc3BlY2lhbCB3YXkgc28gdGhhdCB2YXJpYWJsZXMgZGVmaW5lZCBpbnNpZGUgdGhlIGdlbmVyaWMgYXJlIGF2YWlsYWJsZSB0byBtZXRob2RzLiBUaGUgZXhjZXB0aW9uIGFyZSBhcmd1bWVudHMgc3VwcGxpZWQgdG8gdGhlIGZ1bmN0aW9uOiB0aGV5IGFyZSBwYXNzZWQgb24gYXMgaXMgYW5kIGNhbm5vdCBiZSBhZmZlY3RlZCBieSBjb2RlIGluc2lkZSB0aGUgZ2VuZXJpYy4KCi0tLQoKNi4gIFdoYXQgYXJlIHRoZSBhcmd1bWVudHMgdG8gYFtgPyBXaHkgaXMgdGhpcyBhIGhhcmQgcXVlc3Rpb24gdG8gYW5zd2VyPwoKQW5zd2VyOiB0aGUgcG9zc2libGUgYXJndW1lbnRzIGluY2x1ZGUgdGhlIGB4YCwgdGhlIG9iamVjdCBiZWluZyBleHRyYWN0ZWQgKG9yIHJlcGxhY2VkKSwgaW5kaWNlcyAoYGlgLCBgamAsIGAuLi5gKSwgYG5hbWVgLCBgZHJvcGAsIGBleGFjdGAsIGFuZCBgdmFsdWVgLgoKVGhpcyBpcyBhIGhhcmQgcXVlc3Rpb24gdG8gYW5zd2VyIHNpbmNlIGBbYCBpcyBhbiBpcnJlZ3VsYXIgcHJpbWl0aXZlIGZ1bmN0aW9uIHRoYXQgY2FuIGJlIGNhbGxlZCBpbiBtdWx0aXBsZSB3YXlzLCBub25lIG9mIHdoaWNoIHN1cHBvcnQgdXNpbmcgYWxsIHBvc3NpYmxlIGFyZ3VtZW50cy4KCkFSIFNvbHV0aW9uczogVGhlIHN1YnNldHRpbmcgb3BlcmF0b3IgYFtgIGlzIGEgcHJpbWl0aXZlIGFuZCBhIGdlbmVyaWMgZnVuY3Rpb24sIHdoaWNoIGNhbiBiZSBjb25maXJtZWQgdmlhIGBmdHlwZSgpYC4KCmBgYHtyfQpmdHlwZShgW2ApCmBgYAoKRm9yIHByaW1pdGl2ZSBmdW5jdGlvbnMgYGZvcm1hbHMoWylgIHJldHVybnMgYE5VTExgIHNvIHdlIG5lZWQgdG8gZmluZCBhbm90aGVyIHdheSB0byBkZXRlcm1pbmUgdGhlIGZ1bmN0aW9ucyBhcmd1bWVudHMuIE9uZSBwb3NzaWJsZSB3YXkgdG8gZmlndXJlIG91dCBgW2AncyBhcmd1bWVudHMgd291bGQgYmUgdG8gaW5zcGVjdCB0aGUgdW5kZXJseWluZyBDIHNvdXJjZSBjb2RlLCB3aGljaCBjYW4gYmUgc2VhcmNoZWQgZm9yIHZpYSBgcHJ5cjo6c2hvd19jX3NvdXJjZSguUHJpbWl0aXZlKCJbIikpYC4KV2hlbiB3ZSBpbnNwZWN0IHRoZSBhcmd1bWVudHMgb2Ygc29tZSBvZiBgW2AncyBtZXRob2RzLCB3ZSBzZWUgdGhhdCB0aGUgYXJndW1lbnRzIHZhcnkgd2l0aCB0aGUgY2xhc3Mgb2YgYHhgLgoKYGBge3J9Cm5hbWVzKGZvcm1hbHMoYFsuZGF0YS5mcmFtZWApKQpuYW1lcyhmb3JtYWxzKGBbLnRhYmxlYCkpCm5hbWVzKGZvcm1hbHMoYFsuRGF0ZWApKQpuYW1lcyhmb3JtYWxzKGBbLkFzSXNgKSkKYGBgCgpUbyBmaW5hbGx5IGdldCBhIGJldHRlciBvdmVydmlldywgd2UgaGF2ZSB0byBwdXQgaW4gYSBsaXR0bGUgbW9yZSBlZmZvcnQgYW5kIGFsc28gdXNlIGBzM19tZXRob2RzX2dlbmVyaWMoKWAgYWdhaW4uCgpgYGB7ciwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9CnMzX21ldGhvZHNfZ2VuZXJpYygiWyIpICU+JQogIGZpbHRlcih2aXNpYmxlKSAlPiUKICBtdXRhdGUoCiAgICBtZXRob2QgPSBwYXN0ZTAoIlsuIiwgY2xhc3MpLAogICAgYXJnbmFtZXMgPSBwdXJycjo6bWFwKG1ldGhvZCwgfiBuYW1lcyhmb3JtYWxzKC54KSkpLAogICAgYXJncyA9IHB1cnJyOjptYXAobWV0aG9kLCB+IGZvcm1hbHMoLngpKSwKICAgIGFyZ3MgPSBwdXJycjo6bWFwMiggIyBub2xpbnQ6IGR1cGxpY2F0ZV9hcmd1bWVudF9saW50ZXIuCiAgICAgIGFyZ25hbWVzLCBhcmdzLAogICAgICB+IHBhc3RlKC54LCAueSwgc2VwID0gIiA9ICIpCiAgICApLAogICAgYXJncyA9IHB1cnJyOjpzZXRfbmFtZXMoYXJncywgbWV0aG9kKSAjIG5vbGludDogZHVwbGljYXRlX2FyZ3VtZW50X2xpbnRlci4KICApICU+JQogIHB1bGwoYXJncykgJT4lCiAgaGVhZCgpCmBgYAoKLS0tCgojIyAxMy41LjEgRXhlcmNpc2VzCgoxLiAgQ2F0ZWdvcmlzZSB0aGUgb2JqZWN0cyByZXR1cm5lZCBieSBgbG0oKWAsIGBmYWN0b3IoKWAsIGB0YWJsZSgpYCwgCiAgICBgYXMuRGF0ZSgpYCwgYGFzLlBPU0lYY3QoKWAsIGBlY2RmKClgLCBgb3JkZXJlZCgpYCwgYEkoKWAgaW50byB0aGUKICAgIHN0eWxlcyBkZXNjcmliZWQgYWJvdmUuCgpBbnN3ZXI6CgotIGBsbSgpYCwgYGVjZGYoKWA6IHNjYWxhcgotIGBmYWN0b3IoKWAsIGBhcy5EYXRlKClgLCBgYXMuUE9TSVhjdCgpYCwgYG9yZGVyZWRgOiB2ZWN0b3IKLSBgdGFibGUoKWA6IGRhdGEgZnJhbWUKLSBgSSgpYDogc2FtZSBhcyB0aGUgc291cmNlIG9iamVjdAoKQVIgU29sdXRpb25zOiBXZSBjYW4gY2F0ZWdvcmlzZSB0aGUgcmV0dXJuIHZhbHVlcyBpbnRvIHRoZSB2YXJpb3VzIG9iamVjdCBzdHlsZXMgYnkgb2JzZXJ2aW5nIGhvdyB0aGUgW251bWJlciBvZiBvYnNlcnZhdGlvbnNdKGh0dHBzOi8vdmN0cnMuci1saWIub3JnL2FydGljbGVzL3R5cGUtc2l6ZS5odG1sI3NpemUpIGlzIGNhbGN1bGF0ZWQ6IEZvciB2ZWN0b3Igc3R5bGUgY2xhc3NlcywgYGxlbmd0aCh4KWAgcmVwcmVzZW50cyB0aGUgbnVtYmVyIG9mIG9ic2VydmF0aW9ucy4gUmVjb3JkIHN0eWxlIG9iamVjdHMgdXNlIGEgbGlzdCBvZiBlcXVhbCBsZW5ndGggZWxlbWVudHMgdG8gcmVwcmVzZW50IGluZGl2aWR1YWwgY29tcG9uZW50cy4gRm9yIGRhdGEgZnJhbWVzIGFuZCBtYXRyaWNlcywgdGhlIG9ic2VydmF0aW9ucyBhcmUgcmVwcmVzZW50ZWQgYnkgdGhlIHJvd3MuIFNjYWxhciBzdHlsZSBvYmplY3RzIHVzZSBhIGxpc3QgdG8gcmVwcmVzZW50IGEgc2luZ2xlIHRoaW5nLgoKVGhpcyBsZWFkcyB1cyB0bzoKCi0gVmVjdG9yIG9iamVjdC1zdHlsZTogYGZhY3RvcigpYCwgYHRhYmxlKClgLCBgYXMuRGF0ZSgpYCwgYGFzLlBPU0lYY3QoKWAsIGBvcmRlcmVkKClgCi0gUmVjb3JkIG9iamVjdC1zdHlsZTogbm90IG9ic2VydmVkCi0gRGF0YSBmcmFtZSBvYmplY3Qtc3R5bGU6IG5vdCBvYnNlcnZlZAotIFNjYWxhciBvYmplY3Qtc3R5bGU6IGBsbSgpYCwgYGVjZGYoKWAgIAoKVGhlIG9iamVjdCBzdHlsZSBvZiBgSSgpYCBkZXBlbmRzIG9uIHRoZSBpbnB1dCBzaW5jZSB0aGlzIGZ1bmN0aW9uIHJldHVybnMgYSAiY29weSBvZiB0aGUgb2JqZWN0IHdpdGggY2xhc3MgYEFzSXNgIHByZXBlbmRlZCB0byB0aGUgY2xhc3MoZXMpIi4KCi0tLQoKMi4gIFdoYXQgd291bGQgYSBjb25zdHJ1Y3RvciBmdW5jdGlvbiBmb3IgYGxtYCBvYmplY3RzLCBgbmV3X2xtKClgLCBsb29rIGxpa2U/CiAgICBVc2UgYD9sbWAgYW5kIGV4cGVyaW1lbnRhdGlvbiB0byBmaWd1cmUgb3V0IHRoZSByZXF1aXJlZCBmaWVsZHMgYW5kIHRoZWlyCiAgICB0eXBlcy4KCkFuc3dlcjogdGhlIG9ubHkgcmVxdWlyZWQgZmllbGQgaXMgYGZvcm11bGFgLCBwcm92aWRlZCB0aGF0IHRoZSB2YXJpYWJsZXMgbGlzdGVkIGluIHRoZSBmb3JtdWxhIGV4aXN0IChhbmQgYXJlIGJvdGggdmVjdG9ycykuIGBmb3JtdWxhYCBtdXN0IGJlIG9mIHR5cGUgImBmb3JtdWxhYCIuCgpgYGB7cn0KbXBnIDwtIHB1bGwobXRjYXJzLCBtcGcpCnd0IDwtIHB1bGwobXRjYXJzLCB3dCkKbG0obXBnIH4gd3QpCmBgYAoKQVIgU29sdXRpb25zOiBUaGUgY29uc3RydWN0b3IgbmVlZHMgdG8gcG9wdWxhdGUgdGhlIGF0dHJpYnV0ZXMgb2YgYW4gYGxtYCBvYmplY3QgYW5kIGNoZWNrIHRoZWlyIHR5cGVzIGZvciBjb3JyZWN0bmVzcy4gTGV0J3Mgc3RhcnQgYnkgY3JlYXRpbmcgYSBzaW1wbGUgYGxtYCBvYmplY3QgYW5kIGV4cGxvcmUgaXRzIHVuZGVybHlpbmcgYmFzZSB0eXBlIGFuZCBhdHRyaWJ1dGVzOgoKYGBge3J9Cm1vZCA8LSBsbShjeWwgfiAuLCBkYXRhID0gbXRjYXJzKQp0eXBlb2YobW9kKQphdHRyaWJ1dGVzKG1vZCkKYGBgCgpBcyBgbW9kYCBpcyBidWlsdCB1cG9uIGEgbGlzdCwgd2UgY2FuIHNpbXBseSB1c2UgYG1hcChtb2QsIHR5cGVvZilgIHRvIGZpbmQgb3V0IHRoZSBiYXNlIHR5cGVzIG9mIGl0cyBlbGVtZW50cy4gKEFkZGl0aW9uYWxseSwgd2UgaW5zcGVjdCBgP2xtYCwgdG8gbGVhcm4gbW9yZSBhYm91dCB0aGUgaW5kaXZpZHVhbCBhdHRyaWJ1dGVzLikKCmBgYHtyfQptYXBfY2hyKG1vZCwgdHlwZW9mKQpgYGAKCk5vdyB3ZSBzaG91bGQgaGF2ZSBlbm91Z2ggaW5mb3JtYXRpb24gdG8gd3JpdGUgYSBjb25zdHJ1Y3RvciBmb3IgbmV3IGBsbWAgb2JqZWN0cy4KCmBgYHtyfQpuZXdfbG0gPC0gZnVuY3Rpb24oY29lZmZpY2llbnRzLCByZXNpZHVhbHMsIGVmZmVjdHMsIHJhbmssIGZpdHRlZC52YWx1ZXMsIGFzc2lnbiwKICAgICAgICAgICAgICAgICAgIHFyLCBkZi5yZXNpZHVhbCwgeGxldmVscywgY2FsbCwgdGVybXMsIG1vZGVsICMgbm9saW50OiBvYmplY3RfbmFtZV9saW50ZXIuCikgewogIHN0b3BpZm5vdCgKICAgIGlzLmRvdWJsZShjb2VmZmljaWVudHMpLCBpcy5kb3VibGUocmVzaWR1YWxzKSwKICAgIGlzLmRvdWJsZShlZmZlY3RzKSwgaXMuaW50ZWdlcihyYW5rKSwgaXMuZG91YmxlKGZpdHRlZC52YWx1ZXMpLAogICAgaXMuaW50ZWdlcihhc3NpZ24pLCBpcy5saXN0KHFyKSwgaXMuaW50ZWdlcihkZi5yZXNpZHVhbCksCiAgICBpcy5saXN0KHhsZXZlbHMpLCBpcy5sYW5ndWFnZShjYWxsKSwgaXMubGFuZ3VhZ2UodGVybXMpLAogICAgaXMubGlzdChtb2RlbCkKICApCgogIHN0cnVjdHVyZSgKICAgIGxpc3QoCiAgICAgIGNvZWZmaWNpZW50cyA9IGNvZWZmaWNpZW50cywKICAgICAgcmVzaWR1YWxzID0gcmVzaWR1YWxzLAogICAgICBlZmZlY3RzID0gZWZmZWN0cywKICAgICAgcmFuayA9IHJhbmssCiAgICAgIGZpdHRlZC52YWx1ZXMgPSBmaXR0ZWQudmFsdWVzLAogICAgICBhc3NpZ24gPSBhc3NpZ24sCiAgICAgIHFyID0gcXIsCiAgICAgIGRmLnJlc2lkdWFsID0gZGYucmVzaWR1YWwsCiAgICAgIHhsZXZlbHMgPSB4bGV2ZWxzLAogICAgICBjYWxsID0gY2FsbCwKICAgICAgdGVybXMgPSB0ZXJtcywKICAgICAgbW9kZWwgPSBtb2RlbAogICAgKSwKICAgIGNsYXNzID0gImxtIgogICkKfQpgYGAKCi0tLQoKIyMgMTMuNi4zIEV4ZXJjaXNlcwoKMS4gIEhvdyBkb2VzIGBbLkRhdGVgIHN1cHBvcnQgc3ViY2xhc3Nlcz8gSG93IGRvZXMgaXQgZmFpbCB0byBzdXBwb3J0IAogICAgc3ViY2xhc3Nlcz8KCmBgYHtyfQpgWy5EYXRlYApgLkRhdGVgCmBgYAoKQW5zd2VyOiBieSBwYXNzaW5nIHRoZSBvYmplY3QncyBjbGFzcyB0byBgLkRhdGVgLCBgWy5EYXRlYCBhdm9pZHMgdGhlIHByb2JsZW0gb2YgYFsuc2VjcmV0YCBhbmQgY2FuIHJldHVybiBzdWJjbGFzc2VzIG9mIGBEYXRlYC4gSG93ZXZlciwgdGhlIGAuRGF0ZWAgbWV0aG9kIGNhbiByZXR1cm4gb2JqZWN0cyB0aGF0IGRvbid0IGNvbnRhaW4gdGhlIGNsYXNzIGBEYXRlYC4KCkFSIFNvbHV0aW9uczogYFsuRGF0ZWAgY2FsbHMgYC5EYXRlYCB3aXRoIHRoZSByZXN1bHQgb2YgY2FsbGluZyBgW2Agb24gdGhlIHBhcmVudCBjbGFzcywgYWxvbmcgd2l0aCBgb2xkQ2xhc3MoKWA6CgpgLkRhdGVgIGlzIGtpbmQgb2YgbGlrZSBhIGNvbnN0cnVjdG9yIGZvciBkYXRlIGNsYXNzZXMsIGFsdGhvdWdoIGl0IGRvZXNuJ3QgY2hlY2sgdGhlIGlucHV0IGlzIHRoZSBjb3JyZWN0IHR5cGU6Cgpgb2xkQ2xhc3MoKWAgaXMgYmFzaWNhbGx5IHRoZSBzYW1lIGFzIGBjbGFzcygpYCwgZXhjZXB0IHRoYXQgaXQgZG9lc24ndCByZXR1cm4gaW1wbGljaXQgY2xhc3NlcywgaS5lLiBpdCdzIGJhc2ljYWxseSBgYXR0cih4LCAiY2xhc3MiKWAgKGxvb2tpbmcgYXQgdGhlIEMgY29kZSB0aGF0J3MgZXhhY3RseSB3aGF0IGl0IGRvZXMsIGV4Y2VwdCB0aGF0IGl0IGFsc28gaGFuZGxlcyBTNCBvYmplY3RzKS4KCkFzIGBvbGRDbGFzcygpYCBpcyAiYmFzaWNhbGx5IiBgY2xhc3MoKWAsIHdlIGNhbiByZXdyaXRlIGBbLkRhdGVgIHRvIG1ha2UgdGhlIGltcGxlbWVudGF0aW9uIG1vcmUgY2xlYXI6CgpgYGB7cn0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKYFsuRGF0ZWAgPC0gZnVuY3Rpb24oeCwgLi4uLCBkcm9wID0gVFJVRSkgewogIG91dCA8LSBOZXh0TWV0aG9kKCJbIikKICBjbGFzcyhvdXQpIDwtIGNsYXNzKHgpCiAgb3V0Cn0KYGBgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgClNvLCBgWy5EYXRlYCBlbnN1cmVzIHRoYXQgdGhlIG91dHB1dCBoYXMgdGhlIHNhbWUgY2xhc3MgYXMgaW4gdGhlIGlucHV0LiBCdXQgd2hhdCBhYm91dCBvdGhlciBhdHRyaWJ1dGVzIHRoYXQgYSBzdWJjbGFzcyBtaWdodCBwb3NzZXNzPyBUaGV5IGdldCBsb3N0OgoKYGBge3J9CnggPC0gc3RydWN0dXJlKDE6NCwgdGVzdCA9ICJ0ZXN0IiwgY2xhc3MgPSBjKCJteURhdGUiLCAiRGF0ZSIpKQphdHRyaWJ1dGVzKHhbMV0pCmBgYAoKTm90ZTogdGhpcyBpcyBhIGJldHRlciBleHBsYW5hdGlvbiBvZiBob3cgaXQgZmFpbHMgdG8gc3VwcG9ydCBzdWJjbGFzc2VzOyBpdCBkcm9wcyBub24tY2xhc3MgYXR0cmlidXRlcy4KCi0tLQoKMi4gIFIgaGFzIHR3byBjbGFzc2VzIGZvciByZXByZXNlbnRpbmcgZGF0ZSB0aW1lIGRhdGEsIGBQT1NJWGN0YCBhbmQKICAgIGBQT1NJWGx0YCwgd2hpY2ggYm90aCBpbmhlcml0IGZyb20gYFBPU0lYdGAuIFdoaWNoIGdlbmVyaWNzIGhhdmUKICAgIGRpZmZlcmVudCBiZWhhdmlvdXJzIGZvciB0aGUgdHdvIGNsYXNzZXM/IFdoaWNoIGdlbmVyaWNzIHNoYXJlIHRoZSBzYW1lCiAgICBiZWhhdmlvdXI/CgpBbnN3ZXI6IGlmIGEgZ2VuZXJpYyBpcyBkZWZpbmVkIGZvciBlaXRoZXIgY2xhc3MsIGl0IG11c3QgaGF2ZSBkaWZmZXJlbnQgYmVoYXZpb3JzLiBHZW5lcmljcyB0aGF0IGFyZW4ndCBkZWZpbmVkIGZvciBlaXRoZXIgY2xhc3MgbXVzdCBoYXZlIHRoZSBzYW1lIGJlaGF2aW9yLiBXZSBjYW4gZ2V0IHRoZSBsaXN0IG9mIGdlbmVyaWNzIGRlZmluZWQgZm9yIGVpdGhlciBjbGFzcyB1c2luZyBgc2xvb3A6OnMzX21ldGhvZHNfY2xhc3MoKWAuIFRoZXNlIGdlbmVyaWNzIGhhdmUgZGlmZmVyZW50IGJlaGF2aW9ycyBmb3IgdGhlIHR3byBjbGFzc2VzOgoKYGBge3IsIHdhcm5pbmcgPSBGQUxTRX0KY3RfZ2VuZXJpY3MgPC0gczNfbWV0aG9kc19jbGFzcygiUE9TSVhjdCIpJGdlbmVyaWMKbHRfZ2VuZXJpY3MgPC0gczNfbWV0aG9kc19jbGFzcygiUE9TSVhsdCIpJGdlbmVyaWMKZGVmaW5lZF9nZW5lcmljcyA8LSB1bmlvbihjdF9nZW5lcmljcywgbHRfZ2VuZXJpY3MpCmRlZmluZWRfZ2VuZXJpY3MKYGBgCgpXZSBhZGFwdCB3b3JrIGZyb20gcHJldmlvdXMgZXhlcmNpc2VzIHRvIGdldCB0aGUgbGlzdCBvZiBhbGwgZ2VuZXJpY3MsIGFuZCBpZGVudGlmeSBTMyBnZW5lcmljcyB0aGF0IGFyZW4ndCBkZWZpbmVkIGZvciBlaXRoZXIgY2xhc3MsIHdoaWNoIG11c3QgaGF2ZSB0aGUgc2FtZSBiZWhhdmlvcjoKCmBgYHtyfQpzM19nZW5lcmljX2Z1bnMgPC0gRmlsdGVyKGlzX3MzX2dlbmVyaWMsIG5hbWVzKGZ1bnMpKQp1bmlvbihzZXRkaWZmKGRlZmluZWRfZ2VuZXJpY3MsIHMzX2dlbmVyaWNfZnVucyksIHNldGRpZmYoczNfZ2VuZXJpY19mdW5zLCBkZWZpbmVkX2dlbmVyaWNzKSkKYGBgCgpOb3RlOiB0aGlzIGNvZGUgZG9lc24ndCBxdWl0ZSB3b3JrLCBzaW5jZSBgU3VtbWFyeWAgaXMgYSBnZW5lcmljIGFjY29yZGluZyB0byBgaXNHZW5lcmljYCBhbmQgaXMgbm90IGFjY29yZGluZyB0byBgaXNfczNfZ2VuZXJpY2AsIGFuZCBgd2VpZ2h0ZWQubWVhbmAgaXMgYSBub24tYmFzZSBTMyBnZW5lcmljLgoKQVIgU29sdXRpb25zOiBUbyBhbnN3ZXIgdGhpcyBxdWVzdGlvbiwgd2UgaGF2ZSB0byBnZXQgdGhlIHJlc3BlY3RpdmUgZ2VuZXJpY3MKCmBgYHtyLCB3YXJuaW5nID0gRkFMU0V9CmdlbmVyaWNzX3QgPC0gczNfbWV0aG9kc19jbGFzcygiUE9TSVh0IikkZ2VuZXJpYwpnZW5lcmljc19jdCA8LSBzM19tZXRob2RzX2NsYXNzKCJQT1NJWGN0IikkZ2VuZXJpYwpnZW5lcmljc19sdCA8LSBzM19tZXRob2RzX2NsYXNzKCJQT1NJWGx0IikkZ2VuZXJpYwpgYGAKClRoZSBnZW5lcmljcyBpbiBgZ2VuZXJpY3NfdGAgd2l0aCBhIG1ldGhvZCBmb3IgdGhlIHN1cGVyY2xhc3MgYFBPU0lYdGAgcG90ZW50aWFsbHkgc2hhcmUgdGhlIHNhbWUgYmVoYXZpb3VyIGZvciBib3RoIHN1YmNsYXNzZXMuIEhvd2V2ZXIsIGlmIGEgZ2VuZXJpYyBoYXMgYSBzcGVjaWZpYyBtZXRob2QgZm9yIG9uZSBvZiB0aGUgc3ViY2xhc3NlcywgaXQgaGFzIHRvIGJlIHN1YnRyYWN0ZWQ6CgpgYGB7cn0KIyBUaGVzZSBnZW5lcmljcyBwcm92aWRlIHN1YmNsYXNzLXNwZWNpZmljIG1ldGhvZHMKdW5pb24oZ2VuZXJpY3NfY3QsIGdlbmVyaWNzX2x0KQoKIyBUaGVzZSBnZW5lcmljcyBzaGFyZSAoaW5oZXJpdGVkKSBtZXRob2RzIGZvciBib3RoIHN1YmNsYXNzZXMKc2V0ZGlmZihnZW5lcmljc190LCB1bmlvbihnZW5lcmljc19jdCwgZ2VuZXJpY3NfbHQpKQpgYGAKCk5vdGU6IGFnYWluLCBhZHZhbmNlZCBSIGdpdmVzIGEgYmV0dGVyIGFuc3dlciB0byB0aGlzIHF1ZXN0aW9uLCBieSBjb21wYXJpbmcgdG8gdGhlIGdlbmVyaWNzIHN1cHBvcnRlZCBieSB0aGUgcGFyZW50IGNsYXNzLgoKLS0tCgozLiAgV2hhdCBkbyB5b3UgZXhwZWN0IHRoaXMgY29kZSB0byByZXR1cm4/IFdoYXQgZG9lcyBpdCBhY3R1YWxseSByZXR1cm4/CiAgICBXaHk/CgpgYGB7cn0KZ2VuZXJpYzIgPC0gZnVuY3Rpb24oeCkgVXNlTWV0aG9kKCJnZW5lcmljMiIpCmdlbmVyaWMyLmExIDwtIGZ1bmN0aW9uKHgpICJhMSIKZ2VuZXJpYzIuYTIgPC0gZnVuY3Rpb24oeCkgImEyIgpnZW5lcmljMi5iIDwtIGZ1bmN0aW9uKHgpIHsKICBjbGFzcyh4KSA8LSAiYTEiCiAgTmV4dE1ldGhvZCgpCn0KZ2VuZXJpYzIoc3RydWN0dXJlKGxpc3QoKSwgY2xhc3MgPSBjKCJiIiwgImEyIikpKQpgYGAKCkFuc3dlcjogSSdkIGV4cGVjdCB0aGlzIGNvZGUgdG8gcmV0dXJuIGAiYTIiYCB3aXRoIGEgY2xhc3Mgb2YgYGMoImExIiwgImEyIilgLiBJdCBhY3R1YWxseSByZXR1cm5zICJhMiIgd2l0aCBhIGNsYXNzIG9mIGBjaGFyYWN0ZXJgLiBUaGlzIGlzIGJlY2F1c2Ugd2hlbiBgZ2VuZXJpYzIuYmAgY2FsbHMgYE5leHRNZXRob2QoKWAsIGBnZW5lcmljMi5hMmAgaXMgY2FsbGVkIHdoaWNoIHJldHVybnMgYSBiYXJlIGAiYTIiYCwgZHJvcHBpbmcgdGhlIGNsYXNzIGFzc2lnbmVkIGJ5IGBnZW5lcmljMi5iYC4KCmBgYHtyfQpjbGFzcyhnZW5lcmljMihzdHJ1Y3R1cmUobGlzdCgpLCBjbGFzcyA9IGMoImIiLCAiYTIiKSkpKQpgYGAKCgpBUiBTb2x1dGlvbnM6IFdoZW4gd2UgZXhlY3V0ZSB0aGUgY29kZSBhYm92ZSwgdGhpcyBpcyB3aGF0IGlzIGhhcHBlbmluZzoKCi0gd2UgcGFzcyBhbiBvYmplY3Qgb2YgY2xhc3NlcyBgYmAgYW5kIGBhMmAgdG8gYGdlbmVyaWMyKClgLCB3aGljaCBwcm9tcHRzIFIgdG8gbG9vayBmb3IgYSBtZXRob2RgZ2VuZXJpYzIuYigpYAotIHRoZSBtZXRob2QgYGdlbmVyaWMyLmIoKWAgdGhlbiBjaGFuZ2VzIHRoZSBjbGFzcyB0byBgYTFgIGFuZCBjYWxscyBgTmV4dE1ldGhvZCgpYAotIE9uZSB3b3VsZCB0aGluayB0aGF0IHRoaXMgd2lsbCBsZWFkIFIgdG8gY2FsbCBgZ2VuZXJpYzIuYTEoKWAsIGJ1dCBpbiBmYWN0LCBhcyBtZW50aW9uZWQgaW4gKkFkdmFuY2VkIFIqLCBgTmV4dE1ldGhvZCgpYCAKICAgID4gZG9lc27igJl0IGFjdHVhbGx5IHdvcmsgd2l0aCB0aGUgY2xhc3MgYXR0cmlidXRlIG9mIHRoZSBvYmplY3QsIGJ1dCBpbnN0ZWFkIHVzZXMgYSBzcGVjaWFsIGdsb2JhbCB2YXJpYWJsZSAoLkNsYXNzKSB0byBrZWVwIHRyYWNrIG9mIHdoaWNoIG1ldGhvZCB0byBjYWxsIG5leHQuCiAgICAKICAgVGhpcyBpcyB3aHkgYGdlbmVyaWMyLmEyKClgIGlzIGNhbGxlZCBpbnN0ZWFkLgoKYGBge3J9CmdlbmVyaWMyKHN0cnVjdHVyZShsaXN0KCksIGNsYXNzID0gYygiYiIsICJhMiIpKSkKYGBgCgpMZXQncyBqdXN0IGRvdWJsZSBjaGVjayB0aGUgc3RhdGVtZW50IGFib3ZlIGFuZCBldmFsdWF0ZSBgLkNsYXNzYCBleHBsaWNpdGx5IHdpdGhpbiB0aGUgYGdlbmVyaWMyLmIoKWAgbWV0aG9kLgoKYGBge3J9CmdlbmVyaWMyLmIgPC0gZnVuY3Rpb24oeCkgewogIGNsYXNzKHgpIDwtICJhMSIKICBwcmludCguQ2xhc3MpICMgbm9saW50OiBvYmplY3RfdXNhZ2VfbGludGVyLgogIE5leHRNZXRob2QoKQp9CgpnZW5lcmljMihzdHJ1Y3R1cmUobGlzdCgpLCBjbGFzcyA9IGMoImIiLCAiYTIiKSkpCmBgYAoKLS0tCgojIyAxMy43LjUgRXhlcmNpc2VzCgoxLiAgRXhwbGFpbiB0aGUgZGlmZmVyZW5jZXMgaW4gZGlzcGF0Y2ggYmVsb3c6CgpgYGB7cn0KbGVuZ3RoLmludGVnZXIgPC0gZnVuY3Rpb24oeCkgMTAKCngxIDwtIDE6NQpjbGFzcyh4MSkKczNfZGlzcGF0Y2gobGVuZ3RoKHgxKSkKCngyIDwtIHN0cnVjdHVyZSh4MSwgY2xhc3MgPSAiaW50ZWdlciIpCmNsYXNzKHgyKQpzM19kaXNwYXRjaChsZW5ndGgoeDIpKQpgYGAKCkFuc3dlcjogYHgxYCBkaXNwYXRjaGVzIHVzaW5nIGltcGxpY2l0IGNsYXNzLCB3aGljaCBpcyBgYygiaW50ZWdlciIsICJudW1lcmljIilgLiBgeDJgIGhhcyBhbiBleHBsaWNpdCBjbGFzcywgc28gaXQgaXMgZGlzcGF0Y2hlZCB0byBgbGVuZ3RoLmludGVnZXJgLgoKYGBge3J9CnMzX2NsYXNzKHgxKQpzM19jbGFzcyh4MikKYGBgCgpBUiBTb2x1dGlvbnM6IGBjbGFzcygpYCByZXR1cm5zIGBpbnRlZ2VyYCBpbiBib3RoIGNhc2VzLiBIb3dldmVyLCB3aGlsZSB0aGUgY2xhc3Mgb2YgYHgxYCBpcyBjcmVhdGVkIGltcGxpY2l0bHkgYW5kIGluaGVyaXRzIGZyb20gdGhlIGBudW1lcmljYCBjbGFzcywgdGhlIGNsYXNzIG9mIGB4MmAgaXMgc2V0IGV4cGxpY2l0bHkuIFRoaXMgaXMgaW1wb3J0YW50IGJlY2F1c2UgYGxlbmd0aCgpYCBpcyBhbiBpbnRlcm5hbCBnZW5lcmljIGFuZCBpbnRlcm5hbCBnZW5lcmljcyBvbmx5IGRpc3BhdGNoIHRvIG1ldGhvZHMgd2hlbiB0aGUgY2xhc3MgYXR0cmlidXRlIGhhcyBiZWVuIHNldCwgaS5lLiBpbnRlcm5hbCBnZW5lcmljcyBkbyBub3QgdXNlIGltcGxpY2l0IGNsYXNzZXMuCgpBbiBvYmplY3QgaGFzIG5vIGV4cGxpY2l0IGNsYXNzIGlmIGBhdHRyKHgsICJjbGFzcyIpYCByZXR1cm5zIGBOVUxMYDoKCmBgYHtyfQphdHRyKHgxLCAiY2xhc3MiKQphdHRyKHgyLCAiY2xhc3MiKQpgYGAKClRvIHNlZSB0aGUgcmVsZXZhbnQgY2xhc3NlcyBmb3IgdGhlIFMzIGRpc3BhdGNoLCBvbmUgY2FuIHVzZSBgc2xvb3A6OnMzX2NsYXNzKClgOgoKYGBge3J9CnMzX2NsYXNzKHgxKSAjIGltcGxpY2l0CgpzM19jbGFzcyh4MikgIyBleHBsaWNpdApgYGAKCkZvciBhIGJldHRlciB1bmRlcnN0YW5kaW5nIG9mIGBzM19kaXBhdGNoKClgJ3Mgb3V0cHV0IHdlIHF1b3RlIGZyb20gYD9zM19kaXNwYXRjaGA6Ci0gPT4gbWV0aG9kIGV4aXN0cyBhbmQgaXMgZm91bmQgYnkgYFVzZU1ldGhvZCgpYC4KLSAtPiBtZXRob2QgZXhpc3RzIGFuZCBpcyB1c2VkIGJ5IGBOZXh0TWV0aG9kKClgLgotIFwqIG1ldGhvZCBleGlzdHMgYnV0IGlzIG5vdCB1c2VkLgotIE5vdGhpbmcgKGFuZCBncmV5ZWQgb3V0IGluIGNvbnNvbGUpOiBtZXRob2QgZG9lcyBub3QgZXhpc3QuCgpOb3RlOiBBUiBTb2x1dGlvbnMgaW5jbHVkZXMgYW4gYWRkaXRpb25hbCBpbXBvcnRhbnQgZGV0YWlsLCB0aGF0ICJpbnRlcm5hbCBnZW5lcmljcyBvbmx5IGRpc3BhdGNoIHRvIG1ldGhvZHMgd2hlbiB0aGUgY2xhc3MgYXR0cmlidXRlIGhhcyBiZWVuIHNldCIsIHdoaWNoIGV4cGxhaW5zIHdoeSB0aGUgaW50ZXJuYWwgZ2VuZXJpYyBpcyB1c2VkIGZvciBgeDFgLgoKLS0tCgoyLiAgV2hhdCBjbGFzc2VzIGhhdmUgYSBtZXRob2QgZm9yIHRoZSBgTWF0aGAgZ3JvdXAgZ2VuZXJpYyBpbiBiYXNlIFI/IFJlYWQKICAgIHRoZSBzb3VyY2UgY29kZS4gSG93IGRvIHRoZSBtZXRob2RzIHdvcms/CgpBbnN3ZXI6IGZvdXIgYmFzZSBjbGFzc2VzIGhhdmUgYSBtZXRob2QgZm9yIGBNYXRoYDogYGRhdGEuZnJhbWVgLCBgRGF0ZWAsIGBkaWZmdGltZWAsIGBmYWN0b3JgLCBhbmQgYFBPU0lYdGAuCgpgYGB7cn0KczNfbWV0aG9kc19nZW5lcmljKCJNYXRoIikgfD4KICBmaWx0ZXIoc291cmNlID09ICJiYXNlIikgIyBub2xpbnQ6IHVuZGVzaXJhYmxlX2Z1bmN0aW9uX2xpbnRlci4gc291cmNlIGlzIG5vdCB1c2VkIGFzIGEgZnVuY3Rpb24uCmBgYAoKYGBge3J9Ck1hdGguZGF0YS5mcmFtZQpNYXRoLkRhdGUKTWF0aC5kaWZmdGltZQpNYXRoLmZhY3RvcgpNYXRoLlBPU0lYdApgYGAKCi0gYE1hdGguZGF0YS5mcmFtZWAgcGVyZm9ybXMgbWF0aCBpZiBhbGwgY29sdW1ucyAodmFyaWFibGVzKSBhcmUgZWl0aGVyIG51bWVyaWMsIGxvZ2ljYWwgb3IgY29tcGxleCwKICBhbmQgZXJyb3JzIGlmIGFueSBhcmUgbm90Ci0gYE1hdGguZGlmZnRpbWVgIHBlcmZvcm1zIG9ubHkgY2VydGFpbiBtYXRoIGZ1bmN0aW9uczogYGFic2AsIGBzaWduYCwgYGZsb29yYCwgYGNlaWxpbmdgLCBgdHJ1bmNgLAogIGByb3VuZGAsIGFuZCBgc2lnbmlmYCwgYW5kIGVycm9ycyBmb3Igb3RoZXIgZnVuY3Rpb25zCi0gYE1hdGguRGF0ZWAsIGBNYXRoLmZhY3RvcmAsIGFuZCBgTWF0aC5QT1NJWHRgIGFsd2F5cyBlcnJvcgoKQVIgU29sdXRpb25zOiA6IFRoZSBmb2xsb3dpbmcgZnVuY3Rpb25zIGJlbG9uZyB0byB0aGlzIGdyb3VwIChzZWUgP2BNYXRoYCk6CgotIGBhYnNgLCBgc2lnbmAsIGBzcXJ0YCwgYGZsb29yYCwgYGNlaWxpbmdgLCBgdHJ1bmNgLCBgcm91bmRgLCBgc2lnbmlmYAotIGBleHBgLCBgbG9nYCwgYGV4cG0xYCwgYGxvZzFwYCwgYGNvc2AsIGBzaW5gLCBgdGFuYCwgYGNvc3BpYCwgYHNpbnBpYCwgYHRhbnBpYCwgYGFjb3NgLCBgYXNpbmAsCiAgYGF0YW5gLCBgY29zaGAsIGBzaW5oYCwgYHRhbmhgLCBgYWNvc2hgLCBgYXNpbmhgLCBgYXRhbmhgCi0gYGxnYW1tYWAsIGBnYW1tYWAsIGBkaWdhbW1hYCwgYHRyaWdhbW1hYAotIGBjdW1zdW1gLCBgY3VtcHJvZGAsIGBjdW1tYXhgLCBgY3VtbWluYAoKVGhlIGZvbGxvd2luZyBjbGFzc2VzIGhhdmUgYSBtZXRob2QgZm9yIHRoaXMgZ3JvdXAgZ2VuZXJpYzoKCmBgYHtyfQpzM19tZXRob2RzX2dlbmVyaWMoIk1hdGgiKQpgYGAKClRvIGV4cGxhaW4gdGhlIGJhc2ljIGlkZWEsIHdlIGp1c3Qgb3ZlcndyaXRlIHRoZSBkYXRhIGZyYW1lIG1ldGhvZDoKCmBgYHtyfQpNYXRoLmRhdGEuZnJhbWUgPC0gZnVuY3Rpb24oeCkgImhlbGxvIgpgYGAKCk5vdyBhbGwgZnVuY3Rpb25zIGZyb20gdGhlIG1hdGggZ2VuZXJpYyBncm91cCwgd2lsbCByZXR1cm4gYCJoZWxsbyJgCgpgYGB7cn0KYWJzKG10Y2FycykKZXhwKG10Y2FycykKbGdhbW1hKG10Y2FycykKYGBgCgpPZiBjb3Vyc2UsIGRpZmZlcmVudCBmdW5jdGlvbnMgc2hvdWxkIHBlcmZvcm0gZGlmZmVyZW50IGNhbGN1bGF0aW9ucy4gSGVyZSBgLkdlbmVyaWNgIGNvbWVzIGludG8gcGxheSwgd2hpY2ggcHJvdmlkZXMgdXMgd2l0aCB0aGUgY2FsbGluZyBnZW5lcmljIGFzIGEgc3RyaW5nCgpgYGB7cn0KTWF0aC5kYXRhLmZyYW1lIDwtIGZ1bmN0aW9uKHgsIC4uLikgewogIC5HZW5lcmljICMgbm9saW50OiBvYmplY3RfdXNhZ2VfbGludGVyLgp9CmFicyhtdGNhcnMpCmV4cChtdGNhcnMpCmxnYW1tYShtdGNhcnMpCnJtKE1hdGguZGF0YS5mcmFtZSkKYGBgCgpUaGUgb3JpZ2luYWwgc291cmNlIGNvZGUgb2YgYE1hdGguZGF0YS5mcmFtZSgpYCBpcyBhIGdvb2QgZXhhbXBsZSBvbiBob3cgdG8gaW52b2tlIHRoZSBzdHJpbmcgcmV0dXJuZWQgYnkgYC5HZW5lcmljYCBpbnRvIGEgc3BlY2lmaWMgbWV0aG9kLiBgTWF0aC5mYWN0b3IoKWAgaXMgYSBnb29kIGV4YW1wbGUgb2YgYSBtZXRob2QsIHdoaWNoIGlzIHNpbXBseSBkZWZpbmVkIGZvciBiZXR0ZXIgZXJyb3IgbWVzc2FnZXMuCgpOb3RlOiBJIHByZWZlciBteSBhbnN3ZXIgdG8gdGhlIEFSIFNvbHV0aW9ucyBhbnN3ZXIuCgotLS0KCjMuICBgTWF0aC5kaWZmdGltZSgpYCBpcyBtb3JlIGNvbXBsaWNhdGVkIHRoYW4gSSBkZXNjcmliZWQuIFdoeT8KCkFuc3dlcjogdGhlIGV4cGxhbmF0aW9uIGluIHRoZSB0ZXh0IG9taXRzIHRoZSBmYWN0IHRoYXQgYE1hdGguZGlmZnRpbWUoKWAgZmlyc3QgY2hlY2tzIHRoYXQgdGhlIG1hdGggZnVuY3Rpb24gYmVpbmcgY2FsbGVkLgoKQVIgU29sdXRpb25zOiBgTWF0aC5kaWZmdGltZSgpYCBhbHNvIGV4Y2x1ZGVzIGNhc2VzIGFwYXJ0IGZyb20gYGFic2AsIGBzaWduYCwgYGZsb29yYCwgYGNlaWxpbmdgLCBgdHJ1bmNgLCBgcm91bmRgIGFuZCBgc2lnbmlmYCBhbmQgbmVlZHMgdG8gcmV0dXJuIGEgZml0dGluZyBlcnJvciBtZXNzYWdlLgoKLS0tCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("advanced-r-3.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
