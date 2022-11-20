@@ -14,8 +14,176 @@ output:
 Workbook for completing quizzes and exercises from the "Getting started" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
 ```{r setup, message = FALSE, warning = FALSE}
+library(ggplot2) # nolint: unused_import_linter. imported for the `mpg` dataframe.
+library(dplyr)
+
 knitr::opts_chunk$set(
   comment = "#>",
   fig.align = "center"
 )
 ```
+
+# Introduction
+
+This workbook includes answers and solutions to the quizzes and exercises from [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html) and [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app), organized by chapter. It includes excerpts from both books, copied here.
+
+**WARNING, SPOILERS!** If you haven't read the ggplot2 book and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
+
+# 2 First steps
+
+The goal of this chapter is to teach you how to produce useful graphics with ggplot2 as quickly as possible. You’ll learn the basics of ggplot() along with some useful “recipes” to make the most important plots. ggplot() allows you to make complex plots with just a few lines of code because it’s based on a rich underlying theory, the grammar of graphics. Here we’ll skip the theory and focus on the practice, and in later chapters you’ll learn how to use the full expressive power of the grammar.
+
+## 2.2.1 Exercises
+
+1.  List five functions that you could use to get more information about the
+    `mpg` dataset.
+
+Answer:
+
+Five common base R functions I use to interrogate dataframes are:
+
+1. `summary()`
+1. `hist()`
+1. `plot()`
+1. `lm()`
+1. `View()`
+
+GG Solutions:
+
+-   `help(mpg)`: Documentation of dataset
+-   `dim(mpg)`: Dimensions of dataset
+-   `summary(mpg)`: Summary measures of dataset
+-   `str(mpg)`: Display of the internal structure of dataset
+-   `glimpse(mpg)`: `dplyr` version of `str(mpg)`
+
+---
+
+2.  How can you find out what other datasets are included with ggplot2?
+
+Answer: use `data(package = "ggplot2")`, which returns the following:
+
+```
+Data sets in package ‘ggplot2’:
+
+diamonds                      Prices of over 50,000 round cut diamonds
+economics                     US economic time series
+economics_long                US economic time series
+faithfuld                     2d density estimate of Old Faithful data
+luv_colours                   'colors()' in Luv space
+midwest                       Midwest demographics
+mpg                           Fuel economy data from 1999 to 2008 for 38 popular models of
+                              cars
+msleep                        An updated and expanded version of the mammals sleep dataset
+presidential                  Terms of 12 presidents from Eisenhower to Trump
+seals                         Vector field of seal movements
+txhousing                     Housing sales in TX
+```
+
+GG Solutions:
+
+`data(package = "ggplot2")` loads the available data sets in ggplot2. Alternatively,if you have internet access, go to https://ggplot2.tidyverse.org/reference/index.html#section-data
+
+---
+    
+3.  Apart from the US, most countries use fuel consumption (fuel consumed
+    over fixed distance) rather than fuel economy (distance travelled with
+    fixed amount of fuel). How could you convert `cty` and `hwy` into the
+    European standard of l/100km? 
+
+Answer: to convert miles/gallon to liters/100km, we use the formula:
+
+$\frac{1}{miles/gallon} \times \frac{3.78541}{1.609344 \div 100} = l/100km$
+
+```{r}
+mpg_l100km <- function(x) {
+  (1 / x) * 3.78541 / (1.609344 / 100)
+}
+
+mpg |>
+  mutate(cty = mpg_l100km(cty), hwy = mpg_l100km(hwy))
+```
+
+GG Solutions:
+
+- According to [asknumbers](https://www.asknumbers.com/mpg-to-L100km.aspx), you divide 235.214583 by the mpg values in `cty` and `hwy` to convert them into the European standard of l/100km. 
+
+- Function to convert into European standard (Rademaker, 2016):
+
+```{r}
+# nolint start: object_name_linter.
+mpgTol100km <- function(milespergallon) {
+  GalloLiter <- 3.785411784
+  MileKilometer <- 1.609344
+
+  l100km <- (100 * GalloLiter) / (milespergallon * MileKilometer)
+  l100km
+}
+# nolint end
+```
+
+---
+    
+4.  Which manufacturer has the most models in this dataset? Which model has 
+    the most variations? Does your answer change if you remove the redundant
+    specification of drive train (e.g. "pathfinder 4wd", "a4 quattro") from the 
+    model name?
+
+Answer: we can generate a dataframe with manufacturers, models, and variations using:
+
+```{r}
+mpg_summary <- mpg |>
+  count(manufacturer, model) |>
+  rename(variations = n)
+
+mpg_summary
+```
+
+The model with the most variations is the Dodge Caravan 2wd.
+
+```{r}
+mpg_summary |>
+  arrange(variations) |>
+  tail(1)
+```
+The manufacturer with the most models is Toyota.
+
+```{r}
+mpg_summary |>
+  count(manufacturer) |>
+  arrange(n) |>
+  tail(1)
+```
+
+If we first remove the redundant drive train from the summary, we get:
+
+```{r}
+mpg_summary2 <- mpg |>
+  mutate(model = gsub(" (quattro)|(2wd)|(4wd)|(awd)$", "", model)) |>
+  count(manufacturer, model) |>
+  rename(variations = n)
+
+mpg_summary2
+```
+
+The model with the most variations has changed to the Audi A4.
+
+```{r}
+mpg_summary2 |>
+  arrange(variations) |>
+  tail(1)
+```
+
+The manufacturer with the most models is still Toyota.
+
+```{r}
+mpg_summary2 |>
+  count(manufacturer) |>
+  arrange(n) |>
+  tail(1)
+```
+
+GG Solutions:
+
+Not included here because I believe the answer to question 4 in [2.2 Exercises](https://ggplot2-book-solutions-3ed.netlify.app/first-steps.html#exercises-1) is incorrect, as it counts variants by manufacturer, not models by manufacturer.
+
+---
