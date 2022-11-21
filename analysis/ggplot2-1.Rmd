@@ -14,7 +14,7 @@ output:
 Workbook for completing quizzes and exercises from the "Getting started" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
 ```{r setup, message = FALSE, warning = FALSE}
-library(ggplot2) # nolint: unused_import_linter. imported for the `mpg` dataframe.
+library(ggplot2)
 library(dplyr)
 
 knitr::opts_chunk$set(
@@ -185,5 +185,112 @@ mpg_summary2 |>
 GG Solutions:
 
 Not included here because I believe the answer to question 4 in [2.2 Exercises](https://ggplot2-book-solutions-3ed.netlify.app/first-steps.html#exercises-1) is incorrect, as it counts variants by manufacturer, not models by manufacturer.
+
+---
+
+## 2.3.1 Exercises
+
+1.  How would you describe the relationship between `cty` and `hwy`?
+    Do you have any concerns about drawing conclusions from that plot?
+
+Answer: we can explore the relationship using a scatterplot: 
+
+```{r}
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point()
+```
+
+There is a strong correlation between `cty` and `hwy`, which is expected since these are both measures of fuel efficiency of the same car.
+
+GG Solutions:
+
+- The plot shows a strongly linear relationship, which tells me that `cty` and `hwy` are highly correlated variables. The only concern I have is that the points seem to be overlapping.
+- There is not much insight to be gained except that cars which are fuel efficient on a highway are also fuel efficient in cities. This relationship is probably a function of speed (Rademaker, 2016) 
+
+--
+
+2.  What does `ggplot(mpg, aes(model, manufacturer)) + geom_point()` show?
+    Is it useful? How could you modify the data to make it more informative?
+
+Answer: this plot shows each model as a point for each manufacturer, which is not particularly useful, although it does allow for a quick count of models by manufacturer. A bar chart showing count of models by manufacturer would be more useful.
+
+```{r}
+ggplot(mpg, aes(model, manufacturer)) +
+  geom_point()
+```
+
+GG Solutions:
+
+- The plot shows the manufacturer of each model. Its not very readable since there are too many models and this clutters up the x-axis with too many ticks! I would just plot 20 or so models so that the graph is more readable. See below:
+
+```{r}
+mpg %>%
+  head(25) %>%
+  ggplot(aes(model, manufacturer)) +
+  geom_point()
+```
+
+- A possible alternative would be to look total number of observations for each manufacturer-model combination using geom_bar(). (Rademaker, 2016)
+
+```{r}
+df <- mpg %>%
+  transmute("man_mod" = paste(manufacturer, model, sep = " "))
+ggplot(df, aes(man_mod)) +
+  geom_bar() +
+  coord_flip()
+```
+
+Note: I prefer my solution for this exercise.
+
+--
+
+3.  Describe the data, aesthetic mappings and layers used for each of the 
+    following plots. You'll need to guess a little because you haven't seen
+    all the datasets and functions yet, but use your common sense! See if you 
+    can predict what the plot will look like before running the code.
+    
+    1. `ggplot(mpg, aes(cty, hwy)) + geom_point()`
+    1. `ggplot(diamonds, aes(carat, price)) + geom_point()`
+    1. `ggplot(economics, aes(date, unemploy)) + geom_line()`
+    1. `ggplot(mpg, aes(cty)) + geom_histogram()`
+
+Answer:
+
+1. `ggplot(mpg, aes(cty, hwy)) + geom_point()` - scatterplot of city mpg against highway mpg
+1. `ggplot(diamonds, aes(carat, price)) + geom_point()` - scatterplot of diamond weight in carats
+   against price
+1. `ggplot(economics, aes(date, unemploy)) + geom_line()` - a line plot showing the unemployment
+   rate over time
+1. `ggplot(mpg, aes(cty)) + geom_histogram()` - a histogram of city mpg
+
+```{r}
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point()
+ggplot(diamonds, aes(carat, price)) +
+  geom_point()
+ggplot(economics, aes(date, unemploy)) +
+  geom_line()
+ggplot(mpg, aes(cty)) +
+  geom_histogram()
+```
+
+In general, my guesses are correct (given my existing experience with ggplot), except for the economics plot, which appears to show the number of unemployed people instead of an employment rate.
+
+GG Solutions: (Rademaker, 2016)
+
+1. `ggplot(mpg, aes(cty, hwy)) + geom_point()`
+-   *Data*: `mpg`
+-   *Aesthetic*: highway miles per gallon is mapped to y position and city miles per gallon is mapped to x position.
+-   *Layer*: points
+
+2. `ggplot(diamonds, aes(carat, price)) + geom_point()`
+-   *Data*: `diamonds`
+-   *Aesthetic*: price in US dollars is mapped to y position, weight of the diamond is mapped to x position.
+-   *Layer*: points
+
+3.  `ggplot(economics, aes(date, unemploy)) + geom_line()`
+-   *Data*: `economics`
+-   *Aesthetic*: median duration of unemployment, in weeks, is mapped to y position and month of data collection is mapped to x position.
+-   *Layer*: line
 
 ---
