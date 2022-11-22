@@ -294,3 +294,74 @@ GG Solutions: (Rademaker, 2016)
 -   *Layer*: line
 
 ---
+
+## 2.4.1 Exercises
+
+1.  Experiment with the colour, shape and size aesthetics. What happens when 
+    you map them to continuous values? What about categorical values? What 
+    happens when you use more than one aesthetic in a plot?
+
+Answer: observations based on the plots below:
+
+- Using a continuous variable with shape generates an error
+- Using a categorical variable with shape for more than 6 values generates a warning
+- Using a continuous variable with size works well
+- Using a categorical variable with size generates a warning
+- Using a continuous variable with color creates a gradient
+- Using a categorical variable with color creates a discrete mapping
+- Multiple aesthetics can overload the plot
+
+```{r}
+# continuous
+ggplot(mpg, aes(displ, hwy, color = cyl)) +
+  geom_point()
+# categorical
+ggplot(mpg, aes(displ, hwy, color = drv)) +
+  geom_point()
+# multiple
+mpg |>
+  mutate(year = as.factor(year)) |>
+  ggplot(aes(displ, hwy, color = drv, size = cyl, shape = year)) +
+  geom_point()
+```
+
+GG Solutions offers a similar and less complete answer.
+
+---
+
+2.  What happens if you map a continuous variable to shape? Why? What happens
+    if you map `trans` to shape? Why?
+
+Answer: As noted above, using a continuous variable with shape generates an error, because plots must have discrete shapes. Using a categorical variable with shape for more than 6 values (like `trans`) generates a warning, since (as the error notes) many different shapes can be hard to distinguish on a plot.
+
+GG Solutions presents a similar answer.
+
+---
+
+3.  How is drive train related to fuel economy? How is drive train related to
+    engine size and class?
+
+Answer: The plots below show that:
+
+- Front wheel drive is correlated with higher fuel economy
+- Front wheel drive is correlated with smaller displacement, rear wheel drive is correlated with
+  larger displacement, and four wheel drive is not correlated with displacement
+- Some classes only have a single drive train:
+  - Two seaters only have rear wheel drive
+  - Minivans only have front wheel drive
+  - Pickups only have four wheel drive
+
+```{r}
+ggplot(mpg, aes(hwy, drv)) +
+  geom_point()
+ggplot(mpg, aes(displ, drv)) +
+  geom_point()
+ggplot(mpg, aes(class, drv)) +
+  geom_point()
+```
+
+GG Solutions presents a similar answer using bar charts, and compares engine size and class together in a single plot.
+
+Note: GG Solutions does not explore the relationship between drive train and class.
+
+---
