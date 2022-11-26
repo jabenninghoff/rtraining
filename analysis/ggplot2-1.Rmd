@@ -16,6 +16,8 @@ Workbook for completing quizzes and exercises from the "Getting started" chapter
 ```{r setup, message = FALSE, warning = FALSE}
 library(ggplot2)
 library(dplyr)
+library(modelr)
+library(jbplot)
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -437,5 +439,181 @@ GG Solutions:
 
 - It allows users to decide whether scales should be fixed. I would use it whenever different subsets of the data are on vastly different scales. 
 - (Rademaker, 2016) If we want to compare across facets, `scales = "fixed"` is more appropriate. If our focus is on individual patterns within each facet, setting `scales = "free"` might be more appropriate.
+
+---
+
+## 2.6.6 Exercises
+
+1.  What's the problem with the plot created by 
+    `ggplot(mpg, aes(cty, hwy)) + geom_point()`? Which of the geoms 
+    described above is most effective at remedying the problem?
+
+Answer: as noted in GG Solutions, the problem is overplotting, which `geom_jitter` fixes:
+
+```{r}
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point() +
+  geom_jitter()
+```
+
+GG Solutions:
+
+- The problem is overplotting. 
+
+Solution 1. Use `geom_jitter` to add random noise to the data and avoid overplotting.
+
+Solution 2. (Rademaker, 2016) Set opacity with `alpha`
+
+---
+
+2.  One challenge with `ggplot(mpg, aes(class, hwy)) + geom_boxplot()`
+    is that the ordering of `class` is alphabetical, which is not terribly 
+    useful. How could you change the factor levels to be more informative? 
+    
+    Rather than reordering the factor by hand, you can do it automatically
+    based on the data:
+    `ggplot(mpg, aes(reorder(class, hwy), hwy)) + geom_boxplot()`.
+    What does `reorder()` do? Read the documentation.
+
+Answer: as noted in the exercise, ordering of `class` by `hwy` is more informative. `reorder()` reorders levels based on the second, numeric value, by default using the mean.
+
+```{r}
+ggplot(mpg, aes(class, hwy)) +
+  geom_boxplot()
+
+ggplot(mpg, aes(reorder(class, hwy), hwy)) +
+  geom_boxplot()
+```
+
+GG Solutions takes a similar approach but instead uses `mutate(class = factor(class), class = fct_reorder(class, hwy))`.
+
+---
+
+3.  Explore the distribution of the carat variable in the `diamonds`
+    dataset. What `binwidth` reveals the most interesting patterns?
+
+Answer: using trial and error, `binwidth = 0.01` reveals that carat weight is skewed towards round numbers (1, 1.25, 1.5, 2, etc.). Using the smaller `binwidth = 0.005` doesn't improve the pattern, and makes it harder to see.
+
+```{r}
+ggplot(diamonds, aes(carat)) +
+  geom_histogram(binwidth = 0.1)
+
+ggplot(diamonds, aes(carat)) +
+  geom_histogram(binwidth = 0.01)
+
+ggplot(diamonds, aes(carat)) +
+  geom_histogram(binwidth = 0.005)
+```
+
+GG Solutions:
+
+- This is a subjective answer, but `binwidth` of 0.2 or 0.3 reveals that the distribution of carat is heavily skewed to the right. This means that most diamonds carats are between 0 and 1.
+
+---
+
+4.  Explore the distribution of the price variable in the `diamonds`
+    data. How does the distribution vary by cut?
+
+Answer: a boxplot of price by cut shows that better cuts aren't necessarily more expensive.
+
+However, as noted in my [R Training Log](r-training-log.html):
+
+> [7.6 Patterns and models](https://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models) covers models and residuals, here showing how to reveal the expected relationship between cut and price:
+
+We can remove the relationship between carats and price, and redo the boxplot:
+
+```{r}
+ggplot(diamonds, aes(cut, price)) +
+  geom_boxplot()
+
+# remove carat weight as a confounding variable
+mod <- lm(log(price) ~ log(carat), data = diamonds)
+
+diamonds2 <- diamonds |>
+  add_residuals(mod) |>
+  mutate(resid = exp(resid))
+
+ggplot(data = diamonds2) +
+  geom_boxplot(mapping = aes(x = cut, y = resid))
+```
+
+GG Solutions uses both a boxplot and a frequency polygon to compare cuts, and concludes:
+
+- (Rademaker, 2016) Fair quality diamonds are more expensive then others. Possible reason is they are bigger.
+
+---
+
+5.  You now know (at least) three ways to compare the distributions of 
+    subgroups: `geom_violin()`, `geom_freqpoly()` and the colour aesthetic,
+    or `geom_histogram()` and faceting. What are the strengths and weaknesses 
+    of each approach? What other approaches could you try?
+
+Answer: Violin plots convey the most information but require an understanding of probability density. Frequency polygons allow for direct comparison on the same plot - in contrast, faceted histograms provide a better visualization of each variable, but make comparison more difficult. Other approaches include comparing boxplots, multiple density plots, or side-by-side histograms - a bar plot showing multiple variables for each bin.
+
+GG Solutions:
+
+- According to the book, `geom_violin()` shows a compact representation of the "density" of the distribution, highlighting the areas where more points are found. Its weakness is that violin plots rely on the calculation of a density estimate, which is hard to interpret.
+- According to the book, `geom_freqploy()` bins the data, then counts the number of observations in each bin using lines. One possible weakness is that you have to select the width of the bins yourself by experimentation.
+- According to the book, `geom_histogram()` and faceting makes it easier to see the distribution of each group, but makes comparisons between groups a little harder.
+
+---
+
+6.  Read the documentation for `geom_bar()`. What does the `weight` 
+    aesthetic do? 
+
+Answer: for `geom_bar()`, the `weight` aesthetic changes the height of the bar from the number of cases in each group to the sum of the weights.
+
+GG Solutions:
+
+- The `weight` aesthetic converts the number of cases to a weight and makes the height of the bar proportional to the sum of the weights. See below:
+
+```{r}
+g <- ggplot(mpg, aes(class))
+# Number of cars in each class:
+g + geom_bar()
+# Total engine displacement of each class
+g + geom_bar(aes(weight = displ))
+```
+
+---
+
+7.  Using the techniques already discussed in this chapter, come up with
+    three ways to visualise a 2d categorical distribution. Try them out 
+    by visualising the distribution of `model` and `manufacturer`, `trans` and 
+    `class`, and `cyl` and `trans`.
+
+Answer: three ways to visualize categorical distributions:
+
+- Bar charts
+- A scatterplot using alpha
+- A scatterplot using size
+
+```{r}
+mpg[c("manufacturer", "model")] |>
+  unique() |>
+  ggplot(aes(manufacturer)) +
+  geom_bar(color = "black", fill = "white", width = 0.8) +
+  coord_flip() +
+  scale_x_discrete(limits = rev) +
+  labs(x = "", y = "models") +
+  theme_quo()
+
+mpg |>
+  ggplot(aes(trans, class)) +
+  geom_point(alpha = 0.1) +
+  scale_y_discrete(limits = rev) +
+  labs(x = "", y = "") +
+  theme_quo()
+
+mpg |>
+  count(trans, cyl) |>
+  ggplot(aes(cyl, trans, size = n)) +
+  geom_point() +
+  scale_y_discrete(limits = rev) +
+  labs(x = "cylinders", y = "", size = "count") +
+  theme_quo(minor.x = FALSE)
+```
+
+GG Solutions does not provide an answer.
 
 ---
