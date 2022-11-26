@@ -25,3 +25,80 @@ knitr::opts_chunk$set(
 This workbook includes answers and solutions to the quizzes and exercises from [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html) and [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app), organized by chapter. It includes excerpts from both books, copied here.
 
 **WARNING, SPOILERS!** If you haven't read the ggplot2 book and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
+
+# 3 Individual geoms
+
+## 3.1.1 Exercises
+
+1.  What geoms would you use to draw each of the following named plots?
+    
+    1. Scatterplot
+    1. Line chart
+    1. Histogram
+    1. Bar chart
+    1. Pie chart
+
+Answer:
+
+1. Scatterplot: `geom_point()`
+1. Line chart: `geom_line()`
+1. Histogram: `geom_histogram()`
+1. Bar chart: `geom_bar()`
+1. Pie chart: there is no native geom for a pie chart, but, as the
+   [R Graph Gallery](https://r-graph-gallery.com/piechart-ggplot2.html) demonstrates, it is possible
+   to create a pie chart using `geom_bar()` and `coord_polar()`
+
+GG Solutions:
+
+- Scatterplot: `geom_point()`
+- Line chart: `geom_line()`
+- Histogram: `geom_histogram()`
+- Bar chart: `geom_bar()`
+- Pie chart: ggplot2 does not have a geom to draw pie charts. One workaround, according to the [R Graph Gallery](https://www.r-graph-gallery.com/piechart-ggplot2.html) is to build a stacked bar chart with one bar only using the `geom_bar()` function and then make it circular with `coord_polar()`
+
+---
+
+2.  What's the difference between `geom_path()` and `geom_polygon()`?
+    What's the difference between `geom_path()` and `geom_line()`?
+
+Answer: `geom_path()` connects observations with a line in the order they appear in the data, `geom_line()` connects them in order along the x axis, and `geom_polygon()` connects the start and end points of `geom_path()` and fills in the plot.
+
+GG Solutions:
+
+- `geom_polygon` draws the same graph (lines) as `geom_path`, but it fills these lines with color
+- `geom_line()` connects points from left to right, whereas `geom_path()` connects points in the order they appear in the data
+
+---
+
+3.  What low-level geoms are used to draw `geom_smooth()`? 
+    What about `geom_boxplot()` and `geom_violin()`? 
+
+Answer: reviewing the source code:
+
+[`geom_smooth()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-smooth.r) uses:
+
+- `geom_path()` by way of `geom_line()`
+- `geom_area()` by way of `geom_ribbon()`
+
+[`geom_boxplot()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-boxplot.r) uses:
+
+- `geom_point()`
+- `geom_path()` by way of `geom_segment()` and `geom_crossbar()`
+- `geom_polygon()` by way of `geom_crossbar()`
+
+[`geom_violin()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-violin.r) uses:
+
+- `geom_path()`
+- `geom_polygon()`
+
+GG Solutions:
+
+(kangnade)
+
+- `geom_point()`, `geom_path()`, and `geom_area()` are used to draw `geom_smooth()`
+- `geom_rect()`, `geom_line()`, `geom_point()` are used for `geom_boxplot()`
+- `geom_area()` and `geom_path()` are used for `geom_violin()`
+
+Note: GG Solutions answers appear to be incorrect guesses.
+
+---
