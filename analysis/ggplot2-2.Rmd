@@ -14,6 +14,11 @@ output:
 Workbook for completing quizzes and exercises from the "Layers" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
 ```{r setup, message = FALSE, warning = FALSE}
+library(ggplot2)
+library(dplyr)
+library(babynames) # nolint: unused_import_linter. attached for `babynames` data frame.
+library(jbplot)
+
 knitr::opts_chunk$set(
   comment = "#>",
   fig.align = "center"
@@ -102,3 +107,145 @@ GG Solutions:
 Note: GG Solutions answers appear to be incorrect guesses.
 
 ---
+
+# 4 Collective geoms
+
+Geoms can be roughly divided into individual and collective geoms. An __individual__ geom draws a distinct graphical object for each observation (row). For example, the point geom draws one point per row. A __collective__ geom displays multiple observations with one geometric object. This may be a result of a statistical summary, like a boxplot, or may be fundamental to the display of the geom, like a polygon. Lines and paths fall somewhere in between: each line is composed of a set of straight segments, but each segment represents two points. How do we control the assignment of observations to graphical elements?  This is the job of the `group` aesthetic.
+
+## 4.5 Exercises
+
+GG Solutions offers no answers for this section.
+
+1.  Draw a boxplot of `hwy` for each value of `cyl`, without turning
+    `cyl` into a factor. What extra aesthetic do you need to set?
+
+Answer: the `group` aesthetic is required.
+
+```{r}
+ggplot(mpg, aes(cyl, hwy, group = cyl)) +
+  geom_boxplot()
+```
+
+---
+
+2.  Modify the following plot so that you get one boxplot per integer value 
+    of `displ`.
+
+```{r, eval = FALSE}
+ggplot(mpg, aes(displ, cty)) +
+  geom_boxplot()
+```
+
+Answer: grouping by the floor of displacement works, but is arranged strangely. Mutating displacement first is a better solution:
+
+```{r}
+ggplot(mpg, aes(displ, cty, group = floor(displ))) +
+  geom_boxplot()
+
+mpg |>
+  mutate(displ = floor(displ)) |>
+  ggplot(aes(displ, cty, group = displ)) +
+  geom_boxplot()
+```
+
+---
+
+3.  When illustrating the difference between mapping continuous and discrete
+    colours to a line, the discrete example needed `aes(group = 1)`. Why?
+    What happens if that is omitted? What's the difference between
+    `aes(group = 1)` and `aes(group = 2)`? Why?
+
+Answer: using the example from the book, omitting the group aesthetic generates an error:
+
+```
+`geom_line()`: Each group consists of only one observation.
+ℹ Do you need to adjust the group aesthetic?
+```
+
+There is no difference between `aes(group = 1)` and `aes(group = 2)`, presumably because both methods put all observations into a single group.
+
+```{r}
+df <- data.frame(x = 1:3, y = 1:3, colour = c(1, 3, 5))
+
+ggplot(df, aes(x, y, colour = factor(colour))) +
+  geom_line(aes(group = 1), linewidth = 2) +
+  geom_point(size = 5)
+
+ggplot(df, aes(x, y, colour = factor(colour))) +
+  geom_line(aes(group = 2), linewidth = 2) +
+  geom_point(size = 5)
+```
+
+---
+
+4.  How many bars are in each of the following plots?
+    (Hint: try adding an outline around each bar with `colour = "white"`)
+
+```{r, eval = FALSE}
+ggplot(mpg, aes(drv)) +
+  geom_bar()
+ggplot(mpg, aes(drv, fill = hwy, group = hwy)) +
+  geom_bar()
+
+mpg2 <- mpg %>%
+  arrange(hwy) %>%
+  mutate(id = seq_along(hwy))
+ggplot(mpg2, aes(drv, fill = hwy, group = id)) +
+  geom_bar()
+```
+
+Answer: in the first plot, there are three bars. In the second, there is one bar for each unique value for `hwy` in each column. In the third, there is one bar for each observation of `hwy`.
+
+```{r}
+ggplot(mpg, aes(drv)) +
+  geom_bar(color = "white")
+
+ggplot(mpg, aes(drv, fill = hwy, group = hwy)) +
+  geom_bar(color = "white")
+
+mpg |>
+  arrange(hwy) |>
+  mutate(id = seq_along(hwy)) |>
+  ggplot(aes(drv, fill = hwy, group = id)) +
+  geom_bar(color = "white")
+```
+
+---
+
+5.  Install the babynames package. It contains data about the popularity of
+    babynames in the US. Run the following code and fix the resulting graph.
+    Why does this graph make me unhappy?
+
+```{r, eval = FALSE}
+library(babynames) # nolint: unused_import_linter. attached for `babynames` data frame.
+hadley <- dplyr::filter(babynames, name == "Hadley")
+ggplot(hadley, aes(year, n)) +
+  geom_line()
+```
+
+Answer: the popularity of "Hadley" is sadly declining.
+
+```{r}
+babynames |>
+  filter(name == "Hadley") |>
+  ggplot(aes(year, n, group = sex, color = sex)) +
+  geom_line()
+```
+
+---
+
+Bonus: a comparison of the popularity of my name (John) and Hadley:
+
+```{r}
+babynames |>
+  filter(name %in% c("Hadley", "John")) |>
+  ggplot(aes(year, prop, color = interaction(name, sex, sep = ", ", lex.order = TRUE))) +
+  geom_line() +
+  scale_y_log10() +
+  scale_color_viridis_d() +
+  labs(x = "", y = "", color = "Name, Sex") +
+  labs(title = "Relative popularity of the names Hadley and John") +
+  theme_quo()
+```
+
+Note: `group` is redundant for `geom_line()` when using `color`.
