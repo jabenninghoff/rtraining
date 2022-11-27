@@ -345,4 +345,40 @@ Notes: from the documentation for `after_stat()`:
 
 GG Solutions answer not included here.
 
+Note: after reading the [Generated Variables](https://ggplot2-book.org/layers.html#generated-variables) section, there is an easier solution:
+
+```{r}
+ggplot(diamonds, aes(depth)) +
+  geom_freqpoly(aes(y = after_stat(density)), binwidth = 1) +
+  geom_density() +
+  labs(y = "")
+```
+
 ---
+
+Bonus: overlay a PDF and ECDF on a histogram.
+
+```{r}
+ggplot(diamonds, aes(price)) +
+  geom_histogram(aes(y = after_stat(ncount)), binwidth = 50, fill = "gray") +
+  stat_ecdf() +
+  labs(x = "", y = "") +
+  theme_quo()
+
+ggplot(diamonds, aes(price)) +
+  geom_histogram(binwidth = 50, fill = "gray") +
+  # see https://stackoverflow.com/questions/27611438/density-curve-overlay-on-histogram-where-vertical-axis-is-frequency-aka-count # nolint
+  geom_density(aes(y = after_stat(density * nrow(diamonds) * 50))) +
+  labs(x = "", y = "") +
+  theme_quo()
+
+ggplot(diamonds, aes(price)) +
+  geom_histogram(aes(y = after_stat(ncount)), binwidth = 50, fill = "gray") +
+  # TODO: the factor of 0.62 was determined by trial and error, find underlying formula
+  #       the maximum density / the maximum count of the previous plot = 930.57 / 1503 = 0.62
+  #       but that doesn't work here
+  geom_density(aes(y = after_stat(ndensity * 0.62))) +
+  stat_ecdf() +
+  labs(x = "", y = "") +
+  theme_quo()
+```
