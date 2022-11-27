@@ -382,3 +382,25 @@ ggplot(diamonds, aes(price)) +
   labs(x = "", y = "") +
   theme_quo()
 ```
+
+# 6 Maps
+
+Plotting geospatial data is a common visualisation task, and one that requires specialised tools. Typically the problem can be decomposed into two problems: using one data source to draw a map, and adding metadata from another information source to the map. This chapter will help you tackle both problems.
+
+## Bonus
+
+There are no exercises, so let's draw a map of Minnesota using polygon maps!
+
+```{r}
+library(maps) # nolint: unused_import_linter. maps is required by map_data().
+
+map_data("county", "minnesota") |>
+  select(lon = long, lat, group) |>
+  ggplot(aes(lon, lat, group = group)) +
+  geom_polygon(fill = "white", colour = "grey50") +
+  coord_quickmap() +
+  labs(x = "", y = "") +
+  theme_quo()
+```
+
+Polygon maps are superseded by simple features maps, but the `sf` package requires too many dependencies to justify installation for only drawing a simple map.
