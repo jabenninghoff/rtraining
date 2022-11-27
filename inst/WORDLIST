@@ -63,6 +63,7 @@ exts
 flavours
 frac
 geoms
+geospatial
 ggplot
 github
 gitignore
@@ -133,6 +134,7 @@ serialise
 sethrobertson
 signalled
 signalling
+specialised
 srf
 standardised
 stringr
