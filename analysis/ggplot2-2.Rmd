@@ -18,6 +18,7 @@ library(ggplot2)
 library(dplyr)
 library(babynames) # nolint: unused_import_linter. attached for `babynames` data frame.
 library(jbplot)
+library(modelr)
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -249,3 +250,99 @@ babynames |>
 ```
 
 Note: `group` is redundant for `geom_line()` when using `color`.
+
+---
+
+# 5 Statistical summaries
+
+## 5.4.1 Exercises
+
+1.  What `binwidth` tells you the most interesting story about the distribution
+    of `carat`?
+
+Answer: as answered in [2.6.6 Exercises](ggplot2-1.html#266_Exercises):
+
+Answer: using trial and error, `binwidth = 0.01` reveals that carat weight is skewed towards round numbers (1, 1.25, 1.5, 2, etc.). Using the smaller `binwidth = 0.005` doesn't improve the pattern, and makes it harder to see.
+
+```{r}
+ggplot(diamonds, aes(carat)) +
+  geom_histogram(binwidth = 0.01)
+```
+
+GG Solutions:
+
+- Highly subjective answer, but I would go with 0.2 since it gives you the right amount of information about the distribution of `carat`: right-skewed.
+
+---
+
+2.  Draw a histogram of `price`. What interesting patterns do you see?
+
+Answer: price has a multi-modal distribution with a gap. Looking at the underlying data, there are no prices between \$1454 and \$1546
+
+```{r}
+ggplot(diamonds, aes(price)) +
+  geom_histogram(binwidth = 50)
+
+diamonds |>
+  filter(price >= 1454 & price <= 1546)
+```
+
+GG Solutions:
+
+- It's skewed to the right and has a long tail. Also, there is a small peak around 5000 and a huge peak around 0.
+
+---
+
+3.  How does the distribution of `price` vary with `clarity`?
+
+Answer: a boxplot of price by clarity shows that diamonds with better clarity aren't necessarily more expensive.
+
+However, as noted in my [R Training Log](r-training-log.html) and as answered in [2.6.6 Exercises](ggplot2-1.html#266_Exercises):
+
+> [7.6 Patterns and models](https://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models) covers models and residuals, here showing how to reveal the expected relationship between cut and price:
+
+We can remove the relationship between carats and price, and redo the boxplot, which shows the expected relationship:
+
+```{r}
+ggplot(diamonds, aes(clarity, price)) +
+  geom_boxplot()
+
+# remove carat weight as a confounding variable
+diamonds |>
+  add_residuals(lm(log(price) ~ log(carat), data = diamonds)) |>
+  mutate(resid = exp(resid)) |>
+  ggplot(aes(clarity, resid)) +
+  geom_boxplot()
+```
+
+GG Solutions:
+
+- The range of prices is similar across clarity and the median and IQR vary greatly with clarity.  
+
+---
+
+4.  Overlay a frequency polygon and density plot of `depth`. What computed
+    variable do you need to map to `y` to make the two plots comparable? 
+    (You can either modify `geom_freqpoly()` or `geom_density()`.)
+
+Answer: you need to either divide or multiply `y` by the total number of observations, `nrow(diamonds)` using `after_stat()`.
+
+```{r}
+ggplot(diamonds, aes(depth)) +
+  geom_freqpoly(aes(y = after_stat(count) / nrow(diamonds)), binwidth = 1) +
+  geom_density() +
+  labs(y = "")
+
+ggplot(diamonds, aes(depth)) +
+  geom_freqpoly(binwidth = 1) +
+  geom_density(aes(y = after_stat(density) * nrow(diamonds))) +
+  labs(y = "")
+```
+
+Notes: from the documentation for `after_stat()`:
+
+> Most aesthetics are mapped from variables found in the data. Sometimes, however, you want to delay the mapping until later in the rendering process. ggplot2 has three stages of the data that you can map aesthetics from. The default is to map at the beginning, using the layer data provided by the user. The second stage is after the data has been transformed by the layer stat. The third and last stage is after the data has been transformed and mapped by the plot scales. The most common example of mapping from stat transformed data is the height of bars in `geom_histogram()`: the height does not come from a variable in the underlying data, but is instead mapped to the count computed by `stat_bin()`. An example of mapping from scaled data could be to use a desaturated version of the stroke colour for fill. If you want to map directly from the layer data you should not do anything special. In order to map from stat transformed data you should use the `after_stat()` function to flag that evaluation of the aesthetic mapping should be postponed until after stat transformation. Similarly, you should use `after_scale()` to flag evaluation of mapping for after data has been scaled. If you want to map the same aesthetic multiple times, e.g. map x to a data column for the stat, but remap it for the geom, you can use the `stage()` function to collect multiple mappings.
+
+GG Solutions answer not included here.
+
+---
