@@ -403,4 +403,19 @@ map_data("county", "minnesota") |>
   theme_quo()
 ```
 
-Polygon maps are superseded by simple features maps, but the `sf` package requires too many dependencies to justify installation for only drawing a simple map.
+Polygon maps are superseded by simple features maps, so let's draw it again, adding Minneapolis, in red:
+
+```{r, message = FALSE}
+library(sf)
+library(USAboundaries)
+library(USAboundariesData) # nolint: unused_import_linter. Needed by USAboundaries.
+
+us_counties(resolution = "high", states = "MN") |>
+  ggplot() +
+  geom_sf(fill = "white") +
+  geom_sf(data = filter(us_cities(states = "MN"), city == "Minneapolis"), color = "red") +
+  coord_sf() +
+  theme_quo()
+```
+
+Side note: although it creates files in `/usr/local`, which causes [Homebrew](https://brew.sh) to complain, [`rig`](https://github.com/r-lib/rig/), *The R Installation Manager*, supports multiple versions of R, and supports installation of binary packages, which is substantially faster and requires fewer local dependencies.
