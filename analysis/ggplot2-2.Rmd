@@ -19,6 +19,12 @@ library(dplyr)
 library(babynames) # nolint: unused_import_linter. attached for `babynames` data frame.
 library(jbplot)
 library(modelr)
+library(maps) # nolint: unused_import_linter. maps is required by map_data().
+library(sf)
+library(USAboundaries)
+library(USAboundariesData) # nolint: unused_import_linter. Needed by USAboundaries.
+library(ggraph)
+library(tidygraph)
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -218,7 +224,6 @@ mpg |>
     Why does this graph make me unhappy?
 
 ```{r, eval = FALSE}
-library(babynames) # nolint: unused_import_linter. attached for `babynames` data frame.
 hadley <- dplyr::filter(babynames, name == "Hadley")
 ggplot(hadley, aes(year, n)) +
   geom_line()
@@ -392,8 +397,6 @@ Plotting geospatial data is a common visualisation task, and one that requires s
 There are no exercises, so let's draw a map of Minnesota using polygon maps!
 
 ```{r}
-library(maps) # nolint: unused_import_linter. maps is required by map_data().
-
 map_data("county", "minnesota") |>
   select(lon = long, lat, group) |>
   ggplot(aes(lon, lat, group = group)) +
@@ -406,10 +409,6 @@ map_data("county", "minnesota") |>
 Polygon maps are superseded by simple features maps, so let's draw it again, adding Minneapolis, in red:
 
 ```{r, message = FALSE}
-library(sf)
-library(USAboundaries)
-library(USAboundariesData) # nolint: unused_import_linter. Needed by USAboundaries.
-
 us_counties(resolution = "high", states = "MN") |>
   ggplot() +
   geom_sf(fill = "white") +
@@ -429,9 +428,6 @@ Like maps and spatial data, networks and graphs occupy a special part of the vis
 While ggplot2 has limited support for maps, it has no direct support for networks and graphs. `ggraph` offers some interesting visualizations that are useful for understanding social networks, especially this one, which shows how friendships among high school boys changed from 1957 to 1958:
 
 ```{r, warning = FALSE}
-library(ggraph)
-library(tidygraph)
-
 highschool |>
   as_tbl_graph(directed = FALSE) |>
   ggraph(layout = "stress") +
