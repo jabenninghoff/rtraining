@@ -1,0 +1,27 @@
+---
+title: "ggplot2 (Scales)"
+date: '2022-12-03'
+output:
+  html_notebook:
+    theme:
+      version: 5
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+---
+
+Workbook for completing quizzes and exercises from the "Scales" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
+
+```{r setup, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  fig.align = "center"
+)
+```
+
+# Introduction
+
+This workbook includes answers and solutions to the quizzes and exercises from [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html) and [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app), organized by chapter. It includes excerpts from both books, copied here.
+
+**WARNING, SPOILERS!** If you haven't read the ggplot2 book and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
