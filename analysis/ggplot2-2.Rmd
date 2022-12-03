@@ -435,3 +435,78 @@ highschool |>
   geom_node_point() +
   facet_edges(~year)
 ```
+
+# 8 Annotations
+
+When constructing a data visualisation, it is often necessary to make annotations to
+the data displayed. Conceptually, an annotation supplies *metadata* for the plot: that is,
+it provides additional information about the data being displayed. From a practical 
+standpoint, however, metadata is just another form of data. Because of this, the 
+annotation tools in ggplot2 reuse the same geoms that are used to create other plots. 
+However, to meet the specific needs that users often have when annotating plots, there
+are some helper functions in ggplot2 itself, and a number of other packages have 
+extended ggplot2 in ways you may find helpful.
+
+## Notes
+
+An important distinction on axis labels:
+
+> There are two ways to remove the axis label. Setting `labs(x = "")` omits the label but still allocates space; setting `labs(x = NULL)` removes the label and its space. 
+
+Consider adopting [`showtext`](https://github.com/yixuan/showtext) for non-standard fonts, with caveats for using it in [R Markdown](https://statr.me/2014/07/showtext-with-knitr/).
+
+One of the most useful alignments is “inward”. It aligns text towards the middle of the plot, which ensures that labels remain within the plot limits:
+
+```{r}
+df <- data.frame(
+  x = c(1, 1, 2, 2, 1.5),
+  y = c(1, 2, 1, 2, 1.5),
+  text = c(
+    "bottom-left", "top-left",
+    "bottom-right", "top-right", "center"
+  ), stringsAsFactors = FALSE
+)
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = text))
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = text), vjust = "inward", hjust = "inward")
+```
+
+*   The font size is controlled by the `size` aesthetic. Unlike most tools, 
+    ggplot2 specifies the size in millimeters (mm), rather than the usual 
+    points (pts). The reason for this choice is that it makes it the units for
+    font sizes consistent with how other sizes are specified in ggplot2. 
+    (There are 72.27 pts in a inch, so to convert from points to mm, just 
+    multiply by 72.27 / 25.4).
+
+Let's assign blame to unemployment!
+
+```{r}
+presidential <- subset(presidential, start > economics$date[1] & start < max(economics$date))
+
+ggplot(economics) +
+  geom_rect(
+    aes(xmin = start, xmax = end, fill = party),
+    ymin = -Inf, ymax = Inf, alpha = 0.25,
+    data = presidential
+  ) +
+  geom_vline(
+    aes(xintercept = as.numeric(start)),
+    data = presidential,
+    colour = "grey50", alpha = 0.5
+  ) +
+  geom_text(
+    # themes only affect the non-data components of the plot, see:
+    #   https://github.com/tidyverse/ggplot2/issues/1859
+    aes(x = start, y = 0.0005, label = name, family = "Lato"),
+    data = presidential,
+    size = 3, vjust = 0, hjust = 0, nudge_x = 75
+  ) +
+  geom_line(aes(date, unemploy / pop)) +
+  scale_fill_manual(values = c("blue", "red")) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, NA)) +
+  scale_x_date(breaks = presidential$start, date_labels = "%Y") +
+  guides(fill = "none") +
+  labs(title = "Unemployment rate by presidential term", x = NULL, y = NULL) +
+  theme_quo(minor.y = FALSE, x = FALSE)
+```
