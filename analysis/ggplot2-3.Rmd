@@ -14,6 +14,8 @@ output:
 Workbook for completing quizzes and exercises from the "Scales" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
 ```{r setup, message = FALSE, warning = FALSE}
+library(ggplot2)
+
 knitr::opts_chunk$set(
   comment = "#>",
   fig.align = "center"
@@ -25,3 +27,40 @@ knitr::opts_chunk$set(
 This workbook includes answers and solutions to the quizzes and exercises from [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html) and [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app), organized by chapter. It includes excerpts from both books, copied here.
 
 **WARNING, SPOILERS!** If you haven't read the ggplot2 book and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
+
+# 10 Position scales and axes
+
+Position scales are used to control the locations of visual entities in a plot, and how those locations are mapped to data values. Every plot has two position scales, corresponding to the x and y aesthetics. In most cases this is clear in the plot specification, because the user explicitly specifies the variables mapped to x and y explicitly. However, this is not always the case. Consider this plot specification:
+
+```{r, fig.show = "hide", message = FALSE}
+ggplot(mpg, aes(x = displ)) +
+  geom_histogram()
+```
+
+In this example the y aesthetic is not specified by the user. Rather, the aesthetic is mapped to a computed variable: `geom_histogram()` computes a `count` variable that gets mapped to the y aesthetic. The default behaviour of `geom_histogram()` is equivalent to the following:
+
+```{r, fig.show = "hide", message = FALSE}
+ggplot(mpg, aes(x = displ, y = after_stat(count))) +
+  geom_histogram()
+```
+
+Because position scales are used in every plot, it is useful to understand how they work and how they can be modified.
+
+## Notes
+
+The goal of `label_date_short()` is to automatically construct short labels that are sufficient to uniquely identify the dates: 
+
+```{r}
+ggplot(economics, aes(date, psavert)) +
+  geom_line(na.rm = TRUE) +
+  labs(x = NULL, y = NULL) +
+  scale_x_date(limits = as.Date(c("2004-01-01", "2005-01-01")), labels = scales::label_date_short())
+```
+
+Let's create a plot with rotated labels!
+
+```{r}
+ggplot(mpg, aes(manufacturer, hwy)) +
+  geom_boxplot() +
+  guides(x = guide_axis(angle = 90))
+```
