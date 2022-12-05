@@ -16,6 +16,7 @@ Workbook for completing quizzes and exercises from the "Scales" chapters of [ggp
 ```{r setup, message = FALSE, warning = FALSE}
 library(ggplot2)
 library(dplyr)
+library(jbplot)
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -196,4 +197,67 @@ The viridis palettes can be used in the same way, by calling the palette generat
 erupt + scale_fill_stepsn(n.breaks = 9, colours = viridis::viridis(9))
 erupt + scale_fill_stepsn(n.breaks = 9, colours = viridis::magma(9))
 erupt + scale_fill_stepsn(n.breaks = 9, colours = viridis::inferno(9))
+```
+
+# 12 Other aesthetics
+
+In addition to position and colour, there are several other aesthetics that ggplot2 can use to represent data.
+
+## Size
+
+The size aesthetic is typically used to scale points and text. The default scale for size aesthetics is `scale_size()` in which a linear increase in the variable is mapped onto a linear increase in the area (not the radius) of the geom. Scaling as a function of area is a sensible default as human perception of size is more closely mimicked by area scaling than by radius scaling. By default the smallest value in the data (more precisely in the scale limits) is mapped to a size of 1 and the largest is mapped to a size of 6. The `range` argument allows you to scale the size of the geoms:
+
+```{r}
+base <- ggplot(mpg, aes(displ, hwy, size = cyl)) +
+  geom_point()
+base
+base + scale_size(range = c(1, 2))
+```
+
+Let's draw a scale model of the planets!
+
+```{r}
+planets <- data.frame(
+  name = c("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"),
+  type = c(rep("Inner", 4), rep("Outer", 4)),
+  position = 1:8,
+  radius = c(2440, 6052, 6378, 3390, 71400, 60330, 25559, 24764),
+  stringsAsFactors = FALSE
+)
+planets$name <- with(planets, factor(name, name))
+
+ggplot(planets, aes(1, name, size = radius)) +
+  geom_point() +
+  scale_x_continuous(breaks = NULL) +
+  scale_radius(limits = c(0, NA), range = c(0, 15)) +
+  labs(x = NULL, y = NULL, size = "Radius", title = "The planets of the solar system") +
+  theme_quo(y = FALSE, x = FALSE)
+```
+
+## Manual scales
+
+Let's create a plot with manual scales:
+
+```{r}
+huron <- data.frame(year = 1875:1972, level = as.numeric(LakeHuron))
+
+ggplot(huron, aes(year)) +
+  geom_line(aes(y = level + 5, colour = "above")) +
+  geom_line(aes(y = level - 5, colour = "below")) +
+  scale_colour_manual("Direction",
+    values = c("above" = "red", "below" = "blue")
+  ) +
+  labs(x = NULL, y = NULL)
+```
+
+## Identity scales
+
+Let's plot all the R colors!
+
+```{r}
+ggplot(luv_colours, aes(u, v)) +
+  geom_point(aes(colour = col), size = 3) +
+  scale_color_identity() +
+  coord_equal() +
+  labs(x = NULL, y = NULL)
 ```
