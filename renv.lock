@@ -176,11 +176,11 @@
       "Package": "USAboundariesData",
       "Version": "0.4.0",
       "Source": "Repository",
-      "Repository": "https://ropensci.r-universe.dev",
+      "RemoteType": "repository",
       "RemoteUrl": "https://github.com/ropensci/USAboundariesData",
       "RemoteRef": "main",
       "RemoteSha": "064cdbcbb283f867493f81d0fff9b9ec9d9a6b08",
-      "Hash": "8830d3363a1e959b0163bf42db5d7d81",
+      "Hash": "7ad0c28cb4dd15e7a1ece4c392c21785",
       "Requirements": []
     },
     "askpass": {
@@ -754,10 +754,10 @@
     },
     "gert": {
       "Package": "gert",
-      "Version": "1.9.1",
+      "Version": "1.9.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9a091a6d2fb91e43afd4337e2dcef2e7",
+      "Hash": "9122b3958e749badb5c939f498038b57",
       "Requirements": [
         "askpass",
         "credentials",
@@ -1003,13 +1003,14 @@
     },
     "htmltools": {
       "Package": "htmltools",
-      "Version": "0.5.3",
+      "Version": "0.5.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6496090a9e00f8354b811d1a2d47b566",
+      "Hash": "9d27e99cc90bd701c0a7a63e5923f9b7",
       "Requirements": [
         "base64enc",
         "digest",
+        "ellipsis",
         "fastmap",
         "rlang"
       ]
@@ -1115,7 +1116,7 @@
       "RemoteRef": "main",
       "RemoteSha": "fc34c0eba0d3eaf35376ac8f1cf61354fa2f1637",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "a6ad0ee68bb2a56a3d6ceb18a46ccc66",
+      "Hash": "465334cd95cb54f2999f05442ba2d746",
       "Requirements": [
         "ggplot2"
       ]
@@ -1132,10 +1133,10 @@
     },
     "jsonlite": {
       "Package": "jsonlite",
-      "Version": "1.8.3",
+      "Version": "1.8.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8b1bd0be62956f2a6b91ce84fac79a45",
+      "Hash": "a4269a09a9b865579b2635c77e572374",
       "Requirements": []
     },
     "knitr": {
@@ -1361,10 +1362,10 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.0.4",
+      "Version": "2.0.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e86c5ffeb8474a9e03d75f5d2919683e",
+      "Hash": "b04c27110bf367b4daa93f34f3d58e75",
       "Requirements": [
         "askpass"
       ]
@@ -1779,10 +1780,10 @@
     },
     "roxygen2": {
       "Package": "roxygen2",
-      "Version": "7.2.2",
+      "Version": "7.2.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d0dbb227bab26a4b8af658d81bfb6b36",
+      "Hash": "7b153c746193b143c14baa072bae4e27",
       "Requirements": [
         "R6",
         "brew",
@@ -1790,7 +1791,6 @@
         "commonmark",
         "cpp11",
         "desc",
-        "digest",
         "knitr",
         "pkgload",
         "purrr",
@@ -1999,14 +1999,18 @@
     },
     "stringr": {
       "Package": "stringr",
-      "Version": "1.4.1",
+      "Version": "1.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a66ad12140cd34d4f9dfcc19e84fc2a5",
+      "Hash": "671a4d384ae9d32fc47a14e98bfa3dc8",
       "Requirements": [
+        "cli",
         "glue",
+        "lifecycle",
         "magrittr",
-        "stringi"
+        "rlang",
+        "stringi",
+        "vctrs"
       ]
     },
     "styler": {
@@ -2374,10 +2378,10 @@
     },
     "whisker": {
       "Package": "whisker",
-      "Version": "0.4",
+      "Version": "0.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ca970b96d894e90397ed20637a0c1bbe",
+      "Hash": "c6abfa47a46d281a7d5159d0a8891e88",
       "Requirements": []
     },
     "withr": {
@@ -2390,10 +2394,10 @@
     },
     "wk": {
       "Package": "wk",
-      "Version": "0.7.0",
+      "Version": "0.7.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4801d436beeacde30e87f3485a042326",
+      "Hash": "141385279f2cd7faa6a3eccd8d1279dd",
       "Requirements": []
     },
     "xfun": {
