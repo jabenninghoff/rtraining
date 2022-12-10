@@ -33,3 +33,155 @@ In order to unlock the full power of ggplot2, you'll need to master the underlyi
 This chapter describes the theoretical basis of ggplot2: the layered grammar of graphics. The layered grammar is based on Wilkinson's grammar of graphics, but adds a number of enhancements that help it to be more expressive and fit seamlessly into the R environment. The differences between the layered grammar and Wilkinson's grammar are described fully in Hadley Wickham. In this chapter you will learn a little bit about each component of the grammar and how they all fit together.  The next chapters discuss the components in more detail, and provide more examples of how you can use them in practice.
 
 The grammar makes it easier for you to iteratively update a plot, changing a single feature at a time. The grammar is also useful because it suggests the high-level aspects of a plot that *can* be changed, giving you a framework to think about graphics, and hopefully shortening the distance from mind to paper.  It also encourages the use of graphics customised to a particular problem, rather than relying on specific chart types.
+
+## 13.5 Exercises 
+
+-   One of the best ways to get a handle on how the grammar works is to apply
+    it to the analysis of existing graphics. For each of the graphics listed 
+    below, write down the components of the graphic. Don't worry if you don't
+    know what the corresponding functions in ggplot2 are called (or if they even
+    exist!), instead focussing on recording the key elements of a plot so you
+    could communicate it to someone else.
+
+Answer: use the components from 13.4 to describe each plot: data, aesthetics (aes), stat, geom, scale, coordinate system (coord), and faceting
+
+1.  "Napoleon's march" by Charles John Minard: [link](http://www.datavis.ca/gallery/re-minard.php)
+
+Answer: the plot describes Napolean's 1812 campaign. Larger version at: [Wikipedia](https://en.wikipedia.org/wiki/Charles_Joseph_Minard#/media/File:Minard.png)
+
+- data: the size, location and date of the army's travel, along with temperature
+- aes: x, y mapped to location over time, with width representing size
+- stat: no transformation
+- geom: line
+- scale: scales are used for location and temperature
+- coord: Cartesian / map projection
+- facet: no faceting
+
+---
+
+2.  "Where the Heat and the Thunder Hit Their Shots", by Jeremy White, 
+    Joe Ward, and Matthew Ericson at The New York Times. [link](http://nyti.ms/1duzTvY)
+
+Answer: a plot of basketball shots and points scored.
+
+- data: number of attempts and points scored by location
+- aes: x, y mapped to location, size mapped to attempts, color to points scored
+- stat: no transformation (possibly points per attempt)
+- geom: hex tiles
+- scale: continuous scales mapped to location, size (attempts), and color (points)
+- coord: Cartesian, mapped to the court
+- facet: faceting by team and players
+
+---
+
+3.  "London Cycle Hire Journeys", by James Cheshire. [link](http://bit.ly/1S2cyRy)
+
+Answer: retrieved from [archive.org](https://web.archive.org/web/20210516232923/http://spatialanalysis.co.uk/wp-content/uploads/2012/02/bike_ggplot.png).
+
+- data: travels of London bicycle rentals
+- aes: x, y mapped to location, density (alpha) mapped to number of trips in a location
+- stat: none
+- geom: line
+- scale: location
+- coord: Cartesian / map projection
+- facet: none
+
+---
+
+4.  The Pew Research Center's favorite data visualizations of 2014: [link](http://pewrsr.ch/1KZSSN6)
+
+Answer: multiple plots, described individually.
+
+Political Shifts
+
+- data: responses to political values questions
+- aes: height showing volume of responses, between consistently liberal and conservative
+- stat: histogram
+- geom: area / frequency polygon, with color showing above / below median of the other party
+- scale: continuous
+- coord: Cartesian
+- facet: faceting by party by year
+
+Next America
+
+- data: population by age group and gender
+- aes: binned data by age and gender
+- stat: none
+- geom: bar and color by gender, with boomers a distinct color
+- scale: continuous
+- coord: Cartesian
+- facet: faceting by year, animated
+
+"Murder Capitals"
+
+- data: murder rate for six cities, with the highest rate shown for each year, national rate
+- aes: x is time (year) and y is the murder rate
+- stat: none
+- geom: bar, line
+- scale: city is additionally mapped to year at the top of the plot, and national rate is shown as a
+  line across the bottom
+- coord: Cartesian
+- facet: none
+
+Ideological Placement of News Sources
+
+- data: scores of responses to political values questions mapped to audiences for news sources
+- aes: x mapped to score for a news source audience
+- stat: none
+- geom: point
+- scale: a single (x-axis) continuous scale, with labels for each source
+- coord: Cartesian
+- facet: none
+
+Regional Support for Same-Sex Marriage
+
+- data: percentage of population supporting same-sex marriage by region
+- aes: x mapped to time (year), y mapped to percent support
+- stat: none
+- geom: line
+- scale: continuous
+- coord: Cartesian
+- facet: faceting by region, national support is an additional layer
+
+---
+
+5.  "The Tony's Have Never Been so Dominated by Women", by 
+    Joanna Kao at FiveThirtyEight: [link](http://53eig.ht/1cJRCyG).
+
+Answer: a plot of Tony award winners by category.
+
+- data: Tony award categories by year with at least one female winner
+- aes: categories along the y axis, years along the x axis, colored red if a female won
+- stat: none
+- geom: square points with color showing female winners
+- scale: discrete categories and years
+- coord: Cartesian
+- facet: none
+
+---
+
+6.  "In Climbing Income Ladder, Location Matters" by the Mike Bostock, 
+    Shan Carter, Amanda Cox, Matthew Ericson, Josh Keller, Alicia 
+    Parlapiano, Kevin Quealy and Josh Williams at the New York Times:
+    [link](http://nyti.ms/1S2dJQT)
+
+Answer: not visible due to paywall, unable to retrieve the graphic.
+
+---
+
+7. "Dissecting a Trailer: The Parts of the Film That Make the Cut",
+    by Shan Carter, Amanda Cox, and Mike Bostock at the New York Times:
+    [link](http://nyti.ms/1KTJQOE)
+
+Answer: multiple plots showing the sequencing of movie trailers.
+
+- data: scenes in a trailer mapped to when they occurred in the full film
+- aes: x axis showing the timestamp of a trailer scene, y axis and color showing when the scene
+  occurred, including scenes not in the final film
+- stat: none
+- geom: square points (with width per scene), connected by lines
+- scale: continuous duration (seconds)
+- coord: Cartesian
+- facet: faceting by trailer (all plots are mapped to the same scale)
+
+---
