@@ -14,6 +14,9 @@ output:
 Workbook for completing quizzes and exercises from the "Grammar" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
 ```{r setup, message = FALSE, warning = FALSE}
+library(ggplot2)
+library(dplyr)
+
 knitr::opts_chunk$set(
   comment = "#>",
   fig.align = "center"
@@ -183,5 +186,65 @@ Answer: multiple plots showing the sequencing of movie trailers.
 - scale: continuous duration (seconds)
 - coord: Cartesian
 - facet: faceting by trailer (all plots are mapped to the same scale)
+
+---
+
+# 14 Build a plot layer by layer
+
+One of the key ideas behind ggplot2 is that it allows you to easily iterate, building up a complex plot a layer at a time. Each layer can come from a different dataset and have a different aesthetic mapping, making it possible to create sophisticated plots that display data from multiple sources. 
+
+You've already created layers with functions like `geom_point()` and `geom_histogram()`. In this chapter, you'll dive into the details of a layer, and how you can control all five components: data, the aesthetic mappings, the geom, stat, and position adjustments. The goal here is to give you the tools to build sophisticated plots tailored to the problem at hand.
+
+## 14.3.1 Exercises
+
+1.  The first two arguments to ggplot are `data` and `mapping`. The first
+    two arguments to all layer functions are `mapping` and `data`. Why does the
+    order of the arguments differ? (Hint: think about what you set most 
+    commonly.)
+
+Answer: most plots use common data for all layers, where the aesthetics are more likely to vary.
+
+GG Solutions:
+
+- Commonly, you first set the data in `ggplot()` and then set aesthetics inside your layer functions, like `geom_point()`, `geom_boxplot()`, or `geom_histogram()`. 
+
+---
+
+2.  The following code uses dplyr to generate some summary statistics about
+    each class of car. 
+
+```{r}
+class <- mpg %>%
+  group_by(class) %>%
+  summarise(n = n(), hwy = mean(hwy))
+```
+
+    Use the data to recreate this plot:
+
+Answer: with some help from the source code to get the measurements right, here is the solution:
+
+```{r}
+ggplot(mpg, aes(class, hwy)) +
+  geom_point() +
+  geom_jitter(width = 0.25) +
+  geom_point(data = class, color = "red", size = 5) +
+  geom_text(aes(y = 10, label = paste0("n = ", n)), data = class, size = 3)
+```
+
+GG Solutions:
+
+```{r}
+mpg %>%
+  ggplot(aes(class, hwy)) +
+  geom_jitter(width = 0.15, height = 0.35) +
+  geom_point(
+    data = class, aes(class, hwy),
+    color = "red",
+    size = 6
+  ) +
+  geom_text(data = class, aes(y = 10, x = class, label = paste0("n = ", n)))
+```
+
+- I plotted 3 different layers: jittered points, red point for the summary measure, mean, and text for the sample size (n).
 
 ---
