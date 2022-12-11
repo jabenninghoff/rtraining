@@ -16,6 +16,7 @@ Workbook for completing quizzes and exercises from the "Grammar" chapters of [gg
 ```{r setup, message = FALSE, warning = FALSE}
 library(ggplot2)
 library(dplyr)
+library(jbplot)
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -444,5 +445,86 @@ Answers below:
 - Focus attention on the overall trend in a large dataset: `geom_smooth`.
 - Draw a map: `geom_map` or its successor, `geom_sf`.
 - Label outlying points: `geom_text` or `geom_label`.
+
+---
+
+## 14.6.2 Exercises
+
+1.  The code below creates a similar dataset to `stat_smooth()`. Use 
+    the appropriate geoms to mimic the default `geom_smooth()` display.
+
+```{r}
+mod <- loess(hwy ~ displ, data = mpg)
+smoothed <- data.frame(displ = seq(1.6, 7, length.out = 50))
+pred <- predict(mod, newdata = smoothed, se = TRUE)
+smoothed$hwy <- pred$fit
+smoothed$hwy_lwr <- pred$fit - 1.96 * pred$se.fit
+smoothed$hwy_upr <- pred$fit + 1.96 * pred$se.fit
+```
+
+Answer: the exercise is to replicate `geom_smooth` using the `smoothed` data frame, which includes a line and a ribbon:
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_smooth(method = "loess", formula = y ~ x)
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_line(data = smoothed, color = "blue", linewidth = 1) +
+  geom_ribbon(mapping = aes(ymin = hwy_lwr, ymax = hwy_upr), data = smoothed, alpha = 0.2)
+```
+
+A perfect match!
+
+GG Solutions:
+
+```{r}
+smoothed %>%
+  ggplot(aes(displ, hwy)) +
+  geom_line(color = "dodgerblue1") +
+  geom_ribbon(aes(ymin = hwy_lwr, ymax = hwy_upr), alpha = 0.4)
+```
+
+---
+
+2.  What stats were used to create the following plots?
+
+Answer: in the order they appear in the [Exercises](https://ggplot2-book.org/layers.html#exercises-12):
+
+1. `stat_ecdf`
+1. `stat_qq`
+1. `stat_density`
+
+Confirmed correct by reviewing the [source code](https://github.com/hadley/ggplot2-book/blob/master/layers.Rmd).
+
+GG Solutions: From left to right,
+
+`stat_ecdf()`, `stat_qq()`, `stat_function()`
+
+---
+
+3.  Read the help for `stat_sum()` then use `geom_count()` to create a plot
+    that shows the proportion of cars that have each combination of `drv` and 
+    `trans`.
+
+Answer:
+
+```{r}
+ggplot(mpg, aes(drv, trans)) +
+  geom_count(aes(size = after_stat(prop), group = 1)) +
+  scale_size(labels = scales::label_percent()) +
+  labs(title = "Combinations of drive train and transmissions", x = NULL, y = NULL) +
+  labs(size = "% of cars") +
+  theme_quo()
+```
+
+GG Solutions:
+
+```{r}
+mpg %>%
+  ggplot(aes(drv, trans)) +
+  geom_count(aes(size = after_stat(prop), group = 1))
+```
 
 ---
