@@ -359,3 +359,90 @@ GG Solutions:
 - Not sure
 
 ---
+
+## 14.5.1 Exercises
+
+1.  Download and print out the ggplot2 cheatsheet from 
+    [rstudio](http://www.rstudio.com/resources/cheatsheets/) so you have a handy visual
+    reference for all the geoms.
+
+Answer: cheatsheets have moved to [posit](https://posit.co/resources/cheatsheets/) (as the company rebranded).
+
+---
+
+2.  Look at the documentation for the graphical primitive geoms. Which
+    aesthetics do they use? How can you summarise them in a compact form?
+
+Answer: from 14.5, the primitives are:
+
+- `geom_blank()`: no aesthetics, "draw nothing"
+- `geom_point()`: **`x`**, **`y`**, `alpha`, `color`, `fill`, `group`, `shape`, `size`, `stroke`,
+  "draw points"
+- `geom_path()`: **`x`**, **`y`**, `alpha`, `color`, `group`, `linetype`, `linewidth`,
+  "connect observations"
+- `geom_ribbon()`: **`x` or `y`**, **`ymin` or `xmin`**, **`ymax` or `xmax`**, `alpha`, `color`,
+  `fill`, `group`, `linetype`, `linewidth`, "draw an area along a line"
+- `geom_segment()`: **`x`**, **`y`**, **`xend`**, **`yend`**, `alpha`, `color`, `group`, `linetype`,
+  `linewidth`, "connect two points"
+- `geom_rect()`: **`x`**, **`y`**, `alpha`, `color`, `fill`, `group`, `height`, `linetype`,
+  `linewidth`, `width`, "draw rectangles"
+- `geom_polygon()`: **`x`**, **`y`**, `alpha`, `color`, `fill`, `group`, `linetype`, `linewidth`,
+  `subgroup`, "draw polygons"
+- `geom_text()`: **`x`**, **`y`**, **`label`**, `alpha`, `angle`, `color`, `family`, `fontface`,
+  `group`, `hjust`, `lineheight`, `size`, `vjust`, "draw text"
+
+---
+
+3.  What's the best way to master an unfamiliar geom? List three resources
+    to help you get started.
+
+Answer:
+
+- R Documentation for ggplot2, either built-in or [online](https://ggplot2.tidyverse.org)
+- Posit [cheatsheets](https://posit.co/resources/cheatsheets/)
+- The [R Graph Gallery](http://r-graph-gallery.com)
+
+---
+
+4.  For each of the plots below, identify the geom used to draw it.
+
+Answer: in the order they appear in the [Exercises](https://ggplot2-book.org/layers.html#exercises-11):
+
+1. `geom_violin`
+1. `geom_point` (actually uses `geom_count`)
+1. `geom_hex`
+1. `geom_point` (actually uses `geom_jitter`)
+1. `geom_area`
+1. `geom_path`
+
+Note: verifying my answers against the [source code](https://github.com/hadley/ggplot2-book/blob/master/layers.Rmd), I got two wrong, although the underlying geom is `geom_point`.
+
+GG Solutions:
+
+Starting from top left, clockwise direction:
+
+- `geom_violin()`, `geom_point()`, `geom_point()`, `geom_path()`, `geom_area()`, `geom_hex()`.
+
+Note: GG Solutions makes the same mistakes I did.
+
+---
+
+5.  For each of the following problems, suggest a useful geom:
+
+    * Display how a variable has changed over time.
+    * Show the detailed distribution of a single variable.
+    * Focus attention on the overall trend in a large dataset.
+    * Draw a map.
+    * Label outlying points.
+
+Answers below:
+
+- Display how a variable has changed over time: `geom_line`, with time on the x axis, or `geom_path`
+  to show changes in two dimensions over time.
+- Show the detailed distribution of a single variable: one of the distribution plots,
+  `geom_histogram` and `geom_dotplot` are good choices.
+- Focus attention on the overall trend in a large dataset: `geom_smooth`.
+- Draw a map: `geom_map` or its successor, `geom_sf`.
+- Label outlying points: `geom_text` or `geom_label`.
+
+---
