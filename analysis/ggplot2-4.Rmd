@@ -508,12 +508,13 @@ GG Solutions: From left to right,
     that shows the proportion of cars that have each combination of `drv` and 
     `trans`.
 
-Answer:
+Answer: in addition, facet by year.
 
 ```{r}
 ggplot(mpg, aes(drv, trans)) +
   geom_count(aes(size = after_stat(prop), group = 1)) +
   scale_size(labels = scales::label_percent()) +
+  facet_wrap(vars(year)) +
   labs(title = "Combinations of drive train and transmissions", x = NULL, y = NULL) +
   labs(size = "% of cars") +
   theme_quo()
