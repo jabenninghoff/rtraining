@@ -248,3 +248,114 @@ mpg %>%
 - I plotted 3 different layers: jittered points, red point for the summary measure, mean, and text for the sample size (n).
 
 ---
+
+## 14.4.3 Exercises
+
+1.  Simplify the following plot specifications:
+
+```{r, eval = FALSE}
+ggplot(mpg) +
+  geom_point(aes(mpg$displ, mpg$hwy))
+
+ggplot() +
+  geom_point(mapping = aes(y = hwy, x = cty), data = mpg) +
+  geom_smooth(data = mpg, mapping = aes(cty, hwy))
+
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(aes(log(brainwt), log(bodywt)), data = msleep)
+```
+
+Answer:
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point()
+
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point() +
+  geom_smooth(method = "loess", formula = y ~ x)
+
+ggplot(msleep, aes(log(brainwt), log(bodywt))) +
+  geom_point(na.rm = TRUE)
+```
+
+GG Solutions offers a similar solution for the first two and a strange solution for the third (since the `diamonds` data is never used in the third plot):
+
+```{r, eval = FALSE}
+ggplot(mpg) +
+  geom_point(aes(displ, hwy))
+
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point() +
+  geom_smooth()
+
+msleep_processed <- msleep %>%
+  mutate(
+    brainwt_log = log(brainwt),
+    bodywt_log = log(bodywt)
+  )
+
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(aes(brainwt_log, bodywt_log),
+    data = msleep_processed
+  )
+```
+
+Note: I prefer my answer to GG Solutions.
+
+---
+
+2.  What does the following code do? Does it work? Does it make sense?
+    Why/why not?
+
+```{r, eval = FALSE}
+ggplot(mpg) +
+  geom_point(aes(class, cty)) +
+  geom_boxplot(aes(trans, hwy))
+```
+
+Answer: it does work, but does not make sense, and should be done as separate plots so that the variables comparisons are visible:
+
+```{r}
+ggplot(mpg, aes(class, cty)) +
+  geom_point() +
+  coord_flip()
+
+ggplot(mpg, aes(trans, hwy)) +
+  geom_boxplot() +
+  coord_flip()
+```
+
+GG Solutions:
+
+- It plots points of `class` vs `cty` and then a boxplot of `trans` vs `hwy`. It doesn't make sense to plot layers with different `x` and `y` variables.
+
+---
+
+3.  What happens if you try to use a continuous variable on the x axis in 
+    one layer, and a categorical variable in another layer? What happens if 
+    you do it in the opposite order?
+
+Answer: let's experiment!
+
+This code throws an error, `Error: Discrete value supplied to continuous scale`
+
+```{r, eval = FALSE}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_point(aes(drv, hwy), color = "red")
+```
+
+Reversing the order works, but draws a strange plot:
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(drv, hwy), color = "red") +
+  geom_point()
+```
+
+GG Solutions:
+
+- Not sure
+
+---
