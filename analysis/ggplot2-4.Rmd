@@ -568,3 +568,55 @@ Answer: a stacked area plot is a good way to show the relationship of related va
 GG Solutions: Stacked area plot seems useful when you want to portray an area whereas a line plot seems useful when you just need a line.
 
 ---
+
+# 15 Scales and guides
+
+The scales toolbox in Chapters 10 to 12 provides extensive guidance for how to work with scales, focusing on solving common data visualisation problems. The practical goals of the toolbox mean that topics are introduced when they are most relevant: for example, scale transformations are discussed in relation to continuous position scales (Section 10.1.7) because that is the most common situation in which you might want to transform a scale. However, because ggplot2 aims to provide a grammar of graphics, there is nothing preventing you from transforming other kinds of scales (see Section 15.6). This chapter aims to illustrate these concepts: I'll discuss the theory underpinning scales and guides, and give examples showing how concepts that I've discussed specifically for position or colour scales also apply elsewhere.
+
+## Setting color with limits
+
+Let's create a pair of plots controlling color with limits (from 11.3.5)! First, we'll just plot both independently:
+
+```{r}
+gg_99 <- mpg |>
+  filter(year == 1999) |>
+  ggplot(aes(displ, hwy, color = fl)) +
+  geom_point()
+
+gg_08 <- mpg |>
+  filter(year == 2008) |>
+  ggplot(aes(displ, hwy, color = fl)) +
+  geom_point()
+
+gg_99
+gg_08
+```
+
+Now, let's replot using limits:
+
+```{r}
+gg_99 +
+  lims(x = c(1, 7), y = c(10, 45)) +
+  scale_color_discrete(
+    limits = c("c", "d", "e", "p", "r"),
+    breaks = c("d", "p", "r"),
+    labels = c("diesel", "premium", "regular")
+  )
+
+gg_08 +
+  lims(x = c(1, 7), y = c(10, 45)) +
+  scale_color_discrete(
+    limits = c("c", "d", "e", "p", "r"),
+    labels = c("compressed", "diesel", "ethanol", "premium", "regular")
+  )
+```
+## Key glyphs
+
+Let's use a key glyph! (`draw_key_timeseries()`)
+
+```{r}
+ggplot(economics, aes(date, psavert, color = "Personal\nSavings\nRate")) +
+  geom_line(key_glyph = "timeseries") +
+  labs(x = NULL, y = NULL, color = NULL) +
+  theme_quo()
+```
