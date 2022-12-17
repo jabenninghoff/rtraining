@@ -660,3 +660,7 @@ ggplot(mtcars, aes(factor(1), fill = factor(cyl))) +
   labs(title = "Number of cylinders", fill = NULL) +
   theme_void()
 ```
+
+# 17 Faceting
+
+You first encountered faceting in Section 2.5. Faceting generates small multiples each showing a different subset of the data. Small multiples are a powerful tool for exploratory data analysis: you can rapidly compare patterns in different parts of the data and see whether they are the same or different. This section will discuss how you can fine-tune facets, particularly the way in which they interact with position scales.
