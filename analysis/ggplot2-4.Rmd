@@ -17,6 +17,7 @@ Workbook for completing quizzes and exercises from the "Grammar" chapters of [gg
 library(ggplot2)
 library(dplyr)
 library(jbplot)
+library(MASS) # nolint: unused_import_linter. Used by geom_smooth(method = "rlm", formula = y ~ x).
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -664,3 +665,55 @@ ggplot(mtcars, aes(factor(1), fill = factor(cyl))) +
 # 17 Faceting
 
 You first encountered faceting in Section 2.5. Faceting generates small multiples each showing a different subset of the data. Small multiples are a powerful tool for exploratory data analysis: you can rapidly compare patterns in different parts of the data and see whether they are the same or different. This section will discuss how you can fine-tune facets, particularly the way in which they interact with position scales.
+
+## Facet grid
+
+Let's draw a facet grid!
+
+```{r}
+mpg |>
+  filter(cyl != 5) |>
+  ggplot(aes(displ, hwy)) +
+  geom_point() +
+  geom_smooth(method = "rlm", formula = y ~ x) +
+  facet_grid(drv ~ cyl) +
+  labs(x = NULL, y = NULL)
+```
+
+## Free scales
+
+Free scales are useful when faceting across different variables over the same time period:
+
+```{r}
+ggplot(economics_long, aes(date, value)) +
+  geom_line() +
+  facet_wrap(~variable, scales = "free_y", ncol = 1)
+```
+
+## Facet space
+
+`facet_grid()` has an additional parameter called `space`, which takes the same values as `scales`.  When space is "free", each column (or row) will have width (or height) proportional to the range of the scale for that column (or row).  This makes the scaling equal across the whole plot: 1 cm on each panel maps to the same range of data. (This is somewhat analogous to the 'sliced' axis limits of lattice.) For example, if panel a had range 2 and panel b had range 4, one-third of the space would be given to a, and two-thirds to b. This is most useful for categorical scales, where we can assign space proportionally based on the number of levels in each facet, as illustrated below.
+
+```{r}
+mpg2 <- mpg
+mpg2$model <- reorder(mpg2$model, mpg2$cty)
+mpg2$manufacturer <- reorder(mpg2$manufacturer, -mpg2$cty)
+
+ggplot(mpg2, aes(cty, model)) +
+  geom_point() +
+  facet_grid(manufacturer ~ ., scales = "free", space = "free") +
+  labs(x = NULL, y = NULL) +
+  theme(strip.text.y = element_text(angle = 0))
+```
+
+## Grouping and faceting
+
+Let's combine grouping and faceting!
+
+```{r}
+mpg_d <- dplyr::select(mpg, -drv)
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(data = mpg_d, color = "grey75") +
+  geom_point(aes(color = drv)) +
+  facet_wrap(~drv)
+```
