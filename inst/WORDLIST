@@ -86,6 +86,7 @@ geospatial
 ggplot
 github
 gitignore
+glyphs
 grey
 greyed
 hadley
@@ -150,6 +151,7 @@ recurse
 recurses
 remium
 renv
+replot
 repo
 reproducibility
 rmarkdown
