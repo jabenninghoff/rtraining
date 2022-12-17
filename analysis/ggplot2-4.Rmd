@@ -620,3 +620,43 @@ ggplot(economics, aes(date, psavert, color = "Personal\nSavings\nRate")) +
   labs(x = NULL, y = NULL, color = NULL) +
   theme_quo()
 ```
+
+# 16 Coordinate systems
+
+Coordinate systems have two main jobs:
+
+* Combine the two position aesthetics to produce a 2d position on the plot.
+  The position aesthetics are called `x` and `y`, but they might be better 
+  called position 1 and 2 because their meaning depends on the coordinate 
+  system used. For example, with the polar coordinate system they become angle 
+  and radius (or radius and angle), and with maps they become latitude and 
+  longitude.
+
+* In coordination with the faceter, coordinate systems draw axes and panel
+  backgrounds. While the scales control the values that appear on the axes, and
+  how they map from data to position, it is the coordinate system which 
+  actually draws them. This is because their appearance depends on the 
+  coordinate system: an angle axis looks quite different than an x axis. 
+
+## Polar coordinates
+
+Let's draw a spiral with polar coordinates!
+
+```{r}
+data.frame(x = c(1, 200), y = c(200, 1)) |>
+  ggplot(aes(x, y)) +
+  geom_line() +
+  coord_polar()
+```
+
+We can use polar coordinates to draw a pie chart:
+
+```{r}
+ggplot(mtcars, aes(factor(1), fill = factor(cyl))) +
+  geom_bar(width = 1) +
+  scale_x_discrete(NULL, expand = c(0, 0)) +
+  scale_y_continuous(NULL, expand = c(0, 0)) +
+  coord_polar(theta = "y") +
+  labs(title = "Number of cylinders", fill = NULL) +
+  theme_void()
+```
