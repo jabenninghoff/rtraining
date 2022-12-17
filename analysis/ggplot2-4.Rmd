@@ -529,3 +529,42 @@ mpg %>%
 ```
 
 ---
+
+## 14.7.1 Exercises
+
+1.  When might you use `position_nudge()`? Read the documentation.
+
+Answer: as the documentation states, "Nudging is built in to `geom_text()` because it's so useful for moving labels a small distance from what they're labelling."
+
+GG Solutions: According to the help page, `position_nudge()` is generally useful for adjusting the position of items on discrete scales by a small amount. Nudging is built in to geom_text() because it's so useful for moving labels a small distance from what they're labelling.
+
+---
+
+2.  Many position adjustments can only be used with a few geoms. For example,
+    you can't stack boxplots or errors bars. Why not? What properties must a 
+    geom possess in order to be stackable? What properties must it possess
+    to be dodgeable?
+
+Answer: reading the docs, `position_stack()` requires that geoms have a position (points, lines, text) or a dimension (bar, area). Boxplots and error bars can't be stacked since they don't have a position or area. A geom must have a width in order to be dodgeable, which can be set with `position_dodge(width = ...)`.
+
+GG Solutions: Not sure
+
+---
+
+3.  Why might you use `geom_jitter()` instead of `geom_count()`? What are
+    the advantages and disadvantages of each technique?
+
+Answer: `geom_jitter()` preserves the size and number of points but not position, and `geom_count()` preserves the position but not number or size. `geom_jitter()` can be a better choice when there are few overlapping points. 
+
+GG Solutions: `geom_jitter()` adds a small amount of random variation to the location of each point. It is useful for looking at all the overplotted  points. On the other hand, `geom_count()` counts the number of overlapping observations at each location. It is useful for understanding the number of points in a location.
+
+---
+
+4.  When might you use a stacked area plot? What are the advantages and
+    disadvantages compared to a line plot?
+
+Answer: a stacked area plot is a good way to show the relationship of related variables, showing how parts of a whole change over time, for example, plotting the phases of incident response (mean time to detect, mean time to resolve). It is very similar to a line plot, and makes relative values (proportions) easier to compare and absolute values harder to compare.
+
+GG Solutions: Stacked area plot seems useful when you want to portray an area whereas a line plot seems useful when you just need a line.
+
+---
