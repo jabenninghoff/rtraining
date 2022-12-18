@@ -8,6 +8,8 @@
 
 * Added ggplot2 (Grammar): Workbook for completing quizzes and exercises from the "Grammar" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app)
 
+* Added ggplot2 (Extending): Workbook for completing quizzes and exercises from the "Extending" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app)
+
 # rtraining 0.8.11
 
 * Added Advanced R Workbook (Object-oriented programming): Workbook for completing quizzes and exercises from the "Object-oriented programming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io)
