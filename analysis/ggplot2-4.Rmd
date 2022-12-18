@@ -18,6 +18,7 @@ library(MASS)
 library(ggplot2)
 library(dplyr)
 library(jbplot)
+library(ggthemes)
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -821,3 +822,50 @@ mpg2 %>%
 In this chapter you will learn how to use the ggplot2 theme system, which allows you to exercise fine control over the non-data elements of your plot. The theme system does not affect how the data is rendered by geoms, or how it is transformed by scales. Themes don't change the perceptual properties of the plot, but they do help you make the plot aesthetically pleasing or match an existing style guide. Themes give you control over things like fonts, ticks, panel strips, and backgrounds.
 
 This separation of control into data and non-data parts is quite different from base and lattice graphics. In base and lattice graphics, most functions take a large number of arguments that specify both data and non-data appearance, which makes the functions complicated and harder to learn. ggplot2 takes a different approach: when creating the plot you determine how the data is displayed, then *after* it has been created you can edit every detail of the rendering, using the theming system. 
+
+## 18.2.1 Exercises
+
+1.  Try out all the themes in ggthemes. Which do you like the best?
+
+Answer: the "interesting" themes are displayed below. From the top four, I'd pick `theme_solarized_2()`, although `theme_fivethirtyeight()` is a close runner-up.
+
+```{r}
+base <- ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = factor(cyl))) +
+  geom_smooth(method = "loess", formula = y ~ x) +
+  labs(
+    title = "Fuel economy declines as engine size increases",
+    subtitle = "1999-2008",
+    caption = "Data from https://fueleconomy.gov/",
+    x = "Displacement (liters)",
+    y = "Miles per gallon (highway)",
+    color = "Cylinders"
+  )
+
+base
+base + theme_calc()
+base + theme_fivethirtyeight()
+base + theme_hc()
+base + theme_solarized_2()
+```
+
+---
+
+2.  What aspects of the default theme do you like? What don't you like?   
+    What would you change?
+
+Answer: my personal theme, `theme_quo()` uses a white background with light gray gridlines (based on `theme_minimal()`), bold titles, captions left-adjusted, and a better font, [Lato](https://www.latofonts.com).
+
+```{r}
+base +
+  theme_quo()
+```
+
+---
+
+3.  Look at the plots in your favourite scientific journal. What theme
+    do they most resemble? What are the main differences?
+
+Answer: the plots from [this paper](https://doi.org/10.1016/j.ssci.2018.07.021) on *Safety Science* most closely resemble `theme_classic()`, with few differences, the most notable being the position of the legend in Figures 4, 5, 8, and 9.
+
+---
