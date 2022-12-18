@@ -869,3 +869,88 @@ base +
 Answer: the plots from [this paper](https://doi.org/10.1016/j.ssci.2018.07.021) on *Safety Science* most closely resemble `theme_classic()`, with few differences, the most notable being the position of the legend in Figures 4, 5, 8, and 9.
 
 ---
+
+## 18.4.6 Exercises
+
+1.  Create the ugliest plot possible! (Contributed by Andrew D. Steen, 
+    University of Tennessee - Knoxville)
+
+Answer: using the same base, alter colors and theme settings, must still be legible:
+
+```{r}
+base +
+  geom_smooth(method = "loess", formula = y ~ x, color = "orange", fill = "limegreen") +
+  theme_grey(base_family = "Comic Sans MS") +
+  theme(
+    plot.background = element_rect(fill = "skyblue", color = "purple"),
+    plot.title = element_text(face = "bold", hjust = 1, color = "red"),
+    plot.subtitle = element_text(color = "yellow"),
+    plot.caption = element_text(hjust = 0.5, color = "blue"),
+    plot.margin = margin(50, 50, 50, 50),
+    axis.line = element_line(color = "maroon", linetype = "dotdash"),
+    axis.text = element_text(color = "hotpink"),
+    axis.title = element_text(color = "green"),
+    legend.background = element_rect(fill = "lemonchiffon", color = "gray50"),
+    legend.key = element_rect(fill = "pink", color = "black"),
+    legend.text = element_text(color = "purple"),
+    legend.title = element_text(color = "deeppink"),
+    panel.background = element_rect(fill = "lavender"),
+    panel.grid = element_line(linetype = "twodash")
+  ) +
+  scale_color_excel()
+```
+
+---
+
+2.  `theme_dark()` makes the inside of the plot dark, but not the 
+    outside. Change the plot background to black, and then update the
+    text settings so you can still read the labels.
+
+Answer:
+
+```{r}
+base +
+  theme_dark() +
+  theme(
+    plot.background = element_rect(fill = "black"),
+    legend.background = element_rect(fill = "black"),
+    text = element_text(color = "gray50")
+  )
+```
+
+---
+
+3.  Make an elegant theme that uses "linen" as the background colour and
+    a serif font for the text.
+
+Answer:
+
+```{r}
+base +
+  theme_minimal(base_family = "Georgia") +
+  theme(
+    plot.background = element_rect(fill = "linen"),
+    panel.grid.major = element_line(color = "gray85"),
+    panel.grid.minor = element_line(color = "gray90")
+  )
+```
+
+---
+
+4.  Systematically explore the effects of `hjust` when you have a multiline
+    title. Why doesn't `vjust` do anything?
+
+Answer: with multiline titles, `hjust` affects both lines in the same way, between left justified (0), centered (0.5), and right justified (1). `vjust` does slightly alter the vertical justification, but not significantly since two lines are just within the vertical margins.
+
+```{r}
+multi <- base +
+  labs(title = "Fuel economy declines as engine size increases\n1999-2008", subtitle = NULL)
+
+multi + theme(plot.title = element_text(hjust = 0))
+multi + theme(plot.title = element_text(hjust = 0.25))
+multi + theme(plot.title = element_text(hjust = 0.5))
+multi + theme(plot.title = element_text(hjust = 1))
+multi + theme(plot.title = element_text(hjust = 1, vjust = 0))
+```
+
+---
