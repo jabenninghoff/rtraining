@@ -14,10 +14,10 @@ output:
 Workbook for completing quizzes and exercises from the "Grammar" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
 ```{r setup, message = FALSE, warning = FALSE}
+library(MASS)
 library(ggplot2)
 library(dplyr)
 library(jbplot)
-library(MASS) # nolint: unused_import_linter. Used by geom_smooth(method = "rlm", formula = y ~ x).
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -695,7 +695,7 @@ ggplot(economics_long, aes(date, value)) +
 `facet_grid()` has an additional parameter called `space`, which takes the same values as `scales`.  When space is "free", each column (or row) will have width (or height) proportional to the range of the scale for that column (or row).  This makes the scaling equal across the whole plot: 1 cm on each panel maps to the same range of data. (This is somewhat analogous to the 'sliced' axis limits of lattice.) For example, if panel a had range 2 and panel b had range 4, one-third of the space would be given to a, and two-thirds to b. This is most useful for categorical scales, where we can assign space proportionally based on the number of levels in each facet, as illustrated below.
 
 ```{r}
-mpg2 <- mpg
+mpg2 <- subset(mpg, cyl != 5 & drv %in% c("4", "f") & class != "2seater")
 mpg2$model <- reorder(mpg2$model, mpg2$cty)
 mpg2$manufacturer <- reorder(mpg2$manufacturer, -mpg2$cty)
 
@@ -711,9 +711,110 @@ ggplot(mpg2, aes(cty, model)) +
 Let's combine grouping and faceting!
 
 ```{r}
-mpg_d <- dplyr::select(mpg, -drv)
+mpg_d <- select(mpg, -drv)
 ggplot(mpg, aes(displ, hwy)) +
   geom_point(data = mpg_d, color = "grey75") +
   geom_point(aes(color = drv)) +
   facet_wrap(~drv)
 ```
+
+## 17.7 Exercises
+
+1.  Diamonds: display the distribution of price conditional
+    on cut and carat. Try faceting by cut and grouping by carat. Try
+    faceting by carat and grouping by cut. Which do you prefer?
+
+Answer: faceting by caret requires discretizing, here we use `cut_number()`:
+
+```{r}
+ggplot(diamonds, aes(price, group = carat, color = carat)) +
+  geom_histogram(bins = 100) +
+  scale_color_viridis_c() +
+  facet_wrap(~cut)
+
+diamonds |>
+  mutate(carat_n = cut_number(carat, 6)) |>
+  ggplot(aes(price, group = cut, fill = cut)) +
+  geom_histogram(bins = 100) +
+  scale_color_viridis_d() +
+  facet_wrap(~carat_n)
+```
+
+Faceting by cut seems preferable, since it provides an insight not provided by faceting by carat: there are more large carat diamonds with a Fair cut.
+
+GG Solutions: takes a different approach, and concludes: "It makes more sense to facet by cut because its a discrete variable. Faceting by carat, a continuous variable, makes too many facets and renders the plot unreadable!"
+
+---
+
+2.  Diamonds: compare the relationship between price and carat for
+    each colour. What makes it hard to compare the groups? Is grouping better 
+    or faceting? If you use faceting, what annotation might you add to 
+    make it easier to see the differences between panels?
+
+Answer: comparing is hard because of overlap between groups and overplotting. Overall, grouping seems easier to read than faceting. Adding a reference line (in this case, a robust linear regression) makes it easier to see differences across faceting panels.
+
+```{r}
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(aes(color = color)) +
+  geom_smooth(method = "rlm", formula = y ~ x, se = FALSE) +
+  coord_cartesian(ylim = c(0, max(diamonds$price)))
+
+diamonds2 <- select(diamonds, -color)
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(aes(color = color)) +
+  geom_smooth(data = diamonds2, method = "rlm", formula = y ~ x, se = FALSE) +
+  coord_cartesian(ylim = c(0, max(diamonds$price))) +
+  facet_wrap(~color)
+```
+
+GG Solutions:
+
+```{r}
+diamonds %>%
+  ggplot(aes(carat, price)) +
+  geom_point(aes(color = color))
+
+diamonds %>%
+  ggplot(aes(carat, price)) +
+  geom_point(aes(color = color)) +
+  facet_wrap(~color)
+```
+
+- I think its better to use grouping to compare the different colors. The panels all have the same shape, so it's hard to compare the groups across facets. If I use faceting, I'd add that the plot is facetted by diamond colour, from D (best) to J (worst).
+
+---
+
+3.  Why is `facet_wrap()` generally more useful than `facet_grid()`?
+
+Answer: when faceting by a single variable, `facet_wrap()` is easier to use as it wraps the facets to fit the plot space automatically. `facet_grid()` is generally more useful only when faceting with two variables.
+
+GG Solutions: I think `facet_wrap()` is more useful than `facet_grid()` because the former function is useful if you have a single variable with many levels and want to arrange the plots in a more space efficient manner. In data analysis, its extremely common to have a single variable with many levels that the analyst wants to arrange the for easy comparison. Although `facet_grid()` works on single variables, `facet_wrap()` involves less typing when you have a single variable.
+
+---
+
+4.  Recreate the following plot. It facets `mpg2` by class, overlaying
+    a smooth curve fit to the full dataset.
+
+Answer: plot below.
+
+```{r}
+mpg2c <- select(mpg2, -class)
+ggplot(mpg2, aes(displ, hwy)) +
+  geom_point() +
+  geom_smooth(data = mpg2c, method = "loess", formula = y ~ x, se = FALSE) +
+  facet_wrap(~class)
+```
+
+Comparing to the [source code](https://github.com/hadley/ggplot2-book/blob/master/facet.Rmd), the answer is correct!
+
+GG Solutions:
+
+```{r}
+mpg2 %>%
+  ggplot(aes(displ, hwy)) +
+  geom_point() +
+  geom_smooth(data = mpg2 %>% select(-class), se = FALSE, method = "loess") +
+  facet_wrap(~class)
+```
+
+---
