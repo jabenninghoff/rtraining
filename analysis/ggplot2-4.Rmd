@@ -711,9 +711,8 @@ ggplot(mpg2, aes(cty, model)) +
 Let's combine grouping and faceting!
 
 ```{r}
-mpg_d <- select(mpg, -drv)
 ggplot(mpg, aes(displ, hwy)) +
-  geom_point(data = mpg_d, color = "grey75") +
+  geom_point(data = select(mpg, -drv), color = "grey75") +
   geom_point(aes(color = drv)) +
   facet_wrap(~drv)
 ```
@@ -759,10 +758,9 @@ ggplot(diamonds, aes(carat, price)) +
   geom_smooth(method = "rlm", formula = y ~ x, se = FALSE) +
   coord_cartesian(ylim = c(0, max(diamonds$price)))
 
-diamonds2 <- select(diamonds, -color)
 ggplot(diamonds, aes(carat, price)) +
   geom_point(aes(color = color)) +
-  geom_smooth(data = diamonds2, method = "rlm", formula = y ~ x, se = FALSE) +
+  geom_smooth(data = select(diamonds, -color), method = "rlm", formula = y ~ x, se = FALSE) +
   coord_cartesian(ylim = c(0, max(diamonds$price))) +
   facet_wrap(~color)
 ```
@@ -798,10 +796,9 @@ GG Solutions: I think `facet_wrap()` is more useful than `facet_grid()` because 
 Answer: plot below.
 
 ```{r}
-mpg2c <- select(mpg2, -class)
 ggplot(mpg2, aes(displ, hwy)) +
   geom_point() +
-  geom_smooth(data = mpg2c, method = "loess", formula = y ~ x, se = FALSE) +
+  geom_smooth(data = select(mpg2, -class), method = "loess", formula = y ~ x, se = FALSE) +
   facet_wrap(~class)
 ```
 
