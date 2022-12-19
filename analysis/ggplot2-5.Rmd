@@ -14,6 +14,10 @@ output:
 Workbook for completing quizzes and exercises from the "Extending" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
 ```{r setup, message = FALSE, warning = FALSE}
+library(ggplot2)
+library(wesanderson)
+library(scales)
+
 knitr::opts_chunk$set(
   comment = "#>",
   fig.align = "center"
@@ -31,3 +35,163 @@ This workbook includes answers and solutions to the quizzes and exercises from [
 A major requirement of a good data analysis is flexibility. If your data changes, or you discover something that makes you rethink your basic assumptions, you need to be able to easily change many plots at once. The main inhibitor of flexibility is code duplication. If you have the same plotting statement repeated over and over again, you'll have to make the same change in many different places. Often just the thought of making all those changes is exhausting! This chapter will help you overcome that problem by showing you how to program with ggplot2.
 
 To make your code more flexible, you need to reduce duplicated code by writing functions. When you notice you're doing the same thing over and over again, think about how you might generalise it and turn it into a function. If you're not that familiar with how functions work in R, you might want to brush up your knowledge at <https://adv-r.hadley.nz/functions.html>. 
+
+## 19.2.1 Exercises
+
+1.  Create an object that represents a pink histogram with 100 bins.
+
+Answer: `pink_hist` applied to the price of `diamonds`.
+
+```{r}
+pink_hist <- geom_histogram(bins = 100, fill = "pink")
+
+ggplot(diamonds, aes(price)) +
+  pink_hist
+```
+
+GG Solutions:
+
+```{r}
+pink_hist_ggs <- geom_histogram(
+  color = "pink",
+  bins = 100
+)
+```
+
+Note: I think the intent here is to set `fill`, not `color`.
+
+---
+
+2.  Create an object that represents a fill scale with the Blues 
+    ColorBrewer palette.
+
+Answer: `blues` applied to a `geom_bar()` example:
+
+```{r}
+blues <- scale_fill_brewer(palette = "Blues")
+
+ggplot(mpg, aes(class, fill = drv)) +
+  geom_bar() +
+  theme_classic() +
+  blues
+```
+
+GG Solutions:
+
+```{r}
+fill_blues <- scale_fill_distiller(
+  palette = "Blues"
+)
+```
+
+Note that the documentation states:
+
+> The `distiller` scales extend `brewer` scales by smoothly interpolating 7 colours from any palette to a continuous scale.
+
+---
+
+3.  Read the source code for `theme_grey()`. What are its arguments? 
+    How does it work?
+
+Answer: `theme_grey()` has 4 arguments: `base_size`, `base_family`, `base_line_size`, and `base_rect_size`. It specifies a complete theme object, `t`, and uses the `%+replace%` function to modify an internal global, `ggplot_global$theme_all_null` using `t`.
+
+```{r}
+theme_grey
+```
+
+GG Solutions:
+
+- Its arguments include `base_size`, `base_family`, `base_line_size`, and `base_rect_size`
+- According to the help file, `theme_gray()` is the signature ggplot2 theme with a grey background and white gridlines and is designed to put the data forward yet make comparisons easy.
+
+---
+
+4.  Create `scale_colour_wesanderson()`. It should have a parameter to pick 
+    the palette from the wesanderson package, and create either a continuous
+    or discrete scale.
+
+Answer: to construct this function, it is helpful to review the code for `scale_color_brewer()`:
+
+```{r}
+scale_color_brewer
+```
+
+The function is a wrapper for `discrete_scale()` and calls `scales::brewer_pal()`, which is a [function factory](https://adv-r.hadley.nz/function-factories.html):
+
+```{r}
+scales::brewer_pal
+```
+
+First we construct a discrete scale, using `Darjeeling1` as the default:
+
+```{r}
+wesanderson_pal <- function(name, type) {
+  function(n) {
+    wes_palette(name, n, type)
+  }
+}
+
+scale_color_wesanderson_d <- function(..., name = "Darjeeling1", type = "discrete",
+                                      aesthetics = "colour") {
+  discrete_scale(aesthetics, "wesanderson_d", wesanderson_pal(name, type), ...)
+}
+```
+
+Note that these functions are limited by the number of colors in each wesanderson palette (4-7), which will generate an error if more colors are requested. The `wesanderson_pal` function could be revised to auto-enable `continuous` or `scale_color_wesanderson_d()` can be called with `type = "continuous"`.
+
+For a continuous scale, it is helpful to review the code of `scale_color_viridis_c()`:
+
+```{r}
+scale_color_viridis_c
+```
+
+We can add a continuous scale based using `Zissou1` as the default:
+
+```{r}
+scale_color_wesanderson_c <- function(...,
+                                      name = "Zissou1",
+                                      type = "continuous",
+                                      values = NULL,
+                                      space = "Lab",
+                                      na.value = "grey50", # nolint: object_name_linter.
+                                      guide = "colourbar",
+                                      aesthetics = "colour") {
+  continuous_scale(
+    aesthetics, "wesanderson_c",
+    gradient_n_pal(wesanderson_pal(name, type)(length(wes_palettes[[name]])), values, space),
+    na.value = na.value, guide = guide, ...
+  )
+}
+```
+
+`scale_colour_wesanderson_d()` applied to an `mpg` plot:
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = drv)) +
+  geom_point() +
+  scale_color_wesanderson_d()
+```
+
+`scale_colour_wesanderson_c()` applied to an `mpg` plot:
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = cyl)) +
+  geom_point() +
+  scale_color_wesanderson_c()
+```
+
+Notes: while the exercise calls for a single function, this breaks the normal conventions for ggplot2. Such a function could be written by combining `scale_colour_wesanderson_d()` and `scale_colour_wesanderson_c()`.
+
+GG Solutions:
+
+```{r}
+scale_colour_wesanderson <- function(palette = "BottleRocket1", ...) {
+  scale_color_manual(values = wesanderson::wes_palette(palette), ...)
+}
+# Working example
+ggplot(mtcars, aes(wt, disp, color = factor(gear))) +
+  geom_point() +
+  scale_colour_wesanderson()
+```
+
+---
