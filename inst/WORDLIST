@@ -4,6 +4,7 @@ Bostock
 CMD
 Categorise
 Changelog
+ColorBrewer
 Colour
 Counterintuitively
 DF
@@ -202,4 +203,5 @@ visualisation
 visualise
 visualising
 wd
+wesanderson
 yihui
