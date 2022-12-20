@@ -333,3 +333,44 @@ distribution(diamonds, price, type = "density")
 Answer: it would be useful to add arguments for the order of the variables, and a scale adjustment for value, drawing from examples on [Wikipedia](https://en.wikipedia.org/wiki/Parallel_coordinates). Using `...` for `geom_line()` prevents other unnamed parameters from being passed to other functions, like `ggplot()`.
 
 ---
+
+## 19.5.1 Exercises
+    
+1.  How could you add a `geom_point()` layer to each element of the following 
+    list?
+
+```{r}
+plots <- list(
+  ggplot(mpg, aes(displ, hwy)),
+  ggplot(diamonds, aes(carat, price)),
+  ggplot(faithfuld, aes(waiting, eruptions, size = density))
+)
+```
+
+Answer: easily done with `lapply`()`:
+
+```{r}
+lapply(plots, function(g) g + geom_point())
+```
+
+---
+
+2.  What does the following function do? What's a better name for it?
+
+```{r}
+mystery <- function(...) {
+  Reduce(`+`, list(...), accumulate = TRUE)
+}
+
+mystery(
+  ggplot(mpg, aes(displ, hwy)) +
+    geom_point(),
+  geom_smooth(),
+  xlab(NULL),
+  ylab(NULL)
+)
+```
+
+Answer: a better name would be 'add layer and print'.
+
+---
