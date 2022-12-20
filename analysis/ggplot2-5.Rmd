@@ -292,3 +292,44 @@ ggplot(mpg, aes(displ, hwy)) +
 GG Solutions: no answer.
 
 ---
+
+## 19.4.2 Exercises
+
+1.  Create a `distribution()` function specially designed for visualising 
+    continuous distributions. Allow the user to supply a dataset and the
+    name of a variable to visualise. Let them choose between histograms,
+    frequency polygons, and density plots. What other arguments might you
+    want to include?
+
+Answer: code below. In this case, it is useful to include `binwidth` and `bins`, used in creating both histograms and frequency polygons, and `na.rm`, used in all three. Defaults to histogram.
+
+```{r}
+distribution <- function(data, var, type = "histogram", binwidth = NULL, bins = NULL,
+                         na.rm = FALSE) { # nolint: object_name_linter.
+  gg <- ggplot(data, aes({{ var }}))
+
+  if (type == "histogram") {
+    gg <- gg + geom_histogram(binwidth = binwidth, bins = bins, na.rm = na.rm)
+  } else if (type == "freqpoly") {
+    gg <- gg + geom_freqpoly(binwidth = binwidth, bins = bins, na.rm = na.rm)
+  } else if (type == "density") {
+    gg <- gg + geom_density(na.rm = na.rm)
+  } else {
+    stop("`type` must be histogram, freqpoly, or density")
+  }
+  gg
+}
+
+distribution(diamonds, price, binwidth = 100)
+distribution(diamonds, price, type = "freqpoly", binwidth = 100)
+distribution(diamonds, price, type = "density")
+```
+
+---
+
+2.  What additional arguments should `pcp()` take? What are the downsides
+    of how `...` is used in the current code?
+
+Answer: it would be useful to add arguments for the order of the variables, and a scale adjustment for value, drawing from examples on [Wikipedia](https://en.wikipedia.org/wiki/Parallel_coordinates). Using `...` for `geom_line()` prevents other unnamed parameters from being passed to other functions, like `ggplot()`.
+
+---
