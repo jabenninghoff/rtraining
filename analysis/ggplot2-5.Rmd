@@ -17,6 +17,8 @@ Workbook for completing quizzes and exercises from the "Extending" chapters of [
 library(ggplot2)
 library(wesanderson)
 library(scales)
+library(maps) # nolint: unused_import_linter. Needed for `us.cities`.
+library(dplyr)
 
 knitr::opts_chunk$set(
   comment = "#>",
@@ -193,5 +195,100 @@ ggplot(mtcars, aes(wt, disp, color = factor(gear))) +
   geom_point() +
   scale_colour_wesanderson()
 ```
+
+---
+
+## 19.3.4 Exercises
+
+1.  To make the best use of space, many examples in this book hide the axes 
+    labels and legend. I've just copied-and-pasted the same code into multiple 
+    places, but it would make more sense to create a reusable function. 
+    What would that function look like?
+
+Answer: `hide_ll()` does this, demonstrated with an `mpg` plot.
+
+```{r}
+hide_ll <- function() {
+  list(
+    labs(x = NULL, y = NULL),
+    theme(legend.position = "none")
+  )
+}
+
+ggplot(mpg, aes(displ, hwy, color = drv)) +
+  geom_point() +
+  hide_ll()
+```
+
+GG Solutions:
+
+```{r}
+remove_labels <- theme(
+  legend.position = "none",
+  axis.title.x = element_blank(),
+  axis.title.y = element_blank()
+)
+# Working Example
+ggplot(mtcars, aes(wt, disp, color = factor(gear))) +
+  geom_point() +
+  remove_labels
+```
+
+Note: the GG Solutions answer is more verbose, but uses only a single function call (theme).
+
+---
+
+2.  Extend the `borders()` function to also add `coord_quickmap()` to the
+    plot.
+
+Answer: `borders_quickmap()` implemented and demonstrated using a `borders()` example. In this case, the function passes all `...` variables to `borders()` and none to `coord_quickmap()` which avoids the complexity of handling arguments for both functions.
+
+```{r}
+borders_quickmap <- function(...) {
+  list(
+    borders(...),
+    coord_quickmap()
+  )
+}
+
+us.cities |>
+  filter(capital == 2 & !(country.etc %in% c("AK", "HI"))) |>
+  ggplot(aes(long, lat)) +
+  geom_point() +
+  borders_quickmap("state") +
+  theme_void()
+```
+
+Note: because of the complexities, it's unlikely I'd ever implement something like [Additional arguments](https://ggplot2-book.org/programming.html#additional-arguments) - there are minimal gains compared to calling two functions with separate lists of parameters.
+
+GG Solutions: Not sure.
+
+---
+
+3.  Look through your own code. What combinations of geoms or scales do you
+    use all the time? How could you extract the pattern into a reusable 
+    function?
+
+Answer: a common pattern I use is `geom_smooth` with `lm` and `y ~ x`. An implementation of this using robust linear modeling from `MASS` is demonstrated below:
+
+```{r}
+geom_rlm <- function(mapping = NULL, data = NULL, stat = "smooth", position = "identity", ...,
+                     method = MASS::rlm, formula = y ~ x, se = TRUE,
+                     na.rm = FALSE, # nolint: object_name_linter.
+                     orientation = NA,
+                     show.legend = NA, inherit.aes = TRUE) { # nolint: object_name_linter.
+  geom_smooth(
+    mapping = mapping, data = data, stat = stat, position = position, ...,
+    method = method, formula = formula, se = se, na.rm = na.rm, orientation = orientation,
+    show.legend = show.legend, inherit.aes = TRUE
+  )
+}
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_rlm()
+```
+
+GG Solutions: no answer.
 
 ---
