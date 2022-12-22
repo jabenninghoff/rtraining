@@ -210,7 +210,7 @@ GG Solutions:
 - The plot shows a strongly linear relationship, which tells me that `cty` and `hwy` are highly correlated variables. The only concern I have is that the points seem to be overlapping.
 - There is not much insight to be gained except that cars which are fuel efficient on a highway are also fuel efficient in cities. This relationship is probably a function of speed (Rademaker, 2016) 
 
---
+---
 
 2.  What does `ggplot(mpg, aes(model, manufacturer)) + geom_point()` show?
     Is it useful? How could you modify the data to make it more informative?
@@ -245,7 +245,7 @@ ggplot(df, aes(man_mod)) +
 
 Note: I prefer my solution for this exercise.
 
---
+---
 
 3.  Describe the data, aesthetic mappings and layers used for each of the 
     following plots. You'll need to guess a little because you haven't seen
