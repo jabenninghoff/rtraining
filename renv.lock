@@ -175,12 +175,14 @@
     "USAboundariesData": {
       "Package": "USAboundariesData",
       "Version": "0.4.0",
-      "Source": "Repository",
-      "RemoteType": "repository",
-      "RemoteUrl": "https://github.com/ropensci/USAboundariesData",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "ropensci",
+      "RemoteRepo": "USAboundariesData",
       "RemoteRef": "main",
       "RemoteSha": "064cdbcbb283f867493f81d0fff9b9ec9d9a6b08",
-      "Hash": "7ad0c28cb4dd15e7a1ece4c392c21785",
+      "Hash": "a2fff0d88decd1c8055e2505bf5842bf",
       "Requirements": []
     },
     "askpass": {
