@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2022-12-18" />
+
+<title>ggplot2 (Extending)</title>
+
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">rtraining notebooks</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="FaultTree.html">FaultTree.widget Test</a>
+    </li>
+    <li>
+      <a href="advanced-r-1.html">Advanced R Workbook (Foundations)</a>
+    </li>
+    <li>
+      <a href="advanced-r-2.html">Advanced R Workbook (Functional programming)</a>
+    </li>
+    <li>
+      <a href="advanced-r-3.html">Advanced R Workbook (Object-oriented programming)</a>
+    </li>
+    <li>
+      <a href="ggplot2-1.html">ggplot2 (Getting started)</a>
+    </li>
+    <li>
+      <a href="ggplot2-2.html">ggplot2 (Layers)</a>
+    </li>
+    <li>
+      <a href="ggplot2-3.html">ggplot2 (Scales)</a>
+    </li>
+    <li>
+      <a href="ggplot2-4.html">ggplot2 (Grammar)</a>
+    </li>
+    <li>
+      <a href="ggplot2-5.html">ggplot2 (Extending)</a>
+    </li>
+    <li>
+      <a href="r-setup-log.html">R Setup Log</a>
+    </li>
+    <li>
+      <a href="r-training-log.html">R Training Log</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jabenninghoff/rtraining/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">ggplot2 (Extending)</h1>
+<h4 class="date">2022-12-18</h4>
+
+</div>
+
+
+<p>Workbook for completing quizzes and exercises from the “Extending”
+chapters of <a href="https://ggplot2-book.org/index.html">ggplot2:
+Elegant Graphics for Data Analysis</a>, third edition, with comparisons
+to solutions from <a
+href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to
+ggplot2: Elegant Graphics for Data Analysis</a>.</p>
+<pre class="r"><code>library(ggplot2)
+library(wesanderson)
+library(scales)
+library(maps) # nolint: unused_import_linter. Needed for `us.cities`.
+library(dplyr)
+
+knitr::opts_chunk$set(
+  comment = &quot;#&gt;&quot;,
+  fig.align = &quot;center&quot;
+)</code></pre>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This workbook includes answers and solutions to the quizzes and
+exercises from <a href="https://ggplot2-book.org/index.html">ggplot2:
+Elegant Graphics for Data Analysis</a> and <a
+href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to
+ggplot2: Elegant Graphics for Data Analysis</a>, organized by chapter.
+It includes excerpts from both books, copied here.</p>
+<p><strong>WARNING, SPOILERS!</strong> If you haven’t read the ggplot2
+book and intend to complete the quizzes and exercises, don’t read this
+notebook. It contains my (potentially wrong) answers to both.</p>
+</div>
+<div id="programming-with-ggplot2" class="section level1">
+<h1>19 Programming with ggplot2</h1>
+<p>A major requirement of a good data analysis is flexibility. If your
+data changes, or you discover something that makes you rethink your
+basic assumptions, you need to be able to easily change many plots at
+once. The main inhibitor of flexibility is code duplication. If you have
+the same plotting statement repeated over and over again, you’ll have to
+make the same change in many different places. Often just the thought of
+making all those changes is exhausting! This chapter will help you
+overcome that problem by showing you how to program with ggplot2.</p>
+<p>To make your code more flexible, you need to reduce duplicated code
+by writing functions. When you notice you’re doing the same thing over
+and over again, think about how you might generalise it and turn it into
+a function. If you’re not that familiar with how functions work in R,
+you might want to brush up your knowledge at <a
+href="https://adv-r.hadley.nz/functions.html"
+class="uri">https://adv-r.hadley.nz/functions.html</a>.</p>
+<div id="exercises" class="section level2">
+<h2>19.2.1 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Create an object that represents a pink histogram with 100
+bins.</li>
+</ol>
+<p>Answer: <code>pink_hist</code> applied to the price of
+<code>diamonds</code>.</p>
+<pre class="r"><code>pink_hist &lt;- geom_histogram(bins = 100, fill = &quot;pink&quot;)
+
+ggplot(diamonds, aes(price)) +
+  pink_hist</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-1-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>GG Solutions:</p>
+<pre class="r"><code>pink_hist_ggs &lt;- geom_histogram(
+  color = &quot;pink&quot;,
+  bins = 100
+)</code></pre>
+<p>Note: I think the intent here is to set <code>fill</code>, not
+<code>color</code>.</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Create an object that represents a fill scale with the Blues
+ColorBrewer palette.</li>
+</ol>
+<p>Answer: <code>blues</code> applied to a <code>geom_bar()</code>
+example:</p>
+<pre class="r"><code>blues &lt;- scale_fill_brewer(palette = &quot;Blues&quot;)
+
+ggplot(ggplot2::mpg, aes(class, fill = drv)) +
+  geom_bar() +
+  theme_classic() +
+  blues</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>GG Solutions:</p>
+<pre class="r"><code>fill_blues &lt;- scale_fill_distiller(
+  palette = &quot;Blues&quot;
+)</code></pre>
+<p>Note that the documentation states:</p>
+<blockquote>
+<p>The <code>distiller</code> scales extend <code>brewer</code> scales
+by smoothly interpolating 7 colours from any palette to a continuous
+scale.</p>
+</blockquote>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Read the source code for <code>theme_grey()</code>. What are its
+arguments? How does it work?</li>
+</ol>
+<p>Answer: <code>theme_grey()</code> has 4 arguments:
+<code>base_size</code>, <code>base_family</code>,
+<code>base_line_size</code>, and <code>base_rect_size</code>. It
+specifies a complete theme object, <code>t</code>, and uses the
+<code>%+replace%</code> function to modify an internal global,
+<code>ggplot_global$theme_all_null</code> using <code>t</code>.</p>
+<pre class="r"><code>theme_grey</code></pre>
+<pre><code>#&gt; function (base_size = 11, base_family = &quot;&quot;, base_line_size = base_size/22, 
+#&gt;     base_rect_size = base_size/22) 
+#&gt; {
+#&gt;     half_line &lt;- base_size/2
+#&gt;     t &lt;- theme(line = element_line(colour = &quot;black&quot;, linewidth = base_line_size, 
+#&gt;         linetype = 1, lineend = &quot;butt&quot;), rect = element_rect(fill = &quot;white&quot;, 
+#&gt;         colour = &quot;black&quot;, linewidth = base_rect_size, linetype = 1), 
+#&gt;         text = element_text(family = base_family, face = &quot;plain&quot;, 
+#&gt;             colour = &quot;black&quot;, size = base_size, lineheight = 0.9, 
+#&gt;             hjust = 0.5, vjust = 0.5, angle = 0, margin = margin(), 
+#&gt;             debug = FALSE), axis.line = element_blank(), axis.line.x = NULL, 
+#&gt;         axis.line.y = NULL, axis.text = element_text(size = rel(0.8), 
+#&gt;             colour = &quot;grey30&quot;), axis.text.x = element_text(margin = margin(t = 0.8 * 
+#&gt;             half_line/2), vjust = 1), axis.text.x.top = element_text(margin = margin(b = 0.8 * 
+#&gt;             half_line/2), vjust = 0), axis.text.y = element_text(margin = margin(r = 0.8 * 
+#&gt;             half_line/2), hjust = 1), axis.text.y.right = element_text(margin = margin(l = 0.8 * 
+#&gt;             half_line/2), hjust = 0), axis.ticks = element_line(colour = &quot;grey20&quot;), 
+#&gt;         axis.ticks.length = unit(half_line/2, &quot;pt&quot;), axis.ticks.length.x = NULL, 
+#&gt;         axis.ticks.length.x.top = NULL, axis.ticks.length.x.bottom = NULL, 
+#&gt;         axis.ticks.length.y = NULL, axis.ticks.length.y.left = NULL, 
+#&gt;         axis.ticks.length.y.right = NULL, axis.title.x = element_text(margin = margin(t = half_line/2), 
+#&gt;             vjust = 1), axis.title.x.top = element_text(margin = margin(b = half_line/2), 
+#&gt;             vjust = 0), axis.title.y = element_text(angle = 90, 
+#&gt;             margin = margin(r = half_line/2), vjust = 1), axis.title.y.right = element_text(angle = -90, 
+#&gt;             margin = margin(l = half_line/2), vjust = 0), legend.background = element_rect(colour = NA), 
+#&gt;         legend.spacing = unit(2 * half_line, &quot;pt&quot;), legend.spacing.x = NULL, 
+#&gt;         legend.spacing.y = NULL, legend.margin = margin(half_line, 
+#&gt;             half_line, half_line, half_line), legend.key = element_rect(fill = &quot;grey95&quot;, 
+#&gt;             colour = NA), legend.key.size = unit(1.2, &quot;lines&quot;), 
+#&gt;         legend.key.height = NULL, legend.key.width = NULL, legend.text = element_text(size = rel(0.8)), 
+#&gt;         legend.text.align = NULL, legend.title = element_text(hjust = 0), 
+#&gt;         legend.title.align = NULL, legend.position = &quot;right&quot;, 
+#&gt;         legend.direction = NULL, legend.justification = &quot;center&quot;, 
+#&gt;         legend.box = NULL, legend.box.margin = margin(0, 0, 0, 
+#&gt;             0, &quot;cm&quot;), legend.box.background = element_blank(), 
+#&gt;         legend.box.spacing = unit(2 * half_line, &quot;pt&quot;), panel.background = element_rect(fill = &quot;grey92&quot;, 
+#&gt;             colour = NA), panel.border = element_blank(), panel.grid = element_line(colour = &quot;white&quot;), 
+#&gt;         panel.grid.minor = element_line(linewidth = rel(0.5)), 
+#&gt;         panel.spacing = unit(half_line, &quot;pt&quot;), panel.spacing.x = NULL, 
+#&gt;         panel.spacing.y = NULL, panel.ontop = FALSE, strip.background = element_rect(fill = &quot;grey85&quot;, 
+#&gt;             colour = NA), strip.clip = &quot;inherit&quot;, strip.text = element_text(colour = &quot;grey10&quot;, 
+#&gt;             size = rel(0.8), margin = margin(0.8 * half_line, 
+#&gt;                 0.8 * half_line, 0.8 * half_line, 0.8 * half_line)), 
+#&gt;         strip.text.x = NULL, strip.text.y = element_text(angle = -90), 
+#&gt;         strip.text.y.left = element_text(angle = 90), strip.placement = &quot;inside&quot;, 
+#&gt;         strip.placement.x = NULL, strip.placement.y = NULL, strip.switch.pad.grid = unit(half_line/2, 
+#&gt;             &quot;pt&quot;), strip.switch.pad.wrap = unit(half_line/2, 
+#&gt;             &quot;pt&quot;), plot.background = element_rect(colour = &quot;white&quot;), 
+#&gt;         plot.title = element_text(size = rel(1.2), hjust = 0, 
+#&gt;             vjust = 1, margin = margin(b = half_line)), plot.title.position = &quot;panel&quot;, 
+#&gt;         plot.subtitle = element_text(hjust = 0, vjust = 1, margin = margin(b = half_line)), 
+#&gt;         plot.caption = element_text(size = rel(0.8), hjust = 1, 
+#&gt;             vjust = 1, margin = margin(t = half_line)), plot.caption.position = &quot;panel&quot;, 
+#&gt;         plot.tag = element_text(size = rel(1.2), hjust = 0.5, 
+#&gt;             vjust = 0.5), plot.tag.position = &quot;topleft&quot;, plot.margin = margin(half_line, 
+#&gt;             half_line, half_line, half_line), complete = TRUE)
+#&gt;     ggplot_global$theme_all_null %+replace% t
+#&gt; }
+#&gt; &lt;bytecode: 0x7fcd47aace50&gt;
+#&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
+<p>GG Solutions:</p>
+<ul>
+<li>Its arguments include <code>base_size</code>,
+<code>base_family</code>, <code>base_line_size</code>, and
+<code>base_rect_size</code></li>
+<li>According to the help file, <code>theme_gray()</code> is the
+signature ggplot2 theme with a grey background and white gridlines and
+is designed to put the data forward yet make comparisons easy.</li>
+</ul>
+<hr />
+<ol start="4" style="list-style-type: decimal">
+<li>Create <code>scale_colour_wesanderson()</code>. It should have a
+parameter to pick the palette from the wesanderson package, and create
+either a continuous or discrete scale.</li>
+</ol>
+<p>Answer: to construct this function, it is helpful to review the code
+for <code>scale_color_brewer()</code>:</p>
+<pre class="r"><code>scale_color_brewer</code></pre>
+<pre><code>#&gt; function (..., type = &quot;seq&quot;, palette = 1, direction = 1, aesthetics = &quot;colour&quot;) 
+#&gt; {
+#&gt;     discrete_scale(aesthetics, &quot;brewer&quot;, brewer_pal(type, palette, 
+#&gt;         direction), ...)
+#&gt; }
+#&gt; &lt;bytecode: 0x7fcd0060e9b8&gt;
+#&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
+<p>The function is a wrapper for <code>discrete_scale()</code> and calls
+<code>scales::brewer_pal()</code>, which is a <a
+href="https://adv-r.hadley.nz/function-factories.html">function
+factory</a>:</p>
+<pre class="r"><code>scales::brewer_pal</code></pre>
+<pre><code>#&gt; function (type = &quot;seq&quot;, palette = 1, direction = 1) 
+#&gt; {
+#&gt;     pal &lt;- pal_name(palette, type)
+#&gt;     force(direction)
+#&gt;     function(n) {
+#&gt;         if (n &lt; 3) {
+#&gt;             pal &lt;- suppressWarnings(RColorBrewer::brewer.pal(n, 
+#&gt;                 pal))
+#&gt;         }
+#&gt;         else {
+#&gt;             pal &lt;- RColorBrewer::brewer.pal(n, pal)
+#&gt;         }
+#&gt;         pal &lt;- pal[seq_len(n)]
+#&gt;         if (direction == -1) {
+#&gt;             pal &lt;- rev(pal)
+#&gt;         }
+#&gt;         pal
+#&gt;     }
+#&gt; }
+#&gt; &lt;bytecode: 0x7fcd0774efc8&gt;
+#&gt; &lt;environment: namespace:scales&gt;</code></pre>
+<p>First we construct a discrete scale, using <code>Darjeeling1</code>
+as the default:</p>
+<pre class="r"><code>wesanderson_pal &lt;- function(name, type) {
+  function(n) {
+    wes_palette(name, n, type)
+  }
+}
+
+scale_color_wesanderson_d &lt;- function(..., name = &quot;Darjeeling1&quot;, type = &quot;discrete&quot;,
+                                      aesthetics = &quot;colour&quot;) {
+  discrete_scale(aesthetics, &quot;wesanderson_d&quot;, wesanderson_pal(name, type), ...)
+}</code></pre>
+<p>Note that these functions are limited by the number of colors in each
+wesanderson palette (4-7), which will generate an error if more colors
+are requested. The <code>wesanderson_pal</code> function could be
+revised to auto-enable <code>continuous</code> or
+<code>scale_color_wesanderson_d()</code> can be called with
+<code>type = "continuous"</code>.</p>
+<p>For a continuous scale, it is helpful to review the code of
+<code>scale_color_viridis_c()</code>:</p>
+<pre class="r"><code>scale_color_viridis_c</code></pre>
+<pre><code>#&gt; function (..., alpha = 1, begin = 0, end = 1, direction = 1, 
+#&gt;     option = &quot;D&quot;, values = NULL, space = &quot;Lab&quot;, na.value = &quot;grey50&quot;, 
+#&gt;     guide = &quot;colourbar&quot;, aesthetics = &quot;colour&quot;) 
+#&gt; {
+#&gt;     continuous_scale(aesthetics, &quot;viridis_c&quot;, gradient_n_pal(viridis_pal(alpha, 
+#&gt;         begin, end, direction, option)(6), values, space), na.value = na.value, 
+#&gt;         guide = guide, ...)
+#&gt; }
+#&gt; &lt;bytecode: 0x7fcd42786928&gt;
+#&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
+<p>We can add a continuous scale based using <code>Zissou1</code> as the
+default:</p>
+<pre class="r"><code>scale_color_wesanderson_c &lt;- function(...,
+                                      name = &quot;Zissou1&quot;,
+                                      type = &quot;continuous&quot;,
+                                      values = NULL,
+                                      space = &quot;Lab&quot;,
+                                      na.value = &quot;grey50&quot;, # nolint: object_name_linter.
+                                      guide = &quot;colourbar&quot;,
+                                      aesthetics = &quot;colour&quot;) {
+  continuous_scale(
+    aesthetics, &quot;wesanderson_c&quot;,
+    gradient_n_pal(wesanderson_pal(name, type)(length(wes_palettes[[name]])), values, space),
+    na.value = na.value, guide = guide, ...
+  )
+}</code></pre>
+<p><code>scale_colour_wesanderson_d()</code> applied to an
+<code>mpg</code> plot:</p>
+<pre class="r"><code>ggplot(ggplot2::mpg, aes(displ, hwy, color = drv)) +
+  geom_point() +
+  scale_color_wesanderson_d()</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><code>scale_colour_wesanderson_c()</code> applied to an
+<code>mpg</code> plot:</p>
+<pre class="r"><code>ggplot(ggplot2::mpg, aes(displ, hwy, color = cyl)) +
+  geom_point() +
+  scale_color_wesanderson_c()</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-12-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Notes: while the exercise calls for a single function, this breaks
+the normal conventions for ggplot2. Such a function could be written by
+combining <code>scale_colour_wesanderson_d()</code> and
+<code>scale_colour_wesanderson_c()</code>.</p>
+<p>GG Solutions:</p>
+<pre class="r"><code>scale_colour_wesanderson &lt;- function(palette = &quot;BottleRocket1&quot;, ...) {
+  scale_color_manual(values = wesanderson::wes_palette(palette), ...)
+}
+# Working example
+ggplot(mtcars, aes(wt, disp, color = factor(gear))) +
+  geom_point() +
+  scale_colour_wesanderson()</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-13-1.png" width="768" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="exercises-1" class="section level2">
+<h2>19.3.4 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>To make the best use of space, many examples in this book hide the
+axes labels and legend. I’ve just copied-and-pasted the same code into
+multiple places, but it would make more sense to create a reusable
+function. What would that function look like?</li>
+</ol>
+<p>Answer: <code>hide_ll()</code> does this, demonstrated with an
+<code>mpg</code> plot.</p>
+<pre class="r"><code>hide_ll &lt;- function() {
+  list(
+    labs(x = NULL, y = NULL),
+    theme(legend.position = &quot;none&quot;)
+  )
+}
+
+ggplot(ggplot2::mpg, aes(displ, hwy, color = drv)) +
+  geom_point() +
+  hide_ll()</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>GG Solutions:</p>
+<pre class="r"><code>remove_labels &lt;- theme(
+  legend.position = &quot;none&quot;,
+  axis.title.x = element_blank(),
+  axis.title.y = element_blank()
+)
+# Working Example
+ggplot(mtcars, aes(wt, disp, color = factor(gear))) +
+  geom_point() +
+  remove_labels</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Note: the GG Solutions answer is more verbose, but uses only a single
+function call (theme).</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Extend the <code>borders()</code> function to also add
+<code>coord_quickmap()</code> to the plot.</li>
+</ol>
+<p>Answer: <code>borders_quickmap()</code> implemented and demonstrated
+using a <code>borders()</code> example. In this case, the function
+passes all <code>...</code> variables to <code>borders()</code> and none
+to <code>coord_quickmap()</code> which avoids the complexity of handling
+arguments for both functions.</p>
+<pre class="r"><code>borders_quickmap &lt;- function(...) {
+  list(
+    borders(...),
+    coord_quickmap()
+  )
+}
+
+us.cities |&gt;
+  filter(capital == 2 &amp; !(country.etc %in% c(&quot;AK&quot;, &quot;HI&quot;))) |&gt;
+  ggplot(aes(long, lat)) +
+  geom_point() +
+  borders_quickmap(&quot;state&quot;) +
+  theme_void()</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Note: because of the complexities, it’s unlikely I’d ever implement
+something like <a
+href="https://ggplot2-book.org/programming.html#additional-arguments">Additional
+arguments</a> - there are minimal gains compared to calling two
+functions with separate lists of parameters.</p>
+<p>GG Solutions: Not sure.</p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Look through your own code. What combinations of geoms or scales do
+you use all the time? How could you extract the pattern into a reusable
+function?</li>
+</ol>
+<p>Answer: a common pattern I use is <code>geom_smooth</code> with
+<code>lm</code> and <code>y ~ x</code>. An implementation of this using
+robust linear modeling from <code>MASS</code> is demonstrated below:</p>
+<pre class="r"><code>geom_rlm &lt;- function(mapping = NULL, data = NULL, stat = &quot;smooth&quot;, position = &quot;identity&quot;, ...,
+                     method = MASS::rlm, formula = y ~ x, se = TRUE,
+                     na.rm = FALSE, # nolint: object_name_linter.
+                     orientation = NA,
+                     show.legend = NA, inherit.aes = TRUE) { # nolint: object_name_linter.
+  geom_smooth(
+    mapping = mapping, data = data, stat = stat, position = position, ...,
+    method = method, formula = formula, se = se, na.rm = na.rm, orientation = orientation,
+    show.legend = show.legend, inherit.aes = TRUE
+  )
+}
+
+ggplot(ggplot2::mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_rlm()</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-17-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>GG Solutions: no answer.</p>
+<hr />
+</div>
+<div id="exercises-2" class="section level2">
+<h2>19.4.2 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Create a <code>distribution()</code> function specially designed for
+visualising continuous distributions. Allow the user to supply a dataset
+and the name of a variable to visualise. Let them choose between
+histograms, frequency polygons, and density plots. What other arguments
+might you want to include?</li>
+</ol>
+<p>Answer: code below. In this case, it is useful to include
+<code>binwidth</code> and <code>bins</code>, used in creating both
+histograms and frequency polygons, and <code>na.rm</code>, used in all
+three. Defaults to histogram.</p>
+<pre class="r"><code>distribution &lt;- function(data, var, type = &quot;histogram&quot;, binwidth = NULL, bins = NULL,
+                         na.rm = FALSE) { # nolint: object_name_linter.
+  gg &lt;- ggplot(data, aes({{ var }}))
+
+  if (type == &quot;histogram&quot;) {
+    gg &lt;- gg + geom_histogram(binwidth = binwidth, bins = bins, na.rm = na.rm)
+  } else if (type == &quot;freqpoly&quot;) {
+    gg &lt;- gg + geom_freqpoly(binwidth = binwidth, bins = bins, na.rm = na.rm)
+  } else if (type == &quot;density&quot;) {
+    gg &lt;- gg + geom_density(na.rm = na.rm)
+  } else {
+    stop(&quot;`type` must be histogram, freqpoly, or density&quot;)
+  }
+  gg
+}
+
+distribution(diamonds, price, binwidth = 100)</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>distribution(diamonds, price, type = &quot;freqpoly&quot;, binwidth = 100)</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-18-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>distribution(diamonds, price, type = &quot;density&quot;)</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-18-3.png" width="768" style="display: block; margin: auto;" /></p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>What additional arguments should <code>pcp()</code> take? What are
+the downsides of how <code>...</code> is used in the current code?</li>
+</ol>
+<p>Answer: it would be useful to add arguments for the order of the
+variables, and a scale adjustment for value, drawing from examples on <a
+href="https://en.wikipedia.org/wiki/Parallel_coordinates">Wikipedia</a>.
+Using <code>...</code> for <code>geom_line()</code> prevents other
+unnamed parameters from being passed to other functions, like
+<code>ggplot()</code>.</p>
+<hr />
+</div>
+<div id="exercises-3" class="section level2">
+<h2>19.5.1 Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>How could you add a <code>geom_point()</code> layer to each element
+of the following list?</li>
+</ol>
+<pre class="r"><code>plots &lt;- list(
+  ggplot(ggplot2::mpg, aes(displ, hwy)),
+  ggplot(diamonds, aes(carat, price)),
+  ggplot(faithfuld, aes(waiting, eruptions, size = density))
+)</code></pre>
+<p>Answer: easily done with <code>lapply</code>()`:</p>
+<pre class="r"><code>lapply(plots, function(g) g + geom_point())</code></pre>
+<pre><code>#&gt; [[1]]</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre><code>#&gt; 
+#&gt; [[2]]</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-20-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre><code>#&gt; 
+#&gt; [[3]]</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-20-3.png" width="768" style="display: block; margin: auto;" /></p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>What does the following function do? What’s a better name for
+it?</li>
+</ol>
+<pre class="r"><code>mystery &lt;- function(...) {
+  Reduce(`+`, list(...), accumulate = TRUE)
+}
+
+mystery(
+  ggplot(ggplot2::mpg, aes(displ, hwy)) +
+    geom_point(),
+  geom_smooth(),
+  xlab(NULL),
+  ylab(NULL)
+)</code></pre>
+<pre><code>#&gt; [[1]]</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-21-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre><code>#&gt; 
+#&gt; [[2]]</code></pre>
+<pre><code>#&gt; `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-21-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre><code>#&gt; 
+#&gt; [[3]]</code></pre>
+<pre><code>#&gt; `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-21-3.png" width="768" style="display: block; margin: auto;" /></p>
+<pre><code>#&gt; 
+#&gt; [[4]]</code></pre>
+<pre><code>#&gt; `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="ggplot2-5_files/figure-html/unnamed-chunk-21-4.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Answer: a better name would be ‘add layer and print’.</p>
+<hr />
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiBnZ3Bsb3QyIChFeHRlbmRpbmcpCmRhdGU6ICcyMDIyLTEyLTE4JwpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRoZW1lOgogICAgICB2ZXJzaW9uOiA1CiAgICB0b2M6IHllcwogICAgdG9jX2Zsb2F0OgogICAgICBjb2xsYXBzZWQ6IHllcwogICAgICBzbW9vdGhfc2Nyb2xsOiBubwotLS0KCldvcmtib29rIGZvciBjb21wbGV0aW5nIHF1aXp6ZXMgYW5kIGV4ZXJjaXNlcyBmcm9tIHRoZSAiRXh0ZW5kaW5nIiBjaGFwdGVycyBvZiBbZ2dwbG90MjogRWxlZ2FudCBHcmFwaGljcyBmb3IgRGF0YSBBbmFseXNpc10oaHR0cHM6Ly9nZ3Bsb3QyLWJvb2sub3JnL2luZGV4Lmh0bWwpLCB0aGlyZCBlZGl0aW9uLCB3aXRoIGNvbXBhcmlzb25zIHRvIHNvbHV0aW9ucyBmcm9tIFtTb2x1dGlvbnMgdG8gZ2dwbG90MjogRWxlZ2FudCBHcmFwaGljcyBmb3IgRGF0YSBBbmFseXNpc10oaHR0cHM6Ly9nZ3Bsb3QyLWJvb2stc29sdXRpb25zLTNlZC5uZXRsaWZ5LmFwcCkuCgpgYGB7ciBzZXR1cCwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9CmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeSh3ZXNhbmRlcnNvbikKbGlicmFyeShzY2FsZXMpCmxpYnJhcnkobWFwcykgIyBub2xpbnQ6IHVudXNlZF9pbXBvcnRfbGludGVyLiBOZWVkZWQgZm9yIGB1cy5jaXRpZXNgLgpsaWJyYXJ5KGRwbHlyKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KAogIGNvbW1lbnQgPSAiIz4iLAogIGZpZy5hbGlnbiA9ICJjZW50ZXIiCikKYGBgCgojIEludHJvZHVjdGlvbgoKVGhpcyB3b3JrYm9vayBpbmNsdWRlcyBhbnN3ZXJzIGFuZCBzb2x1dGlvbnMgdG8gdGhlIHF1aXp6ZXMgYW5kIGV4ZXJjaXNlcyBmcm9tIFtnZ3Bsb3QyOiBFbGVnYW50IEdyYXBoaWNzIGZvciBEYXRhIEFuYWx5c2lzXShodHRwczovL2dncGxvdDItYm9vay5vcmcvaW5kZXguaHRtbCkgYW5kIFtTb2x1dGlvbnMgdG8gZ2dwbG90MjogRWxlZ2FudCBHcmFwaGljcyBmb3IgRGF0YSBBbmFseXNpc10oaHR0cHM6Ly9nZ3Bsb3QyLWJvb2stc29sdXRpb25zLTNlZC5uZXRsaWZ5LmFwcCksIG9yZ2FuaXplZCBieSBjaGFwdGVyLiBJdCBpbmNsdWRlcyBleGNlcnB0cyBmcm9tIGJvdGggYm9va3MsIGNvcGllZCBoZXJlLgoKKipXQVJOSU5HLCBTUE9JTEVSUyEqKiBJZiB5b3UgaGF2ZW4ndCByZWFkIHRoZSBnZ3Bsb3QyIGJvb2sgYW5kIGludGVuZCB0byBjb21wbGV0ZSB0aGUgcXVpenplcyBhbmQgZXhlcmNpc2VzLCBkb24ndCByZWFkIHRoaXMgbm90ZWJvb2suIEl0IGNvbnRhaW5zIG15IChwb3RlbnRpYWxseSB3cm9uZykgYW5zd2VycyB0byBib3RoLgoKIyAxOSBQcm9ncmFtbWluZyB3aXRoIGdncGxvdDIKCkEgbWFqb3IgcmVxdWlyZW1lbnQgb2YgYSBnb29kIGRhdGEgYW5hbHlzaXMgaXMgZmxleGliaWxpdHkuIElmIHlvdXIgZGF0YSBjaGFuZ2VzLCBvciB5b3UgZGlzY292ZXIgc29tZXRoaW5nIHRoYXQgbWFrZXMgeW91IHJldGhpbmsgeW91ciBiYXNpYyBhc3N1bXB0aW9ucywgeW91IG5lZWQgdG8gYmUgYWJsZSB0byBlYXNpbHkgY2hhbmdlIG1hbnkgcGxvdHMgYXQgb25jZS4gVGhlIG1haW4gaW5oaWJpdG9yIG9mIGZsZXhpYmlsaXR5IGlzIGNvZGUgZHVwbGljYXRpb24uIElmIHlvdSBoYXZlIHRoZSBzYW1lIHBsb3R0aW5nIHN0YXRlbWVudCByZXBlYXRlZCBvdmVyIGFuZCBvdmVyIGFnYWluLCB5b3UnbGwgaGF2ZSB0byBtYWtlIHRoZSBzYW1lIGNoYW5nZSBpbiBtYW55IGRpZmZlcmVudCBwbGFjZXMuIE9mdGVuIGp1c3QgdGhlIHRob3VnaHQgb2YgbWFraW5nIGFsbCB0aG9zZSBjaGFuZ2VzIGlzIGV4aGF1c3RpbmchIFRoaXMgY2hhcHRlciB3aWxsIGhlbHAgeW91IG92ZXJjb21lIHRoYXQgcHJvYmxlbSBieSBzaG93aW5nIHlvdSBob3cgdG8gcHJvZ3JhbSB3aXRoIGdncGxvdDIuCgpUbyBtYWtlIHlvdXIgY29kZSBtb3JlIGZsZXhpYmxlLCB5b3UgbmVlZCB0byByZWR1Y2UgZHVwbGljYXRlZCBjb2RlIGJ5IHdyaXRpbmcgZnVuY3Rpb25zLiBXaGVuIHlvdSBub3RpY2UgeW91J3JlIGRvaW5nIHRoZSBzYW1lIHRoaW5nIG92ZXIgYW5kIG92ZXIgYWdhaW4sIHRoaW5rIGFib3V0IGhvdyB5b3UgbWlnaHQgZ2VuZXJhbGlzZSBpdCBhbmQgdHVybiBpdCBpbnRvIGEgZnVuY3Rpb24uIElmIHlvdSdyZSBub3QgdGhhdCBmYW1pbGlhciB3aXRoIGhvdyBmdW5jdGlvbnMgd29yayBpbiBSLCB5b3UgbWlnaHQgd2FudCB0byBicnVzaCB1cCB5b3VyIGtub3dsZWRnZSBhdCA8aHR0cHM6Ly9hZHYtci5oYWRsZXkubnovZnVuY3Rpb25zLmh0bWw+LiAKCiMjIDE5LjIuMSBFeGVyY2lzZXMKCjEuICBDcmVhdGUgYW4gb2JqZWN0IHRoYXQgcmVwcmVzZW50cyBhIHBpbmsgaGlzdG9ncmFtIHdpdGggMTAwIGJpbnMuCgpBbnN3ZXI6IGBwaW5rX2hpc3RgIGFwcGxpZWQgdG8gdGhlIHByaWNlIG9mIGBkaWFtb25kc2AuCgpgYGB7cn0KcGlua19oaXN0IDwtIGdlb21faGlzdG9ncmFtKGJpbnMgPSAxMDAsIGZpbGwgPSAicGluayIpCgpnZ3Bsb3QoZGlhbW9uZHMsIGFlcyhwcmljZSkpICsKICBwaW5rX2hpc3QKYGBgCgpHRyBTb2x1dGlvbnM6CgpgYGB7cn0KcGlua19oaXN0X2dncyA8LSBnZW9tX2hpc3RvZ3JhbSgKICBjb2xvciA9ICJwaW5rIiwKICBiaW5zID0gMTAwCikKYGBgCgpOb3RlOiBJIHRoaW5rIHRoZSBpbnRlbnQgaGVyZSBpcyB0byBzZXQgYGZpbGxgLCBub3QgYGNvbG9yYC4KCi0tLQoKMi4gIENyZWF0ZSBhbiBvYmplY3QgdGhhdCByZXByZXNlbnRzIGEgZmlsbCBzY2FsZSB3aXRoIHRoZSBCbHVlcyAKICAgIENvbG9yQnJld2VyIHBhbGV0dGUuCgpBbnN3ZXI6IGBibHVlc2AgYXBwbGllZCB0byBhIGBnZW9tX2JhcigpYCBleGFtcGxlOgoKYGBge3J9CmJsdWVzIDwtIHNjYWxlX2ZpbGxfYnJld2VyKHBhbGV0dGUgPSAiQmx1ZXMiKQoKZ2dwbG90KGdncGxvdDI6Om1wZywgYWVzKGNsYXNzLCBmaWxsID0gZHJ2KSkgKwogIGdlb21fYmFyKCkgKwogIHRoZW1lX2NsYXNzaWMoKSArCiAgYmx1ZXMKYGBgCgpHRyBTb2x1dGlvbnM6CgpgYGB7cn0KZmlsbF9ibHVlcyA8LSBzY2FsZV9maWxsX2Rpc3RpbGxlcigKICBwYWxldHRlID0gIkJsdWVzIgopCmBgYAoKTm90ZSB0aGF0IHRoZSBkb2N1bWVudGF0aW9uIHN0YXRlczoKCj4gVGhlIGBkaXN0aWxsZXJgIHNjYWxlcyBleHRlbmQgYGJyZXdlcmAgc2NhbGVzIGJ5IHNtb290aGx5IGludGVycG9sYXRpbmcgNyBjb2xvdXJzIGZyb20gYW55IHBhbGV0dGUgdG8gYSBjb250aW51b3VzIHNjYWxlLgoKLS0tCgozLiAgUmVhZCB0aGUgc291cmNlIGNvZGUgZm9yIGB0aGVtZV9ncmV5KClgLiBXaGF0IGFyZSBpdHMgYXJndW1lbnRzPyAKICAgIEhvdyBkb2VzIGl0IHdvcms/CgpBbnN3ZXI6IGB0aGVtZV9ncmV5KClgIGhhcyA0IGFyZ3VtZW50czogYGJhc2Vfc2l6ZWAsIGBiYXNlX2ZhbWlseWAsIGBiYXNlX2xpbmVfc2l6ZWAsIGFuZCBgYmFzZV9yZWN0X3NpemVgLiBJdCBzcGVjaWZpZXMgYSBjb21wbGV0ZSB0aGVtZSBvYmplY3QsIGB0YCwgYW5kIHVzZXMgdGhlIGAlK3JlcGxhY2UlYCBmdW5jdGlvbiB0byBtb2RpZnkgYW4gaW50ZXJuYWwgZ2xvYmFsLCBgZ2dwbG90X2dsb2JhbCR0aGVtZV9hbGxfbnVsbGAgdXNpbmcgYHRgLgoKYGBge3J9CnRoZW1lX2dyZXkKYGBgCgpHRyBTb2x1dGlvbnM6CgotIEl0cyBhcmd1bWVudHMgaW5jbHVkZSBgYmFzZV9zaXplYCwgYGJhc2VfZmFtaWx5YCwgYGJhc2VfbGluZV9zaXplYCwgYW5kIGBiYXNlX3JlY3Rfc2l6ZWAKLSBBY2NvcmRpbmcgdG8gdGhlIGhlbHAgZmlsZSwgYHRoZW1lX2dyYXkoKWAgaXMgdGhlIHNpZ25hdHVyZSBnZ3Bsb3QyIHRoZW1lIHdpdGggYSBncmV5IGJhY2tncm91bmQgYW5kIHdoaXRlIGdyaWRsaW5lcyBhbmQgaXMgZGVzaWduZWQgdG8gcHV0IHRoZSBkYXRhIGZvcndhcmQgeWV0IG1ha2UgY29tcGFyaXNvbnMgZWFzeS4KCi0tLQoKNC4gIENyZWF0ZSBgc2NhbGVfY29sb3VyX3dlc2FuZGVyc29uKClgLiBJdCBzaG91bGQgaGF2ZSBhIHBhcmFtZXRlciB0byBwaWNrIAogICAgdGhlIHBhbGV0dGUgZnJvbSB0aGUgd2VzYW5kZXJzb24gcGFja2FnZSwgYW5kIGNyZWF0ZSBlaXRoZXIgYSBjb250aW51b3VzCiAgICBvciBkaXNjcmV0ZSBzY2FsZS4KCkFuc3dlcjogdG8gY29uc3RydWN0IHRoaXMgZnVuY3Rpb24sIGl0IGlzIGhlbHBmdWwgdG8gcmV2aWV3IHRoZSBjb2RlIGZvciBgc2NhbGVfY29sb3JfYnJld2VyKClgOgoKYGBge3J9CnNjYWxlX2NvbG9yX2JyZXdlcgpgYGAKClRoZSBmdW5jdGlvbiBpcyBhIHdyYXBwZXIgZm9yIGBkaXNjcmV0ZV9zY2FsZSgpYCBhbmQgY2FsbHMgYHNjYWxlczo6YnJld2VyX3BhbCgpYCwgd2hpY2ggaXMgYSBbZnVuY3Rpb24gZmFjdG9yeV0oaHR0cHM6Ly9hZHYtci5oYWRsZXkubnovZnVuY3Rpb24tZmFjdG9yaWVzLmh0bWwpOgoKYGBge3J9CnNjYWxlczo6YnJld2VyX3BhbApgYGAKCkZpcnN0IHdlIGNvbnN0cnVjdCBhIGRpc2NyZXRlIHNjYWxlLCB1c2luZyBgRGFyamVlbGluZzFgIGFzIHRoZSBkZWZhdWx0OgoKYGBge3J9Cndlc2FuZGVyc29uX3BhbCA8LSBmdW5jdGlvbihuYW1lLCB0eXBlKSB7CiAgZnVuY3Rpb24obikgewogICAgd2VzX3BhbGV0dGUobmFtZSwgbiwgdHlwZSkKICB9Cn0KCnNjYWxlX2NvbG9yX3dlc2FuZGVyc29uX2QgPC0gZnVuY3Rpb24oLi4uLCBuYW1lID0gIkRhcmplZWxpbmcxIiwgdHlwZSA9ICJkaXNjcmV0ZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYWVzdGhldGljcyA9ICJjb2xvdXIiKSB7CiAgZGlzY3JldGVfc2NhbGUoYWVzdGhldGljcywgIndlc2FuZGVyc29uX2QiLCB3ZXNhbmRlcnNvbl9wYWwobmFtZSwgdHlwZSksIC4uLikKfQpgYGAKCk5vdGUgdGhhdCB0aGVzZSBmdW5jdGlvbnMgYXJlIGxpbWl0ZWQgYnkgdGhlIG51bWJlciBvZiBjb2xvcnMgaW4gZWFjaCB3ZXNhbmRlcnNvbiBwYWxldHRlICg0LTcpLCB3aGljaCB3aWxsIGdlbmVyYXRlIGFuIGVycm9yIGlmIG1vcmUgY29sb3JzIGFyZSByZXF1ZXN0ZWQuIFRoZSBgd2VzYW5kZXJzb25fcGFsYCBmdW5jdGlvbiBjb3VsZCBiZSByZXZpc2VkIHRvIGF1dG8tZW5hYmxlIGBjb250aW51b3VzYCBvciBgc2NhbGVfY29sb3Jfd2VzYW5kZXJzb25fZCgpYCBjYW4gYmUgY2FsbGVkIHdpdGggYHR5cGUgPSAiY29udGludW91cyJgLgoKRm9yIGEgY29udGludW91cyBzY2FsZSwgaXQgaXMgaGVscGZ1bCB0byByZXZpZXcgdGhlIGNvZGUgb2YgYHNjYWxlX2NvbG9yX3ZpcmlkaXNfYygpYDoKCmBgYHtyfQpzY2FsZV9jb2xvcl92aXJpZGlzX2MKYGBgCgpXZSBjYW4gYWRkIGEgY29udGludW91cyBzY2FsZSBiYXNlZCB1c2luZyBgWmlzc291MWAgYXMgdGhlIGRlZmF1bHQ6CgpgYGB7cn0Kc2NhbGVfY29sb3Jfd2VzYW5kZXJzb25fYyA8LSBmdW5jdGlvbiguLi4sCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZSA9ICJaaXNzb3UxIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0eXBlID0gImNvbnRpbnVvdXMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhbHVlcyA9IE5VTEwsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3BhY2UgPSAiTGFiIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBuYS52YWx1ZSA9ICJncmV5NTAiLCAjIG5vbGludDogb2JqZWN0X25hbWVfbGludGVyLgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGd1aWRlID0gImNvbG91cmJhciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYWVzdGhldGljcyA9ICJjb2xvdXIiKSB7CiAgY29udGludW91c19zY2FsZSgKICAgIGFlc3RoZXRpY3MsICJ3ZXNhbmRlcnNvbl9jIiwKICAgIGdyYWRpZW50X25fcGFsKHdlc2FuZGVyc29uX3BhbChuYW1lLCB0eXBlKShsZW5ndGgod2VzX3BhbGV0dGVzW1tuYW1lXV0pKSwgdmFsdWVzLCBzcGFjZSksCiAgICBuYS52YWx1ZSA9IG5hLnZhbHVlLCBndWlkZSA9IGd1aWRlLCAuLi4KICApCn0KYGBgCgpgc2NhbGVfY29sb3VyX3dlc2FuZGVyc29uX2QoKWAgYXBwbGllZCB0byBhbiBgbXBnYCBwbG90OgoKYGBge3J9CmdncGxvdChnZ3Bsb3QyOjptcGcsIGFlcyhkaXNwbCwgaHd5LCBjb2xvciA9IGRydikpICsKICBnZW9tX3BvaW50KCkgKwogIHNjYWxlX2NvbG9yX3dlc2FuZGVyc29uX2QoKQpgYGAKCmBzY2FsZV9jb2xvdXJfd2VzYW5kZXJzb25fYygpYCBhcHBsaWVkIHRvIGFuIGBtcGdgIHBsb3Q6CgpgYGB7cn0KZ2dwbG90KGdncGxvdDI6Om1wZywgYWVzKGRpc3BsLCBod3ksIGNvbG9yID0gY3lsKSkgKwogIGdlb21fcG9pbnQoKSArCiAgc2NhbGVfY29sb3Jfd2VzYW5kZXJzb25fYygpCmBgYAoKTm90ZXM6IHdoaWxlIHRoZSBleGVyY2lzZSBjYWxscyBmb3IgYSBzaW5nbGUgZnVuY3Rpb24sIHRoaXMgYnJlYWtzIHRoZSBub3JtYWwgY29udmVudGlvbnMgZm9yIGdncGxvdDIuIFN1Y2ggYSBmdW5jdGlvbiBjb3VsZCBiZSB3cml0dGVuIGJ5IGNvbWJpbmluZyBgc2NhbGVfY29sb3VyX3dlc2FuZGVyc29uX2QoKWAgYW5kIGBzY2FsZV9jb2xvdXJfd2VzYW5kZXJzb25fYygpYC4KCkdHIFNvbHV0aW9uczoKCmBgYHtyfQpzY2FsZV9jb2xvdXJfd2VzYW5kZXJzb24gPC0gZnVuY3Rpb24ocGFsZXR0ZSA9ICJCb3R0bGVSb2NrZXQxIiwgLi4uKSB7CiAgc2NhbGVfY29sb3JfbWFudWFsKHZhbHVlcyA9IHdlc2FuZGVyc29uOjp3ZXNfcGFsZXR0ZShwYWxldHRlKSwgLi4uKQp9CiMgV29ya2luZyBleGFtcGxlCmdncGxvdChtdGNhcnMsIGFlcyh3dCwgZGlzcCwgY29sb3IgPSBmYWN0b3IoZ2VhcikpKSArCiAgZ2VvbV9wb2ludCgpICsKICBzY2FsZV9jb2xvdXJfd2VzYW5kZXJzb24oKQpgYGAKCi0tLQoKIyMgMTkuMy40IEV4ZXJjaXNlcwoKMS4gIFRvIG1ha2UgdGhlIGJlc3QgdXNlIG9mIHNwYWNlLCBtYW55IGV4YW1wbGVzIGluIHRoaXMgYm9vayBoaWRlIHRoZSBheGVzIAogICAgbGFiZWxzIGFuZCBsZWdlbmQuIEkndmUganVzdCBjb3BpZWQtYW5kLXBhc3RlZCB0aGUgc2FtZSBjb2RlIGludG8gbXVsdGlwbGUgCiAgICBwbGFjZXMsIGJ1dCBpdCB3b3VsZCBtYWtlIG1vcmUgc2Vuc2UgdG8gY3JlYXRlIGEgcmV1c2FibGUgZnVuY3Rpb24uIAogICAgV2hhdCB3b3VsZCB0aGF0IGZ1bmN0aW9uIGxvb2sgbGlrZT8KCkFuc3dlcjogYGhpZGVfbGwoKWAgZG9lcyB0aGlzLCBkZW1vbnN0cmF0ZWQgd2l0aCBhbiBgbXBnYCBwbG90LgoKYGBge3J9CmhpZGVfbGwgPC0gZnVuY3Rpb24oKSB7CiAgbGlzdCgKICAgIGxhYnMoeCA9IE5VTEwsIHkgPSBOVUxMKSwKICAgIHRoZW1lKGxlZ2VuZC5wb3NpdGlvbiA9ICJub25lIikKICApCn0KCmdncGxvdChnZ3Bsb3QyOjptcGcsIGFlcyhkaXNwbCwgaHd5LCBjb2xvciA9IGRydikpICsKICBnZW9tX3BvaW50KCkgKwogIGhpZGVfbGwoKQpgYGAKCkdHIFNvbHV0aW9uczoKCmBgYHtyfQpyZW1vdmVfbGFiZWxzIDwtIHRoZW1lKAogIGxlZ2VuZC5wb3NpdGlvbiA9ICJub25lIiwKICBheGlzLnRpdGxlLnggPSBlbGVtZW50X2JsYW5rKCksCiAgYXhpcy50aXRsZS55ID0gZWxlbWVudF9ibGFuaygpCikKIyBXb3JraW5nIEV4YW1wbGUKZ2dwbG90KG10Y2FycywgYWVzKHd0LCBkaXNwLCBjb2xvciA9IGZhY3RvcihnZWFyKSkpICsKICBnZW9tX3BvaW50KCkgKwogIHJlbW92ZV9sYWJlbHMKYGBgCgpOb3RlOiB0aGUgR0cgU29sdXRpb25zIGFuc3dlciBpcyBtb3JlIHZlcmJvc2UsIGJ1dCB1c2VzIG9ubHkgYSBzaW5nbGUgZnVuY3Rpb24gY2FsbCAodGhlbWUpLgoKLS0tCgoyLiAgRXh0ZW5kIHRoZSBgYm9yZGVycygpYCBmdW5jdGlvbiB0byBhbHNvIGFkZCBgY29vcmRfcXVpY2ttYXAoKWAgdG8gdGhlCiAgICBwbG90LgoKQW5zd2VyOiBgYm9yZGVyc19xdWlja21hcCgpYCBpbXBsZW1lbnRlZCBhbmQgZGVtb25zdHJhdGVkIHVzaW5nIGEgYGJvcmRlcnMoKWAgZXhhbXBsZS4gSW4gdGhpcyBjYXNlLCB0aGUgZnVuY3Rpb24gcGFzc2VzIGFsbCBgLi4uYCB2YXJpYWJsZXMgdG8gYGJvcmRlcnMoKWAgYW5kIG5vbmUgdG8gYGNvb3JkX3F1aWNrbWFwKClgIHdoaWNoIGF2b2lkcyB0aGUgY29tcGxleGl0eSBvZiBoYW5kbGluZyBhcmd1bWVudHMgZm9yIGJvdGggZnVuY3Rpb25zLgoKYGBge3J9CmJvcmRlcnNfcXVpY2ttYXAgPC0gZnVuY3Rpb24oLi4uKSB7CiAgbGlzdCgKICAgIGJvcmRlcnMoLi4uKSwKICAgIGNvb3JkX3F1aWNrbWFwKCkKICApCn0KCnVzLmNpdGllcyB8PgogIGZpbHRlcihjYXBpdGFsID09IDIgJiAhKGNvdW50cnkuZXRjICVpbiUgYygiQUsiLCAiSEkiKSkpIHw+CiAgZ2dwbG90KGFlcyhsb25nLCBsYXQpKSArCiAgZ2VvbV9wb2ludCgpICsKICBib3JkZXJzX3F1aWNrbWFwKCJzdGF0ZSIpICsKICB0aGVtZV92b2lkKCkKYGBgCgpOb3RlOiBiZWNhdXNlIG9mIHRoZSBjb21wbGV4aXRpZXMsIGl0J3MgdW5saWtlbHkgSSdkIGV2ZXIgaW1wbGVtZW50IHNvbWV0aGluZyBsaWtlIFtBZGRpdGlvbmFsIGFyZ3VtZW50c10oaHR0cHM6Ly9nZ3Bsb3QyLWJvb2sub3JnL3Byb2dyYW1taW5nLmh0bWwjYWRkaXRpb25hbC1hcmd1bWVudHMpIC0gdGhlcmUgYXJlIG1pbmltYWwgZ2FpbnMgY29tcGFyZWQgdG8gY2FsbGluZyB0d28gZnVuY3Rpb25zIHdpdGggc2VwYXJhdGUgbGlzdHMgb2YgcGFyYW1ldGVycy4KCkdHIFNvbHV0aW9uczogTm90IHN1cmUuCgotLS0KCjMuICBMb29rIHRocm91Z2ggeW91ciBvd24gY29kZS4gV2hhdCBjb21iaW5hdGlvbnMgb2YgZ2VvbXMgb3Igc2NhbGVzIGRvIHlvdQogICAgdXNlIGFsbCB0aGUgdGltZT8gSG93IGNvdWxkIHlvdSBleHRyYWN0IHRoZSBwYXR0ZXJuIGludG8gYSByZXVzYWJsZSAKICAgIGZ1bmN0aW9uPwoKQW5zd2VyOiBhIGNvbW1vbiBwYXR0ZXJuIEkgdXNlIGlzIGBnZW9tX3Ntb290aGAgd2l0aCBgbG1gIGFuZCBgeSB+IHhgLiBBbiBpbXBsZW1lbnRhdGlvbiBvZiB0aGlzIHVzaW5nIHJvYnVzdCBsaW5lYXIgbW9kZWxpbmcgZnJvbSBgTUFTU2AgaXMgZGVtb25zdHJhdGVkIGJlbG93OgoKYGBge3J9Cmdlb21fcmxtIDwtIGZ1bmN0aW9uKG1hcHBpbmcgPSBOVUxMLCBkYXRhID0gTlVMTCwgc3RhdCA9ICJzbW9vdGgiLCBwb3NpdGlvbiA9ICJpZGVudGl0eSIsIC4uLiwKICAgICAgICAgICAgICAgICAgICAgbWV0aG9kID0gTUFTUzo6cmxtLCBmb3JtdWxhID0geSB+IHgsIHNlID0gVFJVRSwKICAgICAgICAgICAgICAgICAgICAgbmEucm0gPSBGQUxTRSwgIyBub2xpbnQ6IG9iamVjdF9uYW1lX2xpbnRlci4KICAgICAgICAgICAgICAgICAgICAgb3JpZW50YXRpb24gPSBOQSwKICAgICAgICAgICAgICAgICAgICAgc2hvdy5sZWdlbmQgPSBOQSwgaW5oZXJpdC5hZXMgPSBUUlVFKSB7ICMgbm9saW50OiBvYmplY3RfbmFtZV9saW50ZXIuCiAgZ2VvbV9zbW9vdGgoCiAgICBtYXBwaW5nID0gbWFwcGluZywgZGF0YSA9IGRhdGEsIHN0YXQgPSBzdGF0LCBwb3NpdGlvbiA9IHBvc2l0aW9uLCAuLi4sCiAgICBtZXRob2QgPSBtZXRob2QsIGZvcm11bGEgPSBmb3JtdWxhLCBzZSA9IHNlLCBuYS5ybSA9IG5hLnJtLCBvcmllbnRhdGlvbiA9IG9yaWVudGF0aW9uLAogICAgc2hvdy5sZWdlbmQgPSBzaG93LmxlZ2VuZCwgaW5oZXJpdC5hZXMgPSBUUlVFCiAgKQp9CgpnZ3Bsb3QoZ2dwbG90Mjo6bXBnLCBhZXMoZGlzcGwsIGh3eSkpICsKICBnZW9tX3BvaW50KCkgKwogIGdlb21fcmxtKCkKYGBgCgpHRyBTb2x1dGlvbnM6IG5vIGFuc3dlci4KCi0tLQoKIyMgMTkuNC4yIEV4ZXJjaXNlcwoKMS4gIENyZWF0ZSBhIGBkaXN0cmlidXRpb24oKWAgZnVuY3Rpb24gc3BlY2lhbGx5IGRlc2lnbmVkIGZvciB2aXN1YWxpc2luZyAKICAgIGNvbnRpbnVvdXMgZGlzdHJpYnV0aW9ucy4gQWxsb3cgdGhlIHVzZXIgdG8gc3VwcGx5IGEgZGF0YXNldCBhbmQgdGhlCiAgICBuYW1lIG9mIGEgdmFyaWFibGUgdG8gdmlzdWFsaXNlLiBMZXQgdGhlbSBjaG9vc2UgYmV0d2VlbiBoaXN0b2dyYW1zLAogICAgZnJlcXVlbmN5IHBvbHlnb25zLCBhbmQgZGVuc2l0eSBwbG90cy4gV2hhdCBvdGhlciBhcmd1bWVudHMgbWlnaHQgeW91CiAgICB3YW50IHRvIGluY2x1ZGU/CgpBbnN3ZXI6IGNvZGUgYmVsb3cuIEluIHRoaXMgY2FzZSwgaXQgaXMgdXNlZnVsIHRvIGluY2x1ZGUgYGJpbndpZHRoYCBhbmQgYGJpbnNgLCB1c2VkIGluIGNyZWF0aW5nIGJvdGggaGlzdG9ncmFtcyBhbmQgZnJlcXVlbmN5IHBvbHlnb25zLCBhbmQgYG5hLnJtYCwgdXNlZCBpbiBhbGwgdGhyZWUuIERlZmF1bHRzIHRvIGhpc3RvZ3JhbS4KCmBgYHtyfQpkaXN0cmlidXRpb24gPC0gZnVuY3Rpb24oZGF0YSwgdmFyLCB0eXBlID0gImhpc3RvZ3JhbSIsIGJpbndpZHRoID0gTlVMTCwgYmlucyA9IE5VTEwsCiAgICAgICAgICAgICAgICAgICAgICAgICBuYS5ybSA9IEZBTFNFKSB7ICMgbm9saW50OiBvYmplY3RfbmFtZV9saW50ZXIuCiAgZ2cgPC0gZ2dwbG90KGRhdGEsIGFlcyh7eyB2YXIgfX0pKQoKICBpZiAodHlwZSA9PSAiaGlzdG9ncmFtIikgewogICAgZ2cgPC0gZ2cgKyBnZW9tX2hpc3RvZ3JhbShiaW53aWR0aCA9IGJpbndpZHRoLCBiaW5zID0gYmlucywgbmEucm0gPSBuYS5ybSkKICB9IGVsc2UgaWYgKHR5cGUgPT0gImZyZXFwb2x5IikgewogICAgZ2cgPC0gZ2cgKyBnZW9tX2ZyZXFwb2x5KGJpbndpZHRoID0gYmlud2lkdGgsIGJpbnMgPSBiaW5zLCBuYS5ybSA9IG5hLnJtKQogIH0gZWxzZSBpZiAodHlwZSA9PSAiZGVuc2l0eSIpIHsKICAgIGdnIDwtIGdnICsgZ2VvbV9kZW5zaXR5KG5hLnJtID0gbmEucm0pCiAgfSBlbHNlIHsKICAgIHN0b3AoImB0eXBlYCBtdXN0IGJlIGhpc3RvZ3JhbSwgZnJlcXBvbHksIG9yIGRlbnNpdHkiKQogIH0KICBnZwp9CgpkaXN0cmlidXRpb24oZGlhbW9uZHMsIHByaWNlLCBiaW53aWR0aCA9IDEwMCkKZGlzdHJpYnV0aW9uKGRpYW1vbmRzLCBwcmljZSwgdHlwZSA9ICJmcmVxcG9seSIsIGJpbndpZHRoID0gMTAwKQpkaXN0cmlidXRpb24oZGlhbW9uZHMsIHByaWNlLCB0eXBlID0gImRlbnNpdHkiKQpgYGAKCi0tLQoKMi4gIFdoYXQgYWRkaXRpb25hbCBhcmd1bWVudHMgc2hvdWxkIGBwY3AoKWAgdGFrZT8gV2hhdCBhcmUgdGhlIGRvd25zaWRlcwogICAgb2YgaG93IGAuLi5gIGlzIHVzZWQgaW4gdGhlIGN1cnJlbnQgY29kZT8KCkFuc3dlcjogaXQgd291bGQgYmUgdXNlZnVsIHRvIGFkZCBhcmd1bWVudHMgZm9yIHRoZSBvcmRlciBvZiB0aGUgdmFyaWFibGVzLCBhbmQgYSBzY2FsZSBhZGp1c3RtZW50IGZvciB2YWx1ZSwgZHJhd2luZyBmcm9tIGV4YW1wbGVzIG9uIFtXaWtpcGVkaWFdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1BhcmFsbGVsX2Nvb3JkaW5hdGVzKS4gVXNpbmcgYC4uLmAgZm9yIGBnZW9tX2xpbmUoKWAgcHJldmVudHMgb3RoZXIgdW5uYW1lZCBwYXJhbWV0ZXJzIGZyb20gYmVpbmcgcGFzc2VkIHRvIG90aGVyIGZ1bmN0aW9ucywgbGlrZSBgZ2dwbG90KClgLgoKLS0tCgojIyAxOS41LjEgRXhlcmNpc2VzCiAgICAKMS4gIEhvdyBjb3VsZCB5b3UgYWRkIGEgYGdlb21fcG9pbnQoKWAgbGF5ZXIgdG8gZWFjaCBlbGVtZW50IG9mIHRoZSBmb2xsb3dpbmcgCiAgICBsaXN0PwoKYGBge3J9CnBsb3RzIDwtIGxpc3QoCiAgZ2dwbG90KGdncGxvdDI6Om1wZywgYWVzKGRpc3BsLCBod3kpKSwKICBnZ3Bsb3QoZGlhbW9uZHMsIGFlcyhjYXJhdCwgcHJpY2UpKSwKICBnZ3Bsb3QoZmFpdGhmdWxkLCBhZXMod2FpdGluZywgZXJ1cHRpb25zLCBzaXplID0gZGVuc2l0eSkpCikKYGBgCgpBbnN3ZXI6IGVhc2lseSBkb25lIHdpdGggYGxhcHBseWAoKWA6CgpgYGB7cn0KbGFwcGx5KHBsb3RzLCBmdW5jdGlvbihnKSBnICsgZ2VvbV9wb2ludCgpKQpgYGAKCi0tLQoKMi4gIFdoYXQgZG9lcyB0aGUgZm9sbG93aW5nIGZ1bmN0aW9uIGRvPyBXaGF0J3MgYSBiZXR0ZXIgbmFtZSBmb3IgaXQ/CgpgYGB7cn0KbXlzdGVyeSA8LSBmdW5jdGlvbiguLi4pIHsKICBSZWR1Y2UoYCtgLCBsaXN0KC4uLiksIGFjY3VtdWxhdGUgPSBUUlVFKQp9CgpteXN0ZXJ5KAogIGdncGxvdChnZ3Bsb3QyOjptcGcsIGFlcyhkaXNwbCwgaHd5KSkgKwogICAgZ2VvbV9wb2ludCgpLAogIGdlb21fc21vb3RoKCksCiAgeGxhYihOVUxMKSwKICB5bGFiKE5VTEwpCikKYGBgCgpBbnN3ZXI6IGEgYmV0dGVyIG5hbWUgd291bGQgYmUgJ2FkZCBsYXllciBhbmQgcHJpbnQnLgoKLS0tCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("ggplot2-5.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
