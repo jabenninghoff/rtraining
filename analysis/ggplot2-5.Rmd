@@ -72,7 +72,7 @@ Answer: `blues` applied to a `geom_bar()` example:
 ```{r}
 blues <- scale_fill_brewer(palette = "Blues")
 
-ggplot(mpg, aes(class, fill = drv)) +
+ggplot(ggplot2::mpg, aes(class, fill = drv)) +
   geom_bar() +
   theme_classic() +
   blues
@@ -169,7 +169,7 @@ scale_color_wesanderson_c <- function(...,
 `scale_colour_wesanderson_d()` applied to an `mpg` plot:
 
 ```{r}
-ggplot(mpg, aes(displ, hwy, color = drv)) +
+ggplot(ggplot2::mpg, aes(displ, hwy, color = drv)) +
   geom_point() +
   scale_color_wesanderson_d()
 ```
@@ -177,7 +177,7 @@ ggplot(mpg, aes(displ, hwy, color = drv)) +
 `scale_colour_wesanderson_c()` applied to an `mpg` plot:
 
 ```{r}
-ggplot(mpg, aes(displ, hwy, color = cyl)) +
+ggplot(ggplot2::mpg, aes(displ, hwy, color = cyl)) +
   geom_point() +
   scale_color_wesanderson_c()
 ```
@@ -215,7 +215,7 @@ hide_ll <- function() {
   )
 }
 
-ggplot(mpg, aes(displ, hwy, color = drv)) +
+ggplot(ggplot2::mpg, aes(displ, hwy, color = drv)) +
   geom_point() +
   hide_ll()
 ```
@@ -284,7 +284,7 @@ geom_rlm <- function(mapping = NULL, data = NULL, stat = "smooth", position = "i
   )
 }
 
-ggplot(mpg, aes(displ, hwy)) +
+ggplot(ggplot2::mpg, aes(displ, hwy)) +
   geom_point() +
   geom_rlm()
 ```
@@ -341,7 +341,7 @@ Answer: it would be useful to add arguments for the order of the variables, and 
 
 ```{r}
 plots <- list(
-  ggplot(mpg, aes(displ, hwy)),
+  ggplot(ggplot2::mpg, aes(displ, hwy)),
   ggplot(diamonds, aes(carat, price)),
   ggplot(faithfuld, aes(waiting, eruptions, size = density))
 )
@@ -363,7 +363,7 @@ mystery <- function(...) {
 }
 
 mystery(
-  ggplot(mpg, aes(displ, hwy)) +
+  ggplot(ggplot2::mpg, aes(displ, hwy)) +
     geom_point(),
   geom_smooth(),
   xlab(NULL),
