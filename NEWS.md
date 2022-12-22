@@ -1,3 +1,7 @@
+# rtraining 0.8.13
+
+* Minor fixes
+
 # rtraining 0.8.12
 
 * Added ggplot2 (Getting started): Workbook for completing quizzes and exercises from the "Getting started" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app)
