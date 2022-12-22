@@ -14,14 +14,14 @@
 
 <title>Advanced R Workbook (Functional programming)</title>
 
-<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link href="site_libs/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-5.1.3/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.1/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.1/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.1/bs3compat.js"></script>
+<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -351,6 +351,21 @@ div.tocify {
       <a href="advanced-r-3.html">Advanced R Workbook (Object-oriented programming)</a>
     </li>
     <li>
+      <a href="ggplot2-1.html">ggplot2 (Getting started)</a>
+    </li>
+    <li>
+      <a href="ggplot2-2.html">ggplot2 (Layers)</a>
+    </li>
+    <li>
+      <a href="ggplot2-3.html">ggplot2 (Scales)</a>
+    </li>
+    <li>
+      <a href="ggplot2-4.html">ggplot2 (Grammar)</a>
+    </li>
+    <li>
+      <a href="ggplot2-5.html">ggplot2 (Extending)</a>
+    </li>
+    <li>
       <a href="r-setup-log.html">R Setup Log</a>
     </li>
     <li>
@@ -443,11 +458,11 @@ calls the function provided as input with 1000 random uniform
 numbers.</p>
 <pre class="r"><code>randomise &lt;- function(f) f(runif(1e3))
 randomise(mean)</code></pre>
-<pre><code>#&gt; [1] 0.4998114</code></pre>
+<pre><code>#&gt; [1] 0.5134935</code></pre>
 <pre class="r"><code>randomise(mean)</code></pre>
-<pre><code>#&gt; [1] 0.4981199</code></pre>
+<pre><code>#&gt; [1] 0.4931999</code></pre>
 <pre class="r"><code>randomise(sum)</code></pre>
-<pre><code>#&gt; [1] 513.104</code></pre>
+<pre><code>#&gt; [1] 494.2862</code></pre>
 <p>The chances are that you’ve already used a functional. You might have
 used for-loop replacements like base R’s <code>lapply()</code>,
 <code>apply()</code>, and <code>tapply()</code>; or purrr’s
@@ -484,7 +499,7 @@ out.</li>
 #&gt;     .f &lt;- as_mapper(.f, ...)
 #&gt;     .Call(map_impl, environment(), &quot;.x&quot;, &quot;.f&quot;, &quot;double&quot;)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fee7d858550&gt;
+#&gt; &lt;bytecode: 0x7fcd04399b68&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="r"><code>map_dbl(mtcars, ~ length(unique(.x)))</code></pre>
 <pre><code>#&gt;  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
@@ -493,25 +508,25 @@ out.</li>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; length(unique(.x))
-#&gt; &lt;environment: 0x7fee9df698e8&gt;
+#&gt; &lt;environment: 0x7fcd16eab598&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <pre class="r"><code>function(..., .x = ..1, .y = ..2, . = ..1) length(unique(.x))</code></pre>
 <pre><code>#&gt; function(..., .x = ..1, .y = ..2, . = ..1) length(unique(.x))
-#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fcd16eab598&gt;</code></pre>
 <pre class="r"><code>as_mapper(mean)</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod(&quot;mean&quot;)
-#&gt; &lt;bytecode: 0x7feede819bc8&gt;
+#&gt; &lt;bytecode: 0x7fcd46cf7ca0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <pre class="r"><code>as_mapper(function(x) mean(x, na.rm = TRUE))</code></pre>
 <pre><code>#&gt; function(x) mean(x, na.rm = TRUE)
-#&gt; &lt;environment: 0x7fee9df698e8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fcd16eab598&gt;</code></pre>
 <pre class="r"><code>as_mapper(~ mean(.x, na.rm = TRUE))</code></pre>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; mean(.x, na.rm = TRUE)
-#&gt; &lt;environment: 0x7fee9df698e8&gt;
+#&gt; &lt;environment: 0x7fcd16eab598&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <p>Answer: Exploration above. <code>attr_getter()</code> supports
@@ -533,15 +548,15 @@ with nested data.</p>
 <pre class="r"><code>as_mapper(c(1, 2)) # equivalent to function(x) x[[1]][[2]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck(x, 1, 2, .default = NULL)
-#&gt; &lt;environment: 0x7feea83f2f98&gt;</code></pre>
+#&gt; &lt;environment: 0x7fcd01d9f6a8&gt;</code></pre>
 <pre class="r"><code>as_mapper(c(&quot;a&quot;, &quot;b&quot;)) # equivalent to function(x) x[[&quot;a&quot;]][[&quot;b]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck(x, &quot;a&quot;, &quot;b&quot;, .default = NULL)
-#&gt; &lt;environment: 0x7feea8354be0&gt;</code></pre>
+#&gt; &lt;environment: 0x7fcd01df7360&gt;</code></pre>
 <pre class="r"><code>as_mapper(list(1, &quot;b&quot;)) # equivalent to function(x) x[[1]][[&quot;b]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck(x, 1, &quot;b&quot;, .default = NULL)
-#&gt; &lt;environment: 0x7feea82e79e0&gt;</code></pre>
+#&gt; &lt;environment: 0x7fcd04491408&gt;</code></pre>
 <p>Besides mixing positions and names, it is also possible to pass along
 an accessor function. This is basically an anonymous function that gets
 information about some aspect of the input data. You are free to define
@@ -566,13 +581,13 @@ you explain why it returns the result that it does?</li>
 </ol>
 <pre class="r"><code>map(1:3, ~ runif(2))</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; [1] 0.5585438 0.1630985
+#&gt; [1] 0.9335278 0.5248136
 #&gt; 
 #&gt; [[2]]
-#&gt; [1] 0.6808823 0.2922937
+#&gt; [1] 0.3460012 0.1269208
 #&gt; 
 #&gt; [[3]]
-#&gt; [1] 0.5167138 0.6905384</code></pre>
+#&gt; [1] 0.4593295 0.9643878</code></pre>
 <pre class="r"><code>map(1:3, runif(2))</code></pre>
 <pre><code>#&gt; [[1]]
 #&gt; NULL
@@ -591,13 +606,13 @@ below:</p>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; runif(2)
-#&gt; &lt;environment: 0x7fee9df698e8&gt;
+#&gt; &lt;environment: 0x7fcd16eab598&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <pre class="r"><code>as_mapper(runif(2))</code></pre>
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck(x, 0.562832291005179, 0.843672472750768, .default = NULL)
-#&gt; &lt;environment: 0x7fee8a207398&gt;</code></pre>
+#&gt; pluck(x, 0.8440022978466, 0.0730421289335936, .default = NULL)
+#&gt; &lt;environment: 0x7fcd50de73f8&gt;</code></pre>
 <p>A more reasonable use of a pluck mapper for <code>1:3</code> is
 <code>1</code>:</p>
 <pre class="r"><code>map(1:3, 1)</code></pre>
@@ -849,8 +864,8 @@ compute the <span class="math inline">\(R^2\)</span> with
 bootstraps &lt;- map(1:10, ~ bootstrap(mtcars))
 
 map_dbl(bootstraps, ~ summary(lm(mpg ~ disp, .x))$r.squared)</code></pre>
-<pre><code>#&gt;  [1] 0.7028916 0.7169056 0.7532226 0.6038125 0.7276230 0.7331975 0.7772989 0.7823161 0.7438988
-#&gt; [10] 0.6086140</code></pre>
+<pre><code>#&gt;  [1] 0.6729760 0.6867304 0.7977465 0.7646300 0.6429110 0.7166302 0.6842718 0.7106996 0.6170812
+#&gt; [10] 0.7130085</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: To accomplish this task, we take advantage of the “list
 in, list out”-functionality of <code>map()</code>. This allows us to
@@ -862,8 +877,8 @@ class="math inline">\(R^2\)</span> values. For the last call we use
   map(~ lm(mpg ~ disp, data = .x)) %&gt;%
   map(summary) %&gt;%
   map_dbl(&quot;r.squared&quot;)</code></pre>
-<pre><code>#&gt;  [1] 0.7028916 0.7169056 0.7532226 0.6038125 0.7276230 0.7331975 0.7772989 0.7823161 0.7438988
-#&gt; [10] 0.6086140</code></pre>
+<pre><code>#&gt;  [1] 0.6729760 0.6867304 0.7977465 0.7646300 0.6429110 0.7166302 0.6842718 0.7106996 0.6170812
+#&gt; [10] 0.7130085</code></pre>
 <p>Note: while AR Solutions is arguably <em>slightly</em> more readable,
 my code should be faster:</p>
 <pre class="r"><code>bench::mark({
@@ -872,7 +887,7 @@ my code should be faster:</p>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                                         min median itr/s…¹ mem_a…² gc/se…³
 #&gt;   &lt;bch:expr&gt;                                                      &lt;bch:&gt; &lt;bch:&gt;   &lt;dbl&gt; &lt;bch:b&gt;   &lt;dbl&gt;
-#&gt; 1 { map_dbl(bootstraps, ~summary(lm(mpg ~ disp, .x))$r.squared) } 6.19ms 6.73ms    147.  63.7KB    6.99
+#&gt; 1 { map_dbl(bootstraps, ~summary(lm(mpg ~ disp, .x))$r.squared) } 4.98ms 5.63ms    170.  63.7KB    9.08
 #&gt; # … with abbreviated variable names ¹​`itr/sec`, ²​mem_alloc, ³​`gc/sec`</code></pre>
 <pre class="r"><code>bench::mark({
   bootstraps %&gt;%
@@ -883,7 +898,7 @@ my code should be faster:</p>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                                                                        min
 #&gt;   &lt;bch:expr&gt;                                                                                   &lt;bch:tm&gt;
-#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ disp, data = .x)) %&gt;% map(summary) %&gt;% map_dbl(&quot;r.squared&quot;) }   5.79ms
+#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ disp, data = .x)) %&gt;% map(summary) %&gt;% map_dbl(&quot;r.squared&quot;) }    4.6ms
 #&gt; # … with 4 more variables: median &lt;bch:tm&gt;, `itr/sec` &lt;dbl&gt;, mem_alloc &lt;bch:byt&gt;, `gc/sec` &lt;dbl&gt;</code></pre>
 <p>It is actually slightly slower! AR Solutions wins!</p>
 <hr />
@@ -902,7 +917,7 @@ my code should be faster:</p>
 <pre class="r"><code>as_mapper(1)</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck(x, 1, .default = NULL)
-#&gt; &lt;environment: 0x7fee8d0535c0&gt;</code></pre>
+#&gt; &lt;environment: 0x7fccf5398b70&gt;</code></pre>
 <pre class="r"><code>head(mtcars, 1)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -1218,12 +1233,12 @@ expect).</p>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                     min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span_r(test2, is.numeric)   87.4µs    106µs     9033.    4.01KB     16.1</code></pre>
+#&gt; 1 span_r(test2, is.numeric)   95.7µs    110µs     8454.    4.01KB     13.5</code></pre>
 <pre class="r"><code>bench::mark(span(test2, is.numeric))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;              &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span(test2, is.numeric)    136µs    150µs     6245.    4.01KB     11.0</code></pre>
+#&gt; 1 span(test2, is.numeric)    157µs    171µs     5402.    4.01KB     8.65</code></pre>
 <hr />
 <ol start="4" style="list-style-type: decimal">
 <li>Implement <code>arg_max()</code>. It should take a function and a
@@ -1512,12 +1527,12 @@ this stops <code>build_analysis_site()</code>):</p>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point_ar(cos, x_init = 1, tol = 1e-05)   19.2µs     23µs    41278.        0B     16.5</code></pre>
+#&gt; 1 fixed_point_ar(cos, x_init = 1, tol = 1e-05)     21µs   23.3µs    37685.        0B     11.3</code></pre>
 <pre class="r"><code>bench::mark(fixed_point(cos, 1))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point(cos, 1)     48µs     57µs    16778.        0B     15.8</code></pre>
+#&gt; 1 fixed_point(cos, 1)   52.8µs   60.7µs    15365.        0B     13.4</code></pre>
 <p>As usual, AR Solutions is faster. :-(</p>
 <hr />
 </div>
@@ -1576,7 +1591,7 @@ function operators, which you’ll learn about in Chapter 11.</p>
 <pre class="r"><code>force</code></pre>
 <pre><code>#&gt; function (x) 
 #&gt; x
-#&gt; &lt;bytecode: 0x7feedd900308&gt;
+#&gt; &lt;bytecode: 0x7fcd46972f08&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <p>Why is it better to <code>force(x)</code> instead of just
 <code>x</code>?</p>
@@ -1714,7 +1729,7 @@ bench::mark(m2(x))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)         6.7µs   8.56µs   106185.      848B     10.6</code></pre>
+#&gt; 1 m2(x)        7.34µs   8.38µs   104406.      848B     10.4</code></pre>
 <p>Answer: code above, following the formula <span
 class="math inline">\(E[(X - E[X])^i]\)</span>, where <span
 class="math inline">\(E\)</span> is the <a
@@ -1744,7 +1759,7 @@ all.equal(m1(x), 0) # removed stopifnot() for clarity</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        4.63µs    5.9µs   151427.      848B     15.1</code></pre>
+#&gt; 1 m2(x)        4.96µs    5.7µs   159726.      848B     16.0</code></pre>
 <p>Note: isn’t <code>sum() / length()</code> just <code>mean()</code>?
 For fun, compare <code>bench::mark()</code> (above). Curses, foiled
 again!</p>
@@ -1939,23 +1954,23 @@ bench::mark(optimize(ll_poisson1(x1), c(0, 100), maximum = TRUE))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                                min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                           &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x1), c(0, 100), maximum = TRUE)     31µs   38.1µs    24951.    10.6KB     17.5</code></pre>
+#&gt; 1 optimize(ll_poisson1(x1), c(0, 100), maximum = TRUE)   31.6µs   40.8µs    19804.    10.6KB     11.0</code></pre>
 <pre class="r"><code>bench::mark(optimize(ll_poisson2(x1), c(0, 100), maximum = TRUE))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                                min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                           &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x1), c(0, 100), maximum = TRUE)   19.1µs   22.7µs    42281.        0B     12.7</code></pre>
+#&gt; 1 optimize(ll_poisson2(x1), c(0, 100), maximum = TRUE)   21.4µs   24.6µs    38300.        0B     15.3</code></pre>
 <pre class="r"><code>x &lt;- rpois(1e3, 100L)
 bench::mark(optimize(ll_poisson1(x), c(0, 100), maximum = TRUE))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x), c(0, 100), maximum = TRUE)    643µs    730µs     1336.     220KB     8.69</code></pre>
+#&gt; 1 optimize(ll_poisson1(x), c(0, 100), maximum = TRUE)    366µs    394µs     2424.     110KB     8.66</code></pre>
 <pre class="r"><code>bench::mark(optimize(ll_poisson2(x), c(0, 100), maximum = TRUE))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x), c(0, 100), maximum = TRUE)   62.7µs   72.8µs    12193.    7.86KB     8.64</code></pre>
+#&gt; 1 optimize(ll_poisson2(x), c(0, 100), maximum = TRUE)   47.3µs   50.7µs    18121.    7.86KB     5.77</code></pre>
 <p>Answer: <code>ll_poisson2()</code> is nearly twice as fast with
 <code>x1</code> and nearly 10 times as fast when the length of
 <code>x</code> is 100.</p>
@@ -2152,7 +2167,7 @@ work?</li>
 #&gt;         })
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x7fee9e4f5650&gt;
+#&gt; &lt;bytecode: 0x7fccf5b5cf88&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <p>Answer: <code>possibly()</code> returns a function that uses
 <code>tryCatch()</code> to return <code>otherwise</code> if the mapper
@@ -2182,7 +2197,7 @@ work?</li>
 #&gt;     .f &lt;- as_mapper(.f)
 #&gt;     function(...) capture_error(.f(...), otherwise, quiet)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fee89b79ae8&gt;
+#&gt; &lt;bytecode: 0x7fcd07ddd2a8&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="r"><code>purrr:::capture_error # nolint: undesirable_operator_linter.</code></pre>
 <pre><code>#&gt; function (code, otherwise = NULL, quiet = TRUE) 
@@ -2195,7 +2210,7 @@ work?</li>
 #&gt;         stop(&quot;Terminated by user&quot;, call. = FALSE)
 #&gt;     })
 #&gt; }
-#&gt; &lt;bytecode: 0x7fee8c86a3f8&gt;
+#&gt; &lt;bytecode: 0x7fcd47c4bfe0&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <p>Answer: <code>safely()</code> returns a function that uses the
 internal <code>capture_error()</code> function to store the evaluation
@@ -2430,14 +2445,14 @@ system.time({
   h()
 })</code></pre>
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.006   0.006   1.000</code></pre>
+#&gt;   0.004   0.002   1.002</code></pre>
 <pre class="r"><code>system.time({
   g()
   Sys.sleep(2)
   g()
 })</code></pre>
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.010   0.010   2.002</code></pre>
+#&gt;   0.006   0.006   2.000</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions:</p>
 <p>To ensure that the function created by <code>delay_by()</code> waits

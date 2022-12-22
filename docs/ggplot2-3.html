@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2022-12-03" />
+
+<title>ggplot2 (Scales)</title>
+
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">rtraining notebooks</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="FaultTree.html">FaultTree.widget Test</a>
+    </li>
+    <li>
+      <a href="advanced-r-1.html">Advanced R Workbook (Foundations)</a>
+    </li>
+    <li>
+      <a href="advanced-r-2.html">Advanced R Workbook (Functional programming)</a>
+    </li>
+    <li>
+      <a href="advanced-r-3.html">Advanced R Workbook (Object-oriented programming)</a>
+    </li>
+    <li>
+      <a href="ggplot2-1.html">ggplot2 (Getting started)</a>
+    </li>
+    <li>
+      <a href="ggplot2-2.html">ggplot2 (Layers)</a>
+    </li>
+    <li>
+      <a href="ggplot2-3.html">ggplot2 (Scales)</a>
+    </li>
+    <li>
+      <a href="ggplot2-4.html">ggplot2 (Grammar)</a>
+    </li>
+    <li>
+      <a href="ggplot2-5.html">ggplot2 (Extending)</a>
+    </li>
+    <li>
+      <a href="r-setup-log.html">R Setup Log</a>
+    </li>
+    <li>
+      <a href="r-training-log.html">R Training Log</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jabenninghoff/rtraining/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">ggplot2 (Scales)</h1>
+<h4 class="date">2022-12-03</h4>
+
+</div>
+
+
+<p>Workbook for completing quizzes and exercises from the “Scales”
+chapters of <a href="https://ggplot2-book.org/index.html">ggplot2:
+Elegant Graphics for Data Analysis</a>, third edition, with comparisons
+to solutions from <a
+href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to
+ggplot2: Elegant Graphics for Data Analysis</a>.</p>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(jbplot)
+
+knitr::opts_chunk$set(
+  comment = &quot;#&gt;&quot;,
+  fig.align = &quot;center&quot;
+)</code></pre>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This workbook includes answers and solutions to the quizzes and
+exercises from <a href="https://ggplot2-book.org/index.html">ggplot2:
+Elegant Graphics for Data Analysis</a> and <a
+href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to
+ggplot2: Elegant Graphics for Data Analysis</a>, organized by chapter.
+It includes excerpts from both books, copied here.</p>
+<p><strong>WARNING, SPOILERS!</strong> If you haven’t read the ggplot2
+book and intend to complete the quizzes and exercises, don’t read this
+notebook. It contains my (potentially wrong) answers to both.</p>
+</div>
+<div id="position-scales-and-axes" class="section level1">
+<h1>10 Position scales and axes</h1>
+<p>Position scales are used to control the locations of visual entities
+in a plot, and how those locations are mapped to data values. Every plot
+has two position scales, corresponding to the x and y aesthetics. In
+most cases this is clear in the plot specification, because the user
+explicitly specifies the variables mapped to x and y explicitly.
+However, this is not always the case. Consider this plot
+specification:</p>
+<pre class="r"><code>ggplot(ggplot2::mpg, aes(x = displ)) +
+  geom_histogram()</code></pre>
+<p>In this example the y aesthetic is not specified by the user. Rather,
+the aesthetic is mapped to a computed variable:
+<code>geom_histogram()</code> computes a <code>count</code> variable
+that gets mapped to the y aesthetic. The default behaviour of
+<code>geom_histogram()</code> is equivalent to the following:</p>
+<pre class="r"><code>ggplot(ggplot2::mpg, aes(x = displ, y = after_stat(count))) +
+  geom_histogram()</code></pre>
+<p>Because position scales are used in every plot, it is useful to
+understand how they work and how they can be modified.</p>
+<div id="notes" class="section level2">
+<h2>Notes</h2>
+<p>The goal of <code>label_date_short()</code> is to automatically
+construct short labels that are sufficient to uniquely identify the
+dates:</p>
+<pre class="r"><code>ggplot(economics, aes(date, psavert)) +
+  geom_line(na.rm = TRUE) +
+  labs(x = NULL, y = NULL) +
+  scale_x_date(limits = as.Date(c(&quot;2004-01-01&quot;, &quot;2005-01-01&quot;)), labels = scales::label_date_short())</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Let’s create a plot with rotated labels!</p>
+<pre class="r"><code>ggplot(ggplot2::mpg, aes(manufacturer, hwy)) +
+  geom_boxplot() +
+  guides(x = guide_axis(angle = 90))</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="colour-scales-and-legends" class="section level1">
+<h1>11 Colour scales and legends</h1>
+<p>A comparison of different color scales:</p>
+<pre class="r"><code>erupt &lt;- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_raster() +
+  scale_x_continuous(NULL, expand = c(0, 0)) +
+  scale_y_continuous(NULL, expand = c(0, 0)) +
+  theme(legend.position = &quot;none&quot;)
+
+erupt</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>erupt + scale_fill_viridis_c()</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-5-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>erupt + scale_fill_viridis_c(option = &quot;magma&quot;)</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-5-3.png" width="768" style="display: block; margin: auto;" /></p>
+<div id="missing-values" class="section level2">
+<h2>Missing values</h2>
+<p>All continuous colour scales have an <code>na.value</code> parameter
+that controls what colour is used for missing values (including values
+outside the range of the scale limits). By default it is set to grey,
+which will stand out when you use a colourful scale. If you use a black
+and white scale, you might want to set it to something else to make it
+more obvious. You can set <code>na.value = NA</code> to make missing
+values invisible, or choose a specific colour if you prefer:</p>
+<pre class="r"><code>df &lt;- data.frame(x = 1, y = 1:5, z = c(1, 3, 2, NA, 5))
+base &lt;- ggplot(df, aes(x, y)) +
+  geom_tile(aes(fill = z), linewidth = 5) +
+  labs(x = NULL, y = NULL) +
+  scale_x_continuous(labels = NULL)
+base</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>base + scale_fill_gradient(na.value = NA)</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-6-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>base + scale_fill_gradient(na.value = &quot;yellow&quot;)</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-6-3.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="limits-breaks-and-labels" class="section level2">
+<h2>Limits, breaks, and labels</h2>
+<p>Scale limits for discrete colour scales can be set using the
+<code>limits</code> argument to the scale argument, or by using the
+<code>lims()</code> helper function. This can be important when the same
+variable is represented in different plots, and you want to ensure that
+the colours are consistent across plots. To demonstrate this I’ll extend
+the example from Section 10.1.1. Colour represents the fuel type, which
+can be <strong>r</strong>egular, <strong>e</strong>thanol,
+<strong>d</strong>iesel, <strong>p</strong>remium or
+<strong>c</strong>ompressed natural gas.</p>
+<pre class="r"><code>mpg_99 &lt;- ggplot2::mpg %&gt;% filter(year == 1999)
+mpg_08 &lt;- ggplot2::mpg %&gt;% filter(year == 2008)
+base_99 &lt;- ggplot(mpg_99, aes(displ, hwy, colour = fl)) +
+  geom_point()
+base_08 &lt;- ggplot(mpg_08, aes(displ, hwy, colour = fl)) +
+  geom_point()
+base_99</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-7-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>base_08</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-7-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Each plot makes sense on its own, but visual comparison between the
+two is difficult. The axis limits are different, and because only
+regular, premium and diesel fuels are represented in the 1998 data the
+colours are mapped inconsistently. To ensure a consistent mapping for
+the colour aesthetic, we can use <code>lims()</code> to manually set the
+limits. As discussed in Section 10.1.1 it takes name-value pairs as
+input, where the name specifies the aesthetic and the value specifies
+the limits:</p>
+<pre class="r"><code>base_99 + lims(colour = c(&quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;p&quot;, &quot;r&quot;))</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>base_08 + lims(colour = c(&quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;p&quot;, &quot;r&quot;))</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-8-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p>The nice thing about <code>lims()</code> is that we can set the
+limits for multiple aesthetics at once. To ensure that x, y, and colour
+all use consistent limits we can do this:</p>
+<pre class="r"><code>base_99 +
+  lims(
+    x = c(1, 7),
+    y = c(10, 45),
+    colour = c(&quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;p&quot;, &quot;r&quot;)
+  )</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>base_08 +
+  lims(
+    x = c(1, 7),
+    y = c(10, 45),
+    colour = c(&quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;p&quot;, &quot;r&quot;)
+  )</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-9-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p>There are two potential limitations to these plots. First, while
+setting the scale limits does ensure that colours are mapped identically
+in both plots, it also means that the plot for the 1999 data displays
+labels for all five fuel types, despite the fact that ethanol and
+compressed natural gas fuels were not in use at that time. We can
+address this by manually setting the scale breaks, ensuring that only
+those fuel types that appear in the data are shown in the legend. The
+second limitation is that the labels are not particularly helpful, which
+we can address by specifying them manually. When setting multiple
+properties of a single scale, it can be more useful to customise using
+the arguments to the scale function rather than using the
+<code>lims()</code> helper function:</p>
+<pre class="r"><code>base_99 +
+  scale_color_discrete(
+    limits = c(&quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;p&quot;, &quot;r&quot;),
+    breaks = c(&quot;d&quot;, &quot;p&quot;, &quot;r&quot;),
+    labels = c(&quot;diesel&quot;, &quot;premium&quot;, &quot;regular&quot;)
+  )</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-10-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>However, there is nothing stopping you from using <code>lims()</code>
+to control the position aesthetic limits, while using
+<code>scale_colour_discrete()</code> to exercise more fine-grained
+control over the colour aesthetic:</p>
+<pre class="r"><code>base_99 +
+  lims(x = c(1, 7), y = c(10, 45)) +
+  scale_color_discrete(
+    limits = c(&quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;p&quot;, &quot;r&quot;),
+    breaks = c(&quot;d&quot;, &quot;p&quot;, &quot;r&quot;),
+    labels = c(&quot;diesel&quot;, &quot;premium&quot;, &quot;regular&quot;)
+  )</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>base_08 +
+  lims(x = c(1, 7), y = c(10, 45)) +
+  scale_color_discrete(
+    limits = c(&quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;p&quot;, &quot;r&quot;),
+    labels = c(&quot;compressed&quot;, &quot;diesel&quot;, &quot;ethanol&quot;, &quot;premium&quot;, &quot;regular&quot;)
+  )</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-11-2.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="legends" class="section level2">
+<h2>Legends</h2>
+<ul>
+<li><code>override.aes</code> is useful when you want the elements in
+the legend display differently to the geoms in the plot. This is often
+required when you’ve used transparency or size to deal with moderate
+overplotting and also used colour in the plot.</li>
+</ul>
+<pre class="r"><code>base &lt;- ggplot(ggplot2::mpg, aes(displ, hwy, colour = drv)) +
+  geom_point(size = 4, alpha = 0.2, stroke = 0)
+
+base + guides(colour = guide_legend())</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-12-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>base + guides(colour = guide_legend(override.aes = list(alpha = 1)))</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-12-2.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="binned-colour" class="section level2">
+<h2>Binned colour scales</h2>
+<p>Colour scales also come in binned versions. The default scale is
+<code>scale_fill_binned()</code> which in turn defaults to
+<code>scale_fill_steps()</code>. As with the binned position scales
+discussed in Section 10.4 these scales have an <code>n.breaks</code>
+argument that controls the number of discrete colour categories created
+by the scale. Counterintuitively—because the human visual system is very
+good at detecting edges—this can sometimes make a continuous colour
+gradient easier to perceive:</p>
+<pre class="r"><code>erupt + scale_fill_binned()</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-13-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>erupt + scale_fill_steps()</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-13-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>erupt + scale_fill_steps(n.breaks = 8)</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-13-3.png" width="768" style="display: block; margin: auto;" /></p>
+<p>The viridis palettes can be used in the same way, by calling the
+palette generating functions directly when specifying the
+<code>colours</code> argument to <code>scale_fill_stepsn()</code>:</p>
+<pre class="r"><code>erupt + scale_fill_stepsn(n.breaks = 9, colours = viridis::viridis(9))</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>erupt + scale_fill_stepsn(n.breaks = 9, colours = viridis::magma(9))</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-14-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>erupt + scale_fill_stepsn(n.breaks = 9, colours = viridis::inferno(9))</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-14-3.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="other-aesthetics" class="section level1">
+<h1>12 Other aesthetics</h1>
+<p>In addition to position and colour, there are several other
+aesthetics that ggplot2 can use to represent data.</p>
+<div id="size" class="section level2">
+<h2>Size</h2>
+<p>The size aesthetic is typically used to scale points and text. The
+default scale for size aesthetics is <code>scale_size()</code> in which
+a linear increase in the variable is mapped onto a linear increase in
+the area (not the radius) of the geom. Scaling as a function of area is
+a sensible default as human perception of size is more closely mimicked
+by area scaling than by radius scaling. By default the smallest value in
+the data (more precisely in the scale limits) is mapped to a size of 1
+and the largest is mapped to a size of 6. The <code>range</code>
+argument allows you to scale the size of the geoms:</p>
+<pre class="r"><code>base &lt;- ggplot(ggplot2::mpg, aes(displ, hwy, size = cyl)) +
+  geom_point()
+base</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>base + scale_size(range = c(1, 2))</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-15-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Let’s draw a scale model of the planets!</p>
+<pre class="r"><code>planets &lt;- data.frame(
+  name = c(&quot;Mercury&quot;, &quot;Venus&quot;, &quot;Earth&quot;, &quot;Mars&quot;, &quot;Jupiter&quot;, &quot;Saturn&quot;, &quot;Uranus&quot;, &quot;Neptune&quot;),
+  type = c(rep(&quot;Inner&quot;, 4), rep(&quot;Outer&quot;, 4)),
+  position = 1:8,
+  radius = c(2440, 6052, 6378, 3390, 71400, 60330, 25559, 24764),
+  stringsAsFactors = FALSE
+)
+planets$name &lt;- with(planets, factor(name, name))
+
+ggplot(planets, aes(1, name, size = radius)) +
+  geom_point() +
+  scale_x_continuous(breaks = NULL) +
+  scale_radius(limits = c(0, NA), range = c(0, 15)) +
+  labs(x = NULL, y = NULL, size = &quot;Radius&quot;, title = &quot;The planets of the solar system&quot;) +
+  theme_quo(y = FALSE, x = FALSE)</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="manual-scales" class="section level2">
+<h2>Manual scales</h2>
+<p>Let’s create a plot with manual scales:</p>
+<pre class="r"><code>huron &lt;- data.frame(year = 1875:1972, level = as.numeric(LakeHuron))
+
+ggplot(huron, aes(year)) +
+  geom_line(aes(y = level + 5, colour = &quot;above&quot;)) +
+  geom_line(aes(y = level - 5, colour = &quot;below&quot;)) +
+  scale_colour_manual(&quot;Direction&quot;,
+    values = c(&quot;above&quot; = &quot;red&quot;, &quot;below&quot; = &quot;blue&quot;)
+  ) +
+  labs(x = NULL, y = NULL)</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-17-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="identity-scales" class="section level2">
+<h2>Identity scales</h2>
+<p>Let’s plot all the R colors!</p>
+<pre class="r"><code>ggplot(luv_colours, aes(u, v)) +
+  geom_point(aes(colour = col), size = 3) +
+  scale_color_identity() +
+  coord_equal() +
+  labs(x = NULL, y = NULL)</code></pre>
+<p><img src="ggplot2-3_files/figure-html/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiBnZ3Bsb3QyIChTY2FsZXMpCmRhdGU6ICcyMDIyLTEyLTAzJwpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRoZW1lOgogICAgICB2ZXJzaW9uOiA1CiAgICB0b2M6IHllcwogICAgdG9jX2Zsb2F0OgogICAgICBjb2xsYXBzZWQ6IHllcwogICAgICBzbW9vdGhfc2Nyb2xsOiBubwotLS0KCldvcmtib29rIGZvciBjb21wbGV0aW5nIHF1aXp6ZXMgYW5kIGV4ZXJjaXNlcyBmcm9tIHRoZSAiU2NhbGVzIiBjaGFwdGVycyBvZiBbZ2dwbG90MjogRWxlZ2FudCBHcmFwaGljcyBmb3IgRGF0YSBBbmFseXNpc10oaHR0cHM6Ly9nZ3Bsb3QyLWJvb2sub3JnL2luZGV4Lmh0bWwpLCB0aGlyZCBlZGl0aW9uLCB3aXRoIGNvbXBhcmlzb25zIHRvIHNvbHV0aW9ucyBmcm9tIFtTb2x1dGlvbnMgdG8gZ2dwbG90MjogRWxlZ2FudCBHcmFwaGljcyBmb3IgRGF0YSBBbmFseXNpc10oaHR0cHM6Ly9nZ3Bsb3QyLWJvb2stc29sdXRpb25zLTNlZC5uZXRsaWZ5LmFwcCkuCgpgYGB7ciBzZXR1cCwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9CmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeShkcGx5cikKbGlicmFyeShqYnBsb3QpCgprbml0cjo6b3B0c19jaHVuayRzZXQoCiAgY29tbWVudCA9ICIjPiIsCiAgZmlnLmFsaWduID0gImNlbnRlciIKKQpgYGAKCiMgSW50cm9kdWN0aW9uCgpUaGlzIHdvcmtib29rIGluY2x1ZGVzIGFuc3dlcnMgYW5kIHNvbHV0aW9ucyB0byB0aGUgcXVpenplcyBhbmQgZXhlcmNpc2VzIGZyb20gW2dncGxvdDI6IEVsZWdhbnQgR3JhcGhpY3MgZm9yIERhdGEgQW5hbHlzaXNdKGh0dHBzOi8vZ2dwbG90Mi1ib29rLm9yZy9pbmRleC5odG1sKSBhbmQgW1NvbHV0aW9ucyB0byBnZ3Bsb3QyOiBFbGVnYW50IEdyYXBoaWNzIGZvciBEYXRhIEFuYWx5c2lzXShodHRwczovL2dncGxvdDItYm9vay1zb2x1dGlvbnMtM2VkLm5ldGxpZnkuYXBwKSwgb3JnYW5pemVkIGJ5IGNoYXB0ZXIuIEl0IGluY2x1ZGVzIGV4Y2VycHRzIGZyb20gYm90aCBib29rcywgY29waWVkIGhlcmUuCgoqKldBUk5JTkcsIFNQT0lMRVJTISoqIElmIHlvdSBoYXZlbid0IHJlYWQgdGhlIGdncGxvdDIgYm9vayBhbmQgaW50ZW5kIHRvIGNvbXBsZXRlIHRoZSBxdWl6emVzIGFuZCBleGVyY2lzZXMsIGRvbid0IHJlYWQgdGhpcyBub3RlYm9vay4gSXQgY29udGFpbnMgbXkgKHBvdGVudGlhbGx5IHdyb25nKSBhbnN3ZXJzIHRvIGJvdGguCgojIDEwIFBvc2l0aW9uIHNjYWxlcyBhbmQgYXhlcwoKUG9zaXRpb24gc2NhbGVzIGFyZSB1c2VkIHRvIGNvbnRyb2wgdGhlIGxvY2F0aW9ucyBvZiB2aXN1YWwgZW50aXRpZXMgaW4gYSBwbG90LCBhbmQgaG93IHRob3NlIGxvY2F0aW9ucyBhcmUgbWFwcGVkIHRvIGRhdGEgdmFsdWVzLiBFdmVyeSBwbG90IGhhcyB0d28gcG9zaXRpb24gc2NhbGVzLCBjb3JyZXNwb25kaW5nIHRvIHRoZSB4IGFuZCB5IGFlc3RoZXRpY3MuIEluIG1vc3QgY2FzZXMgdGhpcyBpcyBjbGVhciBpbiB0aGUgcGxvdCBzcGVjaWZpY2F0aW9uLCBiZWNhdXNlIHRoZSB1c2VyIGV4cGxpY2l0bHkgc3BlY2lmaWVzIHRoZSB2YXJpYWJsZXMgbWFwcGVkIHRvIHggYW5kIHkgZXhwbGljaXRseS4gSG93ZXZlciwgdGhpcyBpcyBub3QgYWx3YXlzIHRoZSBjYXNlLiBDb25zaWRlciB0aGlzIHBsb3Qgc3BlY2lmaWNhdGlvbjoKCmBgYHtyLCBmaWcuc2hvdyA9ICJoaWRlIiwgbWVzc2FnZSA9IEZBTFNFfQpnZ3Bsb3QoZ2dwbG90Mjo6bXBnLCBhZXMoeCA9IGRpc3BsKSkgKwogIGdlb21faGlzdG9ncmFtKCkKYGBgCgpJbiB0aGlzIGV4YW1wbGUgdGhlIHkgYWVzdGhldGljIGlzIG5vdCBzcGVjaWZpZWQgYnkgdGhlIHVzZXIuIFJhdGhlciwgdGhlIGFlc3RoZXRpYyBpcyBtYXBwZWQgdG8gYSBjb21wdXRlZCB2YXJpYWJsZTogYGdlb21faGlzdG9ncmFtKClgIGNvbXB1dGVzIGEgYGNvdW50YCB2YXJpYWJsZSB0aGF0IGdldHMgbWFwcGVkIHRvIHRoZSB5IGFlc3RoZXRpYy4gVGhlIGRlZmF1bHQgYmVoYXZpb3VyIG9mIGBnZW9tX2hpc3RvZ3JhbSgpYCBpcyBlcXVpdmFsZW50IHRvIHRoZSBmb2xsb3dpbmc6CgpgYGB7ciwgZmlnLnNob3cgPSAiaGlkZSIsIG1lc3NhZ2UgPSBGQUxTRX0KZ2dwbG90KGdncGxvdDI6Om1wZywgYWVzKHggPSBkaXNwbCwgeSA9IGFmdGVyX3N0YXQoY291bnQpKSkgKwogIGdlb21faGlzdG9ncmFtKCkKYGBgCgpCZWNhdXNlIHBvc2l0aW9uIHNjYWxlcyBhcmUgdXNlZCBpbiBldmVyeSBwbG90LCBpdCBpcyB1c2VmdWwgdG8gdW5kZXJzdGFuZCBob3cgdGhleSB3b3JrIGFuZCBob3cgdGhleSBjYW4gYmUgbW9kaWZpZWQuCgojIyBOb3RlcwoKVGhlIGdvYWwgb2YgYGxhYmVsX2RhdGVfc2hvcnQoKWAgaXMgdG8gYXV0b21hdGljYWxseSBjb25zdHJ1Y3Qgc2hvcnQgbGFiZWxzIHRoYXQgYXJlIHN1ZmZpY2llbnQgdG8gdW5pcXVlbHkgaWRlbnRpZnkgdGhlIGRhdGVzOiAKCmBgYHtyfQpnZ3Bsb3QoZWNvbm9taWNzLCBhZXMoZGF0ZSwgcHNhdmVydCkpICsKICBnZW9tX2xpbmUobmEucm0gPSBUUlVFKSArCiAgbGFicyh4ID0gTlVMTCwgeSA9IE5VTEwpICsKICBzY2FsZV94X2RhdGUobGltaXRzID0gYXMuRGF0ZShjKCIyMDA0LTAxLTAxIiwgIjIwMDUtMDEtMDEiKSksIGxhYmVscyA9IHNjYWxlczo6bGFiZWxfZGF0ZV9zaG9ydCgpKQpgYGAKCkxldCdzIGNyZWF0ZSBhIHBsb3Qgd2l0aCByb3RhdGVkIGxhYmVscyEKCmBgYHtyfQpnZ3Bsb3QoZ2dwbG90Mjo6bXBnLCBhZXMobWFudWZhY3R1cmVyLCBod3kpKSArCiAgZ2VvbV9ib3hwbG90KCkgKwogIGd1aWRlcyh4ID0gZ3VpZGVfYXhpcyhhbmdsZSA9IDkwKSkKYGBgCgojIDExIENvbG91ciBzY2FsZXMgYW5kIGxlZ2VuZHMKCkEgY29tcGFyaXNvbiBvZiBkaWZmZXJlbnQgY29sb3Igc2NhbGVzOgoKYGBge3J9CmVydXB0IDwtIGdncGxvdChmYWl0aGZ1bGQsIGFlcyh3YWl0aW5nLCBlcnVwdGlvbnMsIGZpbGwgPSBkZW5zaXR5KSkgKwogIGdlb21fcmFzdGVyKCkgKwogIHNjYWxlX3hfY29udGludW91cyhOVUxMLCBleHBhbmQgPSBjKDAsIDApKSArCiAgc2NhbGVfeV9jb250aW51b3VzKE5VTEwsIGV4cGFuZCA9IGMoMCwgMCkpICsKICB0aGVtZShsZWdlbmQucG9zaXRpb24gPSAibm9uZSIpCgplcnVwdAplcnVwdCArIHNjYWxlX2ZpbGxfdmlyaWRpc19jKCkKZXJ1cHQgKyBzY2FsZV9maWxsX3ZpcmlkaXNfYyhvcHRpb24gPSAibWFnbWEiKQpgYGAKCiMjIE1pc3NpbmcgdmFsdWVzCgpBbGwgY29udGludW91cyBjb2xvdXIgc2NhbGVzIGhhdmUgYW4gYG5hLnZhbHVlYCBwYXJhbWV0ZXIgdGhhdCBjb250cm9scyB3aGF0IGNvbG91ciBpcyB1c2VkIGZvciBtaXNzaW5nIHZhbHVlcyAoaW5jbHVkaW5nIHZhbHVlcyBvdXRzaWRlIHRoZSByYW5nZSBvZiB0aGUgc2NhbGUgbGltaXRzKS4gQnkgZGVmYXVsdCBpdCBpcyBzZXQgdG8gZ3JleSwgd2hpY2ggd2lsbCBzdGFuZCBvdXQgd2hlbiB5b3UgdXNlIGEgY29sb3VyZnVsIHNjYWxlLiBJZiB5b3UgdXNlIGEgYmxhY2sgYW5kIHdoaXRlIHNjYWxlLCB5b3UgbWlnaHQgd2FudCB0byBzZXQgaXQgdG8gc29tZXRoaW5nIGVsc2UgdG8gbWFrZSBpdCBtb3JlIG9idmlvdXMuIFlvdSBjYW4gc2V0IGBuYS52YWx1ZSA9IE5BYCB0byBtYWtlIG1pc3NpbmcgdmFsdWVzIGludmlzaWJsZSwgb3IgY2hvb3NlIGEgc3BlY2lmaWMgY29sb3VyIGlmIHlvdSBwcmVmZXI6CgpgYGB7cn0KZGYgPC0gZGF0YS5mcmFtZSh4ID0gMSwgeSA9IDE6NSwgeiA9IGMoMSwgMywgMiwgTkEsIDUpKQpiYXNlIDwtIGdncGxvdChkZiwgYWVzKHgsIHkpKSArCiAgZ2VvbV90aWxlKGFlcyhmaWxsID0geiksIGxpbmV3aWR0aCA9IDUpICsKICBsYWJzKHggPSBOVUxMLCB5ID0gTlVMTCkgKwogIHNjYWxlX3hfY29udGludW91cyhsYWJlbHMgPSBOVUxMKQpiYXNlCmJhc2UgKyBzY2FsZV9maWxsX2dyYWRpZW50KG5hLnZhbHVlID0gTkEpCmJhc2UgKyBzY2FsZV9maWxsX2dyYWRpZW50KG5hLnZhbHVlID0gInllbGxvdyIpCmBgYAoKIyMgTGltaXRzLCBicmVha3MsIGFuZCBsYWJlbHMKClNjYWxlIGxpbWl0cyBmb3IgZGlzY3JldGUgY29sb3VyIHNjYWxlcyBjYW4gYmUgc2V0IHVzaW5nIHRoZSBgbGltaXRzYCBhcmd1bWVudCB0byB0aGUgc2NhbGUgYXJndW1lbnQsIG9yIGJ5IHVzaW5nIHRoZSBgbGltcygpYCBoZWxwZXIgZnVuY3Rpb24uIFRoaXMgY2FuIGJlIGltcG9ydGFudCB3aGVuIHRoZSBzYW1lIHZhcmlhYmxlIGlzIHJlcHJlc2VudGVkIGluIGRpZmZlcmVudCBwbG90cywgYW5kIHlvdSB3YW50IHRvIGVuc3VyZSB0aGF0IHRoZSBjb2xvdXJzIGFyZSBjb25zaXN0ZW50IGFjcm9zcyBwbG90cy4gVG8gZGVtb25zdHJhdGUgdGhpcyBJJ2xsIGV4dGVuZCB0aGUgZXhhbXBsZSBmcm9tIFNlY3Rpb24gMTAuMS4xLiBDb2xvdXIgcmVwcmVzZW50cyB0aGUgZnVlbCB0eXBlLCB3aGljaCBjYW4gYmUgKipyKiplZ3VsYXIsICoqZSoqdGhhbm9sLCAqKmQqKmllc2VsLCAqKnAqKnJlbWl1bSBvciAqKmMqKm9tcHJlc3NlZCBuYXR1cmFsIGdhcy4KCmBgYHtyfQptcGdfOTkgPC0gZ2dwbG90Mjo6bXBnICU+JSBmaWx0ZXIoeWVhciA9PSAxOTk5KQptcGdfMDggPC0gZ2dwbG90Mjo6bXBnICU+JSBmaWx0ZXIoeWVhciA9PSAyMDA4KQpiYXNlXzk5IDwtIGdncGxvdChtcGdfOTksIGFlcyhkaXNwbCwgaHd5LCBjb2xvdXIgPSBmbCkpICsKICBnZW9tX3BvaW50KCkKYmFzZV8wOCA8LSBnZ3Bsb3QobXBnXzA4LCBhZXMoZGlzcGwsIGh3eSwgY29sb3VyID0gZmwpKSArCiAgZ2VvbV9wb2ludCgpCmJhc2VfOTkKYmFzZV8wOApgYGAKCkVhY2ggcGxvdCBtYWtlcyBzZW5zZSBvbiBpdHMgb3duLCBidXQgdmlzdWFsIGNvbXBhcmlzb24gYmV0d2VlbiB0aGUgdHdvIGlzIGRpZmZpY3VsdC4gVGhlIGF4aXMgbGltaXRzIGFyZSBkaWZmZXJlbnQsIGFuZCBiZWNhdXNlIG9ubHkgcmVndWxhciwgcHJlbWl1bSBhbmQgZGllc2VsIGZ1ZWxzIGFyZSByZXByZXNlbnRlZCBpbiB0aGUgMTk5OCBkYXRhIHRoZSBjb2xvdXJzIGFyZSBtYXBwZWQgaW5jb25zaXN0ZW50bHkuIFRvIGVuc3VyZSBhIGNvbnNpc3RlbnQgbWFwcGluZyBmb3IgdGhlIGNvbG91ciBhZXN0aGV0aWMsIHdlIGNhbiB1c2UgYGxpbXMoKWAgdG8gbWFudWFsbHkgc2V0IHRoZSBsaW1pdHMuIEFzIGRpc2N1c3NlZCBpbiBTZWN0aW9uIDEwLjEuMSBpdCB0YWtlcyBuYW1lLXZhbHVlIHBhaXJzIGFzIGlucHV0LCB3aGVyZSB0aGUgbmFtZSBzcGVjaWZpZXMgdGhlIGFlc3RoZXRpYyBhbmQgdGhlIHZhbHVlIHNwZWNpZmllcyB0aGUgbGltaXRzOgoKYGBge3J9CmJhc2VfOTkgKyBsaW1zKGNvbG91ciA9IGMoImMiLCAiZCIsICJlIiwgInAiLCAiciIpKQpiYXNlXzA4ICsgbGltcyhjb2xvdXIgPSBjKCJjIiwgImQiLCAiZSIsICJwIiwgInIiKSkKYGBgCgpUaGUgbmljZSB0aGluZyBhYm91dCBgbGltcygpYCBpcyB0aGF0IHdlIGNhbiBzZXQgdGhlIGxpbWl0cyBmb3IgbXVsdGlwbGUgYWVzdGhldGljcyBhdCBvbmNlLiBUbyBlbnN1cmUgdGhhdCB4LCB5LCBhbmQgY29sb3VyIGFsbCB1c2UgY29uc2lzdGVudCBsaW1pdHMgd2UgY2FuIGRvIHRoaXM6CgpgYGB7cn0KYmFzZV85OSArCiAgbGltcygKICAgIHggPSBjKDEsIDcpLAogICAgeSA9IGMoMTAsIDQ1KSwKICAgIGNvbG91ciA9IGMoImMiLCAiZCIsICJlIiwgInAiLCAiciIpCiAgKQpiYXNlXzA4ICsKICBsaW1zKAogICAgeCA9IGMoMSwgNyksCiAgICB5ID0gYygxMCwgNDUpLAogICAgY29sb3VyID0gYygiYyIsICJkIiwgImUiLCAicCIsICJyIikKICApCmBgYAoKVGhlcmUgYXJlIHR3byBwb3RlbnRpYWwgbGltaXRhdGlvbnMgdG8gdGhlc2UgcGxvdHMuIEZpcnN0LCB3aGlsZSBzZXR0aW5nIHRoZSBzY2FsZSBsaW1pdHMgZG9lcyBlbnN1cmUgdGhhdCBjb2xvdXJzIGFyZSBtYXBwZWQgaWRlbnRpY2FsbHkgaW4gYm90aCBwbG90cywgaXQgYWxzbyBtZWFucyB0aGF0IHRoZSBwbG90IGZvciB0aGUgMTk5OSBkYXRhIGRpc3BsYXlzIGxhYmVscyBmb3IgYWxsIGZpdmUgZnVlbCB0eXBlcywgZGVzcGl0ZSB0aGUgZmFjdCB0aGF0IGV0aGFub2wgYW5kIGNvbXByZXNzZWQgbmF0dXJhbCBnYXMgZnVlbHMgd2VyZSBub3QgaW4gdXNlIGF0IHRoYXQgdGltZS4gV2UgY2FuIGFkZHJlc3MgdGhpcyBieSBtYW51YWxseSBzZXR0aW5nIHRoZSBzY2FsZSBicmVha3MsIGVuc3VyaW5nIHRoYXQgb25seSB0aG9zZSBmdWVsIHR5cGVzIHRoYXQgYXBwZWFyIGluIHRoZSBkYXRhIGFyZSBzaG93biBpbiB0aGUgbGVnZW5kLiBUaGUgc2Vjb25kIGxpbWl0YXRpb24gaXMgdGhhdCB0aGUgbGFiZWxzIGFyZSBub3QgcGFydGljdWxhcmx5IGhlbHBmdWwsIHdoaWNoIHdlIGNhbiBhZGRyZXNzIGJ5IHNwZWNpZnlpbmcgdGhlbSBtYW51YWxseS4gV2hlbiBzZXR0aW5nIG11bHRpcGxlIHByb3BlcnRpZXMgb2YgYSBzaW5nbGUgc2NhbGUsIGl0IGNhbiBiZSBtb3JlIHVzZWZ1bCB0byBjdXN0b21pc2UgdXNpbmcgdGhlIGFyZ3VtZW50cyB0byB0aGUgc2NhbGUgZnVuY3Rpb24gcmF0aGVyIHRoYW4gdXNpbmcgdGhlIGBsaW1zKClgIGhlbHBlciBmdW5jdGlvbjoKCmBgYHtyfQpiYXNlXzk5ICsKICBzY2FsZV9jb2xvcl9kaXNjcmV0ZSgKICAgIGxpbWl0cyA9IGMoImMiLCAiZCIsICJlIiwgInAiLCAiciIpLAogICAgYnJlYWtzID0gYygiZCIsICJwIiwgInIiKSwKICAgIGxhYmVscyA9IGMoImRpZXNlbCIsICJwcmVtaXVtIiwgInJlZ3VsYXIiKQogICkKYGBgCgpIb3dldmVyLCB0aGVyZSBpcyBub3RoaW5nIHN0b3BwaW5nIHlvdSBmcm9tIHVzaW5nIGBsaW1zKClgIHRvIGNvbnRyb2wgdGhlIHBvc2l0aW9uIGFlc3RoZXRpYyBsaW1pdHMsIHdoaWxlIHVzaW5nIGBzY2FsZV9jb2xvdXJfZGlzY3JldGUoKWAgdG8gZXhlcmNpc2UgbW9yZSBmaW5lLWdyYWluZWQgY29udHJvbCBvdmVyIHRoZSBjb2xvdXIgYWVzdGhldGljOgoKYGBge3J9CmJhc2VfOTkgKwogIGxpbXMoeCA9IGMoMSwgNyksIHkgPSBjKDEwLCA0NSkpICsKICBzY2FsZV9jb2xvcl9kaXNjcmV0ZSgKICAgIGxpbWl0cyA9IGMoImMiLCAiZCIsICJlIiwgInAiLCAiciIpLAogICAgYnJlYWtzID0gYygiZCIsICJwIiwgInIiKSwKICAgIGxhYmVscyA9IGMoImRpZXNlbCIsICJwcmVtaXVtIiwgInJlZ3VsYXIiKQogICkKYmFzZV8wOCArCiAgbGltcyh4ID0gYygxLCA3KSwgeSA9IGMoMTAsIDQ1KSkgKwogIHNjYWxlX2NvbG9yX2Rpc2NyZXRlKAogICAgbGltaXRzID0gYygiYyIsICJkIiwgImUiLCAicCIsICJyIiksCiAgICBsYWJlbHMgPSBjKCJjb21wcmVzc2VkIiwgImRpZXNlbCIsICJldGhhbm9sIiwgInByZW1pdW0iLCAicmVndWxhciIpCiAgKQpgYGAKCiMjIExlZ2VuZHMKCiogICBgb3ZlcnJpZGUuYWVzYCBpcyB1c2VmdWwgd2hlbiB5b3Ugd2FudCB0aGUgZWxlbWVudHMgaW4gdGhlIGxlZ2VuZCAKICAgIGRpc3BsYXkgZGlmZmVyZW50bHkgdG8gdGhlIGdlb21zIGluIHRoZSBwbG90LiBUaGlzIGlzIG9mdGVuIHJlcXVpcmVkCiAgICB3aGVuIHlvdSd2ZSB1c2VkIHRyYW5zcGFyZW5jeSBvciBzaXplIHRvIGRlYWwgd2l0aCBtb2RlcmF0ZSBvdmVycGxvdHRpbmcKICAgIGFuZCBhbHNvIHVzZWQgY29sb3VyIGluIHRoZSBwbG90LgoKYGBge3J9CmJhc2UgPC0gZ2dwbG90KGdncGxvdDI6Om1wZywgYWVzKGRpc3BsLCBod3ksIGNvbG91ciA9IGRydikpICsKICBnZW9tX3BvaW50KHNpemUgPSA0LCBhbHBoYSA9IDAuMiwgc3Ryb2tlID0gMCkKCmJhc2UgKyBndWlkZXMoY29sb3VyID0gZ3VpZGVfbGVnZW5kKCkpCmJhc2UgKyBndWlkZXMoY29sb3VyID0gZ3VpZGVfbGVnZW5kKG92ZXJyaWRlLmFlcyA9IGxpc3QoYWxwaGEgPSAxKSkpCmBgYAoKIyMgQmlubmVkIGNvbG91ciBzY2FsZXMgeyNiaW5uZWQtY29sb3VyfQoKQ29sb3VyIHNjYWxlcyBhbHNvIGNvbWUgaW4gYmlubmVkIHZlcnNpb25zLiBUaGUgZGVmYXVsdCBzY2FsZSBpcyBgc2NhbGVfZmlsbF9iaW5uZWQoKWAgd2hpY2ggaW4gdHVybiBkZWZhdWx0cyB0byBgc2NhbGVfZmlsbF9zdGVwcygpYC4gQXMgd2l0aCB0aGUgYmlubmVkIHBvc2l0aW9uIHNjYWxlcyBkaXNjdXNzZWQgaW4gU2VjdGlvbiAxMC40IHRoZXNlIHNjYWxlcyBoYXZlIGFuIGBuLmJyZWFrc2AgYXJndW1lbnQgdGhhdCBjb250cm9scyB0aGUgbnVtYmVyIG9mIGRpc2NyZXRlIGNvbG91ciBjYXRlZ29yaWVzIGNyZWF0ZWQgYnkgdGhlIHNjYWxlLiBDb3VudGVyaW50dWl0aXZlbHktLS1iZWNhdXNlIHRoZSBodW1hbiB2aXN1YWwgc3lzdGVtIGlzIHZlcnkgZ29vZCBhdCBkZXRlY3RpbmcgZWRnZXMtLS10aGlzIGNhbiBzb21ldGltZXMgbWFrZSBhIGNvbnRpbnVvdXMgY29sb3VyIGdyYWRpZW50IGVhc2llciB0byBwZXJjZWl2ZToKCmBgYHtyfQplcnVwdCArIHNjYWxlX2ZpbGxfYmlubmVkKCkKZXJ1cHQgKyBzY2FsZV9maWxsX3N0ZXBzKCkKZXJ1cHQgKyBzY2FsZV9maWxsX3N0ZXBzKG4uYnJlYWtzID0gOCkKYGBgCgpUaGUgdmlyaWRpcyBwYWxldHRlcyBjYW4gYmUgdXNlZCBpbiB0aGUgc2FtZSB3YXksIGJ5IGNhbGxpbmcgdGhlIHBhbGV0dGUgZ2VuZXJhdGluZyBmdW5jdGlvbnMgZGlyZWN0bHkgd2hlbiBzcGVjaWZ5aW5nIHRoZSBgY29sb3Vyc2AgYXJndW1lbnQgdG8gYHNjYWxlX2ZpbGxfc3RlcHNuKClgOgoKYGBge3J9CmVydXB0ICsgc2NhbGVfZmlsbF9zdGVwc24obi5icmVha3MgPSA5LCBjb2xvdXJzID0gdmlyaWRpczo6dmlyaWRpcyg5KSkKZXJ1cHQgKyBzY2FsZV9maWxsX3N0ZXBzbihuLmJyZWFrcyA9IDksIGNvbG91cnMgPSB2aXJpZGlzOjptYWdtYSg5KSkKZXJ1cHQgKyBzY2FsZV9maWxsX3N0ZXBzbihuLmJyZWFrcyA9IDksIGNvbG91cnMgPSB2aXJpZGlzOjppbmZlcm5vKDkpKQpgYGAKCiMgMTIgT3RoZXIgYWVzdGhldGljcwoKSW4gYWRkaXRpb24gdG8gcG9zaXRpb24gYW5kIGNvbG91ciwgdGhlcmUgYXJlIHNldmVyYWwgb3RoZXIgYWVzdGhldGljcyB0aGF0IGdncGxvdDIgY2FuIHVzZSB0byByZXByZXNlbnQgZGF0YS4KCiMjIFNpemUKClRoZSBzaXplIGFlc3RoZXRpYyBpcyB0eXBpY2FsbHkgdXNlZCB0byBzY2FsZSBwb2ludHMgYW5kIHRleHQuIFRoZSBkZWZhdWx0IHNjYWxlIGZvciBzaXplIGFlc3RoZXRpY3MgaXMgYHNjYWxlX3NpemUoKWAgaW4gd2hpY2ggYSBsaW5lYXIgaW5jcmVhc2UgaW4gdGhlIHZhcmlhYmxlIGlzIG1hcHBlZCBvbnRvIGEgbGluZWFyIGluY3JlYXNlIGluIHRoZSBhcmVhIChub3QgdGhlIHJhZGl1cykgb2YgdGhlIGdlb20uIFNjYWxpbmcgYXMgYSBmdW5jdGlvbiBvZiBhcmVhIGlzIGEgc2Vuc2libGUgZGVmYXVsdCBhcyBodW1hbiBwZXJjZXB0aW9uIG9mIHNpemUgaXMgbW9yZSBjbG9zZWx5IG1pbWlja2VkIGJ5IGFyZWEgc2NhbGluZyB0aGFuIGJ5IHJhZGl1cyBzY2FsaW5nLiBCeSBkZWZhdWx0IHRoZSBzbWFsbGVzdCB2YWx1ZSBpbiB0aGUgZGF0YSAobW9yZSBwcmVjaXNlbHkgaW4gdGhlIHNjYWxlIGxpbWl0cykgaXMgbWFwcGVkIHRvIGEgc2l6ZSBvZiAxIGFuZCB0aGUgbGFyZ2VzdCBpcyBtYXBwZWQgdG8gYSBzaXplIG9mIDYuIFRoZSBgcmFuZ2VgIGFyZ3VtZW50IGFsbG93cyB5b3UgdG8gc2NhbGUgdGhlIHNpemUgb2YgdGhlIGdlb21zOgoKYGBge3J9CmJhc2UgPC0gZ2dwbG90KGdncGxvdDI6Om1wZywgYWVzKGRpc3BsLCBod3ksIHNpemUgPSBjeWwpKSArCiAgZ2VvbV9wb2ludCgpCmJhc2UKYmFzZSArIHNjYWxlX3NpemUocmFuZ2UgPSBjKDEsIDIpKQpgYGAKCkxldCdzIGRyYXcgYSBzY2FsZSBtb2RlbCBvZiB0aGUgcGxhbmV0cyEKCmBgYHtyfQpwbGFuZXRzIDwtIGRhdGEuZnJhbWUoCiAgbmFtZSA9IGMoIk1lcmN1cnkiLCAiVmVudXMiLCAiRWFydGgiLCAiTWFycyIsICJKdXBpdGVyIiwgIlNhdHVybiIsICJVcmFudXMiLCAiTmVwdHVuZSIpLAogIHR5cGUgPSBjKHJlcCgiSW5uZXIiLCA0KSwgcmVwKCJPdXRlciIsIDQpKSwKICBwb3NpdGlvbiA9IDE6OCwKICByYWRpdXMgPSBjKDI0NDAsIDYwNTIsIDYzNzgsIDMzOTAsIDcxNDAwLCA2MDMzMCwgMjU1NTksIDI0NzY0KSwKICBzdHJpbmdzQXNGYWN0b3JzID0gRkFMU0UKKQpwbGFuZXRzJG5hbWUgPC0gd2l0aChwbGFuZXRzLCBmYWN0b3IobmFtZSwgbmFtZSkpCgpnZ3Bsb3QocGxhbmV0cywgYWVzKDEsIG5hbWUsIHNpemUgPSByYWRpdXMpKSArCiAgZ2VvbV9wb2ludCgpICsKICBzY2FsZV94X2NvbnRpbnVvdXMoYnJlYWtzID0gTlVMTCkgKwogIHNjYWxlX3JhZGl1cyhsaW1pdHMgPSBjKDAsIE5BKSwgcmFuZ2UgPSBjKDAsIDE1KSkgKwogIGxhYnMoeCA9IE5VTEwsIHkgPSBOVUxMLCBzaXplID0gIlJhZGl1cyIsIHRpdGxlID0gIlRoZSBwbGFuZXRzIG9mIHRoZSBzb2xhciBzeXN0ZW0iKSArCiAgdGhlbWVfcXVvKHkgPSBGQUxTRSwgeCA9IEZBTFNFKQpgYGAKCiMjIE1hbnVhbCBzY2FsZXMKCkxldCdzIGNyZWF0ZSBhIHBsb3Qgd2l0aCBtYW51YWwgc2NhbGVzOgoKYGBge3J9Cmh1cm9uIDwtIGRhdGEuZnJhbWUoeWVhciA9IDE4NzU6MTk3MiwgbGV2ZWwgPSBhcy5udW1lcmljKExha2VIdXJvbikpCgpnZ3Bsb3QoaHVyb24sIGFlcyh5ZWFyKSkgKwogIGdlb21fbGluZShhZXMoeSA9IGxldmVsICsgNSwgY29sb3VyID0gImFib3ZlIikpICsKICBnZW9tX2xpbmUoYWVzKHkgPSBsZXZlbCAtIDUsIGNvbG91ciA9ICJiZWxvdyIpKSArCiAgc2NhbGVfY29sb3VyX21hbnVhbCgiRGlyZWN0aW9uIiwKICAgIHZhbHVlcyA9IGMoImFib3ZlIiA9ICJyZWQiLCAiYmVsb3ciID0gImJsdWUiKQogICkgKwogIGxhYnMoeCA9IE5VTEwsIHkgPSBOVUxMKQpgYGAKCiMjIElkZW50aXR5IHNjYWxlcwoKTGV0J3MgcGxvdCBhbGwgdGhlIFIgY29sb3JzIQoKYGBge3J9CmdncGxvdChsdXZfY29sb3VycywgYWVzKHUsIHYpKSArCiAgZ2VvbV9wb2ludChhZXMoY29sb3VyID0gY29sKSwgc2l6ZSA9IDMpICsKICBzY2FsZV9jb2xvcl9pZGVudGl0eSgpICsKICBjb29yZF9lcXVhbCgpICsKICBsYWJzKHggPSBOVUxMLCB5ID0gTlVMTCkKYGBgCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("ggplot2-3.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

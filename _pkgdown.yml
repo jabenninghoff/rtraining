@@ -29,6 +29,16 @@ navbar:
         href: advanced-r-2.html
       - text: Advanced R Workbook (Object-oriented programming)
         href: advanced-r-3.html
+      - text: ggplot2 (Getting started)
+        href: ggplot2-1.html
+      - text: ggplot2 (Layers)
+        href: ggplot2-2.html
+      - text: ggplot2 (Scales)
+        href: ggplot2-3.html
+      - text: ggplot2 (Grammar)
+        href: ggplot2-4.html
+      - text: ggplot2 (Extending)
+        href: ggplot2-5.html
       - text: R Setup Log
         href: r-setup-log.html
       - text: R Training Log

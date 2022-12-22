@@ -44,6 +44,41 @@ Notebooks in this package:
   R](https://adv-r.hadley.nz/index.html), second edition, with
   comparisons to solutions from [Advanced R
   Solutions](https://advanced-r-solutions.rbind.io).
+- [ggplot2 (Getting
+  started)](https://jabenninghoff.github.io/rtraining/ggplot2-1.html)
+  (2022-11-20): Workbook for completing quizzes and exercises from the
+  “Getting started” chapters of [ggplot2: Elegant Graphics for Data
+  Analysis](https://ggplot2-book.org/index.html), third edition, with
+  comparisons to solutions from [Solutions to ggplot2: Elegant Graphics
+  for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
+- [ggplot2
+  (Layers)](https://jabenninghoff.github.io/rtraining/ggplot2-2.html)
+  (2022-11-20): Workbook for completing quizzes and exercises from the
+  “Layers” chapters of [ggplot2: Elegant Graphics for Data
+  Analysis](https://ggplot2-book.org/index.html), third edition, with
+  comparisons to solutions from [Solutions to ggplot2: Elegant Graphics
+  for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
+- [ggplot2
+  (Scales)](https://jabenninghoff.github.io/rtraining/ggplot2-3.html)
+  (2022-12-03): Workbook for completing quizzes and exercises from the
+  “Scales” chapters of [ggplot2: Elegant Graphics for Data
+  Analysis](https://ggplot2-book.org/index.html), third edition, with
+  comparisons to solutions from [Solutions to ggplot2: Elegant Graphics
+  for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
+- [ggplot2
+  (Grammar)](https://jabenninghoff.github.io/rtraining/ggplot2-4.html)
+  (2022-12-09): Workbook for completing quizzes and exercises from the
+  “Grammar” chapters of [ggplot2: Elegant Graphics for Data
+  Analysis](https://ggplot2-book.org/index.html), third edition, with
+  comparisons to solutions from [Solutions to ggplot2: Elegant Graphics
+  for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
+- [ggplot2
+  (Extending)](https://jabenninghoff.github.io/rtraining/ggplot2-5.html)
+  (2022-12-18): Workbook for completing quizzes and exercises from the
+  “Extending” chapters of [ggplot2: Elegant Graphics for Data
+  Analysis](https://ggplot2-book.org/index.html), third edition, with
+  comparisons to solutions from [Solutions to ggplot2: Elegant Graphics
+  for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 - [R Setup
   Log](https://jabenninghoff.github.io/rtraining/r-setup-log.html)
   (2020-12-30): My notes on my personal R setup. I started my R journey
