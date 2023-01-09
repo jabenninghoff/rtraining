@@ -1025,3 +1025,21 @@ Answer: the explanation in the text omits the fact that `Math.difftime()` first 
 AR Solutions: `Math.difftime()` also excludes cases apart from `abs`, `sign`, `floor`, `ceiling`, `trunc`, `round` and `signif` and needs to return a fitting error message.
 
 ---
+
+# 14 R6
+
+```{r}
+rm(list = ls())
+```
+
+This chapter describes the R6 OOP system. R6 has two special properties:
+
+* It uses the encapsulated OOP paradigm, which means that methods belong to 
+  objects, not generics, and you call them like `object$method()`. 
+  
+* R6 objects are __mutable__, which means that they are modified in place, and 
+  hence have reference semantics.
+
+If you've learned OOP in another programming language, it's likely that R6 will feel very natural, and you'll be inclined to prefer it over S3. Resist the temptation to follow the path of least resistance: in most cases R6 will lead you to non-idiomatic R code. We'll come back to this theme in Section 16.3.
+
+R6 is very similar to a base OOP system called __reference classes__, or RC for short. I describe why I teach R6 and not RC in Section 14.5.
