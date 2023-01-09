@@ -400,10 +400,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.4.1",
+      "Version": "3.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0d297d01734d2bcea40197bd4971a764",
+      "Hash": "eb9fc121ad9a1075c471107ef185be46",
       "Requirements": []
     },
     "clipr": {
@@ -996,10 +996,10 @@
     },
     "highr": {
       "Package": "highr",
-      "Version": "0.9",
+      "Version": "0.10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8eb36c8125038e648e5d111c0d7b2ed4",
+      "Hash": "06230136b2d2b9ba5805e1963fa6e890",
       "Requirements": [
         "xfun"
       ]
@@ -1034,10 +1034,10 @@
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
-      "Version": "1.6.0",
+      "Version": "1.6.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f894e7b76e36258a483c602a786d7270",
+      "Hash": "b677ee5954471eaa974c0d099a343a1a",
       "Requirements": [
         "htmltools",
         "jsonlite",
@@ -1118,25 +1118,26 @@
     },
     "isoband": {
       "Package": "isoband",
-      "Version": "0.2.6",
+      "Version": "0.2.7",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "cfdea9dea85c1a973991c8cbe299f4da",
+      "Hash": "0080607b4a1a7b28979aecef976d8bc2",
       "Requirements": []
     },
     "jbplot": {
       "Package": "jbplot",
-      "Version": "1.1.8",
+      "Version": "1.2.1",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "jbplot",
       "RemoteRef": "main",
-      "RemoteSha": "fc34c0eba0d3eaf35376ac8f1cf61354fa2f1637",
+      "RemoteSha": "01b7a5e663ff770ceffa138e8a2492e8e94716ea",
+      "RemoteHost": "api.github.com",
       "Remotes": "jabenninghoff/rdev",
-      "Hash": "465334cd95cb54f2999f05442ba2d746",
+      "Hash": "fc732afee28f6132343c1650b68c4779",
       "Requirements": [
+        "MASS",
         "ggplot2"
       ]
     },
@@ -1584,13 +1585,16 @@
     },
     "purrr": {
       "Package": "purrr",
-      "Version": "0.3.5",
+      "Version": "1.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "54842a2443c76267152eface28d9e90a",
+      "Hash": "1ad491d27989ec6c26a2918ad6df116b",
       "Requirements": [
+        "cli",
+        "lifecycle",
         "magrittr",
-        "rlang"
+        "rlang",
+        "vctrs"
       ]
     },
     "ragg": {
@@ -2429,10 +2433,10 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.35",
+      "Version": "0.36",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f576593107bdf9aa7db48ef75a8c05fb",
+      "Hash": "f5baec54606751aa53ac9c0e05848ed6",
       "Requirements": []
     },
     "xml2": {
