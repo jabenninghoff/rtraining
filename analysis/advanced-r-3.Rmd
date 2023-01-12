@@ -17,6 +17,7 @@ Workbook for completing quizzes and exercises from the "Object-oriented programm
 library(sloop)
 library(purrr)
 library(dplyr)
+library(R6)
 
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
@@ -1043,3 +1044,348 @@ This chapter describes the R6 OOP system. R6 has two special properties:
 If you've learned OOP in another programming language, it's likely that R6 will feel very natural, and you'll be inclined to prefer it over S3. Resist the temptation to follow the path of least resistance: in most cases R6 will lead you to non-idiomatic R code. We'll come back to this theme in Section 16.3.
 
 R6 is very similar to a base OOP system called __reference classes__, or RC for short. I describe why I teach R6 and not RC in Section 14.5.
+
+## 14.2.6 Exercises
+
+1.  Create a bank account R6 class that stores a balance and allows you to 
+    deposit and withdraw money. Create a subclass that throws an error 
+    if you attempt to go into overdraft. Create another subclass that allows
+    you to go into overdraft, but charges you a fee.
+
+Answer: `Account` stores a balance as an integer value of cents, and prints in dollars (to avoid problems with floating point math).
+
+```{r}
+Account <- R6Class("Account", list( # nolint: object_name_linter.
+  balance = 0L,
+  initialize = function(balance = 0L) {
+    stopifnot(is.integer(balance), length(balance) == 1)
+    self$balance <- balance
+  },
+  print = function(...) {
+    cat("Account: \n")
+    cat("  Balance: $", format(self$balance / 100, nsmall = 2), "\n", sep = "")
+    invisible(self)
+  },
+  deposit = function(value) {
+    stopifnot(is.integer(value), length(value) == 1)
+    self$balance <- self$balance + value
+    invisible(self)
+  },
+  withdraw = function(value) {
+    stopifnot(is.integer(value), length(value) == 1)
+    self$balance <- self$balance - value
+    invisible(self)
+  }
+))
+
+AccountOverdraft <- R6Class("AccountOverdraft", # nolint: object_name_linter.
+  inherit = Account,
+  public = list(
+    withdraw = function(value) {
+      stopifnot(value <= self$balance)
+      super$withdraw(value)
+    }
+  )
+)
+
+AccountOverdraftFee <- R6Class("AccountOverdraftFee", # nolint: object_name_linter.
+  inherit = Account,
+  public = list(
+    withdraw = function(value) {
+      if (value > self$balance) value <- value + 500L
+      super$withdraw(value)
+    }
+  )
+)
+
+try(Account$new(1.5))
+
+a <- Account$new(100L)
+a$deposit(100L)
+a$withdraw(250L)
+a
+
+a2 <- AccountOverdraft$new(200L)
+try(a2$withdraw(250L))
+a2$withdraw(150L)
+a2
+
+a3 <- AccountOverdraftFee$new(200L)
+a3$withdraw(250L)
+a3
+```
+
+AR Solutions: `BankAccount` is a similar, simpler approach:
+
+```{r}
+BankAccount <- R6Class( # nolint: object_name_linter.
+  classname = "BankAccount",
+  public = list(
+    balance = 0,
+    deposit = function(dep = 0) {
+      self$balance <- self$balance + dep
+      invisible(self)
+    },
+    withdraw = function(draw) {
+      self$balance <- self$balance - draw
+      invisible(self)
+    }
+  )
+)
+
+BankAccountStrict <- R6Class( # nolint: object_name_linter.
+  classname = "BankAccountStrict",
+  inherit = BankAccount,
+  public = list(
+    withdraw = function(draw = 0) {
+      if (self$balance - draw < 0) {
+        stop("Your `withdraw` must be smaller ",
+          "than your `balance`.",
+          call. = FALSE
+        )
+      }
+      super$withdraw(draw = draw)
+    }
+  )
+)
+
+BankAccountCharging <- R6Class( # nolint: object_name_linter.
+  classname = "BankAccountCharging",
+  inherit = BankAccount,
+  public = list(
+    withdraw = function(draw = 0) {
+      if (self$balance - draw < 0) {
+        draw <- draw + 1
+      }
+      super$withdraw(draw = draw)
+    }
+  )
+)
+```
+
+Note: my object name, `AccountOverdraftFee` is misleading, since it is not a subclass of `AccountOverdraft` - the R Solutions naming convention is clearer.
+
+---
+
+2.  Create an R6 class that represents a shuffled deck of cards. You should be
+    able to draw cards from the deck with `$draw(n)`, and return all cards to 
+    the deck and reshuffle with `$reshuffle()`. Use the following code to make 
+    a vector of cards.
+
+```{r}
+suit <- c("♠", "♥", "♦", "♣")
+value <- c("A", 2:10, "J", "Q", "K")
+cards <- paste0(rep(value, 4), suit)
+```
+
+Answer: `Cards` shuffles the deck using `sample()`. The `draw()` function prints the cards drawn and moves them into play.
+
+```{r}
+Cards <- R6Class("Cards", list( # nolint: object_name_linter.
+  deck = sample(cards, 52),
+  play = NULL,
+  print = function(...) {
+    cat("Cards: \n")
+    cat("  Deck:", self$deck, "\n", sep = " ")
+    cat("  Play:", self$play, "\n", sep = " ")
+    invisible(self)
+  },
+  draw = function(n = 1L) {
+    stopifnot(is.integer(n), length(n) == 1, n > 0, n <= length(self$deck))
+    d <- head(self$deck, n)
+    self$play <- c(self$play, d)
+    self$deck <- tail(self$deck, -n)
+    invisible(self)
+  },
+  reshuffle = function() {
+    self$deck <- sample(cards, 52)
+    self$play <- NULL
+    invisible(self)
+  }
+))
+
+d <- Cards$new()
+d
+try(d$draw(1.5))
+try(d$draw(0L))
+try(d$draw(53L))
+d$draw(13L)
+d
+d$draw(13L)
+d
+d$reshuffle()
+d
+```
+
+AR Solutions: Our new `ShuffledDeck` class will use `sample()` and positive integer subsetting to implement the reshuffling and drawing functionality. We also add a check, so you cannot draw more cards than there are left in the deck.
+
+```{r}
+ShuffledDeck <- R6Class( # nolint: object_name_linter.
+  classname = "ShuffledDeck",
+  public = list(
+    deck = NULL,
+    initialize = function(deck = cards) {
+      self$deck <- sample(deck)
+    },
+    reshuffle = function() {
+      self$deck <- sample(cards)
+      invisible(self)
+    },
+    n = function() {
+      length(self$deck)
+    },
+    draw = function(n = 1) {
+      if (n > self$n()) {
+        stop("Only ", self$n(), " cards remaining.", call. = FALSE)
+      }
+
+      output <- self$deck[seq_len(n)]
+      self$deck <- self$deck[-seq_len(n)]
+      output
+    }
+  )
+)
+```
+
+Notes: it seems simpler to set `deck` directly instead of using an `initialize` function, although `sample(cards)` is cleaner. `self$n()` is a useful function, and the choice of removing and returning cards with `draw()` is probably a better design. I prefer my approach using `head()` and `tail()` over R Solutions use of `seq_len()`.
+
+---
+
+3.  Why can't you model a bank account or a deck of cards with an S3 class?
+
+Answer: because S3 classes are copied-on-modify, they lack state. R6 classes are stateful since they are modified in-place. Both bank accounts and a deck of cards are stateful objects.
+
+AR Solutions: Because S3 classes obey R's usual semantics of copy-on-modify: every time you deposit money into your bank account or draw a card from the deck, you'd get a new copy of the object.
+
+It is possible to combine S3 classes with an environment (which is how R6 works), but it is ill-advised to create an object that looks like a regular R object but has reference semantics.
+
+---
+
+4.  Create an R6 class that allows you to get and set the current time zone. 
+    You can access the current time zone with `Sys.timezone()` and set it 
+    with `Sys.setenv(TZ = "newtimezone")`. When setting the time zone, make
+    sure the new time zone is in the list provided by `OlsonNames()`.
+
+Answer: `TimeZone` is initialized with the current time zone, stored as `tz` in the object.
+
+```{r}
+orig_tz <- Sys.timezone()
+
+TimeZone <- R6Class("TimeZone", list( # nolint: object_name_linter.
+  tz = Sys.timezone(),
+  get = function() {
+    cat("Current time zone: ", self$tz, "\n", sep = "")
+    invisible(self)
+  },
+  set = function(tz) {
+    stopifnot(tz %in% OlsonNames())
+    Sys.setenv(TZ = tz) # nolint: undesirable_function_linter.
+    self$tz <- tz
+    cat("Set time zone: ", self$tz, "\n", sep = "")
+    invisible(self)
+  }
+))
+
+tz <- TimeZone$new()
+tz$get()
+date()
+tz$set("America/New_York")
+date()
+
+Sys.setenv(TZ = orig_tz) # nolint: undesirable_function_linter.
+```
+
+AR Solutions: To create an R6 class that allows us to get and set the time zone, we provide the respective functions as public methods to the R6 class.
+
+```{r}
+Timezone <- R6Class( # nolint: object_name_linter.
+  classname = "Timezone",
+  public = list(
+    get = function() {
+      Sys.timezone()
+    },
+    set = function(value) {
+      stopifnot(value %in% OlsonNames())
+      old <- self$get()
+      Sys.setenv(TZ = value) # nolint: undesirable_function_linter.
+      invisible(old)
+    }
+  )
+)
+```
+
+(When setting, we return the old value invisibly because this makes it easy to restore the previous value.)
+
+---
+
+5.  Create an R6 class that manages the current working directory.
+    It should have `$get()` and `$set()` methods.
+
+Answer: similar to `TimeZone`, `WorkingDirectory` initializes `wd` to `getwd()`.
+
+```{r warning = FALSE}
+orig_wd <- getwd()
+
+WorkingDirectory <- R6Class("WorkingDirectory", list( # nolint: object_name_linter.
+  wd = getwd(),
+  get = function() {
+    cat("Current directory: ", self$wd, "\n", sep = "")
+    invisible(self)
+  },
+  set = function(dir) {
+    self$wd <- setwd(dir) # nolint: undesirable_function_linter.
+    cat("Set directory: ", self$wd, "\n", sep = "")
+    invisible(self)
+  }
+))
+
+wd <- WorkingDirectory$new()
+wd$get()
+wd$set("assets")
+list.files()
+
+setwd(orig_wd) # nolint: undesirable_function_linter.
+```
+
+AR Solutions: Take a look at the following implementation, which is quite minimalistic:
+
+```{r}
+WorkingDirectory <- R6Class( # nolint: object_name_linter.
+  classname = "WorkingDirectory",
+  public = list(
+    get = function() {
+      getwd()
+    },
+    set = function(value) {
+      setwd(value) # nolint: undesirable_function_linter.
+    }
+  )
+)
+```
+
+<!-- HW: You should never do get = getwd() etc because in packages, that inlines the function definition at package build time, creating a subtle dependency that will cause bugs that are extremely difficult to track down -->
+
+---
+
+6.  Why can't you model the time zone or current working directory with an S3
+    class?
+
+Answer: per exercise 3, time zone and current working directory are both stateful.
+
+AR Solutions: Because S3 classes are not suitable for modelling a state that changes over time. S3 methods should (almost) always return the same result when called with the same inputs.
+
+---
+
+7.  What base type are R6 objects built on top of? What attributes do they
+    have?
+
+Answer: R6n objects are built on environments, and have a class attribute with an S3 hierarchy including the base R6 class, per 14.2.5.
+
+```{r}
+typeof(tz)
+attributes(tz)
+```
+
+AR Solutions: R6 objects are built on top of environments. They have a `class` attribute, which is a character vector containing the class name, the name of any super classes (if existent) and the string `"R6"` as the last element.
+
+---
