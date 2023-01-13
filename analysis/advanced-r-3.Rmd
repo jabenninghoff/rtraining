@@ -1389,3 +1389,275 @@ attributes(tz)
 AR Solutions: R6 objects are built on top of environments. They have a `class` attribute, which is a character vector containing the class name, the name of any super classes (if existent) and the string `"R6"` as the last element.
 
 ---
+
+## 14.3.3 Exercises
+
+1.  Create a bank account class that prevents you from directly setting the 
+    account balance, but you can still withdraw from and deposit to. Throw
+    an error if you attempt to go into overdraft.
+
+Answer: `SecureAccount` uses a private internal balance exposed through an active function.
+
+```{r}
+SecureAccount <- R6Class("SecureAccount", # nolint: object_name_linter.
+  private = list(
+    .balance = 0L
+  ),
+  public = list(
+    deposit = function(value) {
+      stopifnot(is.integer(value), length(value) == 1)
+      private$.balance <- private$.balance + value
+      invisible(self)
+    },
+    withdraw = function(value) {
+      stopifnot(is.integer(value), length(value) == 1, value <= private$.balance)
+      private$.balance <- private$.balance - value
+      invisible(self)
+    }
+  ),
+  active = list(
+    balance = function(value) {
+      if (missing(value)) {
+        private$.balance
+      } else {
+        stop("`$balance` is read only", call. = FALSE)
+      }
+    }
+  )
+)
+
+sa <- SecureAccount$new()
+sa$deposit(10L)
+sa$withdraw(5L)
+try(sa$withdraw(20L))
+try(sa$balance <- 100L)
+sa$balance
+```
+
+AR Solutions: To fulfill this requirement, we make balance a private field. The user has to use the `$deposit()` and `$withdraw()` methods which have access to the balance field.
+
+```{r, error = TRUE}
+BankAccountStrict2 <- R6Class( # nolint: object_name_linter.
+  classname = "BankAccountStrict2",
+  public = list(
+    deposit = function(dep = 0) {
+      private$balance <- private$balance + dep
+      invisible(self)
+    },
+    withdraw = function(draw = 0) {
+      if (private$balance - draw < 0) {
+        stop(
+          "Your `withdraw` must be smaller ",
+          "than your `balance`.",
+          call. = FALSE
+        )
+      }
+      private$balance <- private$balance - draw
+      invisible(self)
+    }
+  ),
+  private = list(
+    balance = 0
+  )
+)
+```
+
+---
+
+2.  Create a class with a write-only `$password` field. It should have 
+    `$check_password(password)` method that returns `TRUE` or `FALSE`, but 
+    there should be no way to view the complete password.
+
+Answer: `Login` implements a write-only `$password` field using an active function. `check_password()` will error if a password hasn't been set. In real life, this should be implemented with a secure password hashing function, like `bcrypt` or `scrypt`.
+
+```{r}
+Login <- R6Class("Login", # nolint: object_name_linter.
+  private = list(
+    .password = NULL
+  ),
+  public = list(
+    check_password = function(password) {
+      stopifnot(is.character(password), length(password) == 1)
+      if (is.null(private$.password)) stop("Error: password not set")
+      password == private$.password
+    }
+  ),
+  active = list(
+    password = function(value) {
+      if (missing(value)) {
+        stop("`$password` is write only", call. = FALSE)
+      } else {
+        stopifnot(is.character(value), length(value) == 1)
+        private$.password <- value
+        invisible(self)
+      }
+    }
+  )
+)
+
+l <- Login$new()
+try(l$check_password("Password1"))
+l$password <- "Password1"
+l$check_password("Password1")
+l$check_password("Password2")
+try(l$password)
+```
+
+AR Solutions: To protect the password from changes and direct access, the password will be a private field. Further, our `Password` will get its own print method which hides the password.
+
+```{r}
+Password <- R6Class( # nolint: object_name_linter.
+  classname = "Password",
+  public = list(
+    print = function(...) {
+      cat("<Password>: ********\n")
+      invisible(self)
+    },
+    set = function(value) {
+      private$password <- value
+    },
+    check = function(password) {
+      identical(password, private$password)
+    }
+  ),
+  private = list(
+    password = NULL
+  )
+)
+```
+
+Let's create one instance of our new class and confirm that the password is neither accessible nor visible, but still check-able.
+
+```{r, error = TRUE}
+my_pw <- Password$new()
+my_pw$set("snuffles")
+my_pw$password
+my_pw
+my_pw$check("snuggles")
+my_pw$check("snuffles")
+```
+
+Note: the AR Solutions class properly masks the password when calling `print()`, but mine does not:
+
+```{r}
+l
+```
+
+---
+
+3.  Extend the `Rando` class with another active binding that allows you to 
+    access the previous random value. Ensure that active binding is the only
+    way to access the value.
+
+Answer: the updated `Rando` class sets a private value when `random` is run that is accessible only through `previous`, initially set to `NA`.
+
+```{r}
+Rando <- R6::R6Class("Rando", # nolint: object_name_linter.
+  private = list(
+    .previous = NA
+  ),
+  active = list(
+    random = function(value) {
+      if (missing(value)) {
+        private$.previous <- runif(1)
+        private$.previous
+      } else {
+        stop("Can't set `$random`", call. = FALSE)
+      }
+    },
+    previous = function(value) {
+      if (missing(value)) {
+        private$.previous
+      } else {
+        stop("Can't set `$previous`", call. = FALSE)
+      }
+    }
+  )
+)
+x <- Rando$new()
+
+x$previous
+x$random
+x$previous
+x$random
+x$previous
+```
+
+AR Solutions: To access the previous random value from an instance, we add a private `$last_random` field to our class, and we modify `$random()` to write to this field, whenever it is called. To access the `$last_random` field we provide `$previous()`.
+
+```{r}
+Rando <- R6::R6Class( # nolint: object_name_linter.
+  classname = "Rando",
+  private = list(
+    last_random = NULL
+  ),
+  active = list(
+    random = function(value) {
+      if (missing(value)) {
+        private$last_random <- runif(1)
+        private$last_random
+      } else {
+        stop("Can't set `$random`.", call. = FALSE)
+      }
+    },
+    previous = function(value) {
+      if (missing(value)) {
+        private$last_random
+      }
+    }
+  )
+)
+```
+
+---
+
+4.  Can subclasses access private fields/methods from their parent? Perform
+    an experiment to find out.
+
+Answer: `LoginEvil` shows that subclasses *can* access private fields from their parent.
+
+```{r}
+LoginEvil <- R6Class("LoginEvil", # nolint: object_name_linter.
+  inherit = Login,
+  public = list(
+    steal_password = function() {
+      cat("The password is: ", private$.password, "\n", sep = "")
+    }
+  )
+)
+
+evil <- LoginEvil$new()
+evil$password <- "SuperSecretPassword"
+evil$steal_password()
+```
+
+AR Solutions: To find out if private fields/methods can be accessed from subclasses, we first create a class `A` with a private field `foo` and a private method `bar()`. Afterwards, an instance of a subclass `B`  is created and calls the `foobar()` methods, which tries to access the `foo` field and the `bar()` method from its superclass `A`.
+
+```{r}
+A <- R6Class( # nolint: object_name_linter.
+  classname = "A",
+  private = list(
+    field = "foo",
+    method = function() {
+      "bar"
+    }
+  )
+)
+B <- R6Class( # nolint: object_name_linter.
+  classname = "B",
+  inherit = A,
+  public = list(
+    test = function() {
+      cat("Field:  ", super$field, "\n", sep = "")
+      cat("Method: ", super$method(), "\n", sep = "")
+    }
+  )
+)
+B$new()$test()
+```
+
+We conclude that subclasses can access private methods from their superclasses, but not private fields.
+
+Note: as I discovered, private fields are not accessible through `super$`, but *are* accessible through `private$`.
+
+---
