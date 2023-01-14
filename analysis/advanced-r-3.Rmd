@@ -1725,3 +1725,13 @@ FileWriter <- R6::R6Class( # nolint: object_name_linter.
 ```
 
 ---
+
+# 15 S4
+
+```{r}
+rm(list = ls())
+```
+
+S4 provides a formal approach to functional OOP. The underlying ideas are similar to S3 (the topic of Chapter 13), but implementation is much stricter and makes use of specialised functions for creating classes (`setClass()`), generics (`setGeneric()`), and methods (`setMethod()`). Additionally, S4 provides both multiple inheritance (i.e. a class can have multiple parents) and multiple dispatch (i.e. method dispatch can use the class of multiple arguments).
+
+An important new component of S4 is the __slot__, a named component of the object that is accessed using the specialised subsetting operator `@` (pronounced at). The set of slots, and their classes, forms an important part of the definition of an S4 class.
