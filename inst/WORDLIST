@@ -58,6 +58,7 @@ Yan
 aes
 asknumbers
 atomics
+aut
 babynames
 backtrace
 behaviour
@@ -71,6 +72,9 @@ colourful
 colours
 conf
 coord
+cph
+cre
+ctb
 customise
 customised
 deduplicates
@@ -79,6 +83,7 @@ devtools
 discretizing
 dodgeable
 dplyr
+dtc
 ecdf
 egular
 exts
@@ -87,6 +92,7 @@ facetted
 favourite
 finalizer
 flavours
+fnd
 focussing
 frac
 generalise
@@ -163,6 +169,7 @@ rebranded
 recognise
 recurse
 recurses
+reimplement
 remium
 renv
 replot
@@ -191,12 +198,14 @@ testthat
 th
 thanol
 theming
+ths
 tibble
 tibbles
 tidyr
 tidyverse
 traceback
 travelled
+trl
 unlist
 validator
 vctrs

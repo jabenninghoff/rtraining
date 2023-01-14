@@ -1805,3 +1805,281 @@ AR Solutions: Besides adding `?` in front of a function call (i.e. `?method()`),
 - documentation for a specific method via `ClassName?methodName`.
 
 ---
+
+## 15.3.6 Exercises
+
+1.  Extend the Person class with fields to match `utils::person()`.
+    Think about what slots you will need, what class each slot should have,
+    and what you'll need to check in your validity method.
+
+Answer: the `Person` class uses the fields from `utils::person()`, excluding deprecated fields. Per the docs, `family` must be a string (length 1), others can be vectors (but this is not enforced).
+
+```{r}
+setClass("Person",
+  slots = c(
+    given = "character",
+    family = "character",
+    email = "character",
+    role = "character",
+    comment = "character"
+  ),
+  prototype = list(
+    given = NA_character_,
+    family = NA_character_,
+    email = NA_character_,
+    role = NA_character_,
+    comment = NA_character_
+  )
+)
+
+setValidity("Person", function(object) {
+  # regex from https://www.nicebread.de/validating-email-adresses-in-r/
+  regex <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
+
+  if (length(object@family) > 1) {
+    "@family must be a string (length 1)"
+  } else if (!is.na(object@email) & !grepl(regex, object@email, ignore.case = TRUE)) {
+    "invalid @email"
+  } else {
+    TRUE
+  }
+}) |>
+  invisible()
+
+Person <- function(given = NA_character_, family = NA_character_, # nolint: object_name_linter.
+                   email = NA_character_, role = NA_character_, comment = NA_character_) {
+  given <- as.character(given)
+  family <- as.character(family)
+  email <- as.character(email)
+  role <- as.character(role)
+  comment <- as.character(comment)
+
+  new("Person", given = given, family = family, email = email, role = role, comment = comment)
+}
+
+Person("John", "Benninghoff", email = "john@example.com", comment = 51)
+try(Person("John", c("Three", "Last", "Names")))
+try(Person("John", email = "invalid@local"))
+```
+
+AR Solutions: The Person class from *Advanced R* contains the slots `name` and `age`. The person class from the `{utils}` package contains the slots `given` (vector of given names), `family`, `role`, `email` and `comment` (see `?utils::person`). 
+
+All slots from `utils::person()` besides `role` must be of type character and length 1. The entries in the `role` slot must match one of the following abbreviations "aut", "com", "cph", "cre", "ctb", "ctr", "dtc", "fnd", "rev", "ths", "trl". Therefore, `role` might be of different length than the other slots and we'll add a corresponding constraint within the validator.
+
+```{r}
+# Definition of the Person class
+setClass("Person",
+  slots = c(
+    age = "numeric",
+    given = "character",
+    family = "character",
+    role = "character",
+    email = "character",
+    comment = "character"
+  ),
+  prototype = list(
+    age = NA_real_,
+    given = NA_character_,
+    family = NA_character_,
+    role = NA_character_,
+    email = NA_character_,
+    comment = NA_character_
+  )
+)
+# Helper to create instances of the Person class
+Person <- function(given, family, # nolint: object_name_linter.
+                   age = NA_real_,
+                   role = NA_character_,
+                   email = NA_character_,
+                   comment = NA_character_) {
+  age <- as.double(age)
+  new("Person",
+    age = age,
+    given = given,
+    family = family,
+    role = role,
+    email = email,
+    comment = comment
+  )
+}
+# Validator to ensure that each slot is of length one
+setValidity("Person", function(object) { # nolint: cyclocomp_linter.
+  invalids <- character(0)
+  if (length(object@age) != 1 ||
+    length(object@given) != 1 ||
+    length(object@family) != 1 ||
+    length(object@email) != 1 ||
+    length(object@comment) != 1) {
+    invalids <- paste0(
+      "@name, @age, @given, @family, @email, ",
+      "@comment must be of length 1"
+    )
+  }
+
+  known_roles <- c(
+    NA_character_, "aut", "com", "cph", "cre", "ctb",
+    "ctr", "dtc", "fnd", "rev", "ths", "trl"
+  )
+
+  if (!all(object@role %in% known_roles)) {
+    paste(
+      "@role(s) must be one of",
+      paste(known_roles, collapse = ", ") # nolint: paste_linter.
+    )
+  }
+
+  if (length(invalids)) {
+    return(invalids)
+  }
+  TRUE
+}) |>
+  invisible()
+```
+
+Notes: while I missed including `age`, our implementations are similar except for validations.
+
+---
+
+2.  What happens if you define a new S4 class that doesn't have any slots?
+    (Hint: read about virtual classes in `?setClass`.)
+
+Answer: defining a new class with no slots makes it a virtual class, which can't be used to create new objects, but can be used to define a class union.
+
+```{r}
+setClass("Virtual")
+try(new("Virtual"))
+setClassUnion("Virtual", "Person")
+getClass("Virtual")
+```
+
+AR Solutions: It depends on the other arguments. If we inherit from another class, we get the same slots. But something interesting happens if we don't inherit from an existing class. We get a virtual class. A virtual class can't be instantiated:
+
+```{r}
+setClass("Human")
+try(new("Human"))
+```
+
+But can be inherited from:
+
+```{r}
+setClass("Programmer", contains = "Human")
+```
+
+---
+
+3.  Imagine you were going to reimplement factors, dates, and data frames in 
+    S4. Sketch out the `setClass()` calls that you would use to define the 
+    classes. Think about appropriate `slots` and `prototype`.
+
+Answer: sketch below. Default values would be set in `initialize()`.
+
+```{r}
+setClass("Factor",
+  slots = list(
+    x = "character",
+    levels = "character",
+    labels = "character",
+    exclude = "character",
+    ordered = "logical",
+    nmax = "integer"
+  ),
+  prototype = list(
+    x = character(0),
+    levels = character(0),
+    labels = character(0),
+    exclude = NA_character_,
+    ordered = FALSE,
+    nmax = NA_integer_
+  )
+)
+
+setClass("S4Date",
+  slots = list(
+    days = "integer"
+  ),
+  prototype = list(
+    days = 0L
+  )
+)
+
+setClass("DataFrame",
+  slots = list(
+    data = "matrix",
+    col_names = "character",
+    row_names = "character"
+  ),
+  prototype = list(
+    data = matrix(nrow = 0, ncol = 0),
+    col_names = NULL,
+    row_names = NULL
+  )
+)
+```
+
+AR Solutions: For all these classes we need one slot for the data and one slot per attribute. Keep in mind, that inheritance matters for ordered factors and dates. For data frames, special checks like equal lengths of the underlying list's elements should be done within a validator.
+
+For simplicity we don't introduce an explicit subclass for ordered factors. Instead, we introduce `ordered` as a slot.
+
+```{r}
+setClass("Factor",
+  slots = c(
+    data = "integer",
+    levels = "character",
+    ordered = "logical"
+  ),
+  prototype = list(
+    data = integer(),
+    levels = character(),
+    ordered = FALSE
+  )
+)
+new("Factor", data = c(1L, 2L), levels = letters[1:3])
+```
+
+The `Date2` class stores its dates as integers, similarly to base R which uses doubles. Dates don't have any other attributes.
+
+```{r}
+setClass("Date2",
+  slots = list(
+    data = "integer"
+  ),
+  prototype = list(
+    data = integer()
+  )
+)
+
+new("Date2", data = 1L)
+```
+
+Our `DataFrame` class consists of a list and a slot for `row.names`. Most of the logic (e.g. checking that all elements of the list are a vector, and that they all have the same length) would need to be part of a validator.
+
+```{r}
+setClass("DataFrame",
+  slots = c(
+    data = "list",
+    row.names = "character"
+  ),
+  prototype = list(
+    data = list(),
+    row.names = character(0)
+  )
+)
+
+new("DataFrame", data = list(a = 1, b = 2))
+```
+
+Notes:
+
+- A key insight from AR Solutions is that the objects need one slot for data and one for each
+  attribute
+- My implementation of `Factor` is wrong, where the AR Solutions answer is clearly right
+- The implementations of the new `Date` object are similar; the prototype for AR Solutions is
+  better
+- The AR Solutions `DataFrame` omits column names (names), where mine does not; using a list for the
+  data in `DataFrame` is a better choice, but harder to implement
+
+```{r}
+attributes(data.frame())
+```
+
+---
