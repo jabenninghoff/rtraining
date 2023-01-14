@@ -2083,3 +2083,164 @@ attributes(data.frame())
 ```
 
 ---
+
+## 15.4.5 Exercises
+
+1.  Add `age()` accessors for the `Person` class.
+
+Answer: the code below adds age accessors to Advanced R `Person`.
+
+```{r}
+setClass("Person",
+  slots = c(
+    name = "character",
+    age = "numeric"
+  ),
+  prototype = list(
+    name = NA_character_,
+    age = NA_real_
+  )
+)
+
+john <- new("Person", name = "John Smith")
+
+setGeneric("age", function(x) standardGeneric("age")) |>
+  invisible()
+setMethod("age", "Person", function(x) x@age)
+
+age(john)
+
+setGeneric("age<-", function(x, value) standardGeneric("age<-")) |>
+  invisible()
+setMethod("age<-", "Person", function(x, value) {
+  x@age <- value
+  validObject(x)
+  x
+})
+
+age(john) <- 51
+age(john)
+```
+
+AR Solutions: We implement the accessors via an `age()` generic, with a method for the `Person` class and a corresponding replacement function `age<-`:
+
+```{r}
+setGeneric("age", function(x) standardGeneric("age"))
+setMethod("age", "Person", function(x) x@age)
+
+setGeneric("age<-", function(x, value) standardGeneric("age<-"))
+setMethod("age<-", "Person", function(x, value) {
+  x@age <- value
+  validObject(x)
+  x
+})
+```
+
+---
+
+2.  In the definition of the generic, why is it necessary to repeat the
+    name of the generic twice?
+
+Answer: according to the R docs, `setGeneric(name)` specifies an existing function. When creating a new generic, the form `setGeneric(name, def)` is used, where `def` is `standardGeneric(name)`.
+
+AR Solutions: Within `setGeneric()` the `name` (1st argument) is needed as the name of the generic. Then, the name also explicitly incorporates method dispatch via `standardGeneric()` within the generic's body (`def` parameter of `setGeneric()`). This behaviour is similar to `UseMethod()` in S3.
+
+---
+
+3.  Why does the `show()` method defined in Section 15.4.3 use
+    `is(object)[[1]]`? (Hint: try printing the employee subclass.)
+
+Answer: `is(object)` returns a vector for a subclass, with the current class first.
+
+```{r}
+setClass("Employee",
+  contains = "Person",
+  slots = c(
+    boss = "Person"
+  ),
+  prototype = list(
+    boss = new("Person")
+  )
+)
+
+setMethod("show", "Person", function(object) {
+  cat(is(object)[[1]], "\n",
+    "  Name: ", object@name, "\n",
+    "  Age:  ", object@age, "\n",
+    sep = ""
+  )
+})
+
+john
+jane <- new("Employee", name = "Jane Doe")
+is(jane)
+jane
+```
+
+AR Solutions: `is(object)` returns the class of the object. `is(object)` also contains the superclass, for subclasses like `Employee`. In order to always return the most specific class (the subclass), `show()` returns the first element of `is(object)`.
+
+---
+
+4.  What happens if you define a method with different argument names to
+    the generic?
+
+Answer: this should cause method dispatch to fail, but I don't know of a way to test.
+
+AR Solutions: It depends. We first create the object `hadley` of class `Person`:
+
+```{r}
+.Person <- setClass( # nolint: object_name_linter.
+  "Person",
+  slots = c(name = "character", age = "numeric")
+)
+hadley <- .Person(name = "Hadley")
+hadley
+```
+
+Now let's see which arguments can be supplied to the `show()` generic.
+
+```{r}
+formals("show")
+```
+
+Usually, we would use this argument when defining a new method.
+
+```{r}
+setMethod("show", "Person", function(object) {
+  cat(object@name, "creates hard exercises")
+})
+
+hadley
+```
+
+When we supply another name as a first element of our method (e.g. `x` instead of `object`), this element will be matched to the correct `object` argument and we receive a warning. Our method will work, though:
+
+```{r}
+setMethod("show", "Person", function(x) {
+  cat(x@name, "creates hard exercises")
+})
+
+hadley
+```
+
+If we add more arguments to our method than our generic can handle, we will get an error.
+
+```{r}
+try(
+  setMethod("show", "Person", function(x, y) {
+    cat(x@name, "is", x@age, "years old")
+  })
+)
+```
+
+If we do this with arguments added to the correctly written `object` argument, we will receive an informative error message. It states that we could add other argument names for generics, which can take the `...` argument.
+
+```{r}
+try(
+  setMethod("show", "Person", function(object, y) {
+    cat(object@name, "is", object@age, "years old")
+  })
+)
+```
+
+---
