@@ -1674,3 +1674,54 @@ We conclude that subclasses can access private methods from their superclasses, 
 Note: as I discovered, private fields are not accessible through `super$`, but *are* accessible through `private$`.
 
 ---
+
+## 14.4.4 Exercises
+
+1.  Create a class that allows you to write a line to a specified file. 
+    You should open a connection to the file in `$initialize()`, append a
+    line using `cat()` in `$append_line()`, and close the connection in
+    `$finalize()`.
+
+Answer: `WriteFile` implemented below.
+
+```{r}
+WriteFile <- R6Class("WriteFile", list( # nolint: object_name_linter.
+  wfile = NULL,
+  initialize = function(filename) {
+    self$wfile <- file(filename, "a")
+  },
+  append_line = function(line) {
+    cat(line, file = self$wfile)
+  },
+  finalize = function() {
+    close(self$wfile)
+  }
+))
+
+tmp <- tempfile()
+wf <- WriteFile$new(tmp)
+wf$append_line("The quick brown fox jumps over the lazy dog.\n")
+readLines(tmp)
+```
+
+AR Solutions: Our `FileWriter` class will create a connection to a file at initialization. Therefore, we open a connection to a user specified file during the initialisation. Note that we need to set `open = "a"` in `file()` to open connection for appending text. Otherwise, `cat()` would only work when applied to files, but not with connections as explicitly asked for in the exercise. Further, we add the `append_line()` method and a `close()` statement as finalizer.
+
+```{r, eval = TRUE, error = TRUE}
+FileWriter <- R6::R6Class( # nolint: object_name_linter.
+  classname = "FileWriter",
+  public = list(
+    con = NULL,
+    initialize = function(filename) {
+      self$con <- file(filename, open = "a")
+    },
+    finalize = function() {
+      close(self$con)
+    },
+    append_line = function(x) {
+      cat(x, "\n", sep = "", file = self$con)
+    }
+  )
+)
+```
+
+---
