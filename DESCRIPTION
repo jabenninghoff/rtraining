@@ -33,6 +33,7 @@ Suggests:
     pkgdown,
     pkgload,
     purrr,
+    R6,
     rdev,
     rlang,
     rmarkdown,
