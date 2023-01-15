@@ -1,3 +1,7 @@
+# rtraining 0.8.14
+
+* Updated Advanced R Workbook (Object-oriented programming): add solutions for Chapter 14, 15
+
 # rtraining 0.8.13
 
 * Minor fixes
