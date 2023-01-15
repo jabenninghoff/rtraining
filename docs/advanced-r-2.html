@@ -458,11 +458,11 @@ calls the function provided as input with 1000 random uniform
 numbers.</p>
 <pre class="r"><code>randomise &lt;- function(f) f(runif(1e3))
 randomise(mean)</code></pre>
-<pre><code>#&gt; [1] 0.5093396</code></pre>
+<pre><code>#&gt; [1] 0.5016107</code></pre>
 <pre class="r"><code>randomise(mean)</code></pre>
-<pre><code>#&gt; [1] 0.4992708</code></pre>
+<pre><code>#&gt; [1] 0.4996193</code></pre>
 <pre class="r"><code>randomise(sum)</code></pre>
-<pre><code>#&gt; [1] 502.9835</code></pre>
+<pre><code>#&gt; [1] 495.4482</code></pre>
 <p>The chances are that you’ve already used a functional. You might have
 used for-loop replacements like base R’s <code>lapply()</code>,
 <code>apply()</code>, and <code>tapply()</code>; or purrr’s
@@ -494,12 +494,11 @@ helper allows you to extract attributes? Read the documentation to find
 out.</li>
 </ol>
 <pre class="r"><code>map_dbl</code></pre>
-<pre><code>#&gt; function (.x, .f, ...) 
+<pre><code>#&gt; function (.x, .f, ..., .progress = FALSE) 
 #&gt; {
-#&gt;     .f &lt;- as_mapper(.f, ...)
-#&gt;     .Call(map_impl, environment(), &quot;.x&quot;, &quot;.f&quot;, &quot;double&quot;)
+#&gt;     map_(&quot;double&quot;, .x, .f, ..., .progress = .progress)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fb1b5a6de00&gt;
+#&gt; &lt;bytecode: 0x7fba32810e10&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="r"><code>map_dbl(mtcars, ~ length(unique(.x)))</code></pre>
 <pre><code>#&gt;  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
@@ -508,25 +507,25 @@ out.</li>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; length(unique(.x))
-#&gt; &lt;environment: 0x7fb1b3ae3878&gt;
+#&gt; &lt;environment: 0x7fba67bad9a0&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <pre class="r"><code>function(..., .x = ..1, .y = ..2, . = ..1) length(unique(.x))</code></pre>
 <pre><code>#&gt; function(..., .x = ..1, .y = ..2, . = ..1) length(unique(.x))
-#&gt; &lt;environment: 0x7fb1b3ae3878&gt;</code></pre>
+#&gt; &lt;environment: 0x7fba67bad9a0&gt;</code></pre>
 <pre class="r"><code>as_mapper(mean)</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod(&quot;mean&quot;)
-#&gt; &lt;bytecode: 0x7fb1d4963ca0&gt;
+#&gt; &lt;bytecode: 0x7fba97765580&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <pre class="r"><code>as_mapper(function(x) mean(x, na.rm = TRUE))</code></pre>
 <pre><code>#&gt; function(x) mean(x, na.rm = TRUE)
-#&gt; &lt;environment: 0x7fb1b3ae3878&gt;</code></pre>
+#&gt; &lt;environment: 0x7fba67bad9a0&gt;</code></pre>
 <pre class="r"><code>as_mapper(~ mean(.x, na.rm = TRUE))</code></pre>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; mean(.x, na.rm = TRUE)
-#&gt; &lt;environment: 0x7fb1b3ae3878&gt;
+#&gt; &lt;environment: 0x7fba67bad9a0&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <p>Answer: Exploration above. <code>attr_getter()</code> supports
@@ -547,16 +546,16 @@ with nested data.</p>
 (accessors “access” some part of your data object).</p>
 <pre class="r"><code>as_mapper(c(1, 2)) # equivalent to function(x) x[[1]][[2]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck(x, 1, 2, .default = NULL)
-#&gt; &lt;environment: 0x7fb1b294c468&gt;</code></pre>
+#&gt; pluck_raw(x, list(1, 2), .default = NULL)
+#&gt; &lt;environment: 0x7fba3236c278&gt;</code></pre>
 <pre class="r"><code>as_mapper(c(&quot;a&quot;, &quot;b&quot;)) # equivalent to function(x) x[[&quot;a&quot;]][[&quot;b]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck(x, &quot;a&quot;, &quot;b&quot;, .default = NULL)
-#&gt; &lt;environment: 0x7fb1d195c750&gt;</code></pre>
+#&gt; pluck_raw(x, list(&quot;a&quot;, &quot;b&quot;), .default = NULL)
+#&gt; &lt;environment: 0x7fba323c4278&gt;</code></pre>
 <pre class="r"><code>as_mapper(list(1, &quot;b&quot;)) # equivalent to function(x) x[[1]][[&quot;b]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck(x, 1, &quot;b&quot;, .default = NULL)
-#&gt; &lt;environment: 0x7fb1d0a8bcc0&gt;</code></pre>
+#&gt; pluck_raw(x, list(1, &quot;b&quot;), .default = NULL)
+#&gt; &lt;environment: 0x7fba442250d8&gt;</code></pre>
 <p>Besides mixing positions and names, it is also possible to pass along
 an accessor function. This is basically an anonymous function that gets
 information about some aspect of the input data. You are free to define
@@ -581,22 +580,22 @@ you explain why it returns the result that it does?</li>
 </ol>
 <pre class="r"><code>map(1:3, ~ runif(2))</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; [1] 0.8412395 0.2894332
+#&gt; [1] 0.5463802 0.7830595
 #&gt; 
 #&gt; [[2]]
-#&gt; [1] 0.7427088 0.1067803
+#&gt; [1] 0.02451640 0.01394307
 #&gt; 
 #&gt; [[3]]
-#&gt; [1] 0.6175985 0.5672489</code></pre>
+#&gt; [1] 0.6744210 0.4657646</code></pre>
 <pre class="r"><code>map(1:3, runif(2))</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; NULL
+#&gt; [1] 1
 #&gt; 
 #&gt; [[2]]
-#&gt; NULL
+#&gt; [1] 2
 #&gt; 
 #&gt; [[3]]
-#&gt; NULL</code></pre>
+#&gt; [1] 3</code></pre>
 <p>Answer: <code>~ runif(2)</code> generates a mapper that returns 2
 random values from the uniform distribution, where <code>runif(2)</code>
 creates a <code>pluck()</code> mapper with 2 random values, which will
@@ -606,13 +605,13 @@ below:</p>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; runif(2)
-#&gt; &lt;environment: 0x7fb1b3ae3878&gt;
+#&gt; &lt;environment: 0x7fba67bad9a0&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <pre class="r"><code>as_mapper(runif(2))</code></pre>
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck(x, 0.520323231583461, 0.923852207604796, .default = NULL)
-#&gt; &lt;environment: 0x7fb185061918&gt;</code></pre>
+#&gt; pluck_raw(x, list(0.648935958044603, 0.530744314193726), .default = NULL)
+#&gt; &lt;environment: 0x7fba67d45850&gt;</code></pre>
 <p>A more reasonable use of a pluck mapper for <code>1:3</code> is
 <code>1</code>:</p>
 <pre class="r"><code>map(1:3, 1)</code></pre>
@@ -743,10 +742,11 @@ do you need to do to make it work?</li>
 
 triple &lt;- function(x) x * 3
 try(map(x, map, .f = triple))</code></pre>
-<pre><code>#&gt; Error in .f(.x[[i]], ...) : unused argument (function (.x, .f, ...) 
+<pre><code>#&gt; Error in map(x, map, .f = triple) : ℹ In index: 1.
+#&gt; Caused by error in `.f()`:
+#&gt; ! unused argument (function (.x, .f, ..., .progress = FALSE) 
 #&gt; {
-#&gt;     .f &lt;- as_mapper(.f, ...)
-#&gt;     .Call(map_impl, environment(), &quot;.x&quot;, &quot;.f&quot;, &quot;list&quot;)
+#&gt;     map_(&quot;list&quot;, .x, .f, ..., .progress = .progress)
 #&gt; })</code></pre>
 <p>Answer: the call fails since the <code>.f = triple</code> specifies
 the function for the outer <code>map()</code>, and the <code>map</code>
@@ -864,8 +864,8 @@ compute the <span class="math inline">\(R^2\)</span> with
 bootstraps &lt;- map(1:10, ~ bootstrap(mtcars))
 
 map_dbl(bootstraps, ~ summary(lm(mpg ~ disp, .x))$r.squared)</code></pre>
-<pre><code>#&gt;  [1] 0.7330943 0.5874307 0.7559202 0.7740158 0.7761027 0.7603230 0.6593290 0.6789250 0.7065349
-#&gt; [10] 0.7727513</code></pre>
+<pre><code>#&gt;  [1] 0.6653391 0.7051992 0.7256869 0.6693435 0.8327733 0.6906055 0.5874057 0.7383333 0.8526811
+#&gt; [10] 0.7779640</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: To accomplish this task, we take advantage of the “list
 in, list out”-functionality of <code>map()</code>. This allows us to
@@ -877,8 +877,8 @@ class="math inline">\(R^2\)</span> values. For the last call we use
   map(~ lm(mpg ~ disp, data = .x)) %&gt;%
   map(summary) %&gt;%
   map_dbl(&quot;r.squared&quot;)</code></pre>
-<pre><code>#&gt;  [1] 0.7330943 0.5874307 0.7559202 0.7740158 0.7761027 0.7603230 0.6593290 0.6789250 0.7065349
-#&gt; [10] 0.7727513</code></pre>
+<pre><code>#&gt;  [1] 0.6653391 0.7051992 0.7256869 0.6693435 0.8327733 0.6906055 0.5874057 0.7383333 0.8526811
+#&gt; [10] 0.7779640</code></pre>
 <p>Note: while AR Solutions is arguably <em>slightly</em> more readable,
 my code should be faster:</p>
 <pre class="r"><code>bench::mark({
@@ -887,7 +887,7 @@ my code should be faster:</p>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                                         min median itr/s…¹ mem_a…² gc/se…³
 #&gt;   &lt;bch:expr&gt;                                                      &lt;bch:&gt; &lt;bch:&gt;   &lt;dbl&gt; &lt;bch:b&gt;   &lt;dbl&gt;
-#&gt; 1 { map_dbl(bootstraps, ~summary(lm(mpg ~ disp, .x))$r.squared) } 4.97ms 6.26ms    152.  63.7KB    6.69
+#&gt; 1 { map_dbl(bootstraps, ~summary(lm(mpg ~ disp, .x))$r.squared) } 4.58ms 5.33ms    183.  63.7KB    9.62
 #&gt; # … with abbreviated variable names ¹​`itr/sec`, ²​mem_alloc, ³​`gc/sec`</code></pre>
 <pre class="r"><code>bench::mark({
   bootstraps %&gt;%
@@ -898,7 +898,7 @@ my code should be faster:</p>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                                                                        min
 #&gt;   &lt;bch:expr&gt;                                                                                   &lt;bch:tm&gt;
-#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ disp, data = .x)) %&gt;% map(summary) %&gt;% map_dbl(&quot;r.squared&quot;) }   4.94ms
+#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ disp, data = .x)) %&gt;% map(summary) %&gt;% map_dbl(&quot;r.squared&quot;) }    4.3ms
 #&gt; # … with 4 more variables: median &lt;bch:tm&gt;, `itr/sec` &lt;dbl&gt;, mem_alloc &lt;bch:byt&gt;, `gc/sec` &lt;dbl&gt;</code></pre>
 <p>It is actually slightly slower! AR Solutions wins!</p>
 <hr />
@@ -911,13 +911,13 @@ my code should be faster:</p>
 <pre class="r"><code>modify(mtcars, 1)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4 Wag"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Datsun 710"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Hornet 4 Drive"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Hornet Sportabout"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Valiant"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Duster 360"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 240D"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 230"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 280"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 280C"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 450SE"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 450SL"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Merc 450SLC"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Cadillac Fleetwood"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Lincoln Continental"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Chrysler Imperial"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Fiat 128"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Honda Civic"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Toyota Corolla"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Toyota Corona"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Dodge Challenger"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"AMC Javelin"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Camaro Z28"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Pontiac Firebird"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Fiat X1-9"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Porsche 914-2"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Lotus Europa"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Ford Pantera L"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Ferrari Dino"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Maserati Bora"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"},{"1":"21","2":"6","3":"160","4":"110","5":"3.9","6":"2.62","7":"16.46","8":"0","9":"1","10":"4","11":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>as_mapper(1)</code></pre>
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck(x, 1, .default = NULL)
-#&gt; &lt;environment: 0x7fb19192bd18&gt;</code></pre>
+#&gt; pluck_raw(x, list(1), .default = NULL)
+#&gt; &lt;environment: 0x7fba4394a478&gt;</code></pre>
 <pre class="r"><code>head(mtcars, 1)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -1233,12 +1233,12 @@ expect).</p>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                     min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span_r(test2, is.numeric)   94.6µs    109µs     7925.    4.01KB     13.8</code></pre>
+#&gt; 1 span_r(test2, is.numeric)   98.3µs    119µs     7963.    4.01KB     11.1</code></pre>
 <pre class="r"><code>bench::mark(span(test2, is.numeric))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;              &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span(test2, is.numeric)    153µs    166µs     5422.    4.01KB     7.20</code></pre>
+#&gt; 1 span(test2, is.numeric)    152µs    178µs     5313.    4.01KB     8.65</code></pre>
 <hr />
 <ol start="4" style="list-style-type: decimal">
 <li>Implement <code>arg_max()</code>. It should take a function and a
@@ -1304,7 +1304,7 @@ apply it to every numeric column in a data frame?</li>
 modify(mtcars, scale01)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.4510638","2":"0.5","3":"0.22175106","4":"0.20494700","5":"0.52534562","6":"0.28304781","7":"0.23333333","8":"0","9":"1","10":"0.5","11":"0.4285714","_rn_":"Mazda RX4"},{"1":"0.4510638","2":"0.5","3":"0.22175106","4":"0.20494700","5":"0.52534562","6":"0.34824853","7":"0.30000000","8":"0","9":"1","10":"0.5","11":"0.4285714","_rn_":"Mazda RX4 Wag"},{"1":"0.5276596","2":"0.0","3":"0.09204290","4":"0.14487633","5":"0.50230415","6":"0.20634109","7":"0.48928571","8":"1","9":"1","10":"0.5","11":"0.0000000","_rn_":"Datsun 710"},{"1":"0.4680851","2":"0.5","3":"0.46620105","4":"0.20494700","5":"0.14746544","6":"0.43518282","7":"0.58809524","8":"1","9":"0","10":"0.0","11":"0.0000000","_rn_":"Hornet 4 Drive"},{"1":"0.3531915","2":"1.0","3":"0.72062859","4":"0.43462898","5":"0.17972350","6":"0.49271286","7":"0.30000000","8":"0","9":"0","10":"0.0","11":"0.1428571","_rn_":"Hornet Sportabout"},{"1":"0.3276596","2":"0.5","3":"0.38388626","4":"0.18727915","5":"0.00000000","6":"0.49782664","7":"0.68095238","8":"1","9":"0","10":"0.0","11":"0.0000000","_rn_":"Valiant"},{"1":"0.1659574","2":"1.0","3":"0.72062859","4":"0.68197880","5":"0.20737327","6":"0.52595244","7":"0.15952381","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Duster 360"},{"1":"0.5957447","2":"0.0","3":"0.18857570","4":"0.03533569","5":"0.42857143","6":"0.42879059","7":"0.65476190","8":"1","9":"0","10":"0.5","11":"0.1428571","_rn_":"Merc 240D"},{"1":"0.5276596","2":"0.0","3":"0.17385882","4":"0.15194346","5":"0.53456221","6":"0.41856303","7":"1.00000000","8":"1","9":"0","10":"0.5","11":"0.1428571","_rn_":"Merc 230"},{"1":"0.3744681","2":"0.5","3":"0.24070841","4":"0.25088339","5":"0.53456221","6":"0.49271286","7":"0.45238095","8":"1","9":"0","10":"0.5","11":"0.4285714","_rn_":"Merc 280"},{"1":"0.3148936","2":"0.5","3":"0.24070841","4":"0.25088339","5":"0.53456221","6":"0.49271286","7":"0.52380952","8":"1","9":"0","10":"0.5","11":"0.4285714","_rn_":"Merc 280C"},{"1":"0.2553191","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.65379698","7":"0.34523810","8":"0","9":"0","10":"0.0","11":"0.2857143","_rn_":"Merc 450SE"},{"1":"0.2936170","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.56686269","7":"0.36904762","8":"0","9":"0","10":"0.0","11":"0.2857143","_rn_":"Merc 450SL"},{"1":"0.2042553","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.57964715","7":"0.41666667","8":"0","9":"0","10":"0.0","11":"0.2857143","_rn_":"Merc 450SLC"},{"1":"0.0000000","2":"1.0","3":"1.00000000","4":"0.54063604","5":"0.07834101","6":"0.95551010","7":"0.41428571","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Cadillac Fleetwood"},{"1":"0.0000000","2":"1.0","3":"0.97006735","4":"0.57597173","5":"0.11059908","6":"1.00000000","7":"0.39523810","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Lincoln Continental"},{"1":"0.1829787","2":"1.0","3":"0.92017960","4":"0.62897527","5":"0.21658986","6":"0.97980056","7":"0.34761905","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Chrysler Imperial"},{"1":"0.9361702","2":"0.0","3":"0.01895735","4":"0.04946996","5":"0.60829493","6":"0.17565840","7":"0.59166667","8":"1","9":"1","10":"0.5","11":"0.0000000","_rn_":"Fiat 128"},{"1":"0.8510638","2":"0.0","3":"0.01147418","4":"0.00000000","5":"1.00000000","6":"0.02608029","7":"0.47857143","8":"1","9":"1","10":"0.5","11":"0.1428571","_rn_":"Honda Civic"},{"1":"1.0000000","2":"0.0","3":"0.00000000","4":"0.04593640","5":"0.67281106","6":"0.08233188","7":"0.64285714","8":"1","9":"1","10":"0.5","11":"0.0000000","_rn_":"Toyota Corolla"},{"1":"0.4723404","2":"0.0","3":"0.12222499","4":"0.15901060","5":"0.43317972","6":"0.24341601","7":"0.65595238","8":"1","9":"0","10":"0.0","11":"0.0000000","_rn_":"Toyota Corona"},{"1":"0.2170213","2":"1.0","3":"0.61586431","4":"0.34628975","5":"0.00000000","6":"0.51316799","7":"0.28214286","8":"0","9":"0","10":"0.0","11":"0.1428571","_rn_":"Dodge Challenger"},{"1":"0.2042553","2":"1.0","3":"0.58094288","4":"0.34628975","5":"0.17972350","6":"0.49143442","7":"0.33333333","8":"0","9":"0","10":"0.0","11":"0.1428571","_rn_":"AMC Javelin"},{"1":"0.1234043","2":"1.0","3":"0.69568471","4":"0.68197880","5":"0.44700461","6":"0.59498849","7":"0.10833333","8":"0","9":"0","10":"0.0","11":"0.4285714","_rn_":"Camaro Z28"},{"1":"0.3744681","2":"1.0","3":"0.82040409","4":"0.43462898","5":"0.14746544","6":"0.59626694","7":"0.30357143","8":"0","9":"0","10":"0.0","11":"0.1428571","_rn_":"Pontiac Firebird"},{"1":"0.7191489","2":"0.0","3":"0.01970566","4":"0.04946996","5":"0.60829493","6":"0.10790079","7":"0.52380952","8":"1","9":"1","10":"0.5","11":"0.0000000","_rn_":"Fiat X1-9"},{"1":"0.6638298","2":"0.0","3":"0.12272387","4":"0.13780919","5":"0.76958525","6":"0.16031705","7":"0.26190476","8":"0","9":"1","10":"1.0","11":"0.1428571","_rn_":"Porsche 914-2"},{"1":"0.8510638","2":"0.0","3":"0.05986530","4":"0.21554770","5":"0.46543779","6":"0.00000000","7":"0.28571429","8":"1","9":"1","10":"1.0","11":"0.1428571","_rn_":"Lotus Europa"},{"1":"0.2297872","2":"1.0","3":"0.69817910","4":"0.74911661","5":"0.67281106","6":"0.42367681","7":"0.00000000","8":"0","9":"1","10":"1.0","11":"0.4285714","_rn_":"Ford Pantera L"},{"1":"0.3957447","2":"0.5","3":"0.18433525","4":"0.43462898","5":"0.39631336","6":"0.32140118","7":"0.11904762","8":"0","9":"1","10":"1.0","11":"0.7142857","_rn_":"Ferrari Dino"},{"1":"0.1957447","2":"1.0","3":"0.57345972","4":"1.00000000","5":"0.35944700","6":"0.52595244","7":"0.01190476","8":"0","9":"1","10":"1.0","11":"1.0000000","_rn_":"Maserati Bora"},{"1":"0.4680851","2":"0.0","3":"0.12446994","4":"0.20141343","5":"0.62211982","6":"0.32395807","7":"0.48809524","8":"1","9":"1","10":"0.5","11":"0.1428571","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.4510638","2":"0.5","3":"0.22175106","4":"0.20494700","5":"0.52534562","6":"0.28304781","7":"0.23333333","8":"0","9":"1","10":"0.5","11":"0.4285714"},{"1":"0.4510638","2":"0.5","3":"0.22175106","4":"0.20494700","5":"0.52534562","6":"0.34824853","7":"0.30000000","8":"0","9":"1","10":"0.5","11":"0.4285714"},{"1":"0.5276596","2":"0.0","3":"0.09204290","4":"0.14487633","5":"0.50230415","6":"0.20634109","7":"0.48928571","8":"1","9":"1","10":"0.5","11":"0.0000000"},{"1":"0.4680851","2":"0.5","3":"0.46620105","4":"0.20494700","5":"0.14746544","6":"0.43518282","7":"0.58809524","8":"1","9":"0","10":"0.0","11":"0.0000000"},{"1":"0.3531915","2":"1.0","3":"0.72062859","4":"0.43462898","5":"0.17972350","6":"0.49271286","7":"0.30000000","8":"0","9":"0","10":"0.0","11":"0.1428571"},{"1":"0.3276596","2":"0.5","3":"0.38388626","4":"0.18727915","5":"0.00000000","6":"0.49782664","7":"0.68095238","8":"1","9":"0","10":"0.0","11":"0.0000000"},{"1":"0.1659574","2":"1.0","3":"0.72062859","4":"0.68197880","5":"0.20737327","6":"0.52595244","7":"0.15952381","8":"0","9":"0","10":"0.0","11":"0.4285714"},{"1":"0.5957447","2":"0.0","3":"0.18857570","4":"0.03533569","5":"0.42857143","6":"0.42879059","7":"0.65476190","8":"1","9":"0","10":"0.5","11":"0.1428571"},{"1":"0.5276596","2":"0.0","3":"0.17385882","4":"0.15194346","5":"0.53456221","6":"0.41856303","7":"1.00000000","8":"1","9":"0","10":"0.5","11":"0.1428571"},{"1":"0.3744681","2":"0.5","3":"0.24070841","4":"0.25088339","5":"0.53456221","6":"0.49271286","7":"0.45238095","8":"1","9":"0","10":"0.5","11":"0.4285714"},{"1":"0.3148936","2":"0.5","3":"0.24070841","4":"0.25088339","5":"0.53456221","6":"0.49271286","7":"0.52380952","8":"1","9":"0","10":"0.5","11":"0.4285714"},{"1":"0.2553191","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.65379698","7":"0.34523810","8":"0","9":"0","10":"0.0","11":"0.2857143"},{"1":"0.2936170","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.56686269","7":"0.36904762","8":"0","9":"0","10":"0.0","11":"0.2857143"},{"1":"0.2042553","2":"1.0","3":"0.51060115","4":"0.45229682","5":"0.14285714","6":"0.57964715","7":"0.41666667","8":"0","9":"0","10":"0.0","11":"0.2857143"},{"1":"0.0000000","2":"1.0","3":"1.00000000","4":"0.54063604","5":"0.07834101","6":"0.95551010","7":"0.41428571","8":"0","9":"0","10":"0.0","11":"0.4285714"},{"1":"0.0000000","2":"1.0","3":"0.97006735","4":"0.57597173","5":"0.11059908","6":"1.00000000","7":"0.39523810","8":"0","9":"0","10":"0.0","11":"0.4285714"},{"1":"0.1829787","2":"1.0","3":"0.92017960","4":"0.62897527","5":"0.21658986","6":"0.97980056","7":"0.34761905","8":"0","9":"0","10":"0.0","11":"0.4285714"},{"1":"0.9361702","2":"0.0","3":"0.01895735","4":"0.04946996","5":"0.60829493","6":"0.17565840","7":"0.59166667","8":"1","9":"1","10":"0.5","11":"0.0000000"},{"1":"0.8510638","2":"0.0","3":"0.01147418","4":"0.00000000","5":"1.00000000","6":"0.02608029","7":"0.47857143","8":"1","9":"1","10":"0.5","11":"0.1428571"},{"1":"1.0000000","2":"0.0","3":"0.00000000","4":"0.04593640","5":"0.67281106","6":"0.08233188","7":"0.64285714","8":"1","9":"1","10":"0.5","11":"0.0000000"},{"1":"0.4723404","2":"0.0","3":"0.12222499","4":"0.15901060","5":"0.43317972","6":"0.24341601","7":"0.65595238","8":"1","9":"0","10":"0.0","11":"0.0000000"},{"1":"0.2170213","2":"1.0","3":"0.61586431","4":"0.34628975","5":"0.00000000","6":"0.51316799","7":"0.28214286","8":"0","9":"0","10":"0.0","11":"0.1428571"},{"1":"0.2042553","2":"1.0","3":"0.58094288","4":"0.34628975","5":"0.17972350","6":"0.49143442","7":"0.33333333","8":"0","9":"0","10":"0.0","11":"0.1428571"},{"1":"0.1234043","2":"1.0","3":"0.69568471","4":"0.68197880","5":"0.44700461","6":"0.59498849","7":"0.10833333","8":"0","9":"0","10":"0.0","11":"0.4285714"},{"1":"0.3744681","2":"1.0","3":"0.82040409","4":"0.43462898","5":"0.14746544","6":"0.59626694","7":"0.30357143","8":"0","9":"0","10":"0.0","11":"0.1428571"},{"1":"0.7191489","2":"0.0","3":"0.01970566","4":"0.04946996","5":"0.60829493","6":"0.10790079","7":"0.52380952","8":"1","9":"1","10":"0.5","11":"0.0000000"},{"1":"0.6638298","2":"0.0","3":"0.12272387","4":"0.13780919","5":"0.76958525","6":"0.16031705","7":"0.26190476","8":"0","9":"1","10":"1.0","11":"0.1428571"},{"1":"0.8510638","2":"0.0","3":"0.05986530","4":"0.21554770","5":"0.46543779","6":"0.00000000","7":"0.28571429","8":"1","9":"1","10":"1.0","11":"0.1428571"},{"1":"0.2297872","2":"1.0","3":"0.69817910","4":"0.74911661","5":"0.67281106","6":"0.42367681","7":"0.00000000","8":"0","9":"1","10":"1.0","11":"0.4285714"},{"1":"0.3957447","2":"0.5","3":"0.18433525","4":"0.43462898","5":"0.39631336","6":"0.32140118","7":"0.11904762","8":"0","9":"1","10":"1.0","11":"0.7142857"},{"1":"0.1957447","2":"1.0","3":"0.57345972","4":"1.00000000","5":"0.35944700","6":"0.52595244","7":"0.01190476","8":"0","9":"1","10":"1.0","11":"1.0000000"},{"1":"0.4680851","2":"0.0","3":"0.12446994","4":"0.20141343","5":"0.62211982","6":"0.32395807","7":"0.48809524","8":"1","9":"1","10":"0.5","11":"0.1428571"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code># every numeric column
@@ -1527,12 +1527,12 @@ this stops <code>build_analysis_site()</code>):</p>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point_ar(cos, x_init = 1, tol = 1e-05)   20.9µs     23µs    36231.        0B     7.25</code></pre>
+#&gt; 1 fixed_point_ar(cos, x_init = 1, tol = 1e-05)   18.7µs   22.3µs    42222.        0B     12.7</code></pre>
 <pre class="r"><code>bench::mark(fixed_point(cos, 1))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point(cos, 1)   52.9µs   60.1µs    14965.        0B     6.35</code></pre>
+#&gt; 1 fixed_point(cos, 1)   49.7µs   61.2µs    15632.        0B     13.3</code></pre>
 <p>As usual, AR Solutions is faster. :-(</p>
 <hr />
 </div>
@@ -1591,7 +1591,7 @@ function operators, which you’ll learn about in Chapter 11.</p>
 <pre class="r"><code>force</code></pre>
 <pre><code>#&gt; function (x) 
 #&gt; x
-#&gt; &lt;bytecode: 0x7fb1d594a108&gt;
+#&gt; &lt;bytecode: 0x7fba67149b08&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <p>Why is it better to <code>force(x)</code> instead of just
 <code>x</code>?</p>
@@ -1729,7 +1729,7 @@ bench::mark(m2(x))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        7.25µs    8.1µs   103986.      848B        0</code></pre>
+#&gt; 1 m2(x)        6.46µs   8.04µs   111738.      848B     11.2</code></pre>
 <p>Answer: code above, following the formula <span
 class="math inline">\(E[(X - E[X])^i]\)</span>, where <span
 class="math inline">\(E\)</span> is the <a
@@ -1759,7 +1759,7 @@ all.equal(m1(x), 0) # removed stopifnot() for clarity</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)           5µs   5.54µs   146397.      848B     14.6</code></pre>
+#&gt; 1 m2(x)        4.83µs   5.59µs   161293.      848B     16.1</code></pre>
 <p>Note: isn’t <code>sum() / length()</code> just <code>mean()</code>?
 For fun, compare <code>bench::mark()</code> (above). Curses, foiled
 again!</p>
@@ -1954,23 +1954,23 @@ bench::mark(optimize(ll_poisson1(x1), c(0, 100), maximum = TRUE))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                                min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                           &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x1), c(0, 100), maximum = TRUE)   33.9µs     39µs    22112.    10.6KB     6.64</code></pre>
+#&gt; 1 optimize(ll_poisson1(x1), c(0, 100), maximum = TRUE)   31.2µs   38.3µs    24838.    10.6KB     12.4</code></pre>
 <pre class="r"><code>bench::mark(optimize(ll_poisson2(x1), c(0, 100), maximum = TRUE))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                                min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                           &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x1), c(0, 100), maximum = TRUE)   21.4µs   23.9µs    35974.        0B     3.60</code></pre>
+#&gt; 1 optimize(ll_poisson2(x1), c(0, 100), maximum = TRUE)   20.4µs   24.7µs    37694.        0B     11.3</code></pre>
 <pre class="r"><code>x &lt;- rpois(1e3, 100L)
 bench::mark(optimize(ll_poisson1(x), c(0, 100), maximum = TRUE))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x), c(0, 100), maximum = TRUE)    366µs    417µs     2253.     110KB     4.23</code></pre>
+#&gt; 1 optimize(ll_poisson1(x), c(0, 100), maximum = TRUE)    321µs    374µs     2589.     110KB     5.89</code></pre>
 <pre class="r"><code>bench::mark(optimize(ll_poisson2(x), c(0, 100), maximum = TRUE))</code></pre>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                                               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                                          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x), c(0, 100), maximum = TRUE)   47.5µs   52.5µs    16427.    7.86KB     2.04</code></pre>
+#&gt; 1 optimize(ll_poisson2(x), c(0, 100), maximum = TRUE)   42.8µs   52.9µs    18469.    7.86KB     6.37</code></pre>
 <p>Answer: <code>ll_poisson2()</code> is nearly twice as fast with
 <code>x1</code> and nearly 10 times as fast when the length of
 <code>x</code> is 100.</p>
@@ -2153,21 +2153,20 @@ code, c) can degrade performance, and d) can’t improve performance.</p>
 work?</li>
 </ol>
 <pre class="r"><code>possibly</code></pre>
-<pre><code>#&gt; function (.f, otherwise, quiet = TRUE) 
+<pre><code>#&gt; function (.f, otherwise = NULL, quiet = TRUE) 
 #&gt; {
 #&gt;     .f &lt;- as_mapper(.f)
 #&gt;     force(otherwise)
+#&gt;     check_bool(quiet)
 #&gt;     function(...) {
 #&gt;         tryCatch(.f(...), error = function(e) {
 #&gt;             if (!quiet) 
-#&gt;                 message(&quot;Error: &quot;, e$message)
+#&gt;                 message(&quot;Error: &quot;, conditionMessage(e))
 #&gt;             otherwise
-#&gt;         }, interrupt = function(e) {
-#&gt;             stop(&quot;Terminated by user&quot;, call. = FALSE)
 #&gt;         })
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x7fb1b2bfb5b8&gt;
+#&gt; &lt;bytecode: 0x7fba4271bc90&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <p>Answer: <code>possibly()</code> returns a function that uses
 <code>tryCatch()</code> to return <code>otherwise</code> if the mapper
@@ -2195,22 +2194,22 @@ work?</li>
 <pre><code>#&gt; function (.f, otherwise = NULL, quiet = TRUE) 
 #&gt; {
 #&gt;     .f &lt;- as_mapper(.f)
+#&gt;     force(otherwise)
+#&gt;     check_bool(quiet)
 #&gt;     function(...) capture_error(.f(...), otherwise, quiet)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fb1b55cb210&gt;
+#&gt; &lt;bytecode: 0x7fba43351ef0&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="r"><code>purrr:::capture_error # nolint: undesirable_operator_linter.</code></pre>
 <pre><code>#&gt; function (code, otherwise = NULL, quiet = TRUE) 
 #&gt; {
 #&gt;     tryCatch(list(result = code, error = NULL), error = function(e) {
 #&gt;         if (!quiet) 
-#&gt;             message(&quot;Error: &quot;, e$message)
+#&gt;             message(&quot;Error: &quot;, conditionMessage(e))
 #&gt;         list(result = otherwise, error = e)
-#&gt;     }, interrupt = function(e) {
-#&gt;         stop(&quot;Terminated by user&quot;, call. = FALSE)
 #&gt;     })
 #&gt; }
-#&gt; &lt;bytecode: 0x7fb1b5622b48&gt;
+#&gt; &lt;bytecode: 0x7fba43349b70&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <p>Answer: <code>safely()</code> returns a function that uses the
 internal <code>capture_error()</code> function to store the evaluation
@@ -2445,14 +2444,14 @@ system.time({
   h()
 })</code></pre>
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.004   0.004   1.000</code></pre>
+#&gt;   0.007   0.007   1.002</code></pre>
 <pre class="r"><code>system.time({
   g()
   Sys.sleep(2)
   g()
 })</code></pre>
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.009   0.008   2.001</code></pre>
+#&gt;   0.015   0.013   2.003</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions:</p>
 <p>To ensure that the function created by <code>delay_by()</code> waits
