@@ -2272,3 +2272,105 @@ Answer: since all terminal nodes are equidistant from the classes, the method is
 AR Solutions: We will introduce ambiguity, since one class has distance 2 to all terminal nodes and the other four have distance 1 to two terminal nodes each. To resolve this ambiguity we have to define five more methods, one per class combination.
 
 ---
+
+## 15.6.3 Exercises
+
+1.  What would a full `setOldClass()` definition look like for an ordered 
+    factor (i.e. add `slots` and `prototype` the definition above)?
+
+Answer: building on the AR Solutions example and the `factor` example in 15.6.1, the following S4 object behaves like the `ordered()` version:
+
+```{r}
+setClass("Ordered",
+  contains = "integer",
+  slots = c(
+    levels = "character",
+    ordered = "logical"
+  ),
+  prototype = structure(
+    integer(),
+    levels = character(),
+    ordered = TRUE
+  )
+)
+setOldClass("ordered", S4Class = "Ordered")
+
+o <- new("Ordered", 1:4, levels = letters[1:4])
+o
+str(ordered(c("a", "b", "c", "d")))
+```
+
+AR Solutions: The purpose of `setOldClass()` lies in registering an S3 class as a "formally defined class", so that it can be used within the S4 object-oriented programming system. When using it, we may provide the argument `S4Class`, which will inherit the slots and their default values (prototype) to the registered class.
+
+Let's build an S4 `OrderedFactor` on top of the S3 factor in such a way.
+
+```{r}
+setOldClass("factor") # use build-in definition for brevity
+OrderedFactor <- setClass( # nolint: object_name_linter.
+  "OrderedFactor",
+  contains = "factor", # inherit from registered S3 class
+  slots = c(
+    levels = "character",
+    ordered = "logical" # add logical order slot
+  ),
+  prototype = structure(
+    integer(),
+    levels = character(),
+    ordered = logical() # add default value
+  )
+)
+```
+
+We can now register the (S3) ordered-class, while providing an "S4 template". We can also use the S4-class to create new object directly.
+
+```{r, warning = FALSE}
+setOldClass("ordered", S4Class = "OrderedFactor")
+x <- OrderedFactor(
+  c(1L, 2L, 2L),
+  levels = c("a", "b", "c"),
+  ordered = TRUE
+)
+str(x)
+```
+
+Notes: while my class `Ordered` looks similar to the AR Solutions version, it does not include the S3 class:
+
+```{r}
+str(o)
+```
+
+---
+
+2.  Define a `length` method for the `Person` class.
+
+Answer: since `Person` is a vector class, its length is the `length()` of any of its fields (we use Person2 here due to prevent conflicts with the already defined Person class):
+
+```{r}
+setClass("Person2",
+  slots = c(
+    name = "character",
+    age = "numeric"
+  ),
+  prototype = list(
+    name = NA_character_,
+    age = NA_real_
+  )
+)
+
+setGeneric("length") |>
+  invisible()
+setMethod("length", "Person2", function(x) length(x@name))
+
+people <- new("Person2", name = c("John Smith", "Jane Doe"), age = c(NA_real_, NA_real_))
+people
+length(people)
+```
+
+AR Solutions: We keep things simple and will just return `"180cm"` when the `length()` method is called on a `Person` object. The method can be defined either as an S3 or S4 method.
+
+```{r}
+length.Person <- function(x) "180cm" # S3
+setMethod("length", "Person", function(x) "180cm") # S4
+```
+
+---
