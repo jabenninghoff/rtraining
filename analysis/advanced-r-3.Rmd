@@ -2244,3 +2244,31 @@ try(
 ```
 
 ---
+
+## 15.5.5 Exercises
+
+1.  Draw the method graph for `f(sweat_smile, kissing_cat)`
+
+Answer: skipped.
+
+AR Solutions: Look at the graph and repeat after me: "I will keep my class structure simple and use multiple inheritance sparingly".
+
+---
+
+2.  Draw the method graph for `f(smiley, wink, kissing_smiling_eyes)`
+
+Answer: skipped.
+
+AR Solutions: We see that the method graph below looks simpler than the one above. Relatively speaking, multiple dispatch seems to introduce less complexity than multiple inheritance. Use it with care, though!
+
+---
+
+3.  Take the last example which shows multiple dispatch over two classes that
+    use multiple inheritance. What happens if you define a method for all
+    terminal classes? Why does method dispatch not save us much work here?
+
+Answer: since all terminal nodes are equidistant from the classes, the method is ambiguous. This is true at the first level as well. The only way to avoid ambiguity is to avoid method dispatch altogether and define a method at the root node.
+
+AR Solutions: We will introduce ambiguity, since one class has distance 2 to all terminal nodes and the other four have distance 1 to two terminal nodes each. To resolve this ambiguity we have to define five more methods, one per class combination.
+
+---
