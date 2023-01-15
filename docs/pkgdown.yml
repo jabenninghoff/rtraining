@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-12-22T19:12Z
+last_built: 2023-01-15T03:45Z
 urls:
   reference: https://jabenninghoff.github.io/rtraining/reference
   article: https://jabenninghoff.github.io/rtraining/articles
