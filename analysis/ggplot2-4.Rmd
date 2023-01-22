@@ -66,7 +66,8 @@ Answer: the plot describes Napolean's 1812 campaign. Larger version at: [Wikiped
 ---
 
 2.  "Where the Heat and the Thunder Hit Their Shots", by Jeremy White, 
-    Joe Ward, and Matthew Ericson at The New York Times. [link](http://nyti.ms/1duzTvY)
+    Joe Ward, and Matthew Ericson at The New York Times.
+    [link](https://archive.nytimes.com/www.nytimes.com/interactive/2012/06/11/sports/basketball/nba-shot-analysis.html?_r=0)
 
 Answer: a plot of basketball shots and points scored.
 
@@ -80,7 +81,8 @@ Answer: a plot of basketball shots and points scored.
 
 ---
 
-3.  "London Cycle Hire Journeys", by James Cheshire. [link](http://bit.ly/1S2cyRy)
+3.  "London Cycle Hire Journeys", by James Cheshire.
+    [link](https://web.archive.org/web/20190523203409/http://spatialanalysis.co.uk/2012/02/great-maps-ggplot2/)
 
 Answer: retrieved from [archive.org](https://web.archive.org/web/20210516232923/http://spatialanalysis.co.uk/wp-content/uploads/2012/02/bike_ggplot.png).
 
@@ -94,7 +96,8 @@ Answer: retrieved from [archive.org](https://web.archive.org/web/20210516232923/
 
 ---
 
-4.  The Pew Research Center's favorite data visualizations of 2014: [link](http://pewrsr.ch/1KZSSN6)
+4.  The Pew Research Center's favorite data visualizations of 2014:
+    [link](https://www.pewresearch.org/fact-tank/2014/12/29/our-favorite-pew-research-center-data-visualizations-from-2014/)
 
 Answer: multiple plots, described individually.
 
@@ -152,7 +155,8 @@ Regional Support for Same-Sex Marriage
 ---
 
 5.  "The Tony's Have Never Been so Dominated by Women", by 
-    Joanna Kao at FiveThirtyEight: [link](http://53eig.ht/1cJRCyG).
+    Joanna Kao at FiveThirtyEight:
+    [link](https://fivethirtyeight.com/features/the-tonys-have-never-been-so-dominated-by-women/).
 
 Answer: a plot of Tony award winners by category.
 
@@ -169,7 +173,7 @@ Answer: a plot of Tony award winners by category.
 6.  "In Climbing Income Ladder, Location Matters" by the Mike Bostock, 
     Shan Carter, Amanda Cox, Matthew Ericson, Josh Keller, Alicia 
     Parlapiano, Kevin Quealy and Josh Williams at the New York Times:
-    [link](http://nyti.ms/1S2dJQT)
+    [link](https://www.nytimes.com/2013/07/22/business/in-climbing-income-ladder-location-matters.html)
 
 Answer: not visible due to paywall, unable to retrieve the graphic.
 
@@ -177,7 +181,7 @@ Answer: not visible due to paywall, unable to retrieve the graphic.
 
 7. "Dissecting a Trailer: The Parts of the Film That Make the Cut",
     by Shan Carter, Amanda Cox, and Mike Bostock at the New York Times:
-    [link](http://nyti.ms/1KTJQOE)
+    [link](https://archive.nytimes.com/www.nytimes.com/interactive/2013/02/19/movies/awardsseason/oscar-trailers.html)
 
 Answer: multiple plots showing the sequencing of movie trailers.
 

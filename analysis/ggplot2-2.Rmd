@@ -66,7 +66,7 @@ GG Solutions:
 - Line chart: `geom_line()`
 - Histogram: `geom_histogram()`
 - Bar chart: `geom_bar()`
-- Pie chart: ggplot2 does not have a geom to draw pie charts. One workaround, according to the [R Graph Gallery](https://www.r-graph-gallery.com/piechart-ggplot2.html) is to build a stacked bar chart with one bar only using the `geom_bar()` function and then make it circular with `coord_polar()`
+- Pie chart: ggplot2 does not have a geom to draw pie charts. One workaround, according to the [R Graph Gallery](https://r-graph-gallery.com/piechart-ggplot2.html) is to build a stacked bar chart with one bar only using the `geom_bar()` function and then make it circular with `coord_polar()`
 
 ---
 
