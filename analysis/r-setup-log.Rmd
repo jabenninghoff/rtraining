@@ -61,7 +61,7 @@ Once R and RStudio have been installed, you'll need a development environment an
 
 ## Development Environment
 
-Well, obviously, I use [RStudio](https://www.rstudio.com/products/rstudio/download/). There are other IDEs available, and it's also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don't typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.
+Well, obviously, I use [RStudio](https://posit.co/download/rstudio-desktop/). There are other IDEs available, and it's also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don't typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.
 
 ```sh
 brew install github
@@ -112,7 +112,7 @@ echo "install.packages(${DEVPKG}, repos=\"https://cran.rstudio.com\", lib=\"${SI
 Any packages *not* needed to create projects I install within a project using renv - here are some good intros:
 
 - A [presentation at rstudio::conf 2020](https://www.rstudio.com/resources/rstudioconf-2020/renv-project-environments-for-r/)
-- The [RStudio Blog post](https://www.rstudio.com/blog/renv-project-environments-for-r/)
+- The [RStudio Blog post](https://posit.co/blog/renv-project-environments-for-r/)
 - An [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html)
 - [renv](https://github.com/rstudio/renv) on GitHub
 
@@ -175,7 +175,7 @@ There are some drawbacks to using R Notebooks:
   1. "Restart R and Clear Output"
   1. "Run All"
   1. Save
-- [Debug breakpoints don't work in R Markdown documents](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio#debugging-in-r-markdown-documents). To fix this, [convert R Markdown documents to R Scripts using purl](https://bookdown.org/yihui/rmarkdown-cookbook/purl.html) for debugging.
+- [Debug breakpoints don't work in R Markdown documents](https://support.posit.co/hc/en-us/articles/205612627-Debugging-with-RStudio#debugging-in-r-markdown-documents). To fix this, [convert R Markdown documents to R Scripts using purl](https://bookdown.org/yihui/rmarkdown-cookbook/purl.html) for debugging.
 - Not really a drawback, but...`Rcpp` and `rprojroot` are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with `renv`. This is a [bug in RStudio](https://github.com/rstudio/rstudio/issues/7935), which will be fixed in version 1.4.944.
 
 ## Publishing R Notebooks

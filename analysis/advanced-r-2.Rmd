@@ -780,6 +780,8 @@ Notes: I wasn't aware of `purrr::modify_depth()`.
     [fixed point algorithm](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-12.html#%25_idx_1096).
     Complete the exercises using R.
 
+Note: see [archive.org](https://web.archive.org/web/20220614001903/https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-12.html), "Finding fixed points of functions."
+
 Answer: the fixed point algorithm is defined below, with an example solution:
 
 ```
