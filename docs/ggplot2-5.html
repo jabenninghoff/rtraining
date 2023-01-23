@@ -14,7 +14,7 @@
 
 <title>ggplot2 (Extending)</title>
 
-<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
@@ -565,7 +565,7 @@ specifies a complete theme object, <code>t</code>, and uses the
 #&gt;             half_line, half_line, half_line), complete = TRUE)
 #&gt;     ggplot_global$theme_all_null %+replace% t
 #&gt; }
-#&gt; &lt;bytecode: 0x7fba43e04770&gt;
+#&gt; &lt;bytecode: 0x7fb426f05ac0&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>GG Solutions:</p>
 <ul>
@@ -590,7 +590,7 @@ for <code>scale_color_brewer()</code>:</p>
 #&gt;     discrete_scale(aesthetics, &quot;brewer&quot;, brewer_pal(type, palette, 
 #&gt;         direction), ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fba612b0e60&gt;
+#&gt; &lt;bytecode: 0x7fb455820000&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>The function is a wrapper for <code>discrete_scale()</code> and calls
 <code>scales::brewer_pal()</code>, which is a <a
@@ -616,7 +616,7 @@ factory</a>:</p>
 #&gt;         pal
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x7fba54b43b68&gt;
+#&gt; &lt;bytecode: 0x7fb455a875c8&gt;
 #&gt; &lt;environment: namespace:scales&gt;</code></pre>
 <p>First we construct a discrete scale, using <code>Darjeeling1</code>
 as the default:</p>
@@ -647,7 +647,7 @@ revised to auto-enable <code>continuous</code> or
 #&gt;         begin, end, direction, option)(6), values, space), na.value = na.value, 
 #&gt;         guide = guide, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fba32d18438&gt;
+#&gt; &lt;bytecode: 0x7fb474c4fc00&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>We can add a continuous scale based using <code>Zissou1</code> as the
 default:</p>
