@@ -1,3 +1,7 @@
+# rtraining 0.8.16
+
+* Maintenance update
+
 # rtraining 0.8.15
 
 * Maintenance update
