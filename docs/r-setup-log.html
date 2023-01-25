@@ -435,7 +435,6 @@ because it creates problems with <code>brew doctor</code>:</p>
 <pre><code>## ==&gt; r: 4.2.2
 ## https://www.r-project.org/
 ## Not installed
-## From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r.rb
 ## ==&gt; Name
 ## R
 ## ==&gt; Description
@@ -443,12 +442,12 @@ because it creates problems with <code>brew doctor</code>:</p>
 ## ==&gt; Artifacts
 ## R-4.2.2.pkg (Pkg)
 ## ==&gt; Caveats
-## Cask r installs files under /usr/local. The presence of such
+## Cask r installs files under $(brew --prefix). The presence of such
 ## files can cause warnings when running `brew doctor`, which is considered
 ## to be a bug in Homebrew Cask.
 ## 
 ## ==&gt; Analytics
-## install: 1,191 (30 days), 3,160 (90 days), 12,606 (365 days)</code></pre>
+## install: 1,215 (30 days), 3,169 (90 days), 12,620 (365 days)</code></pre>
 <p>I tried “<a
 href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing
 all the things</a>” with <a
