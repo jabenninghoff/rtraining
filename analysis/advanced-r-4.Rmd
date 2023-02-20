@@ -1,0 +1,36 @@
+---
+title: "Advanced R Workbook (Metaprogramming)"
+date: '2023-02-19'
+output:
+  html_notebook:
+    theme:
+      version: 5
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+---
+
+Workbook for completing quizzes and exercises from the "Metaprogramming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io).
+
+```{r setup, message = FALSE, warning = FALSE}
+# from https://github.com/hadley/adv-r/blob/master/common.R
+knitr::opts_chunk$set(
+  comment = "#>",
+  fig.align = "center"
+)
+
+knitr::knit_hooks$set(
+  small_mar = function(before, options, envir) {
+    if (before) {
+      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+    }
+  }
+)
+```
+
+# Introduction
+
+This workbook includes answers and solutions to the quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html) and [Advanced R Solutions](https://advanced-r-solutions.rbind.io), organized by chapter. It includes excerpts from both books, copied here.
+
+**WARNING, SPOILERS!** If you haven't read Advanced R and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
