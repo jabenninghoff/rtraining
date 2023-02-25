@@ -14,6 +14,8 @@ output:
 Workbook for completing quizzes and exercises from the "Metaprogramming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io).
 
 ```{r setup, message = FALSE, warning = FALSE}
+library(lobstr)
+
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
   comment = "#>",
@@ -46,6 +48,7 @@ But I think it's easier to learn metaprogramming now than ever before. Over the 
 To compute on the language, we first need to understand its structure. That requires some new vocabulary, some new tools, and some new ways of thinking about R code. The first of these is the distinction between an operation and its result. Take the following code, which multiplies a variable `x` by 10 and saves the result to a new variable called `y`. It doesn't work because we haven't defined a variable called `x`:
 
 ```{r, error = TRUE}
+rm(x)
 try(y <- x * 10)
 ```
 
@@ -68,3 +71,171 @@ y
 
 The focus of this chapter is the data structures that underlie expressions. Mastering this knowledge will allow you to inspect and modify captured code, and to generate code with code. We'll come back to `expr()` in Chapter 19, and to `eval()` in Chapter 20.
 
+## 18.2.4 Exercises
+
+1.  Reconstruct the code represented by the trees below:
+
+```{r}
+#> █─f
+#> └─█─g
+#>   └─█─h
+#> █─`+`
+#> ├─█─`+`
+#> │ ├─1
+#> │ └─2
+#> └─3
+#> █─`*`
+#> ├─█─`(`
+#> │ └─█─`+`
+#> │   ├─x
+#> │   └─y
+#> └─z
+```
+
+Answer: code below.
+
+```{r}
+lobstr::ast(f(g(h())))
+lobstr::ast(1 + 2 + 3)
+lobstr::ast((x + y) * z)
+```
+
+AR Solutions: Let the source (of the code chunks above) be with you and show you how the ASTs (abstract syntax trees) were produced.
+
+```{r}
+ast(f(g(h())))
+ast(1 + 2 + 3)
+ast((x + y) * z)
+```
+
+---
+
+2.  Draw the following trees by hand and then check your answers with
+    `lobstr::ast()`.
+
+```{r, eval = FALSE}
+f(g(h(i(1, 2, 3))))
+f(1, g(2, h(3, i())))
+f(g(1, 2), h(3, i(4, 5)))
+```
+
+Answer: code below, expression 1:
+
+```{r}
+#> █─f
+#> └─█─g
+#>   └─█─h
+#>     └─█─i
+#>       └─1
+#>       └─2
+#>       └─3
+lobstr::ast(f(g(h(i(1, 2, 3)))))
+```
+
+Expression 2:
+
+```{r}
+#> █─f
+#> └─1
+#> └─█─g
+#>   └─2
+#>   └─█─h
+#>     └─3
+#>     └─█─i
+lobstr::ast(f(1, g(2, h(3, i()))))
+```
+
+Expression 3:
+
+```{r}
+#> █─f
+#> └─█─g
+#> | └─1
+#> | └─2
+#> └─█─h
+#>   └─3
+#>   └─█─i
+#>     └─4
+#>     └─5
+lobstr::ast(f(g(1, 2), h(3, i(4, 5))))
+```
+
+AR Solutions: Let us delegate the drawing to the `lobstr` package.
+
+---
+
+3.  What's happening with the ASTs below? (Hint: carefully read `?"^"`.)
+
+```{r}
+lobstr::ast(`x` + `y`)
+lobstr::ast(x ** y) # styler: off
+lobstr::ast(1 -> x) # nolint: assignment_linter.
+```
+
+Answer: all expressions are changed to their normal forms. In the first expression, the back ticks denoting symbols are not needed. In the third expression, the assignment operator is changed to the standard form. In the second expression, the operator is changed per this note in the R documentation:
+
+> `**` is translated in the parser to `^`, but this was undocumented for many years. It appears as an index entry in Becker *et al* (1988), pointing to the help for `Deprecated` but is not actually mentioned on that page. Even though it had been deprecated in S for 20 years, it was still accepted in R in 2008.
+
+AR Solutions: ASTs start function calls with the name of the function. This is why the call in the first expression is translated into its prefix form. In the second case, `**` is translated by R's parser into `^`. In the last AST, the expression is flipped when R parses it.
+
+---
+
+4.  What is special about the AST below? (Hint: re-read Section
+    6.2.1.)
+
+```{r}
+lobstr::ast(function(x = 1, y = 2) {}) # nolint: brace_linter.
+```
+
+Answer: the AST includes two of the three parts of the function, the `formals()`, `x` and `y`, the `body()`, represented by `{` and `<inline srcref>`.
+
+AR Solutions: The last leaf of the AST is not explicitly specified in the expression. Instead, the `srcref` attribute, which points to the functions source code, is automatically created by base R.
+
+---
+
+5.  What does the call tree of an `if` statement with multiple `else if`
+    conditions look like? Why?
+
+Answer: the call tree shows nested if statements; this is because if-else is a function with three arguments, the `cond`, the `cons.expr` and the `alt.expr`. The `alt.expr` for each if-else statement is a new call to if.
+
+```{r}
+lobstr::ast(
+  if (v == 1) {
+    print("one")
+  } else if (v == 2) {
+    print("two")
+  } else if (v == 3) {
+    print("three")
+  } else if (v == 4) {
+    print("four")
+  }
+)
+```
+
+AR Solutions: The AST of nested `else if` statements might look a bit confusing because it contains multiple curly braces. However, we can see that in the `else` part of the AST just another expression is being evaluated, which happens to be an `if` statement and so forth.
+
+```{r}
+ast(
+  if (FALSE) {
+    1
+  } else if (FALSE) {
+    2
+  } else if (TRUE) {
+    3
+  }
+)
+```
+
+We can see the structure more clearly if we avoid the curly braces:
+
+```{r}
+ast(
+  # styler: off
+  if (FALSE) 1
+  else if (FALSE) 2
+  else if (TRUE) 3
+  # styler: on
+)
+```
+
+---
