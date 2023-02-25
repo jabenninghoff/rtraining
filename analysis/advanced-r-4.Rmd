@@ -398,3 +398,309 @@ ast(`if`(x > 1, "a", "b"))
 ```
 
 ---
+
+## 18.4.4 Exercises
+
+1.  R uses parentheses in two slightly different ways as illustrated by
+    these two calls:
+
+```{r, eval = FALSE}
+f((1))
+`(`(1 + 1)
+```
+
+Compare and contrast the two uses by referencing the AST.
+
+Answer: R uses parentheses both as a function *and* as part of a function call. In the first call, the outer parentheses are for `f` and the inner represent `(` with a single parameter. In the second call, equivalent to `(1 + 1)`, the parentheses are for the `(` function call.
+
+```{r}
+lobstr::ast(f((1)))
+lobstr::ast(`(`(1 + 1))
+lobstr::ast((1 + 1))
+```
+
+AR Solutions: The trick with these examples lies in the fact that `(` can be a part of R's general prefix function syntax but can also represent a call to the `(` function.
+
+So, in the AST of the first example, we will not see the outer `(` since it is prefix function syntax and belongs to `f()`. In contrast, the inner `(` is a function (represented as a symbol in the AST):
+
+```{r}
+ast(f((1)))
+```
+
+In the second example, we can see that the outer `(` is a function and the inner `(` belongs to its syntax:
+
+```{r}
+ast(`(`(1 + 1))
+```
+
+For the sake of clarity, let's also create a third example, where none of the `(` is part of another function's syntax:
+
+```{r}
+ast(((1 + 1)))
+```
+
+---
+
+2.  `=` can also be used in two ways. Construct a simple example that shows
+    both uses.
+
+Answer: `=` can be used for assignment and also for function parameters.
+
+```{r}
+lobstr::ast(`=`(val, sum(10, na.rm = TRUE)))
+```
+
+AR Solutions: `=` is used both for assignment, and for naming arguments in function calls:
+
+```{r}
+b = c(c = 1) # nolint: assignment_linter. styler: off
+```
+
+So, when we play with `ast()`, we can directly see that the following is not possible:
+
+```{r, error = TRUE}
+try(ast(b = c(c = 1)))
+```
+
+We get an error because `b = ` makes R looking for an argument called `b`. Since `x` is the only argument of `ast()`, we get an error.
+
+The easiest way around this problem is to wrap this line in `{}`.
+
+```{r}
+ast({b = c(c = 1)})  # nolint: assignment_linter, brace_linter. styler: off
+```
+
+When we ignore the braces and compare the trees, we can see that the first `=` is used for assignment and the second `=` is part of the syntax of function calls.
+
+---
+
+3.  Does `-2^2` yield 4 or -4? Why?
+
+Answer: the result is -4, because `^` has higher precedence than `-`:
+
+```{r}
+-2^2
+lobstr::ast(-2^2)
+```
+
+AR Solutions: It yields `-4`, because `^` has a higher operator precedence than `-`, which we can verify by looking at the AST (or looking it up under `?"Syntax"`):
+
+```{r}
+-2^2
+
+ast(-2^2)
+```
+
+---
+
+4.  What does `!1 + !1` return? Why?
+
+Answer: `FALSE`. As the AST demonstrates, the `!` operator takes precedence.
+
+```{r}
+!1 + !1
+lobstr::ast(!1 + !1)
+```
+
+The result can be demonstrated by evaluating the AST in steps:
+
+```{r}
+!1 # FALSE
+1 + FALSE # 1
+!1 # FALSE
+```
+
+AR Solutions: The answer is a little surprising:
+
+```{r}
+!1 + !1
+```
+
+To answer the "why?", we take a look at the AST:
+
+```{r}
+ast(!1 + !1)
+```
+
+The right `!1` is evaluated first. It evaluates to `FALSE`, because R coerces every non 0 numeric to `TRUE`, when a logical operator is applied. The negation of `TRUE` then equals `FALSE`.
+
+Next `1 + FALSE` is evaluated to `1`, since `FALSE` is coerced to `0`.
+
+Finally `!1` is evaluated to `FALSE`.
+
+Note that if `!` had a higher precedence, the intermediate result would be `FALSE + FALSE`, which would evaluate to `0`.
+
+---
+
+5.  Why does `x1 <- x2 <- x3 <- 0` work? Describe the two reasons.
+
+Answer: assignment is right-associative: `x1 <- (x2 <- 0)` and `x1 <- x2 <- 0` are equivalent, and the rightmost assignment operator is evaluated first.
+
+```{r}
+lobstr::ast(x1 <- x2 <- x3 <- 0)
+```
+
+AR Solutions: One reason is that `<-` is right-associative, i.e. evaluation takes place from right to left:
+
+```{r}
+x1 <- (x2 <- (x3 <- 0))
+```
+
+The other reason is that `<-` invisibly returns the value on the right-hand side.
+
+```{r}
+(x3 <- 0)
+```
+
+Note: I forgot that `<-` returns the value invisibly.
+
+---
+
+6.  Compare the ASTs of `x + y %+% z` and `x ^ y %+% z`. What have you learned
+    about the precedence of custom infix functions?
+
+Answer: custom infix functions have higher precedence than `+` and lower precedence than `^`.
+
+```{r}
+lobstr::ast(x + y %+% z)
+lobstr::ast(x ^ y %+% z) # styler: off
+```
+
+AR Solutions: Let's take a look at the syntax trees:
+
+```{r}
+ast(x + y %+% z)
+```
+
+Here `y %+% z` will be calculated first and the result will be added to `x`.
+
+```{r}
+ast(x ^ y %+% z) # styler: off
+```
+
+Here `x ^ y` will be calculated first, and the result will be used as first argument to `%+%()`.
+We can conclude that custom infix functions have precedence between addition and exponentiation.
+The exact precedence of infix functions can be looked up under `?"Syntax"` where we see that it lies directly behind the sequence operator (`:`) and in front of the multiplication and division operators (`*` and `/`).
+
+---
+
+7.  What happens if you call `parse_expr()` with a string that generates
+    multiple expressions? e.g. `parse_expr("x + 1; y + 1")`
+
+Answer: `parse_expr()` throws an error. Use `parse_exprs()` with strings containing multiple expressions.
+
+```{r}
+try(parse_expr("x + 1; y + 1"))
+parse_exprs("x + 1; y + 1")
+```
+
+AR Solutions: In this case `parse_expr()` notices that more than one expression would have to be generated and throws an error.
+
+```{r, error = TRUE}
+try(parse_expr("x + 1; y + 1"))
+```
+
+---
+
+8.  What happens if you attempt to parse an invalid expression? e.g. `"a +"`
+    or `"f())"`.
+
+Answer: `parse_expr()` throws an error.
+
+```{r}
+try(parse_expr("a +"))
+try(parse_expr("f())"))
+```
+
+AR Solutions: Invalid expressions will lead to an error in the underlying `parse()` function.
+
+```{r, error = TRUE}
+try(parse_expr("a +"))
+try(parse_expr("f())"))
+try(parse(text = "a +"))
+try(parse(text = "f())"))
+```
+
+---
+
+9.  `deparse()` produces vectors when the input is long. For example, the
+    following call produces a vector of length two:
+
+```{r}
+expr <- expr(g(a + b + c + d + e + f + g + h + i + j + k + l +
+  m + n + o + p + q + r + s + t + u + v + w + x + y + z))
+deparse(expr)
+```
+
+What does `expr_text()` do instead?
+
+Answer: `expr_text()` adds a newline (`\n`) instead.
+
+```{r}
+expr_text(expr)
+```
+
+AR Solutions: `expr_text()` will paste the results from `deparse(expr)` together and use a linebreak (`\n`) as separator.
+
+```{r, eval = FALSE}
+expr <- expr(g(a + b + c + d + e + f + g + h + i + j + k + l + m +
+  n + o + p + q + r + s + t + u + v + w + x + y + z))
+deparse(expr)
+#> [1] "g(a + b + c + d + e + f + g + h + i + j + k + l + m + n + "
+#> [2] "o + p + q + r + s + t + u + v + w + x + y + z)"
+expr_text(expr)
+#> [1] "g(a + b + c + d + e + f + g + h + i + j + k + l + m + n
+#> + \n    o + p + q + r + s + t + u + v + w + x + y + z)"
+```
+
+---
+
+10.  `pairwise.t.test()` assumes that `deparse()` always returns a length one
+    character vector. Can you construct an input that violates this expectation?
+    What happens?
+
+Answer: an especially long input for `x` or `g` would create a character vector of length two or more. However, starting in R 4.0.0, `pairwise.t.test()` uses `deparse1()` which guarantees a string (character of length one), so it is no longer possible to break `pairwise.t.test()`.
+
+```{r}
+pairwise.t.test
+deparse(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18))
+pairwise.t.test(1:18, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18))
+```
+
+AR Solutions: The function `pairwise.t.test()` captures its data arguments (`x` and `g`) so it can print the input expressions along the computed p-values. Prior to R 4.0.0 this used to be implemented via `deparse(substitute(x))` in combination with `paste()`. This could lead to unexpected output, if one of the inputs exceeded the default `width.cutoff` value of 60 characters within `deparse()`. In this case, the expression would be split into a character vector of length greater 1.
+
+```{r, eval = FALSE}
+# Output in R version 3.6.2
+d <- 1
+pairwise.t.test(2, d + d + d + d + d + d + d + d +
+  d + d + d + d + d + d + d + d + d)
+#> 	Pairwise comparisons using t tests with pooled SD
+#>
+#> data:  2 and d + d + d + d + d + d + d + d + d + d + d + d + d + d
+#> + d + d +  2 and     d
+#>
+#> <0 x 0 matrix>
+#>
+#> P value adjustment method: holm
+```
+
+In [R 4.0.0](https://cran.r-project.org/doc/manuals/r-release/NEWS.html) `pairwise.t.test()` was updated to use the newly introduced `deparse1()`, which serves as a wrapper around `deparse()`.
+
+> deparse1() is a simple utility added in R 4.0.0 to ensure a string result (character vector of length one), typically used in name construction, as deparse1(substitute(.)).
+
+```{r, eval = FALSE}
+# Output since R 4.0.0
+d <- 1
+pairwise.t.test(2, d + d + d + d + d + d + d + d +
+  d + d + d + d + d + d + d + d + d)
+#> 	Pairwise comparisons using t tests with pooled SD
+#>
+#> data:  2 and d + d + d + d + d + d + d + d + d + d + d + d + d + d
+#> + d + d + d
+#>
+#> <0 x 0 matrix>
+#>
+#> P value adjustment method: holm
+```
+
+---
