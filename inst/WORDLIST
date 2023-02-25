@@ -119,6 +119,7 @@ ie
 iesel
 initialisation
 initialised
+inlined
 internalise
 invertible
 io
@@ -168,6 +169,7 @@ purrr
 purrr's
 quadratically
 quattro
+raws
 rdev
 readr
 rebase
@@ -193,6 +195,7 @@ signalling
 specialised
 srf
 stackable
+standardise
 standardised
 stateful
 stringr

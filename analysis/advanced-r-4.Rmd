@@ -15,6 +15,7 @@ Workbook for completing quizzes and exercises from the "Metaprogramming" chapter
 
 ```{r setup, message = FALSE, warning = FALSE}
 library(lobstr)
+library(rlang)
 
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
@@ -236,6 +237,164 @@ ast(
   else if (TRUE) 3
   # styler: on
 )
+```
+
+---
+
+## 18.3.5 Exercises
+
+2.  Which two of the six types of atomic vector can't appear in an expression?
+    Why? Similarly, why can't you create an expression that contains an atomic 
+    vector of length greater than one?
+
+Answer: `raw` and some `complex` numbers can't appear in an expression, since constructing both requires a function call (`raw()` and `+` respectively). Similarly, creating atomic vectors longer than one requires `c()`.
+
+```{r}
+expr(f(TRUE, 1L, 1.0, "x", 1i, raw(1L), 1 + 1i))
+expr(c(1, 2))
+```
+
+AR Solutions: There is no way to create raws and complex atomics without using a function call (this is only possible for imaginary scalars like `i`, `5i` etc.). But expressions that include a function are *calls*. Therefore, both of these vector types cannot appear in an expression.
+
+Similarly, it is not possible to create an expression that evaluates to an atomic of length greater than one without using a function (e.g. `c()`).
+
+Let's make this observation concrete via an example:
+
+```{r}
+# Atomic
+is_atomic(expr(1))
+# Not an atomic (although it would evaluate to an atomic)
+is_atomic(expr(c(1, 1)))
+is_call(expr(c(1, 1)))
+```
+
+---
+
+2.  What happens when you subset a call object to remove the first element?
+    e.g. `expr(read.csv("foo.csv", header = TRUE))[-1]`. Why?
+
+Answer: as the result demonstrates, this removes the function call which makes the first argument the new function call in the expression, since the AST structure (call object) is preserved, and the first element of the call object is the function position.
+
+```{r}
+expr(read.csv("foo.csv", header = TRUE))[-1]
+```
+
+AR Solutions: When the first element of a call object is removed, the second element moves to the first position, which is the function to call. Therefore, we get `"foo.csv"(header = TRUE)`.
+
+---
+
+3.  Describe the differences between the following call objects.
+
+```{r, results = FALSE}
+x <- 1:10
+call2(median, x, na.rm = TRUE)
+call2(expr(median), x, na.rm = TRUE)
+call2(median, expr(x), na.rm = TRUE)
+call2(expr(median), expr(x), na.rm = TRUE)
+```
+
+Answer: the objects differ in their use of `expr()`. When using bare `median` and `x`, the object uses the evaluated function and value of `x` where using `expr()` prevents evaluation.
+
+```{r}
+median
+expr(median)
+x
+expr(x)
+```
+
+AR Solutions: The call objects differ in their first two elements, which are in some cases evaluated before the call is constructed. In the first one, both `median()` and `x` are evaluated and inlined into the call.  Therefore, we can see in the constructed call that median is a generic and the `x` argument is 1:10.
+
+```{r}
+call2(median, x, na.rm = TRUE)
+```
+
+In the following calls we remain with differing combinations. Once, only `x` and once only `median()` gets evaluated. 
+
+```{r}
+call2(expr(median), x, na.rm = TRUE)
+call2(median, expr(x), na.rm = TRUE)
+```
+
+In the final call neither `x` nor `median()` is evaluated.
+
+```{r}
+call2(expr(median), expr(x), na.rm = TRUE)
+```
+
+Note that all these calls will generate the same result when evaluated. The key difference is when the values bound to the `x` and `median` symbols are found.
+
+---
+
+4.  `rlang::call_standardise()` doesn't work so well for the following calls.
+    Why? What makes `mean()` special?
+
+```{r}
+call_standardise(quote(mean(1:10, na.rm = TRUE)))
+call_standardise(quote(mean(n = T, 1:10))) # nolint: T_and_F_symbol_linter.
+call_standardise(quote(mean(x = 1:10, , TRUE))) # nolint: missing_argument_linter.
+```
+
+Answer: as noted in the book, "If the function uses `...` it’s not possible to standardise all arguments." `mean()` has a single argument, `x`, and uses `...` for the remaining arguments, although the default S3 method is `mean(x, trim = 0, na.rm = FALSE, ...)`.
+
+AR Solutions: The reason for this unexpected behaviour is that `mean()` uses the `...` argument and therefore cannot standardise the regarding arguments. Since `mean()` uses S3 dispatch (i.e. `UseMethod()`) and the underlying `mean.default()` method specifies some more arguments, `call_standardise()` can do much better with a specific S3 method.
+
+---
+
+5.  Why does this code not make sense?
+
+```{r, eval = FALSE}
+x <- expr(foo(x = 1))
+names(x) <- c("x", "y")
+```
+
+Answer: as the code below demonstrates, the only symbol (name) in the expression is `x`. Assigning a name to both components changes `x` to `y` but doesn't change the function call `foo`.
+
+```{r}
+ex <- expr(foo(x = 1))
+names(ex)
+names(ex) <- c("x", "y")
+ex
+```
+
+AR Solutions: As stated in *Advanced R*
+
+> The first element of a call is always the function that gets called.
+
+Let's see what happens when we run the code
+
+```{r}
+x <- expr(foo(x = 1))
+x
+names(x) <- c("x", "")
+x
+names(x) <- c("", "x")
+x
+```
+
+So, giving the first element a name just adds metadata that R ignores.
+
+---
+
+6.  Construct the expression `if(x > 1) "a" else "b"` using multiple calls to
+    `call2()`. How does the code structure reflect the structure of the AST?
+
+Answer: code below. The `call2()` structure mirrors the AST of the if expression.
+
+```{r}
+call2("if", call2(">", expr(x), 1), "a", "b")
+lobstr::ast(if (x > 1) "a" else "b")
+```
+
+AR Solutions: Similar to the prefix version we get
+
+```{r}
+call2("if", call2(">", sym("x"), 1), "a", "b")
+```
+
+When we read the AST from left to right, we get the same structure: Function to evaluate, expression, which is another function and is evaluated first, and two constants which will be evaluated next.
+
+```{r}
+ast(`if`(x > 1, "a", "b"))
 ```
 
 ---
