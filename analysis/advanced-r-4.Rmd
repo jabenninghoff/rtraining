@@ -34,3 +34,37 @@ knitr::knit_hooks$set(
 This workbook includes answers and solutions to the quizzes and exercises from [Advanced R](https://adv-r.hadley.nz/index.html) and [Advanced R Solutions](https://advanced-r-solutions.rbind.io), organized by chapter. It includes excerpts from both books, copied here.
 
 **WARNING, SPOILERS!** If you haven't read Advanced R and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
+
+# 17 Big picture
+
+Metaprogramming is the hardest topic in this book because it brings together many formerly unrelated topics and forces you grapple with issues that you probably haven't thought about before. You'll also need to learn a lot of new vocabulary, and at first it will seem like every new term is defined by three other terms that you haven't heard of. Even if you're an experienced programmer in another language, your existing skills are unlikely to be much help as few modern popular languages expose the level of metaprogramming that R provides. So don't be surprised if you're frustrated or confused at first; this is a natural part of the process that happens to everyone! 
+
+But I think it's easier to learn metaprogramming now than ever before. Over the last few years, the theory and practice have matured substantially, providing a strong foundation paired with tools that allow you to solve common problems. In this chapter, you'll get the big picture of all the main pieces and how they fit together. 
+
+# 18 Expressions
+
+To compute on the language, we first need to understand its structure. That requires some new vocabulary, some new tools, and some new ways of thinking about R code. The first of these is the distinction between an operation and its result. Take the following code, which multiplies a variable `x` by 10 and saves the result to a new variable called `y`. It doesn't work because we haven't defined a variable called `x`:
+
+```{r, error = TRUE}
+try(y <- x * 10)
+```
+
+It would be nice if we could capture the intent of the code without executing it. In other words, how can we separate our description of the action from the action itself? 
+
+One way is to use `rlang::expr()`:
+
+```{r}
+z <- rlang::expr(y <- x * 10)
+z
+```
+
+`expr()` returns an expression, an object that captures the structure of the code without evaluating it (i.e. running it). If you have an expression, you can evaluate it with `base::eval()`:
+
+```{r}
+x <- 4
+eval(z)
+y
+```
+
+The focus of this chapter is the data structures that underlie expressions. Mastering this knowledge will allow you to inspect and modify captured code, and to generate code with code. We'll come back to `expr()` in Chapter 19, and to `eval()` in Chapter 20.
+
