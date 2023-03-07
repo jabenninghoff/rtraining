@@ -1108,3 +1108,149 @@ Note: the AR Solutions version detects *any* function call, not a specific funct
 Now that you understand the tree structure of R code, it's time to return to one of the fundamental ideas that make `expr()` and `ast()` work: quotation. In tidy evaluation, all quoting functions are actually quasiquoting functions because they also support unquoting. Where quotation is the act of capturing an unevaluated expression, __unquotation__ is the ability to selectively evaluate parts of an otherwise quoted expression. Together, this is called quasiquotation. Quasiquotation makes it easy to create functions that combine code written by the function's author with code written by the function's user. This helps to solve a wide variety of challenging problems. 
 
 Quasiquotation is one of the three pillars of tidy evaluation. You'll learn about the other two (quosures and the data mask) in Chapter 20. When used alone, quasiquotation is most useful for programming, particularly for generating code. But when it's combined with the other techniques, tidy evaluation becomes a powerful tool for data analysis.
+
+## 19.2.2 Exercises
+
+1.  For each function in the following base R code, identify which arguments
+    are quoted and which are evaluated.
+
+```{r, results = FALSE}
+library(MASS) # nolint: unused_import_linter.
+
+mtcars2 <- subset(mtcars, cyl == 4)
+
+with(mtcars2, sum(vs))
+sum(mtcars2$am)
+
+rm(mtcars2)
+```
+
+Answer: using the technique described in the chapter, test arguments outside their functions:
+
+```{r}
+library(MASS) # nolint: unused_import_linter.
+try(MASS)
+
+mtcars2 <- subset(mtcars, cyl == 4)
+mtcars
+try(cyl)
+
+with(mtcars2, sum(vs))
+mtcars2
+try(vs)
+
+sum(mtcars2$am)
+mtcars2$am
+
+rm(mtcars2)
+```
+
+Results: `MASS`, `cyl`, `vs` are quoted, `mtcars`, `mtcars2` and `mtcars2$am` are not.
+
+AR Solutions: For each argument we first follow the advice from *Advanced R* and execute the argument outside of the respective function. Since `MASS`, `cyl`, `vs` and `am` are not objects contained in the global environment, their execution raises an "Object not found" error. This way we confirm that the respective function arguments are quoted. For the other arguments, we may inspect the source code (and the documentation) to check if any quoting mechanisms are applied or the arguments are evaluated.
+
+```{r, eval = FALSE}
+library(MASS) # MASS is quoted # nolint: unused_import_linter.
+```
+
+`library()` also accepts character vectors and doesn't quote when `character.only` is set to `TRUE`, so `library(MASS, character.only = TRUE)` would raise an error.
+
+```{r, eval = FALSE}
+mtcars2 <- subset(mtcars, cyl == 4) # mtcars is evaluated
+# cyl is quoted
+with(mtcars2, sum(vs)) # mtcars2 is evaluated
+# sum(vs) is quoted
+sum(mtcars2$am) # matcars$am is evaluated
+# am is quoted by $()
+```
+
+When we inspect the source code of `rm()`, we notice that `rm()` catches its `...` argument as an unevaluated call (in this case a pairlist) via `match.call()`. This call is then converted into a string for further evaluation.
+
+```{r, eval = FALSE}
+rm(mtcars2) # mtcars2 is quoted
+```
+
+---
+
+2.  For each function in the following tidyverse code, identify which arguments
+    are quoted and which are evaluated.
+
+```{r, eval = FALSE}
+library(dplyr)
+library(ggplot2)
+
+by_cyl <- mtcars %>%
+  group_by(cyl) %>%
+  summarise(mean = mean(mpg))
+
+ggplot(by_cyl, aes(cyl, mean)) +
+  geom_point()
+```
+
+Answer: `library` automatically quotes its arguments. `cyl`, `mpg`, and `mean` are all data.frame columns.
+
+- Quoted: `dplyr`, `ggplot2`, `cyl`, `mpg`, `mean` (in the final `ggpot` call)
+- Evaluated: `by_cyl`, `mtcars`
+
+AR Solutions: From the previous exercise we've already learned that `library()` quotes its first argument.
+
+```{r, eval = FALSE}
+library(dplyr) # dplyr is quoted
+library(ggplot2) # ggplot2 is quoted
+```
+
+In similar fashion, it becomes clear that `cyl` is quoted by `group_by()`.
+
+```{r, eval = FALSE}
+by_cyl <- mtcars %>% # mtcars is evaluated
+  group_by(cyl) %>% # cyl is quoted
+  summarise(mean = mean(mpg)) # mean = mean(mpg) is quoted
+```
+
+To find out what happens in `summarise()`, we inspect the source code. Tracing down the S3-dispatch of `summarise()`, we see that the `...` argument is quoted in `dplyr:::summarise_cols()` which is called in the underlying `summarise.data.frame()` method.
+
+```{r}
+dplyr::summarise
+```
+
+```{r}
+dplyr:::summarise.data.frame # nolint: undesirable_operator_linter.
+```
+
+```{r, eval = FALSE}
+dplyr:::summarise_cols # nolint: undesirable_operator_linter.
+#> function (.data, ...)
+#> {
+#>     mask <- DataMask$new(.data, caller_env())
+#>     dots <- enquos(...)
+#>     dots_names <- names(dots)
+#>     auto_named_dots <- names(enquos(..., .named = TRUE))
+#>     cols <- list()
+#>     sizes <- 1L
+#>     chunks <- vector("list", length(dots))
+#>     types <- vector("list", length(dots))
+#>
+#>     ## function definition abbreviated for clarity ##
+#> }
+#> <bytecode: 0x55b540c07ca0>
+#> <environment: namespace:dplyr>
+```
+
+In the following `{ggplot2}` expression the `cyl`- and `mean`-objects are quoted.
+
+```{r, eval = FALSE}
+ggplot(
+  by_cyl, # by_cyl is evaluated
+  aes(cyl, mean) # aes() is evaluated
+) +
+  # cyl, mean is quoted (via aes)
+  geom_point()
+```
+
+We can confirm this also by inspecting `aes()`'s source code.
+
+```{r}
+ggplot2::aes
+```
+
+---
