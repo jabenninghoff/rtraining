@@ -16,6 +16,8 @@ Workbook for completing quizzes and exercises from the "Metaprogramming" chapter
 ```{r setup, message = FALSE, warning = FALSE}
 library(lobstr)
 library(rlang)
+library(promises)
+library(future) # nolint: unused_import_linter. used for future_promise().
 
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
@@ -1251,6 +1253,201 @@ We can confirm this also by inspecting `aes()`'s source code.
 
 ```{r}
 ggplot2::aes
+```
+
+---
+
+## 19.3.6 Exercises
+
+1.  How is `expr()` implemented? Look at its source code.
+
+Answer: reviewing the source code:
+
+```{r}
+rlang::expr
+rlang::enexpr
+```
+
+`expr()` simply calls `enexpr()`, which uses the C++ function `ffi_enexpr` and uses the base R function `substitute()`.
+
+AR Solutions: `expr()` acts as a simple wrapper, which passes its argument to `enexpr()`.
+
+---
+
+2.  Compare and contrast the following two functions. Can you predict the
+    output before running them?
+
+```{r, results = FALSE}
+f1 <- function(x, y) {
+  exprs(x = x, y = y)
+}
+f2 <- function(x, y) {
+  enexprs(x = x, y = y)
+}
+f1(a + b, c + d)
+f2(a + b, c + d)
+```
+
+Answer: per Advanced R, `exprs(x = x, y = y)` is shorthand for `list(x = expr(x), y = expr(y))`, and `expr()` will capture the argument exactly as provided. `enexpr()` captures what the caller supplied, with `enexprs()` returning a list.
+
+Test the predictions in comments:
+
+```{r}
+f1 <- function(x, y) {
+  exprs(x = x, y = y)
+}
+f2 <- function(x, y) {
+  enexprs(x = x, y = y)
+}
+# returns $x x $y y
+f1(a + b, c + d)
+# returns $x a + b $y c + d
+f2(a + b, c + d)
+```
+
+Correct!
+
+AR Solutions: Both functions are able to capture multiple arguments and will return a named list of expressions. `f1()` will return the arguments defined within the body of `f1()`. This happens because `exprs()` captures the expressions as specified by the developer during the definition of `f1()`.
+
+```{r}
+f1(a + b, c + d)
+```
+
+`f2()` will return the arguments supplied to `f2()` as specified by the user when the function is called.
+
+```{r}
+f2(a + b, c + d)
+```
+
+---
+
+3.  What happens if you try to use `enexpr()` with an expression (i.e. 
+    `enexpr(x + y)` ? What happens if `enexpr()` is passed a missing argument?
+
+Answer: from the code below, `arg` must be a symbol, not an expression, and `arg` must exist.
+
+```{r}
+try(enexpr(x + y))
+try(enexpr(arg = foo))
+```
+
+AR Solutions: In the first case an error is thrown:
+
+```{r, error = TRUE}
+on_expr <- function(x) {
+  enexpr(expr(x))
+}
+try(on_expr(x + y))
+```
+
+In the second case a missing argument is returned:
+
+```{r}
+on_missing <- function(x) {
+  enexpr(x)
+}
+on_missing()
+is_missing(on_missing())
+```
+
+---
+
+4.  How are `exprs(a)` and `exprs(a = )` different? Think about both the
+    input and the output.
+
+Answer: as the code below demonstrates, `expr(a)` creates an unnamed list with `a` as the first element. `exprs(a = )` which creates an named list with an empty first element. Input of the form `x = y` creates a named list, while the form `x` creates an unnamed list.
+
+```{r}
+exprs(a)
+exprs(a = ) # nolint: missing_argument_linter, spaces_inside_linter.
+
+exprs(a = a)
+```
+
+AR Solutions: In `exprs(a)` the input `a` is interpreted as a symbol for an unnamed argument. Consequently, the output shows an unnamed list with the first element containing the symbol `a`.
+
+```{r}
+out1 <- exprs(a)
+str(out1)
+```
+
+In `exprs(a = )` the first argument is named `a`, but then no value is provided. This leads to the output of a named list with the first element named `a`, which contains the missing argument.
+
+```{r}
+out2 <- exprs(a = ) # nolint: missing_argument_linter, spaces_inside_linter.
+str(out2)
+is_missing(out2$a)
+```
+
+---
+
+5.  What are other differences between `exprs()` and `alist()`? Read the 
+    documentation for the named arguments of `exprs()` to find out.
+
+Answer: `exprs()` has three named arguments (`alist()` has none):
+
+- `.named`, which automatically adds names to the list
+- `.ignore_empty`, which selectively ignores empty arguments depending on the setting
+- `.unquote_names`, which treats use of `:=` (which allows names injection) as `=`
+
+AR Solutions: `exprs()` provides the additional arguments `.named` (`= FALSE`), `.ignore_empty` (`c("trailing", "none", "all")`) and `.unquote_names` (`TRUE`). `.named` allows to ensure that all dots are named. `ignore_empty` allows to specify how empty arguments should be handled for dots (`"trailing"`) or all arguments (`"none"` and `"all"`). Further via `.unquote_names` one can specify if `:=` should be treated like `=`. `:=` can be useful as it supports unquoting (`!!`) on the left-hand side.
+
+---
+
+6.  The documentation for `substitute()` says:
+
+    > Substitution takes place by examining each component of the parse tree 
+    > as follows: 
+    > 
+    > * If it is not a bound symbol in `env`, it is unchanged. 
+    > * If it is a promise object (i.e., a formal argument to a function) 
+    >   the expression slot of the promise replaces the symbol. 
+    > * If it is an ordinary variable, its value is substituted, unless 
+    > `env` is `.GlobalEnv` in which case the symbol is left unchanged.
+  
+    Create examples that illustrate each of the above cases.
+
+Answer: reviewing Google results for [R bound symbol](https://rlang.r-lib.org/reference/env_names.html) and [R promise object](https://rstudio.github.io/promises/articles/overview.html), construct the following code:
+
+```{r}
+# ordinary variable in `.GlobalEnv`
+foo <- "bar"
+substitute(foo)
+# ordinary variable not in `.GlobalEnv`
+local({
+  foo <- "bar"
+  substitute(foo)
+})
+# not a bound symbol in `env`
+substitute(func)
+# promise object
+pr <- future_promise(mean(1:10))
+substitute(pr)
+```
+
+AR Solutions: Let's create a new environment `my_env`, which contains no objects. In this case `substitute()` will just return its first argument (`expr`):
+
+```{r}
+my_env <- env()
+substitute(x, my_env)
+```
+
+When we create a function containing an argument, which is directly returned after substitution, this function just returns the provided expression:
+
+```{r}
+foo <- function(x) substitute(x)
+
+foo(x + y * sin(0))
+```
+
+In case `substitute()` can find (parts of) the expression in `env`, it will literally substitute. However, unless `env` is `.GlobalEnv`.
+
+```{r}
+my_env$x <- 7
+substitute(x, my_env)
+
+x <- 7
+substitute(x, .GlobalEnv)
 ```
 
 ---
