@@ -16,8 +16,6 @@ Workbook for completing quizzes and exercises from the "Metaprogramming" chapter
 ```{r setup, message = FALSE, warning = FALSE}
 library(lobstr)
 library(rlang)
-library(promises)
-library(future) # nolint: unused_import_linter. used for future_promise().
 
 # from https://github.com/hadley/adv-r/blob/master/common.R
 knitr::opts_chunk$set(
@@ -1407,7 +1405,7 @@ AR Solutions: `exprs()` provides the additional arguments `.named` (`= FALSE`), 
   
     Create examples that illustrate each of the above cases.
 
-Answer: reviewing Google results for [R bound symbol](https://rlang.r-lib.org/reference/env_names.html) and [R promise object](https://rstudio.github.io/promises/articles/overview.html), construct the following code:
+Answer: reviewing Google results for [R bound symbol](https://rlang.r-lib.org/reference/env_names.html), [R promise object](https://rstudio.github.io/promises/articles/overview.html), and chapter 6.5.1, construct the following code:
 
 ```{r}
 # ordinary variable in `.GlobalEnv`
@@ -1421,9 +1419,14 @@ local({
 # not a bound symbol in `env`
 substitute(func)
 # promise object
-pr <- future_promise(mean(1:10))
-substitute(pr)
+local({
+  x <- 1:5
+  y <- 1:10
+  substitute(mean(x = y))
+})
 ```
+
+In the promise example, `y` is substituted, but not `x`, since `x` is the formal argument to `mean()`.
 
 AR Solutions: Let's create a new environment `my_env`, which contains no objects. In this case `substitute()` will just return its first argument (`expr`):
 
