@@ -1454,3 +1454,118 @@ substitute(x, .GlobalEnv)
 ```
 
 ---
+
+## 19.4.8 Exercises
+
+1.  Given the following components:
+
+```{r}
+xy <- expr(x + y)
+xz <- expr(x + z)
+yz <- expr(y + z)
+abc <- exprs(a, b, c)
+```
+
+Use quasiquotation to construct the following calls:
+
+```{r, eval = FALSE}
+(x + y) / (y + z)
+-(x + z)^(y + z)
+(x + y) + (y + z) - (x + y)
+atan2(x + y, y + z)
+sum(x + y, x + y, y + z)
+sum(a, b, c)
+mean(c(a, b, c), na.rm = TRUE)
+foo(a = x + y, b = y + z)
+```
+
+Answer: code below.
+
+```{r}
+# nolint start: commented_code_linter.
+# (x + y) / (y + z)
+expr(!!xy / !!yz)
+
+# -(x + z) ^ (y + z)
+expr(-(!!xz)^!!yz)
+
+# (x + y) + (y + z) - (x + y)
+expr(((!!xy)) + !!yz - !!xy)
+
+# atan2(x + y, y + z)
+expr(atan2(!!xy, !!yz))
+
+# sum(x + y, x + y, y + z)
+expr(sum(!!xy, !!xy, !!yz))
+
+# sum(a, b, c)
+expr(sum(!!!abc))
+
+# mean(c(a, b, c), na.rm = TRUE)
+expr(mean(c(!!!abc), na.rm = TRUE)) # nolint: unneeded_concatenation_linter.
+
+# foo(a = x + y, b = y + z)
+expr(foo(a = !!xy, b = !!yz))
+
+# nolint end
+```
+
+Surprisingly, multiple parentheses are needed to construct `(x + y) + (y + z) - (x + y)`.
+
+AR Solutions We combine and unquote the given quoted expressions to construct the desired calls like this:
+
+```{r}
+expr(!!xy / !!yz) # (1)
+
+expr(-(!!xz)^(!!yz)) # (2)
+
+expr(((!!xy)) + !!yz - !!xy) # (3)
+
+expr(atan2(!!xy, !!yz)) # (4)
+
+expr(sum(!!xy, !!xy, !!yz)) # (5)
+
+expr(sum(!!!abc)) # (6)
+
+expr(mean(c(!!!abc), na.rm = TRUE)) # (7)  # nolint: unneeded_concatenation_linter.
+
+expr(foo(a = !!xy, b = !!yz)) # (8)
+```
+
+---
+
+2.  The following two calls print the same, but are actually different:
+
+```{r}
+(a <- expr(mean(1:10)))
+(b <- expr(mean(!!(1:10))))
+identical(a, b)
+```
+
+What's the difference? Which one is more natural?
+
+Answer: the key difference is the use of `!!` for the sequence `1:10`. Comparing `expr()` for both of the arguments supplied to mean, `!!` changes the expression from a call to `:` to an integer vector:
+
+```{r}
+arga <- expr(1:10)
+argb <- expr(!!(1:10))
+arga
+ast(!!arga)
+argb
+ast(!!argb)
+```
+
+Use of `!!` creates a non-standard AST with an inline integer. The first form is more natural.
+
+AR Solutions: It's easiest to see the difference with `lobstr::ast()`:
+
+```{r}
+lobstr::ast(mean(1:10))
+lobstr::ast(mean(!!(1:10)))
+```
+
+In the expression `mean(!!(1:10))` the call `1:10` is evaluated to an integer vector, while still being a call object in `mean(1:10)`.
+
+The first version (`mean(1:10)`) seems more natural. It captures lazy evaluation, with a promise that is evaluated when the function is called. The second version (`mean(!!(1:10))`) inlines a vector directly into a call.
+
+---
