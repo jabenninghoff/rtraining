@@ -87,18 +87,18 @@ GG Solutions:
 
 Answer: reviewing the source code:
 
-[`geom_smooth()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-smooth.r) uses:
+[`geom_smooth()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-smooth.R) uses:
 
 - `geom_path()` by way of `geom_line()`
 - `geom_area()` by way of `geom_ribbon()`
 
-[`geom_boxplot()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-boxplot.r) uses:
+[`geom_boxplot()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-boxplot.R) uses:
 
 - `geom_point()`
 - `geom_path()` by way of `geom_segment()` and `geom_crossbar()`
 - `geom_polygon()` by way of `geom_crossbar()`
 
-[`geom_violin()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-violin.r) uses:
+[`geom_violin()`](https://github.com/tidyverse/ggplot2/blob/main/R/geom-violin.R) uses:
 
 - `geom_path()`
 - `geom_polygon()`
