@@ -1569,3 +1569,90 @@ In the expression `mean(!!(1:10))` the call `1:10` is evaluated to an integer ve
 The first version (`mean(1:10)`) seems more natural. It captures lazy evaluation, with a promise that is evaluated when the function is called. The second version (`mean(!!(1:10))`) inlines a vector directly into a call.
 
 ---
+
+## 19.6.5 Exercises
+
+1.  One way to implement `exec()` is shown below. Describe how it works. What are the
+    key ideas?
+
+```{r}
+exec <- function(f, ..., .env = caller_env()) {
+  args <- list2(...)
+  do.call(f, args, envir = .env)
+}
+```
+
+Answer: the implementation is a wrapper to `do.call()`, which requires a function, list of arguments, and environment (it also has a `quote` parameter which is set to `FALSE` by default). `list2()` is used to convert the function arguments into a list which is compatible with `do.call()`.
+
+AR Solutions: `exec()` takes a function (`f`), its arguments (`...`) and an environment (`.env`) as input. This allows to construct a call from `f` and `...` and evaluate this call in the supplied environment. As the `...` argument is handled via `list2()`, `exec()` supports tidy dots (quasiquotation), which means that arguments and names (on the left-hand side of `:=`) can be unquoted via `!!` and `!!!`.
+
+---
+
+2.  Carefully read the source code for `interaction()`, `expand.grid()`, and 
+    `par()`.  Compare and contrast the techniques they use for switching 
+    between dots and list behaviour.
+
+Answer: reviewing the source code for each function, all three functions convert dots into a list using `list(...)`. All three also allow passing multiple arguments as well as a list as a single argument.
+
+```{r}
+interaction
+expand.grid
+par # nolint: undesirable_function_linter.
+```
+
+AR Solutions:  All three functions capture the dots via `args <- list(...)`.
+
+`interaction()` computes factor interactions between the captured input factors by iterating over the `args`. When a list is provided this is detected via `length(args) == 1 && is.list(args[[1]])` and one level of the list is stripped through `args <- args[[1]]`. The rest of the function's code doesn't differentiate further between list and dots behaviour.
+
+```{r}
+# styler: off
+# Both calls create the same output
+interaction(     a = c("a", "b", "c", "d"), b = c("e", "f"))  # dots # nolint: spaces_inside_linter.
+interaction(list(a = c("a", "b", "c", "d"), b = c("e", "f"))) # list
+# styler: on
+```
+
+`expand.grid()` uses the same strategy and also assigns `args <- args[[1]]` in case of `length(args) == 1 && is.list(args[[1]])`.
+
+`par()` does the most pre-processing to ensure a valid structure of the `args` argument. When no dots are provided (`!length(args)`) it creates a list of arguments from an internal character vector (partly depending on its `no.readonly` argument). Further, given that all elements of `args` are character vectors (`all(unlist(lapply(args, is.character)))`), `args` is turned into a list via `as.list(unlist(args))` (this flattens nested lists). Similar to the other functions, one level of `args` gets stripped via `args <- args[[1L]]`, when `args` is of length one and its first element is a list.
+
+---
+
+3.  Explain the problem with this definition of `set_attr()`
+
+```{r, error = TRUE}
+set_attr <- function(x, ...) {
+  attr <- rlang::list2(...)
+  attributes(x) <- attr
+  x
+}
+try(set_attr(1:10, x = 10))
+```
+
+Answer: `attributes(x) <- value` requires `value` to be a named list, which is only generated for `list2` calls of the form `list2(a = 1, b = 2)` - setting `.named = TRUE` doesn't help in this case as it generates zero-length names which are not allowed by `attributes()`. Using dots will only work when each attribute is explicitly named.
+
+```{r}
+set_attr <- function(x, ...) {
+  attr <- rlang::list2(..., .named = TRUE)
+  attributes(x) <- attr
+  x
+}
+try(set_attr(1:10, x = 10))
+```
+
+AR Solutions: `set_attr()` expects an object named `x` and its attributes, supplied via the dots. Unfortunately, this prohibits us to provide attributes named `x` as these would collide with the argument name of our object. Even omitting the object's argument name doesn't help in this case — as can be seen in the example where the object is consequently treated as an unnamed attribute.
+
+However, we may name the first argument `.x`, which seems clearer and less likely to invoke errors. In this case `1:10` will get the (named) attribute `x = 10` assigned:
+
+```{r}
+set_attr <- function(.x, ...) {
+  attr <- rlang::list2(...)
+
+  attributes(.x) <- attr
+  .x
+}
+
+set_attr(1:10, x = 10)
+```
+
+---
