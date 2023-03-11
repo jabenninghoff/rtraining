@@ -38,6 +38,8 @@ This workbook includes answers and solutions to the quizzes and exercises from [
 
 **WARNING, SPOILERS!** If you haven't read Advanced R and intend to complete the quizzes and exercises, don't read this notebook. It contains my (potentially wrong) answers to both.
 
+**Important:** advice on tidy evaluation has changed since these chapters were written; see the "Programming with dplyr" [vignette](https://dplyr.tidyverse.org/articles/programming.html).
+
 # 17 Big picture
 
 Metaprogramming is the hardest topic in this book because it brings together many formerly unrelated topics and forces you grapple with issues that you probably haven't thought about before. You'll also need to learn a lot of new vocabulary, and at first it will seem like every new term is defined by three other terms that you haven't heard of. Even if you're an experienced programmer in another language, your existing skills are unlikely to be much help as few modern popular languages expose the level of metaprogramming that R provides. So don't be surprised if you're frustrated or confused at first; this is a natural part of the process that happens to everyone! 
