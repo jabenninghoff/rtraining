@@ -44,6 +44,13 @@ Notebooks in this package:
   R](https://adv-r.hadley.nz/index.html), second edition, with
   comparisons to solutions from [Advanced R
   Solutions](https://advanced-r-solutions.rbind.io).
+- [Advanced R Workbook
+  (Metaprogramming)](https://jabenninghoff.github.io/rtraining/advanced-r-4.html)
+  (2023-02-19): Workbook for completing quizzes and exercises from the
+  “Metaprogramming” chapters of [Advanced
+  R](https://adv-r.hadley.nz/index.html), second edition, with
+  comparisons to solutions from [Advanced R
+  Solutions](https://advanced-r-solutions.rbind.io).
 - [ggplot2 (Getting
   started)](https://jabenninghoff.github.io/rtraining/ggplot2-1.html)
   (2022-11-20): Workbook for completing quizzes and exercises from the
