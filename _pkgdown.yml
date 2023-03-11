@@ -29,6 +29,8 @@ navbar:
         href: advanced-r-2.html
       - text: Advanced R Workbook (Object-oriented programming)
         href: advanced-r-3.html
+      - text: Advanced R Workbook (Metaprogramming)
+        href: advanced-r-4.html
       - text: ggplot2 (Getting started)
         href: ggplot2-1.html
       - text: ggplot2 (Layers)
