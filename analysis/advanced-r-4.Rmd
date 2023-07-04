@@ -1804,3 +1804,269 @@ This chapter begins with a discussion of evaluation in its purest form. You'll l
     which we'll then resolve with data pronouns.
 
 Together, quasiquotation, quosures, and data masks form what we call __tidy evaluation__, or tidy eval for short. Tidy eval provides a principled approach to non-standard evaluation that makes it possible to use such functions both interactively and embedded with other functions. Tidy evaluation is the most important practical implication of all this theory so we'll spend a little time exploring the implications. The chapter finishes off with a discussion of the closest related approaches in base R, and how you can program around their drawbacks.
+
+## 20.2.4 Exercises
+
+1.  Carefully read the documentation for `source()`. What environment does it
+    use by default? What if you supply `local = TRUE`? How do you provide
+    a custom environment?
+
+Answer: by default, `source()` uses the global environment, and uses the calling environment with `local = TRUE`, and doesn't support other options; to provide a custom environment, you must use `sys.source()`.
+
+AR Solutions: By default, `source()` uses the global environment (`local = FALSE`). A specific evaluation environment may be chosen, by passing it explicitly to the `local` argument. To use current environment (i.e. the calling environment of `source()`) set `local = TRUE`.
+
+```{r}
+# Create a temporary, sourceable R script that prints x
+tmp_file <- tempfile()
+writeLines("print(x)", tmp_file)
+
+# Set `x` globally
+x <- "global environment"
+env2 <- env(x = "specified environment")
+
+locate_evaluation <- function(file, local) {
+  x <- "local environment" # nolint: object_usage_linter.
+  source(file, local = local) # nolint: undesirable_function_linter.
+}
+
+# Where will source() evaluate the code?
+locate_evaluation(tmp_file, local = FALSE) # default
+locate_evaluation(tmp_file, local = env2)
+locate_evaluation(tmp_file, local = TRUE)
+```
+
+---
+
+2.  Predict the results of the following lines of code:
+
+```{r, eval = FALSE}
+eval(expr(eval(expr(eval(expr(2 + 2))))))
+eval(eval(expr(eval(expr(eval(expr(2 + 2)))))))
+expr(eval(expr(eval(expr(eval(expr(2 + 2)))))))
+```
+
+Answer: all of these *should* return `4`, since the innermost expression is evaluated first.
+
+```{r}
+eval(expr(eval(expr(eval(expr(2 + 2))))))
+eval(eval(expr(eval(expr(eval(expr(2 + 2)))))))
+expr(eval(expr(eval(expr(eval(expr(2 + 2)))))))
+```
+
+Incorrect: let's explore how these are evaluated:
+
+```{r}
+expr(2 + 2)
+eval(expr(2 + 2))
+expr(eval(expr(2 + 2)))
+eval(expr(eval(expr(2 + 2))))
+expr(eval(expr(eval(expr(2 + 2)))))
+eval(expr(eval(expr(eval(expr(2 + 2))))))
+```
+
+When `expr()` is on the outside, the expression isn't evaluated, when `eval()` is on the outside the answer 'collapses' to 4.
+
+AR Solutions: Let's look at a quote from the [first edition of *Advanced R*](http://adv-r.had.co.nz/Computing-on-the-language.html#subset):
+
+> "`expr()` and `eval()` are opposites. [...] each `eval()` peels off one layer of `expr()`'s".
+
+In general, `eval(expr(x))` evaluates to  `x`. Therefore, (1) evaluates to $2 + 2 = 4$. Adding another `eval()` doesn't have impact here. So, also (2) evaluates to `4`. However, when wrapping (1) into `expr()` the whole expression will be quoted. 
+
+```{r}
+eval(expr(eval(expr(eval(expr(2 + 2)))))) # (1)
+eval(eval(expr(eval(expr(eval(expr(2 + 2))))))) # (2)
+expr(eval(expr(eval(expr(eval(expr(2 + 2))))))) # (3)
+```
+
+---
+
+3.  Fill in the function bodies below to re-implement `get()` using `sym()` 
+    and `eval()`, and`assign()` using `sym()`, `expr()`, and `eval()`. Don't 
+    worry about the multiple ways of choosing an environment that `get()` and
+    `assign()` support; assume that the user supplies it explicitly.
+
+```{r}
+# name is a string
+# nolint start: brace_linter.
+get2 <- function(name, env) {}
+assign2 <- function(name, value, env) {}
+# nolint end
+```
+
+Answer: code below.
+
+```{r}
+get2 <- function(name, env) {
+  eval(sym(name), envir = env)
+}
+assign2 <- function(name, value, env) { # nolint: object_usage_linter. `!!` is OK.
+  s <- sym(name)
+  eval(expr(!!s <- !!value), envir = env)
+}
+
+test <- 1234
+get2("test", caller_env())
+assign2("test", 2345, caller_env())
+test
+```
+
+AR Solutions: We reimplement these two functions using tidy evaluation. We turn the string `name` into a symbol, then evaluate it:
+
+```{r}
+get2 <- function(name, env = caller_env()) {
+  name_sym <- sym(name)
+  eval(name_sym, env)
+}
+
+x <- 1
+get2("x")
+```
+
+To build the correct expression for the value assignment, we unquote using `!!`.
+
+```{r}
+assign2 <- function(name, value, env = caller_env()) { # nolint: object_usage_linter. `!!` is OK.
+  name_sym <- sym(name)
+  assign_expr <- expr(!!name_sym <- !!value)
+  eval(assign_expr, env)
+}
+
+assign2("x", 4)
+x
+```
+
+Note: I had to review AR Solutions to discover the need to unquote using `!!`.
+
+---
+
+4.  Modify `source2()` so it returns the result of _every_ expression,
+    not just the last one. Can you eliminate the for loop?
+
+Answer: code below.
+
+```{r}
+my_source2 <- function(path, env = caller_env()) {
+  file <- paste(readLines(path, warn = FALSE), collapse = "\n")
+  exprs <- parse_exprs(file)
+
+  invisible(lapply(exprs, eval, env))
+}
+```
+
+AR Solutions: The code for `source2()` was given in *Advanced R* as:
+
+```{r}
+source2 <- function(path, env = caller_env()) {
+  file <- paste(readLines(path, warn = FALSE), collapse = "\n")
+  exprs <- parse_exprs(file)
+
+  res <- NULL
+  for (i in seq_along(exprs)) {
+    res <- eval(exprs[[i]], env)
+  }
+
+  invisible(res)
+}
+```
+
+In order to highlight the modifications in our new `source2()` function, we've preserved the differing code from the former `source2()` in a comment.
+
+```{r}
+source2 <- function(path, env = caller_env()) {
+  file <- paste(readLines(path, warn = FALSE), collapse = "\n")
+  exprs <- parse_exprs(file)
+
+  # nolint start: commented_code_linter.
+  # res <- NULL
+  # for (i in seq_along(exprs)) {
+  #   res[[i]] <- eval(exprs[[i]], env)
+  # }
+  # nolint end
+
+  res <- purrr::map(exprs, eval, env)
+
+  invisible(res)
+}
+```
+
+Let's create a file and test `source2()`. Keep in mind that `<-` returns invisibly.
+
+```{r}
+tmp_file <- tempfile()
+writeLines(
+  "x <- 1
+       x
+       y <- 2
+       y  # some comment",
+  tmp_file
+)
+
+(source2(tmp_file))
+```
+
+Note: validate `my_source2()` returns the same results:
+
+```{r}
+(my_source2(tmp_file))
+```
+
+---
+
+5.  We can make `base::local()` slightly easier to understand by spreading
+    out over multiple lines:
+
+```{r}
+local3 <- function(expr, envir = new.env()) {
+  call <- substitute(eval(quote(expr), envir))
+  eval(call, envir = parent.frame())
+}
+```
+
+Explain how `local()` works in words. (Hint: you might want to `print(call)`
+to help understand what `substitute()` is doing, and read the documentation
+to remind yourself what environment `new.env()` will inherit from.)
+
+Answer: adding `print(call)` shows that `substitute()` creates a call to evaluate the expression passed to `local3()` in `new.env()`, which inherits the environment from the caller. So:
+
+`local()` works by evaluating an expression in a new child environment.
+
+```{r}
+local3 <- function(expr, envir = new.env()) {
+  call <- substitute(eval(quote(expr), envir))
+  print(call)
+  eval(call, envir = parent.frame())
+}
+
+local3(test <- 4567)
+```
+
+AR Solutions: Let's follow the advice and add `print(call)` inside of `local3()`:
+
+```{r}
+local3 <- function(expr, envir = new.env()) {
+  call <- substitute(eval(quote(expr), envir))
+  print(call)
+  eval(call, envir = parent.frame())
+}
+```
+
+The first line generates a call to `eval()`, because  `substitute()` operates in the current evaluation argument. However, this doesn't matter here, as both, `expr` and `envir` are promises and therefore "the expression slots of the promises replace the symbols", from `?substitute`.
+
+```{r}
+local3({
+  x <- 10
+  x * 2
+})
+```
+
+Next, `call` will be evaluated in the caller environment (aka the parent frame). Given that `call` contains another call `eval()` why does this matter? The answer is subtle: this outer environment determines where the bindings for `eval`, `quote`, and `new.env` are found. 
+
+```{r}
+eval(quote({
+  x <- 10
+  x * 2
+}), new.env())
+exists("x")
+```
+
+---
