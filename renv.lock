@@ -23,18 +23,13 @@
     "FaultTree": {
       "Package": "FaultTree",
       "Version": "1.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "jto888",
-      "RemoteRepo": "FaultTree",
-      "RemoteRef": "master",
-      "RemoteSha": "23497e747c7c7f1879986ba140e521c45bfb83c8",
-      "RemoteHost": "api.github.com",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "Rcpp",
         "RcppArmadillo"
       ],
-      "Hash": "97b6f4047a423109162aa26343440111"
+      "Hash": "694ab244c99d0689b663743681097858"
     },
     "FaultTree.widget": {
       "Package": "FaultTree.widget",
