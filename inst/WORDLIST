@@ -68,7 +68,6 @@ babynames
 backtrace
 behaviour
 behaviours
-bookdown
 categorise
 cheatsheet
 cheatsheets
@@ -93,7 +92,6 @@ ecdf
 egular
 et
 eval
-exts
 faceter
 facetted
 favourite
@@ -113,10 +111,7 @@ glyphs
 grey
 greyed
 gridlines
-hadley
 homebrew
-http
-https
 ie
 iesel
 initialisation
@@ -124,7 +119,6 @@ initialised
 inlined
 internalise
 invertible
-io
 iteratively
 jpeg
 kableExtra
@@ -150,7 +144,6 @@ minimalistic
 modelling
 nb
 nitty
-nz
 ompressed
 openxlsx
 optimisation
@@ -196,7 +189,6 @@ rstudio
 rtraining
 seaters
 serialise
-sethrobertson
 signalled
 signalling
 specialised
@@ -237,4 +229,3 @@ visualise
 visualising
 wd
 wesanderson
-yihui
