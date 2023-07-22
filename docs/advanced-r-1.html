@@ -14,15 +14,15 @@
 
 <title>Advanced R Workbook (Foundations)</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -32,8 +32,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -484,11 +484,11 @@ shown by <code>obj_size</code> and <code>obj_addr</code>:</p>
 <pre class="r"><code>obj_size(y)</code></pre>
 <pre><code>#&gt; 8.00 MB</code></pre>
 <pre class="r"><code>obj_addr(y[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7ac86c0000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf71500000&quot;</code></pre>
 <pre class="r"><code>obj_addr(y[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7ac86c0000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf71500000&quot;</code></pre>
 <pre class="r"><code>obj_addr(y[[3]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7ac86c0000&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf71500000&quot;</code></pre>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>On which line does <code>a</code> get copied in the following
@@ -496,13 +496,13 @@ example?</li>
 </ol>
 <pre class="r"><code>a &lt;- c(1, 5, 3, 2)
 obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9b436b28&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9d06d838&quot;</code></pre>
 <pre class="r"><code>b &lt;- a
 obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9b436b28&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9d06d838&quot;</code></pre>
 <pre class="r"><code>b[[1]] &lt;- 10
 obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9b4319d8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9d25ce38&quot;</code></pre>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
 </div>
 <div id="exercises" class="section level2">
@@ -522,13 +522,13 @@ point to the same object (with the same address in memory). This object
 has the value <code>1:10</code>. <code>d</code> points to a different
 object with the same value.</p>
 <pre class="r"><code>obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9ad8af68&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9cc62f10&quot;</code></pre>
 <pre class="r"><code>obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9ad8af68&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9cc62f10&quot;</code></pre>
 <pre class="r"><code>obj_addr(c)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9ad8af68&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9cc62f10&quot;</code></pre>
 <pre class="r"><code>obj_addr(d)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a98fb5910&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9ccf95b8&quot;</code></pre>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>The following code accesses the mean function in multiple ways. Do
@@ -542,15 +542,15 @@ evalq(mean)
 match.fun(&quot;mean&quot;)</code></pre>
 <p>Check the <code>obj_addr</code>:</p>
 <pre class="r"><code>obj_addr(mean)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7af268b258&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc262bfd0&quot;</code></pre>
 <pre class="r"><code>obj_addr(base::mean)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7af268b258&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc262bfd0&quot;</code></pre>
 <pre class="r"><code>obj_addr(get(&quot;mean&quot;))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7af268b258&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc262bfd0&quot;</code></pre>
 <pre class="r"><code>obj_addr(evalq(mean))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7af268b258&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc262bfd0&quot;</code></pre>
 <pre class="r"><code>obj_addr(match.fun(&quot;mean&quot;))</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7af268b258&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc262bfd0&quot;</code></pre>
 <p>Answer: they do.</p>
 <p>AR Solutions: Yes, they point to the same object. We confirm this by
 inspecting the address of the underlying function object.</p>
@@ -636,20 +636,20 @@ the code shown earlier in the section.</li>
 <pre class="r"><code>rm(list = ls())
 x &lt;- c(1L, 2L, 3L)
 tracemem(x)</code></pre>
-<pre><code>#&gt; [1] &quot;&lt;0x7f7a9fd39788&gt;&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;&lt;0x7fdf9da37bc8&gt;&quot;</code></pre>
 <pre class="r"><code>x[[3]] &lt;- 4</code></pre>
-<pre><code>#&gt; tracemem[0x7f7a9fd39788 -&gt; 0x7f7a9fd184c8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
-#&gt; tracemem[0x7f7a9fd184c8 -&gt; 0x7f7a9b370668]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre><code>#&gt; tracemem[0x7fdf9da37bc8 -&gt; 0x7fdf9df57c88]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release 
+#&gt; tracemem[0x7fdf9df57c88 -&gt; 0x7fdf9f4f1338]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
 <pre class="r"><code>untracemem(x)</code></pre>
 <p>Answer: unclear. The behavior in R 4.2.0 seems to have changed, since
 this code shows two copies:</p>
 <pre class="r"><code>rm(list = ls())
 x &lt;- c(1, 2, 3)
 tracemem(x)</code></pre>
-<pre><code>#&gt; [1] &quot;&lt;0x7f7a993776a8&gt;&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;&lt;0x7fdfc3391d88&gt;&quot;</code></pre>
 <pre class="r"><code>y &lt;- x
 y[[3]] &lt;- 4L</code></pre>
-<pre><code>#&gt; tracemem[0x7f7a993776a8 -&gt; 0x7f7a9936d298]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
+<pre><code>#&gt; tracemem[0x7fdfc3391d88 -&gt; 0x7fdf9bfdfdd8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; withCallingHandlers suppressMessages render_one FUN lapply sapply &lt;Anonymous&gt; &lt;Anonymous&gt; build_analysis_site stage_release</code></pre>
 <pre class="r"><code>y[[3]] &lt;- 5L
 untracemem(x)</code></pre>
 <p>AR Solutions: Initially the vector <code>x</code> has integer type.
@@ -682,27 +682,27 @@ c &lt;- list(b, a, 1:10)
 print(&quot;first object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;first object&quot;</code></pre>
 <pre class="r"><code>obj_addr(a)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9c5e9cc8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc20d7ac8&quot;</code></pre>
 <pre class="r"><code>obj_addr(b[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9c5e9cc8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc20d7ac8&quot;</code></pre>
 <pre class="r"><code>obj_addr(b[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9c5e9cc8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc20d7ac8&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[2]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9c5e9cc8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdfc20d7ac8&quot;</code></pre>
 <pre class="r"><code>print(&quot;second object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;second object&quot;</code></pre>
 <pre class="r"><code>obj_addr(b)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9a45cc48&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9f515588&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[1]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9a45cc48&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9f515588&quot;</code></pre>
 <pre class="r"><code>print(&quot;third object&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;third object&quot;</code></pre>
 <pre class="r"><code>obj_addr(c)</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a99429df8&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9d074ed8&quot;</code></pre>
 <pre class="r"><code>print(&quot;fourth object (?)&quot;)</code></pre>
 <pre><code>#&gt; [1] &quot;fourth object (?)&quot;</code></pre>
 <pre class="r"><code>obj_addr(c[[3]])</code></pre>
-<pre><code>#&gt; [1] &quot;0x7f7a9bb31b18&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;0x7fdf9adfd708&quot;</code></pre>
 <p>Answer: four different objects with multiple names.</p>
 <p>AR Solutions: <code>a</code> contains a reference to an address with
 the value <code>1:10</code>. <code>b</code> contains a list of two
@@ -720,10 +720,10 @@ value (<code>1:10</code>).</p>
 x[[2]] &lt;- x
 
 ref(x)</code></pre>
-<pre><code>#&gt; █ [1:0x7f7a9b395988] &lt;list&gt; 
-#&gt; ├─[2:0x7f7a9d121698] &lt;int&gt; 
-#&gt; └─█ [3:0x7f7a9d119698] &lt;list&gt; 
-#&gt;   └─[2:0x7f7a9d121698]</code></pre>
+<pre><code>#&gt; █ [1:0x7fdf9d24f548] &lt;list&gt; 
+#&gt; ├─[2:0x7fdf9cf271c8] &lt;int&gt; 
+#&gt; └─█ [3:0x7fdf9b399978] &lt;list&gt; 
+#&gt;   └─[2:0x7fdf9cf271c8]</code></pre>
 <p>Initially x is a list of one element, an int vector 1:10. Then a
 second list element is added, which points to the original int
 vector.</p>
@@ -900,54 +900,61 @@ xm &lt;- x_medians(5)
 head(df_medians(xm$x, xm$medians), 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.445437104","2":"0.44534472","3":"-0.26579500","4":"-0.35480553","5":"0.2054064","_rn_":"1"},{"1":"0.412287868","2":"0.04434835","3":"-0.49876792","4":"-0.29452791","5":"-0.2996505","_rn_":"2"},{"1":"-0.495855852","2":"-0.27482476","3":"-0.38723436","4":"-0.01080590","5":"0.3271019","_rn_":"3"},{"1":"-0.033951823","2":"-0.48918425","3":"0.34252255","4":"0.09991175","5":"-0.3546970","_rn_":"4"},{"1":"-0.135631997","2":"-0.05700126","3":"0.01412283","4":"0.47296056","5":"-0.1398420","_rn_":"5"},{"1":"0.112926617","2":"0.43202375","3":"-0.39536595","4":"0.09994246","5":"0.4957822","_rn_":"6"},{"1":"0.009957179","2":"-0.23897872","3":"-0.23564914","4":"0.28993834","5":"-0.1225261","_rn_":"7"},{"1":"0.378447486","2":"-0.01240351","3":"-0.25761113","4":"-0.41585218","5":"-0.4856507","_rn_":"8"},{"1":"-0.035751870","2":"-0.35471070","3":"0.33497724","4":"-0.40306884","5":"-0.1078243","_rn_":"9"},{"1":"-0.081274168","2":"-0.20998740","3":"-0.05404868","4":"-0.27672801","5":"0.4167688","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.41079992","2":"-0.09917419","3":"0.17943506","4":"-0.30854702","5":"0.30997300","_rn_":"1"},{"1":"0.42956167","2":"-0.49113037","3":"-0.23600622","4":"-0.48898333","5":"-0.14392135","_rn_":"2"},{"1":"-0.32957794","2":"-0.49040705","3":"-0.07040790","4":"-0.09532341","5":"0.01511444","_rn_":"3"},{"1":"0.04690431","2":"0.38976558","3":"0.46301621","4":"0.48970043","5":"-0.29590806","_rn_":"4"},{"1":"-0.27480956","2":"0.40035103","3":"0.24154206","4":"0.03898683","5":"-0.11073797","_rn_":"5"},{"1":"0.32526755","2":"-0.45151852","3":"0.13221350","4":"0.33985465","5":"0.38172432","_rn_":"6"},{"1":"-0.17771648","2":"0.39689603","3":"-0.05967485","4":"-0.31641644","5":"-0.33235424","_rn_":"7"},{"1":"-0.27848806","2":"0.18099886","3":"-0.38802788","4":"-0.37810910","5":"0.27899050","_rn_":"8"},{"1":"0.26541937","2":"0.39138960","3":"-0.23107161","4":"0.50103716","5":"-0.24384343","_rn_":"9"},{"1":"0.46626427","2":"-0.20955912","3":"0.46047156","4":"-0.07294624","5":"-0.39545848","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>head(as.data.frame(ls_medians(xm$x, xm$medians)), 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.445437104","2":"0.44534472","3":"-0.26579500","4":"-0.35480553","5":"0.2054064","_rn_":"1"},{"1":"0.412287868","2":"0.04434835","3":"-0.49876792","4":"-0.29452791","5":"-0.2996505","_rn_":"2"},{"1":"-0.495855852","2":"-0.27482476","3":"-0.38723436","4":"-0.01080590","5":"0.3271019","_rn_":"3"},{"1":"-0.033951823","2":"-0.48918425","3":"0.34252255","4":"0.09991175","5":"-0.3546970","_rn_":"4"},{"1":"-0.135631997","2":"-0.05700126","3":"0.01412283","4":"0.47296056","5":"-0.1398420","_rn_":"5"},{"1":"0.112926617","2":"0.43202375","3":"-0.39536595","4":"0.09994246","5":"0.4957822","_rn_":"6"},{"1":"0.009957179","2":"-0.23897872","3":"-0.23564914","4":"0.28993834","5":"-0.1225261","_rn_":"7"},{"1":"0.378447486","2":"-0.01240351","3":"-0.25761113","4":"-0.41585218","5":"-0.4856507","_rn_":"8"},{"1":"-0.035751870","2":"-0.35471070","3":"0.33497724","4":"-0.40306884","5":"-0.1078243","_rn_":"9"},{"1":"-0.081274168","2":"-0.20998740","3":"-0.05404868","4":"-0.27672801","5":"0.4167688","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["X2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["X5"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.41079992","2":"-0.09917419","3":"0.17943506","4":"-0.30854702","5":"0.30997300","_rn_":"1"},{"1":"0.42956167","2":"-0.49113037","3":"-0.23600622","4":"-0.48898333","5":"-0.14392135","_rn_":"2"},{"1":"-0.32957794","2":"-0.49040705","3":"-0.07040790","4":"-0.09532341","5":"0.01511444","_rn_":"3"},{"1":"0.04690431","2":"0.38976558","3":"0.46301621","4":"0.48970043","5":"-0.29590806","_rn_":"4"},{"1":"-0.27480956","2":"0.40035103","3":"0.24154206","4":"0.03898683","5":"-0.11073797","_rn_":"5"},{"1":"0.32526755","2":"-0.45151852","3":"0.13221350","4":"0.33985465","5":"0.38172432","_rn_":"6"},{"1":"-0.17771648","2":"0.39689603","3":"-0.05967485","4":"-0.31641644","5":"-0.33235424","_rn_":"7"},{"1":"-0.27848806","2":"0.18099886","3":"-0.38802788","4":"-0.37810910","5":"0.27899050","_rn_":"8"},{"1":"0.26541937","2":"0.39138960","3":"-0.23107161","4":"0.50103716","5":"-0.24384343","_rn_":"9"},{"1":"0.46626427","2":"-0.20955912","3":"0.46047156","4":"-0.07294624","5":"-0.39545848","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code># benchmark
 mark(df_medians(xm$x, xm$medians))</code></pre>
-<pre><code>#&gt; # A tibble: 1 × 6
-#&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   85.6µs    121µs     6470.     409KB     156.</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"87.343µs","3":"114.178µs","4":"7313.516","5":"408.8438KB","6":"125.424"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
-<pre><code>#&gt; # A tibble: 1 × 6
-#&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   36.4µs   61.2µs    15281.     409KB     264.</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"34.377µs","3":"59.483µs","4":"16154.03","5":"408.7734KB","6":"309.823"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <pre class="r"><code>mark(as.data.frame(ls_medians(xm$x, xm$medians))) # as.data.frame introduces significant overhead</code></pre>
-<pre><code>#&gt; # A tibble: 1 × 6
-#&gt;   expression                                       min   median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                                  &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$medians))    251µs    289µs     2855.     391KB     52.4</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"269.199µs","3":"305.452µs","4":"2972.31","5":"390.8594KB","6":"57.15981"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
 <pre class="r"><code>xm &lt;- x_medians(10)
 mark(df_medians(xm$x, xm$medians))</code></pre>
-<pre><code>#&gt; # A tibble: 1 × 6
-#&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    135µs    164µs     5086.     391KB     102.</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"142.245µs","3":"170.582µs","4":"5105.65","5":"391.0938KB","6":"97.71579"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
-<pre><code>#&gt; # A tibble: 1 × 6
-#&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   37.3µs   62.6µs    13507.     391KB     275.</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"35.495µs","3":"61.648µs","4":"13822.78","5":"391.0938KB","6":"141.1042"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <pre class="r"><code>xm &lt;- x_medians(20)
 mark(df_medians(xm$x, xm$medians))</code></pre>
-<pre><code>#&gt; # A tibble: 1 × 6
-#&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    245µs    275µs     3125.     400KB     31.8</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"254.941µs","3":"295.669µs","4":"2940.247","5":"399.6875KB","6":"31.93028"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <pre class="r"><code>mark(ls_medians(xm$x, xm$medians))</code></pre>
-<pre><code>#&gt; # A tibble: 1 × 6
-#&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   38.6µs   63.1µs    14170.     392KB     148.</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"38.564µs","3":"64.057µs","4":"12613.22","5":"391.7656KB","6":"134.1322"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the
 list method is 5 times as fast. So, the list method is near constant
 time regardless of columns, whereas the data.frame method scales
@@ -1131,7 +1138,7 @@ as atomic vectors or lists.</p>
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x7f7ad95ba488&gt;
+#&gt; &lt;bytecode: 0x7fdf989fddd8&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 <pre class="r"><code>unname</code></pre>
 <pre><code>#&gt; function (obj, force = FALSE) 
@@ -1142,7 +1149,7 @@ as atomic vectors or lists.</p>
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x7f7aafcbbea8&gt;
+#&gt; &lt;bytecode: 0x7fdf989becb8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <p>Answer: using <code>names()</code>, and <code>dimnames()</code> for
 <code>unname()</code>.</p>
@@ -1278,9 +1285,9 @@ a_table &lt;- table(a, sample(a))
 a_table</code></pre>
 <pre><code>#&gt;    
 #&gt; a   a b c
-#&gt;   a 1 0 0
-#&gt;   b 0 0 1
-#&gt;   c 0 1 0</code></pre>
+#&gt;   a 0 0 1
+#&gt;   b 0 1 0
+#&gt;   c 1 0 0</code></pre>
 <pre class="r"><code>typeof(a_table)</code></pre>
 <pre><code>#&gt; [1] &quot;integer&quot;</code></pre>
 <pre class="r"><code>attributes(a_table)</code></pre>
@@ -1302,10 +1309,10 @@ b_table &lt;- table(b, sample(b))
 b_table</code></pre>
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 1 0 0 0
+#&gt;   a 0 0 1 0
 #&gt;   b 0 1 0 0
 #&gt;   c 0 0 0 1
-#&gt;   d 0 0 1 0</code></pre>
+#&gt;   d 1 0 0 0</code></pre>
 <pre class="r"><code>attributes(b_table)</code></pre>
 <pre><code>#&gt; $dim
 #&gt; [1] 4 4
@@ -1429,13 +1436,13 @@ combining a date and date-time into a single vector.</li>
 </ol>
 <pre class="r"><code>d &lt;- list(date = as.Date(&quot;2022-06-25&quot;), datetime = as.POSIXct(&quot;2022-06-25 09:59:40 CDT&quot;))
 dput(d)</code></pre>
-<pre><code>#&gt; list(date = structure(19168, class = &quot;Date&quot;), datetime = structure(1656176380, class = c(&quot;POSIXct&quot;, 
+<pre><code>#&gt; list(date = structure(19168, class = &quot;Date&quot;), datetime = structure(1656169180, class = c(&quot;POSIXct&quot;, 
 #&gt; &quot;POSIXt&quot;), tzone = &quot;&quot;))</code></pre>
 <pre class="r"><code>dput(c(d)) # nolint: unneeded_concatenation_linter.</code></pre>
-<pre><code>#&gt; list(date = structure(19168, class = &quot;Date&quot;), datetime = structure(1656176380, class = c(&quot;POSIXct&quot;, 
+<pre><code>#&gt; list(date = structure(19168, class = &quot;Date&quot;), datetime = structure(1656169180, class = c(&quot;POSIXct&quot;, 
 #&gt; &quot;POSIXt&quot;), tzone = &quot;&quot;))</code></pre>
 <pre class="r"><code>dput(unlist(d))</code></pre>
-<pre><code>#&gt; c(date = 19168, datetime = 1656176380)</code></pre>
+<pre><code>#&gt; c(date = 19168, datetime = 1656169180)</code></pre>
 <p>Answer: <code>c()</code> preserves the list structure.
 <code>unlist()</code> converts both to <code>double</code>.</p>
 <p>AR Solutions: Date and date-time objects are both built upon doubles.
@@ -1473,9 +1480,11 @@ date + 3599
 convert their input first into <code>POSIXct</code> and
 <code>Date</code>, respectively.</p>
 <pre class="r"><code>c(dttm_ct, date)</code></pre>
-<pre><code>#&gt; [1] &quot;1969-12-31 17:00:00 PST&quot; &quot;1970-01-01 16:00:00 PST&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;1970-01-01 01:00:00 UTC&quot; &quot;1970-01-02 00:00:00 UTC&quot;</code></pre>
 <pre class="r"><code>unclass(c(dttm_ct, date))</code></pre>
-<pre><code>#&gt; [1]  3600 86400</code></pre>
+<pre><code>#&gt; [1]  3600 86400
+#&gt; attr(,&quot;tzone&quot;)
+#&gt; [1] &quot;UTC&quot;</code></pre>
 <pre class="r"><code>c(date, dttm_ct)</code></pre>
 <pre><code>#&gt; [1] &quot;1970-01-02&quot; &quot;1970-01-01&quot;</code></pre>
 <pre class="r"><code>unclass(c(date, dttm_ct))</code></pre>
@@ -2023,13 +2032,13 @@ permute the rows and columns in one step?</li>
 df[, sample(ncol(df))]</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["z"],"name":[1],"type":["chr"],"align":["left"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["x"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"a","2":"5","3":"1","_rn_":"1"},{"1":"b","2":"4","3":"2","_rn_":"2"},{"1":"c","2":"3","3":"3","_rn_":"3"},{"1":"d","2":"2","3":"4","_rn_":"4"},{"1":"e","2":"1","3":"5","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["z"],"name":[2],"type":["chr"],"align":["left"]},{"label":["y"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"a","3":"5","_rn_":"1"},{"1":"2","2":"b","3":"4","_rn_":"2"},{"1":"3","2":"c","3":"3","_rn_":"3"},{"1":"4","2":"d","3":"2","_rn_":"4"},{"1":"5","2":"e","3":"1","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>df[sample(nrow(df)), sample(ncol(df))]</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["z"],"name":[1],"type":["chr"],"align":["left"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["x"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"c","2":"3","3":"3","_rn_":"3"},{"1":"e","2":"1","3":"5","_rn_":"5"},{"1":"a","2":"5","3":"1","_rn_":"1"},{"1":"b","2":"4","3":"2","_rn_":"2"},{"1":"d","2":"2","3":"4","_rn_":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"5","2":"1","3":"e","_rn_":"5"},{"1":"1","2":"5","3":"a","_rn_":"1"},{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"2","2":"4","3":"b","_rn_":"2"},{"1":"4","2":"2","3":"d","_rn_":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -2061,13 +2070,13 @@ initial row, a final row, and every row in between)?</li>
 sample_rows(df, 3)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"4","2":"2","3":"d","_rn_":"4"},{"1":"5","2":"1","3":"e","_rn_":"5"},{"1":"1","2":"5","3":"a","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"4","2":"2","3":"d","_rn_":"4"},{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"5","2":"1","3":"e","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>sample_rows(df, 3, contiguous = TRUE)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"2","2":"4","3":"b","_rn_":"2"},{"1":"3","2":"3","3":"c","_rn_":"3"},{"1":"4","2":"2","3":"d","_rn_":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]},{"label":["z"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"5","3":"a","_rn_":"1"},{"1":"2","2":"4","3":"b","_rn_":"2"},{"1":"3","2":"3","3":"c","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>try(sample_rows(df, 6))</code></pre>
@@ -2346,7 +2355,7 @@ function. Which of the two approaches below is correct? Why?</li>
 </ol>
 <pre class="r"><code>function(x) 3()</code></pre>
 <pre><code>#&gt; function(x) 3()
-#&gt; &lt;environment: 0x7f7aafec0420&gt;</code></pre>
+#&gt; &lt;environment: 0x7fdf99de3d38&gt;</code></pre>
 <pre class="r"><code>(function(x) 3)()</code></pre>
 <pre><code>#&gt; [1] 3</code></pre>
 <p>Answer: The second is correct, as the first is the form of defining a
@@ -2408,13 +2417,13 @@ those functions?</li>
 head(fun_args[order(fun_args$args, decreasing = TRUE), ], 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["args"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"scan","2":"22","_rn_":"1056"},{"1":"format.default","2":"16","_rn_":"564"},{"1":"source","2":"16","_rn_":"1109"},{"1":"formatC","2":"15","_rn_":"577"},{"1":"library","2":"13","_rn_":"755"},{"1":"merge.data.frame","2":"13","_rn_":"812"},{"1":"prettyNum","2":"13","_rn_":"907"},{"1":"system2","2":"11","_rn_":"1219"},{"1":"print.default","2":"10","_rn_":"915"},{"1":"save","2":"10","_rn_":"1051"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["args"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"scan","2":"22","_rn_":"1068"},{"1":"format.default","2":"16","_rn_":"570"},{"1":"source","2":"16","_rn_":"1121"},{"1":"formatC","2":"15","_rn_":"583"},{"1":"library","2":"13","_rn_":"764"},{"1":"merge.data.frame","2":"13","_rn_":"821"},{"1":"prettyNum","2":"13","_rn_":"918"},{"1":"system2","2":"11","_rn_":"1231"},{"1":"print.default","2":"10","_rn_":"926"},{"1":"save","2":"10","_rn_":"1063"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>fun_args[fun_args$args == 0, ]</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["args"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"-","2":"0","_rn_":"1"},{"1":":","2":"0","_rn_":"4"},{"1":"::","2":"0","_rn_":"5"},{"1":":::","2":"0","_rn_":"6"},{"1":"!","2":"0","_rn_":"7"},{"1":"!=","2":"0","_rn_":"10"},{"1":"...elt","2":"0","_rn_":"13"},{"1":"...length","2":"0","_rn_":"14"},{"1":"...names","2":"0","_rn_":"15"},{"1":".C","2":"0","_rn_":"20"},{"1":".cache_class","2":"0","_rn_":"21"},{"1":".Call","2":"0","_rn_":"22"},{"1":".Call.graphics","2":"0","_rn_":"23"},{"1":".class2","2":"0","_rn_":"24"},{"1":".External","2":"0","_rn_":"41"},{"1":".External.graphics","2":"0","_rn_":"42"},{"1":".External2","2":"0","_rn_":"43"},{"1":".First.sys","2":"0","_rn_":"44"},{"1":".Fortran","2":"0","_rn_":"46"},{"1":".Internal","2":"0","_rn_":"54"},{"1":".isMethodsDispatchOn","2":"0","_rn_":"55"},{"1":".NotYetImplemented","2":"0","_rn_":"66"},{"1":".OptRequireMethods","2":"0","_rn_":"68"},{"1":".Primitive","2":"0","_rn_":"74"},{"1":".primTrace","2":"0","_rn_":"75"},{"1":".primUntrace","2":"0","_rn_":"76"},{"1":".standard_regexps","2":"0","_rn_":"87"},{"1":".subset","2":"0","_rn_":"88"},{"1":".subset2","2":"0","_rn_":"89"},{"1":".tryResumeInterrupt","2":"0","_rn_":"92"},{"1":"(","2":"0","_rn_":"94"},{"1":"[","2":"0","_rn_":"95"},{"1":"[[","2":"0","_rn_":"113"},{"1":"[[<-","2":"0","_rn_":"120"},{"1":"[<-","2":"0","_rn_":"125"},{"1":"{","2":"0","_rn_":"133"},{"1":"@","2":"0","_rn_":"134"},{"1":"@<-","2":"0","_rn_":"135"},{"1":"*","2":"0","_rn_":"136"},{"1":"/","2":"0","_rn_":"138"},{"1":"&","2":"0","_rn_":"140"},{"1":"&&","2":"0","_rn_":"143"},{"1":"%*%","2":"0","_rn_":"144"},{"1":"%/%","2":"0","_rn_":"145"},{"1":"%%","2":"0","_rn_":"146"},{"1":"^","2":"0","_rn_":"150"},{"1":"+","2":"0","_rn_":"151"},{"1":"<","2":"0","_rn_":"154"},{"1":"<-","2":"0","_rn_":"155"},{"1":"<<-","2":"0","_rn_":"156"},{"1":"<=","2":"0","_rn_":"157"},{"1":"=","2":"0","_rn_":"158"},{"1":"==","2":"0","_rn_":"159"},{"1":">","2":"0","_rn_":"160"},{"1":">=","2":"0","_rn_":"161"},{"1":"|","2":"0","_rn_":"162"},{"1":"||","2":"0","_rn_":"165"},{"1":"~","2":"0","_rn_":"166"},{"1":"$","2":"0","_rn_":"167"},{"1":"$<-","2":"0","_rn_":"170"},{"1":"abs","2":"0","_rn_":"173"},{"1":"acos","2":"0","_rn_":"174"},{"1":"acosh","2":"0","_rn_":"175"},{"1":"all","2":"0","_rn_":"182"},{"1":"any","2":"0","_rn_":"199"},{"1":"anyNA","2":"0","_rn_":"205"},{"1":"Arg","2":"0","_rn_":"214"},{"1":"as.call","2":"0","_rn_":"220"},{"1":"as.character","2":"0","_rn_":"221"},{"1":"as.complex","2":"0","_rn_":"232"},{"1":"as.double","2":"0","_rn_":"266"},{"1":"as.environment","2":"0","_rn_":"269"},{"1":"as.integer","2":"0","_rn_":"276"},{"1":"as.logical","2":"0","_rn_":"288"},{"1":"as.numeric","2":"0","_rn_":"298"},{"1":"as.raw","2":"0","_rn_":"317"},{"1":"asin","2":"0","_rn_":"327"},{"1":"asinh","2":"0","_rn_":"328"},{"1":"atan","2":"0","_rn_":"334"},{"1":"atanh","2":"0","_rn_":"336"},{"1":"attr","2":"0","_rn_":"339"},{"1":"attr<-","2":"0","_rn_":"341"},{"1":"attributes","2":"0","_rn_":"342"},{"1":"attributes<-","2":"0","_rn_":"343"},{"1":"baseenv","2":"0","_rn_":"347"},{"1":"break","2":"0","_rn_":"366"},{"1":"browser","2":"0","_rn_":"367"},{"1":"c","2":"0","_rn_":"376"},{"1":"call","2":"0","_rn_":"385"},{"1":"ceiling","2":"0","_rn_":"392"},{"1":"class","2":"0","_rn_":"404"},{"1":"class<-","2":"0","_rn_":"405"},{"1":"closeAllConnections","2":"0","_rn_":"411"},{"1":"Conj","2":"0","_rn_":"428"},{"1":"contributors","2":"0","_rn_":"429"},{"1":"cos","2":"0","_rn_":"430"},{"1":"cosh","2":"0","_rn_":"431"},{"1":"cospi","2":"0","_rn_":"432"},{"1":"Cstack_info","2":"0","_rn_":"434"},{"1":"cummax","2":"0","_rn_":"435"},{"1":"cummin","2":"0","_rn_":"436"},{"1":"cumprod","2":"0","_rn_":"437"},{"1":"cumsum","2":"0","_rn_":"438"},{"1":"date","2":"0","_rn_":"447"},{"1":"default.stringsAsFactors","2":"0","_rn_":"451"},{"1":"digamma","2":"0","_rn_":"468"},{"1":"dim","2":"0","_rn_":"469"},{"1":"dim<-","2":"0","_rn_":"471"},{"1":"dimnames","2":"0","_rn_":"472"},{"1":"dimnames<-","2":"0","_rn_":"474"},{"1":"emptyenv","2":"0","_rn_":"503"},{"1":"enc2native","2":"0","_rn_":"504"},{"1":"enc2utf8","2":"0","_rn_":"505"},{"1":"environment<-","2":"0","_rn_":"513"},{"1":"exp","2":"0","_rn_":"521"},{"1":"expm1","2":"0","_rn_":"523"},{"1":"expression","2":"0","_rn_":"524"},{"1":"extSoftVersion","2":"0","_rn_":"525"},{"1":"floor","2":"0","_rn_":"552"},{"1":"for","2":"0","_rn_":"555"},{"1":"forceAndCall","2":"0","_rn_":"557"},{"1":"function","2":"0","_rn_":"580"},{"1":"gamma","2":"0","_rn_":"581"},{"1":"gc.time","2":"0","_rn_":"583"},{"1":"getAllConnections","2":"0","_rn_":"589"},{"1":"geterrmessage","2":"0","_rn_":"597"},{"1":"getLoadedDLLs","2":"0","_rn_":"600"},{"1":"getRversion","2":"0","_rn_":"610"},{"1":"getTaskCallbackNames","2":"0","_rn_":"612"},{"1":"getwd","2":"0","_rn_":"615"},{"1":"globalenv","2":"0","_rn_":"618"},{"1":"iconvlist","2":"0","_rn_":"630"},{"1":"if","2":"0","_rn_":"635"},{"1":"Im","2":"0","_rn_":"637"},{"1":"interactive","2":"0","_rn_":"643"},{"1":"invisible","2":"0","_rn_":"648"},{"1":"is.array","2":"0","_rn_":"651"},{"1":"is.atomic","2":"0","_rn_":"652"},{"1":"is.call","2":"0","_rn_":"653"},{"1":"is.character","2":"0","_rn_":"654"},{"1":"is.complex","2":"0","_rn_":"655"},{"1":"is.double","2":"0","_rn_":"657"},{"1":"is.environment","2":"0","_rn_":"659"},{"1":"is.expression","2":"0","_rn_":"660"},{"1":"is.finite","2":"0","_rn_":"662"},{"1":"is.function","2":"0","_rn_":"663"},{"1":"is.infinite","2":"0","_rn_":"664"},{"1":"is.integer","2":"0","_rn_":"665"},{"1":"is.language","2":"0","_rn_":"666"},{"1":"is.list","2":"0","_rn_":"667"},{"1":"is.logical","2":"0","_rn_":"669"},{"1":"is.matrix","2":"0","_rn_":"670"},{"1":"is.na","2":"0","_rn_":"671"},{"1":"is.name","2":"0","_rn_":"679"},{"1":"is.nan","2":"0","_rn_":"680"},{"1":"is.null","2":"0","_rn_":"681"},{"1":"is.numeric","2":"0","_rn_":"682"},{"1":"is.object","2":"0","_rn_":"687"},{"1":"is.pairlist","2":"0","_rn_":"690"},{"1":"is.R","2":"0","_rn_":"693"},{"1":"is.raw","2":"0","_rn_":"694"},{"1":"is.recursive","2":"0","_rn_":"695"},{"1":"is.single","2":"0","_rn_":"696"},{"1":"is.symbol","2":"0","_rn_":"697"},{"1":"isS4","2":"0","_rn_":"713"},{"1":"l10n_info","2":"0","_rn_":"727"},{"1":"La_library","2":"0","_rn_":"728"},{"1":"La_version","2":"0","_rn_":"729"},{"1":"lazyLoadDBfetch","2":"0","_rn_":"736"},{"1":"length","2":"0","_rn_":"739"},{"1":"length<-","2":"0","_rn_":"741"},{"1":"levels<-","2":"0","_rn_":"750"},{"1":"lgamma","2":"0","_rn_":"753"},{"1":"libcurlVersion","2":"0","_rn_":"754"},{"1":"licence","2":"0","_rn_":"758"},{"1":"license","2":"0","_rn_":"759"},{"1":"list","2":"0","_rn_":"760"},{"1":"loadedNamespaces","2":"0","_rn_":"766"},{"1":"loadingNamespaceInfo","2":"0","_rn_":"767"},{"1":"log","2":"0","_rn_":"772"},{"1":"log10","2":"0","_rn_":"773"},{"1":"log1p","2":"0","_rn_":"774"},{"1":"log2","2":"0","_rn_":"775"},{"1":"max","2":"0","_rn_":"798"},{"1":"memory.profile","2":"0","_rn_":"810"},{"1":"min","2":"0","_rn_":"816"},{"1":"missing","2":"0","_rn_":"817"},{"1":"Mod","2":"0","_rn_":"818"},{"1":"names","2":"0","_rn_":"827"},{"1":"names<-","2":"0","_rn_":"829"},{"1":"nargs","2":"0","_rn_":"836"},{"1":"next","2":"0","_rn_":"842"},{"1":"nullfile","2":"0","_rn_":"851"},{"1":"nzchar","2":"0","_rn_":"856"},{"1":"oldClass","2":"0","_rn_":"858"},{"1":"oldClass<-","2":"0","_rn_":"859"},{"1":"on.exit","2":"0","_rn_":"861"},{"1":"pcre_config","2":"0","_rn_":"894"},{"1":"pos.to.env","2":"0","_rn_":"903"},{"1":"proc.time","2":"0","_rn_":"946"},{"1":"prod","2":"0","_rn_":"947"},{"1":"quote","2":"0","_rn_":"970"},{"1":"R.Version","2":"0","_rn_":"973"},{"1":"range","2":"0","_rn_":"974"},{"1":"Re","2":"0","_rn_":"987"},{"1":"rep","2":"0","_rn_":"1006"},{"1":"repeat","2":"0","_rn_":"1015"},{"1":"retracemem","2":"0","_rn_":"1022"},{"1":"return","2":"0","_rn_":"1023"},{"1":"round","2":"0","_rn_":"1031"},{"1":"search","2":"0","_rn_":"1057"},{"1":"searchpaths","2":"0","_rn_":"1058"},{"1":"seq_along","2":"0","_rn_":"1062"},{"1":"seq_len","2":"0","_rn_":"1063"},{"1":"seq.int","2":"0","_rn_":"1066"},{"1":"sign","2":"0","_rn_":"1082"},{"1":"signif","2":"0","_rn_":"1084"},{"1":"sin","2":"0","_rn_":"1090"},{"1":"sinh","2":"0","_rn_":"1092"},{"1":"sinpi","2":"0","_rn_":"1095"},{"1":"sqrt","2":"0","_rn_":"1119"},{"1":"standardGeneric","2":"0","_rn_":"1125"},{"1":"stderr","2":"0","_rn_":"1127"},{"1":"stdin","2":"0","_rn_":"1128"},{"1":"stdout","2":"0","_rn_":"1129"},{"1":"storage.mode<-","2":"0","_rn_":"1133"},{"1":"substitute","2":"0","_rn_":"1149"},{"1":"sum","2":"0","_rn_":"1154"},{"1":"switch","2":"0","_rn_":"1183"},{"1":"sys.calls","2":"0","_rn_":"1185"},{"1":"Sys.Date","2":"0","_rn_":"1187"},{"1":"sys.frames","2":"0","_rn_":"1189"},{"1":"Sys.getpid","2":"0","_rn_":"1193"},{"1":"Sys.info","2":"0","_rn_":"1195"},{"1":"Sys.localeconv","2":"0","_rn_":"1197"},{"1":"sys.nframe","2":"0","_rn_":"1198"},{"1":"sys.on.exit","2":"0","_rn_":"1199"},{"1":"sys.parents","2":"0","_rn_":"1201"},{"1":"sys.status","2":"0","_rn_":"1210"},{"1":"Sys.time","2":"0","_rn_":"1211"},{"1":"tan","2":"0","_rn_":"1225"},{"1":"tanh","2":"0","_rn_":"1226"},{"1":"tanpi","2":"0","_rn_":"1227"},{"1":"tracemem","2":"0","_rn_":"1242"},{"1":"trigamma","2":"0","_rn_":"1247"},{"1":"trunc","2":"0","_rn_":"1249"},{"1":"unclass","2":"0","_rn_":"1258"},{"1":"untracemem","2":"0","_rn_":"1282"},{"1":"UseMethod","2":"0","_rn_":"1286"},{"1":"while","2":"0","_rn_":"1302"},{"1":"xtfrm","2":"0","_rn_":"1319"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["args"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"-","2":"0","_rn_":"1"},{"1":":","2":"0","_rn_":"4"},{"1":"::","2":"0","_rn_":"5"},{"1":":::","2":"0","_rn_":"6"},{"1":"!","2":"0","_rn_":"7"},{"1":"!=","2":"0","_rn_":"10"},{"1":"...elt","2":"0","_rn_":"13"},{"1":"...length","2":"0","_rn_":"14"},{"1":"...names","2":"0","_rn_":"15"},{"1":".C","2":"0","_rn_":"20"},{"1":".cache_class","2":"0","_rn_":"21"},{"1":".Call","2":"0","_rn_":"22"},{"1":".Call.graphics","2":"0","_rn_":"23"},{"1":".class2","2":"0","_rn_":"25"},{"1":".External","2":"0","_rn_":"42"},{"1":".External.graphics","2":"0","_rn_":"43"},{"1":".External2","2":"0","_rn_":"44"},{"1":".First.sys","2":"0","_rn_":"45"},{"1":".Fortran","2":"0","_rn_":"48"},{"1":".Internal","2":"0","_rn_":"56"},{"1":".isMethodsDispatchOn","2":"0","_rn_":"57"},{"1":".NotYetImplemented","2":"0","_rn_":"68"},{"1":".OptRequireMethods","2":"0","_rn_":"70"},{"1":".Primitive","2":"0","_rn_":"76"},{"1":".primTrace","2":"0","_rn_":"77"},{"1":".primUntrace","2":"0","_rn_":"78"},{"1":".standard_regexps","2":"0","_rn_":"89"},{"1":".subset","2":"0","_rn_":"90"},{"1":".subset2","2":"0","_rn_":"91"},{"1":".tryResumeInterrupt","2":"0","_rn_":"94"},{"1":"(","2":"0","_rn_":"96"},{"1":"[","2":"0","_rn_":"97"},{"1":"[[","2":"0","_rn_":"115"},{"1":"[[<-","2":"0","_rn_":"122"},{"1":"[<-","2":"0","_rn_":"127"},{"1":"{","2":"0","_rn_":"135"},{"1":"@","2":"0","_rn_":"136"},{"1":"@<-","2":"0","_rn_":"137"},{"1":"*","2":"0","_rn_":"138"},{"1":"/","2":"0","_rn_":"140"},{"1":"&","2":"0","_rn_":"142"},{"1":"&&","2":"0","_rn_":"145"},{"1":"%*%","2":"0","_rn_":"146"},{"1":"%/%","2":"0","_rn_":"147"},{"1":"%%","2":"0","_rn_":"148"},{"1":"^","2":"0","_rn_":"152"},{"1":"+","2":"0","_rn_":"153"},{"1":"<","2":"0","_rn_":"156"},{"1":"<-","2":"0","_rn_":"157"},{"1":"<<-","2":"0","_rn_":"158"},{"1":"<=","2":"0","_rn_":"159"},{"1":"=","2":"0","_rn_":"160"},{"1":"==","2":"0","_rn_":"161"},{"1":">","2":"0","_rn_":"162"},{"1":">=","2":"0","_rn_":"163"},{"1":"|","2":"0","_rn_":"164"},{"1":"||","2":"0","_rn_":"167"},{"1":"~","2":"0","_rn_":"168"},{"1":"$","2":"0","_rn_":"169"},{"1":"$<-","2":"0","_rn_":"172"},{"1":"abs","2":"0","_rn_":"176"},{"1":"acos","2":"0","_rn_":"177"},{"1":"acosh","2":"0","_rn_":"178"},{"1":"all","2":"0","_rn_":"185"},{"1":"any","2":"0","_rn_":"202"},{"1":"anyNA","2":"0","_rn_":"208"},{"1":"Arg","2":"0","_rn_":"217"},{"1":"as.call","2":"0","_rn_":"224"},{"1":"as.character","2":"0","_rn_":"225"},{"1":"as.complex","2":"0","_rn_":"236"},{"1":"as.double","2":"0","_rn_":"270"},{"1":"as.environment","2":"0","_rn_":"273"},{"1":"as.integer","2":"0","_rn_":"280"},{"1":"as.logical","2":"0","_rn_":"292"},{"1":"as.numeric","2":"0","_rn_":"302"},{"1":"as.raw","2":"0","_rn_":"321"},{"1":"asin","2":"0","_rn_":"331"},{"1":"asinh","2":"0","_rn_":"332"},{"1":"atan","2":"0","_rn_":"338"},{"1":"atanh","2":"0","_rn_":"340"},{"1":"attr","2":"0","_rn_":"343"},{"1":"attr<-","2":"0","_rn_":"345"},{"1":"attributes","2":"0","_rn_":"346"},{"1":"attributes<-","2":"0","_rn_":"347"},{"1":"baseenv","2":"0","_rn_":"352"},{"1":"break","2":"0","_rn_":"371"},{"1":"browser","2":"0","_rn_":"372"},{"1":"c","2":"0","_rn_":"381"},{"1":"call","2":"0","_rn_":"390"},{"1":"ceiling","2":"0","_rn_":"397"},{"1":"class","2":"0","_rn_":"410"},{"1":"class<-","2":"0","_rn_":"411"},{"1":"closeAllConnections","2":"0","_rn_":"417"},{"1":"Conj","2":"0","_rn_":"434"},{"1":"contributors","2":"0","_rn_":"435"},{"1":"cos","2":"0","_rn_":"436"},{"1":"cosh","2":"0","_rn_":"437"},{"1":"cospi","2":"0","_rn_":"438"},{"1":"Cstack_info","2":"0","_rn_":"440"},{"1":"cummax","2":"0","_rn_":"441"},{"1":"cummin","2":"0","_rn_":"442"},{"1":"cumprod","2":"0","_rn_":"443"},{"1":"cumsum","2":"0","_rn_":"444"},{"1":"date","2":"0","_rn_":"453"},{"1":"default.stringsAsFactors","2":"0","_rn_":"457"},{"1":"digamma","2":"0","_rn_":"474"},{"1":"dim","2":"0","_rn_":"475"},{"1":"dim<-","2":"0","_rn_":"477"},{"1":"dimnames","2":"0","_rn_":"478"},{"1":"dimnames<-","2":"0","_rn_":"480"},{"1":"emptyenv","2":"0","_rn_":"509"},{"1":"enc2native","2":"0","_rn_":"510"},{"1":"enc2utf8","2":"0","_rn_":"511"},{"1":"environment<-","2":"0","_rn_":"519"},{"1":"exp","2":"0","_rn_":"527"},{"1":"expm1","2":"0","_rn_":"529"},{"1":"expression","2":"0","_rn_":"530"},{"1":"extSoftVersion","2":"0","_rn_":"531"},{"1":"floor","2":"0","_rn_":"558"},{"1":"for","2":"0","_rn_":"561"},{"1":"forceAndCall","2":"0","_rn_":"563"},{"1":"function","2":"0","_rn_":"586"},{"1":"gamma","2":"0","_rn_":"587"},{"1":"gc.time","2":"0","_rn_":"589"},{"1":"getAllConnections","2":"0","_rn_":"595"},{"1":"geterrmessage","2":"0","_rn_":"603"},{"1":"getLoadedDLLs","2":"0","_rn_":"606"},{"1":"getRversion","2":"0","_rn_":"616"},{"1":"getTaskCallbackNames","2":"0","_rn_":"618"},{"1":"getwd","2":"0","_rn_":"621"},{"1":"globalenv","2":"0","_rn_":"624"},{"1":"iconvlist","2":"0","_rn_":"636"},{"1":"if","2":"0","_rn_":"641"},{"1":"Im","2":"0","_rn_":"643"},{"1":"interactive","2":"0","_rn_":"649"},{"1":"invisible","2":"0","_rn_":"654"},{"1":"is.array","2":"0","_rn_":"657"},{"1":"is.atomic","2":"0","_rn_":"658"},{"1":"is.call","2":"0","_rn_":"659"},{"1":"is.character","2":"0","_rn_":"660"},{"1":"is.complex","2":"0","_rn_":"661"},{"1":"is.double","2":"0","_rn_":"663"},{"1":"is.environment","2":"0","_rn_":"665"},{"1":"is.expression","2":"0","_rn_":"666"},{"1":"is.finite","2":"0","_rn_":"668"},{"1":"is.function","2":"0","_rn_":"670"},{"1":"is.infinite","2":"0","_rn_":"671"},{"1":"is.integer","2":"0","_rn_":"673"},{"1":"is.language","2":"0","_rn_":"674"},{"1":"is.list","2":"0","_rn_":"675"},{"1":"is.logical","2":"0","_rn_":"677"},{"1":"is.matrix","2":"0","_rn_":"678"},{"1":"is.na","2":"0","_rn_":"679"},{"1":"is.name","2":"0","_rn_":"687"},{"1":"is.nan","2":"0","_rn_":"688"},{"1":"is.null","2":"0","_rn_":"690"},{"1":"is.numeric","2":"0","_rn_":"691"},{"1":"is.object","2":"0","_rn_":"696"},{"1":"is.pairlist","2":"0","_rn_":"699"},{"1":"is.R","2":"0","_rn_":"702"},{"1":"is.raw","2":"0","_rn_":"703"},{"1":"is.recursive","2":"0","_rn_":"704"},{"1":"is.single","2":"0","_rn_":"705"},{"1":"is.symbol","2":"0","_rn_":"706"},{"1":"isS4","2":"0","_rn_":"722"},{"1":"l10n_info","2":"0","_rn_":"736"},{"1":"La_library","2":"0","_rn_":"737"},{"1":"La_version","2":"0","_rn_":"738"},{"1":"lazyLoadDBfetch","2":"0","_rn_":"745"},{"1":"length","2":"0","_rn_":"748"},{"1":"length<-","2":"0","_rn_":"750"},{"1":"levels<-","2":"0","_rn_":"759"},{"1":"lgamma","2":"0","_rn_":"762"},{"1":"libcurlVersion","2":"0","_rn_":"763"},{"1":"licence","2":"0","_rn_":"767"},{"1":"license","2":"0","_rn_":"768"},{"1":"list","2":"0","_rn_":"769"},{"1":"loadedNamespaces","2":"0","_rn_":"775"},{"1":"loadingNamespaceInfo","2":"0","_rn_":"776"},{"1":"log","2":"0","_rn_":"781"},{"1":"log10","2":"0","_rn_":"782"},{"1":"log1p","2":"0","_rn_":"783"},{"1":"log2","2":"0","_rn_":"784"},{"1":"max","2":"0","_rn_":"807"},{"1":"memory.profile","2":"0","_rn_":"819"},{"1":"min","2":"0","_rn_":"825"},{"1":"missing","2":"0","_rn_":"826"},{"1":"Mod","2":"0","_rn_":"827"},{"1":"names","2":"0","_rn_":"838"},{"1":"names<-","2":"0","_rn_":"840"},{"1":"nargs","2":"0","_rn_":"847"},{"1":"next","2":"0","_rn_":"853"},{"1":"nullfile","2":"0","_rn_":"862"},{"1":"nzchar","2":"0","_rn_":"867"},{"1":"oldClass","2":"0","_rn_":"869"},{"1":"oldClass<-","2":"0","_rn_":"870"},{"1":"on.exit","2":"0","_rn_":"872"},{"1":"pcre_config","2":"0","_rn_":"905"},{"1":"pos.to.env","2":"0","_rn_":"914"},{"1":"proc.time","2":"0","_rn_":"957"},{"1":"prod","2":"0","_rn_":"958"},{"1":"quote","2":"0","_rn_":"981"},{"1":"R_compiled_by","2":"0","_rn_":"982"},{"1":"R.Version","2":"0","_rn_":"985"},{"1":"range","2":"0","_rn_":"986"},{"1":"Re","2":"0","_rn_":"999"},{"1":"rep","2":"0","_rn_":"1018"},{"1":"repeat","2":"0","_rn_":"1027"},{"1":"retracemem","2":"0","_rn_":"1034"},{"1":"return","2":"0","_rn_":"1035"},{"1":"round","2":"0","_rn_":"1043"},{"1":"search","2":"0","_rn_":"1069"},{"1":"searchpaths","2":"0","_rn_":"1070"},{"1":"seq_along","2":"0","_rn_":"1074"},{"1":"seq_len","2":"0","_rn_":"1075"},{"1":"seq.int","2":"0","_rn_":"1078"},{"1":"sign","2":"0","_rn_":"1094"},{"1":"signif","2":"0","_rn_":"1096"},{"1":"sin","2":"0","_rn_":"1102"},{"1":"sinh","2":"0","_rn_":"1104"},{"1":"sinpi","2":"0","_rn_":"1107"},{"1":"sqrt","2":"0","_rn_":"1131"},{"1":"standardGeneric","2":"0","_rn_":"1137"},{"1":"stderr","2":"0","_rn_":"1139"},{"1":"stdin","2":"0","_rn_":"1140"},{"1":"stdout","2":"0","_rn_":"1141"},{"1":"storage.mode<-","2":"0","_rn_":"1145"},{"1":"substitute","2":"0","_rn_":"1161"},{"1":"sum","2":"0","_rn_":"1166"},{"1":"switch","2":"0","_rn_":"1195"},{"1":"sys.calls","2":"0","_rn_":"1197"},{"1":"Sys.Date","2":"0","_rn_":"1199"},{"1":"sys.frames","2":"0","_rn_":"1201"},{"1":"Sys.getpid","2":"0","_rn_":"1205"},{"1":"Sys.info","2":"0","_rn_":"1207"},{"1":"Sys.localeconv","2":"0","_rn_":"1209"},{"1":"sys.nframe","2":"0","_rn_":"1210"},{"1":"sys.on.exit","2":"0","_rn_":"1211"},{"1":"sys.parents","2":"0","_rn_":"1213"},{"1":"sys.status","2":"0","_rn_":"1222"},{"1":"Sys.time","2":"0","_rn_":"1223"},{"1":"tan","2":"0","_rn_":"1237"},{"1":"tanh","2":"0","_rn_":"1238"},{"1":"tanpi","2":"0","_rn_":"1239"},{"1":"tracemem","2":"0","_rn_":"1254"},{"1":"trigamma","2":"0","_rn_":"1259"},{"1":"trunc","2":"0","_rn_":"1261"},{"1":"unCfillPOSIXlt","2":"0","_rn_":"1270"},{"1":"unclass","2":"0","_rn_":"1271"},{"1":"untracemem","2":"0","_rn_":"1295"},{"1":"UseMethod","2":"0","_rn_":"1299"},{"1":"while","2":"0","_rn_":"1315"},{"1":"xtfrm","2":"0","_rn_":"1332"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code># check if all functions with 0 arguments are primitive
@@ -2426,7 +2435,7 @@ fun_args2 &lt;- data.frame(
 fun_args2[fun_args2$args == 0, ]</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["args"],"name":[2],"type":["int"],"align":["right"]},{"label":["prim"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"-","2":"0","3":"TRUE","_rn_":"1"},{"1":":","2":"0","3":"TRUE","_rn_":"4"},{"1":"::","2":"0","3":"TRUE","_rn_":"5"},{"1":":::","2":"0","3":"TRUE","_rn_":"6"},{"1":"!","2":"0","3":"TRUE","_rn_":"7"},{"1":"!=","2":"0","3":"TRUE","_rn_":"10"},{"1":"...elt","2":"0","3":"TRUE","_rn_":"13"},{"1":"...length","2":"0","3":"TRUE","_rn_":"14"},{"1":"...names","2":"0","3":"TRUE","_rn_":"15"},{"1":".C","2":"0","3":"TRUE","_rn_":"20"},{"1":".cache_class","2":"0","3":"TRUE","_rn_":"21"},{"1":".Call","2":"0","3":"TRUE","_rn_":"22"},{"1":".Call.graphics","2":"0","3":"TRUE","_rn_":"23"},{"1":".class2","2":"0","3":"TRUE","_rn_":"24"},{"1":".External","2":"0","3":"TRUE","_rn_":"41"},{"1":".External.graphics","2":"0","3":"TRUE","_rn_":"42"},{"1":".External2","2":"0","3":"TRUE","_rn_":"43"},{"1":".First.sys","2":"0","3":"FALSE","_rn_":"44"},{"1":".Fortran","2":"0","3":"TRUE","_rn_":"46"},{"1":".Internal","2":"0","3":"TRUE","_rn_":"54"},{"1":".isMethodsDispatchOn","2":"0","3":"TRUE","_rn_":"55"},{"1":".NotYetImplemented","2":"0","3":"FALSE","_rn_":"66"},{"1":".OptRequireMethods","2":"0","3":"FALSE","_rn_":"68"},{"1":".Primitive","2":"0","3":"TRUE","_rn_":"74"},{"1":".primTrace","2":"0","3":"TRUE","_rn_":"75"},{"1":".primUntrace","2":"0","3":"TRUE","_rn_":"76"},{"1":".standard_regexps","2":"0","3":"FALSE","_rn_":"87"},{"1":".subset","2":"0","3":"TRUE","_rn_":"88"},{"1":".subset2","2":"0","3":"TRUE","_rn_":"89"},{"1":".tryResumeInterrupt","2":"0","3":"FALSE","_rn_":"92"},{"1":"(","2":"0","3":"TRUE","_rn_":"94"},{"1":"[","2":"0","3":"TRUE","_rn_":"95"},{"1":"[[","2":"0","3":"TRUE","_rn_":"113"},{"1":"[[<-","2":"0","3":"TRUE","_rn_":"120"},{"1":"[<-","2":"0","3":"TRUE","_rn_":"125"},{"1":"{","2":"0","3":"TRUE","_rn_":"133"},{"1":"@","2":"0","3":"TRUE","_rn_":"134"},{"1":"@<-","2":"0","3":"TRUE","_rn_":"135"},{"1":"*","2":"0","3":"TRUE","_rn_":"136"},{"1":"/","2":"0","3":"TRUE","_rn_":"138"},{"1":"&","2":"0","3":"TRUE","_rn_":"140"},{"1":"&&","2":"0","3":"TRUE","_rn_":"143"},{"1":"%*%","2":"0","3":"TRUE","_rn_":"144"},{"1":"%/%","2":"0","3":"TRUE","_rn_":"145"},{"1":"%%","2":"0","3":"TRUE","_rn_":"146"},{"1":"^","2":"0","3":"TRUE","_rn_":"150"},{"1":"+","2":"0","3":"TRUE","_rn_":"151"},{"1":"<","2":"0","3":"TRUE","_rn_":"154"},{"1":"<-","2":"0","3":"TRUE","_rn_":"155"},{"1":"<<-","2":"0","3":"TRUE","_rn_":"156"},{"1":"<=","2":"0","3":"TRUE","_rn_":"157"},{"1":"=","2":"0","3":"TRUE","_rn_":"158"},{"1":"==","2":"0","3":"TRUE","_rn_":"159"},{"1":">","2":"0","3":"TRUE","_rn_":"160"},{"1":">=","2":"0","3":"TRUE","_rn_":"161"},{"1":"|","2":"0","3":"TRUE","_rn_":"162"},{"1":"||","2":"0","3":"TRUE","_rn_":"165"},{"1":"~","2":"0","3":"TRUE","_rn_":"166"},{"1":"$","2":"0","3":"TRUE","_rn_":"167"},{"1":"$<-","2":"0","3":"TRUE","_rn_":"170"},{"1":"abs","2":"0","3":"TRUE","_rn_":"173"},{"1":"acos","2":"0","3":"TRUE","_rn_":"174"},{"1":"acosh","2":"0","3":"TRUE","_rn_":"175"},{"1":"all","2":"0","3":"TRUE","_rn_":"182"},{"1":"any","2":"0","3":"TRUE","_rn_":"199"},{"1":"anyNA","2":"0","3":"TRUE","_rn_":"205"},{"1":"Arg","2":"0","3":"TRUE","_rn_":"214"},{"1":"as.call","2":"0","3":"TRUE","_rn_":"220"},{"1":"as.character","2":"0","3":"TRUE","_rn_":"221"},{"1":"as.complex","2":"0","3":"TRUE","_rn_":"232"},{"1":"as.double","2":"0","3":"TRUE","_rn_":"266"},{"1":"as.environment","2":"0","3":"TRUE","_rn_":"269"},{"1":"as.integer","2":"0","3":"TRUE","_rn_":"276"},{"1":"as.logical","2":"0","3":"TRUE","_rn_":"288"},{"1":"as.numeric","2":"0","3":"TRUE","_rn_":"298"},{"1":"as.raw","2":"0","3":"TRUE","_rn_":"317"},{"1":"asin","2":"0","3":"TRUE","_rn_":"327"},{"1":"asinh","2":"0","3":"TRUE","_rn_":"328"},{"1":"atan","2":"0","3":"TRUE","_rn_":"334"},{"1":"atanh","2":"0","3":"TRUE","_rn_":"336"},{"1":"attr","2":"0","3":"TRUE","_rn_":"339"},{"1":"attr<-","2":"0","3":"TRUE","_rn_":"341"},{"1":"attributes","2":"0","3":"TRUE","_rn_":"342"},{"1":"attributes<-","2":"0","3":"TRUE","_rn_":"343"},{"1":"baseenv","2":"0","3":"TRUE","_rn_":"347"},{"1":"break","2":"0","3":"TRUE","_rn_":"366"},{"1":"browser","2":"0","3":"TRUE","_rn_":"367"},{"1":"c","2":"0","3":"TRUE","_rn_":"376"},{"1":"call","2":"0","3":"TRUE","_rn_":"385"},{"1":"ceiling","2":"0","3":"TRUE","_rn_":"392"},{"1":"class","2":"0","3":"TRUE","_rn_":"404"},{"1":"class<-","2":"0","3":"TRUE","_rn_":"405"},{"1":"closeAllConnections","2":"0","3":"FALSE","_rn_":"411"},{"1":"Conj","2":"0","3":"TRUE","_rn_":"428"},{"1":"contributors","2":"0","3":"FALSE","_rn_":"429"},{"1":"cos","2":"0","3":"TRUE","_rn_":"430"},{"1":"cosh","2":"0","3":"TRUE","_rn_":"431"},{"1":"cospi","2":"0","3":"TRUE","_rn_":"432"},{"1":"Cstack_info","2":"0","3":"FALSE","_rn_":"434"},{"1":"cummax","2":"0","3":"TRUE","_rn_":"435"},{"1":"cummin","2":"0","3":"TRUE","_rn_":"436"},{"1":"cumprod","2":"0","3":"TRUE","_rn_":"437"},{"1":"cumsum","2":"0","3":"TRUE","_rn_":"438"},{"1":"date","2":"0","3":"FALSE","_rn_":"447"},{"1":"default.stringsAsFactors","2":"0","3":"FALSE","_rn_":"451"},{"1":"digamma","2":"0","3":"TRUE","_rn_":"468"},{"1":"dim","2":"0","3":"TRUE","_rn_":"469"},{"1":"dim<-","2":"0","3":"TRUE","_rn_":"471"},{"1":"dimnames","2":"0","3":"TRUE","_rn_":"472"},{"1":"dimnames<-","2":"0","3":"TRUE","_rn_":"474"},{"1":"emptyenv","2":"0","3":"TRUE","_rn_":"503"},{"1":"enc2native","2":"0","3":"TRUE","_rn_":"504"},{"1":"enc2utf8","2":"0","3":"TRUE","_rn_":"505"},{"1":"environment<-","2":"0","3":"TRUE","_rn_":"513"},{"1":"exp","2":"0","3":"TRUE","_rn_":"521"},{"1":"expm1","2":"0","3":"TRUE","_rn_":"523"},{"1":"expression","2":"0","3":"TRUE","_rn_":"524"},{"1":"extSoftVersion","2":"0","3":"FALSE","_rn_":"525"},{"1":"floor","2":"0","3":"TRUE","_rn_":"552"},{"1":"for","2":"0","3":"TRUE","_rn_":"555"},{"1":"forceAndCall","2":"0","3":"TRUE","_rn_":"557"},{"1":"function","2":"0","3":"TRUE","_rn_":"580"},{"1":"gamma","2":"0","3":"TRUE","_rn_":"581"},{"1":"gc.time","2":"0","3":"TRUE","_rn_":"583"},{"1":"getAllConnections","2":"0","3":"FALSE","_rn_":"589"},{"1":"geterrmessage","2":"0","3":"FALSE","_rn_":"597"},{"1":"getLoadedDLLs","2":"0","3":"FALSE","_rn_":"600"},{"1":"getRversion","2":"0","3":"FALSE","_rn_":"610"},{"1":"getTaskCallbackNames","2":"0","3":"FALSE","_rn_":"612"},{"1":"getwd","2":"0","3":"FALSE","_rn_":"615"},{"1":"globalenv","2":"0","3":"TRUE","_rn_":"618"},{"1":"iconvlist","2":"0","3":"FALSE","_rn_":"630"},{"1":"if","2":"0","3":"TRUE","_rn_":"635"},{"1":"Im","2":"0","3":"TRUE","_rn_":"637"},{"1":"interactive","2":"0","3":"TRUE","_rn_":"643"},{"1":"invisible","2":"0","3":"TRUE","_rn_":"648"},{"1":"is.array","2":"0","3":"TRUE","_rn_":"651"},{"1":"is.atomic","2":"0","3":"TRUE","_rn_":"652"},{"1":"is.call","2":"0","3":"TRUE","_rn_":"653"},{"1":"is.character","2":"0","3":"TRUE","_rn_":"654"},{"1":"is.complex","2":"0","3":"TRUE","_rn_":"655"},{"1":"is.double","2":"0","3":"TRUE","_rn_":"657"},{"1":"is.environment","2":"0","3":"TRUE","_rn_":"659"},{"1":"is.expression","2":"0","3":"TRUE","_rn_":"660"},{"1":"is.finite","2":"0","3":"TRUE","_rn_":"662"},{"1":"is.function","2":"0","3":"TRUE","_rn_":"663"},{"1":"is.infinite","2":"0","3":"TRUE","_rn_":"664"},{"1":"is.integer","2":"0","3":"TRUE","_rn_":"665"},{"1":"is.language","2":"0","3":"TRUE","_rn_":"666"},{"1":"is.list","2":"0","3":"TRUE","_rn_":"667"},{"1":"is.logical","2":"0","3":"TRUE","_rn_":"669"},{"1":"is.matrix","2":"0","3":"TRUE","_rn_":"670"},{"1":"is.na","2":"0","3":"TRUE","_rn_":"671"},{"1":"is.name","2":"0","3":"TRUE","_rn_":"679"},{"1":"is.nan","2":"0","3":"TRUE","_rn_":"680"},{"1":"is.null","2":"0","3":"TRUE","_rn_":"681"},{"1":"is.numeric","2":"0","3":"TRUE","_rn_":"682"},{"1":"is.object","2":"0","3":"TRUE","_rn_":"687"},{"1":"is.pairlist","2":"0","3":"TRUE","_rn_":"690"},{"1":"is.R","2":"0","3":"FALSE","_rn_":"693"},{"1":"is.raw","2":"0","3":"TRUE","_rn_":"694"},{"1":"is.recursive","2":"0","3":"TRUE","_rn_":"695"},{"1":"is.single","2":"0","3":"TRUE","_rn_":"696"},{"1":"is.symbol","2":"0","3":"TRUE","_rn_":"697"},{"1":"isS4","2":"0","3":"TRUE","_rn_":"713"},{"1":"l10n_info","2":"0","3":"FALSE","_rn_":"727"},{"1":"La_library","2":"0","3":"FALSE","_rn_":"728"},{"1":"La_version","2":"0","3":"FALSE","_rn_":"729"},{"1":"lazyLoadDBfetch","2":"0","3":"TRUE","_rn_":"736"},{"1":"length","2":"0","3":"TRUE","_rn_":"739"},{"1":"length<-","2":"0","3":"TRUE","_rn_":"741"},{"1":"levels<-","2":"0","3":"TRUE","_rn_":"750"},{"1":"lgamma","2":"0","3":"TRUE","_rn_":"753"},{"1":"libcurlVersion","2":"0","3":"FALSE","_rn_":"754"},{"1":"licence","2":"0","3":"FALSE","_rn_":"758"},{"1":"license","2":"0","3":"FALSE","_rn_":"759"},{"1":"list","2":"0","3":"TRUE","_rn_":"760"},{"1":"loadedNamespaces","2":"0","3":"FALSE","_rn_":"766"},{"1":"loadingNamespaceInfo","2":"0","3":"FALSE","_rn_":"767"},{"1":"log","2":"0","3":"TRUE","_rn_":"772"},{"1":"log10","2":"0","3":"TRUE","_rn_":"773"},{"1":"log1p","2":"0","3":"TRUE","_rn_":"774"},{"1":"log2","2":"0","3":"TRUE","_rn_":"775"},{"1":"max","2":"0","3":"TRUE","_rn_":"798"},{"1":"memory.profile","2":"0","3":"FALSE","_rn_":"810"},{"1":"min","2":"0","3":"TRUE","_rn_":"816"},{"1":"missing","2":"0","3":"TRUE","_rn_":"817"},{"1":"Mod","2":"0","3":"TRUE","_rn_":"818"},{"1":"names","2":"0","3":"TRUE","_rn_":"827"},{"1":"names<-","2":"0","3":"TRUE","_rn_":"829"},{"1":"nargs","2":"0","3":"TRUE","_rn_":"836"},{"1":"next","2":"0","3":"TRUE","_rn_":"842"},{"1":"nullfile","2":"0","3":"FALSE","_rn_":"851"},{"1":"nzchar","2":"0","3":"TRUE","_rn_":"856"},{"1":"oldClass","2":"0","3":"TRUE","_rn_":"858"},{"1":"oldClass<-","2":"0","3":"TRUE","_rn_":"859"},{"1":"on.exit","2":"0","3":"TRUE","_rn_":"861"},{"1":"pcre_config","2":"0","3":"FALSE","_rn_":"894"},{"1":"pos.to.env","2":"0","3":"TRUE","_rn_":"903"},{"1":"proc.time","2":"0","3":"TRUE","_rn_":"946"},{"1":"prod","2":"0","3":"TRUE","_rn_":"947"},{"1":"quote","2":"0","3":"TRUE","_rn_":"970"},{"1":"R.Version","2":"0","3":"FALSE","_rn_":"973"},{"1":"range","2":"0","3":"TRUE","_rn_":"974"},{"1":"Re","2":"0","3":"TRUE","_rn_":"987"},{"1":"rep","2":"0","3":"TRUE","_rn_":"1006"},{"1":"repeat","2":"0","3":"TRUE","_rn_":"1015"},{"1":"retracemem","2":"0","3":"TRUE","_rn_":"1022"},{"1":"return","2":"0","3":"TRUE","_rn_":"1023"},{"1":"round","2":"0","3":"TRUE","_rn_":"1031"},{"1":"search","2":"0","3":"FALSE","_rn_":"1057"},{"1":"searchpaths","2":"0","3":"FALSE","_rn_":"1058"},{"1":"seq_along","2":"0","3":"TRUE","_rn_":"1062"},{"1":"seq_len","2":"0","3":"TRUE","_rn_":"1063"},{"1":"seq.int","2":"0","3":"TRUE","_rn_":"1066"},{"1":"sign","2":"0","3":"TRUE","_rn_":"1082"},{"1":"signif","2":"0","3":"TRUE","_rn_":"1084"},{"1":"sin","2":"0","3":"TRUE","_rn_":"1090"},{"1":"sinh","2":"0","3":"TRUE","_rn_":"1092"},{"1":"sinpi","2":"0","3":"TRUE","_rn_":"1095"},{"1":"sqrt","2":"0","3":"TRUE","_rn_":"1119"},{"1":"standardGeneric","2":"0","3":"TRUE","_rn_":"1125"},{"1":"stderr","2":"0","3":"FALSE","_rn_":"1127"},{"1":"stdin","2":"0","3":"FALSE","_rn_":"1128"},{"1":"stdout","2":"0","3":"FALSE","_rn_":"1129"},{"1":"storage.mode<-","2":"0","3":"TRUE","_rn_":"1133"},{"1":"substitute","2":"0","3":"TRUE","_rn_":"1149"},{"1":"sum","2":"0","3":"TRUE","_rn_":"1154"},{"1":"switch","2":"0","3":"TRUE","_rn_":"1183"},{"1":"sys.calls","2":"0","3":"FALSE","_rn_":"1185"},{"1":"Sys.Date","2":"0","3":"FALSE","_rn_":"1187"},{"1":"sys.frames","2":"0","3":"FALSE","_rn_":"1189"},{"1":"Sys.getpid","2":"0","3":"FALSE","_rn_":"1193"},{"1":"Sys.info","2":"0","3":"FALSE","_rn_":"1195"},{"1":"Sys.localeconv","2":"0","3":"FALSE","_rn_":"1197"},{"1":"sys.nframe","2":"0","3":"FALSE","_rn_":"1198"},{"1":"sys.on.exit","2":"0","3":"FALSE","_rn_":"1199"},{"1":"sys.parents","2":"0","3":"FALSE","_rn_":"1201"},{"1":"sys.status","2":"0","3":"FALSE","_rn_":"1210"},{"1":"Sys.time","2":"0","3":"FALSE","_rn_":"1211"},{"1":"tan","2":"0","3":"TRUE","_rn_":"1225"},{"1":"tanh","2":"0","3":"TRUE","_rn_":"1226"},{"1":"tanpi","2":"0","3":"TRUE","_rn_":"1227"},{"1":"tracemem","2":"0","3":"TRUE","_rn_":"1242"},{"1":"trigamma","2":"0","3":"TRUE","_rn_":"1247"},{"1":"trunc","2":"0","3":"TRUE","_rn_":"1249"},{"1":"unclass","2":"0","3":"TRUE","_rn_":"1258"},{"1":"untracemem","2":"0","3":"TRUE","_rn_":"1282"},{"1":"UseMethod","2":"0","3":"TRUE","_rn_":"1286"},{"1":"while","2":"0","3":"TRUE","_rn_":"1302"},{"1":"xtfrm","2":"0","3":"TRUE","_rn_":"1319"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["args"],"name":[2],"type":["int"],"align":["right"]},{"label":["prim"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"-","2":"0","3":"TRUE","_rn_":"1"},{"1":":","2":"0","3":"TRUE","_rn_":"4"},{"1":"::","2":"0","3":"TRUE","_rn_":"5"},{"1":":::","2":"0","3":"TRUE","_rn_":"6"},{"1":"!","2":"0","3":"TRUE","_rn_":"7"},{"1":"!=","2":"0","3":"TRUE","_rn_":"10"},{"1":"...elt","2":"0","3":"TRUE","_rn_":"13"},{"1":"...length","2":"0","3":"TRUE","_rn_":"14"},{"1":"...names","2":"0","3":"TRUE","_rn_":"15"},{"1":".C","2":"0","3":"TRUE","_rn_":"20"},{"1":".cache_class","2":"0","3":"TRUE","_rn_":"21"},{"1":".Call","2":"0","3":"TRUE","_rn_":"22"},{"1":".Call.graphics","2":"0","3":"TRUE","_rn_":"23"},{"1":".class2","2":"0","3":"TRUE","_rn_":"25"},{"1":".External","2":"0","3":"TRUE","_rn_":"42"},{"1":".External.graphics","2":"0","3":"TRUE","_rn_":"43"},{"1":".External2","2":"0","3":"TRUE","_rn_":"44"},{"1":".First.sys","2":"0","3":"FALSE","_rn_":"45"},{"1":".Fortran","2":"0","3":"TRUE","_rn_":"48"},{"1":".Internal","2":"0","3":"TRUE","_rn_":"56"},{"1":".isMethodsDispatchOn","2":"0","3":"TRUE","_rn_":"57"},{"1":".NotYetImplemented","2":"0","3":"FALSE","_rn_":"68"},{"1":".OptRequireMethods","2":"0","3":"FALSE","_rn_":"70"},{"1":".Primitive","2":"0","3":"TRUE","_rn_":"76"},{"1":".primTrace","2":"0","3":"TRUE","_rn_":"77"},{"1":".primUntrace","2":"0","3":"TRUE","_rn_":"78"},{"1":".standard_regexps","2":"0","3":"FALSE","_rn_":"89"},{"1":".subset","2":"0","3":"TRUE","_rn_":"90"},{"1":".subset2","2":"0","3":"TRUE","_rn_":"91"},{"1":".tryResumeInterrupt","2":"0","3":"FALSE","_rn_":"94"},{"1":"(","2":"0","3":"TRUE","_rn_":"96"},{"1":"[","2":"0","3":"TRUE","_rn_":"97"},{"1":"[[","2":"0","3":"TRUE","_rn_":"115"},{"1":"[[<-","2":"0","3":"TRUE","_rn_":"122"},{"1":"[<-","2":"0","3":"TRUE","_rn_":"127"},{"1":"{","2":"0","3":"TRUE","_rn_":"135"},{"1":"@","2":"0","3":"TRUE","_rn_":"136"},{"1":"@<-","2":"0","3":"TRUE","_rn_":"137"},{"1":"*","2":"0","3":"TRUE","_rn_":"138"},{"1":"/","2":"0","3":"TRUE","_rn_":"140"},{"1":"&","2":"0","3":"TRUE","_rn_":"142"},{"1":"&&","2":"0","3":"TRUE","_rn_":"145"},{"1":"%*%","2":"0","3":"TRUE","_rn_":"146"},{"1":"%/%","2":"0","3":"TRUE","_rn_":"147"},{"1":"%%","2":"0","3":"TRUE","_rn_":"148"},{"1":"^","2":"0","3":"TRUE","_rn_":"152"},{"1":"+","2":"0","3":"TRUE","_rn_":"153"},{"1":"<","2":"0","3":"TRUE","_rn_":"156"},{"1":"<-","2":"0","3":"TRUE","_rn_":"157"},{"1":"<<-","2":"0","3":"TRUE","_rn_":"158"},{"1":"<=","2":"0","3":"TRUE","_rn_":"159"},{"1":"=","2":"0","3":"TRUE","_rn_":"160"},{"1":"==","2":"0","3":"TRUE","_rn_":"161"},{"1":">","2":"0","3":"TRUE","_rn_":"162"},{"1":">=","2":"0","3":"TRUE","_rn_":"163"},{"1":"|","2":"0","3":"TRUE","_rn_":"164"},{"1":"||","2":"0","3":"TRUE","_rn_":"167"},{"1":"~","2":"0","3":"TRUE","_rn_":"168"},{"1":"$","2":"0","3":"TRUE","_rn_":"169"},{"1":"$<-","2":"0","3":"TRUE","_rn_":"172"},{"1":"abs","2":"0","3":"TRUE","_rn_":"176"},{"1":"acos","2":"0","3":"TRUE","_rn_":"177"},{"1":"acosh","2":"0","3":"TRUE","_rn_":"178"},{"1":"all","2":"0","3":"TRUE","_rn_":"185"},{"1":"any","2":"0","3":"TRUE","_rn_":"202"},{"1":"anyNA","2":"0","3":"TRUE","_rn_":"208"},{"1":"Arg","2":"0","3":"TRUE","_rn_":"217"},{"1":"as.call","2":"0","3":"TRUE","_rn_":"224"},{"1":"as.character","2":"0","3":"TRUE","_rn_":"225"},{"1":"as.complex","2":"0","3":"TRUE","_rn_":"236"},{"1":"as.double","2":"0","3":"TRUE","_rn_":"270"},{"1":"as.environment","2":"0","3":"TRUE","_rn_":"273"},{"1":"as.integer","2":"0","3":"TRUE","_rn_":"280"},{"1":"as.logical","2":"0","3":"TRUE","_rn_":"292"},{"1":"as.numeric","2":"0","3":"TRUE","_rn_":"302"},{"1":"as.raw","2":"0","3":"TRUE","_rn_":"321"},{"1":"asin","2":"0","3":"TRUE","_rn_":"331"},{"1":"asinh","2":"0","3":"TRUE","_rn_":"332"},{"1":"atan","2":"0","3":"TRUE","_rn_":"338"},{"1":"atanh","2":"0","3":"TRUE","_rn_":"340"},{"1":"attr","2":"0","3":"TRUE","_rn_":"343"},{"1":"attr<-","2":"0","3":"TRUE","_rn_":"345"},{"1":"attributes","2":"0","3":"TRUE","_rn_":"346"},{"1":"attributes<-","2":"0","3":"TRUE","_rn_":"347"},{"1":"baseenv","2":"0","3":"TRUE","_rn_":"352"},{"1":"break","2":"0","3":"TRUE","_rn_":"371"},{"1":"browser","2":"0","3":"TRUE","_rn_":"372"},{"1":"c","2":"0","3":"TRUE","_rn_":"381"},{"1":"call","2":"0","3":"TRUE","_rn_":"390"},{"1":"ceiling","2":"0","3":"TRUE","_rn_":"397"},{"1":"class","2":"0","3":"TRUE","_rn_":"410"},{"1":"class<-","2":"0","3":"TRUE","_rn_":"411"},{"1":"closeAllConnections","2":"0","3":"FALSE","_rn_":"417"},{"1":"Conj","2":"0","3":"TRUE","_rn_":"434"},{"1":"contributors","2":"0","3":"FALSE","_rn_":"435"},{"1":"cos","2":"0","3":"TRUE","_rn_":"436"},{"1":"cosh","2":"0","3":"TRUE","_rn_":"437"},{"1":"cospi","2":"0","3":"TRUE","_rn_":"438"},{"1":"Cstack_info","2":"0","3":"FALSE","_rn_":"440"},{"1":"cummax","2":"0","3":"TRUE","_rn_":"441"},{"1":"cummin","2":"0","3":"TRUE","_rn_":"442"},{"1":"cumprod","2":"0","3":"TRUE","_rn_":"443"},{"1":"cumsum","2":"0","3":"TRUE","_rn_":"444"},{"1":"date","2":"0","3":"FALSE","_rn_":"453"},{"1":"default.stringsAsFactors","2":"0","3":"FALSE","_rn_":"457"},{"1":"digamma","2":"0","3":"TRUE","_rn_":"474"},{"1":"dim","2":"0","3":"TRUE","_rn_":"475"},{"1":"dim<-","2":"0","3":"TRUE","_rn_":"477"},{"1":"dimnames","2":"0","3":"TRUE","_rn_":"478"},{"1":"dimnames<-","2":"0","3":"TRUE","_rn_":"480"},{"1":"emptyenv","2":"0","3":"TRUE","_rn_":"509"},{"1":"enc2native","2":"0","3":"TRUE","_rn_":"510"},{"1":"enc2utf8","2":"0","3":"TRUE","_rn_":"511"},{"1":"environment<-","2":"0","3":"TRUE","_rn_":"519"},{"1":"exp","2":"0","3":"TRUE","_rn_":"527"},{"1":"expm1","2":"0","3":"TRUE","_rn_":"529"},{"1":"expression","2":"0","3":"TRUE","_rn_":"530"},{"1":"extSoftVersion","2":"0","3":"FALSE","_rn_":"531"},{"1":"floor","2":"0","3":"TRUE","_rn_":"558"},{"1":"for","2":"0","3":"TRUE","_rn_":"561"},{"1":"forceAndCall","2":"0","3":"TRUE","_rn_":"563"},{"1":"function","2":"0","3":"TRUE","_rn_":"586"},{"1":"gamma","2":"0","3":"TRUE","_rn_":"587"},{"1":"gc.time","2":"0","3":"TRUE","_rn_":"589"},{"1":"getAllConnections","2":"0","3":"FALSE","_rn_":"595"},{"1":"geterrmessage","2":"0","3":"FALSE","_rn_":"603"},{"1":"getLoadedDLLs","2":"0","3":"FALSE","_rn_":"606"},{"1":"getRversion","2":"0","3":"FALSE","_rn_":"616"},{"1":"getTaskCallbackNames","2":"0","3":"FALSE","_rn_":"618"},{"1":"getwd","2":"0","3":"FALSE","_rn_":"621"},{"1":"globalenv","2":"0","3":"TRUE","_rn_":"624"},{"1":"iconvlist","2":"0","3":"FALSE","_rn_":"636"},{"1":"if","2":"0","3":"TRUE","_rn_":"641"},{"1":"Im","2":"0","3":"TRUE","_rn_":"643"},{"1":"interactive","2":"0","3":"TRUE","_rn_":"649"},{"1":"invisible","2":"0","3":"TRUE","_rn_":"654"},{"1":"is.array","2":"0","3":"TRUE","_rn_":"657"},{"1":"is.atomic","2":"0","3":"TRUE","_rn_":"658"},{"1":"is.call","2":"0","3":"TRUE","_rn_":"659"},{"1":"is.character","2":"0","3":"TRUE","_rn_":"660"},{"1":"is.complex","2":"0","3":"TRUE","_rn_":"661"},{"1":"is.double","2":"0","3":"TRUE","_rn_":"663"},{"1":"is.environment","2":"0","3":"TRUE","_rn_":"665"},{"1":"is.expression","2":"0","3":"TRUE","_rn_":"666"},{"1":"is.finite","2":"0","3":"TRUE","_rn_":"668"},{"1":"is.function","2":"0","3":"TRUE","_rn_":"670"},{"1":"is.infinite","2":"0","3":"TRUE","_rn_":"671"},{"1":"is.integer","2":"0","3":"TRUE","_rn_":"673"},{"1":"is.language","2":"0","3":"TRUE","_rn_":"674"},{"1":"is.list","2":"0","3":"TRUE","_rn_":"675"},{"1":"is.logical","2":"0","3":"TRUE","_rn_":"677"},{"1":"is.matrix","2":"0","3":"TRUE","_rn_":"678"},{"1":"is.na","2":"0","3":"TRUE","_rn_":"679"},{"1":"is.name","2":"0","3":"TRUE","_rn_":"687"},{"1":"is.nan","2":"0","3":"TRUE","_rn_":"688"},{"1":"is.null","2":"0","3":"TRUE","_rn_":"690"},{"1":"is.numeric","2":"0","3":"TRUE","_rn_":"691"},{"1":"is.object","2":"0","3":"TRUE","_rn_":"696"},{"1":"is.pairlist","2":"0","3":"TRUE","_rn_":"699"},{"1":"is.R","2":"0","3":"FALSE","_rn_":"702"},{"1":"is.raw","2":"0","3":"TRUE","_rn_":"703"},{"1":"is.recursive","2":"0","3":"TRUE","_rn_":"704"},{"1":"is.single","2":"0","3":"TRUE","_rn_":"705"},{"1":"is.symbol","2":"0","3":"TRUE","_rn_":"706"},{"1":"isS4","2":"0","3":"TRUE","_rn_":"722"},{"1":"l10n_info","2":"0","3":"FALSE","_rn_":"736"},{"1":"La_library","2":"0","3":"FALSE","_rn_":"737"},{"1":"La_version","2":"0","3":"FALSE","_rn_":"738"},{"1":"lazyLoadDBfetch","2":"0","3":"TRUE","_rn_":"745"},{"1":"length","2":"0","3":"TRUE","_rn_":"748"},{"1":"length<-","2":"0","3":"TRUE","_rn_":"750"},{"1":"levels<-","2":"0","3":"TRUE","_rn_":"759"},{"1":"lgamma","2":"0","3":"TRUE","_rn_":"762"},{"1":"libcurlVersion","2":"0","3":"FALSE","_rn_":"763"},{"1":"licence","2":"0","3":"FALSE","_rn_":"767"},{"1":"license","2":"0","3":"FALSE","_rn_":"768"},{"1":"list","2":"0","3":"TRUE","_rn_":"769"},{"1":"loadedNamespaces","2":"0","3":"FALSE","_rn_":"775"},{"1":"loadingNamespaceInfo","2":"0","3":"FALSE","_rn_":"776"},{"1":"log","2":"0","3":"TRUE","_rn_":"781"},{"1":"log10","2":"0","3":"TRUE","_rn_":"782"},{"1":"log1p","2":"0","3":"TRUE","_rn_":"783"},{"1":"log2","2":"0","3":"TRUE","_rn_":"784"},{"1":"max","2":"0","3":"TRUE","_rn_":"807"},{"1":"memory.profile","2":"0","3":"FALSE","_rn_":"819"},{"1":"min","2":"0","3":"TRUE","_rn_":"825"},{"1":"missing","2":"0","3":"TRUE","_rn_":"826"},{"1":"Mod","2":"0","3":"TRUE","_rn_":"827"},{"1":"names","2":"0","3":"TRUE","_rn_":"838"},{"1":"names<-","2":"0","3":"TRUE","_rn_":"840"},{"1":"nargs","2":"0","3":"TRUE","_rn_":"847"},{"1":"next","2":"0","3":"TRUE","_rn_":"853"},{"1":"nullfile","2":"0","3":"FALSE","_rn_":"862"},{"1":"nzchar","2":"0","3":"TRUE","_rn_":"867"},{"1":"oldClass","2":"0","3":"TRUE","_rn_":"869"},{"1":"oldClass<-","2":"0","3":"TRUE","_rn_":"870"},{"1":"on.exit","2":"0","3":"TRUE","_rn_":"872"},{"1":"pcre_config","2":"0","3":"FALSE","_rn_":"905"},{"1":"pos.to.env","2":"0","3":"TRUE","_rn_":"914"},{"1":"proc.time","2":"0","3":"TRUE","_rn_":"957"},{"1":"prod","2":"0","3":"TRUE","_rn_":"958"},{"1":"quote","2":"0","3":"TRUE","_rn_":"981"},{"1":"R_compiled_by","2":"0","3":"FALSE","_rn_":"982"},{"1":"R.Version","2":"0","3":"FALSE","_rn_":"985"},{"1":"range","2":"0","3":"TRUE","_rn_":"986"},{"1":"Re","2":"0","3":"TRUE","_rn_":"999"},{"1":"rep","2":"0","3":"TRUE","_rn_":"1018"},{"1":"repeat","2":"0","3":"TRUE","_rn_":"1027"},{"1":"retracemem","2":"0","3":"TRUE","_rn_":"1034"},{"1":"return","2":"0","3":"TRUE","_rn_":"1035"},{"1":"round","2":"0","3":"TRUE","_rn_":"1043"},{"1":"search","2":"0","3":"FALSE","_rn_":"1069"},{"1":"searchpaths","2":"0","3":"FALSE","_rn_":"1070"},{"1":"seq_along","2":"0","3":"TRUE","_rn_":"1074"},{"1":"seq_len","2":"0","3":"TRUE","_rn_":"1075"},{"1":"seq.int","2":"0","3":"TRUE","_rn_":"1078"},{"1":"sign","2":"0","3":"TRUE","_rn_":"1094"},{"1":"signif","2":"0","3":"TRUE","_rn_":"1096"},{"1":"sin","2":"0","3":"TRUE","_rn_":"1102"},{"1":"sinh","2":"0","3":"TRUE","_rn_":"1104"},{"1":"sinpi","2":"0","3":"TRUE","_rn_":"1107"},{"1":"sqrt","2":"0","3":"TRUE","_rn_":"1131"},{"1":"standardGeneric","2":"0","3":"TRUE","_rn_":"1137"},{"1":"stderr","2":"0","3":"FALSE","_rn_":"1139"},{"1":"stdin","2":"0","3":"FALSE","_rn_":"1140"},{"1":"stdout","2":"0","3":"FALSE","_rn_":"1141"},{"1":"storage.mode<-","2":"0","3":"TRUE","_rn_":"1145"},{"1":"substitute","2":"0","3":"TRUE","_rn_":"1161"},{"1":"sum","2":"0","3":"TRUE","_rn_":"1166"},{"1":"switch","2":"0","3":"TRUE","_rn_":"1195"},{"1":"sys.calls","2":"0","3":"FALSE","_rn_":"1197"},{"1":"Sys.Date","2":"0","3":"FALSE","_rn_":"1199"},{"1":"sys.frames","2":"0","3":"FALSE","_rn_":"1201"},{"1":"Sys.getpid","2":"0","3":"FALSE","_rn_":"1205"},{"1":"Sys.info","2":"0","3":"FALSE","_rn_":"1207"},{"1":"Sys.localeconv","2":"0","3":"FALSE","_rn_":"1209"},{"1":"sys.nframe","2":"0","3":"FALSE","_rn_":"1210"},{"1":"sys.on.exit","2":"0","3":"FALSE","_rn_":"1211"},{"1":"sys.parents","2":"0","3":"FALSE","_rn_":"1213"},{"1":"sys.status","2":"0","3":"FALSE","_rn_":"1222"},{"1":"Sys.time","2":"0","3":"FALSE","_rn_":"1223"},{"1":"tan","2":"0","3":"TRUE","_rn_":"1237"},{"1":"tanh","2":"0","3":"TRUE","_rn_":"1238"},{"1":"tanpi","2":"0","3":"TRUE","_rn_":"1239"},{"1":"tracemem","2":"0","3":"TRUE","_rn_":"1254"},{"1":"trigamma","2":"0","3":"TRUE","_rn_":"1259"},{"1":"trunc","2":"0","3":"TRUE","_rn_":"1261"},{"1":"unCfillPOSIXlt","2":"0","3":"TRUE","_rn_":"1270"},{"1":"unclass","2":"0","3":"TRUE","_rn_":"1271"},{"1":"untracemem","2":"0","3":"TRUE","_rn_":"1295"},{"1":"UseMethod","2":"0","3":"TRUE","_rn_":"1299"},{"1":"while","2":"0","3":"TRUE","_rn_":"1315"},{"1":"xtfrm","2":"0","3":"TRUE","_rn_":"1332"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Answers:</p>
@@ -2460,7 +2469,7 @@ first entries.</p>
 functions with no arguments:</li>
 </ol>
 <pre class="r"><code>sum(n_args == 0)</code></pre>
-<pre><code>#&gt; [1] 251</code></pre>
+<pre><code>#&gt; [1] 253</code></pre>
 <p>However, this over counts because <code>formals()</code> returns
 <code>NULL</code> for primitive functions, and <code>length(NULL)</code>
 is 0. To fix this, we can first remove the primitive functions:</p>
@@ -2470,7 +2479,7 @@ is 0. To fix this, we can first remove the primitive functions:</p>
   map_int(length)
 
 sum(n_args2 == 0)</code></pre>
-<pre><code>#&gt; [1] 47</code></pre>
+<pre><code>#&gt; [1] 48</code></pre>
 <p>Indeed, most of the functions with no arguments are actually
 primitive functions.</p>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -2480,7 +2489,7 @@ primitive functions.</p>
 </ol>
 <pre class="r"><code>funs &lt;- Filter(is.primitive, objs)
 length(funs)</code></pre>
-<pre><code>#&gt; [1] 204</code></pre>
+<pre><code>#&gt; [1] 205</code></pre>
 <hr />
 <ol start="6" style="list-style-type: decimal">
 <li>What are the three important components of a function?</li>
@@ -2721,7 +2730,7 @@ two unique elements before <code>xlim</code> is computed.</p>
   print(x)
 }
 show_time()</code></pre>
-<pre><code>#&gt; [1] &quot;2023-03-11 15:16:07 PST&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;2023-07-22 18:10:59 CDT&quot;</code></pre>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is
 evaluated. This is a confusing use of lazy evaluation.</p>
 <p>AR Solutions: Before <code>show_time()</code> accesses <code>x</code>
@@ -3063,7 +3072,7 @@ cor(m = &quot;k&quot;, y = y, u = &quot;p&quot;, x = x)</code></pre>
 <pre class="r"><code>x &lt;- sample(c(1:10, NA), 20, replace = TRUE)
 y &lt;- runif(20)
 cor(x, y, use = &quot;pairwise.complete.obs&quot;, method = &quot;kendall&quot;)</code></pre>
-<pre><code>#&gt; [1] 0.3336113</code></pre>
+<pre><code>#&gt; [1] 0.1030985</code></pre>
 <p>AR Solutions: None of these functions provides a <code>...</code>
 argument. Therefore, the function arguments are first matched exactly,
 then via partial matching and finally by position. This leads us to the
@@ -3121,7 +3130,7 @@ vector.</li>
 v &lt;- 1:20
 modrand(v) &lt;- NA
 v</code></pre>
-<pre><code>#&gt;  [1]  1  2  3  4  5  6 NA  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 NA 20</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: Let’s define <code>random&lt;-</code> like this:</p>
 <pre class="r"><code>`random&lt;-` &lt;- function(x, value) {
@@ -3219,12 +3228,12 @@ head(repls, 30)</code></pre>
 #&gt;          &quot;[&lt;-.POSIXct&quot;          &quot;[&lt;-.POSIXlt&quot;                  &quot;@&lt;-&quot;                &quot;%@%&lt;-&quot; 
 #&gt;                     21                     21                     21                     21 
 #&gt;                   &quot;&lt;-&quot;                  &quot;&lt;&lt;-&quot;                  &quot;$&lt;-&quot;       &quot;$&lt;-.data.frame&quot; 
+#&gt;                     21                     19                     21                     21 
+#&gt;          &quot;$&lt;-.POSIXlt&quot;                 &quot;as&lt;-&quot;               &quot;attr&lt;-&quot;         &quot;attributes&lt;-&quot; 
 #&gt;                     19                     21                     21                     19 
-#&gt;                 &quot;as&lt;-&quot;               &quot;attr&lt;-&quot;         &quot;attributes&lt;-&quot;               &quot;body&lt;-&quot; 
-#&gt;                     21                     21                     19                     21 
-#&gt;               &quot;body&lt;-&quot;              &quot;class&lt;-&quot;             &quot;coerce&lt;-&quot;           &quot;colnames&lt;-&quot; 
-#&gt;                     21                      7 
-#&gt;            &quot;comment&lt;-&quot;          &quot;contrasts&lt;-&quot;</code></pre>
+#&gt;               &quot;body&lt;-&quot;               &quot;body&lt;-&quot;              &quot;class&lt;-&quot;             &quot;coerce&lt;-&quot; 
+#&gt;                     21                     21 
+#&gt;           &quot;colnames&lt;-&quot;            &quot;comment&lt;-&quot;</code></pre>
 <p>To restrict <code>repl</code> to names of replacement functions from
 the <code>{base}</code> package, we select only matches containing the
 relevant position on the search path.</p>
@@ -3243,35 +3252,37 @@ repls_base</code></pre>
 #&gt;                        21                        21                        21 
 #&gt;                      &quot;&lt;-&quot;                     &quot;&lt;&lt;-&quot;                     &quot;$&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;          &quot;$&lt;-.data.frame&quot;                  &quot;attr&lt;-&quot;            &quot;attributes&lt;-&quot; 
+#&gt;          &quot;$&lt;-.data.frame&quot;             &quot;$&lt;-.POSIXlt&quot;                  &quot;attr&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;                  &quot;body&lt;-&quot;                 &quot;class&lt;-&quot;              &quot;colnames&lt;-&quot; 
+#&gt;            &quot;attributes&lt;-&quot;                  &quot;body&lt;-&quot;                 &quot;class&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;               &quot;comment&lt;-&quot;                  &quot;diag&lt;-&quot;                   &quot;dim&lt;-&quot; 
+#&gt;              &quot;colnames&lt;-&quot;               &quot;comment&lt;-&quot;                  &quot;diag&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;              &quot;dimnames&lt;-&quot;   &quot;dimnames&lt;-.data.frame&quot;              &quot;Encoding&lt;-&quot; 
+#&gt;                   &quot;dim&lt;-&quot;              &quot;dimnames&lt;-&quot;   &quot;dimnames&lt;-.data.frame&quot; 
 #&gt;                        21                        21                        21 
-#&gt;           &quot;environment&lt;-&quot;               &quot;formals&lt;-&quot;                 &quot;is.na&lt;-&quot; 
+#&gt;              &quot;Encoding&lt;-&quot;           &quot;environment&lt;-&quot;               &quot;formals&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;         &quot;is.na&lt;-.default&quot;          &quot;is.na&lt;-.factor&quot; &quot;is.na&lt;-.numeric_version&quot; 
+#&gt;                 &quot;is.na&lt;-&quot;         &quot;is.na&lt;-.default&quot;          &quot;is.na&lt;-.factor&quot; 
 #&gt;                        21                        21                        21 
-#&gt;                &quot;length&lt;-&quot;           &quot;length&lt;-.Date&quot;       &quot;length&lt;-.difftime&quot; 
+#&gt; &quot;is.na&lt;-.numeric_version&quot;                &quot;length&lt;-&quot;           &quot;length&lt;-.Date&quot; 
 #&gt;                        21                        21                        21 
-#&gt;         &quot;length&lt;-.factor&quot;        &quot;length&lt;-.POSIXct&quot;        &quot;length&lt;-.POSIXlt&quot; 
+#&gt;       &quot;length&lt;-.difftime&quot;         &quot;length&lt;-.factor&quot;        &quot;length&lt;-.POSIXct&quot; 
 #&gt;                        21                        21                        21 
-#&gt;                &quot;levels&lt;-&quot;         &quot;levels&lt;-.factor&quot;                  &quot;mode&lt;-&quot; 
+#&gt;        &quot;length&lt;-.POSIXlt&quot;                &quot;levels&lt;-&quot;         &quot;levels&lt;-.factor&quot; 
 #&gt;                        21                        21                        21 
-#&gt;        &quot;mostattributes&lt;-&quot;                 &quot;names&lt;-&quot;         &quot;names&lt;-.POSIXlt&quot; 
+#&gt;                  &quot;mode&lt;-&quot;        &quot;mostattributes&lt;-&quot;                 &quot;names&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;              &quot;oldClass&lt;-&quot;            &quot;parent.env&lt;-&quot;            &quot;regmatches&lt;-&quot; 
+#&gt;         &quot;names&lt;-.POSIXlt&quot;              &quot;oldClass&lt;-&quot;            &quot;parent.env&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;             &quot;row.names&lt;-&quot;  &quot;row.names&lt;-.data.frame&quot;     &quot;row.names&lt;-.default&quot; 
+#&gt;            &quot;regmatches&lt;-&quot;             &quot;row.names&lt;-&quot;  &quot;row.names&lt;-.data.frame&quot; 
 #&gt;                        21                        21                        21 
-#&gt;              &quot;rownames&lt;-&quot;                 &quot;split&lt;-&quot;      &quot;split&lt;-.data.frame&quot; 
+#&gt;     &quot;row.names&lt;-.default&quot;              &quot;rownames&lt;-&quot;                 &quot;split&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;         &quot;split&lt;-.default&quot;          &quot;storage.mode&lt;-&quot;                &quot;substr&lt;-&quot; 
+#&gt;      &quot;split&lt;-.data.frame&quot;         &quot;split&lt;-.default&quot;          &quot;storage.mode&lt;-&quot; 
 #&gt;                        21                        21                        21 
-#&gt;             &quot;substring&lt;-&quot;                 &quot;units&lt;-&quot;        &quot;units&lt;-.difftime&quot;</code></pre>
+#&gt;                &quot;substr&lt;-&quot;             &quot;substring&lt;-&quot;                 &quot;units&lt;-&quot; 
+#&gt;                        21 
+#&gt;        &quot;units&lt;-.difftime&quot;</code></pre>
 <p>To find out which of these functions are primitives, we first search
 for these functions via <code>mget()</code> and then subset the result
 using <code>Filter()</code> and <code>is.primitive()</code>.</p>
@@ -3332,17 +3343,17 @@ conventions from mathematics.</li>
 
 # taken from docs examples
 (x &lt;- c(sort(sample(1:20, 9)), NA))</code></pre>
-<pre><code>#&gt;  [1]  3  4  5  6 11 14 16 19 20 NA</code></pre>
+<pre><code>#&gt;  [1]  3  5  7  9 11 12 13 17 19 NA</code></pre>
 <pre class="r"><code>(y &lt;- c(sort(sample(3:23, 7)), NA))</code></pre>
-<pre><code>#&gt; [1]  3 11 14 17 20 21 23 NA</code></pre>
+<pre><code>#&gt; [1]  3  4  5  6 15 20 23 NA</code></pre>
 <pre class="r"><code>x %u% y</code></pre>
-<pre><code>#&gt;  [1]  3  4  5  6 11 14 16 19 20 NA 17 21 23</code></pre>
+<pre><code>#&gt;  [1]  3  5  7  9 11 12 13 17 19 NA  4  6 15 20 23</code></pre>
 <pre class="r"><code>x %n% y</code></pre>
-<pre><code>#&gt; [1]  3 11 14 20 NA</code></pre>
+<pre><code>#&gt; [1]  3  5 NA</code></pre>
 <pre class="r"><code>x %s% y</code></pre>
-<pre><code>#&gt; [1]  4  5  6 16 19</code></pre>
+<pre><code>#&gt; [1]  7  9 11 12 13 17 19</code></pre>
 <pre class="r"><code>y %s% x</code></pre>
-<pre><code>#&gt; [1] 17 21 23</code></pre>
+<pre><code>#&gt; [1]  4  6 15 20 23</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: These infix operators could be defined in the following
 way. (<code>%/%</code> is chosen instead of <code>%\%</code>, because
@@ -3421,14 +3432,14 @@ e1$loop &lt;- e1
 
 # Print the environment
 env_print(e1)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7f7a9fb51f90&gt;
-#&gt; Parent: &lt;environment: 0x7f7aafec0420&gt;
+<pre><code>#&gt; &lt;environment: 0x7fdf6d2bcc28&gt;
+#&gt; Parent: &lt;environment: 0x7fdf99de3d38&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
 <pre class="r"><code># Verify that it contains itself
 lobstr::ref(e1)</code></pre>
-<pre><code>#&gt; █ [1:0x7f7a9fb51f90] &lt;env&gt; 
-#&gt; └─loop = [1:0x7f7a9fb51f90]</code></pre>
+<pre><code>#&gt; █ [1:0x7fdf6d2bcc28] &lt;env&gt; 
+#&gt; └─loop = [1:0x7fdf6d2bcc28]</code></pre>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>Create a pair of environments as illustrated by this picture.</li>
@@ -3448,13 +3459,13 @@ e1$loop &lt;- e2
 e2$dedoop &lt;- e1
 
 lobstr::ref(e1)</code></pre>
-<pre><code>#&gt; █ [1:0x7f7af21f7a78] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x7f7a9cce4648] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x7f7af21f7a78]</code></pre>
+<pre><code>#&gt; █ [1:0x7fdfc153dd40] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x7fdfc14957d8] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x7fdfc153dd40]</code></pre>
 <pre class="r"><code>lobstr::ref(e2)</code></pre>
-<pre><code>#&gt; █ [1:0x7f7a9cce4648] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x7f7af21f7a78] &lt;env&gt; 
-#&gt;            └─loop = [1:0x7f7a9cce4648]</code></pre>
+<pre><code>#&gt; █ [1:0x7fdfc14957d8] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x7fdfc153dd40] &lt;env&gt; 
+#&gt;            └─loop = [1:0x7fdfc14957d8]</code></pre>
 <hr />
 <ol start="4" style="list-style-type: decimal">
 <li>Explain why <code>e[[1]]</code> and <code>e[c("a", "b")]</code>
@@ -3486,8 +3497,8 @@ env_poke_new(e_test, &quot;d&quot;, &quot;success&quot;)
 try(env_poke_new(e_test, &quot;a&quot;, &quot;fail&quot;))</code></pre>
 <pre><code>#&gt; Error in env_poke_new(e_test, &quot;a&quot;, &quot;fail&quot;) : nm &#39;a&#39; already bound</code></pre>
 <pre class="r"><code>env_print(e_test)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7f7a9cce2608&gt;
-#&gt; Parent: &lt;environment: 0x7f7aafec0420&gt;
+<pre><code>#&gt; &lt;environment: 0x7fdf9eee3408&gt;
+#&gt; Parent: &lt;environment: 0x7fdf99de3d38&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
 #&gt; • b: &lt;dbl&gt;
@@ -3583,7 +3594,7 @@ x &lt;- 5
 try(where(&quot;yyy&quot;))</code></pre>
 <pre><code>#&gt; Error : Can&#39;t find yyy</code></pre>
 <pre class="r"><code>where(&quot;x&quot;)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7f7aafec0420&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7fdf99de3d38&gt;</code></pre>
 <pre class="r"><code>where(&quot;mean&quot;)</code></pre>
 <pre><code>#&gt; &lt;environment: namespace:base&gt;</code></pre>
 <pre class="r"><code>all_where &lt;- function(name, env = caller_env(), found = list()) {
@@ -3601,16 +3612,16 @@ try(where(&quot;yyy&quot;))</code></pre>
 
 all_where(&quot;x&quot;)</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7f7aafec0420&gt;</code></pre>
+#&gt; &lt;environment: 0x7fdf99de3d38&gt;</code></pre>
 <pre class="r"><code>local({
   x &lt;- 10
   all_where(&quot;x&quot;)
 })</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7f7a9f729d30&gt;
+#&gt; &lt;environment: 0x7fdf69199500&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x7f7aafec0420&gt;</code></pre>
+#&gt; &lt;environment: 0x7fdf99de3d38&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: <code>where()</code> searches (recursively) for a given
 name within a given environment and its ancestors. If
@@ -3644,10 +3655,10 @@ e1b &lt;- env(e1a, b = 10, c = 11)
 e1c &lt;- env(e1b, a = 12, d = 13)
 where2(&quot;a&quot;, e1c)</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x7f7a9db0f6a0&gt;
+#&gt; &lt;environment: 0x7fdf9b574750&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x7f7a9c7e3c78&gt;</code></pre>
+#&gt; &lt;environment: 0x7fdf9dc91aa8&gt;</code></pre>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>Write a function called <code>fget()</code> that finds only function
@@ -3680,7 +3691,7 @@ try(fget(&quot;x&quot;))</code></pre>
 <pre class="r"><code>try(fget(&quot;print&quot;, inherits = FALSE))</code></pre>
 <pre><code>#&gt; Error : Can&#39;t find print</code></pre>
 <pre class="r"><code>fget(&quot;all_where&quot;, inherits = FALSE)</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7f7aafec0420&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7fdf99de3d38&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: We follow a similar approach to the previous exercise.
 This time we additionally check if the found object is a function and
@@ -3708,7 +3719,7 @@ mean &lt;- 10
 fget(&quot;mean&quot;, inherits = TRUE)</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod(&quot;mean&quot;)
-#&gt; &lt;bytecode: 0x7f7af268b1b0&gt;
+#&gt; &lt;bytecode: 0x7fdfc262bf28&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <hr />
 </div>
@@ -3774,11 +3785,11 @@ e_str(print)</code></pre>
 <pre class="r"><code>e_str(fget)</code></pre>
 <pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)  
 #&gt;  - attr(*, &quot;srcref&quot;)= &#39;srcref&#39; int [1:8] 1 9 17 1 9 1 1 17
-#&gt;   ..- attr(*, &quot;srcfile&quot;)=Classes &#39;srcfilecopy&#39;, &#39;srcfile&#39; &lt;environment: 0x7f7aa8d0b8c0&gt;</code></pre>
+#&gt;   ..- attr(*, &quot;srcfile&quot;)=Classes &#39;srcfilecopy&#39;, &#39;srcfile&#39; &lt;environment: 0x7fdf9e765468&gt;</code></pre>
 <pre><code>#&gt; fn_env():</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7f7aafec0420&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7fdf99de3d38&gt;</code></pre>
 <pre><code>#&gt; environment():</code></pre>
-<pre><code>#&gt; &lt;environment: 0x7f7aafec0420&gt;</code></pre>
+<pre><code>#&gt; &lt;environment: 0x7fdf99de3d38&gt;</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: To solve this problem, we need to write a function that
 takes the name of a function and looks for that function returning both
@@ -3941,12 +3952,12 @@ file.create(tmp)</code></pre>
 <pre><code>#&gt; [1] TRUE</code></pre>
 <pre class="r"><code>file.remove(tmp)</code></pre>
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file
-#&gt; &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmprHmPpn/filec8f44b95551a&#39;, reason &#39;No such file
+#&gt; &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//Rtmp8wEnKQ/file14a7f79eec65e&#39;, reason &#39;No such file
 #&gt; or directory&#39;</code></pre>
 <pre><code>#&gt; [1] FALSE</code></pre>
 <pre class="r"><code>try(safe_file_remove(tmp))</code></pre>
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmprHmPpn/filec8f44b95551a&#39; does not exist</code></pre>
+#&gt;   file &#39;/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//Rtmp8wEnKQ/file14a7f79eec65e&#39; does not exist</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: We prefer the following solution for its clarity and
 simplicity:</p>
@@ -3996,7 +4007,8 @@ objects? Read the help for <code>?abort</code> to learn more.</li>
 #&gt; Error:
 #&gt; ! An error
 #&gt; ---
-#&gt; Backtrace:</code></pre>
+#&gt; Backtrace:
+#&gt; ▆</code></pre>
 <p>Answer: <code>abort()</code> includes the error message and backtrace
 in the condition object. <code>abort()</code> uses the custom class
 <code>rlang_error</code>.</p>
@@ -4106,7 +4118,7 @@ works.</li>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x7f7af3355f68&gt;
+#&gt; &lt;bytecode: 0x7fdf6c484500&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 <pre class="r"><code>catch_cnd(stop(&quot;error&quot;))</code></pre>
 <pre><code>#&gt; &lt;simpleError in force(expr): error&gt;</code></pre>
@@ -4370,7 +4382,8 @@ error_obj</code></pre>
 #&gt; Error:
 #&gt; ! error
 #&gt; ---
-#&gt; Backtrace:</code></pre>
+#&gt; Backtrace:
+#&gt; ▆</code></pre>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>Compare the following two implementations of
