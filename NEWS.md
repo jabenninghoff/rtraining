@@ -1,3 +1,7 @@
+# rtraining 0.8.18
+
+* Updated Advanced R Workbook (Metaprogramming): add partial solutions for Chapter 20
+
 # rtraining 0.8.17
 
 * Added Advanced R Workbook (Metaprogramming): Workbook for completing quizzes and exercises from the "Object-oriented programming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io)
