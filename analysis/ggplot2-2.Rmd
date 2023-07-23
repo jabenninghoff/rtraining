@@ -16,7 +16,7 @@ Workbook for completing quizzes and exercises from the "Layers" chapters of [ggp
 ```{r setup, message = FALSE, warning = FALSE}
 library(ggplot2)
 library(dplyr)
-library(babynames) # nolint: unused_import_linter. attached for `babynames` data frame.
+library(babynames)
 library(jbplot)
 library(modelr)
 library(maps) # nolint: unused_import_linter. maps is required by map_data().

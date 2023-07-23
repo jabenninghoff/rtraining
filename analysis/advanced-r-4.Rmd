@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 knitr::knit_hooks$set(
   small_mar = function(before, options, envir) {
     if (before) {
-      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+      par(mar = c(4.1, 4.1, 0.5, 0.5))
     }
   }
 )
@@ -172,7 +172,7 @@ AR Solutions: Let us delegate the drawing to the `lobstr` package.
 ```{r}
 lobstr::ast(`x` + `y`)
 lobstr::ast(x ** y) # styler: off
-lobstr::ast(1 -> x) # nolint: assignment_linter.
+lobstr::ast(1 -> x)
 ```
 
 Answer: all expressions are changed to their normal forms. In the first expression, the back ticks denoting symbols are not needed. In the third expression, the assignment operator is changed to the standard form. In the second expression, the operator is changed per this note in the R documentation:
@@ -187,7 +187,7 @@ AR Solutions: ASTs start function calls with the name of the function. This is w
     6.2.1.)
 
 ```{r}
-lobstr::ast(function(x = 1, y = 2) {}) # nolint: brace_linter.
+lobstr::ast(function(x = 1, y = 2) {})
 ```
 
 Answer: the AST includes two of the three parts of the function, the `formals()`, `x` and `y`, the `body()`, represented by `{` and `<inline srcref>`.
@@ -332,8 +332,8 @@ Note that all these calls will generate the same result when evaluated. The key 
 
 ```{r}
 call_standardise(quote(mean(1:10, na.rm = TRUE)))
-call_standardise(quote(mean(n = T, 1:10))) # nolint: T_and_F_symbol_linter.
-call_standardise(quote(mean(x = 1:10, , TRUE))) # nolint: missing_argument_linter.
+call_standardise(quote(mean(n = T, 1:10)))
+call_standardise(quote(mean(x = 1:10, , TRUE)))
 ```
 
 Answer: as noted in the book, "If the function uses `...` it’s not possible to standardise all arguments." `mean()` has a single argument, `x`, and uses `...` for the remaining arguments, although the default S3 method is `mean(x, trim = 0, na.rm = FALSE, ...)`.
@@ -455,7 +455,7 @@ lobstr::ast(`=`(val, sum(10, na.rm = TRUE)))
 AR Solutions: `=` is used both for assignment, and for naming arguments in function calls:
 
 ```{r}
-b = c(c = 1) # nolint: assignment_linter. styler: off
+b = c(c = 1) # styler: off
 ```
 
 So, when we play with `ast()`, we can directly see that the following is not possible:
@@ -469,7 +469,7 @@ We get an error because `b = ` makes R looking for an argument called `b`. Since
 The easiest way around this problem is to wrap this line in `{}`.
 
 ```{r}
-ast({b = c(c = 1)})  # nolint: assignment_linter, brace_linter. styler: off
+ast({b = c(c = 1)})  # styler: off
 ```
 
 When we ignore the braces and compare the trees, we can see that the first `=` is used for assignment and the second `=` is part of the syntax of function calls.
@@ -763,7 +763,7 @@ switch_expr <- function(x, ...) {
 ```
 
 ```{r}
-find_T_call <- function(x) { # nolint: object_name_linter.
+find_T_call <- function(x) {
   if (is_call(x, "T")) {
     x <- as.list(x)[-1]
     purrr::some(x, logical_abbr_rec)
@@ -792,11 +792,11 @@ Now let's test our new `logical_abbr()` function:
 
 ```{r}
 logical_abbr(T(1, 2, 3))
-logical_abbr(T(T, T(3, 4))) # nolint: T_and_F_symbol_linter.
-logical_abbr(T(T)) # nolint: T_and_F_symbol_linter.
+logical_abbr(T(T, T(3, 4)))
+logical_abbr(T(T))
 logical_abbr(T())
 logical_abbr()
-logical_abbr(c(T, T, T)) # nolint: T_and_F_symbol_linter.
+logical_abbr(c(T, T, T))
 ```
 
 Answer: taken from Advanced R solutions, we need to find function calls within the recursive call. The trick is to find and remove the `T` or `F` from the list:
@@ -828,7 +828,7 @@ logical_abbr <- function(x) {
   logical_abbr_rec(enexpr(x))
 }
 
-logical_abbr(T) # TRUE  # nolint: T_and_F_symbol_linter.
+logical_abbr(T) # TRUE
 logical_abbr(FALSE) # FALSE
 logical_abbr(T(1, 2, 3)) # FALSE
 logical_abbr(F(1, 2, 3)) # FALSE
@@ -844,7 +844,7 @@ Note: I was unable to solve this exercise on my own, and needed to consult AR So
 
 ```{r, eval = FALSE}
 logical_abbr(function(x = TRUE) {
-  g(x + T) # nolint: T_and_F_symbol_linter.
+  g(x + T)
 })
 ```
 
@@ -852,7 +852,7 @@ AR Solutions: The function currently fails, because `"closure"` is not handled i
 
 ```{r, error = TRUE}
 f <- function(x = TRUE) {
-  g(x + T) # nolint: object_usage_linter, T_and_F_symbol_linter.
+  g(x + T)
 }
 try(logical_abbr(!!f))
 ```
@@ -911,7 +911,7 @@ find_assign_call <- function(x) {
 find_assign_rec <- function(x) {
   switch_expr(x,
     # Base cases
-    constant = , # nolint: missing_argument_linter.
+    constant = ,
     symbol = character(),
 
     # Recursive cases
@@ -995,7 +995,7 @@ find_assign_rec <- function(x) {
   switch_expr(
     x,
     # Base cases
-    constant = , symbol = character(), # nolint: missing_argument_linter.
+    constant = , symbol = character(),
     # Recursive cases
     pairlist = flat_map_chr(x, find_assign_rec),
     call = find_assign_call(x)
@@ -1027,7 +1027,7 @@ find_call_rec <- function(x, fun) {
   switch_expr(
     x,
     # Base cases
-    constant = , # nolint: missing_argument_linter.
+    constant = ,
     symbol = character(),
 
     # Recursive cases
@@ -1087,7 +1087,7 @@ find_assign_rec <- function(x) {
   switch_expr(
     x,
     # Base cases
-    constant = , # nolint: missing_argument_linter.
+    constant = ,
     symbol = character(),
 
     # Recursive cases
@@ -1216,11 +1216,11 @@ dplyr::summarise
 ```
 
 ```{r}
-dplyr:::summarise.data.frame # nolint: undesirable_operator_linter.
+dplyr:::summarise.data.frame
 ```
 
 ```{r, eval = FALSE}
-dplyr:::summarise_cols # nolint: undesirable_operator_linter.
+dplyr:::summarise_cols
 #> function (.data, ...)
 #> {
 #>     mask <- DataMask$new(.data, caller_env())
@@ -1359,7 +1359,7 @@ Answer: as the code below demonstrates, `expr(a)` creates an unnamed list with `
 
 ```{r}
 exprs(a)
-exprs(a = ) # nolint: missing_argument_linter, spaces_inside_linter.
+exprs(a = )
 
 exprs(a = a)
 ```
@@ -1374,7 +1374,7 @@ str(out1)
 In `exprs(a = )` the first argument is named `a`, but then no value is provided. This leads to the output of a named list with the first element named `a`, which contains the missing argument.
 
 ```{r}
-out2 <- exprs(a = ) # nolint: missing_argument_linter, spaces_inside_linter.
+out2 <- exprs(a = )
 str(out2)
 is_missing(out2$a)
 ```
@@ -1484,7 +1484,6 @@ foo(a = x + y, b = y + z)
 Answer: code below.
 
 ```{r}
-# nolint start: commented_code_linter.
 # (x + y) / (y + z)
 expr(!!xy / !!yz)
 
@@ -1504,12 +1503,10 @@ expr(sum(!!xy, !!xy, !!yz))
 expr(sum(!!!abc))
 
 # mean(c(a, b, c), na.rm = TRUE)
-expr(mean(c(!!!abc), na.rm = TRUE)) # nolint: unneeded_concatenation_linter.
+expr(mean(c(!!!abc), na.rm = TRUE))
 
 # foo(a = x + y, b = y + z)
 expr(foo(a = !!xy, b = !!yz))
-
-# nolint end
 ```
 
 Surprisingly, multiple parentheses are needed to construct `(x + y) + (y + z) - (x + y)`.
@@ -1529,7 +1526,7 @@ expr(sum(!!xy, !!xy, !!yz)) # (5)
 
 expr(sum(!!!abc)) # (6)
 
-expr(mean(c(!!!abc), na.rm = TRUE)) # (7)  # nolint: unneeded_concatenation_linter.
+expr(mean(c(!!!abc), na.rm = TRUE)) # (7)
 
 expr(foo(a = !!xy, b = !!yz)) # (8)
 ```
@@ -1599,7 +1596,7 @@ Answer: reviewing the source code for each function, all three functions convert
 ```{r}
 interaction
 expand.grid
-par # nolint: undesirable_function_linter.
+par
 ```
 
 AR Solutions:  All three functions capture the dots via `args <- list(...)`.
@@ -1609,7 +1606,7 @@ AR Solutions:  All three functions capture the dots via `args <- list(...)`.
 ```{r}
 # styler: off
 # Both calls create the same output
-interaction(     a = c("a", "b", "c", "d"), b = c("e", "f"))  # dots # nolint: spaces_inside_linter.
+interaction(     a = c("a", "b", "c", "d"), b = c("e", "f"))  # dots
 interaction(list(a = c("a", "b", "c", "d"), b = c("e", "f"))) # list
 # styler: on
 ```
@@ -1704,7 +1701,7 @@ bc <- function(lambda) {
     })
   }
   new_function(
-    exprs(x = ), # nolint: missing_argument_linter, spaces_inside_linter.
+    exprs(x = ),
     func,
     caller_env()
   )
@@ -1723,11 +1720,9 @@ bc2 <- function(lambda) {
   lambda <- enexpr(lambda)
 
   if (!!lambda == 0) {
-    new_function(exprs(x = ), expr(log(x))) # nolint: missing_argument_linter, spaces_inside_linter.
+    new_function(exprs(x = ), expr(log(x)))
   } else {
-    # nolint start: missing_argument_linter, spaces_inside_linter.
     new_function(exprs(x = ), expr((x^(!!lambda) - 1) / !!lambda))
-    # nolint end
   }
 }
 
@@ -1755,7 +1750,7 @@ compose(sum, as.integer)(1:10)
 Answer: (non-working) code below.
 
 ```{r eval = FALSE}
-compose <- function(f, g) { # nolint: object_usage_linter.
+compose <- function(f, g) {
   new_function(
     expr(...),
     expr({
@@ -1772,13 +1767,11 @@ compose(sum, as.integer)(1:10)
 AR Solutions: The implementation is fairly straightforward, even though a lot of parentheses are required:
 
 ```{r}
-compose2 <- function(f, g) { # nolint: object_usage_linter.
+compose2 <- function(f, g) {
   f <- enexpr(f)
   g <- enexpr(g)
 
-  # nolint start: missing_argument_linter, spaces_inside_linter.
   new_function(exprs(... = ), expr((!!f)((!!g)(...))))
-  # nolint end
 }
 
 compose(sin, cos)
@@ -1825,8 +1818,8 @@ x <- "global environment"
 env2 <- env(x = "specified environment")
 
 locate_evaluation <- function(file, local) {
-  x <- "local environment" # nolint: object_usage_linter.
-  source(file, local = local) # nolint: undesirable_function_linter.
+  x <- "local environment"
+  source(file, local = local)
 }
 
 # Where will source() evaluate the code?
@@ -1887,10 +1880,8 @@ expr(eval(expr(eval(expr(eval(expr(2 + 2))))))) # (3)
 
 ```{r}
 # name is a string
-# nolint start: brace_linter.
 get2 <- function(name, env) {}
 assign2 <- function(name, value, env) {}
-# nolint end
 ```
 
 Answer: code below.
@@ -1899,7 +1890,7 @@ Answer: code below.
 get2 <- function(name, env) {
   eval(sym(name), envir = env)
 }
-assign2 <- function(name, value, env) { # nolint: object_usage_linter. `!!` is OK.
+assign2 <- function(name, value, env) {
   s <- sym(name)
   eval(expr(!!s <- !!value), envir = env)
 }
@@ -1925,7 +1916,7 @@ get2("x")
 To build the correct expression for the value assignment, we unquote using `!!`.
 
 ```{r}
-assign2 <- function(name, value, env = caller_env()) { # nolint: object_usage_linter. `!!` is OK.
+assign2 <- function(name, value, env = caller_env()) {
   name_sym <- sym(name)
   assign_expr <- expr(!!name_sym <- !!value)
   eval(assign_expr, env)
@@ -1976,12 +1967,10 @@ source2 <- function(path, env = caller_env()) {
   file <- paste(readLines(path, warn = FALSE), collapse = "\n")
   exprs <- parse_exprs(file)
 
-  # nolint start: commented_code_linter.
   # res <- NULL
   # for (i in seq_along(exprs)) {
   #   res[[i]] <- eval(exprs[[i]], env)
   # }
-  # nolint end
 
   res <- purrr::map(exprs, eval, env)
 

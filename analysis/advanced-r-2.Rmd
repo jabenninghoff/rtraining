@@ -15,7 +15,7 @@ Workbook for completing quizzes and exercises from the "Functional programming" 
 
 ```{r setup, message = FALSE, warning = FALSE}
 library(purrr)
-library(palmerpenguins) # nolint: unused_import_linter. Imported for `penguins` tibble.
+library(palmerpenguins)
 library(ggplot2)
 library(scales)
 library(rlang)
@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 knitr::knit_hooks$set(
   small_mar = function(before, options, envir) {
     if (before) {
-      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+      par(mar = c(4.1, 4.1, 0.5, 0.5))
     }
   }
 )
@@ -1076,7 +1076,7 @@ Note: isn't `sum() / length()` just `mean()`? For fun, compare `bench::mark()` (
 ```{r}
 i <- 0
 new_counter2 <- function() {
-  i <<- i + 1 # nolint: undesirable_operator_linter. use of `<<-` is intended here.
+  i <<- i + 1
   i
 }
 ```
@@ -1112,7 +1112,7 @@ i <- 0
 
 ```{r}
 new_counter3 <- function() {
-  i <- 0 # nolint: object_usage_linter.
+  i <- 0
   function() {
     i <- i + 1
     i
@@ -1279,11 +1279,9 @@ funs <- list(
   sum = function(x) sum(x, na.rm = TRUE)
 )
 
-# nolint start: undesirable_function_linter.
 attach(funs)
 mean <- function(x) stop("Hi!")
 detach(funs)
-# nolint end
 
 env_bind(globalenv(), !!!funs)
 mean <- function(x) stop("Hi!")
@@ -1387,7 +1385,7 @@ The main functionality of `possibly()` is provided by `base::tryCatch()`. In thi
 
 ```{r}
 safely
-purrr:::capture_error # nolint: undesirable_operator_linter.
+purrr:::capture_error
 ```
 
 Answer: `safely()` returns a function that uses the internal `capture_error()` function to store the evaluation of the mapper `.f` in `result`, and any error in `error`.
@@ -1575,7 +1573,7 @@ delay_by <- function(f, delay) {
     if (!is.null(last_called)) {
       sleep_if(last_called, Sys.time(), delay)
     }
-    on.exit(last_called <<- Sys.time(), add = TRUE) # nolint: undesirable_operator_linter.
+    on.exit(last_called <<- Sys.time(), add = TRUE)
 
     f(...)
   }
@@ -1623,7 +1621,7 @@ delay_atleast <- function(amount, f) {
     }
 
     # Update the time after the function has finished
-    on.exit(last_time <<- Sys.time()) # nolint: undesirable_operator_linter.
+    on.exit(last_time <<- Sys.time())
 
     f(...)
   }

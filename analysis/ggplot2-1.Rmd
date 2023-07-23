@@ -113,7 +113,6 @@ GG Solutions:
 - Function to convert into European standard (Rademaker, 2016):
 
 ```{r}
-# nolint start: object_name_linter.
 mpgTol100km <- function(milespergallon) {
   GalloLiter <- 3.785411784
   MileKilometer <- 1.609344
@@ -121,7 +120,6 @@ mpgTol100km <- function(milespergallon) {
   l100km <- (100 * GalloLiter) / (milespergallon * MileKilometer)
   l100km
 }
-# nolint end
 ```
 
 ---
