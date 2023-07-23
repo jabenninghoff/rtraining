@@ -1,3 +1,7 @@
+# rtraining 0.8.19
+
+* Maintenance updates
+
 # rtraining 0.8.18
 
 * Updated Advanced R Workbook (Metaprogramming): add partial solutions for Chapter 20
