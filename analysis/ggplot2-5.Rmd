@@ -17,7 +17,7 @@ Workbook for completing quizzes and exercises from the "Extending" chapters of [
 library(ggplot2)
 library(wesanderson)
 library(scales)
-library(maps) # nolint: unused_import_linter. Needed for `us.cities`.
+library(maps)
 library(dplyr)
 
 knitr::opts_chunk$set(
@@ -155,7 +155,7 @@ scale_color_wesanderson_c <- function(...,
                                       type = "continuous",
                                       values = NULL,
                                       space = "Lab",
-                                      na.value = "grey50", # nolint: object_name_linter.
+                                      na.value = "grey50",
                                       guide = "colourbar",
                                       aesthetics = "colour") {
   continuous_scale(
@@ -274,9 +274,9 @@ Answer: a common pattern I use is `geom_smooth` with `lm` and `y ~ x`. An implem
 ```{r}
 geom_rlm <- function(mapping = NULL, data = NULL, stat = "smooth", position = "identity", ...,
                      method = MASS::rlm, formula = y ~ x, se = TRUE,
-                     na.rm = FALSE, # nolint: object_name_linter.
+                     na.rm = FALSE,
                      orientation = NA,
-                     show.legend = NA, inherit.aes = TRUE) { # nolint: object_name_linter.
+                     show.legend = NA, inherit.aes = TRUE) {
   geom_smooth(
     mapping = mapping, data = data, stat = stat, position = position, ...,
     method = method, formula = formula, se = se, na.rm = na.rm, orientation = orientation,
@@ -305,7 +305,7 @@ Answer: code below. In this case, it is useful to include `binwidth` and `bins`,
 
 ```{r}
 distribution <- function(data, var, type = "histogram", binwidth = NULL, bins = NULL,
-                         na.rm = FALSE) { # nolint: object_name_linter.
+                         na.rm = FALSE) {
   gg <- ggplot(data, aes({{ var }}))
 
   if (type == "histogram") {

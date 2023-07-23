@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 knitr::knit_hooks$set(
   small_mar = function(before, options, envir) {
     if (before) {
-      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+      par(mar = c(4.1, 4.1, 0.5, 0.5))
     }
   }
 )
@@ -196,9 +196,9 @@ unclass(data.frame(a = 1:2, b = 3:4))
 Answer: code below. The data frame is built on the list base type, and includes the names, row.names, and class attributes. This implementation requires values to be a list, names to be a character, and row.names to be an integer.
 
 ```{r}
-new_data.frame <- function(values = list(), # nolint: object_name_linter.
+new_data.frame <- function(values = list(),
                            names = character(length(values)),
-                           row.names = integer(length(values))) { # nolint: object_name_linter.
+                           row.names = integer(length(values))) {
   stopifnot(
     is.list(values),
     is.character(names),
@@ -219,19 +219,17 @@ We need to provide the number of rows as an input to make it possible to create 
 This leads to the following constructor:
 
 ```{r, error = TRUE}
-new_data.frame <- function(x, n, row.names = NULL) { # nolint: object_name_linter.
-  # nolint start: consecutive_stopifnot_linter.
+new_data.frame <- function(x, n, row.names = NULL) {
   # Check if the underlying object is a list
   stopifnot(is.list(x))
 
   # Check all inputs are the same length
   # (This check also allows that x has length 0)
   stopifnot(all(lengths(x) == n))
-  # nolint end
 
   if (is.null(row.names)) {
     # Use special row names helper from base R
-    row.names <- .set_row_names(n) # nolint: object_name_linter.
+    row.names <- .set_row_names(n)
   } else {
     # Otherwise check that they're a character vector with the
     # correct length
@@ -399,12 +397,10 @@ Our updated `new_factor()` constructor gets a `contrasts` argument, which accept
 new_factor <- function(x = integer(),
                        levels = character(),
                        contrasts = NULL) {
-  # nolint start: consecutive_stopifnot_linter.
   stopifnot(is.integer(x))
   stopifnot(is.character(levels))
-  # nolint end
 
-  if (!is.null(constrasts)) { # nolint: object_usage_linter. not sure why lintr flags this.
+  if (!is.null(constrasts)) {
     stopifnot(is.matrix(contrasts) && is.numeric(contrasts)) # nolint: conjunct_test_linter.
   }
 
@@ -571,7 +567,7 @@ get_method_count <- function(fname) {
   data.frame(
     name = fname,
     # this code should work but doesn't:
-    # method_count = nrow(s3_methods_generic(fname)) # nolint: commented_code_linter.
+    # method_count = nrow(s3_methods_generic(fname))
     method_count = length(methods(fname))
   )
 }
@@ -612,7 +608,7 @@ ls(all.names = TRUE, envir = baseenv()) %>%
 ```{r}
 g <- function(x) {
   x <- 10
-  y <- 10 # nolint: object_usage_linter.
+  y <- 10
   UseMethod("g")
 }
 g.default <- function(x) c(x = x, y = y)
@@ -668,11 +664,11 @@ s3_methods_generic("[") %>%
     method = paste0("[.", class),
     argnames = purrr::map(method, ~ names(formals(.x))),
     args = purrr::map(method, ~ formals(.x)),
-    args = purrr::map2( # nolint: duplicate_argument_linter.
+    args = purrr::map2(
       argnames, args,
       ~ paste(.x, .y, sep = " = ")
     ),
-    args = purrr::set_names(args, method) # nolint: duplicate_argument_linter.
+    args = purrr::set_names(args, method)
   ) %>%
   pull(args) %>%
   head()
@@ -736,8 +732,7 @@ Now we should have enough information to write a constructor for new `lm` object
 
 ```{r}
 new_lm <- function(coefficients, residuals, effects, rank, fitted.values, assign,
-                   qr, df.residual, xlevels, call, terms, model # nolint: object_name_linter.
-) {
+                   qr, df.residual, xlevels, call, terms, model) {
   stopifnot(
     is.double(coefficients), is.double(residuals),
     is.double(effects), is.integer(rank), is.double(fitted.values),
@@ -891,7 +886,7 @@ Let's just double check the statement above and evaluate `.Class` explicitly wit
 ```{r}
 generic2.b <- function(x) {
   class(x) <- "a1"
-  print(.Class) # nolint: object_usage_linter.
+  print(.Class)
   NextMethod()
 }
 
@@ -957,7 +952,7 @@ Answer: four base classes have a method for `Math`: `data.frame`, `Date`, `difft
 
 ```{r}
 s3_methods_generic("Math") |>
-  filter(source == "base") # nolint: undesirable_function_linter. source is not used as a function.
+  filter(source == "base")
 ```
 
 ```{r}
@@ -1006,7 +1001,7 @@ Of course, different functions should perform different calculations. Here `.Gen
 
 ```{r}
 Math.data.frame <- function(x, ...) {
-  .Generic # nolint: object_usage_linter.
+  .Generic
 }
 abs(mtcars)
 exp(mtcars)
@@ -1056,7 +1051,7 @@ R6 is very similar to a base OOP system called __reference classes__, or RC for 
 Answer: `Account` stores a balance as an integer value of cents, and prints in dollars (to avoid problems with floating point math).
 
 ```{r}
-Account <- R6Class("Account", list( # nolint: object_name_linter.
+Account <- R6Class("Account", list(
   balance = 0L,
   initialize = function(balance = 0L) {
     stopifnot(is.integer(balance), length(balance) == 1)
@@ -1079,7 +1074,7 @@ Account <- R6Class("Account", list( # nolint: object_name_linter.
   }
 ))
 
-AccountOverdraft <- R6Class("AccountOverdraft", # nolint: object_name_linter.
+AccountOverdraft <- R6Class("AccountOverdraft",
   inherit = Account,
   public = list(
     withdraw = function(value) {
@@ -1089,7 +1084,7 @@ AccountOverdraft <- R6Class("AccountOverdraft", # nolint: object_name_linter.
   )
 )
 
-AccountOverdraftFee <- R6Class("AccountOverdraftFee", # nolint: object_name_linter.
+AccountOverdraftFee <- R6Class("AccountOverdraftFee",
   inherit = Account,
   public = list(
     withdraw = function(value) {
@@ -1119,7 +1114,7 @@ a3
 AR Solutions: `BankAccount` is a similar, simpler approach:
 
 ```{r}
-BankAccount <- R6Class( # nolint: object_name_linter.
+BankAccount <- R6Class(
   classname = "BankAccount",
   public = list(
     balance = 0,
@@ -1134,7 +1129,7 @@ BankAccount <- R6Class( # nolint: object_name_linter.
   )
 )
 
-BankAccountStrict <- R6Class( # nolint: object_name_linter.
+BankAccountStrict <- R6Class(
   classname = "BankAccountStrict",
   inherit = BankAccount,
   public = list(
@@ -1150,7 +1145,7 @@ BankAccountStrict <- R6Class( # nolint: object_name_linter.
   )
 )
 
-BankAccountCharging <- R6Class( # nolint: object_name_linter.
+BankAccountCharging <- R6Class(
   classname = "BankAccountCharging",
   inherit = BankAccount,
   public = list(
@@ -1182,7 +1177,7 @@ cards <- paste0(rep(value, 4), suit)
 Answer: `Cards` shuffles the deck using `sample()`. The `draw()` function prints the cards drawn and moves them into play.
 
 ```{r}
-Cards <- R6Class("Cards", list( # nolint: object_name_linter.
+Cards <- R6Class("Cards", list(
   deck = sample(cards, 52),
   play = NULL,
   print = function(...) {
@@ -1221,7 +1216,7 @@ d
 AR Solutions: Our new `ShuffledDeck` class will use `sample()` and positive integer subsetting to implement the reshuffling and drawing functionality. We also add a check, so you cannot draw more cards than there are left in the deck.
 
 ```{r}
-ShuffledDeck <- R6Class( # nolint: object_name_linter.
+ShuffledDeck <- R6Class(
   classname = "ShuffledDeck",
   public = list(
     deck = NULL,
@@ -1281,7 +1276,7 @@ Answer: `TimeZone` is initialized with the current time zone, stored as `tz` in 
 ```{r}
 orig_tz <- Sys.timezone()
 
-TimeZone <- R6Class("TimeZone", list( # nolint: object_name_linter.
+TimeZone <- R6Class("TimeZone", list(
   tz = Sys.timezone(),
   get = function() {
     cat("Current time zone: ", self$tz, "\n", sep = "")
@@ -1289,7 +1284,7 @@ TimeZone <- R6Class("TimeZone", list( # nolint: object_name_linter.
   },
   set = function(tz) {
     stopifnot(tz %in% OlsonNames())
-    Sys.setenv(TZ = tz) # nolint: undesirable_function_linter.
+    Sys.setenv(TZ = tz)
     self$tz <- tz
     cat("Set time zone: ", self$tz, "\n", sep = "")
     invisible(self)
@@ -1302,7 +1297,7 @@ date()
 tz$set("America/New_York")
 date()
 
-Sys.setenv(TZ = orig_tz) # nolint: undesirable_function_linter.
+Sys.setenv(TZ = orig_tz)
 ```
 
 Bug: like `Cards`, `TimeZone` should set `tz` in `initialize()`.
@@ -1310,7 +1305,7 @@ Bug: like `Cards`, `TimeZone` should set `tz` in `initialize()`.
 AR Solutions: To create an R6 class that allows us to get and set the time zone, we provide the respective functions as public methods to the R6 class.
 
 ```{r}
-Timezone <- R6Class( # nolint: object_name_linter.
+Timezone <- R6Class(
   classname = "Timezone",
   public = list(
     get = function() {
@@ -1319,7 +1314,7 @@ Timezone <- R6Class( # nolint: object_name_linter.
     set = function(value) {
       stopifnot(value %in% OlsonNames())
       old <- self$get()
-      Sys.setenv(TZ = value) # nolint: undesirable_function_linter.
+      Sys.setenv(TZ = value)
       invisible(old)
     }
   )
@@ -1338,14 +1333,14 @@ Answer: similar to `TimeZone`, `WorkingDirectory` initializes `wd` to `getwd()`.
 ```{r warning = FALSE}
 orig_wd <- getwd()
 
-WorkingDirectory <- R6Class("WorkingDirectory", list( # nolint: object_name_linter.
+WorkingDirectory <- R6Class("WorkingDirectory", list(
   wd = getwd(),
   get = function() {
     cat("Current directory: ", self$wd, "\n", sep = "")
     invisible(self)
   },
   set = function(dir) {
-    self$wd <- setwd(dir) # nolint: undesirable_function_linter.
+    self$wd <- setwd(dir)
     cat("Set directory: ", self$wd, "\n", sep = "")
     invisible(self)
   }
@@ -1356,20 +1351,20 @@ wd$get()
 wd$set("assets")
 list.files()
 
-setwd(orig_wd) # nolint: undesirable_function_linter.
+setwd(orig_wd)
 ```
 
 AR Solutions: Take a look at the following implementation, which is quite minimalistic:
 
 ```{r}
-WorkingDirectory <- R6Class( # nolint: object_name_linter.
+WorkingDirectory <- R6Class(
   classname = "WorkingDirectory",
   public = list(
     get = function() {
       getwd()
     },
     set = function(value) {
-      setwd(value) # nolint: undesirable_function_linter.
+      setwd(value)
     }
   )
 )
@@ -1413,7 +1408,7 @@ AR Solutions: R6 objects are built on top of environments. They have a `class` a
 Answer: `SecureAccount` uses a private internal balance exposed through an active function.
 
 ```{r}
-SecureAccount <- R6Class("SecureAccount", # nolint: object_name_linter.
+SecureAccount <- R6Class("SecureAccount",
   private = list(
     .balance = 0L
   ),
@@ -1451,7 +1446,7 @@ sa$balance
 AR Solutions: To fulfill this requirement, we make balance a private field. The user has to use the `$deposit()` and `$withdraw()` methods which have access to the balance field.
 
 ```{r, error = TRUE}
-BankAccountStrict2 <- R6Class( # nolint: object_name_linter.
+BankAccountStrict2 <- R6Class(
   classname = "BankAccountStrict2",
   public = list(
     deposit = function(dep = 0) {
@@ -1485,7 +1480,7 @@ BankAccountStrict2 <- R6Class( # nolint: object_name_linter.
 Answer: `Login` implements a write-only `$password` field using an active function. `check_password()` will error if a password hasn't been set. In real life, this should be implemented with a secure password hashing function, like `bcrypt` or `scrypt`.
 
 ```{r}
-Login <- R6Class("Login", # nolint: object_name_linter.
+Login <- R6Class("Login",
   private = list(
     .password = NULL
   ),
@@ -1520,7 +1515,7 @@ try(l$password)
 AR Solutions: To protect the password from changes and direct access, the password will be a private field. Further, our `Password` will get its own print method which hides the password.
 
 ```{r}
-Password <- R6Class( # nolint: object_name_linter.
+Password <- R6Class(
   classname = "Password",
   public = list(
     print = function(...) {
@@ -1566,7 +1561,7 @@ l
 Answer: the updated `Rando` class sets a private value when `random` is run that is accessible only through `previous`, initially set to `NA`.
 
 ```{r}
-Rando <- R6::R6Class("Rando", # nolint: object_name_linter.
+Rando <- R6::R6Class("Rando",
   private = list(
     .previous = NA
   ),
@@ -1600,7 +1595,7 @@ x$previous
 AR Solutions: To access the previous random value from an instance, we add a private `$last_random` field to our class, and we modify `$random()` to write to this field, whenever it is called. To access the `$last_random` field we provide `$previous()`.
 
 ```{r}
-Rando <- R6::R6Class( # nolint: object_name_linter.
+Rando <- R6::R6Class(
   classname = "Rando",
   private = list(
     last_random = NULL
@@ -1631,7 +1626,7 @@ Rando <- R6::R6Class( # nolint: object_name_linter.
 Answer: `LoginEvil` shows that subclasses *can* access private fields from their parent.
 
 ```{r}
-LoginEvil <- R6Class("LoginEvil", # nolint: object_name_linter.
+LoginEvil <- R6Class("LoginEvil",
   inherit = Login,
   public = list(
     steal_password = function() {
@@ -1648,7 +1643,7 @@ evil$steal_password()
 AR Solutions: To find out if private fields/methods can be accessed from subclasses, we first create a class `A` with a private field `foo` and a private method `bar()`. Afterwards, an instance of a subclass `B`  is created and calls the `foobar()` methods, which tries to access the `foo` field and the `bar()` method from its superclass `A`.
 
 ```{r}
-A <- R6Class( # nolint: object_name_linter.
+A <- R6Class(
   classname = "A",
   private = list(
     field = "foo",
@@ -1657,7 +1652,7 @@ A <- R6Class( # nolint: object_name_linter.
     }
   )
 )
-B <- R6Class( # nolint: object_name_linter.
+B <- R6Class(
   classname = "B",
   inherit = A,
   public = list(
@@ -1686,7 +1681,7 @@ Note: as I discovered, private fields are not accessible through `super$`, but *
 Answer: `WriteFile` implemented below.
 
 ```{r}
-WriteFile <- R6Class("WriteFile", list( # nolint: object_name_linter.
+WriteFile <- R6Class("WriteFile", list(
   wfile = NULL,
   initialize = function(filename) {
     self$wfile <- file(filename, "a")
@@ -1708,7 +1703,7 @@ readLines(tmp)
 AR Solutions: Our `FileWriter` class will create a connection to a file at initialization. Therefore, we open a connection to a user specified file during the initialisation. Note that we need to set `open = "a"` in `file()` to open connection for appending text. Otherwise, `cat()` would only work when applied to files, but not with connections as explicitly asked for in the exercise. Further, we add the `append_line()` method and a `close()` statement as finalizer.
 
 ```{r, eval = TRUE, error = TRUE}
-FileWriter <- R6::R6Class( # nolint: object_name_linter.
+FileWriter <- R6::R6Class(
   classname = "FileWriter",
   public = list(
     con = NULL,
@@ -1847,7 +1842,7 @@ setValidity("Person", function(object) {
 }) |>
   invisible()
 
-Person <- function(given = NA_character_, family = NA_character_, # nolint: object_name_linter.
+Person <- function(given = NA_character_, family = NA_character_,
                    email = NA_character_, role = NA_character_, comment = NA_character_) {
   given <- as.character(given)
   family <- as.character(family)
@@ -1889,7 +1884,7 @@ setClass("Person",
   )
 )
 # Helper to create instances of the Person class
-Person <- function(given, family, # nolint: object_name_linter.
+Person <- function(given, family,
                    age = NA_real_,
                    role = NA_character_,
                    email = NA_character_,
@@ -2202,7 +2197,7 @@ AR Solutions: It depends. We first create the object `hadley` of class `Person`:
 
 ```{r, eval = FALSE}
 # TODO: eval = FALSE set to allow rendering using build_analysis_site()
-.Person <- setClass( # nolint: object_name_linter.
+.Person <- setClass(
   "Person",
   slots = c(name = "character", age = "numeric")
 )
@@ -2325,7 +2320,7 @@ Let's build an S4 `OrderedFactor` on top of the S3 factor in such a way.
 ```{r, eval = FALSE}
 # TODO: eval = FALSE set to allow rendering using build_analysis_site()
 setOldClass("factor") # use build-in definition for brevity
-OrderedFactor <- setClass( # nolint: object_name_linter.
+OrderedFactor <- setClass(
   "OrderedFactor",
   contains = "factor", # inherit from registered S3 class
   slots = c(

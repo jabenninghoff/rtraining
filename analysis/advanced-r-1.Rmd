@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 knitr::knit_hooks$set(
   small_mar = function(before, options, envir) {
     if (before) {
-      par(mar = c(4.1, 4.1, 0.5, 0.5)) # nolint: undesirable_function_linter.
+      par(mar = c(4.1, 4.1, 0.5, 0.5))
     }
   }
 )
@@ -780,7 +780,7 @@ AR Solutions: A list is already a vector, though not an atomic one!
 d <- list(date = as.Date("2022-06-25"), datetime = as.POSIXct("2022-06-25 09:59:40 CDT"))
 dput(d)
 
-dput(c(d)) # nolint: unneeded_concatenation_linter.
+dput(c(d))
 dput(unlist(d))
 ```
 
@@ -831,7 +831,7 @@ However, as `c()` strips the time zone (and other attributes) of `POSIXct` objec
 
 ```{r}
 (dttm_ct <- as.POSIXct("1970-01-01 01:00", tz = "HST"))
-attributes(c(dttm_ct)) # nolint: unneeded_concatenation_linter.
+attributes(c(dttm_ct))
 ```
 
 A package that deals with these kinds of problems in more depth and provides a structural solution for them is the [`vctrs` package](https://github.com/r-lib/vctrs) which is also used throughout the tidyverse.
@@ -975,7 +975,6 @@ rm(list = ls())
 1.  Fix each of the following common data frame subsetting errors:
 
 ```{r}
-# nolint start: commented_code_linter.
 # mtcars[mtcars$cyl = 4, ]
 mtcars[mtcars$cyl == 4, ]
 # use `==`              (instead of `=`)
@@ -992,8 +991,6 @@ mtcars[mtcars$cyl <= 5, ]
 mtcars[mtcars$cyl == 4 | mtcars$cyl == 6, ]
 # use `mtcars$cyl == 6` (instead of `6`)
 #  or `%in% c(4, 6)`    (instead of `== 4 | 6`)
-
-# nolint end
 ```
 
 Answer: fixed!
@@ -1423,7 +1420,7 @@ f1(1)()
 4.  How could you make this call easier to read? `mean(c(1:10, NA), na.rm = TRUE)` [correct!]
 
 ```{r, eval = FALSE}
-mean(, TRUE, x = c(1:10, NA)) # nolint: missing_argument_linter.
+mean(, TRUE, x = c(1:10, NA))
 ```
 
 5.  Does the following code throw an error when executed? Why or why not? a: no, due to lazy
@@ -1706,7 +1703,7 @@ AR Solutions: The function returns 100. The default argument (`x = z`) gets lazi
 ```{r}
 y <- 10
 # styler: off
-f1 <- function(x = {y <- 1; 2}, y = 0) { # nolint brace_linter, semicolon_linter.
+f1 <- function(x = {y <- 1; 2}, y = 0) { # nolint: semicolon_linter.
   # styler: on
   c(x, y)
 }
@@ -1857,7 +1854,7 @@ localTitle(main = main, sub = sub, xlab = xlab, ylab = ylab, ...)
 The `localTitle()` function was defined in the first lines of `plot.default()` as:
 
 ```{r, eval = FALSE}
-localTitle <- function(..., col, bg, pch, cex, lty, lwd) title(...) # nolint: object_name_linter.
+localTitle <- function(..., col, bg, pch, cex, lty, lwd) title(...)
 ```
 
 The call to `localTitle()` passes the `col` parameter as part of the `...` argument to `title()`. `?title` tells us that the `title()` function specifies four parts of the plot: Main (title of the plot), sub (sub-title of the plot) and both axis labels. Therefore, it would introduce ambiguity inside `title()` to use `col` directly. Instead, one has the option to supply `col` via the `...` argument, via `col.lab` or as part of `xlab` in the form `xlab = list(c("index"), col = "red")` (similar for `ylab`).
@@ -1932,7 +1929,6 @@ plot_pdf <- function(code) {
 5.  We can use `on.exit()` to implement a simple version of `capture.output()`.
 
 ```{r, eval = getRversion() >= "3.5"}
-# nolint start: object_name_linter, undesirable_function_linter.
 capture.output2 <- function(code) {
   temp <- tempfile()
   on.exit(file.remove(temp), add = TRUE, after = TRUE)
@@ -1941,7 +1937,7 @@ capture.output2 <- function(code) {
   force(code)
   readLines(temp)
 }
-# nolint end
+
 capture.output2(cat("a", "b", "c", sep = "\n"))
 ```
 
@@ -2980,12 +2976,10 @@ my_check_installed <- function(pkg) {
 
 my_check_installed("rlang")
 # NOTE: this code causes renv::dependencies() to mistakenly report package 'pkg' as a dependency
-# nolint start: commented_code_linter.
 # requireNamespace("pkg", quietly = FALSE)
 # err <- catch_cnd(my_check_installed("pkg"))
 # err
 # err$pkg
-# nolint end
 try(my_check_installed("pkg"))
 ```
 
@@ -3049,7 +3043,7 @@ AR Solutions: Instead of returning an error it might be preferable to throw a cu
     should handle errors.
 
 ```{r}
-suppressConditions <- function(expr) { # nolint: object_name_linter.
+suppressConditions <- function(expr) {
   tryCatch(
     error = function(cnd) invisible(cnd),
     withCallingHandlers(
@@ -3077,7 +3071,7 @@ Answer: code above. Errors are not printed, but are returned, invisibly.
 AR Solutions: In general, we would like to catch errors, since they contain important information for debugging. To suppress the error message and hide the returned error object from the console, we handle errors within a `tryCatch()` and return the error object invisibly:
 
 ```{r}
-suppressErrors <- function(expr) { # nolint: object_name_linter.
+suppressErrors <- function(expr) {
   tryCatch(
     error = function(cnd) invisible(cnd),
     interrupt = function(cnd) {
@@ -3093,7 +3087,7 @@ suppressErrors <- function(expr) { # nolint: object_name_linter.
 After we defined the error handling, we can just combine it with the other handlers to create `suppressConditions()`:
 
 ```{r}
-suppressConditions <- function(expr) { # nolint: object_name_linter.
+suppressConditions <- function(expr) {
   suppressErrors(suppressWarnings(suppressMessages(expr)))
 }
 ```
@@ -3217,7 +3211,7 @@ bottles_of_beer <- function(i = 99) {
     tryCatch(
       Sys.sleep(1),
       interrupt = function(err) {
-        i <<- i - 1 # nolint: undesirable_operator_linter.
+        i <<- i - 1
         if (i > 0) {
           message(
             "Take one down, pass it around, ", i,

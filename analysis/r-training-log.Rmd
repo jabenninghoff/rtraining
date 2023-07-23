@@ -242,7 +242,6 @@ A fun demo taken from the Wikipedia article on [R](https://en.wikipedia.org/wiki
 ![Mandelbrot set](rendered/mandelbrot.gif)
 
 ```{r wikipedia_demo}
-# nolint start: commented_code_linter, object_name_linter
 local({
   # TODO: fix colors to match Wikipedia article
   # install.packages("caTools")  # install external package
@@ -266,5 +265,4 @@ local({
   }
   write.gif(X, "rendered/mandelbrot.gif", col = jet.colors, delay = 100)
 })
-# nolint end
 ```
