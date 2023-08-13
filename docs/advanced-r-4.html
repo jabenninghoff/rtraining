@@ -19,9 +19,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/bs3compat-0.5.1/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.1/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.1/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -825,7 +825,7 @@ evaluated function and value of <code>x</code> where using
 <pre class="r"><code>median</code></pre>
 <pre><code>#&gt; function (x, na.rm = FALSE, ...) 
 #&gt; UseMethod(&quot;median&quot;)
-#&gt; &lt;bytecode: 0x7fcd640cdb60&gt;
+#&gt; &lt;bytecode: 0x7fb7e5d13270&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 <pre class="r"><code>expr(median)</code></pre>
 <pre><code>#&gt; median</code></pre>
@@ -1308,7 +1308,7 @@ possible to break <code>pairwise.t.test()</code>.</p>
 #&gt;     class(ans) &lt;- &quot;pairwise.htest&quot;
 #&gt;     ans
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd36c27948&gt;
+#&gt; &lt;bytecode: 0x7fb7a27d3038&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 <pre class="r"><code>deparse(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18))</code></pre>
 <pre><code>#&gt; [1] &quot;c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, &quot;
@@ -1937,7 +1937,7 @@ we see that the <code>...</code> argument is quoted in
 #&gt;     }
 #&gt;     UseMethod(&quot;summarise&quot;)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd11775238&gt;
+#&gt; &lt;bytecode: 0x7fb7a4ad6c98&gt;
 #&gt; &lt;environment: namespace:dplyr&gt;</code></pre>
 <pre class="r"><code>dplyr:::summarise.data.frame</code></pre>
 <pre><code>#&gt; function (.data, ..., .by = NULL, .groups = NULL) 
@@ -1960,7 +1960,7 @@ we see that the <code>...</code> argument is quoted in
 #&gt;     }
 #&gt;     out
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd30649950&gt;
+#&gt; &lt;bytecode: 0x7fb795d40040&gt;
 #&gt; &lt;environment: namespace:dplyr&gt;</code></pre>
 <pre class="r"><code>dplyr:::summarise_cols
 #&gt; function (.data, ...)
@@ -2003,7 +2003,7 @@ code.</p>
 #&gt;     aes &lt;- new_aes(args, env = parent.frame())
 #&gt;     rename_aes(aes)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd1711fe40&gt;
+#&gt; &lt;bytecode: 0x7fb795b7e650&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 <hr />
 </div>
@@ -2019,14 +2019,14 @@ code.</li>
 #&gt; {
 #&gt;     enexpr(expr)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd159a6860&gt;
+#&gt; &lt;bytecode: 0x7fb7d4267a08&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 <pre class="r"><code>rlang::enexpr</code></pre>
 <pre><code>#&gt; function (arg) 
 #&gt; {
 #&gt;     .Call(ffi_enexpr, substitute(arg), parent.frame())
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd2233c548&gt;
+#&gt; &lt;bytecode: 0x7fb7a4adfe60&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 <p><code>expr()</code> simply calls <code>enexpr()</code>, which uses
 the C++ function <code>ffi_enexpr</code> and uses the base R function
@@ -2448,7 +2448,7 @@ single argument.</p>
 #&gt;     }
 #&gt;     structure(as.integer(ans + 1L), levels = lvs, class = &quot;factor&quot;)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd166a0e10&gt;
+#&gt; &lt;bytecode: 0x7fb7a4473470&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <pre class="r"><code>expand.grid</code></pre>
 <pre><code>#&gt; function (..., KEEP.OUT.ATTRS = TRUE, stringsAsFactors = TRUE) 
@@ -2501,7 +2501,7 @@ single argument.</p>
 #&gt;     rn &lt;- .set_row_names(as.integer(prod(d)))
 #&gt;     structure(cargs, class = &quot;data.frame&quot;, row.names = rn)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd2322fbb0&gt;
+#&gt; &lt;bytecode: 0x7fb7a44aee50&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <pre class="r"><code>par</code></pre>
 <pre><code>#&gt; function (..., no.readonly = FALSE) 
@@ -2530,7 +2530,7 @@ single argument.</p>
 #&gt;         invisible(value)
 #&gt;     else value
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd170b1d98&gt;
+#&gt; &lt;bytecode: 0x7fb7a74f0630&gt;
 #&gt; &lt;environment: namespace:graphics&gt;</code></pre>
 <p>AR Solutions: All three functions capture the dots via
 <code>args &lt;- list(...)</code>.</p>
@@ -2643,10 +2643,10 @@ formula method explicitly adds them, making it easier to understand.</p>
 
 bc(0)</code></pre>
 <pre><code>#&gt; function(x) log(x)
-#&gt; &lt;environment: 0x7fcd156f6978&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb7a0cd0148&gt;</code></pre>
 <pre class="r"><code>bc(2)</code></pre>
 <pre><code>#&gt; function(x) (x^lambda - 1) / lambda
-#&gt; &lt;environment: 0x7fcd335fa850&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb795acec18&gt;</code></pre>
 <pre class="r"><code>bc(0)(2)</code></pre>
 <pre><code>#&gt; [1] 0.6931472</code></pre>
 <pre class="r"><code>bc(2)(2)</code></pre>
@@ -2674,13 +2674,13 @@ bc(0)</code></pre>
 #&gt; {
 #&gt;     log(x)
 #&gt; }
-#&gt; &lt;environment: 0x7fcd17eb2ed8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb79600d660&gt;</code></pre>
 <pre class="r"><code>bc(2)</code></pre>
 <pre><code>#&gt; function (x) 
 #&gt; {
 #&gt;     ((x^2) - 1)/2
 #&gt; }
-#&gt; &lt;environment: 0x7fcd17eb2ed8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb79600d660&gt;</code></pre>
 <pre class="r"><code>bc(0)(2)</code></pre>
 <pre><code>#&gt; [1] 0.6931472</code></pre>
 <pre class="r"><code>bc(2)(2)</code></pre>
@@ -2700,11 +2700,11 @@ function factory using tidy evaluation.</p>
 bc2(0)</code></pre>
 <pre><code>#&gt; function (x) 
 #&gt; log(x)
-#&gt; &lt;environment: 0x7fcd20fd9048&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb7a177ae38&gt;</code></pre>
 <pre class="r"><code>bc2(2)</code></pre>
 <pre><code>#&gt; function (x) 
 #&gt; (x^2 - 1)/2
-#&gt; &lt;environment: 0x7fcd177112e8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb7a16fa4a8&gt;</code></pre>
 <pre class="r"><code>bc2(2)(2)</code></pre>
 <pre><code>#&gt; [1] 1.5</code></pre>
 <p>Note: I prefer the base R approach to
@@ -2720,7 +2720,7 @@ quasiquotation and <code>new_function()</code>:</li>
 
 compose(sum, as.integer)</code></pre>
 <pre><code>#&gt; function(...) f(g(...))
-#&gt; &lt;environment: 0x7fcd23b54530&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb797301a50&gt;</code></pre>
 <pre class="r"><code>compose(sum, as.integer)(1:10)</code></pre>
 <pre><code>#&gt; [1] 55</code></pre>
 <p>Answer: (non-working) code below.</p>
@@ -2747,13 +2747,13 @@ though a lot of parentheses are required:</p>
 
 compose(sin, cos)</code></pre>
 <pre><code>#&gt; function(...) f(g(...))
-#&gt; &lt;environment: 0x7fcd2449b258&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb7a06a1348&gt;</code></pre>
 <pre class="r"><code>compose(sin, cos)(pi)</code></pre>
 <pre><code>#&gt; [1] -0.841471</code></pre>
 <pre class="r"><code>compose2(sin, cos)</code></pre>
 <pre><code>#&gt; function (...) 
 #&gt; sin(cos(...))
-#&gt; &lt;environment: 0x7fcd203383f0&gt;</code></pre>
+#&gt; &lt;environment: 0x7fb794f03be8&gt;</code></pre>
 <pre class="r"><code>compose2(sin, cos)(pi)</code></pre>
 <pre><code>#&gt; [1] -0.841471</code></pre>
 <hr />
@@ -2918,7 +2918,7 @@ get2(&quot;test&quot;, caller_env())</code></pre>
 #&gt;     testthat::test_local(pkg$path, filter = filter, stop_on_failure = stop_on_failure, 
 #&gt;         load_package = load_package, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd1610ec50&gt;
+#&gt; &lt;bytecode: 0x7fb7a69b5890&gt;
 #&gt; &lt;environment: namespace:devtools&gt;</code></pre>
 <pre class="r"><code>assign2(&quot;test&quot;, 2345, caller_env())
 test</code></pre>
