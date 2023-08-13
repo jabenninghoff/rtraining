@@ -209,12 +209,17 @@
     "USAboundaries": {
       "Package": "USAboundaries",
       "Version": "0.4.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "ropensci",
+      "RemoteRepo": "USAboundaries",
+      "RemoteRef": "main",
+      "RemoteSha": "0f56f4920ec353d84651d7f941d510b1197317d3",
       "Requirements": [
         "R"
       ],
-      "Hash": "d92652e77f80ccc099e2a04480428725"
+      "Hash": "47f5c58ee4768435e0ed0ffd15200f6e"
     },
     "USAboundariesData": {
       "Package": "USAboundariesData",
