@@ -14,14 +14,14 @@
 
 <title>Advanced R Workbook (Functional programming)</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/bs3compat-0.5.1/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.1/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.1/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -461,11 +461,11 @@ calls the function provided as input with 1000 random uniform
 numbers.</p>
 <pre class="r"><code>randomise &lt;- function(f) f(runif(1e3))
 randomise(mean)</code></pre>
-<pre><code>#&gt; [1] 0.4920939</code></pre>
+<pre><code>#&gt; [1] 0.4974832</code></pre>
 <pre class="r"><code>randomise(mean)</code></pre>
-<pre><code>#&gt; [1] 0.4998474</code></pre>
+<pre><code>#&gt; [1] 0.5121558</code></pre>
 <pre class="r"><code>randomise(sum)</code></pre>
-<pre><code>#&gt; [1] 504.1538</code></pre>
+<pre><code>#&gt; [1] 500.7643</code></pre>
 <p>The chances are that you’ve already used a functional. You might have
 used for-loop replacements like base R’s <code>lapply()</code>,
 <code>apply()</code>, and <code>tapply()</code>; or purrr’s
@@ -501,7 +501,7 @@ out.</li>
 #&gt; {
 #&gt;     map_(&quot;double&quot;, .x, .f, ..., .progress = .progress)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd25e75dc0&gt;
+#&gt; &lt;bytecode: 0x7fd742a1df20&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="r"><code>map_dbl(mtcars, ~ length(unique(.x)))</code></pre>
 <pre><code>#&gt;  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
@@ -510,25 +510,25 @@ out.</li>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; length(unique(.x))
-#&gt; &lt;environment: 0x7fcd17eb2ed8&gt;
+#&gt; &lt;environment: 0x7fd790aece00&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <pre class="r"><code>function(..., .x = ..1, .y = ..2, . = ..1) length(unique(.x))</code></pre>
 <pre><code>#&gt; function(..., .x = ..1, .y = ..2, . = ..1) length(unique(.x))
-#&gt; &lt;environment: 0x7fcd17eb2ed8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fd790aece00&gt;</code></pre>
 <pre class="r"><code>as_mapper(mean)</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod(&quot;mean&quot;)
-#&gt; &lt;bytecode: 0x7fcd63343348&gt;
+#&gt; &lt;bytecode: 0x7fd77122a3a8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <pre class="r"><code>as_mapper(function(x) mean(x, na.rm = TRUE))</code></pre>
 <pre><code>#&gt; function(x) mean(x, na.rm = TRUE)
-#&gt; &lt;environment: 0x7fcd17eb2ed8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fd790aece00&gt;</code></pre>
 <pre class="r"><code>as_mapper(~ mean(.x, na.rm = TRUE))</code></pre>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; mean(.x, na.rm = TRUE)
-#&gt; &lt;environment: 0x7fcd17eb2ed8&gt;
+#&gt; &lt;environment: 0x7fd790aece00&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <p>Answer: Exploration above. <code>attr_getter()</code> supports
@@ -550,15 +550,15 @@ with nested data.</p>
 <pre class="r"><code>as_mapper(c(1, 2)) # equivalent to function(x) x[[1]][[2]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, 2), .default = NULL)
-#&gt; &lt;environment: 0x7fcd2122c008&gt;</code></pre>
+#&gt; &lt;environment: 0x7fd741ea2a68&gt;</code></pre>
 <pre class="r"><code>as_mapper(c(&quot;a&quot;, &quot;b&quot;)) # equivalent to function(x) x[[&quot;a&quot;]][[&quot;b]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(&quot;a&quot;, &quot;b&quot;), .default = NULL)
-#&gt; &lt;environment: 0x7fcd252eadd8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fd741f6e450&gt;</code></pre>
 <pre class="r"><code>as_mapper(list(1, &quot;b&quot;)) # equivalent to function(x) x[[1]][[&quot;b]]</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, &quot;b&quot;), .default = NULL)
-#&gt; &lt;environment: 0x7fcd24318ac8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fd7419853a8&gt;</code></pre>
 <p>Besides mixing positions and names, it is also possible to pass along
 an accessor function. This is basically an anonymous function that gets
 information about some aspect of the input data. You are free to define
@@ -583,13 +583,13 @@ you explain why it returns the result that it does?</li>
 </ol>
 <pre class="r"><code>map(1:3, ~ runif(2))</code></pre>
 <pre><code>#&gt; [[1]]
-#&gt; [1] 0.81268099 0.04394066
+#&gt; [1] 0.9038348 0.5446551
 #&gt; 
 #&gt; [[2]]
-#&gt; [1] 0.7796992 0.8343843
+#&gt; [1] 0.8774079 0.3883697
 #&gt; 
 #&gt; [[3]]
-#&gt; [1] 0.7519987 0.4653086</code></pre>
+#&gt; [1] 0.7417508 0.7942547</code></pre>
 <pre class="r"><code>map(1:3, runif(2))</code></pre>
 <pre><code>#&gt; [[1]]
 #&gt; [1] 1
@@ -608,13 +608,13 @@ below:</p>
 <pre><code>#&gt; &lt;lambda&gt;
 #&gt; function (..., .x = ..1, .y = ..2, . = ..1) 
 #&gt; runif(2)
-#&gt; &lt;environment: 0x7fcd17eb2ed8&gt;
+#&gt; &lt;environment: 0x7fd790aece00&gt;
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;rlang_lambda_function&quot; &quot;function&quot;</code></pre>
 <pre class="r"><code>as_mapper(runif(2))</code></pre>
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck_raw(x, list(0.85501699289307, 0.833998596528545), .default = NULL)
-#&gt; &lt;environment: 0x7fcd2003d318&gt;</code></pre>
+#&gt; pluck_raw(x, list(0.964666981715709, 0.685521917417645), .default = NULL)
+#&gt; &lt;environment: 0x7fd745201bd8&gt;</code></pre>
 <p>A more reasonable use of a pluck mapper for <code>1:3</code> is
 <code>1</code>:</p>
 <pre class="r"><code>map(1:3, 1)</code></pre>
@@ -867,8 +867,8 @@ compute the <span class="math inline">\(R^2\)</span> with
 bootstraps &lt;- map(1:10, ~ bootstrap(mtcars))
 
 map_dbl(bootstraps, ~ summary(lm(mpg ~ disp, .x))$r.squared)</code></pre>
-<pre><code>#&gt;  [1] 0.7373846 0.7341768 0.7231776 0.7782181 0.7384912 0.8286449 0.6585341 0.7526453 0.6204835
-#&gt; [10] 0.6725780</code></pre>
+<pre><code>#&gt;  [1] 0.7394802 0.7263459 0.6508974 0.7534644 0.7552686 0.6661567 0.7949830 0.7461547 0.6557048
+#&gt; [10] 0.7699857</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions: To accomplish this task, we take advantage of the “list
 in, list out”-functionality of <code>map()</code>. This allows us to
@@ -880,8 +880,8 @@ class="math inline">\(R^2\)</span> values. For the last call we use
   map(~ lm(mpg ~ disp, data = .x)) %&gt;%
   map(summary) %&gt;%
   map_dbl(&quot;r.squared&quot;)</code></pre>
-<pre><code>#&gt;  [1] 0.7373846 0.7341768 0.7231776 0.7782181 0.7384912 0.8286449 0.6585341 0.7526453 0.6204835
-#&gt; [10] 0.6725780</code></pre>
+<pre><code>#&gt;  [1] 0.7394802 0.7263459 0.6508974 0.7534644 0.7552686 0.6661567 0.7949830 0.7461547 0.6557048
+#&gt; [10] 0.7699857</code></pre>
 <p>Note: while AR Solutions is arguably <em>slightly</em> more readable,
 my code should be faster:</p>
 <pre class="r"><code>bench::mark({
@@ -889,7 +889,7 @@ my code should be faster:</p>
 })</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"7.416848ms","3":"12.20156ms","4":"82.1973","5":"63.67188KB","6":"2.107623"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"4.612974ms","3":"5.293948ms","4":"178.0066","5":"63.67188KB","6":"4.238252"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>bench::mark({
@@ -900,7 +900,7 @@ my code should be faster:</p>
 })</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"6.330579ms","3":"9.592182ms","4":"103.4212","5":"63.67188KB","6":"2.110637"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"4.614179ms","3":"5.138108ms","4":"190.4552","5":"63.67188KB","6":"4.232337"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>It is actually slightly slower! AR Solutions wins!</p>
@@ -920,7 +920,7 @@ my code should be faster:</p>
 <pre class="r"><code>as_mapper(1)</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1), .default = NULL)
-#&gt; &lt;environment: 0x7fcd10723440&gt;</code></pre>
+#&gt; &lt;environment: 0x7fd7653f05f8&gt;</code></pre>
 <pre class="r"><code>head(mtcars, 1)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -1235,13 +1235,13 @@ expect).</p>
 <pre class="r"><code>bench::mark(span_r(test2, is.numeric))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"120.176µs","3":"223.173µs","4":"4063.251","5":"4.007812KB","6":"4.92814"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"107.62µs","3":"123.716µs","4":"7686.577","5":"4.007812KB","6":"6.354294"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>bench::mark(span(test2, is.numeric))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"187.683µs","3":"408.44µs","4":"2305.94","5":"4.007812KB","6":"2.109735"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"159.233µs","3":"171.571µs","4":"5548.338","5":"4.007812KB","6":"6.370079"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <hr />
@@ -1534,13 +1534,13 @@ this stops <code>build_analysis_site()</code>):</p>
 <pre class="r"><code>bench::mark(fixed_point_ar(cos, x_init = 1, tol = 0.00001))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"22.556µs","3":"25.294µs","4":"30161.41","5":"0B","6":"6.03349"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"19.879µs","3":"23.689µs","4":"40270.29","5":"0B","6":"8.05567"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>bench::mark(fixed_point(cos, 1))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"52.271µs","3":"64.445µs","4":"13304.87","5":"0B","6":"4.323273"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"51.998µs","3":"60.7495µs","4":"15665.16","5":"0B","6":"5.825646"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>As usual, AR Solutions is faster. :-(</p>
@@ -1601,7 +1601,7 @@ function operators, which you’ll learn about in Chapter 11.</p>
 <pre class="r"><code>force</code></pre>
 <pre><code>#&gt; function (x) 
 #&gt; x
-#&gt; &lt;bytecode: 0x7fcd638439b0&gt;
+#&gt; &lt;bytecode: 0x7fd79083b1b0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 <p>Why is it better to <code>force(x)</code> instead of just
 <code>x</code>?</p>
@@ -1738,7 +1738,7 @@ stopifnot(
 bench::mark(m2(x))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"7.912µs","3":"9.073µs","4":"82511.39","5":"848B","6":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"7.034µs","3":"8.189µs","4":"108928.6","5":"848B","6":"10.89395"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Answer: code above, following the formula <span
@@ -1769,7 +1769,7 @@ all.equal(m1(x), 0) # removed stopifnot() for clarity</code></pre>
 <pre class="r"><code>bench::mark(m2(x))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"5.29µs","3":"6.658µs","4":"113066.3","5":"848B","6":"11.30776"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"4.554µs","3":"5.8485µs","4":"155614.4","5":"848B","6":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Note: isn’t <code>sum() / length()</code> just <code>mean()</code>?
@@ -1965,26 +1965,26 @@ x1 &lt;- c(41, 30, 31, 38, 29, 24, 30, 29, 31, 38)
 bench::mark(optimize(ll_poisson1(x1), c(0, 100), maximum = TRUE))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"35.17µs","3":"44.189µs","4":"17409.48","5":"10.625KB","6":"4.42539"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"31.506µs","3":"38.28µs","4":"24765.95","5":"10.625KB","6":"7.432013"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>bench::mark(optimize(ll_poisson2(x1), c(0, 100), maximum = TRUE))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"22.151µs","3":"26.174µs","4":"29384.36","5":"0B","6":"2.93873"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"20.191µs","3":"23.648µs","4":"40748.56","5":"0B","6":"8.151342"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>x &lt;- rpois(1e3, 100L)
 bench::mark(optimize(ll_poisson1(x), c(0, 100), maximum = TRUE))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"713.134µs","3":"886.9445µs","4":"1072.23","5":"220.0625KB","6":"4.358657"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"624.004µs","3":"745.3765µs","4":"1339.81","5":"220.0625KB","6":"4.200031"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>bench::mark(optimize(ll_poisson2(x), c(0, 100), maximum = TRUE))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"67.028µs","3":"81.614µs","4":"10003.84","5":"7.859375KB","6":"2.084133"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["bnch_xpr"],"align":["right"]},{"label":["min"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["median"],"name":[3],"type":["bench_tm"],"align":["right"]},{"label":["itr/sec"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["mem_alloc"],"name":[5],"type":["bnch_byt"],"align":["right"]},{"label":["gc/sec"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"<bnch_xpr>","2":"60.23µs","3":"69.702µs","4":"13863.47","5":"7.859375KB","6":"4.131565"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Answer: <code>ll_poisson2()</code> is nearly twice as fast with
@@ -2180,7 +2180,7 @@ work?</li>
 #&gt;         })
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd151550e8&gt;
+#&gt; &lt;bytecode: 0x7fd781255558&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <p>Answer: <code>possibly()</code> returns a function that uses
 <code>tryCatch()</code> to return <code>otherwise</code> if the mapper
@@ -2212,7 +2212,7 @@ work?</li>
 #&gt;     check_bool(quiet)
 #&gt;     function(...) capture_error(.f(...), otherwise, quiet)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd14763938&gt;
+#&gt; &lt;bytecode: 0x7fd765850d30&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="r"><code>purrr:::capture_error</code></pre>
 <pre><code>#&gt; function (code, otherwise = NULL, quiet = TRUE) 
@@ -2223,7 +2223,7 @@ work?</li>
 #&gt;         list(result = otherwise, error = e)
 #&gt;     })
 #&gt; }
-#&gt; &lt;bytecode: 0x7fcd25eb25d8&gt;
+#&gt; &lt;bytecode: 0x7fd765890fe8&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <p>Answer: <code>safely()</code> returns a function that uses the
 internal <code>capture_error()</code> function to store the evaluation
@@ -2458,14 +2458,14 @@ system.time({
   h()
 })</code></pre>
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.003   0.003   1.003</code></pre>
+#&gt;   0.007   0.007   1.001</code></pre>
 <pre class="r"><code>system.time({
   g()
   Sys.sleep(2)
   g()
 })</code></pre>
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.007   0.005   2.000</code></pre>
+#&gt;   0.013   0.012   2.001</code></pre>
 <p>Answer: code above.</p>
 <p>AR Solutions:</p>
 <p>To ensure that the function created by <code>delay_by()</code> waits
