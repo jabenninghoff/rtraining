@@ -78,7 +78,7 @@
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.6-0",
+      "Version": "1.6-1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -91,7 +91,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "31262fd18481fab05c5e7258dac163ca"
+      "Hash": "cb6855ac711958ca734b75e631b2035d"
     },
     "R.cache": {
       "Package": "R.cache",
@@ -210,6 +210,7 @@
       "Package": "USAboundaries",
       "Version": "0.4.0",
       "Source": "GitHub",
+      "Repository": "RSPM",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "ropensci",
@@ -572,13 +573,13 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "5.0.1",
+      "Version": "5.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "2118af9cb164c8d2dddc7b89eaf732d9"
+      "Hash": "511bacbfa153a15251166b463b4da4f9"
     },
     "cyclocomp": {
       "Package": "cyclocomp",
@@ -951,7 +952,7 @@
     },
     "ggplot2": {
       "Package": "ggplot2",
-      "Version": "3.4.2",
+      "Version": "3.4.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -972,7 +973,7 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "3a147ee02e85a8941aad9909f1b43b7b"
+      "Hash": "85846544c596e71f8f46483ab165da33"
     },
     "ggraph": {
       "Package": "ggraph",
@@ -1363,20 +1364,20 @@
     },
     "jbplot": {
       "Package": "jbplot",
-      "Version": "1.2.5",
+      "Version": "1.2.6",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "jbplot",
       "RemoteRef": "main",
-      "RemoteSha": "e326a6f93ec5a35a55846f3965c899514e0ffabd",
-      "RemoteHost": "api.github.com",
+      "RemoteSha": "7de54ad92f373851ad94bb9c93c0d5599e2e9bd2",
       "Remotes": "jabenninghoff/rdev",
       "Requirements": [
         "MASS",
         "ggplot2"
       ],
-      "Hash": "d39342ea71d6ac50ffeab4a8b04ce1be"
+      "Hash": "a7f29b62812ad652727141f86caa65f0"
     },
     "jquerylib": {
       "Package": "jquerylib",
@@ -1950,14 +1951,14 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "1.6.8",
+      "Version": "1.6.9",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "8e9e643a1dd1eeb78192133ce4decba5d42da8b3",
-      "RemoteHost": "api.github.com",
+      "RemoteSha": "b7f83cca3be273c5fbd4c4c84d2349af64992664",
       "Requirements": [
         "cli",
         "curl",
@@ -1988,7 +1989,7 @@
         "xml2",
         "yaml"
       ],
-      "Hash": "273448f5ab9c04ee34dcd0ce0f3598e3"
+      "Hash": "d8868c9293253eb06399b9b2a632ad1c"
     },
     "readr": {
       "Package": "readr",
@@ -2114,7 +2115,7 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.23",
+      "Version": "2.24",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2134,7 +2135,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "79f14e53725f28900d936f692bfdd69f"
+      "Hash": "3854c37590717c08c32ec8542a2e0a35"
     },
     "roxygen2": {
       "Package": "roxygen2",
