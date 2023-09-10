@@ -407,7 +407,7 @@ Answer:
 
 - R Documentation for ggplot2, either built-in or [online](https://ggplot2.tidyverse.org)
 - Posit [cheatsheets](https://posit.co/resources/cheatsheets/)
-- The [R Graph Gallery](http://r-graph-gallery.com)
+- The [R Graph Gallery](https://r-graph-gallery.com)
 
 ---
 
