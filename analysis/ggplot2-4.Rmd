@@ -422,7 +422,7 @@ Answer: in the order they appear in the [Exercises](https://ggplot2-book.org/lay
 1. `geom_area`
 1. `geom_path`
 
-Note: verifying my answers against the [source code](https://github.com/hadley/ggplot2-book/blob/master/layers.Rmd), I got two wrong, although the underlying geom is `geom_point`.
+Note: verifying my answers against the [source code](https://github.com/hadley/ggplot2-book/blob/main/layers.qmd), I got two wrong, although the underlying geom is `geom_point`.
 
 GG Solutions:
 
@@ -502,7 +502,7 @@ Answer: in the order they appear in the [Exercises](https://ggplot2-book.org/lay
 1. `stat_qq`
 1. `stat_density`
 
-Confirmed correct by reviewing the [source code](https://github.com/hadley/ggplot2-book/blob/master/layers.Rmd).
+Confirmed correct by reviewing the [source code](https://github.com/hadley/ggplot2-book/blob/main/layers.qmd).
 
 GG Solutions: From left to right,
 
@@ -808,7 +808,7 @@ ggplot(mpg2, aes(displ, hwy)) +
   facet_wrap(~class)
 ```
 
-Comparing to the [source code](https://github.com/hadley/ggplot2-book/blob/master/facet.Rmd), the answer is correct!
+Comparing to the [source code](https://github.com/hadley/ggplot2-book/blob/main/facet.qmd), the answer is correct!
 
 GG Solutions:
 

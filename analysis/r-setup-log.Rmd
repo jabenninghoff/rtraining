@@ -81,13 +81,13 @@ With no projects open, I periodically check for updates to the base R packages u
 
 ### Development Packages
 
-The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by [homebrew](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb), currently `/usr/local/lib/R/4.0/site-library`. I've developed a shell script to install development packages that you can find in the tools directory of [this repository](https://github.com/jabenninghoff/rtraining).
+The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by [homebrew](https://github.com/Homebrew/homebrew-core/blob/master/Formula/r/r.rb), currently `/usr/local/lib/R/4.0/site-library`. I've developed a shell script to install development packages that you can find in the tools directory of [this repository](https://github.com/jabenninghoff/rtraining).
 
 ```sh
 #!/bin/sh
 # install development packages to site repository
 # thanks to https://blog.sellorm.com/2017/10/21/quick-script-to-install-an-r-package-from-the-command-line/
-# and https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r.rb
+# and https://github.com/Homebrew/homebrew-core/blob/master/Formula/r/r.rb
 # designed to work with homebrew: `brew install --formula r && brew install --cask rstudio`
 set -ex # halt script on error, echo on
 
