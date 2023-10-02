@@ -1,3 +1,7 @@
+# rtraining 0.8.22
+
+* Updated installation instructions in README and templates to use `remotes` instead of `devtools`
+
 # rtraining 0.8.21
 
 * Maintenance updates
