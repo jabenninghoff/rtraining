@@ -235,7 +235,7 @@ ggplot2::mpg %>%
 
 ```{r}
 df <- ggplot2::mpg %>%
-  transmute("man_mod" = paste(manufacturer, model, sep = " "))
+  transmute("man_mod" = paste(manufacturer, model, sep = " ")) # nolint: keyword_quote_linter.
 ggplot(df, aes(man_mod)) +
   geom_bar() +
   coord_flip()

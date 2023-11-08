@@ -289,7 +289,7 @@ ggplot(diamonds, aes(price)) +
   geom_histogram(binwidth = 50)
 
 diamonds |>
-  filter(price >= 1454 & price <= 1546)
+  filter(price >= 1454, price <= 1546)
 ```
 
 GG Solutions:
@@ -372,7 +372,8 @@ ggplot(diamonds, aes(price)) +
 
 ggplot(diamonds, aes(price)) +
   geom_histogram(binwidth = 50, fill = "gray") +
-  # see https://stackoverflow.com/questions/27611438/density-curve-overlay-on-histogram-where-vertical-axis-is-frequency-aka-count # nolint
+  # nolint next: line_length_linter.
+  # see https://stackoverflow.com/questions/27611438/density-curve-overlay-on-histogram-where-vertical-axis-is-frequency-aka-count
   geom_density(aes(y = after_stat(density * nrow(diamonds) * 50))) +
   labs(x = "", y = "") +
   theme_quo()

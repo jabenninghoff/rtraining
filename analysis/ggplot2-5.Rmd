@@ -252,7 +252,7 @@ borders_quickmap <- function(...) {
 }
 
 us.cities |>
-  filter(capital == 2 & !(country.etc %in% c("AK", "HI"))) |>
+  filter(capital == 2, !(country.etc %in% c("AK", "HI"))) |>
   ggplot(aes(long, lat)) +
   geom_point() +
   borders_quickmap("state") +

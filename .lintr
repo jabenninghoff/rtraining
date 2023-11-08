@@ -10,6 +10,7 @@ linters: linters_with_tags(
     # TODO: remove indentation_linter = NULL when fixed
     indentation_linter = NULL,
     lengths_linter = NULL,
+    library_call_linter = NULL,
     line_length_linter(100),
     matrix_apply_linter = NULL,
     missing_argument_linter = NULL,
@@ -18,6 +19,7 @@ linters: linters_with_tags(
     nonportable_path_linter = NULL,
     object_name_linter = NULL,
     object_usage_linter = NULL,
+    pipe_consistency_linter = NULL,
     spaces_inside_linter = NULL,
     T_and_F_symbol_linter = NULL,
     todo_comment_linter = NULL,
@@ -25,6 +27,7 @@ linters: linters_with_tags(
     undesirable_operator_linter = NULL,
     unnecessary_concatenation_linter = NULL,
     unnecessary_lambda_linter = NULL,
+    unreachable_code_linter = NULL,
     unused_import_linter(
       except_packages = c("bit64", "data.table", "tidyverse", pkgload::pkg_name("."))
     )
