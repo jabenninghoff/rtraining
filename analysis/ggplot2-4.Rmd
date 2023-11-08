@@ -97,7 +97,7 @@ Answer: retrieved from [archive.org](https://web.archive.org/web/20210516232923/
 ---
 
 4.  The Pew Research Center's favorite data visualizations of 2014:
-    [link](https://www.pewresearch.org/fact-tank/2014/12/29/our-favorite-pew-research-center-data-visualizations-from-2014/)
+    [link](https://www.pewresearch.org/short-reads/2014/12/29/our-favorite-pew-research-center-data-visualizations-from-2014/)
 
 Answer: multiple plots, described individually.
 
