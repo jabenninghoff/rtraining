@@ -245,7 +245,7 @@ ggplot(huron, aes(year)) +
   geom_line(aes(y = level + 5, colour = "above")) +
   geom_line(aes(y = level - 5, colour = "below")) +
   scale_colour_manual("Direction",
-    values = c("above" = "red", "below" = "blue")
+    values = c(above = "red", below = "blue")
   ) +
   labs(x = NULL, y = NULL)
 ```

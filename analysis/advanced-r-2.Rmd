@@ -173,7 +173,7 @@ map_dbl(mtcars, sd)
 penguins_numeric <- map_lgl(penguins, is.numeric)
 map_dbl(penguins[penguins_numeric], sd, na.rm = TRUE)
 penguins_factor <- map_lgl(penguins, is.factor)
-map_int(penguins[penguins_factor], ~ length(levels(.x)))
+map_int(penguins[penguins_factor], ~ length(levels(.x))) # nolint: length_levels_linter.
 ```
 
 Note: my code is more concise, both with selections and use of `nlevels()`, although using `keep()` is preferable.

@@ -1719,7 +1719,7 @@ AR Solutions: Here `new_function()` allows us to create a function factory using
 bc2 <- function(lambda) {
   lambda <- enexpr(lambda)
 
-  if (!!lambda == 0) {
+  if (!!lambda == 0) { # nolint: if_not_else_linter.
     new_function(exprs(x = ), expr(log(x)))
   } else {
     new_function(exprs(x = ), expr((x^(!!lambda) - 1) / !!lambda))
