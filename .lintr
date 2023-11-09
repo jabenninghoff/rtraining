@@ -22,6 +22,7 @@ linters: linters_with_tags(
     pipe_consistency_linter = NULL,
     spaces_inside_linter = NULL,
     T_and_F_symbol_linter = NULL,
+    paste_linter(allow_file_path = "always"),
     todo_comment_linter = NULL,
     undesirable_function_linter = NULL,
     undesirable_operator_linter = NULL,
