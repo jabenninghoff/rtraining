@@ -1,9 +1,10 @@
 ---
-title: "Advanced R Workbook (Functional programming)"
+title: "Advanced R (Functional programming)"
 author: "John Benninghoff"
 date: '2022-07-31'
 file-modified: '2023-08-14'
 categories: [exercises, advanced-r]
+order: 202
 output:
   html_notebook:
     theme:

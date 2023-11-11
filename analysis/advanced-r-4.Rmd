@@ -1,9 +1,10 @@
 ---
-title: "Advanced R Workbook (Metaprogramming)"
+title: "Advanced R (Metaprogramming)"
 author: "John Benninghoff"
 date: '2023-02-19'
 file-modified: '2023-07-22'
 categories: [exercises, advanced-r]
+order: 204
 output:
   html_notebook:
     theme:
