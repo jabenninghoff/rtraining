@@ -31,7 +31,6 @@ Suggests:
     MASS,
     modelr,
     palmerpenguins,
-    pkgdown,
     pkgload,
     purrr,
     quarto,
