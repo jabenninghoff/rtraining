@@ -1,6 +1,9 @@
 ---
 title: "ggplot2 (Getting started)"
+author: "John Benninghoff"
 date: '2022-11-20'
+file-modified: '2022-12-22'
+categories: [exercises, ggplot2]
 output:
   html_notebook:
     theme:
