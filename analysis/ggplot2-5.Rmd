@@ -4,6 +4,7 @@ author: "John Benninghoff"
 date: '2022-12-18'
 file-modified: '2022-12-22'
 categories: [exercises, ggplot2]
+order: 305
 output:
   html_notebook:
     theme:

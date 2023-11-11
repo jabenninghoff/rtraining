@@ -3,7 +3,8 @@ title: "R Training Log"
 author: "John Benninghoff"
 date: '2020-12-02'
 file-modified: '2022-06-21'
-categories: [notes, training]
+categories: notes
+order: 101
 output:
   html_notebook:
     theme:

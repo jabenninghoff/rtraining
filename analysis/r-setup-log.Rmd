@@ -3,7 +3,8 @@ title: "R Setup Log"
 author: "John Benninghoff"
 date: '2020-12-30'
 file-modified: '2022-05-14'
-categories: [notes, setup]
+categories: notes
+order: 102
 output:
   html_notebook:
     theme:

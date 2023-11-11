@@ -8,10 +8,10 @@ website:
   description:
     "My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress)."
   repo-url: https://github.com/jabenninghoff/rtraining
-  repo-actions: [edit, issue]
+  repo-actions: [source, issue]
   page-navigation: true
   sidebar:
-    contents: analysis
+    contents: analysis/*
   navbar:
     background: light
     search: true
