@@ -1,5 +1,4 @@
 ^_freeze$
-^_pkgdown\.yml$
 ^_site$
 ^\.github$
 ^\.lintr$
@@ -14,7 +13,6 @@
 ^analysis/import$
 ^analysis/rendered$
 ^docs$
-^pkgdown$
 ^README\.Rmd$
 ^renv\.lock$
 ^renv$
