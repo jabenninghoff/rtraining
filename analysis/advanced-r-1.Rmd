@@ -1,6 +1,9 @@
 ---
 title: "Advanced R Workbook (Foundations)"
+author: "John Benninghoff"
 date: '2022-06-12'
+file-modified: '2022-07-31'
+categories: [exercises, advanced-r]
 output:
   html_notebook:
     theme:

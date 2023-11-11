@@ -1,6 +1,9 @@
 ---
 title: "ggplot2 (Grammar)"
+author: "John Benninghoff"
 date: '2022-12-09'
+file-modified: '2022-12-22'
+categories: [exercises, ggplot2]
 output:
   html_notebook:
     theme:
