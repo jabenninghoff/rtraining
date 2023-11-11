@@ -1,3 +1,7 @@
+# rtraining 1.0.0
+
+* Migrated site to [Quarto](https://quarto.org)
+
 # rtraining 0.8.22
 
 * Updated installation instructions in README and templates to use `remotes` instead of `devtools`
