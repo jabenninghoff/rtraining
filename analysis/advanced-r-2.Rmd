@@ -867,9 +867,9 @@ add_one <- function(x) x + 1
 try(fixed_point_ar(add_one, x_init = 1))
 ```
 
-Notes: AR Solutions offers a different approach using a `while()` loop that is guaranteed to stop. My approach using recursive calls does stop eventually with a stack limit error (however, this stops `build_analysis_site()`):
+Notes: AR Solutions offers a different approach using a `while()` loop that is guaranteed to stop. My approach using recursive calls does stop eventually with a stack limit error:
 
-```{r, eval = FALSE}
+```{r}
 fixed_point(add_one, 1)
 ```
 
