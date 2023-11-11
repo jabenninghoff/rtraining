@@ -1,0 +1,44 @@
+project:
+  type: website
+
+website:
+  title: "rtraining"
+  site-url: https://jabenninghoff.github.io/rtraining
+  description:
+    "My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress)."
+  repo-url: https://github.com/jabenninghoff/rtraining
+  repo-actions: [edit, issue]
+  page-navigation: true
+  sidebar:
+    contents: analysis
+  navbar:
+    background: light
+    search: true
+    left:
+      - text: Changelog
+        file: NEWS.md
+      - text: TODO
+        file: TODO.md
+    tools:
+      - icon: rss
+        href: index.xml
+        aria-label: rss
+      - icon: github
+        url: https://github.com/jabenninghoff/rtraining
+        aria-label: github
+  page-footer:
+    left: "Copyright 2023, John Benninghoff"
+    center:
+      - text: License
+        file: LICENSE.md
+    right:
+      - icon: github
+        href: https://github.com/jabenninghoff/rtraining
+        aria-label: github
+
+execute:
+  freeze: auto
+
+format:
+  html:
+    toc: true
