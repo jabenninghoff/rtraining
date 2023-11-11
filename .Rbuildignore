@@ -1,6 +1,10 @@
+^_freeze$
 ^_pkgdown\.yml$
+^_site$
 ^\.github$
 ^\.lintr$
+^\.nojekyll$
+^\.quarto$
 ^\.Rproj\.user$
 ^analysis/.*-figure$
 ^analysis/.*\.docx$
@@ -10,10 +14,8 @@
 ^analysis/import$
 ^analysis/rendered$
 ^docs$
-^LICENSE\.md$
 ^pkgdown$
 ^README\.Rmd$
 ^renv\.lock$
 ^renv$
 ^rtraining\.Rproj$
-^TODO\.md$

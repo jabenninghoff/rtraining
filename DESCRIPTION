@@ -34,6 +34,7 @@ Suggests:
     pkgdown,
     pkgload,
     purrr,
+    quarto,
     R6,
     rdev,
     rlang,
