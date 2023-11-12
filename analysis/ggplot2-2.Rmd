@@ -133,7 +133,7 @@ GG Solutions offers no answers for this section.
 Answer: the `group` aesthetic is required.
 
 ```{r}
-ggplot(ggplot2::mpg, aes(cyl, hwy, group = cyl)) +
+ggplot(mpg, aes(cyl, hwy, group = cyl)) +
   geom_boxplot()
 ```
 
@@ -143,17 +143,17 @@ ggplot(ggplot2::mpg, aes(cyl, hwy, group = cyl)) +
     of `displ`.
 
 ```{r, eval = FALSE}
-ggplot(ggplot2::mpg, aes(displ, cty)) +
+ggplot(mpg, aes(displ, cty)) +
   geom_boxplot()
 ```
 
 Answer: grouping by the floor of displacement works, but is arranged strangely. Mutating displacement first is a better solution:
 
 ```{r}
-ggplot(ggplot2::mpg, aes(displ, cty, group = floor(displ))) +
+ggplot(mpg, aes(displ, cty, group = floor(displ))) +
   geom_boxplot()
 
-ggplot2::mpg |>
+mpg |>
   mutate(displ = floor(displ)) |>
   ggplot(aes(displ, cty, group = displ)) +
   geom_boxplot()
@@ -193,12 +193,12 @@ ggplot(df, aes(x, y, colour = factor(colour))) +
     (Hint: try adding an outline around each bar with `colour = "white"`)
 
 ```{r, eval = FALSE}
-ggplot(ggplot2::mpg, aes(drv)) +
+ggplot(mpg, aes(drv)) +
   geom_bar()
-ggplot(ggplot2::mpg, aes(drv, fill = hwy, group = hwy)) +
+ggplot(mpg, aes(drv, fill = hwy, group = hwy)) +
   geom_bar()
 
-mpg2 <- ggplot2::mpg %>%
+mpg2 <- mpg %>%
   arrange(hwy) %>%
   mutate(id = seq_along(hwy))
 ggplot(mpg2, aes(drv, fill = hwy, group = id)) +
@@ -208,13 +208,13 @@ ggplot(mpg2, aes(drv, fill = hwy, group = id)) +
 Answer: in the first plot, there are three bars. In the second, there is one bar for each unique value for `hwy` in each column. In the third, there is one bar for each observation of `hwy`.
 
 ```{r}
-ggplot(ggplot2::mpg, aes(drv)) +
+ggplot(mpg, aes(drv)) +
   geom_bar(color = "white")
 
-ggplot(ggplot2::mpg, aes(drv, fill = hwy, group = hwy)) +
+ggplot(mpg, aes(drv, fill = hwy, group = hwy)) +
   geom_bar(color = "white")
 
-ggplot2::mpg |>
+mpg |>
   arrange(hwy) |>
   mutate(id = seq_along(hwy)) |>
   ggplot(aes(drv, fill = hwy, group = id)) +

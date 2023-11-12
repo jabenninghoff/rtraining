@@ -39,14 +39,14 @@ This workbook includes answers and solutions to the quizzes and exercises from [
 Position scales are used to control the locations of visual entities in a plot, and how those locations are mapped to data values. Every plot has two position scales, corresponding to the x and y aesthetics. In most cases this is clear in the plot specification, because the user explicitly specifies the variables mapped to x and y explicitly. However, this is not always the case. Consider this plot specification:
 
 ```{r, fig.show = "hide", message = FALSE}
-ggplot(ggplot2::mpg, aes(x = displ)) +
+ggplot(mpg, aes(x = displ)) +
   geom_histogram()
 ```
 
 In this example the y aesthetic is not specified by the user. Rather, the aesthetic is mapped to a computed variable: `geom_histogram()` computes a `count` variable that gets mapped to the y aesthetic. The default behaviour of `geom_histogram()` is equivalent to the following:
 
 ```{r, fig.show = "hide", message = FALSE}
-ggplot(ggplot2::mpg, aes(x = displ, y = after_stat(count))) +
+ggplot(mpg, aes(x = displ, y = after_stat(count))) +
   geom_histogram()
 ```
 
@@ -66,7 +66,7 @@ ggplot(economics, aes(date, psavert)) +
 Let's create a plot with rotated labels!
 
 ```{r}
-ggplot(ggplot2::mpg, aes(manufacturer, hwy)) +
+ggplot(mpg, aes(manufacturer, hwy)) +
   geom_boxplot() +
   guides(x = guide_axis(angle = 90))
 ```
@@ -107,8 +107,8 @@ base + scale_fill_gradient(na.value = "yellow")
 Scale limits for discrete colour scales can be set using the `limits` argument to the scale argument, or by using the `lims()` helper function. This can be important when the same variable is represented in different plots, and you want to ensure that the colours are consistent across plots. To demonstrate this I'll extend the example from Section 10.1.1. Colour represents the fuel type, which can be **r**egular, **e**thanol, **d**iesel, **p**remium or **c**ompressed natural gas.
 
 ```{r}
-mpg_99 <- ggplot2::mpg %>% filter(year == 1999)
-mpg_08 <- ggplot2::mpg %>% filter(year == 2008)
+mpg_99 <- mpg %>% filter(year == 1999)
+mpg_08 <- mpg %>% filter(year == 2008)
 base_99 <- ggplot(mpg_99, aes(displ, hwy, colour = fl)) +
   geom_point()
 base_08 <- ggplot(mpg_08, aes(displ, hwy, colour = fl)) +
@@ -178,7 +178,7 @@ base_08 +
     and also used colour in the plot.
 
 ```{r}
-base <- ggplot(ggplot2::mpg, aes(displ, hwy, colour = drv)) +
+base <- ggplot(mpg, aes(displ, hwy, colour = drv)) +
   geom_point(size = 4, alpha = 0.2, stroke = 0)
 
 base + guides(colour = guide_legend())
@@ -212,7 +212,7 @@ In addition to position and colour, there are several other aesthetics that ggpl
 The size aesthetic is typically used to scale points and text. The default scale for size aesthetics is `scale_size()` in which a linear increase in the variable is mapped onto a linear increase in the area (not the radius) of the geom. Scaling as a function of area is a sensible default as human perception of size is more closely mimicked by area scaling than by radius scaling. By default the smallest value in the data (more precisely in the scale limits) is mapped to a size of 1 and the largest is mapped to a size of 6. The `range` argument allows you to scale the size of the geoms:
 
 ```{r}
-base <- ggplot(ggplot2::mpg, aes(displ, hwy, size = cyl)) +
+base <- ggplot(mpg, aes(displ, hwy, size = cyl)) +
   geom_point()
 base
 base + scale_size(range = c(1, 2))

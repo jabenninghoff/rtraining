@@ -225,7 +225,7 @@ GG Solutions:
     each class of car. 
 
 ```{r}
-class <- ggplot2::mpg %>%
+class <- mpg %>%
   group_by(class) %>%
   summarise(n = n(), hwy = mean(hwy))
 ```
@@ -235,7 +235,7 @@ class <- ggplot2::mpg %>%
 Answer: with some help from the source code to get the measurements right, here is the solution:
 
 ```{r}
-ggplot(ggplot2::mpg, aes(class, hwy)) +
+ggplot(mpg, aes(class, hwy)) +
   geom_point() +
   geom_jitter(width = 0.25) +
   geom_point(data = class, color = "red", size = 5) +
@@ -245,7 +245,7 @@ ggplot(ggplot2::mpg, aes(class, hwy)) +
 GG Solutions:
 
 ```{r}
-ggplot2::mpg %>%
+mpg %>%
   ggplot(aes(class, hwy)) +
   geom_jitter(width = 0.15, height = 0.35) +
   geom_point(
@@ -265,7 +265,7 @@ ggplot2::mpg %>%
 1.  Simplify the following plot specifications:
 
 ```{r, eval = FALSE}
-ggplot(ggplot2::mpg) +
+ggplot(mpg) +
   geom_point(aes(mpg$displ, mpg$hwy))
 
 ggplot() +
@@ -279,10 +279,10 @@ ggplot(diamonds, aes(carat, price)) +
 Answer:
 
 ```{r}
-ggplot(ggplot2::mpg, aes(displ, hwy)) +
+ggplot(mpg, aes(displ, hwy)) +
   geom_point()
 
-ggplot(ggplot2::mpg, aes(cty, hwy)) +
+ggplot(mpg, aes(cty, hwy)) +
   geom_point() +
   geom_smooth(method = "loess", formula = y ~ x)
 
@@ -293,10 +293,10 @@ ggplot(msleep, aes(log(brainwt), log(bodywt))) +
 GG Solutions offers a similar solution for the first two and a strange solution for the third (since the `diamonds` data is never used in the third plot):
 
 ```{r, eval = FALSE}
-ggplot(ggplot2::mpg) +
+ggplot(mpg) +
   geom_point(aes(displ, hwy))
 
-ggplot(ggplot2::mpg, aes(cty, hwy)) +
+ggplot(mpg, aes(cty, hwy)) +
   geom_point() +
   geom_smooth()
 
@@ -320,7 +320,7 @@ Note: I prefer my answer to GG Solutions.
     Why/why not?
 
 ```{r, eval = FALSE}
-ggplot(ggplot2::mpg) +
+ggplot(mpg) +
   geom_point(aes(class, cty)) +
   geom_boxplot(aes(trans, hwy))
 ```
@@ -328,11 +328,11 @@ ggplot(ggplot2::mpg) +
 Answer: it does work, but does not make sense, and should be done as separate plots so that the variables comparisons are visible:
 
 ```{r}
-ggplot(ggplot2::mpg, aes(class, cty)) +
+ggplot(mpg, aes(class, cty)) +
   geom_point() +
   coord_flip()
 
-ggplot(ggplot2::mpg, aes(trans, hwy)) +
+ggplot(mpg, aes(trans, hwy)) +
   geom_boxplot() +
   coord_flip()
 ```
@@ -352,7 +352,7 @@ Answer: let's experiment!
 This code throws an error, `Error: Discrete value supplied to continuous scale`
 
 ```{r, eval = FALSE}
-ggplot(ggplot2::mpg, aes(displ, hwy)) +
+ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   geom_point(aes(drv, hwy), color = "red")
 ```
@@ -360,7 +360,7 @@ ggplot(ggplot2::mpg, aes(displ, hwy)) +
 Reversing the order works, but draws a strange plot:
 
 ```{r}
-ggplot(ggplot2::mpg, aes(displ, hwy)) +
+ggplot(mpg, aes(displ, hwy)) +
   geom_point(aes(drv, hwy), color = "red") +
   geom_point()
 ```
@@ -464,7 +464,7 @@ Answers below:
     the appropriate geoms to mimic the default `geom_smooth()` display.
 
 ```{r}
-mod <- loess(hwy ~ displ, data = ggplot2::mpg)
+mod <- loess(hwy ~ displ, data = mpg)
 smoothed <- data.frame(displ = seq(1.6, 7, length.out = 50))
 pred <- predict(mod, newdata = smoothed, se = TRUE)
 smoothed$hwy <- pred$fit
@@ -475,11 +475,11 @@ smoothed$hwy_upr <- pred$fit + 1.96 * pred$se.fit
 Answer: the exercise is to replicate `geom_smooth` using the `smoothed` data frame, which includes a line and a ribbon:
 
 ```{r}
-ggplot(ggplot2::mpg, aes(displ, hwy)) +
+ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   geom_smooth(method = "loess", formula = y ~ x)
 
-ggplot(ggplot2::mpg, aes(displ, hwy)) +
+ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   geom_line(data = smoothed, color = "blue", linewidth = 1) +
   geom_ribbon(mapping = aes(ymin = hwy_lwr, ymax = hwy_upr), data = smoothed, alpha = 0.2)
@@ -521,7 +521,7 @@ GG Solutions: From left to right,
 Answer: in addition, facet by year.
 
 ```{r}
-ggplot(ggplot2::mpg, aes(drv, trans)) +
+ggplot(mpg, aes(drv, trans)) +
   geom_count(aes(size = after_stat(prop), group = 1)) +
   scale_size(labels = scales::label_percent()) +
   facet_wrap(vars(year)) +
@@ -533,7 +533,7 @@ ggplot(ggplot2::mpg, aes(drv, trans)) +
 GG Solutions:
 
 ```{r}
-ggplot2::mpg %>%
+mpg %>%
   ggplot(aes(drv, trans)) +
   geom_count(aes(size = after_stat(prop), group = 1))
 ```
@@ -588,12 +588,12 @@ The scales toolbox in Chapters 10 to 12 provides extensive guidance for how to w
 Let's create a pair of plots controlling color with limits (from 11.3.5)! First, we'll just plot both independently:
 
 ```{r}
-gg_99 <- ggplot2::mpg |>
+gg_99 <- mpg |>
   filter(year == 1999) |>
   ggplot(aes(displ, hwy, color = fl)) +
   geom_point()
 
-gg_08 <- ggplot2::mpg |>
+gg_08 <- mpg |>
   filter(year == 2008) |>
   ggplot(aes(displ, hwy, color = fl)) +
   geom_point()
@@ -680,7 +680,7 @@ You first encountered faceting in Section 2.5. Faceting generates small multiple
 Let's draw a facet grid!
 
 ```{r}
-ggplot2::mpg |>
+mpg |>
   filter(cyl != 5) |>
   ggplot(aes(displ, hwy)) +
   geom_point() +
@@ -704,7 +704,7 @@ ggplot(economics_long, aes(date, value)) +
 `facet_grid()` has an additional parameter called `space`, which takes the same values as `scales`.  When space is "free", each column (or row) will have width (or height) proportional to the range of the scale for that column (or row).  This makes the scaling equal across the whole plot: 1 cm on each panel maps to the same range of data. (This is somewhat analogous to the 'sliced' axis limits of lattice.) For example, if panel a had range 2 and panel b had range 4, one-third of the space would be given to a, and two-thirds to b. This is most useful for categorical scales, where we can assign space proportionally based on the number of levels in each facet, as illustrated below.
 
 ```{r}
-mpg2 <- subset(ggplot2::mpg, cyl != 5 & drv %in% c("4", "f") & class != "2seater")
+mpg2 <- subset(mpg, cyl != 5 & drv %in% c("4", "f") & class != "2seater")
 mpg2$model <- reorder(mpg2$model, mpg2$cty)
 mpg2$manufacturer <- reorder(mpg2$manufacturer, -mpg2$cty)
 
@@ -720,9 +720,8 @@ ggplot(mpg2, aes(cty, model)) +
 Let's combine grouping and faceting!
 
 ```{r}
-# Need to use dplyr::select for disambiguation for build_analysis_site()
-ggplot(ggplot2::mpg, aes(displ, hwy)) +
-  geom_point(data = dplyr::select(ggplot2::mpg, -drv), color = "grey75") +
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(data = select(mpg, -drv), color = "grey75") +
   geom_point(aes(color = drv)) +
   facet_wrap(~drv)
 ```
@@ -770,7 +769,7 @@ ggplot(diamonds, aes(carat, price)) +
 
 ggplot(diamonds, aes(carat, price)) +
   geom_point(aes(color = color)) +
-  geom_smooth(data = dplyr::select(diamonds, -color), method = "rlm", formula = y ~ x, se = FALSE) +
+  geom_smooth(data = select(diamonds, -color), method = "rlm", formula = y ~ x, se = FALSE) +
   coord_cartesian(ylim = c(0, max(diamonds$price))) +
   facet_wrap(~color)
 ```
@@ -808,7 +807,7 @@ Answer: plot below.
 ```{r}
 ggplot(mpg2, aes(displ, hwy)) +
   geom_point() +
-  geom_smooth(data = dplyr::select(mpg2, -class), method = "loess", formula = y ~ x, se = FALSE) +
+  geom_smooth(data = select(mpg2, -class), method = "loess", formula = y ~ x, se = FALSE) +
   facet_wrap(~class)
 ```
 
@@ -820,7 +819,7 @@ GG Solutions:
 mpg2 %>%
   ggplot(aes(displ, hwy)) +
   geom_point() +
-  geom_smooth(data = mpg2 %>% dplyr::select(-class), se = FALSE, method = "loess") +
+  geom_smooth(data = mpg2 %>% select(-class), se = FALSE, method = "loess") +
   facet_wrap(~class)
 ```
 
@@ -839,7 +838,7 @@ This separation of control into data and non-data parts is quite different from 
 Answer: the "interesting" themes are displayed below. From the top four, I'd pick `theme_solarized_2()`, although `theme_fivethirtyeight()` is a close runner-up.
 
 ```{r}
-base <- ggplot(ggplot2::mpg, aes(displ, hwy)) +
+base <- ggplot(mpg, aes(displ, hwy)) +
   geom_point(aes(color = factor(cyl))) +
   geom_smooth(method = "loess", formula = y ~ x) +
   labs(

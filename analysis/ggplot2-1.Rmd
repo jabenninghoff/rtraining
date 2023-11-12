@@ -105,8 +105,7 @@ mpg_l100km <- function(x) {
   (1 / x) * 3.78541 / (1.609344 / 100)
 }
 
-# Need to use ggplot2::mpg to disambiguate for build_analysis_site()
-ggplot2::mpg |>
+mpg |>
   mutate(cty = mpg_l100km(cty), hwy = mpg_l100km(hwy))
 ```
 
@@ -136,7 +135,7 @@ mpgTol100km <- function(milespergallon) {
 Answer: we can generate a dataframe with manufacturers, models, and variations using:
 
 ```{r}
-mpg_summary <- ggplot2::mpg |>
+mpg_summary <- mpg |>
   count(manufacturer, model) |>
   rename(variations = n)
 
@@ -162,7 +161,7 @@ mpg_summary |>
 If we first remove the redundant drive train from the summary, we get:
 
 ```{r}
-mpg_summary2 <- ggplot2::mpg |>
+mpg_summary2 <- mpg |>
   mutate(model = gsub(" (quattro)|(2wd)|(4wd)|(awd)$", "", model)) |>
   count(manufacturer, model) |>
   rename(variations = n)
@@ -201,7 +200,7 @@ Not included here because I believe the answer to question 4 in [2.2 Exercises](
 Answer: we can explore the relationship using a scatterplot: 
 
 ```{r}
-ggplot(ggplot2::mpg, aes(cty, hwy)) +
+ggplot(mpg, aes(cty, hwy)) +
   geom_point()
 ```
 
@@ -220,7 +219,7 @@ GG Solutions:
 Answer: this plot shows each model as a point for each manufacturer, which is not particularly useful, although it does allow for a quick count of models by manufacturer. A bar chart showing count of models by manufacturer would be more useful.
 
 ```{r}
-ggplot(ggplot2::mpg, aes(model, manufacturer)) +
+ggplot(mpg, aes(model, manufacturer)) +
   geom_point()
 ```
 
@@ -229,7 +228,7 @@ GG Solutions:
 - The plot shows the manufacturer of each model. Its not very readable since there are too many models and this clutters up the x-axis with too many ticks! I would just plot 20 or so models so that the graph is more readable. See below:
 
 ```{r}
-ggplot2::mpg %>%
+mpg %>%
   head(25) %>%
   ggplot(aes(model, manufacturer)) +
   geom_point()
@@ -238,7 +237,7 @@ ggplot2::mpg %>%
 - A possible alternative would be to look total number of observations for each manufacturer-model combination using geom_bar(). (Rademaker, 2016)
 
 ```{r}
-df <- ggplot2::mpg %>%
+df <- mpg %>%
   transmute("man_mod" = paste(manufacturer, model, sep = " ")) # nolint: keyword_quote_linter.
 ggplot(df, aes(man_mod)) +
   geom_bar() +
@@ -269,13 +268,13 @@ Answer:
 1. `ggplot(mpg, aes(cty)) + geom_histogram()` - a histogram of city mpg
 
 ```{r}
-ggplot(ggplot2::mpg, aes(cty, hwy)) +
+ggplot(mpg, aes(cty, hwy)) +
   geom_point()
 ggplot(diamonds, aes(carat, price)) +
   geom_point()
 ggplot(economics, aes(date, unemploy)) +
   geom_line()
-ggplot(ggplot2::mpg, aes(cty)) +
+ggplot(mpg, aes(cty)) +
   geom_histogram()
 ```
 
@@ -318,13 +317,13 @@ Answer: observations based on the plots below:
 
 ```{r}
 # continuous
-ggplot(ggplot2::mpg, aes(displ, hwy, color = cyl)) +
+ggplot(mpg, aes(displ, hwy, color = cyl)) +
   geom_point()
 # categorical
-ggplot(ggplot2::mpg, aes(displ, hwy, color = drv)) +
+ggplot(mpg, aes(displ, hwy, color = drv)) +
   geom_point()
 # multiple
-ggplot2::mpg |>
+mpg |>
   mutate(year = as.factor(year)) |>
   ggplot(aes(displ, hwy, color = drv, size = cyl, shape = year)) +
   geom_point()
@@ -357,11 +356,11 @@ Answer: The plots below show that:
   - Pickups only have four wheel drive
 
 ```{r}
-ggplot(ggplot2::mpg, aes(hwy, drv)) +
+ggplot(mpg, aes(hwy, drv)) +
   geom_point()
-ggplot(ggplot2::mpg, aes(displ, drv)) +
+ggplot(mpg, aes(displ, drv)) +
   geom_point()
-ggplot(ggplot2::mpg, aes(class, drv)) +
+ggplot(mpg, aes(class, drv)) +
   geom_point()
 ```
 
@@ -379,11 +378,11 @@ Note: GG Solutions does not explore the relationship between drive train and cla
 Answer: faceting on a continuous variable creates a facet for each unique value in the data frame, which holds true for both `hwy` and `cyl`. The key difference is that `cyl` has fewer unique values, making the plot more readable and useful.
 
 ```{r}
-ggplot(ggplot2::mpg, aes(displ, cty)) +
+ggplot(mpg, aes(displ, cty)) +
   geom_point() +
   facet_wrap(vars(hwy))
 
-ggplot(ggplot2::mpg, aes(displ, cty)) +
+ggplot(mpg, aes(displ, cty)) +
   geom_point() +
   facet_wrap(vars(cyl))
 ```
@@ -403,7 +402,7 @@ GG Solutions:
 Answer: engines with fewer cylinders have a stronger relationship between displacement and fuel economy (where larger engines have poorer fuel economy), strongest with 4 cylinders, unclear with 5 (due to limited data), weaker with 6, and no apparent relationship with 8.
 
 ```{r}
-ggplot(ggplot2::mpg, aes(displ, hwy)) +
+ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   geom_smooth(method = "lm", formula = y ~ x) +
   facet_wrap(vars(cyl))
@@ -432,7 +431,7 @@ GG Solutions:
 Answer: the `scales` argument determines whether scales are fixed (the default) or free on one or both dimensions. Using `scales = "free"` is helpful when comparing relationships when scale is less important, as shown in this reworked example of exercise 2, which focuses on the smoothed plot:
 
 ```{r}
-ggplot(ggplot2::mpg, aes(displ, hwy)) +
+ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   geom_smooth(method = "lm", formula = y ~ x) +
   facet_wrap(vars(cyl), scales = "free")
@@ -454,7 +453,7 @@ GG Solutions:
 Answer: as noted in GG Solutions, the problem is overplotting, which `geom_jitter` fixes:
 
 ```{r}
-ggplot(ggplot2::mpg, aes(cty, hwy)) +
+ggplot(mpg, aes(cty, hwy)) +
   geom_point() +
   geom_jitter()
 ```
@@ -481,10 +480,10 @@ Solution 2. (Rademaker, 2016) Set opacity with `alpha`
 Answer: as noted in the exercise, ordering of `class` by `hwy` is more informative. `reorder()` reorders levels based on the second, numeric value, by default using the mean.
 
 ```{r}
-ggplot(ggplot2::mpg, aes(class, hwy)) +
+ggplot(mpg, aes(class, hwy)) +
   geom_boxplot()
 
-ggplot(ggplot2::mpg, aes(reorder(class, hwy), hwy)) +
+ggplot(mpg, aes(reorder(class, hwy), hwy)) +
   geom_boxplot()
 ```
 
@@ -571,7 +570,7 @@ GG Solutions:
 - The `weight` aesthetic converts the number of cases to a weight and makes the height of the bar proportional to the sum of the weights. See below:
 
 ```{r}
-g <- ggplot(ggplot2::mpg, aes(class))
+g <- ggplot(mpg, aes(class))
 # Number of cars in each class:
 g + geom_bar()
 # Total engine displacement of each class
@@ -592,7 +591,7 @@ Answer: three ways to visualize categorical distributions:
 - A scatterplot using size
 
 ```{r}
-ggplot2::mpg[c("manufacturer", "model")] |>
+mpg[c("manufacturer", "model")] |>
   unique() |>
   ggplot(aes(manufacturer)) +
   geom_bar(color = "black", fill = "white", width = 0.8) +
@@ -601,14 +600,14 @@ ggplot2::mpg[c("manufacturer", "model")] |>
   labs(x = "", y = "models") +
   theme_quo()
 
-ggplot2::mpg |>
+mpg |>
   ggplot(aes(trans, class)) +
   geom_point(alpha = 0.1) +
   scale_y_discrete(limits = rev) +
   labs(x = "", y = "") +
   theme_quo()
 
-ggplot2::mpg |>
+mpg |>
   count(trans, cyl) |>
   ggplot(aes(cyl, trans, size = n)) +
   geom_point() +
