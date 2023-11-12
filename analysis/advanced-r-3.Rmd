@@ -2,7 +2,7 @@
 title: "Advanced R (Object-oriented programming)"
 author: "John Benninghoff"
 date: '2022-08-15'
-file-modified: '2023-01-14'
+file-modified: '2023-11-11'
 categories: [exercises, advanced-r]
 order: 203
 output:
