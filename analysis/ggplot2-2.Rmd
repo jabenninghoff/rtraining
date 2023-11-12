@@ -228,7 +228,7 @@ mpg |>
     Why does this graph make me unhappy?
 
 ```{r, eval = FALSE}
-hadley <- dplyr::filter(babynames, name == "Hadley")
+hadley <- filter(babynames, name == "Hadley")
 ggplot(hadley, aes(year, n)) +
   geom_line()
 ```
