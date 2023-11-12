@@ -6,7 +6,7 @@
 \alias{rtraining-package}
 \title{rtraining: R Training}
 \description{
-My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress).
+My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.
 }
 \seealso{
 Useful links:
