@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="John Benninghoff">
 <meta name="dcterms.date" content="2023-02-19">
 
-<title>rtraining - Advanced R Workbook (Metaprogramming)</title>
+<title>rtraining - Advanced R (Metaprogramming)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../analysis/FaultTree.html" rel="next">
+<link href="../analysis/ggplot2-1.html" rel="next">
 <link href="../analysis/advanced-r-3.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -140,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-1.html">Analysis</a></li><li class="breadcrumb-item"><a href="../analysis/advanced-r-4.html">Advanced R Workbook (Metaprogramming)</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-4.html">Advanced R (Metaprogramming)</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -152,89 +153,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Foundations)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Functional programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Object-oriented programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Advanced R Workbook (Metaprogramming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">FaultTree.widget Test</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Getting started)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Layers)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Scales)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Grammar)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Extending)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R Setup Log</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../analysis/r-training-log.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Training Log</span></a>
   </div>
 </li>
-      </ul>
-  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Setup Log</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FaultTree.widget Test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Foundations)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Functional programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Object-oriented programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Advanced R (Metaprogramming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Getting started)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Layers)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Scales)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Grammar)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Extending)</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -267,20 +257,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exercises-9" id="toc-exercises-9" class="nav-link" data-scroll-target="#exercises-9">20.2.4 Exercises</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/edit/main/analysis/advanced-r-4.Rmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/advanced-r-4.Rmd" class="toc-action">View source</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Advanced R Workbook (Metaprogramming)</h1>
-</div>
+<h1 class="title">Advanced R (Metaprogramming)</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">exercises</div>
+    <div class="quarto-category">advanced-r</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>John Benninghoff </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -710,7 +710,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, na.rm = FALSE, ...) 
 #&gt; UseMethod("median")
-#&gt; &lt;bytecode: 0x7fc0686bd768&gt;
+#&gt; &lt;bytecode: 0x7f925fb68ac0&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1292,7 +1292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     class(ans) &lt;- "pairwise.htest"
 #&gt;     ans
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc06901f858&gt;
+#&gt; &lt;bytecode: 0x7f92282a1900&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">deparse</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">18</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2012,7 +2012,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     }
 #&gt;     UseMethod("summarise")
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc068177788&gt;
+#&gt; &lt;bytecode: 0x7f9248347580&gt;
 #&gt; &lt;environment: namespace:dplyr&gt;</code></pre>
 </div>
 </div>
@@ -2039,7 +2039,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     }
 #&gt;     out
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc039ed3988&gt;
+#&gt; &lt;bytecode: 0x7f91f9022208&gt;
 #&gt; &lt;environment: namespace:dplyr&gt;</code></pre>
 </div>
 </div>
@@ -2088,7 +2088,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     aes &lt;- new_aes(args, env = parent.frame())
 #&gt;     rename_aes(aes)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc049d81d78&gt;
+#&gt; &lt;bytecode: 0x7f9238e646e0&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -2107,7 +2107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; {
 #&gt;     enexpr(expr)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc06884dec0&gt;
+#&gt; &lt;bytecode: 0x7f9238fe5bd8&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb304"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb304-1"><a href="#cb304-1" aria-hidden="true" tabindex="-1"></a>rlang<span class="sc">::</span>enexpr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2116,7 +2116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; {
 #&gt;     .Call(ffi_enexpr, substitute(arg), parent.frame())
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc038504fa0&gt;
+#&gt; &lt;bytecode: 0x7f91ffd9f958&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 </div>
@@ -2588,7 +2588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     }
 #&gt;     structure(as.integer(ans + 1L), levels = lvs, class = "factor")
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc00935c898&gt;
+#&gt; &lt;bytecode: 0x7f91f8e5faf8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb407"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb407-1"><a href="#cb407-1" aria-hidden="true" tabindex="-1"></a>expand.grid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2643,7 +2643,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     rn &lt;- .set_row_names(as.integer(prod(d)))
 #&gt;     structure(cargs, class = "data.frame", row.names = rn)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc00945c2e8&gt;
+#&gt; &lt;bytecode: 0x7f91f98adf20&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb409"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb409-1"><a href="#cb409-1" aria-hidden="true" tabindex="-1"></a>par</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2674,7 +2674,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         invisible(value)
 #&gt;     else value
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc0386b9698&gt;
+#&gt; &lt;bytecode: 0x7f91fff2a0c8&gt;
 #&gt; &lt;environment: namespace:graphics&gt;</code></pre>
 </div>
 </div>
@@ -2766,13 +2766,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb422-9"><a href="#cb422-9" aria-hidden="true" tabindex="-1"></a><span class="fu">bc</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(x) log(x)
-#&gt; &lt;environment: 0x7fc00a0e45a0&gt;</code></pre>
+#&gt; &lt;environment: 0x7f91f839aba8&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb424"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb424-1"><a href="#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bc</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(x) (x^lambda - 1) / lambda
-#&gt; &lt;bytecode: 0x7fc008472028&gt;
-#&gt; &lt;environment: 0x7fc00a13cd98&gt;</code></pre>
+#&gt; &lt;bytecode: 0x7f91f9209740&gt;
+#&gt; &lt;environment: 0x7f91f8463ab0&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb426"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb426-1"><a href="#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bc</span>(<span class="dv">0</span>)(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2841,13 +2841,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; log(x)
-#&gt; &lt;environment: 0x7fc06a824a80&gt;</code></pre>
+#&gt; &lt;environment: 0x7f9268e77c90&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb440"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb440-1"><a href="#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bc2</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; (x^2 - 1)/2
-#&gt; &lt;environment: 0x7fc06b104300&gt;</code></pre>
+#&gt; &lt;environment: 0x7f9268055550&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb442"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb442-1"><a href="#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bc2</span>(<span class="dv">2</span>)(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2867,7 +2867,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb444-5"><a href="#cb444-5" aria-hidden="true" tabindex="-1"></a><span class="fu">compose</span>(sum, as.integer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(...) f(g(...))
-#&gt; &lt;environment: 0x7fc0089d3628&gt;</code></pre>
+#&gt; &lt;environment: 0x7f91f919ed30&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb446"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb446-1"><a href="#cb446-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compose</span>(sum, as.integer)(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2901,8 +2901,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb449-8"><a href="#cb449-8" aria-hidden="true" tabindex="-1"></a><span class="fu">compose</span>(sin, cos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(...) f(g(...))
-#&gt; &lt;bytecode: 0x7fc008ccead8&gt;
-#&gt; &lt;environment: 0x7fc00886ccc0&gt;</code></pre>
+#&gt; &lt;bytecode: 0x7f9228fc04f0&gt;
+#&gt; &lt;environment: 0x7f91f9112070&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb451"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb451-1"><a href="#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compose</span>(sin, cos)(pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2912,7 +2912,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (...) 
 #&gt; sin(cos(...))
-#&gt; &lt;environment: 0x7fc008dc38d8&gt;</code></pre>
+#&gt; &lt;environment: 0x7f91f93ee978&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb455"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb455-1"><a href="#cb455-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compose2</span>(sin, cos)(pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2953,57 +2953,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb457-12"><a href="#cb457-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb457-13"><a href="#cb457-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb457-14"><a href="#cb457-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Where will source() evaluate the code?</span></span>
-<span id="cb457-15"><a href="#cb457-15" aria-hidden="true" tabindex="-1"></a><span class="fu">locate_evaluation</span>(tmp_file, <span class="at">local =</span> <span class="cn">FALSE</span>) <span class="co"># default</span></span>
-<span id="cb457-16"><a href="#cb457-16" aria-hidden="true" tabindex="-1"></a><span class="fu">locate_evaluation</span>(tmp_file, <span class="at">local =</span> env2)</span>
-<span id="cb457-17"><a href="#cb457-17" aria-hidden="true" tabindex="-1"></a><span class="fu">locate_evaluation</span>(tmp_file, <span class="at">local =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb457-15"><a href="#cb457-15" aria-hidden="true" tabindex="-1"></a><span class="fu">locate_evaluation</span>(tmp_file, <span class="at">local =</span> <span class="cn">FALSE</span>) <span class="co"># default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "global environment"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb459"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb459-1"><a href="#cb459-1" aria-hidden="true" tabindex="-1"></a><span class="fu">locate_evaluation</span>(tmp_file, <span class="at">local =</span> env2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "specified environment"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb461"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb461-1"><a href="#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">locate_evaluation</span>(tmp_file, <span class="at">local =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "local environment"</code></pre>
+</div>
 </div>
 <hr>
 <ol start="2" type="1">
 <li>Predict the results of the following lines of code:</li>
 </ol>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb458"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb458-1"><a href="#cb458-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))</span>
-<span id="cb458-2"><a href="#cb458-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))))</span>
-<span id="cb458-3"><a href="#cb458-3" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb463"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb463-1"><a href="#cb463-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))</span>
+<span id="cb463-2"><a href="#cb463-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))))</span>
+<span id="cb463-3"><a href="#cb463-3" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Answer: all of these <em>should</em> return <code>4</code>, since the innermost expression is evaluated first.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb459"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb459-1"><a href="#cb459-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb464"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb464-1"><a href="#cb464-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb461"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb461-1"><a href="#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb466"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb466-1"><a href="#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb463"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb463-1"><a href="#cb463-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb468"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb468-1"><a href="#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; eval(expr(eval(expr(eval(expr(2 + 2))))))</code></pre>
 </div>
 </div>
 <p>Incorrect: let’s explore how these are evaluated:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb465"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb465-1"><a href="#cb465-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb470"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb470-1"><a href="#cb470-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; 2 + 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb467"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb467-1"><a href="#cb467-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb472"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb472-1"><a href="#cb472-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb469"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb469-1"><a href="#cb469-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb474"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb474-1"><a href="#cb474-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; eval(expr(2 + 2))</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb471"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb471-1"><a href="#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb476"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb476-1"><a href="#cb476-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb473"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb473-1"><a href="#cb473-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb478"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb478-1"><a href="#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; eval(expr(eval(expr(2 + 2))))</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb475"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb475-1"><a href="#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb480"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb480-1"><a href="#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 4</code></pre>
 </div>
@@ -3015,15 +3024,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>In general, <code>eval(expr(x))</code> evaluates to <code>x</code>. Therefore, (1) evaluates to <span class="math inline">\(2 + 2 = 4\)</span>. Adding another <code>eval()</code> doesn’t have impact here. So, also (2) evaluates to <code>4</code>. However, when wrapping (1) into <code>expr()</code> the whole expression will be quoted.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb477"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb477-1"><a href="#cb477-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))) <span class="co"># (1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb482"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb482-1"><a href="#cb482-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)))))) <span class="co"># (1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb479"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb479-1"><a href="#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))) <span class="co"># (2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb484"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb484-1"><a href="#cb484-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))) <span class="co"># (2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb481"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb481-1"><a href="#cb481-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))) <span class="co"># (3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb486"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb486-1"><a href="#cb486-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="fu">eval</span>(<span class="fu">expr</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>))))))) <span class="co"># (3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; eval(expr(eval(expr(eval(expr(2 + 2))))))</code></pre>
 </div>
@@ -3033,54 +3042,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Fill in the function bodies below to re-implement <code>get()</code> using <code>sym()</code> and <code>eval()</code>, and<code>assign()</code> using <code>sym()</code>, <code>expr()</code>, and <code>eval()</code>. Don’t worry about the multiple ways of choosing an environment that <code>get()</code> and <code>assign()</code> support; assume that the user supplies it explicitly.</li>
 </ol>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb483"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb483-1"><a href="#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="co"># name is a string</span></span>
-<span id="cb483-2"><a href="#cb483-2" aria-hidden="true" tabindex="-1"></a>get2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, env) {}</span>
-<span id="cb483-3"><a href="#cb483-3" aria-hidden="true" tabindex="-1"></a>assign2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, value, env) {}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb488"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb488-1"><a href="#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="co"># name is a string</span></span>
+<span id="cb488-2"><a href="#cb488-2" aria-hidden="true" tabindex="-1"></a>get2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, env) {}</span>
+<span id="cb488-3"><a href="#cb488-3" aria-hidden="true" tabindex="-1"></a>assign2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, value, env) {}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Answer: code below.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb484"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb484-1"><a href="#cb484-1" aria-hidden="true" tabindex="-1"></a>get2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, env) {</span>
-<span id="cb484-2"><a href="#cb484-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">sym</span>(name), <span class="at">envir =</span> env)</span>
-<span id="cb484-3"><a href="#cb484-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb484-4"><a href="#cb484-4" aria-hidden="true" tabindex="-1"></a>assign2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, value, env) {</span>
-<span id="cb484-5"><a href="#cb484-5" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sym</span>(name)</span>
-<span id="cb484-6"><a href="#cb484-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">expr</span>(<span class="sc">!!</span>s <span class="ot">&lt;-</span> <span class="sc">!!</span>value), <span class="at">envir =</span> env)</span>
-<span id="cb484-7"><a href="#cb484-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb484-8"><a href="#cb484-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb484-9"><a href="#cb484-9" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="dv">1234</span></span>
-<span id="cb484-10"><a href="#cb484-10" aria-hidden="true" tabindex="-1"></a><span class="fu">get2</span>(<span class="st">"test"</span>, <span class="fu">caller_env</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb489"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb489-1"><a href="#cb489-1" aria-hidden="true" tabindex="-1"></a>get2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, env) {</span>
+<span id="cb489-2"><a href="#cb489-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">sym</span>(name), <span class="at">envir =</span> env)</span>
+<span id="cb489-3"><a href="#cb489-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb489-4"><a href="#cb489-4" aria-hidden="true" tabindex="-1"></a>assign2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, value, env) {</span>
+<span id="cb489-5"><a href="#cb489-5" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sym</span>(name)</span>
+<span id="cb489-6"><a href="#cb489-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">expr</span>(<span class="sc">!!</span>s <span class="ot">&lt;-</span> <span class="sc">!!</span>value), <span class="at">envir =</span> env)</span>
+<span id="cb489-7"><a href="#cb489-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb489-8"><a href="#cb489-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb489-9"><a href="#cb489-9" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="dv">1234</span></span>
+<span id="cb489-10"><a href="#cb489-10" aria-hidden="true" tabindex="-1"></a><span class="fu">get2</span>(<span class="st">"test"</span>, <span class="fu">caller_env</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 1234</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb486"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb486-1"><a href="#cb486-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assign2</span>(<span class="st">"test"</span>, <span class="dv">2345</span>, <span class="fu">caller_env</span>())</span>
-<span id="cb486-2"><a href="#cb486-2" aria-hidden="true" tabindex="-1"></a>test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb491"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb491-1"><a href="#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assign2</span>(<span class="st">"test"</span>, <span class="dv">2345</span>, <span class="fu">caller_env</span>())</span>
+<span id="cb491-2"><a href="#cb491-2" aria-hidden="true" tabindex="-1"></a>test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 1234</code></pre>
 </div>
 </div>
 <p>AR Solutions: We reimplement these two functions using tidy evaluation. We turn the string <code>name</code> into a symbol, then evaluate it:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb488"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb488-1"><a href="#cb488-1" aria-hidden="true" tabindex="-1"></a>get2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
-<span id="cb488-2"><a href="#cb488-2" aria-hidden="true" tabindex="-1"></a>  name_sym <span class="ot">&lt;-</span> <span class="fu">sym</span>(name)</span>
-<span id="cb488-3"><a href="#cb488-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(name_sym, env)</span>
-<span id="cb488-4"><a href="#cb488-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb488-5"><a href="#cb488-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb488-6"><a href="#cb488-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb488-7"><a href="#cb488-7" aria-hidden="true" tabindex="-1"></a><span class="fu">get2</span>(<span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb493"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb493-1"><a href="#cb493-1" aria-hidden="true" tabindex="-1"></a>get2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
+<span id="cb493-2"><a href="#cb493-2" aria-hidden="true" tabindex="-1"></a>  name_sym <span class="ot">&lt;-</span> <span class="fu">sym</span>(name)</span>
+<span id="cb493-3"><a href="#cb493-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(name_sym, env)</span>
+<span id="cb493-4"><a href="#cb493-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb493-5"><a href="#cb493-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb493-6"><a href="#cb493-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb493-7"><a href="#cb493-7" aria-hidden="true" tabindex="-1"></a><span class="fu">get2</span>(<span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 1</code></pre>
 </div>
 </div>
 <p>To build the correct expression for the value assignment, we unquote using <code>!!</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb490"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb490-1"><a href="#cb490-1" aria-hidden="true" tabindex="-1"></a>assign2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, value, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
-<span id="cb490-2"><a href="#cb490-2" aria-hidden="true" tabindex="-1"></a>  name_sym <span class="ot">&lt;-</span> <span class="fu">sym</span>(name)</span>
-<span id="cb490-3"><a href="#cb490-3" aria-hidden="true" tabindex="-1"></a>  assign_expr <span class="ot">&lt;-</span> <span class="fu">expr</span>(<span class="sc">!!</span>name_sym <span class="ot">&lt;-</span> <span class="sc">!!</span>value)</span>
-<span id="cb490-4"><a href="#cb490-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(assign_expr, env)</span>
-<span id="cb490-5"><a href="#cb490-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb490-6"><a href="#cb490-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb490-7"><a href="#cb490-7" aria-hidden="true" tabindex="-1"></a><span class="fu">assign2</span>(<span class="st">"x"</span>, <span class="dv">4</span>)</span>
-<span id="cb490-8"><a href="#cb490-8" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb495"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb495-1"><a href="#cb495-1" aria-hidden="true" tabindex="-1"></a>assign2 <span class="ot">&lt;-</span> <span class="cf">function</span>(name, value, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
+<span id="cb495-2"><a href="#cb495-2" aria-hidden="true" tabindex="-1"></a>  name_sym <span class="ot">&lt;-</span> <span class="fu">sym</span>(name)</span>
+<span id="cb495-3"><a href="#cb495-3" aria-hidden="true" tabindex="-1"></a>  assign_expr <span class="ot">&lt;-</span> <span class="fu">expr</span>(<span class="sc">!!</span>name_sym <span class="ot">&lt;-</span> <span class="sc">!!</span>value)</span>
+<span id="cb495-4"><a href="#cb495-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(assign_expr, env)</span>
+<span id="cb495-5"><a href="#cb495-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb495-6"><a href="#cb495-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb495-7"><a href="#cb495-7" aria-hidden="true" tabindex="-1"></a><span class="fu">assign2</span>(<span class="st">"x"</span>, <span class="dv">4</span>)</span>
+<span id="cb495-8"><a href="#cb495-8" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 4</code></pre>
 </div>
@@ -3092,55 +3101,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: code below.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb492"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb492-1"><a href="#cb492-1" aria-hidden="true" tabindex="-1"></a>my_source2 <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
-<span id="cb492-2"><a href="#cb492-2" aria-hidden="true" tabindex="-1"></a>  file <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(path, <span class="at">warn =</span> <span class="cn">FALSE</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb492-3"><a href="#cb492-3" aria-hidden="true" tabindex="-1"></a>  exprs <span class="ot">&lt;-</span> <span class="fu">parse_exprs</span>(file)</span>
-<span id="cb492-4"><a href="#cb492-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb492-5"><a href="#cb492-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(<span class="fu">lapply</span>(exprs, eval, env))</span>
-<span id="cb492-6"><a href="#cb492-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb497"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb497-1"><a href="#cb497-1" aria-hidden="true" tabindex="-1"></a>my_source2 <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
+<span id="cb497-2"><a href="#cb497-2" aria-hidden="true" tabindex="-1"></a>  file <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(path, <span class="at">warn =</span> <span class="cn">FALSE</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb497-3"><a href="#cb497-3" aria-hidden="true" tabindex="-1"></a>  exprs <span class="ot">&lt;-</span> <span class="fu">parse_exprs</span>(file)</span>
+<span id="cb497-4"><a href="#cb497-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb497-5"><a href="#cb497-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(<span class="fu">lapply</span>(exprs, eval, env))</span>
+<span id="cb497-6"><a href="#cb497-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>AR Solutions: The code for <code>source2()</code> was given in <em>Advanced R</em> as:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb493"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb493-1"><a href="#cb493-1" aria-hidden="true" tabindex="-1"></a>source2 <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
-<span id="cb493-2"><a href="#cb493-2" aria-hidden="true" tabindex="-1"></a>  file <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(path, <span class="at">warn =</span> <span class="cn">FALSE</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb493-3"><a href="#cb493-3" aria-hidden="true" tabindex="-1"></a>  exprs <span class="ot">&lt;-</span> <span class="fu">parse_exprs</span>(file)</span>
-<span id="cb493-4"><a href="#cb493-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb493-5"><a href="#cb493-5" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb493-6"><a href="#cb493-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(exprs)) {</span>
-<span id="cb493-7"><a href="#cb493-7" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="fu">eval</span>(exprs[[i]], env)</span>
-<span id="cb493-8"><a href="#cb493-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb493-9"><a href="#cb493-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb493-10"><a href="#cb493-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(res)</span>
-<span id="cb493-11"><a href="#cb493-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb498"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb498-1"><a href="#cb498-1" aria-hidden="true" tabindex="-1"></a>source2 <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
+<span id="cb498-2"><a href="#cb498-2" aria-hidden="true" tabindex="-1"></a>  file <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(path, <span class="at">warn =</span> <span class="cn">FALSE</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb498-3"><a href="#cb498-3" aria-hidden="true" tabindex="-1"></a>  exprs <span class="ot">&lt;-</span> <span class="fu">parse_exprs</span>(file)</span>
+<span id="cb498-4"><a href="#cb498-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb498-5"><a href="#cb498-5" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb498-6"><a href="#cb498-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(exprs)) {</span>
+<span id="cb498-7"><a href="#cb498-7" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="fu">eval</span>(exprs[[i]], env)</span>
+<span id="cb498-8"><a href="#cb498-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb498-9"><a href="#cb498-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb498-10"><a href="#cb498-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(res)</span>
+<span id="cb498-11"><a href="#cb498-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In order to highlight the modifications in our new <code>source2()</code> function, we’ve preserved the differing code from the former <code>source2()</code> in a comment.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb494"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb494-1"><a href="#cb494-1" aria-hidden="true" tabindex="-1"></a>source2 <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
-<span id="cb494-2"><a href="#cb494-2" aria-hidden="true" tabindex="-1"></a>  file <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(path, <span class="at">warn =</span> <span class="cn">FALSE</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb494-3"><a href="#cb494-3" aria-hidden="true" tabindex="-1"></a>  exprs <span class="ot">&lt;-</span> <span class="fu">parse_exprs</span>(file)</span>
-<span id="cb494-4"><a href="#cb494-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb494-5"><a href="#cb494-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># res &lt;- NULL</span></span>
-<span id="cb494-6"><a href="#cb494-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for (i in seq_along(exprs)) {</span></span>
-<span id="cb494-7"><a href="#cb494-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   res[[i]] &lt;- eval(exprs[[i]], env)</span></span>
-<span id="cb494-8"><a href="#cb494-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># }</span></span>
-<span id="cb494-9"><a href="#cb494-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb494-10"><a href="#cb494-10" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(exprs, eval, env)</span>
-<span id="cb494-11"><a href="#cb494-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb494-12"><a href="#cb494-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(res)</span>
-<span id="cb494-13"><a href="#cb494-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb499"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb499-1"><a href="#cb499-1" aria-hidden="true" tabindex="-1"></a>source2 <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">env =</span> <span class="fu">caller_env</span>()) {</span>
+<span id="cb499-2"><a href="#cb499-2" aria-hidden="true" tabindex="-1"></a>  file <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(path, <span class="at">warn =</span> <span class="cn">FALSE</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb499-3"><a href="#cb499-3" aria-hidden="true" tabindex="-1"></a>  exprs <span class="ot">&lt;-</span> <span class="fu">parse_exprs</span>(file)</span>
+<span id="cb499-4"><a href="#cb499-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb499-5"><a href="#cb499-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># res &lt;- NULL</span></span>
+<span id="cb499-6"><a href="#cb499-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for (i in seq_along(exprs)) {</span></span>
+<span id="cb499-7"><a href="#cb499-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   res[[i]] &lt;- eval(exprs[[i]], env)</span></span>
+<span id="cb499-8"><a href="#cb499-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># }</span></span>
+<span id="cb499-9"><a href="#cb499-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb499-10"><a href="#cb499-10" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(exprs, eval, env)</span>
+<span id="cb499-11"><a href="#cb499-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb499-12"><a href="#cb499-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(res)</span>
+<span id="cb499-13"><a href="#cb499-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s create a file and test <code>source2()</code>. Keep in mind that <code>&lt;-</code> returns invisibly.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb495"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb495-1"><a href="#cb495-1" aria-hidden="true" tabindex="-1"></a>tmp_file <span class="ot">&lt;-</span> <span class="fu">tempfile</span>()</span>
-<span id="cb495-2"><a href="#cb495-2" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
-<span id="cb495-3"><a href="#cb495-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"x &lt;- 1</span></span>
-<span id="cb495-4"><a href="#cb495-4" aria-hidden="true" tabindex="-1"></a><span class="st">       x</span></span>
-<span id="cb495-5"><a href="#cb495-5" aria-hidden="true" tabindex="-1"></a><span class="st">       y &lt;- 2</span></span>
-<span id="cb495-6"><a href="#cb495-6" aria-hidden="true" tabindex="-1"></a><span class="st">       y  # some comment"</span>,</span>
-<span id="cb495-7"><a href="#cb495-7" aria-hidden="true" tabindex="-1"></a>  tmp_file</span>
-<span id="cb495-8"><a href="#cb495-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb495-9"><a href="#cb495-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb495-10"><a href="#cb495-10" aria-hidden="true" tabindex="-1"></a>(<span class="fu">source2</span>(tmp_file))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb500"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb500-1"><a href="#cb500-1" aria-hidden="true" tabindex="-1"></a>tmp_file <span class="ot">&lt;-</span> <span class="fu">tempfile</span>()</span>
+<span id="cb500-2"><a href="#cb500-2" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
+<span id="cb500-3"><a href="#cb500-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"x &lt;- 1</span></span>
+<span id="cb500-4"><a href="#cb500-4" aria-hidden="true" tabindex="-1"></a><span class="st">       x</span></span>
+<span id="cb500-5"><a href="#cb500-5" aria-hidden="true" tabindex="-1"></a><span class="st">       y &lt;- 2</span></span>
+<span id="cb500-6"><a href="#cb500-6" aria-hidden="true" tabindex="-1"></a><span class="st">       y  # some comment"</span>,</span>
+<span id="cb500-7"><a href="#cb500-7" aria-hidden="true" tabindex="-1"></a>  tmp_file</span>
+<span id="cb500-8"><a href="#cb500-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb500-9"><a href="#cb500-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb500-10"><a href="#cb500-10" aria-hidden="true" tabindex="-1"></a>(<span class="fu">source2</span>(tmp_file))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
 #&gt; [1] 1
@@ -3157,7 +3166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Note: validate <code>my_source2()</code> returns the same results:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb497"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb497-1"><a href="#cb497-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">my_source2</span>(tmp_file))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb502"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb502-1"><a href="#cb502-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">my_source2</span>(tmp_file))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
 #&gt; [1] 1
@@ -3177,40 +3186,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We can make <code>base::local()</code> slightly easier to understand by spreading out over multiple lines:</li>
 </ol>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb499"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb499-1"><a href="#cb499-1" aria-hidden="true" tabindex="-1"></a>local3 <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, <span class="at">envir =</span> <span class="fu">new.env</span>()) {</span>
-<span id="cb499-2"><a href="#cb499-2" aria-hidden="true" tabindex="-1"></a>  call <span class="ot">&lt;-</span> <span class="fu">substitute</span>(<span class="fu">eval</span>(<span class="fu">quote</span>(expr), envir))</span>
-<span id="cb499-3"><a href="#cb499-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(call, <span class="at">envir =</span> <span class="fu">parent.frame</span>())</span>
-<span id="cb499-4"><a href="#cb499-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb504"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb504-1"><a href="#cb504-1" aria-hidden="true" tabindex="-1"></a>local3 <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, <span class="at">envir =</span> <span class="fu">new.env</span>()) {</span>
+<span id="cb504-2"><a href="#cb504-2" aria-hidden="true" tabindex="-1"></a>  call <span class="ot">&lt;-</span> <span class="fu">substitute</span>(<span class="fu">eval</span>(<span class="fu">quote</span>(expr), envir))</span>
+<span id="cb504-3"><a href="#cb504-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(call, <span class="at">envir =</span> <span class="fu">parent.frame</span>())</span>
+<span id="cb504-4"><a href="#cb504-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Explain how <code>local()</code> works in words. (Hint: you might want to <code>print(call)</code> to help understand what <code>substitute()</code> is doing, and read the documentation to remind yourself what environment <code>new.env()</code> will inherit from.)</p>
 <p>Answer: adding <code>print(call)</code> shows that <code>substitute()</code> creates a call to evaluate the expression passed to <code>local3()</code> in <code>new.env()</code>, which inherits the environment from the caller. So:</p>
 <p><code>local()</code> works by evaluating an expression in a new child environment.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb500"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb500-1"><a href="#cb500-1" aria-hidden="true" tabindex="-1"></a>local3 <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, <span class="at">envir =</span> <span class="fu">new.env</span>()) {</span>
-<span id="cb500-2"><a href="#cb500-2" aria-hidden="true" tabindex="-1"></a>  call <span class="ot">&lt;-</span> <span class="fu">substitute</span>(<span class="fu">eval</span>(<span class="fu">quote</span>(expr), envir))</span>
-<span id="cb500-3"><a href="#cb500-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(call)</span>
-<span id="cb500-4"><a href="#cb500-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(call, <span class="at">envir =</span> <span class="fu">parent.frame</span>())</span>
-<span id="cb500-5"><a href="#cb500-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb500-6"><a href="#cb500-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb500-7"><a href="#cb500-7" aria-hidden="true" tabindex="-1"></a><span class="fu">local3</span>(test <span class="ot">&lt;-</span> <span class="dv">4567</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb505"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb505-1"><a href="#cb505-1" aria-hidden="true" tabindex="-1"></a>local3 <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, <span class="at">envir =</span> <span class="fu">new.env</span>()) {</span>
+<span id="cb505-2"><a href="#cb505-2" aria-hidden="true" tabindex="-1"></a>  call <span class="ot">&lt;-</span> <span class="fu">substitute</span>(<span class="fu">eval</span>(<span class="fu">quote</span>(expr), envir))</span>
+<span id="cb505-3"><a href="#cb505-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(call)</span>
+<span id="cb505-4"><a href="#cb505-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(call, <span class="at">envir =</span> <span class="fu">parent.frame</span>())</span>
+<span id="cb505-5"><a href="#cb505-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb505-6"><a href="#cb505-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb505-7"><a href="#cb505-7" aria-hidden="true" tabindex="-1"></a><span class="fu">local3</span>(test <span class="ot">&lt;-</span> <span class="dv">4567</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; eval(quote(test &lt;- 4567), new.env())</code></pre>
 </div>
 </div>
 <p>AR Solutions: Let’s follow the advice and add <code>print(call)</code> inside of <code>local3()</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb502"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb502-1"><a href="#cb502-1" aria-hidden="true" tabindex="-1"></a>local3 <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, <span class="at">envir =</span> <span class="fu">new.env</span>()) {</span>
-<span id="cb502-2"><a href="#cb502-2" aria-hidden="true" tabindex="-1"></a>  call <span class="ot">&lt;-</span> <span class="fu">substitute</span>(<span class="fu">eval</span>(<span class="fu">quote</span>(expr), envir))</span>
-<span id="cb502-3"><a href="#cb502-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(call)</span>
-<span id="cb502-4"><a href="#cb502-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(call, <span class="at">envir =</span> <span class="fu">parent.frame</span>())</span>
-<span id="cb502-5"><a href="#cb502-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb507"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb507-1"><a href="#cb507-1" aria-hidden="true" tabindex="-1"></a>local3 <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, <span class="at">envir =</span> <span class="fu">new.env</span>()) {</span>
+<span id="cb507-2"><a href="#cb507-2" aria-hidden="true" tabindex="-1"></a>  call <span class="ot">&lt;-</span> <span class="fu">substitute</span>(<span class="fu">eval</span>(<span class="fu">quote</span>(expr), envir))</span>
+<span id="cb507-3"><a href="#cb507-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(call)</span>
+<span id="cb507-4"><a href="#cb507-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(call, <span class="at">envir =</span> <span class="fu">parent.frame</span>())</span>
+<span id="cb507-5"><a href="#cb507-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first line generates a call to <code>eval()</code>, because <code>substitute()</code> operates in the current evaluation argument. However, this doesn’t matter here, as both, <code>expr</code> and <code>envir</code> are promises and therefore “the expression slots of the promises replace the symbols”, from <code>?substitute</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb503"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb503-1"><a href="#cb503-1" aria-hidden="true" tabindex="-1"></a><span class="fu">local3</span>({</span>
-<span id="cb503-2"><a href="#cb503-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb503-3"><a href="#cb503-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb503-4"><a href="#cb503-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb508"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb508-1"><a href="#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="fu">local3</span>({</span>
+<span id="cb508-2"><a href="#cb508-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb508-3"><a href="#cb508-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb508-4"><a href="#cb508-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; eval(quote({
 #&gt;     x &lt;- 10
@@ -3223,14 +3232,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Next, <code>call</code> will be evaluated in the caller environment (aka the parent frame). Given that <code>call</code> contains another call <code>eval()</code> why does this matter? The answer is subtle: this outer environment determines where the bindings for <code>eval</code>, <code>quote</code>, and <code>new.env</code> are found.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb506"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb506-1"><a href="#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">quote</span>({</span>
-<span id="cb506-2"><a href="#cb506-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb506-3"><a href="#cb506-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb506-4"><a href="#cb506-4" aria-hidden="true" tabindex="-1"></a>}), <span class="fu">new.env</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb511"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb511-1"><a href="#cb511-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">quote</span>({</span>
+<span id="cb511-2"><a href="#cb511-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb511-3"><a href="#cb511-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb511-4"><a href="#cb511-4" aria-hidden="true" tabindex="-1"></a>}), <span class="fu">new.env</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 20</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb508"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb508-1"><a href="#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exists</span>(<span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb513"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb513-1"><a href="#cb513-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exists</span>(<span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] TRUE</code></pre>
 </div>
@@ -3478,12 +3487,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../analysis/advanced-r-3.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced R Workbook (Object-oriented programming)</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced R (Object-oriented programming)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../analysis/FaultTree.html" class="pagination-link">
-        <span class="nav-page-text">FaultTree.widget Test</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../analysis/ggplot2-1.html" class="pagination-link">
+        <span class="nav-page-text">ggplot2 (Getting started)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
