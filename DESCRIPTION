@@ -5,7 +5,8 @@ Authors@R:
     person("John", "Benninghoff", , "jbenninghoff@mac.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6230-4742"))
 Description: My notes and experiences learning R and RStudio, bundled as
-    an R package (work-in-progress).
+    an R package (work-in-progress), and published to GitHub Pages using
+    Quarto.
 License: MIT + file LICENSE
 URL: https://jabenninghoff.github.io/rtraining/,
     https://github.com/jabenninghoff/rtraining
