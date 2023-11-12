@@ -1813,8 +1813,7 @@ AR Solutions: Besides adding `?` in front of a function call (i.e. `?method()`),
 
 Answer: the `Person` class uses the fields from `utils::person()`, excluding deprecated fields. Per the docs, `family` must be a string (length 1), others can be vectors (but this is not enforced).
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Person",
   slots = c(
     given = "character",
@@ -1866,8 +1865,7 @@ AR Solutions: The Person class from *Advanced R* contains the slots `name` and `
 
 All slots from `utils::person()` besides `role` must be of type character and length 1. The entries in the `role` slot must match one of the following abbreviations "aut", "com", "cph", "cre", "ctb", "ctr", "dtc", "fnd", "rev", "ths", "trl". Therefore, `role` might be of different length than the other slots and we'll add a corresponding constraint within the validator.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 # Definition of the Person class
 setClass("Person",
   slots = c(
@@ -1946,8 +1944,7 @@ Notes: while I missed including `age`, our implementations are similar except fo
 
 Answer: defining a new class with no slots makes it a virtual class, which can't be used to create new objects, but can be used to define a class union.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Virtual")
 try(new("Virtual"))
 setClassUnion("Virtual", "Person")
@@ -1956,16 +1953,14 @@ getClass("Virtual")
 
 AR Solutions: It depends on the other arguments. If we inherit from another class, we get the same slots. But something interesting happens if we don't inherit from an existing class. We get a virtual class. A virtual class can't be instantiated:
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Human")
 try(new("Human"))
 ```
 
 But can be inherited from:
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Programmer", contains = "Human")
 ```
 
@@ -1977,8 +1972,7 @@ setClass("Programmer", contains = "Human")
 
 Answer: sketch below. Default values would be set in `initialize()`.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Factor",
   slots = list(
     x = "character",
@@ -2025,8 +2019,7 @@ AR Solutions: For all these classes we need one slot for the data and one slot p
 
 For simplicity we don't introduce an explicit subclass for ordered factors. Instead, we introduce `ordered` as a slot.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Factor",
   slots = c(
     data = "integer",
@@ -2044,8 +2037,7 @@ new("Factor", data = c(1L, 2L), levels = letters[1:3])
 
 The `Date2` class stores its dates as integers, similarly to base R which uses doubles. Dates don't have any other attributes.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Date2",
   slots = list(
     data = "integer"
@@ -2060,8 +2052,7 @@ new("Date2", data = 1L)
 
 Our `DataFrame` class consists of a list and a slot for `row.names`. Most of the logic (e.g. checking that all elements of the list are a vector, and that they all have the same length) would need to be part of a validator.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("DataFrame",
   slots = c(
     data = "list",
@@ -2098,8 +2089,7 @@ attributes(data.frame())
 
 Answer: the code below adds age accessors to Advanced R `Person`.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Person",
   slots = c(
     name = "character",
@@ -2133,8 +2123,7 @@ age(john)
 
 AR Solutions: We implement the accessors via an `age()` generic, with a method for the `Person` class and a corresponding replacement function `age<-`:
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setGeneric("age", function(x) standardGeneric("age"))
 setMethod("age", "Person", function(x) x@age)
 
@@ -2162,8 +2151,7 @@ AR Solutions: Within `setGeneric()` the `name` (1st argument) is needed as the n
 
 Answer: `is(object)` returns a vector for a subclass, with the current class first.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Employee",
   contains = "Person",
   slots = c(
@@ -2199,8 +2187,7 @@ Answer: this should cause method dispatch to fail, but I don't know of a way to 
 
 AR Solutions: It depends. We first create the object `hadley` of class `Person`:
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 .Person <- setClass(
   "Person",
   slots = c(name = "character", age = "numeric")
@@ -2217,8 +2204,7 @@ formals("show")
 
 Usually, we would use this argument when defining a new method.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setMethod("show", "Person", function(object) {
   cat(object@name, "creates hard exercises")
 })
@@ -2228,8 +2214,7 @@ hadley
 
 When we supply another name as a first element of our method (e.g. `x` instead of `object`), this element will be matched to the correct `object` argument and we receive a warning. Our method will work, though:
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setMethod("show", "Person", function(x) {
   cat(x@name, "creates hard exercises")
 })
@@ -2239,8 +2224,7 @@ hadley
 
 If we add more arguments to our method than our generic can handle, we will get an error.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 try(
   setMethod("show", "Person", function(x, y) {
     cat(x@name, "is", x@age, "years old")
@@ -2250,8 +2234,7 @@ try(
 
 If we do this with arguments added to the correctly written `object` argument, we will receive an informative error message. It states that we could add other argument names for generics, which can take the `...` argument.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 try(
   setMethod("show", "Person", function(object, y) {
     cat(object@name, "is", object@age, "years old")
@@ -2296,8 +2279,7 @@ AR Solutions: We will introduce ambiguity, since one class has distance 2 to all
 
 Answer: building on the AR Solutions example and the `factor` example in 15.6.1, the following S4 object behaves like the `ordered()` version:
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Ordered",
   contains = "integer",
   slots = c(
@@ -2321,8 +2303,7 @@ AR Solutions: The purpose of `setOldClass()` lies in registering an S3 class as 
 
 Let's build an S4 `OrderedFactor` on top of the S3 factor in such a way.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setOldClass("factor") # use build-in definition for brevity
 OrderedFactor <- setClass(
   "OrderedFactor",
@@ -2341,8 +2322,7 @@ OrderedFactor <- setClass(
 
 We can now register the (S3) ordered-class, while providing an "S4 template". We can also use the S4-class to create new object directly.
 
-```{r, warning = FALSE, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r, warning = FALSE}
 setOldClass("ordered", S4Class = "OrderedFactor")
 x <- OrderedFactor(
   c(1L, 2L, 2L),
@@ -2354,8 +2334,7 @@ str(x)
 
 Notes: while my class `Ordered` looks similar to the AR Solutions version, it does not include the S3 class:
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 str(o)
 ```
 
@@ -2365,8 +2344,7 @@ str(o)
 
 Answer: since `Person` is a vector class, its length is the `length()` of any of its fields (we use Person2 here due to prevent conflicts with the already defined Person class):
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 setClass("Person2",
   slots = c(
     name = "character",
@@ -2389,8 +2367,7 @@ length(people)
 
 AR Solutions: We keep things simple and will just return `"180cm"` when the `length()` method is called on a `Person` object. The method can be defined either as an S3 or S4 method.
 
-```{r, eval = FALSE}
-# TODO: eval = FALSE set to allow rendering using build_analysis_site()
+```{r}
 length.Person <- function(x) "180cm" # S3
 setMethod("length", "Person", function(x) "180cm") # S4
 ```
