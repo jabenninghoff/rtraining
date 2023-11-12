@@ -53,6 +53,6 @@ analysis/*-figure/
 analysis/import
 analysis/rendered
 
-# quarto
+# Quarto files
 /.quarto/
 /_freeze/
