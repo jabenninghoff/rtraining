@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="John Benninghoff">
 <meta name="dcterms.date" content="2022-07-31">
 
-<title>rtraining - Advanced R Workbook (Functional programming)</title>
+<title>rtraining - Advanced R (Functional programming)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -140,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-1.html">Analysis</a></li><li class="breadcrumb-item"><a href="../analysis/advanced-r-2.html">Advanced R Workbook (Functional programming)</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-2.html">Advanced R (Functional programming)</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -152,89 +153,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Foundations)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Advanced R Workbook (Functional programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Object-oriented programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Metaprogramming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">FaultTree.widget Test</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Getting started)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Layers)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Scales)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Grammar)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Extending)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R Setup Log</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../analysis/r-training-log.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Training Log</span></a>
   </div>
 </li>
-      </ul>
-  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Setup Log</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FaultTree.widget Test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Foundations)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Advanced R (Functional programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Object-oriented programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Metaprogramming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Getting started)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Layers)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Scales)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Grammar)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Extending)</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -266,20 +256,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exercises-9" id="toc-exercises-9" class="nav-link" data-scroll-target="#exercises-9">11.3.1 Exercises</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/edit/main/analysis/advanced-r-2.Rmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/advanced-r-2.Rmd" class="toc-action">View source</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Advanced R Workbook (Functional programming)</h1>
-</div>
+<h1 class="title">Advanced R (Functional programming)</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">exercises</div>
+    <div class="quarto-category">advanced-r</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>John Benninghoff </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -332,15 +332,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>randomise <span class="ot">&lt;-</span> <span class="cf">function</span>(f) <span class="fu">f</span>(<span class="fu">runif</span>(<span class="fl">1e3</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.5007515</code></pre>
+<pre><code>#&gt; [1] 0.5146361</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.5136107</code></pre>
+<pre><code>#&gt; [1] 0.5067605</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 493.2907</code></pre>
+<pre><code>#&gt; [1] 500.4592</code></pre>
 </div>
 </div>
 <p>The chances are that you’ve already used a functional. You might have used for-loop replacements like base R’s <code>lapply()</code>, <code>apply()</code>, and <code>tapply()</code>; or purrr’s <code>map()</code>; or maybe you’ve used a mathematical functional like <code>integrate()</code> or <code>optim()</code>.</p>
@@ -358,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; {
 #&gt;     map_("double", .x, .f, ..., .progress = .progress)
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9eab2a7568&gt;
+#&gt; &lt;bytecode: 0x7fca79235088&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(mtcars, <span class="sc">~</span> <span class="fu">length</span>(<span class="fu">unique</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -382,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x7f9ea8059778&gt;
+#&gt; &lt;bytecode: 0x7fcaa97b56a8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -407,19 +407,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, 2), .default = NULL)
-#&gt; &lt;environment: 0x7f9eab8da588&gt;</code></pre>
+#&gt; &lt;environment: 0x7fca996b1d38&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>)) <span class="co"># equivalent to function(x) x[["a"]][["b]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list("a", "b"), .default = NULL)
-#&gt; &lt;environment: 0x7f9eab9363c8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fca9970bb08&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">list</span>(<span class="dv">1</span>, <span class="st">"b"</span>)) <span class="co"># equivalent to function(x) x[[1]][["b]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, "b"), .default = NULL)
-#&gt; &lt;environment: 0x7f9eab990cf8&gt;</code></pre>
+#&gt; &lt;environment: 0x7fca99766128&gt;</code></pre>
 </div>
 </div>
 <p>Besides mixing positions and names, it is also possible to pass along an accessor function. This is basically an anonymous function that gets information about some aspect of the input data. You are free to define your own accessor functions.</p>
@@ -446,13 +446,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="sc">~</span> <span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; [1] 0.1324806 0.6091958
+#&gt; [1] 0.3822416 0.5488811
 #&gt; 
 #&gt; [[2]]
-#&gt; [1] 0.9021396 0.3405121
+#&gt; [1] 0.7346732 0.3698387
 #&gt; 
 #&gt; [[3]]
-#&gt; [1] 0.3965188 0.7342250</code></pre>
+#&gt; [1] 0.9187987 0.7961886</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -479,8 +479,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck_raw(x, list(0.00198657321743667, 0.265347206266597), .default = NULL)
-#&gt; &lt;environment: 0x7f9eac40f2d8&gt;</code></pre>
+#&gt; pluck_raw(x, list(0.769452530657873, 0.00295978761278093), .default = NULL)
+#&gt; &lt;environment: 0x7fca7a9a2b20&gt;</code></pre>
 </div>
 </div>
 <p>A more reasonable use of a pluck mapper for <code>1:3</code> is <code>1</code>:</p>
@@ -743,8 +743,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(bootstraps, <span class="sc">~</span> <span class="fu">summary</span>(<span class="fu">lm</span>(mpg <span class="sc">~</span> disp, .x))<span class="sc">$</span>r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.5817655 0.7959442 0.7353011 0.7285381 0.8589889 0.7894471 0.6776116
-#&gt;  [8] 0.7215894 0.5886460 0.7462519</code></pre>
+<pre><code>#&gt;  [1] 0.6507492 0.6639324 0.5677987 0.7540765 0.8848941 0.7620558 0.7269870
+#&gt;  [8] 0.7496633 0.6107795 0.8252196</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -755,8 +755,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(summary) <span class="sc">%&gt;%</span></span>
 <span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dbl</span>(<span class="st">"r.squared"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.5817655 0.7959442 0.7353011 0.7285381 0.8589889 0.7894471 0.6776116
-#&gt;  [8] 0.7215894 0.5886460 0.7462519</code></pre>
+<pre><code>#&gt;  [1] 0.6507492 0.6639324 0.5677987 0.7540765 0.8848941 0.7620558 0.7269870
+#&gt;  [8] 0.7496633 0.6107795 0.8252196</code></pre>
 </div>
 </div>
 <p>Note: while AR Solutions is arguably <em>slightly</em> more readable, my code should be faster:</p>
@@ -767,8 +767,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { map_dbl(bootstraps, ~summary(lm(m… 4.7ms 5.29ms      180.    63.7KB     13.7</code></pre>
+#&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 { map_dbl(bootstraps, ~summary(lm(… 5.13ms 5.65ms      175.    63.7KB     16.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>({</span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  bootstraps <span class="sc">%&gt;%</span></span>
@@ -780,7 +780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 4.68ms 5.27ms      184.    63.7KB     16.3</code></pre>
+#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 5.17ms 5.76ms      169.    63.7KB     19.6</code></pre>
 </div>
 </div>
 <p>It is actually slightly slower! AR Solutions wins!</p>
@@ -832,7 +832,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1), .default = NULL)
-#&gt; &lt;environment: 0x7f9eac9fac50&gt;</code></pre>
+#&gt; &lt;environment: 0x7fca793cc3a0&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1185,14 +1185,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                     min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span_r(test2, is.numeric)    111µs    127µs     7273.    4.01KB     17.8</code></pre>
+#&gt; 1 span_r(test2, is.numeric)    112µs    128µs     7075.    4.01KB     24.4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">span</span>(test2, is.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;              &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span(test2, is.numeric)    153µs    178µs     5264.    4.01KB     14.9</code></pre>
+#&gt; 1 span(test2, is.numeric)    165µs    178µs     5127.    4.01KB     17.3</code></pre>
 </div>
 </div>
 <hr>
@@ -1674,7 +1674,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; Error : Failed to converge.</code></pre>
 </div>
 </div>
-<p>Notes: AR Solutions offers a different approach using a <code>while()</code> loop that is guaranteed to stop. My approach using recursive calls does stop eventually with a stack limit error (however, this stops <code>build_analysis_site()</code>):</p>
+<p>Notes: AR Solutions offers a different approach using a <code>while()</code> loop that is guaranteed to stop. My approach using recursive calls does stop eventually with a stack limit error:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixed_point</span>(add_one, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1685,14 +1685,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 20.4µs 23.5µs    39626.        0B     19.8</code></pre>
+#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 22.2µs 24.4µs    37208.        0B     22.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">fixed_point</span>(cos, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point(cos, 1)   36.3µs   44.1µs    21284.        0B     19.5</code></pre>
+#&gt; 1 fixed_point(cos, 1)     40µs   50.2µs    18740.        0B     24.1</code></pre>
 </div>
 </div>
 <p>As usual, AR Solutions is faster. :-(</p>
@@ -1744,7 +1744,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; x
-#&gt; &lt;bytecode: 0x7f9ece14c7b0&gt;
+#&gt; &lt;bytecode: 0x7fcac90fadb0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1890,7 +1890,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        6.41µs   7.56µs   115116.      848B     23.0</code></pre>
+#&gt; 1 m2(x)         6.4µs   7.66µs   121170.      848B     12.1</code></pre>
 </div>
 </div>
 <p>Answer: code above, following the formula <span class="math inline">\(E[(X - E[X])^i]\)</span>, where <span class="math inline">\(E\)</span> is the <a href="https://en.wikipedia.org/wiki/Expected_value">expected value</a>, ie the <em>mean</em>.</p>
@@ -1917,7 +1917,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        4.16µs   4.93µs   165982.      848B     16.6</code></pre>
+#&gt; 1 m2(x)        4.18µs   4.85µs   179174.      848B     17.9</code></pre>
 </div>
 </div>
 <p>Note: isn’t <code>sum() / length()</code> just <code>mean()</code>? For fun, compare <code>bench::mark()</code> (above). Curses, foiled again!</p>
@@ -2112,14 +2112,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 25.1µs 30.5µs    30249.    12.8KB     21.2</code></pre>
+#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 26.6µs 31.4µs    28259.    12.8KB     22.6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb242"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href="#cb242-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson2</span>(x1), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 13.1µs 13.8µs    64926.        0B     19.5</code></pre>
+#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 13.2µs 15.8µs    56089.        0B     16.8</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb244"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="fl">1e3</span>, 100L)</span>
 <span id="cb244-2"><a href="#cb244-2" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson1</span>(x), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2127,14 +2127,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 332µs  397µs     2494.     110KB     6.21</code></pre>
+#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 661µs  752µs     1317.     204KB     4.16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb246"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb246-1"><a href="#cb246-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson2</span>(x), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x), c(0, 100),…  38µs 38.9µs    23924.    7.86KB     7.18</code></pre>
+#&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 46.3µs 47.8µs    19532.    7.86KB     8.42</code></pre>
 </div>
 </div>
 <p>Answer: <code>ll_poisson2()</code> is nearly twice as fast with <code>x1</code> and nearly 10 times as fast when the length of <code>x</code> is 100.</p>
@@ -2280,7 +2280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         })
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9ea83e42f8&gt;
+#&gt; &lt;bytecode: 0x7fcab9685ca0&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -2302,7 +2302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     check_bool(quiet)
 #&gt;     function(...) capture_error(.f(...), otherwise, quiet)
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9e7f888630&gt;
+#&gt; &lt;bytecode: 0x7fca7abf69e8&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb263"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb263-1"><a href="#cb263-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">:::</span>capture_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2315,7 +2315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         list(result = otherwise, error = e)
 #&gt;     })
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9e7ff6a6c8&gt;
+#&gt; &lt;bytecode: 0x7fca7ac59628&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -2505,7 +2505,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb279-30"><a href="#cb279-30" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.003   0.000   1.006</code></pre>
+#&gt;   0.003   0.000   1.005</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb281"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb281-1"><a href="#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
 <span id="cb281-2"><a href="#cb281-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">g</span>()</span>
@@ -2514,7 +2514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb281-5"><a href="#cb281-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.002   0.000   2.006</code></pre>
+#&gt;   0.007   0.000   2.009</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -2794,12 +2794,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../analysis/advanced-r-1.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced R Workbook (Foundations)</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced R (Foundations)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../analysis/advanced-r-3.html" class="pagination-link">
-        <span class="nav-page-text">Advanced R Workbook (Object-oriented programming)</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Advanced R (Object-oriented programming)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

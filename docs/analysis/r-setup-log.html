@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="John Benninghoff">
 <meta name="dcterms.date" content="2020-12-30">
 
 <title>rtraining - R Setup Log</title>
@@ -65,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../analysis/r-training-log.html" rel="next">
-<link href="../analysis/ggplot2-5.html" rel="prev">
+<link href="../analysis/FaultTree.html" rel="next">
+<link href="../analysis/r-training-log.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -138,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-1.html">Analysis</a></li><li class="breadcrumb-item"><a href="../analysis/r-setup-log.html">R Setup Log</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/r-setup-log.html">R Setup Log</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -150,89 +151,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Foundations)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Functional programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Object-oriented programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Metaprogramming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">FaultTree.widget Test</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Getting started)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Layers)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Scales)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Grammar)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Extending)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">R Setup Log</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../analysis/r-training-log.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Training Log</span></a>
   </div>
 </li>
-      </ul>
-  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">R Setup Log</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FaultTree.widget Test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Foundations)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Functional programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Object-oriented programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Metaprogramming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Getting started)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Layers)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Scales)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Grammar)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Extending)</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -272,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/edit/main/analysis/r-setup-log.Rmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/r-setup-log.Rmd" class="toc-action">View source</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -280,12 +270,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">R Setup Log</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">notes</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>John Benninghoff </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -327,7 +326,7 @@ Environment for statistical computing and graphics
 ==&gt; Artifacts
 R-4.3.2-x86_64.pkg (Pkg)
 ==&gt; Analytics
-install: 837 (30 days), 2,493 (90 days), 5,946 (365 days)</code></pre>
+install: 827 (30 days), 2,489 (90 days), 5,936 (365 days)</code></pre>
 </div>
 </div>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
@@ -940,13 +939,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../analysis/ggplot2-5.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ggplot2 (Extending)</span>
+      <a href="../analysis/r-training-log.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">R Training Log</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../analysis/r-training-log.html" class="pagination-link">
-        <span class="nav-page-text">R Training Log</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../analysis/FaultTree.html" class="pagination-link">
+        <span class="nav-page-text">FaultTree.widget Test</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="John Benninghoff">
 <meta name="dcterms.date" content="2022-08-15">
 
-<title>rtraining - Advanced R Workbook (Object-oriented programming)</title>
+<title>rtraining - Advanced R (Object-oriented programming)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-1.html">Analysis</a></li><li class="breadcrumb-item"><a href="../analysis/advanced-r-3.html">Advanced R Workbook (Object-oriented programming)</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-3.html">Advanced R (Object-oriented programming)</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -150,89 +151,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Foundations)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Functional programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Advanced R Workbook (Object-oriented programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Metaprogramming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">FaultTree.widget Test</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Getting started)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Layers)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Scales)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Grammar)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Extending)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R Setup Log</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../analysis/r-training-log.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Training Log</span></a>
   </div>
 </li>
-      </ul>
-  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Setup Log</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FaultTree.widget Test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Foundations)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Functional programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Advanced R (Object-oriented programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Metaprogramming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Getting started)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Layers)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Scales)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Grammar)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Extending)</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -270,20 +260,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#trade-offs" id="toc-trade-offs" class="nav-link" data-scroll-target="#trade-offs">16 Trade-offs</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/edit/main/analysis/advanced-r-3.Rmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/advanced-r-3.Rmd" class="toc-action">View source</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Advanced R Workbook (Object-oriented programming)</h1>
-</div>
+<h1 class="title">Advanced R (Object-oriented programming)</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">exercises</div>
+    <div class="quarto-category">advanced-r</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>John Benninghoff </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -779,7 +779,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     class(f) &lt;- c(if (ordered) "ordered", "factor")
 #&gt;     f
 #&gt; }
-#&gt; &lt;bytecode: 0x7f8989aa2908&gt;
+#&gt; &lt;bytecode: 0x7feac9a51f08&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -912,14 +912,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; UseMethod("t")
-#&gt; &lt;bytecode: 0x7f893a905e40&gt;
+#&gt; &lt;bytecode: 0x7fea908a8920&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>t.test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("t.test")
-#&gt; &lt;bytecode: 0x7f898996edc0&gt;
+#&gt; &lt;bytecode: 0x7fea87e90630&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -2616,14 +2616,14 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt; {
 #&gt;     .Date(NextMethod("["), oldClass(x))
 #&gt; }
-#&gt; &lt;bytecode: 0x7f895a812918&gt;
+#&gt; &lt;bytecode: 0x7feaa01e0518&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">.Date</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (xx, cl = "Date") 
 #&gt; `class&lt;-`(xx, cl)
-#&gt; &lt;bytecode: 0x7f895cf96318&gt;
+#&gt; &lt;bytecode: 0x7feaa0789760&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -2944,7 +2944,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;             paste(vnames[!mode.ok], collapse = ", "))
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x7f8959b82098&gt;
+#&gt; &lt;bytecode: 0x7fea97ecb898&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb191"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a>Math.Date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2952,7 +2952,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not defined for \"Date\" objects", .Generic), 
 #&gt;     domain = NA)
-#&gt; &lt;bytecode: 0x7f8959b871f8&gt;
+#&gt; &lt;bytecode: 0x7fea97ed09f8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb193"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a>Math.difftime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2966,14 +2966,14 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;         }, stop(gettextf("'%s' not defined for \"difftime\" objects", 
 #&gt;             .Generic), domain = NA))
 #&gt; }
-#&gt; &lt;bytecode: 0x7f8959b867b0&gt;
+#&gt; &lt;bytecode: 0x7fea97ecffb0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb195"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a>Math.factor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not meaningful for factors", sQuote(.Generic)))
-#&gt; &lt;bytecode: 0x7f8959b8b9b0&gt;
+#&gt; &lt;bytecode: 0x7fea97ed51b0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb197"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a>Math.POSIXt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2983,7 +2983,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;     stop(gettextf("'%s' not defined for \"POSIXt\" objects", 
 #&gt;         .Generic), domain = NA)
 #&gt; }
-#&gt; &lt;bytecode: 0x7f8959b8aec0&gt;
+#&gt; &lt;bytecode: 0x7fea97ed46c0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -3377,7 +3377,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb253"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb253-1"><a href="#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Sat Nov 11 12:23:27 2023"</code></pre>
+<pre><code>#&gt; [1] "Sat Nov 11 19:05:39 2023"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb255"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb255-1"><a href="#cb255-1" aria-hidden="true" tabindex="-1"></a>tz<span class="sc">$</span><span class="fu">set</span>(<span class="st">"America/New_York"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3385,7 +3385,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb257"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb257-1"><a href="#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Sat Nov 11 13:23:27 2023"</code></pre>
+<pre><code>#&gt; [1] "Sat Nov 11 20:05:39 2023"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb259"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb259-1"><a href="#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">TZ =</span> orig_tz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -3947,124 +3947,147 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ol>
 <p>Answer: the <code>Person</code> class uses the fields from <code>utils::person()</code>, excluding deprecated fields. Per the docs, <code>family</code> must be a string (length 1), others can be vectors (but this is not enforced).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb331"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb331-1"><a href="#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb331-2"><a href="#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Person"</span>,</span>
-<span id="cb331-3"><a href="#cb331-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb331-4"><a href="#cb331-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> <span class="st">"character"</span>,</span>
-<span id="cb331-5"><a href="#cb331-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">"character"</span>,</span>
-<span id="cb331-6"><a href="#cb331-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> <span class="st">"character"</span>,</span>
-<span id="cb331-7"><a href="#cb331-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> <span class="st">"character"</span>,</span>
-<span id="cb331-8"><a href="#cb331-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="st">"character"</span></span>
-<span id="cb331-9"><a href="#cb331-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb331-10"><a href="#cb331-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb331-11"><a href="#cb331-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb331-12"><a href="#cb331-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb331-13"><a href="#cb331-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb331-14"><a href="#cb331-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb331-15"><a href="#cb331-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="cn">NA_character_</span></span>
-<span id="cb331-16"><a href="#cb331-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb331-17"><a href="#cb331-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb331-18"><a href="#cb331-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb331-19"><a href="#cb331-19" aria-hidden="true" tabindex="-1"></a><span class="fu">setValidity</span>(<span class="st">"Person"</span>, <span class="cf">function</span>(object) {</span>
-<span id="cb331-20"><a href="#cb331-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># regex from https://www.nicebread.de/validating-email-adresses-in-r/</span></span>
-<span id="cb331-21"><a href="#cb331-21" aria-hidden="true" tabindex="-1"></a>  regex <span class="ot">&lt;-</span> <span class="st">"</span><span class="sc">\\</span><span class="st">&lt;[A-Z0-9._%+-]+@[A-Z0-9.-]+</span><span class="sc">\\</span><span class="st">.[A-Z]{2,}</span><span class="sc">\\</span><span class="st">&gt;"</span></span>
-<span id="cb331-22"><a href="#cb331-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb331-23"><a href="#cb331-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(object<span class="sc">@</span>family) <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
-<span id="cb331-24"><a href="#cb331-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"@family must be a string (length 1)"</span></span>
-<span id="cb331-25"><a href="#cb331-25" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(object<span class="sc">@</span>email) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">grepl</span>(regex, object<span class="sc">@</span>email, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb331-26"><a href="#cb331-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"invalid @email"</span></span>
-<span id="cb331-27"><a href="#cb331-27" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb331-28"><a href="#cb331-28" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span></span>
-<span id="cb331-29"><a href="#cb331-29" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb331-30"><a href="#cb331-30" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span></span>
-<span id="cb331-31"><a href="#cb331-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
-<span id="cb331-32"><a href="#cb331-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb331-33"><a href="#cb331-33" aria-hidden="true" tabindex="-1"></a>Person <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">given =</span> <span class="cn">NA_character_</span>, <span class="at">family =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb331-34"><a href="#cb331-34" aria-hidden="true" tabindex="-1"></a>                   <span class="at">email =</span> <span class="cn">NA_character_</span>, <span class="at">role =</span> <span class="cn">NA_character_</span>, <span class="at">comment =</span> <span class="cn">NA_character_</span>) {</span>
-<span id="cb331-35"><a href="#cb331-35" aria-hidden="true" tabindex="-1"></a>  given <span class="ot">&lt;-</span> <span class="fu">as.character</span>(given)</span>
-<span id="cb331-36"><a href="#cb331-36" aria-hidden="true" tabindex="-1"></a>  family <span class="ot">&lt;-</span> <span class="fu">as.character</span>(family)</span>
-<span id="cb331-37"><a href="#cb331-37" aria-hidden="true" tabindex="-1"></a>  email <span class="ot">&lt;-</span> <span class="fu">as.character</span>(email)</span>
-<span id="cb331-38"><a href="#cb331-38" aria-hidden="true" tabindex="-1"></a>  role <span class="ot">&lt;-</span> <span class="fu">as.character</span>(role)</span>
-<span id="cb331-39"><a href="#cb331-39" aria-hidden="true" tabindex="-1"></a>  comment <span class="ot">&lt;-</span> <span class="fu">as.character</span>(comment)</span>
-<span id="cb331-40"><a href="#cb331-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb331-41"><a href="#cb331-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">new</span>(<span class="st">"Person"</span>, <span class="at">given =</span> given, <span class="at">family =</span> family, <span class="at">email =</span> email, <span class="at">role =</span> role, <span class="at">comment =</span> comment)</span>
-<span id="cb331-42"><a href="#cb331-42" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb331-43"><a href="#cb331-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb331-44"><a href="#cb331-44" aria-hidden="true" tabindex="-1"></a><span class="fu">Person</span>(<span class="st">"John"</span>, <span class="st">"Benninghoff"</span>, <span class="at">email =</span> <span class="st">"john@example.com"</span>, <span class="at">comment =</span> <span class="dv">51</span>)</span>
-<span id="cb331-45"><a href="#cb331-45" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">Person</span>(<span class="st">"John"</span>, <span class="fu">c</span>(<span class="st">"Three"</span>, <span class="st">"Last"</span>, <span class="st">"Names"</span>)))</span>
-<span id="cb331-46"><a href="#cb331-46" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">Person</span>(<span class="st">"John"</span>, <span class="at">email =</span> <span class="st">"invalid@local"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb331"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb331-1"><a href="#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Person"</span>,</span>
+<span id="cb331-2"><a href="#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb331-3"><a href="#cb331-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> <span class="st">"character"</span>,</span>
+<span id="cb331-4"><a href="#cb331-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">"character"</span>,</span>
+<span id="cb331-5"><a href="#cb331-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> <span class="st">"character"</span>,</span>
+<span id="cb331-6"><a href="#cb331-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> <span class="st">"character"</span>,</span>
+<span id="cb331-7"><a href="#cb331-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="st">"character"</span></span>
+<span id="cb331-8"><a href="#cb331-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb331-9"><a href="#cb331-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb331-10"><a href="#cb331-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb331-11"><a href="#cb331-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb331-12"><a href="#cb331-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb331-13"><a href="#cb331-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb331-14"><a href="#cb331-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="cn">NA_character_</span></span>
+<span id="cb331-15"><a href="#cb331-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb331-16"><a href="#cb331-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb331-17"><a href="#cb331-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-18"><a href="#cb331-18" aria-hidden="true" tabindex="-1"></a><span class="fu">setValidity</span>(<span class="st">"Person"</span>, <span class="cf">function</span>(object) {</span>
+<span id="cb331-19"><a href="#cb331-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># regex from https://www.nicebread.de/validating-email-adresses-in-r/</span></span>
+<span id="cb331-20"><a href="#cb331-20" aria-hidden="true" tabindex="-1"></a>  regex <span class="ot">&lt;-</span> <span class="st">"</span><span class="sc">\\</span><span class="st">&lt;[A-Z0-9._%+-]+@[A-Z0-9.-]+</span><span class="sc">\\</span><span class="st">.[A-Z]{2,}</span><span class="sc">\\</span><span class="st">&gt;"</span></span>
+<span id="cb331-21"><a href="#cb331-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-22"><a href="#cb331-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(object<span class="sc">@</span>family) <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
+<span id="cb331-23"><a href="#cb331-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"@family must be a string (length 1)"</span></span>
+<span id="cb331-24"><a href="#cb331-24" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(object<span class="sc">@</span>email) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">grepl</span>(regex, object<span class="sc">@</span>email, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb331-25"><a href="#cb331-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"invalid @email"</span></span>
+<span id="cb331-26"><a href="#cb331-26" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb331-27"><a href="#cb331-27" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span></span>
+<span id="cb331-28"><a href="#cb331-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb331-29"><a href="#cb331-29" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span></span>
+<span id="cb331-30"><a href="#cb331-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
+<span id="cb331-31"><a href="#cb331-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-32"><a href="#cb331-32" aria-hidden="true" tabindex="-1"></a>Person <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">given =</span> <span class="cn">NA_character_</span>, <span class="at">family =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb331-33"><a href="#cb331-33" aria-hidden="true" tabindex="-1"></a>                   <span class="at">email =</span> <span class="cn">NA_character_</span>, <span class="at">role =</span> <span class="cn">NA_character_</span>, <span class="at">comment =</span> <span class="cn">NA_character_</span>) {</span>
+<span id="cb331-34"><a href="#cb331-34" aria-hidden="true" tabindex="-1"></a>  given <span class="ot">&lt;-</span> <span class="fu">as.character</span>(given)</span>
+<span id="cb331-35"><a href="#cb331-35" aria-hidden="true" tabindex="-1"></a>  family <span class="ot">&lt;-</span> <span class="fu">as.character</span>(family)</span>
+<span id="cb331-36"><a href="#cb331-36" aria-hidden="true" tabindex="-1"></a>  email <span class="ot">&lt;-</span> <span class="fu">as.character</span>(email)</span>
+<span id="cb331-37"><a href="#cb331-37" aria-hidden="true" tabindex="-1"></a>  role <span class="ot">&lt;-</span> <span class="fu">as.character</span>(role)</span>
+<span id="cb331-38"><a href="#cb331-38" aria-hidden="true" tabindex="-1"></a>  comment <span class="ot">&lt;-</span> <span class="fu">as.character</span>(comment)</span>
+<span id="cb331-39"><a href="#cb331-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-40"><a href="#cb331-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">new</span>(<span class="st">"Person"</span>, <span class="at">given =</span> given, <span class="at">family =</span> family, <span class="at">email =</span> email, <span class="at">role =</span> role, <span class="at">comment =</span> comment)</span>
+<span id="cb331-41"><a href="#cb331-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb331-42"><a href="#cb331-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-43"><a href="#cb331-43" aria-hidden="true" tabindex="-1"></a><span class="fu">Person</span>(<span class="st">"John"</span>, <span class="st">"Benninghoff"</span>, <span class="at">email =</span> <span class="st">"john@example.com"</span>, <span class="at">comment =</span> <span class="dv">51</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; An object of class "Person"
+#&gt; Slot "given":
+#&gt; [1] "John"
+#&gt; 
+#&gt; Slot "family":
+#&gt; [1] "Benninghoff"
+#&gt; 
+#&gt; Slot "email":
+#&gt; [1] "john@example.com"
+#&gt; 
+#&gt; Slot "role":
+#&gt; [1] NA
+#&gt; 
+#&gt; Slot "comment":
+#&gt; [1] "51"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb333"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb333-1"><a href="#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">Person</span>(<span class="st">"John"</span>, <span class="fu">c</span>(<span class="st">"Three"</span>, <span class="st">"Last"</span>, <span class="st">"Names"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Error in validObject(.Object) : 
+#&gt;   invalid class "Person" object: @family must be a string (length 1)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb335"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb335-1"><a href="#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">Person</span>(<span class="st">"John"</span>, <span class="at">email =</span> <span class="st">"invalid@local"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Error in validObject(.Object) : 
+#&gt;   invalid class "Person" object: invalid @email</code></pre>
+</div>
 </div>
 <p>AR Solutions: The Person class from <em>Advanced R</em> contains the slots <code>name</code> and <code>age</code>. The person class from the <code>{utils}</code> package contains the slots <code>given</code> (vector of given names), <code>family</code>, <code>role</code>, <code>email</code> and <code>comment</code> (see <code>?utils::person</code>).</p>
 <p>All slots from <code>utils::person()</code> besides <code>role</code> must be of type character and length 1. The entries in the <code>role</code> slot must match one of the following abbreviations “aut”, “com”, “cph”, “cre”, “ctb”, “ctr”, “dtc”, “fnd”, “rev”, “ths”, “trl”. Therefore, <code>role</code> might be of different length than the other slots and we’ll add a corresponding constraint within the validator.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb332"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb332-1"><a href="#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb332-2"><a href="#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Definition of the Person class</span></span>
-<span id="cb332-3"><a href="#cb332-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Person"</span>,</span>
-<span id="cb332-4"><a href="#cb332-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb332-5"><a href="#cb332-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">"numeric"</span>,</span>
-<span id="cb332-6"><a href="#cb332-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> <span class="st">"character"</span>,</span>
-<span id="cb332-7"><a href="#cb332-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">"character"</span>,</span>
-<span id="cb332-8"><a href="#cb332-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> <span class="st">"character"</span>,</span>
-<span id="cb332-9"><a href="#cb332-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> <span class="st">"character"</span>,</span>
-<span id="cb332-10"><a href="#cb332-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="st">"character"</span></span>
-<span id="cb332-11"><a href="#cb332-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb332-12"><a href="#cb332-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb332-13"><a href="#cb332-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="cn">NA_real_</span>,</span>
-<span id="cb332-14"><a href="#cb332-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb332-15"><a href="#cb332-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb332-16"><a href="#cb332-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb332-17"><a href="#cb332-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb332-18"><a href="#cb332-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="cn">NA_character_</span></span>
-<span id="cb332-19"><a href="#cb332-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb332-20"><a href="#cb332-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb332-21"><a href="#cb332-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Helper to create instances of the Person class</span></span>
-<span id="cb332-22"><a href="#cb332-22" aria-hidden="true" tabindex="-1"></a>Person <span class="ot">&lt;-</span> <span class="cf">function</span>(given, family,</span>
-<span id="cb332-23"><a href="#cb332-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">age =</span> <span class="cn">NA_real_</span>,</span>
-<span id="cb332-24"><a href="#cb332-24" aria-hidden="true" tabindex="-1"></a>                   <span class="at">role =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb332-25"><a href="#cb332-25" aria-hidden="true" tabindex="-1"></a>                   <span class="at">email =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb332-26"><a href="#cb332-26" aria-hidden="true" tabindex="-1"></a>                   <span class="at">comment =</span> <span class="cn">NA_character_</span>) {</span>
-<span id="cb332-27"><a href="#cb332-27" aria-hidden="true" tabindex="-1"></a>  age <span class="ot">&lt;-</span> <span class="fu">as.double</span>(age)</span>
-<span id="cb332-28"><a href="#cb332-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">new</span>(<span class="st">"Person"</span>,</span>
-<span id="cb332-29"><a href="#cb332-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> age,</span>
-<span id="cb332-30"><a href="#cb332-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> given,</span>
-<span id="cb332-31"><a href="#cb332-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> family,</span>
-<span id="cb332-32"><a href="#cb332-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> role,</span>
-<span id="cb332-33"><a href="#cb332-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> email,</span>
-<span id="cb332-34"><a href="#cb332-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> comment</span>
-<span id="cb332-35"><a href="#cb332-35" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb332-36"><a href="#cb332-36" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb332-37"><a href="#cb332-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Validator to ensure that each slot is of length one</span></span>
-<span id="cb332-38"><a href="#cb332-38" aria-hidden="true" tabindex="-1"></a><span class="fu">setValidity</span>(<span class="st">"Person"</span>, <span class="cf">function</span>(object) { <span class="co"># nolint: cyclocomp_linter.</span></span>
-<span id="cb332-39"><a href="#cb332-39" aria-hidden="true" tabindex="-1"></a>  invalids <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb332-40"><a href="#cb332-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(object<span class="sc">@</span>age) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span></span>
-<span id="cb332-41"><a href="#cb332-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(object<span class="sc">@</span>given) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span></span>
-<span id="cb332-42"><a href="#cb332-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(object<span class="sc">@</span>family) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span></span>
-<span id="cb332-43"><a href="#cb332-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(object<span class="sc">@</span>email) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span></span>
-<span id="cb332-44"><a href="#cb332-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(object<span class="sc">@</span>comment) <span class="sc">!=</span> <span class="dv">1</span>) {</span>
-<span id="cb332-45"><a href="#cb332-45" aria-hidden="true" tabindex="-1"></a>    invalids <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb332-46"><a href="#cb332-46" aria-hidden="true" tabindex="-1"></a>      <span class="st">"@name, @age, @given, @family, @email, "</span>,</span>
-<span id="cb332-47"><a href="#cb332-47" aria-hidden="true" tabindex="-1"></a>      <span class="st">"@comment must be of length 1"</span></span>
-<span id="cb332-48"><a href="#cb332-48" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb332-49"><a href="#cb332-49" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb332-50"><a href="#cb332-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-51"><a href="#cb332-51" aria-hidden="true" tabindex="-1"></a>  known_roles <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb332-52"><a href="#cb332-52" aria-hidden="true" tabindex="-1"></a>    <span class="cn">NA_character_</span>, <span class="st">"aut"</span>, <span class="st">"com"</span>, <span class="st">"cph"</span>, <span class="st">"cre"</span>, <span class="st">"ctb"</span>,</span>
-<span id="cb332-53"><a href="#cb332-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ctr"</span>, <span class="st">"dtc"</span>, <span class="st">"fnd"</span>, <span class="st">"rev"</span>, <span class="st">"ths"</span>, <span class="st">"trl"</span></span>
-<span id="cb332-54"><a href="#cb332-54" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb332-55"><a href="#cb332-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-56"><a href="#cb332-56" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(object<span class="sc">@</span>role <span class="sc">%in%</span> known_roles)) {</span>
-<span id="cb332-57"><a href="#cb332-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(</span>
-<span id="cb332-58"><a href="#cb332-58" aria-hidden="true" tabindex="-1"></a>      <span class="st">"@role(s) must be one of"</span>,</span>
-<span id="cb332-59"><a href="#cb332-59" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(known_roles, <span class="at">collapse =</span> <span class="st">", "</span>) <span class="co"># nolint: paste_linter.</span></span>
-<span id="cb332-60"><a href="#cb332-60" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb332-61"><a href="#cb332-61" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb332-62"><a href="#cb332-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb332-63"><a href="#cb332-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(invalids)) {</span>
-<span id="cb332-64"><a href="#cb332-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(invalids)</span>
-<span id="cb332-65"><a href="#cb332-65" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb332-66"><a href="#cb332-66" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span></span>
-<span id="cb332-67"><a href="#cb332-67" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span></span>
-<span id="cb332-68"><a href="#cb332-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb337"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb337-1"><a href="#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definition of the Person class</span></span>
+<span id="cb337-2"><a href="#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Person"</span>,</span>
+<span id="cb337-3"><a href="#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb337-4"><a href="#cb337-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">"numeric"</span>,</span>
+<span id="cb337-5"><a href="#cb337-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> <span class="st">"character"</span>,</span>
+<span id="cb337-6"><a href="#cb337-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">"character"</span>,</span>
+<span id="cb337-7"><a href="#cb337-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> <span class="st">"character"</span>,</span>
+<span id="cb337-8"><a href="#cb337-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> <span class="st">"character"</span>,</span>
+<span id="cb337-9"><a href="#cb337-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="st">"character"</span></span>
+<span id="cb337-10"><a href="#cb337-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb337-11"><a href="#cb337-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb337-12"><a href="#cb337-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="cn">NA_real_</span>,</span>
+<span id="cb337-13"><a href="#cb337-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb337-14"><a href="#cb337-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb337-15"><a href="#cb337-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb337-16"><a href="#cb337-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb337-17"><a href="#cb337-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="cn">NA_character_</span></span>
+<span id="cb337-18"><a href="#cb337-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb337-19"><a href="#cb337-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb337-20"><a href="#cb337-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Helper to create instances of the Person class</span></span>
+<span id="cb337-21"><a href="#cb337-21" aria-hidden="true" tabindex="-1"></a>Person <span class="ot">&lt;-</span> <span class="cf">function</span>(given, family,</span>
+<span id="cb337-22"><a href="#cb337-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">age =</span> <span class="cn">NA_real_</span>,</span>
+<span id="cb337-23"><a href="#cb337-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">role =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb337-24"><a href="#cb337-24" aria-hidden="true" tabindex="-1"></a>                   <span class="at">email =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb337-25"><a href="#cb337-25" aria-hidden="true" tabindex="-1"></a>                   <span class="at">comment =</span> <span class="cn">NA_character_</span>) {</span>
+<span id="cb337-26"><a href="#cb337-26" aria-hidden="true" tabindex="-1"></a>  age <span class="ot">&lt;-</span> <span class="fu">as.double</span>(age)</span>
+<span id="cb337-27"><a href="#cb337-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">new</span>(<span class="st">"Person"</span>,</span>
+<span id="cb337-28"><a href="#cb337-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> age,</span>
+<span id="cb337-29"><a href="#cb337-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">given =</span> given,</span>
+<span id="cb337-30"><a href="#cb337-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> family,</span>
+<span id="cb337-31"><a href="#cb337-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">role =</span> role,</span>
+<span id="cb337-32"><a href="#cb337-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">email =</span> email,</span>
+<span id="cb337-33"><a href="#cb337-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> comment</span>
+<span id="cb337-34"><a href="#cb337-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb337-35"><a href="#cb337-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb337-36"><a href="#cb337-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Validator to ensure that each slot is of length one</span></span>
+<span id="cb337-37"><a href="#cb337-37" aria-hidden="true" tabindex="-1"></a><span class="fu">setValidity</span>(<span class="st">"Person"</span>, <span class="cf">function</span>(object) { <span class="co"># nolint: cyclocomp_linter.</span></span>
+<span id="cb337-38"><a href="#cb337-38" aria-hidden="true" tabindex="-1"></a>  invalids <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb337-39"><a href="#cb337-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(object<span class="sc">@</span>age) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span></span>
+<span id="cb337-40"><a href="#cb337-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(object<span class="sc">@</span>given) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span></span>
+<span id="cb337-41"><a href="#cb337-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(object<span class="sc">@</span>family) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span></span>
+<span id="cb337-42"><a href="#cb337-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(object<span class="sc">@</span>email) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span></span>
+<span id="cb337-43"><a href="#cb337-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(object<span class="sc">@</span>comment) <span class="sc">!=</span> <span class="dv">1</span>) {</span>
+<span id="cb337-44"><a href="#cb337-44" aria-hidden="true" tabindex="-1"></a>    invalids <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb337-45"><a href="#cb337-45" aria-hidden="true" tabindex="-1"></a>      <span class="st">"@name, @age, @given, @family, @email, "</span>,</span>
+<span id="cb337-46"><a href="#cb337-46" aria-hidden="true" tabindex="-1"></a>      <span class="st">"@comment must be of length 1"</span></span>
+<span id="cb337-47"><a href="#cb337-47" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb337-48"><a href="#cb337-48" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb337-49"><a href="#cb337-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-50"><a href="#cb337-50" aria-hidden="true" tabindex="-1"></a>  known_roles <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb337-51"><a href="#cb337-51" aria-hidden="true" tabindex="-1"></a>    <span class="cn">NA_character_</span>, <span class="st">"aut"</span>, <span class="st">"com"</span>, <span class="st">"cph"</span>, <span class="st">"cre"</span>, <span class="st">"ctb"</span>,</span>
+<span id="cb337-52"><a href="#cb337-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ctr"</span>, <span class="st">"dtc"</span>, <span class="st">"fnd"</span>, <span class="st">"rev"</span>, <span class="st">"ths"</span>, <span class="st">"trl"</span></span>
+<span id="cb337-53"><a href="#cb337-53" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb337-54"><a href="#cb337-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-55"><a href="#cb337-55" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(object<span class="sc">@</span>role <span class="sc">%in%</span> known_roles)) {</span>
+<span id="cb337-56"><a href="#cb337-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(</span>
+<span id="cb337-57"><a href="#cb337-57" aria-hidden="true" tabindex="-1"></a>      <span class="st">"@role(s) must be one of"</span>,</span>
+<span id="cb337-58"><a href="#cb337-58" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(known_roles, <span class="at">collapse =</span> <span class="st">", "</span>) <span class="co"># nolint: paste_linter.</span></span>
+<span id="cb337-59"><a href="#cb337-59" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb337-60"><a href="#cb337-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb337-61"><a href="#cb337-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-62"><a href="#cb337-62" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(invalids)) {</span>
+<span id="cb337-63"><a href="#cb337-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(invalids)</span>
+<span id="cb337-64"><a href="#cb337-64" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb337-65"><a href="#cb337-65" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span></span>
+<span id="cb337-66"><a href="#cb337-66" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span></span>
+<span id="cb337-67"><a href="#cb337-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notes: while I missed including <code>age</code>, our implementations are similar except for validations.</p>
 <hr>
@@ -4073,22 +4096,35 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ol>
 <p>Answer: defining a new class with no slots makes it a virtual class, which can’t be used to create new objects, but can be used to define a class union.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb333"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb333-1"><a href="#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb333-2"><a href="#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Virtual"</span>)</span>
-<span id="cb333-3"><a href="#cb333-3" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">new</span>(<span class="st">"Virtual"</span>))</span>
-<span id="cb333-4"><a href="#cb333-4" aria-hidden="true" tabindex="-1"></a><span class="fu">setClassUnion</span>(<span class="st">"Virtual"</span>, <span class="st">"Person"</span>)</span>
-<span id="cb333-5"><a href="#cb333-5" aria-hidden="true" tabindex="-1"></a><span class="fu">getClass</span>(<span class="st">"Virtual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb338"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb338-1"><a href="#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Virtual"</span>)</span>
+<span id="cb338-2"><a href="#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">new</span>(<span class="st">"Virtual"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Error in new("Virtual") : 
+#&gt;   trying to generate an object from a virtual class ("Virtual")</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb340"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb340-1"><a href="#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClassUnion</span>(<span class="st">"Virtual"</span>, <span class="st">"Person"</span>)</span>
+<span id="cb340-2"><a href="#cb340-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getClass</span>(<span class="st">"Virtual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Extended class definition ( "ClassUnionRepresentation" )
+#&gt; Virtual Class "Virtual" [in ".GlobalEnv"]
+#&gt; 
+#&gt; No Slots, prototype of class "Person"
+#&gt; 
+#&gt; Known Subclasses: "Person"</code></pre>
+</div>
 </div>
 <p>AR Solutions: It depends on the other arguments. If we inherit from another class, we get the same slots. But something interesting happens if we don’t inherit from an existing class. We get a virtual class. A virtual class can’t be instantiated:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb334"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb334-1"><a href="#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb334-2"><a href="#cb334-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Human"</span>)</span>
-<span id="cb334-3"><a href="#cb334-3" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">new</span>(<span class="st">"Human"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb342"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb342-1"><a href="#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Human"</span>)</span>
+<span id="cb342-2"><a href="#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">new</span>(<span class="st">"Human"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Error in new("Human") : 
+#&gt;   trying to generate an object from a virtual class ("Human")</code></pre>
+</div>
 </div>
 <p>But can be inherited from:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb335"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb335-1"><a href="#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb335-2"><a href="#cb335-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Programmer"</span>, <span class="at">contains =</span> <span class="st">"Human"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb344"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb344-1"><a href="#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Programmer"</span>, <span class="at">contains =</span> <span class="st">"Human"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <ol start="3" type="1">
@@ -4096,95 +4132,120 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ol>
 <p>Answer: sketch below. Default values would be set in <code>initialize()</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb336"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb336-1"><a href="#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb336-2"><a href="#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Factor"</span>,</span>
-<span id="cb336-3"><a href="#cb336-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">list</span>(</span>
-<span id="cb336-4"><a href="#cb336-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"character"</span>,</span>
-<span id="cb336-5"><a href="#cb336-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="st">"character"</span>,</span>
-<span id="cb336-6"><a href="#cb336-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="st">"character"</span>,</span>
-<span id="cb336-7"><a href="#cb336-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">exclude =</span> <span class="st">"character"</span>,</span>
-<span id="cb336-8"><a href="#cb336-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="st">"logical"</span>,</span>
-<span id="cb336-9"><a href="#cb336-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">nmax =</span> <span class="st">"integer"</span></span>
-<span id="cb336-10"><a href="#cb336-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb336-11"><a href="#cb336-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb336-12"><a href="#cb336-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
-<span id="cb336-13"><a href="#cb336-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
-<span id="cb336-14"><a href="#cb336-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
-<span id="cb336-15"><a href="#cb336-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">exclude =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb336-16"><a href="#cb336-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb336-17"><a href="#cb336-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">nmax =</span> <span class="cn">NA_integer_</span></span>
-<span id="cb336-18"><a href="#cb336-18" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb336-19"><a href="#cb336-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb336-20"><a href="#cb336-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-21"><a href="#cb336-21" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"S4Date"</span>,</span>
-<span id="cb336-22"><a href="#cb336-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">list</span>(</span>
-<span id="cb336-23"><a href="#cb336-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">days =</span> <span class="st">"integer"</span></span>
-<span id="cb336-24"><a href="#cb336-24" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb336-25"><a href="#cb336-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb336-26"><a href="#cb336-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">days =</span> 0L</span>
-<span id="cb336-27"><a href="#cb336-27" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb336-28"><a href="#cb336-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb336-29"><a href="#cb336-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-30"><a href="#cb336-30" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"DataFrame"</span>,</span>
-<span id="cb336-31"><a href="#cb336-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">list</span>(</span>
-<span id="cb336-32"><a href="#cb336-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="st">"matrix"</span>,</span>
-<span id="cb336-33"><a href="#cb336-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_names =</span> <span class="st">"character"</span>,</span>
-<span id="cb336-34"><a href="#cb336-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">row_names =</span> <span class="st">"character"</span></span>
-<span id="cb336-35"><a href="#cb336-35" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb336-36"><a href="#cb336-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb336-37"><a href="#cb336-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">0</span>, <span class="at">ncol =</span> <span class="dv">0</span>),</span>
-<span id="cb336-38"><a href="#cb336-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_names =</span> <span class="cn">NULL</span>,</span>
-<span id="cb336-39"><a href="#cb336-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">row_names =</span> <span class="cn">NULL</span></span>
-<span id="cb336-40"><a href="#cb336-40" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb336-41"><a href="#cb336-41" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb345"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb345-1"><a href="#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Factor"</span>,</span>
+<span id="cb345-2"><a href="#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">list</span>(</span>
+<span id="cb345-3"><a href="#cb345-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"character"</span>,</span>
+<span id="cb345-4"><a href="#cb345-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="st">"character"</span>,</span>
+<span id="cb345-5"><a href="#cb345-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="st">"character"</span>,</span>
+<span id="cb345-6"><a href="#cb345-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">exclude =</span> <span class="st">"character"</span>,</span>
+<span id="cb345-7"><a href="#cb345-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="st">"logical"</span>,</span>
+<span id="cb345-8"><a href="#cb345-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">nmax =</span> <span class="st">"integer"</span></span>
+<span id="cb345-9"><a href="#cb345-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb345-10"><a href="#cb345-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb345-11"><a href="#cb345-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
+<span id="cb345-12"><a href="#cb345-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
+<span id="cb345-13"><a href="#cb345-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">character</span>(<span class="dv">0</span>),</span>
+<span id="cb345-14"><a href="#cb345-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">exclude =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb345-15"><a href="#cb345-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb345-16"><a href="#cb345-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">nmax =</span> <span class="cn">NA_integer_</span></span>
+<span id="cb345-17"><a href="#cb345-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb345-18"><a href="#cb345-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb345-19"><a href="#cb345-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-20"><a href="#cb345-20" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"S4Date"</span>,</span>
+<span id="cb345-21"><a href="#cb345-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">list</span>(</span>
+<span id="cb345-22"><a href="#cb345-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">days =</span> <span class="st">"integer"</span></span>
+<span id="cb345-23"><a href="#cb345-23" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb345-24"><a href="#cb345-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb345-25"><a href="#cb345-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">days =</span> 0L</span>
+<span id="cb345-26"><a href="#cb345-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb345-27"><a href="#cb345-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb345-28"><a href="#cb345-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-29"><a href="#cb345-29" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"DataFrame"</span>,</span>
+<span id="cb345-30"><a href="#cb345-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">list</span>(</span>
+<span id="cb345-31"><a href="#cb345-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="st">"matrix"</span>,</span>
+<span id="cb345-32"><a href="#cb345-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_names =</span> <span class="st">"character"</span>,</span>
+<span id="cb345-33"><a href="#cb345-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">row_names =</span> <span class="st">"character"</span></span>
+<span id="cb345-34"><a href="#cb345-34" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb345-35"><a href="#cb345-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb345-36"><a href="#cb345-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">0</span>, <span class="at">ncol =</span> <span class="dv">0</span>),</span>
+<span id="cb345-37"><a href="#cb345-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_names =</span> <span class="cn">NULL</span>,</span>
+<span id="cb345-38"><a href="#cb345-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">row_names =</span> <span class="cn">NULL</span></span>
+<span id="cb345-39"><a href="#cb345-39" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb345-40"><a href="#cb345-40" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>AR Solutions: For all these classes we need one slot for the data and one slot per attribute. Keep in mind, that inheritance matters for ordered factors and dates. For data frames, special checks like equal lengths of the underlying list’s elements should be done within a validator.</p>
 <p>For simplicity we don’t introduce an explicit subclass for ordered factors. Instead, we introduce <code>ordered</code> as a slot.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb337"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb337-1"><a href="#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb337-2"><a href="#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Factor"</span>,</span>
-<span id="cb337-3"><a href="#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb337-4"><a href="#cb337-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="st">"integer"</span>,</span>
-<span id="cb337-5"><a href="#cb337-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="st">"character"</span>,</span>
-<span id="cb337-6"><a href="#cb337-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="st">"logical"</span></span>
-<span id="cb337-7"><a href="#cb337-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb337-8"><a href="#cb337-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb337-9"><a href="#cb337-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">integer</span>(),</span>
-<span id="cb337-10"><a href="#cb337-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">character</span>(),</span>
-<span id="cb337-11"><a href="#cb337-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">FALSE</span></span>
-<span id="cb337-12"><a href="#cb337-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb337-13"><a href="#cb337-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb337-14"><a href="#cb337-14" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"Factor"</span>, <span class="at">data =</span> <span class="fu">c</span>(1L, 2L), <span class="at">levels =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb346"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb346-1"><a href="#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Factor"</span>,</span>
+<span id="cb346-2"><a href="#cb346-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb346-3"><a href="#cb346-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="st">"integer"</span>,</span>
+<span id="cb346-4"><a href="#cb346-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="st">"character"</span>,</span>
+<span id="cb346-5"><a href="#cb346-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="st">"logical"</span></span>
+<span id="cb346-6"><a href="#cb346-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb346-7"><a href="#cb346-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb346-8"><a href="#cb346-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">integer</span>(),</span>
+<span id="cb346-9"><a href="#cb346-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">character</span>(),</span>
+<span id="cb346-10"><a href="#cb346-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">FALSE</span></span>
+<span id="cb346-11"><a href="#cb346-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb346-12"><a href="#cb346-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb346-13"><a href="#cb346-13" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"Factor"</span>, <span class="at">data =</span> <span class="fu">c</span>(1L, 2L), <span class="at">levels =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; An object of class "Factor"
+#&gt; Slot "data":
+#&gt; [1] 1 2
+#&gt; 
+#&gt; Slot "levels":
+#&gt; [1] "a" "b" "c"
+#&gt; 
+#&gt; Slot "ordered":
+#&gt; [1] FALSE</code></pre>
+</div>
 </div>
 <p>The <code>Date2</code> class stores its dates as integers, similarly to base R which uses doubles. Dates don’t have any other attributes.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb338"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb338-1"><a href="#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb338-2"><a href="#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Date2"</span>,</span>
-<span id="cb338-3"><a href="#cb338-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">list</span>(</span>
-<span id="cb338-4"><a href="#cb338-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="st">"integer"</span></span>
-<span id="cb338-5"><a href="#cb338-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb338-6"><a href="#cb338-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb338-7"><a href="#cb338-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">integer</span>()</span>
-<span id="cb338-8"><a href="#cb338-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb338-9"><a href="#cb338-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb338-10"><a href="#cb338-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb338-11"><a href="#cb338-11" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"Date2"</span>, <span class="at">data =</span> 1L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb348"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb348-1"><a href="#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Date2"</span>,</span>
+<span id="cb348-2"><a href="#cb348-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">list</span>(</span>
+<span id="cb348-3"><a href="#cb348-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="st">"integer"</span></span>
+<span id="cb348-4"><a href="#cb348-4" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb348-5"><a href="#cb348-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb348-6"><a href="#cb348-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">integer</span>()</span>
+<span id="cb348-7"><a href="#cb348-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb348-8"><a href="#cb348-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb348-9"><a href="#cb348-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-10"><a href="#cb348-10" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"Date2"</span>, <span class="at">data =</span> 1L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; An object of class "Date2"
+#&gt; Slot "data":
+#&gt; [1] 1</code></pre>
+</div>
 </div>
 <p>Our <code>DataFrame</code> class consists of a list and a slot for <code>row.names</code>. Most of the logic (e.g.&nbsp;checking that all elements of the list are a vector, and that they all have the same length) would need to be part of a validator.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb339"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb339-1"><a href="#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb339-2"><a href="#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"DataFrame"</span>,</span>
-<span id="cb339-3"><a href="#cb339-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb339-4"><a href="#cb339-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="st">"list"</span>,</span>
-<span id="cb339-5"><a href="#cb339-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="st">"character"</span></span>
-<span id="cb339-6"><a href="#cb339-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb339-7"><a href="#cb339-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb339-8"><a href="#cb339-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">list</span>(),</span>
-<span id="cb339-9"><a href="#cb339-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb339-10"><a href="#cb339-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb339-11"><a href="#cb339-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb339-12"><a href="#cb339-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-13"><a href="#cb339-13" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"DataFrame"</span>, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb350"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb350-1"><a href="#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"DataFrame"</span>,</span>
+<span id="cb350-2"><a href="#cb350-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb350-3"><a href="#cb350-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="st">"list"</span>,</span>
+<span id="cb350-4"><a href="#cb350-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="st">"character"</span></span>
+<span id="cb350-5"><a href="#cb350-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb350-6"><a href="#cb350-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb350-7"><a href="#cb350-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">list</span>(),</span>
+<span id="cb350-8"><a href="#cb350-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb350-9"><a href="#cb350-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb350-10"><a href="#cb350-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb350-11"><a href="#cb350-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb350-12"><a href="#cb350-12" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"DataFrame"</span>, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; An object of class "DataFrame"
+#&gt; Slot "data":
+#&gt; $a
+#&gt; [1] 1
+#&gt; 
+#&gt; $b
+#&gt; [1] 2
+#&gt; 
+#&gt; 
+#&gt; Slot "row.names":
+#&gt; character(0)</code></pre>
+</div>
 </div>
 <p>Notes:</p>
 <ul>
@@ -4194,7 +4255,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <li>The AR Solutions <code>DataFrame</code> omits column names (names), where mine does not; using a list for the data in <code>DataFrame</code> is a better choice, but harder to implement</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb340"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb340-1"><a href="#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(<span class="fu">data.frame</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb352"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb352-1"><a href="#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(<span class="fu">data.frame</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; $names
 #&gt; character(0)
@@ -4215,49 +4276,58 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ol>
 <p>Answer: the code below adds age accessors to Advanced R <code>Person</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb342"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb342-1"><a href="#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb342-2"><a href="#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Person"</span>,</span>
-<span id="cb342-3"><a href="#cb342-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb342-4"><a href="#cb342-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"character"</span>,</span>
-<span id="cb342-5"><a href="#cb342-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">"numeric"</span></span>
-<span id="cb342-6"><a href="#cb342-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb342-7"><a href="#cb342-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb342-8"><a href="#cb342-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb342-9"><a href="#cb342-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="cn">NA_real_</span></span>
-<span id="cb342-10"><a href="#cb342-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb342-11"><a href="#cb342-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb342-12"><a href="#cb342-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-13"><a href="#cb342-13" aria-hidden="true" tabindex="-1"></a>john <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Person"</span>, <span class="at">name =</span> <span class="st">"John Smith"</span>)</span>
-<span id="cb342-14"><a href="#cb342-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-15"><a href="#cb342-15" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"age"</span>, <span class="cf">function</span>(x) <span class="fu">standardGeneric</span>(<span class="st">"age"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb342-16"><a href="#cb342-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
-<span id="cb342-17"><a href="#cb342-17" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"age"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) x<span class="sc">@</span>age)</span>
-<span id="cb342-18"><a href="#cb342-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-19"><a href="#cb342-19" aria-hidden="true" tabindex="-1"></a><span class="fu">age</span>(john)</span>
-<span id="cb342-20"><a href="#cb342-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-21"><a href="#cb342-21" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"age&lt;-"</span>, <span class="cf">function</span>(x, value) <span class="fu">standardGeneric</span>(<span class="st">"age&lt;-"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb342-22"><a href="#cb342-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
-<span id="cb342-23"><a href="#cb342-23" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"age&lt;-"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x, value) {</span>
-<span id="cb342-24"><a href="#cb342-24" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">@</span>age <span class="ot">&lt;-</span> value</span>
-<span id="cb342-25"><a href="#cb342-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validObject</span>(x)</span>
-<span id="cb342-26"><a href="#cb342-26" aria-hidden="true" tabindex="-1"></a>  x</span>
-<span id="cb342-27"><a href="#cb342-27" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb342-28"><a href="#cb342-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb342-29"><a href="#cb342-29" aria-hidden="true" tabindex="-1"></a><span class="fu">age</span>(john) <span class="ot">&lt;-</span> <span class="dv">51</span></span>
-<span id="cb342-30"><a href="#cb342-30" aria-hidden="true" tabindex="-1"></a><span class="fu">age</span>(john)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb354"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb354-1"><a href="#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Person"</span>,</span>
+<span id="cb354-2"><a href="#cb354-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb354-3"><a href="#cb354-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"character"</span>,</span>
+<span id="cb354-4"><a href="#cb354-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">"numeric"</span></span>
+<span id="cb354-5"><a href="#cb354-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb354-6"><a href="#cb354-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb354-7"><a href="#cb354-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb354-8"><a href="#cb354-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="cn">NA_real_</span></span>
+<span id="cb354-9"><a href="#cb354-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb354-10"><a href="#cb354-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb354-11"><a href="#cb354-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-12"><a href="#cb354-12" aria-hidden="true" tabindex="-1"></a>john <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Person"</span>, <span class="at">name =</span> <span class="st">"John Smith"</span>)</span>
+<span id="cb354-13"><a href="#cb354-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-14"><a href="#cb354-14" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"age"</span>, <span class="cf">function</span>(x) <span class="fu">standardGeneric</span>(<span class="st">"age"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb354-15"><a href="#cb354-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
+<span id="cb354-16"><a href="#cb354-16" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"age"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) x<span class="sc">@</span>age)</span>
+<span id="cb354-17"><a href="#cb354-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-18"><a href="#cb354-18" aria-hidden="true" tabindex="-1"></a><span class="fu">age</span>(john)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"age&lt;-"</span>, <span class="cf">function</span>(x, value) <span class="fu">standardGeneric</span>(<span class="st">"age&lt;-"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb356-2"><a href="#cb356-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
+<span id="cb356-3"><a href="#cb356-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"age&lt;-"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x, value) {</span>
+<span id="cb356-4"><a href="#cb356-4" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">@</span>age <span class="ot">&lt;-</span> value</span>
+<span id="cb356-5"><a href="#cb356-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validObject</span>(x)</span>
+<span id="cb356-6"><a href="#cb356-6" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb356-7"><a href="#cb356-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb356-8"><a href="#cb356-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb356-9"><a href="#cb356-9" aria-hidden="true" tabindex="-1"></a><span class="fu">age</span>(john) <span class="ot">&lt;-</span> <span class="dv">51</span></span>
+<span id="cb356-10"><a href="#cb356-10" aria-hidden="true" tabindex="-1"></a><span class="fu">age</span>(john)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 51</code></pre>
+</div>
 </div>
 <p>AR Solutions: We implement the accessors via an <code>age()</code> generic, with a method for the <code>Person</code> class and a corresponding replacement function <code>age&lt;-</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb343"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb343-1"><a href="#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb343-2"><a href="#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"age"</span>, <span class="cf">function</span>(x) <span class="fu">standardGeneric</span>(<span class="st">"age"</span>))</span>
-<span id="cb343-3"><a href="#cb343-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"age"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) x<span class="sc">@</span>age)</span>
-<span id="cb343-4"><a href="#cb343-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-5"><a href="#cb343-5" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"age&lt;-"</span>, <span class="cf">function</span>(x, value) <span class="fu">standardGeneric</span>(<span class="st">"age&lt;-"</span>))</span>
-<span id="cb343-6"><a href="#cb343-6" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"age&lt;-"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x, value) {</span>
-<span id="cb343-7"><a href="#cb343-7" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">@</span>age <span class="ot">&lt;-</span> value</span>
-<span id="cb343-8"><a href="#cb343-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validObject</span>(x)</span>
-<span id="cb343-9"><a href="#cb343-9" aria-hidden="true" tabindex="-1"></a>  x</span>
-<span id="cb343-10"><a href="#cb343-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb358"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb358-1"><a href="#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"age"</span>, <span class="cf">function</span>(x) <span class="fu">standardGeneric</span>(<span class="st">"age"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "age"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb360"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb360-1"><a href="#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"age"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) x<span class="sc">@</span>age)</span>
+<span id="cb360-2"><a href="#cb360-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb360-3"><a href="#cb360-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"age&lt;-"</span>, <span class="cf">function</span>(x, value) <span class="fu">standardGeneric</span>(<span class="st">"age&lt;-"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "age&lt;-"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb362"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb362-1"><a href="#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"age&lt;-"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x, value) {</span>
+<span id="cb362-2"><a href="#cb362-2" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">@</span>age <span class="ot">&lt;-</span> value</span>
+<span id="cb362-3"><a href="#cb362-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validObject</span>(x)</span>
+<span id="cb362-4"><a href="#cb362-4" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb362-5"><a href="#cb362-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <ol start="2" type="1">
@@ -4271,29 +4341,41 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ol>
 <p>Answer: <code>is(object)</code> returns a vector for a subclass, with the current class first.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb344"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb344-1"><a href="#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb344-2"><a href="#cb344-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Employee"</span>,</span>
-<span id="cb344-3"><a href="#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">contains =</span> <span class="st">"Person"</span>,</span>
-<span id="cb344-4"><a href="#cb344-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb344-5"><a href="#cb344-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">boss =</span> <span class="st">"Person"</span></span>
-<span id="cb344-6"><a href="#cb344-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb344-7"><a href="#cb344-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb344-8"><a href="#cb344-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">boss =</span> <span class="fu">new</span>(<span class="st">"Person"</span>)</span>
-<span id="cb344-9"><a href="#cb344-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb344-10"><a href="#cb344-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb344-11"><a href="#cb344-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb344-12"><a href="#cb344-12" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(object) {</span>
-<span id="cb344-13"><a href="#cb344-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">is</span>(object)[[<span class="dv">1</span>]], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb344-14"><a href="#cb344-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"  Name: "</span>, object<span class="sc">@</span>name, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb344-15"><a href="#cb344-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"  Age:  "</span>, object<span class="sc">@</span>age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb344-16"><a href="#cb344-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">""</span></span>
-<span id="cb344-17"><a href="#cb344-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb344-18"><a href="#cb344-18" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb344-19"><a href="#cb344-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb344-20"><a href="#cb344-20" aria-hidden="true" tabindex="-1"></a>john</span>
-<span id="cb344-21"><a href="#cb344-21" aria-hidden="true" tabindex="-1"></a>jane <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Employee"</span>, <span class="at">name =</span> <span class="st">"Jane Doe"</span>)</span>
-<span id="cb344-22"><a href="#cb344-22" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(jane)</span>
-<span id="cb344-23"><a href="#cb344-23" aria-hidden="true" tabindex="-1"></a>jane</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb363"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb363-1"><a href="#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Employee"</span>,</span>
+<span id="cb363-2"><a href="#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">contains =</span> <span class="st">"Person"</span>,</span>
+<span id="cb363-3"><a href="#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb363-4"><a href="#cb363-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">boss =</span> <span class="st">"Person"</span></span>
+<span id="cb363-5"><a href="#cb363-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb363-6"><a href="#cb363-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb363-7"><a href="#cb363-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">boss =</span> <span class="fu">new</span>(<span class="st">"Person"</span>)</span>
+<span id="cb363-8"><a href="#cb363-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb363-9"><a href="#cb363-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb363-10"><a href="#cb363-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb363-11"><a href="#cb363-11" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(object) {</span>
+<span id="cb363-12"><a href="#cb363-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">is</span>(object)[[<span class="dv">1</span>]], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb363-13"><a href="#cb363-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"  Name: "</span>, object<span class="sc">@</span>name, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb363-14"><a href="#cb363-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"  Age:  "</span>, object<span class="sc">@</span>age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb363-15"><a href="#cb363-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">""</span></span>
+<span id="cb363-16"><a href="#cb363-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb363-17"><a href="#cb363-17" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb363-18"><a href="#cb363-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb363-19"><a href="#cb363-19" aria-hidden="true" tabindex="-1"></a>john</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Person
+#&gt;   Name: John Smith
+#&gt;   Age:  51</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb365"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb365-1"><a href="#cb365-1" aria-hidden="true" tabindex="-1"></a>jane <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Employee"</span>, <span class="at">name =</span> <span class="st">"Jane Doe"</span>)</span>
+<span id="cb365-2"><a href="#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(jane)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Employee" "Person"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb367"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb367-1"><a href="#cb367-1" aria-hidden="true" tabindex="-1"></a>jane</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Employee
+#&gt;   Name: Jane Doe
+#&gt;   Age:  NA</code></pre>
+</div>
 </div>
 <p>AR Solutions: <code>is(object)</code> returns the class of the object. <code>is(object)</code> also contains the superclass, for subclasses like <code>Employee</code>. In order to always return the most specific class (the subclass), <code>show()</code> returns the first element of <code>is(object)</code>.</p>
 <hr>
@@ -4303,56 +4385,73 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <p>Answer: this should cause method dispatch to fail, but I don’t know of a way to test.</p>
 <p>AR Solutions: It depends. We first create the object <code>hadley</code> of class <code>Person</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb345"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb345-1"><a href="#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb345-2"><a href="#cb345-2" aria-hidden="true" tabindex="-1"></a>.Person <span class="ot">&lt;-</span> <span class="fu">setClass</span>(</span>
-<span id="cb345-3"><a href="#cb345-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Person"</span>,</span>
-<span id="cb345-4"><a href="#cb345-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(<span class="at">name =</span> <span class="st">"character"</span>, <span class="at">age =</span> <span class="st">"numeric"</span>)</span>
-<span id="cb345-5"><a href="#cb345-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb345-6"><a href="#cb345-6" aria-hidden="true" tabindex="-1"></a>hadley <span class="ot">&lt;-</span> <span class="fu">.Person</span>(<span class="at">name =</span> <span class="st">"Hadley"</span>)</span>
-<span id="cb345-7"><a href="#cb345-7" aria-hidden="true" tabindex="-1"></a>hadley</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb369"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb369-1"><a href="#cb369-1" aria-hidden="true" tabindex="-1"></a>.Person <span class="ot">&lt;-</span> <span class="fu">setClass</span>(</span>
+<span id="cb369-2"><a href="#cb369-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Person"</span>,</span>
+<span id="cb369-3"><a href="#cb369-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(<span class="at">name =</span> <span class="st">"character"</span>, <span class="at">age =</span> <span class="st">"numeric"</span>)</span>
+<span id="cb369-4"><a href="#cb369-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb369-5"><a href="#cb369-5" aria-hidden="true" tabindex="-1"></a>hadley <span class="ot">&lt;-</span> <span class="fu">.Person</span>(<span class="at">name =</span> <span class="st">"Hadley"</span>)</span>
+<span id="cb369-6"><a href="#cb369-6" aria-hidden="true" tabindex="-1"></a>hadley</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Person
+#&gt;   Name: Hadley
+#&gt;   Age:</code></pre>
+</div>
 </div>
 <p>Now let’s see which arguments can be supplied to the <code>show()</code> generic.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb346"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb346-1"><a href="#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(<span class="st">"show"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb371"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb371-1"><a href="#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(<span class="st">"show"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; $object</code></pre>
 </div>
 </div>
 <p>Usually, we would use this argument when defining a new method.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb348"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb348-1"><a href="#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb348-2"><a href="#cb348-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(object) {</span>
-<span id="cb348-3"><a href="#cb348-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(object<span class="sc">@</span>name, <span class="st">"creates hard exercises"</span>)</span>
-<span id="cb348-4"><a href="#cb348-4" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb348-5"><a href="#cb348-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-6"><a href="#cb348-6" aria-hidden="true" tabindex="-1"></a>hadley</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb373"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb373-1"><a href="#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(object) {</span>
+<span id="cb373-2"><a href="#cb373-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(object<span class="sc">@</span>name, <span class="st">"creates hard exercises"</span>)</span>
+<span id="cb373-3"><a href="#cb373-3" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb373-4"><a href="#cb373-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb373-5"><a href="#cb373-5" aria-hidden="true" tabindex="-1"></a>hadley</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Hadley creates hard exercises</code></pre>
+</div>
 </div>
 <p>When we supply another name as a first element of our method (e.g.&nbsp;<code>x</code> instead of <code>object</code>), this element will be matched to the correct <code>object</code> argument and we receive a warning. Our method will work, though:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb349"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb349-1"><a href="#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb349-2"><a href="#cb349-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) {</span>
-<span id="cb349-3"><a href="#cb349-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(x<span class="sc">@</span>name, <span class="st">"creates hard exercises"</span>)</span>
-<span id="cb349-4"><a href="#cb349-4" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb349-5"><a href="#cb349-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb349-6"><a href="#cb349-6" aria-hidden="true" tabindex="-1"></a>hadley</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb375"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb375-1"><a href="#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) {</span>
+<span id="cb375-2"><a href="#cb375-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(x<span class="sc">@</span>name, <span class="st">"creates hard exercises"</span>)</span>
+<span id="cb375-3"><a href="#cb375-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Warning: For function 'show', signature 'Person': argument in method definition
+#&gt; changed from (x) to (object)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb377"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb377-1"><a href="#cb377-1" aria-hidden="true" tabindex="-1"></a>hadley</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Hadley creates hard exercises</code></pre>
+</div>
 </div>
 <p>If we add more arguments to our method than our generic can handle, we will get an error.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb350"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb350-1"><a href="#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb350-2"><a href="#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(</span>
-<span id="cb350-3"><a href="#cb350-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x, y) {</span>
-<span id="cb350-4"><a href="#cb350-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(x<span class="sc">@</span>name, <span class="st">"is"</span>, x<span class="sc">@</span>age, <span class="st">"years old"</span>)</span>
-<span id="cb350-5"><a href="#cb350-5" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb350-6"><a href="#cb350-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb379"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb379-1"><a href="#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(</span>
+<span id="cb379-2"><a href="#cb379-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x, y) {</span>
+<span id="cb379-3"><a href="#cb379-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(x<span class="sc">@</span>name, <span class="st">"is"</span>, x<span class="sc">@</span>age, <span class="st">"years old"</span>)</span>
+<span id="cb379-4"><a href="#cb379-4" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb379-5"><a href="#cb379-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Error in conformMethod(signature, mnames, fnames, f, fdef, definition) : 
+#&gt;   in method for 'show' with signature 'object="Person"': formal arguments (object = "Person") omitted in the method definition cannot be in the signature</code></pre>
+</div>
 </div>
 <p>If we do this with arguments added to the correctly written <code>object</code> argument, we will receive an informative error message. It states that we could add other argument names for generics, which can take the <code>...</code> argument.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb351"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb351-1"><a href="#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb351-2"><a href="#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(</span>
-<span id="cb351-3"><a href="#cb351-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(object, y) {</span>
-<span id="cb351-4"><a href="#cb351-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(object<span class="sc">@</span>name, <span class="st">"is"</span>, object<span class="sc">@</span>age, <span class="st">"years old"</span>)</span>
-<span id="cb351-5"><a href="#cb351-5" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb351-6"><a href="#cb351-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb381"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb381-1"><a href="#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(</span>
+<span id="cb381-2"><a href="#cb381-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setMethod</span>(<span class="st">"show"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(object, y) {</span>
+<span id="cb381-3"><a href="#cb381-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(object<span class="sc">@</span>name, <span class="st">"is"</span>, object<span class="sc">@</span>age, <span class="st">"years old"</span>)</span>
+<span id="cb381-4"><a href="#cb381-4" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb381-5"><a href="#cb381-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Error in rematchDefinition(definition, fdef, mnames, fnames, signature) : 
+#&gt;   methods can add arguments to the generic 'show' only if '...' is an argument to the generic</code></pre>
+</div>
 </div>
 <hr>
 </section>
@@ -4384,59 +4483,80 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ol>
 <p>Answer: building on the AR Solutions example and the <code>factor</code> example in 15.6.1, the following S4 object behaves like the <code>ordered()</code> version:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb352"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb352-1"><a href="#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb352-2"><a href="#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Ordered"</span>,</span>
-<span id="cb352-3"><a href="#cb352-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">contains =</span> <span class="st">"integer"</span>,</span>
-<span id="cb352-4"><a href="#cb352-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb352-5"><a href="#cb352-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="st">"character"</span>,</span>
-<span id="cb352-6"><a href="#cb352-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="st">"logical"</span></span>
-<span id="cb352-7"><a href="#cb352-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb352-8"><a href="#cb352-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">structure</span>(</span>
-<span id="cb352-9"><a href="#cb352-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">integer</span>(),</span>
-<span id="cb352-10"><a href="#cb352-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">character</span>(),</span>
-<span id="cb352-11"><a href="#cb352-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
-<span id="cb352-12"><a href="#cb352-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb352-13"><a href="#cb352-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb352-14"><a href="#cb352-14" aria-hidden="true" tabindex="-1"></a><span class="fu">setOldClass</span>(<span class="st">"ordered"</span>, <span class="at">S4Class =</span> <span class="st">"Ordered"</span>)</span>
-<span id="cb352-15"><a href="#cb352-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb352-16"><a href="#cb352-16" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Ordered"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">levels =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb352-17"><a href="#cb352-17" aria-hidden="true" tabindex="-1"></a>o</span>
-<span id="cb352-18"><a href="#cb352-18" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">ordered</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb383"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb383-1"><a href="#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Ordered"</span>,</span>
+<span id="cb383-2"><a href="#cb383-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">contains =</span> <span class="st">"integer"</span>,</span>
+<span id="cb383-3"><a href="#cb383-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb383-4"><a href="#cb383-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="st">"character"</span>,</span>
+<span id="cb383-5"><a href="#cb383-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="st">"logical"</span></span>
+<span id="cb383-6"><a href="#cb383-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb383-7"><a href="#cb383-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">structure</span>(</span>
+<span id="cb383-8"><a href="#cb383-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">integer</span>(),</span>
+<span id="cb383-9"><a href="#cb383-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">character</span>(),</span>
+<span id="cb383-10"><a href="#cb383-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb383-11"><a href="#cb383-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb383-12"><a href="#cb383-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb383-13"><a href="#cb383-13" aria-hidden="true" tabindex="-1"></a><span class="fu">setOldClass</span>(<span class="st">"ordered"</span>, <span class="at">S4Class =</span> <span class="st">"Ordered"</span>)</span>
+<span id="cb383-14"><a href="#cb383-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb383-15"><a href="#cb383-15" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Ordered"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">levels =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb383-16"><a href="#cb383-16" aria-hidden="true" tabindex="-1"></a>o</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; An object of class "Ordered"
+#&gt; [1] 1 2 3 4
+#&gt; Slot "levels":
+#&gt; [1] "a" "b" "c" "d"
+#&gt; 
+#&gt; Slot "ordered":
+#&gt; [1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb385"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb385-1"><a href="#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">ordered</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;  Ord.factor w/ 4 levels "a"&lt;"b"&lt;"c"&lt;"d": 1 2 3 4</code></pre>
+</div>
 </div>
 <p>AR Solutions: The purpose of <code>setOldClass()</code> lies in registering an S3 class as a “formally defined class”, so that it can be used within the S4 object-oriented programming system. When using it, we may provide the argument <code>S4Class</code>, which will inherit the slots and their default values (prototype) to the registered class.</p>
 <p>Let’s build an S4 <code>OrderedFactor</code> on top of the S3 factor in such a way.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb353"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb353-1"><a href="#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb353-2"><a href="#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setOldClass</span>(<span class="st">"factor"</span>) <span class="co"># use build-in definition for brevity</span></span>
-<span id="cb353-3"><a href="#cb353-3" aria-hidden="true" tabindex="-1"></a>OrderedFactor <span class="ot">&lt;-</span> <span class="fu">setClass</span>(</span>
-<span id="cb353-4"><a href="#cb353-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"OrderedFactor"</span>,</span>
-<span id="cb353-5"><a href="#cb353-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">contains =</span> <span class="st">"factor"</span>, <span class="co"># inherit from registered S3 class</span></span>
-<span id="cb353-6"><a href="#cb353-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb353-7"><a href="#cb353-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="st">"character"</span>,</span>
-<span id="cb353-8"><a href="#cb353-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="st">"logical"</span> <span class="co"># add logical order slot</span></span>
-<span id="cb353-9"><a href="#cb353-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb353-10"><a href="#cb353-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">structure</span>(</span>
-<span id="cb353-11"><a href="#cb353-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">integer</span>(),</span>
-<span id="cb353-12"><a href="#cb353-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">character</span>(),</span>
-<span id="cb353-13"><a href="#cb353-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="fu">logical</span>() <span class="co"># add default value</span></span>
-<span id="cb353-14"><a href="#cb353-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb353-15"><a href="#cb353-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb387"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb387-1"><a href="#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setOldClass</span>(<span class="st">"factor"</span>) <span class="co"># use build-in definition for brevity</span></span>
+<span id="cb387-2"><a href="#cb387-2" aria-hidden="true" tabindex="-1"></a>OrderedFactor <span class="ot">&lt;-</span> <span class="fu">setClass</span>(</span>
+<span id="cb387-3"><a href="#cb387-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"OrderedFactor"</span>,</span>
+<span id="cb387-4"><a href="#cb387-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">contains =</span> <span class="st">"factor"</span>, <span class="co"># inherit from registered S3 class</span></span>
+<span id="cb387-5"><a href="#cb387-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb387-6"><a href="#cb387-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="st">"character"</span>,</span>
+<span id="cb387-7"><a href="#cb387-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="st">"logical"</span> <span class="co"># add logical order slot</span></span>
+<span id="cb387-8"><a href="#cb387-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb387-9"><a href="#cb387-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">structure</span>(</span>
+<span id="cb387-10"><a href="#cb387-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">integer</span>(),</span>
+<span id="cb387-11"><a href="#cb387-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">character</span>(),</span>
+<span id="cb387-12"><a href="#cb387-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="fu">logical</span>() <span class="co"># add default value</span></span>
+<span id="cb387-13"><a href="#cb387-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb387-14"><a href="#cb387-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now register the (S3) ordered-class, while providing an “S4 template”. We can also use the S4-class to create new object directly.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb354"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb354-1"><a href="#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb354-2"><a href="#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setOldClass</span>(<span class="st">"ordered"</span>, <span class="at">S4Class =</span> <span class="st">"OrderedFactor"</span>)</span>
-<span id="cb354-3"><a href="#cb354-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">OrderedFactor</span>(</span>
-<span id="cb354-4"><a href="#cb354-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(1L, 2L, 2L),</span>
-<span id="cb354-5"><a href="#cb354-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>),</span>
-<span id="cb354-6"><a href="#cb354-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
-<span id="cb354-7"><a href="#cb354-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb354-8"><a href="#cb354-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb388"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb388-1"><a href="#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setOldClass</span>(<span class="st">"ordered"</span>, <span class="at">S4Class =</span> <span class="st">"OrderedFactor"</span>)</span>
+<span id="cb388-2"><a href="#cb388-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">OrderedFactor</span>(</span>
+<span id="cb388-3"><a href="#cb388-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(1L, 2L, 2L),</span>
+<span id="cb388-4"><a href="#cb388-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>),</span>
+<span id="cb388-5"><a href="#cb388-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb388-6"><a href="#cb388-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb388-7"><a href="#cb388-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Formal class 'OrderedFactor' [package ".GlobalEnv"] with 4 slots
+#&gt;   ..@ .Data   : int [1:3] 1 2 2
+#&gt;   ..@ levels  : chr [1:3] "a" "b" "c"
+#&gt;   ..@ ordered : logi TRUE
+#&gt;   ..@ .S3Class: chr "factor"</code></pre>
+</div>
 </div>
 <p>Notes: while my class <code>Ordered</code> looks similar to the AR Solutions version, it does not include the S3 class:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb355"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb355-1"><a href="#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb355-2"><a href="#cb355-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb390"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb390-1"><a href="#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Formal class 'Ordered' [package ".GlobalEnv"] with 3 slots
+#&gt;   ..@ .Data  : int [1:4] 1 2 3 4
+#&gt;   ..@ levels : chr [1:4] "a" "b" "c" "d"
+#&gt;   ..@ ordered: logi TRUE</code></pre>
+</div>
 </div>
 <hr>
 <ol start="2" type="1">
@@ -4444,31 +4564,40 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ol>
 <p>Answer: since <code>Person</code> is a vector class, its length is the <code>length()</code> of any of its fields (we use Person2 here due to prevent conflicts with the already defined Person class):</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb356-2"><a href="#cb356-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Person2"</span>,</span>
-<span id="cb356-3"><a href="#cb356-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
-<span id="cb356-4"><a href="#cb356-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"character"</span>,</span>
-<span id="cb356-5"><a href="#cb356-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">"numeric"</span></span>
-<span id="cb356-6"><a href="#cb356-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb356-7"><a href="#cb356-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb356-8"><a href="#cb356-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb356-9"><a href="#cb356-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="cn">NA_real_</span></span>
-<span id="cb356-10"><a href="#cb356-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb356-11"><a href="#cb356-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb356-12"><a href="#cb356-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb356-13"><a href="#cb356-13" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"length"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb356-14"><a href="#cb356-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
-<span id="cb356-15"><a href="#cb356-15" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"length"</span>, <span class="st">"Person2"</span>, <span class="cf">function</span>(x) <span class="fu">length</span>(x<span class="sc">@</span>name))</span>
-<span id="cb356-16"><a href="#cb356-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb356-17"><a href="#cb356-17" aria-hidden="true" tabindex="-1"></a>people <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Person2"</span>, <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"John Smith"</span>, <span class="st">"Jane Doe"</span>), <span class="at">age =</span> <span class="fu">c</span>(<span class="cn">NA_real_</span>, <span class="cn">NA_real_</span>))</span>
-<span id="cb356-18"><a href="#cb356-18" aria-hidden="true" tabindex="-1"></a>people</span>
-<span id="cb356-19"><a href="#cb356-19" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(people)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb392"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb392-1"><a href="#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">"Person2"</span>,</span>
+<span id="cb392-2"><a href="#cb392-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb392-3"><a href="#cb392-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"character"</span>,</span>
+<span id="cb392-4"><a href="#cb392-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">"numeric"</span></span>
+<span id="cb392-5"><a href="#cb392-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb392-6"><a href="#cb392-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb392-7"><a href="#cb392-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb392-8"><a href="#cb392-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="cn">NA_real_</span></span>
+<span id="cb392-9"><a href="#cb392-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb392-10"><a href="#cb392-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb392-11"><a href="#cb392-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb392-12"><a href="#cb392-12" aria-hidden="true" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">"length"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb392-13"><a href="#cb392-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
+<span id="cb392-14"><a href="#cb392-14" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"length"</span>, <span class="st">"Person2"</span>, <span class="cf">function</span>(x) <span class="fu">length</span>(x<span class="sc">@</span>name))</span>
+<span id="cb392-15"><a href="#cb392-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb392-16"><a href="#cb392-16" aria-hidden="true" tabindex="-1"></a>people <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"Person2"</span>, <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"John Smith"</span>, <span class="st">"Jane Doe"</span>), <span class="at">age =</span> <span class="fu">c</span>(<span class="cn">NA_real_</span>, <span class="cn">NA_real_</span>))</span>
+<span id="cb392-17"><a href="#cb392-17" aria-hidden="true" tabindex="-1"></a>people</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; An object of class "Person2"
+#&gt; Slot "name":
+#&gt; [1] "John Smith" "Jane Doe"  
+#&gt; 
+#&gt; Slot "age":
+#&gt; [1] NA NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb394"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb394-1"><a href="#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(people)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 2</code></pre>
+</div>
 </div>
 <p>AR Solutions: We keep things simple and will just return <code>"180cm"</code> when the <code>length()</code> method is called on a <code>Person</code> object. The method can be defined either as an S3 or S4 method.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb357"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb357-1"><a href="#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: eval = FALSE set to allow rendering using build_analysis_site()</span></span>
-<span id="cb357-2"><a href="#cb357-2" aria-hidden="true" tabindex="-1"></a>length.Person <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="st">"180cm"</span> <span class="co"># S3</span></span>
-<span id="cb357-3"><a href="#cb357-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"length"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) <span class="st">"180cm"</span>) <span class="co"># S4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb396"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb396-1"><a href="#cb396-1" aria-hidden="true" tabindex="-1"></a>length.Person <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="st">"180cm"</span> <span class="co"># S3</span></span>
+<span id="cb396-2"><a href="#cb396-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">"length"</span>, <span class="st">"Person"</span>, <span class="cf">function</span>(x) <span class="st">"180cm"</span>) <span class="co"># S4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
@@ -4718,12 +4847,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../analysis/advanced-r-2.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced R Workbook (Functional programming)</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced R (Functional programming)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../analysis/advanced-r-4.html" class="pagination-link">
-        <span class="nav-page-text">Advanced R Workbook (Metaprogramming)</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Advanced R (Metaprogramming)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

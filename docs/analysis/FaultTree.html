@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="John Benninghoff">
 <meta name="dcterms.date" content="2021-09-30">
 
 <title>rtraining - FaultTree.widget Test</title>
@@ -65,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../analysis/ggplot2-1.html" rel="next">
-<link href="../analysis/advanced-r-4.html" rel="prev">
+<link href="../analysis/advanced-r-1.html" rel="next">
+<link href="../analysis/r-setup-log.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -143,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-1.html">Analysis</a></li><li class="breadcrumb-item"><a href="../analysis/FaultTree.html">FaultTree.widget Test</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/FaultTree.html">FaultTree.widget Test</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -155,89 +156,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Foundations)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Functional programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Object-oriented programming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced R Workbook (Metaprogramming)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">FaultTree.widget Test</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Getting started)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Layers)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Scales)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Grammar)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2 (Extending)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R Setup Log</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../analysis/r-training-log.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Training Log</span></a>
   </div>
 </li>
-      </ul>
-  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Setup Log</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">FaultTree.widget Test</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Foundations)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Functional programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Object-oriented programming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced R (Metaprogramming)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Getting started)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Layers)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Scales)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Grammar)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2 (Extending)</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -251,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#example" id="toc-example" class="nav-link active" data-scroll-target="#example">Example</a></li>
   <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/edit/main/analysis/FaultTree.Rmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/FaultTree.Rmd" class="toc-action">View source</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -259,12 +249,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">FaultTree.widget Test</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">notes</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>John Benninghoff </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -303,16 +302,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ftree2widget</span>(tree1, <span class="at">height =</span> <span class="dv">500</span>, <span class="at">width =</span> <span class="dv">800</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="htmlwidget-e67c8f6fb9c4ebdf803e" style="width:100%;height:406px;" class="ftree_widget1 html-widget "></div>
-<script type="application/json" data-for="htmlwidget-e67c8f6fb9c4ebdf803e">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-47d34435f5bc03b1d9f5" style="width:100%;height:406px;" class="ftree_widget1 html-widget "></div>
+<script type="application/json" data-for="htmlwidget-47d34435f5bc03b1d9f5">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Check rendering without height and width specified:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ftree2widget</span>(tree1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="ftree_widget1 html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-fc8894e7fe99f040d68a" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-fc8894e7fe99f040d68a">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div class="ftree_widget1 html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d0e21f51145cf2455050" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-d0e21f51145cf2455050">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -567,13 +566,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../analysis/advanced-r-4.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced R Workbook (Metaprogramming)</span>
+      <a href="../analysis/r-setup-log.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">R Setup Log</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../analysis/ggplot2-1.html" class="pagination-link">
-        <span class="nav-page-text">ggplot2 (Getting started)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../analysis/advanced-r-1.html" class="pagination-link">
+        <span class="nav-page-text">Advanced R (Foundations)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
