@@ -52,7 +52,5 @@ analysis/*.pdf
 analysis/*-figure/
 analysis/import
 analysis/rendered
-
-# Quarto files
 /.quarto/
 /_freeze/
