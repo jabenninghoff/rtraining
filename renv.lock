@@ -1362,20 +1362,20 @@
     },
     "jbplot": {
       "Package": "jbplot",
-      "Version": "1.2.8",
+      "Version": "1.2.9",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "jbplot",
       "RemoteRef": "main",
-      "RemoteSha": "5612b341d6b9161f890805907ab1433bd0694da1",
+      "RemoteSha": "9e1ebce98fddfba86495c70d9d8dee6a493839ce",
       "Remotes": "jabenninghoff/rdev",
       "Requirements": [
         "MASS",
         "ggplot2"
       ],
-      "Hash": "4958030fb4fa0f66939d8b102d471c8f"
+      "Hash": "4c28565d846cd4b650369295d6b8e3e1"
     },
     "jquerylib": {
       "Package": "jquerylib",
@@ -1982,14 +1982,14 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "1.7.2",
+      "Version": "1.8.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "72d3a0f2a57516edd9e8061f161b2d5cb49e2360",
+      "RemoteSha": "dcd5d3acb9b34c29a404c8038fe47783dbd8da5b",
       "Requirements": [
         "cli",
         "curl",
@@ -2005,6 +2005,7 @@
         "pkgdown",
         "pkgload",
         "purrr",
+        "quarto",
         "rcmdcheck",
         "remotes",
         "renv",
@@ -2020,7 +2021,7 @@
         "xml2",
         "yaml"
       ],
-      "Hash": "b418d0b18895282b5164923084c3e077"
+      "Hash": "6967af3f563d36ba7da416eb00346693"
     },
     "readr": {
       "Package": "readr",
