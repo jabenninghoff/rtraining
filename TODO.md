@@ -10,7 +10,7 @@
 - [x] Update README.Rmd
 - [x] ~~Add notes from <https://r-pkgs.org>~~
 - [x] ~~Convert R Setup notebook to a vignette~~
-- [ ] Update setup notes with current configuration using [rig](https://github.com/r-lib/rig)
+- [x] ~~Update setup notes with current configuration using [rig](https://github.com/r-lib/rig)~~
 
 ## Package
 
@@ -33,7 +33,7 @@
 - [x] Migrate site builder to rdev
 - [x] Review <https://github.com/rstudio/renv/> for ideas to include here
 - [x] Review [bslib](https://rstudio.github.io/bslib/index.html), [pkgdown](https://pkgdown.r-lib.org/articles/customise.html) documentation, and [bootswatch](https://bootswatch.com) themes to determine new site look and feel
-- [ ] Evaluate converting from notebooks to a [Quarto website](https://quarto.org/docs/websites/)
+- [x] Evaluate converting from notebooks to a [Quarto website](https://quarto.org/docs/websites/)
 - [ ] Review <https://github.com/jimbrig/rtraining/> for ideas to include here
 
 ## GitHub
