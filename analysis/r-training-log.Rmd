@@ -143,7 +143,7 @@ ggplot(data = diamonds2) +
 
 ### Non-Tidy Data
 
-Hadley advocates for "tidy" data, but there are times when data is usefully [non-tidy](https://simplystatistics.org/posts/2016-02-17-non-tidy-data/).
+Hadley advocates for "tidy" data, but there are times when data is usefully [non-tidy](https://web.archive.org/web/20220520132417/https://simplystatistics.org/posts/2016-02-17-non-tidy-data/).
 
 ### Graphics: Learning more
 

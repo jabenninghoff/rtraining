@@ -229,7 +229,7 @@ NEWS.md| |Release notes, used by [pkgdown](https://pkgdown.r-lib.org)
 README.Rmd|`x`|Generated with [`use_readme_md()`](https://usethis.r-lib.org/reference/use_readme_rmd.html)
 README.md|`x`|Generated with [`build_readme()`](https://devtools.r-lib.org/reference/build_rmd.html)
 R|`x`|All project functions go here, with [roxygen2](https://roxygen2.r-lib.org) comments
-TODO.md| |To-do list, inspired by <https://github.com/rstudio/renv/blob/master/TODO.md>
+TODO.md| |To-do list, inspired by renv's [historical TODO.md](https://github.com/rstudio/renv/blob/99737730ea69730b211770ba2bfa78301cf0e7b2/TODO.md)
 analysis| |Exploratory data analysis in R Notebooks and R Presentations
 analysis/data| |When appropriate, analysis data lives here
 analysis/assets| |External assets (images, other files) included in R Notebooks
