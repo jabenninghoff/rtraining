@@ -1,6 +1,6 @@
 # TODO
 
-*Inspired by <https://github.com/rstudio/renv/blob/master/TODO.md>*
+*Inspired by renv's [historical TODO.md](https://github.com/rstudio/renv/blob/99737730ea69730b211770ba2bfa78301cf0e7b2/TODO.md)*
 
 ## Content
 
