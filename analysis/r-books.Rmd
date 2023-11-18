@@ -1,0 +1,190 @@
+---
+title: "R Books"
+author: "John Benninghoff"
+date: '2023-11-17'
+file-modified: '2023-11-17'
+categories: reading
+order: 1
+output:
+  html_notebook:
+    theme:
+      version: 5
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+---
+
+An actively maintained and curated list of R Books and other recommended resources from my reading list.
+
+## Libraries
+
+Libraries used in this notebook.
+
+```{r setup, message = FALSE, warning = FALSE}
+library(palmerpenguins)
+library(ggplot2)
+library(ggthemes)
+```
+
+## Getting Started
+
+Books and resources I recommend for learning R.
+
+### R for Data Science
+
+[R for Data Science (2e)](https://r4ds.hadley.nz) - Second Edition of
+[Hadley Wickham's](https://hadley.nz/) introductory book on R and exploratory data analysis. The
+book contains example code and exercises in most chapters. I used the
+[first edition](https://r4ds.had.co.nz/) as my primary source when I was first learning R, and
+still recommend the book for beginners who want to learn R. The book teaches the basics of using
+tidyverse R^[For a detailed explanation of "tidyverse R", see [R Dialects]] for exploratory data
+analysis and visualization. A companion book provides suggested
+[solutions](https://mine-cetinkaya-rundel.github.io/r4ds-solutions) to the exercises.
+
+Sample visualization from the first chapter:
+
+```{r r4ds, message = FALSE, warning = FALSE}
+# visualization from https://r4ds.hadley.nz/data-visualize#first-steps
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point(aes(color = species, shape = species)) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Body mass and flipper length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)", y = "Body mass (g)",
+    color = "Species", shape = "Species"
+  ) +
+  scale_color_colorblind()
+```
+
+### Resources
+
+In addition to R for Data Science, I recommend the following resources for new R users:
+
+- [The R Graph Gallery](https://r-graph-gallery.com/) - library of charts made with R and ggplot2
+- Packages for writing better code:
+  - [renv](https://rstudio.github.io/renv/) - for package version management by project
+  - [styler](https://styler.r-lib.org/) - for consistent formatting of R code
+  - [lintr](https://lintr.r-lib.org) - for avoiding common mistakes
+- Style guides for writing better code:
+  - [tidyverse style guide](https://style.tidyverse.org/) - implemented by styler
+  - [Google's R Style Guide](https://google.github.io/styleguide/Rguide.html) - a fork of the
+    tidyverse guide
+
+[rdev](https://jabenninghoff.github.io/rdev/index.html), my personalized collection of R development
+tools, includes all three of these packages and more, along with my own
+[style guide](https://jabenninghoff.github.io/rdev/articles/style-guide.html) and R environment
+setup [instructions](https://jabenninghoff.github.io/rdev/articles/rdev.html).
+
+## Additional Reading
+
+Books I read to improve my knowledge of R.
+
+- [R Packages (2e)](https://r-pkgs.org/) - the second edition of Hadley Wickham's book on writing R
+  packages, which I used to build [rdev](https://github.com/jabenninghoff/rdev)
+- [Advanced R](https://adv-r.hadley.nz/) - the second edition of Hadley's book on R programming,
+  which explains the R language (the [first edition](http://adv-r.had.co.nz) uses more base R than
+  the second edition)
+- [Advanced R Solutions](https://advanced-r-solutions.rbind.io) - solutions to exercises from
+  *Advanced R*
+- [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org) - the third edition
+  of Hadley's book on his implementation of Leland Wilkinson's *Grammar of Graphics*
+- [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app) -
+  solutions to exercises from *ggplot2*
+- [Building reproducible analytical pipelines with R](https://raps-with-r.dev) (in progress) - how
+  to write better analysis notebooks
+
+My own notes and solutions to the Advanced R and ggplot2 exercises are available on this site.
+
+## Future Reading
+
+R books on my reading list.
+
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) - written by the author
+  of [knitr](https://yihui.org/knitr/)
+- [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) - the follow-up to *The
+  Definitive Guide*
+
+## R Dialects
+
+An explanatory note on the R dialects of base R and tidyverse R.
+
+The [R programming language](https://en.wikipedia.org/wiki/R_(programming_language)) is over 30
+years old and has a large number of [packages](https://en.wikipedia.org/wiki/R_package) (R
+libraries) that extend R. Unlike
+[python](https://en.wikipedia.org/wiki/Python_(programming_language)) (a general purpose language),
+R was designed specifically for analysis, visualization, and statistical modeling, which is why I
+[chose R](https://www.information-safety.org/2020/09/11/working-with-r/) for data analysis: it has
+built-in support for data structures like data frames (implemented in python using
+[pandas](https://en.wikipedia.org/wiki/Pandas_(software))), vectors, packages for just about any
+statistical tool you'd need, and of course, [ggplot2](https://en.wikipedia.org/wiki/Ggplot2). In
+fairness, python is more popular, more robust, and a better tool for some tasks, like data
+acquisition and machine learning (which were not priorities for my use).
+
+Like many human languages, R has developed two distinct dialects: base R and tidyverse R. Base R
+consists of the [packages](https://cran.r-project.org/doc/FAQ/R-FAQ.html#Add_002don-packages-in-R)
+included in the R distribution
+*(`r paste(rownames(utils::installed.packages(priority = "base")), collapse = ", ")`)*, and the
+[Tidyverse](https://en.wikipedia.org/wiki/Tidyverse) is a collection of packages that implement a
+[domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language) for data
+analysis, originally created by [Hadley Wickham](https://en.wikipedia.org/wiki/Hadley_Wickham).
+
+In my experience, tidyverse R is better for data analysis, where base R is better for writing
+packages - tidyverse functions are closer to natural language, but have many more dependencies.
+[Comparing](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/) two popular tools for data
+manipulation, [dplyr](https://dplyr.tidyverse.org) (tidyverse R) and
+[data.table](https://rdatatable.gitlab.io/data.table/) (base R) shows these differences.
+
+This code snippet is from a short analysis of survey responses using dplyr:
+
+```r
+survey_results <- survey_import |>
+  mutate(across(Q1:Q7, ~ case_when(
+    .x == "strongly disagree" ~ 1,
+    .x == "disagree" ~ 2,
+    .x == "neither agree nor disagree" ~ 3,
+    .x == "agree" ~ 4,
+    .x == "strongly agree" ~ 5
+  ))) |>
+  mutate(Q8 = as.numeric(Q8 == "Yes")) |>
+  arrange(end_date)
+```
+
+The code is reasonably easy to understand, even if you're not familiar with R.
+
+The same code written in data.table isn't as clear:
+
+```r
+likert_5 <- c(
+  "strongly disagree", "disagree", "neither agree nor disagree",
+  "agree", "strongly agree"
+)
+q_likert <- paste0("Q", 1:7)
+q_yesno <- "Q8"
+
+survey_results <- copy(survey_import)
+survey_results <- survey_results[
+  , (q_likert) := lapply(.SD, \(x) as.numeric(factor(x, levels = likert_5))),
+  .SDcols = q_likert
+][
+  , (q_yesno) := lapply(.SD, \(x) as.numeric(x == "Yes")),
+  .SDcols = q_yesno
+][
+  order(end_date)
+]
+```
+
+While it may be harder to read, data.table has some clear advantages: it is quite
+[fast](https://h2oai.github.io/db-benchmark/), especially with very large datasets, and has no
+[dependencies](https://github.com/Rdatatable/data.table/blob/master/DESCRIPTION) other than base R,
+where dplyr has many.
+
+These tradeoffs are why I tend to use tidyverse R for analysis and base R for functions (most
+tidyverse expressions have functional equivalents in base R). Code used in data analysis should be
+clear and easy to read, which tidyverse R excels at. Packaged functions provide documentation and
+the source code isn't typically read, but many dependencies can be problematic; `R CMD check` will
+raise a NOTE if there are too many imports.
