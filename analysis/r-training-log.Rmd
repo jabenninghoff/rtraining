@@ -2,7 +2,7 @@
 title: "R Training Log"
 author: "John Benninghoff"
 date: '2020-12-02'
-file-modified: '2022-06-21'
+file-modified: '2023-11-17'
 categories: notes
 order: 101
 output:
@@ -15,7 +15,7 @@ output:
       smooth_scroll: no
 ---
 
-Notes on learning R and RStudio.
+Original notes on learning R and RStudio. An updated reading list of R books and other recommended resources is available in [R Books](r-books.html).
 
 # Libraries
 

@@ -1,3 +1,7 @@
+# rtraining 1.1.0
+
+* Added R Books: An actively maintained and curated list of R Books and other recommended resources from my reading list
+
 # rtraining 1.0.0
 
 * Migrated site to [Quarto](https://quarto.org)
