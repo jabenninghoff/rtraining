@@ -134,7 +134,7 @@
     },
     "R.utils": {
       "Package": "R.utils",
-      "Version": "2.12.2",
+      "Version": "2.12.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -145,7 +145,7 @@
         "tools",
         "utils"
       ],
-      "Hash": "325f01db13da12c04d8f6e7be36ff514"
+      "Hash": "3dc2829b790254bfba21e60965787651"
     },
     "R6": {
       "Package": "R6",
@@ -374,7 +374,7 @@
     },
     "bslib": {
       "Package": "bslib",
-      "Version": "0.5.1",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -385,12 +385,13 @@
         "htmltools",
         "jquerylib",
         "jsonlite",
+        "lifecycle",
         "memoise",
         "mime",
         "rlang",
         "sass"
       ],
-      "Hash": "283015ddfbb9d7bf15ea9f0b5698f0d9"
+      "Hash": "fac047b773ad75cea6e2a25214b09ca0"
     },
     "caTools": {
       "Package": "caTools",
@@ -1022,7 +1023,7 @@
     },
     "ggthemes": {
       "Package": "ggthemes",
-      "Version": "4.2.4",
+      "Version": "5.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1030,13 +1031,14 @@
         "ggplot2",
         "graphics",
         "grid",
+        "lifecycle",
         "methods",
         "purrr",
         "scales",
         "stringr",
         "tibble"
       ],
-      "Hash": "617fb2c300f68e8b1ba21043fba88fd7"
+      "Hash": "1bc682f6919559275c36c241cb5274a1"
     },
     "gh": {
       "Package": "gh",
@@ -1235,7 +1237,7 @@
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
-      "Version": "1.6.2",
+      "Version": "1.6.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1246,7 +1248,7 @@
         "rmarkdown",
         "yaml"
       ],
-      "Hash": "a865aa85bcb2697f47505bfd70422471"
+      "Hash": "a4040b08269c9af64554e55f514d002c"
     },
     "httpuv": {
       "Package": "httpuv",
@@ -2363,7 +2365,7 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.7.5.1",
+      "Version": "1.8.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2393,7 +2395,7 @@
         "withr",
         "xtable"
       ],
-      "Hash": "5ec01cc255f2138fc2f0dc74d2b1a1a1"
+      "Hash": "3a1f41807d648a908e3c7f0334bf85e6"
     },
     "sloop": {
       "Package": "sloop",
