@@ -544,6 +544,17 @@
       ],
       "Hash": "707fae4bbf73697ec8d85f9d7076c061"
     },
+    "cranlogs": {
+      "Package": "cranlogs",
+      "Version": "2.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "httr",
+        "jsonlite"
+      ],
+      "Hash": "cfa4eec97df94fd69cb8652368966020"
+    },
     "crayon": {
       "Package": "crayon",
       "Version": "1.5.2",

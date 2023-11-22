@@ -15,6 +15,7 @@ Suggests:
     babynames,
     bench,
     caTools,
+    cranlogs,
     desc,
     devtools,
     dplyr,
