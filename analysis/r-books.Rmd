@@ -126,8 +126,10 @@ I do follow the book's core recommendations for reproducibility:
 - Use [renv](https://rstudio.github.io/renv/) to manage dependencies
 - Package all R code and publish using GitHub Pages
 
-The book does reference some interesting additional reading that I've added to my list:
+The book does reference some interesting reading I've added to my list:
 
+- John M. Chambers. "Object-Oriented Programming, Functional Programming and R."
+  Statist. Sci. 29 (2) 167 - 180, May 2014. <https://doi.org/10.1214/13-STS452>
 - [Trunk-Based Development And Branch By Abstraction](https://trunkbaseddevelopment.com/)
 
 While it isn't referenced in the book, I discovered [vertical](https://www.crumplab.com/vertical/)
