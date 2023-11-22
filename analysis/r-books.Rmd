@@ -25,6 +25,8 @@ Libraries used in this notebook.
 library(palmerpenguins)
 library(ggplot2)
 library(ggthemes)
+library(cranlogs)
+library(dplyr)
 ```
 
 ## Getting Started
@@ -115,7 +117,34 @@ work with no clear benefits over using and/or extending the standard package lay
 reproducible research and analysis) I also found the code examples to be inconsistent and a bit
 clunky.
 
-<!-- TODO: add notes on chapters 12-15 -->
+Chapter 12 gives recommendations on testing: unit testing with some basic examples,
+[assertive programming](https://en.wikipedia.org/wiki/Assertion_(software_development)),
+[Test-Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development), and test
+coverage. It suggests three packages for R assertions:
+[`assertthat`](https://github.com/hadley/assertthat),
+[`chk`](https://poissonconsulting.github.io/chk/), and
+[`checkmate`](https://mllg.github.io/checkmate/). Both `chk` and `checkmate` are designed to check
+function arguments; of the two, `checkmate` appears to be more robust and built to address the
+downside of R being a dynamically typed language.
+
+Chapter 13 introduces [targets](https://docs.ropensci.org/targets/), "a Make-like pipeline tool for
+statistics and data science in R."
+
+<!-- TODO: add notes on chapters 13-15 -->
+
+For data validation, I currently use `stopifnot()`, although I may switch to either `assertr` or
+`validate`, which are both popular packages. I validate function arguments using manual checks, but
+`checkmate` looks appealing as a way to write more succinct code. Total downloads for the `assertr`,
+`validate`, `chk`, and `checkmate` packages for the last month are listed below:
+
+```{r cran_downloads}
+cran_downloads(
+  packages = c("assertr", "validate", "chk", "checkmate"),
+  when = "last-month"
+) |>
+  group_by(package) |>
+  summarize(downloads = sum(count), as_of = max(date))
+```
 
 I do follow the book's core recommendations for reproducibility:
 
@@ -125,6 +154,9 @@ I do follow the book's core recommendations for reproducibility:
 - Use R Markdown which embeds analysis code and code output directly into the written report
 - Use [renv](https://rstudio.github.io/renv/) to manage dependencies
 - Package all R code and publish using GitHub Pages
+- Write unit tests using [testthat](https://testthat.r-lib.org)
+- Use assertions to validate function arguments and imported data
+- Check test coverage using [`covr`](https://covr.r-lib.org)
 
 The book does reference some interesting reading I've added to my list:
 
@@ -132,9 +164,21 @@ The book does reference some interesting reading I've added to my list:
   Statist. Sci. 29 (2) 167 - 180, May 2014. <https://doi.org/10.1214/13-STS452>
 - [Trunk-Based Development And Branch By Abstraction](https://trunkbaseddevelopment.com/)
 
-While it isn't referenced in the book, I discovered [vertical](https://www.crumplab.com/vertical/)
-while reading it, and will be reviewing and comparing it to my own
-[rdev](https://jabenninghoff.github.io/rdev/).
+While reading the book, I discovered some interesting additional resources:
+
+- [Vertical](https://www.crumplab.com/vertical/), a "an R-based structured workflow for creating
+  and sharing research assets in the form of an extended R package", which I plan to review and
+  compare to [rdev](https://jabenninghoff.github.io/rdev/)
+- [Four ways to write assertion checks in R](https://blog.djnavarro.net/posts/2023-08-08_being-assertive/) -
+  an article on four methods for writing assertions in R:
+    - Use `stopifnot()` from base R
+    - Use the [`assertthat`](https://github.com/hadley/assertthat) package (last updated March 2019)
+    - Use the [`assertive`](https://bitbucket.org/richierocks/assertive/src/master/) package
+      (last updated July 2020)
+    - Use the [`assertr`](https://docs.ropensci.org/assertr/) package for data assertions, which
+      works especially well for assertion checks against data frames used in data analysis
+- I also revisited the [`validate`](https://github.com/data-cleaning/validate) package, a data
+  validation rules engine, which includes the Data Validation Cookbook (in [Future Reading])
 
 ## Future Reading
 
@@ -144,6 +188,8 @@ R books on my reading list.
   of [knitr](https://yihui.org/knitr/)
 - [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) - the follow-up to *The
   Definitive Guide*
+- [The Data Validation Cookbook](https://data-cleaning.github.io/validate/) - a book on the R
+  [validate](https://cran.r-project.org/web/packages/validate/index.html) package
 - [Discovering Statistics Using R](https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067) - recommended to me
   as an introduction to statistics using R
 
