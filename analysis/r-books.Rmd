@@ -144,6 +144,8 @@ R books on my reading list.
   of [knitr](https://yihui.org/knitr/)
 - [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) - the follow-up to *The
   Definitive Guide*
+- [Discovering Statistics Using R](https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067) - recommended to me
+  as an introduction to statistics using R
 
 ## R Dialects
 
