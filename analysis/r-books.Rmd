@@ -95,10 +95,44 @@ Books I read to improve my knowledge of R.
   of Hadley's book on his implementation of Leland Wilkinson's *Grammar of Graphics*
 - [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app) -
   solutions to exercises from *ggplot2*
-- [Building reproducible analytical pipelines with R](https://raps-with-r.dev) (in progress) - how
-  to write better analysis notebooks
 
 My own notes and solutions to the Advanced R and ggplot2 exercises are available on this site.
+
+### raps-with-r
+
+[Building reproducible analytical pipelines with R](https://raps-with-r.dev) - the stated goal of
+the book is to improve the reproducibility of data analysis. I don't recommend this book. Section 1
+is a reasonably good introduction to git and GitHub, but introduces trunk-based development without
+covering linear commit history. Section 2 provides some good advice, but much that I disagree with,
+including inline use of `knitr::knit_child` to automate creation of sections (which break the
+notebook workflow) and `fusen` to create packages from `.Rmd` files, which I found to create extra
+work with no clear benefits over using and/or extending the standard package layout like
+[vertical](https://www.crumplab.com/vertical/index.html) or my own
+[layout](https://jabenninghoff.github.io/rdev/articles/analysis-package-layout.html) from
+[rdev](https://jabenninghoff.github.io/rdev/index.html). (Interestingly, the author of vertical is
+[also](https://www.crumplab.com/blog/post_886_10_14_22_quartoProjects/)
+[switching](https://www.crumplab.com/blog/663_quarto_projects/) to [Quarto](https://quarto.org) for
+reproducible research and analysis) I also found the code examples to be inconsistent and a bit
+clunky.
+
+<!-- TODO: add notes on chapters 12-15 -->
+
+I do follow the book's core recommendations for reproducibility:
+
+- Use version control extensively
+- Use trunk-based development
+- Adopt functional programming
+- Use R Markdown which embeds analysis code and code output directly into the written report
+- Use [renv](https://rstudio.github.io/renv/) to manage dependencies
+- Package all R code and publish using GitHub Pages
+
+The book does reference some interesting additional reading that I've added to my list:
+
+- [Trunk-Based Development And Branch By Abstraction](https://trunkbaseddevelopment.com/)
+
+While it isn't referenced in the book, I discovered [vertical](https://www.crumplab.com/vertical/)
+while reading it, and will be reviewing and comparing it to my own
+[rdev](https://jabenninghoff.github.io/rdev/).
 
 ## Future Reading
 
