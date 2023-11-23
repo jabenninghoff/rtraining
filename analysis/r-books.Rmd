@@ -127,11 +127,6 @@ coverage. It suggests three packages for R assertions:
 function arguments; of the two, `checkmate` appears to be more robust and built to address the
 downside of R being a dynamically typed language.
 
-Chapter 13 introduces [targets](https://docs.ropensci.org/targets/), "a Make-like pipeline tool for
-statistics and data science in R."
-
-<!-- TODO: add notes on chapters 13-15 -->
-
 For data validation, I currently use `stopifnot()`, although I may switch to either `assertr` or
 `validate`, which are both popular packages. I validate function arguments using manual checks, but
 `checkmate` looks appealing as a way to write more succinct code. Total downloads for the `assertr`,
@@ -146,17 +141,68 @@ cran_downloads(
   summarize(downloads = sum(count), as_of = max(date))
 ```
 
-I do follow the book's core recommendations for reproducibility:
+Chapter 13 introduces [targets](https://docs.ropensci.org/targets/), "a Make-like pipeline tool for
+statistics and data science in R." Conceptually, targets is very similar to an R Notebook, but like
+Make, will skip components that are up to date, and can run targets in parallel to speed up builds.
+targets can also render R Markdown documents using the `tarchetypes` package. I found the example
+target pipeline in the book convoluted and didn't attempt to follow it. The targets
+[manual](https://books.ropensci.org/targets/) explains that it implements
+[two kinds](https://books.ropensci.org/targets/literate-programming.html#scope) of literate
+programming:
+
+> 1. A literate programming source document (or Quarto project) that renders inside an individual
+>    target. Here, you define a special kind of target that runs a lightweight R Markdown report
+>    which depends on upstream targets.
+> 1. Target Markdown, an overarching system in which one or more Quarto or R Markdown files write
+>    the _targets.R file and encapsulate the pipeline.
+
+Of these two types, the second is a better fit with my preferred workflow: including multiple
+self-contained notebooks in a single repository. From the
+[appendix](https://books.ropensci.org/targets/markdown.html), the design of Target Markdown supports
+both interactive development using notebooks and running a pipeline non-interactively when rendering
+the final document. For my work, targets doesn't offer significant advantages over using R
+Markdown and Quarto - the only slowdown I typically encounter is when building a site with many
+notebooks, which the Quarto [freeze](https://quarto.org/docs/projects/code-execution.html#freeze)
+option handles by only re-rendering documents when the source file changes. (I'm not performing the
+large, complex computations that targets is designed for)
+
+Chapter 14 covers Docker, and asserts that it is necessary for reproducibility. While using Docker
+ensures a stable operating system environment, I think the book overstates the case for
+reproducibility, citing a single example where the operating system changed the results of an
+analysis because the scripts relied on OS file ordering. Much like use of targets, Docker would be
+most useful for projects with complex development environments shared across teams, but much of the
+benefits can be achieved using other approaches, like using [OS-independent](https://fs.r-lib.org)
+code. The chapter also encourages using a "frozen" development environment that is updated on a
+fixed schedule to minimize the impact of frequent updates. This is exactly the opposite of the
+modern DevOps approach - the issues created by small, frequent updates are smaller and easier to
+address than the more complex problems created by large upgrades. I *always* start development by
+updating packages to the latest production release - while this sometimes introduces issues, they
+are typically easy to fix, and prioritizing maintenance first improves quality and security.
+
+An alternate approach to using Docker is to leverage
+[GitHub Actions](https://github.com/features/actions), which provides on-demand virtual machines
+that can be used to consistently test, build, and deploy code. The Tidyverse community provides a
+[library](https://github.com/r-lib/actions) of GitHub Actions for R, which I've customized for
+[rdev](https://jabenninghoff.github.io/rdev/reference/use_rdev_package.html). In fact, chapter 15
+covers use of GitHub Actions using r-lib and presents them as a potential alternative for Docker.
+
+Overall, I do follow the book's core recommendations for reproducibility:
 
 - Use version control extensively
 - Use trunk-based development
-- Adopt functional programming
+- Adopt functional programming and [DRY](https://en.wikipedia.org/wiki/Don't_repeat_yourself)
 - Use R Markdown which embeds analysis code and code output directly into the written report
 - Use [renv](https://rstudio.github.io/renv/) to manage dependencies
 - Package all R code and publish using GitHub Pages
 - Write unit tests using [testthat](https://testthat.r-lib.org)
 - Use assertions to validate function arguments and imported data
 - Check test coverage using [`covr`](https://covr.r-lib.org)
+- Use automated builds (but using Quarto instead of targets)
+
+I would consider use of targets and Docker for larger, more complex, or long-lived projects, but I
+found that `fusen` offered no clear benefits and wouldn't recommend its use. I think the biggest
+lesson I took from the book was to follow DRY a bit more strictly than I currently do, and use more
+functions, tests, and assertions in my analysis code.
 
 The book does reference some interesting reading I've added to my list:
 
