@@ -153,6 +153,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../analysis/r-books.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Books</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../analysis/r-training-log.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Training Log</span></a>
   </div>
@@ -299,7 +305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>My notes on my personal R setup. I started my R journey in <a href="https://www.information-safety.org/2020/09/11/working-with-r/">September 2020</a> after <a href="https://societyinforisk.org/event-3899786">SIRACon 2020</a>. My current setup is documented in <a href="https://jabenninghoff.github.io/rdev/articles/rdev.html">rdev</a>.</p>
+<p>My notes on my personal R setup. I started my R journey in <a href="https://www.information-safety.org/2020/09/11/working-with-r/">September 2020</a> after <a href="https://societyinforisk.org/event-3899786">SIRACon 2020</a>. <strong>Important:</strong> this historical setup is outdated and differs from my current approach, which is documented in <a href="https://jabenninghoff.github.io/rdev/articles/rdev.html">rdev</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no libraries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -324,9 +330,9 @@ R
 ==&gt; Description
 Environment for statistical computing and graphics
 ==&gt; Artifacts
-R-4.3.2-x86_64.pkg (Pkg)
+R-4.3.2-arm64.pkg (Pkg)
 ==&gt; Analytics
-install: 849 (30 days), 2,532 (90 days), 6,039 (365 days)</code></pre>
+install: 846 (30 days), 2,535 (90 days), 6,105 (365 days)</code></pre>
 </div>
 </div>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
@@ -338,7 +344,7 @@ install: 849 (30 days), 2,532 (90 days), 6,039 (365 days)</code></pre>
    http/ftp     sockets      libxml        fifo      cledit       iconv 
        TRUE        TRUE       FALSE        TRUE       FALSE        TRUE 
         NLS       Rprof     profmem       cairo         ICU long.double 
-       TRUE        TRUE        TRUE        TRUE        TRUE        TRUE 
+       TRUE        TRUE        TRUE        TRUE        TRUE       FALSE 
     libcurl 
        TRUE </code></pre>
 </div>
