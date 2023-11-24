@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/analysis/r-books.html",
       "/analysis/r-training-log.html",
       "/analysis/r-setup-log.html",
       "/analysis/FaultTree.html",
