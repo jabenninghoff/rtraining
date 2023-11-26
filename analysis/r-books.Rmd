@@ -44,7 +44,7 @@ book contains example code and exercises in most chapters. I used the
 still recommend the book for beginners who want to learn R. The book teaches the basics of using
 tidyverse R^[For a detailed explanation of "tidyverse R", see [R Dialects]] for exploratory data
 analysis and visualization. A companion book provides suggested
-[solutions](https://mine-cetinkaya-rundel.github.io/r4ds-solutions) to the exercises.
+[solutions](https://mine-cetinkaya-rundel.github.io/r4ds-solutions/) to the exercises.
 
 Sample visualization from the first chapter:
 
