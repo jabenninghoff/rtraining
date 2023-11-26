@@ -53,4 +53,3 @@ analysis/*-figure/
 analysis/import
 analysis/rendered
 /.quarto/
-/_freeze/
