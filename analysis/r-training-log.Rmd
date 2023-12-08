@@ -2,7 +2,7 @@
 title: "R Training Log"
 author: "John Benninghoff"
 date: '2020-12-02'
-file-modified: '2023-11-17'
+file-modified: '2023-12-08'
 categories: notes
 order: 101
 output:
@@ -249,12 +249,15 @@ A fun demo taken from the Wikipedia article on [R](https://en.wikipedia.org/wiki
 
 ```{r wikipedia_demo}
 local({
-  # TODO: fix colors to match Wikipedia article
   # install.packages("caTools")  # install external package
   # library(caTools)             # external package providing write.gif function
+  # note: the code in the text of the Wikipedia article doesn't match the code
+  #       used to generate the image in the article,
+  # https://commons.wikimedia.org/wiki/File:Mandelbrot_Creation_Animation.gif
+  #       the colors here have been changed to match the image.
   jet.colors <- colorRampPalette(c(
-    "green", "pink", "#007FFF", "cyan", "#7FFF7F",
-    "white", "#FF7F00", "red", "#7F0000"
+    "#00007F", "blue", "#007FFF", "cyan", "#7FFF7F",
+    "yellow", "#FF7F00", "red", "#7F0000"
   ))
   dx <- 1500 # define width
   dy <- 1400 # define height
