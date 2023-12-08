@@ -1,3 +1,7 @@
+# rtraining 1.1.4
+
+* Updated R Training Log: fixed Wikipedia demo image colors
+
 # rtraining 1.1.3
 
 * Maintenance updates
