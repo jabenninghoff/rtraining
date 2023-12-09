@@ -16,42 +16,42 @@
   {
     "objectID": "NEWS.html",
     "href": "NEWS.html",
-    "title": "rtraining 1.1.3",
+    "title": "rtraining 1.1.4",
     "section": "",
-    "text": "Maintenance updates"
+    "text": "Updated R Training Log: fixed Wikipedia demo image colors"
   },
   {
     "objectID": "NEWS.html#new-features",
     "href": "NEWS.html#new-features",
-    "title": "rtraining 1.1.3",
+    "title": "rtraining 1.1.4",
     "section": "New Features",
     "text": "New Features\n\nmajor update: build-site has been replaced with an R function, build_analysis_site(), which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to html_document, to_document().\nbuild_analysis_site() will be migrated to rdev in a future release"
   },
   {
     "objectID": "NEWS.html#new-content",
     "href": "NEWS.html#new-content",
-    "title": "rtraining 1.1.3",
+    "title": "rtraining 1.1.4",
     "section": "New Content",
     "text": "New Content\n\nR Setup Log: added notes on the package layout I use for “analysis” packages (will be converted to an rdev vignette in a future release)\nR Setup Log: added notes on my R Workflow\nR Training Log: updated with notes on my current book, R Packages"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures",
     "href": "NEWS.html#new-contentfeatures",
-    "title": "rtraining 1.1.3",
+    "title": "rtraining 1.1.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nci(): run continuous integration tests locally: lint, R CMD check, and style (off by default).\ncheck_renv(): convenience function that runs renv status(), clean(), and optionally update() (on by default)."
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-1",
     "href": "NEWS.html#new-contentfeatures-1",
-    "title": "rtraining 1.1.3",
+    "title": "rtraining 1.1.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R setup\nminor updates to R Training Log\nstyle_all(): style all .R and .Rmd files in a project using styler\nlint_all(): lint all .R and .Rmd files in a project using lintr\nadd GitHub Actions for continuous integration testing"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-2",
     "href": "NEWS.html#new-contentfeatures-2",
-    "title": "rtraining 1.1.3",
+    "title": "rtraining 1.1.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Training Log Notebook (r-training-log.Rmd): Notes on learning R and RStudio\ntools/setup-r: shell script to install development packages to site repository on macOS + Homebrew\nbuild-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/"
   },
@@ -459,7 +459,7 @@
     "href": "analysis/r-training-log.html#wikipedia",
     "title": "R Training Log",
     "section": "Wikipedia",
-    "text": "Wikipedia\nA fun demo taken from the Wikipedia article on R:\n\n\n\nMandelbrot set\n\n\n\nlocal({\n  # TODO: fix colors to match Wikipedia article\n  # install.packages(\"caTools\")  # install external package\n  # library(caTools)             # external package providing write.gif function\n  jet.colors &lt;- colorRampPalette(c(\n    \"green\", \"pink\", \"#007FFF\", \"cyan\", \"#7FFF7F\",\n    \"white\", \"#FF7F00\", \"red\", \"#7F0000\"\n  ))\n  dx &lt;- 1500 # define width\n  dy &lt;- 1400 # define height\n  C &lt;- complex(\n    real = rep(seq(-2.2, 1.0, length.out = dx), each = dy),\n    imag = rep(seq(-1.2, 1.2, length.out = dy), dx)\n  )\n  C &lt;- matrix(C, dy, dx) # reshape as square matrix of complex numbers\n  Z &lt;- 0 # initialize Z to zero\n  X &lt;- array(0, c(dy, dx, 20)) # initialize output 3D array\n  for (k in 1:20) { # loop with 20 iterations\n    Z &lt;- Z^2 + C # the central difference equation\n    X[, , k] &lt;- exp(-abs(Z)) # capture results\n  }\n  write.gif(X, \"rendered/mandelbrot.gif\", col = jet.colors, delay = 100)\n})\n\nWarning in complex(real = rep(seq(-2.2, 1, length.out = dx), each = dy), :\npartial argument match of 'imag' to 'imaginary'"
+    "text": "Wikipedia\nA fun demo taken from the Wikipedia article on R:\n\n\n\nMandelbrot set\n\n\n\nlocal({\n  # install.packages(\"caTools\")  # install external package\n  # library(caTools)             # external package providing write.gif function\n  # note: the code in the text of the Wikipedia article doesn't match the code\n  #       used to generate the image in the article,\n  # https://commons.wikimedia.org/wiki/File:Mandelbrot_Creation_Animation.gif\n  #       the colors here have been changed to match the image.\n  jet.colors &lt;- colorRampPalette(c(\n    \"#00007F\", \"blue\", \"#007FFF\", \"cyan\", \"#7FFF7F\",\n    \"yellow\", \"#FF7F00\", \"red\", \"#7F0000\"\n  ))\n  dx &lt;- 1500 # define width\n  dy &lt;- 1400 # define height\n  C &lt;- complex(\n    real = rep(seq(-2.2, 1.0, length.out = dx), each = dy),\n    imag = rep(seq(-1.2, 1.2, length.out = dy), dx)\n  )\n  C &lt;- matrix(C, dy, dx) # reshape as square matrix of complex numbers\n  Z &lt;- 0 # initialize Z to zero\n  X &lt;- array(0, c(dy, dx, 20)) # initialize output 3D array\n  for (k in 1:20) { # loop with 20 iterations\n    Z &lt;- Z^2 + C # the central difference equation\n    X[, , k] &lt;- exp(-abs(Z)) # capture results\n  }\n  write.gif(X, \"rendered/mandelbrot.gif\", col = jet.colors, delay = 100)\n})\n\nWarning in complex(real = rep(seq(-2.2, 1, length.out = dx), each = dy), :\npartial argument match of 'imag' to 'imaginary'"
   },
   {
     "objectID": "analysis/ggplot2-3.html",
