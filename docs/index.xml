@@ -42417,65 +42417,70 @@ background-color: null;
 font-style: inherit;">local</span>({</span>
 <span id="cb6-2">  <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># </span><span class="al" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">TODO</span><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">: fix colors to match Wikipedia article</span></span>
+font-style: inherit;"># install.packages("caTools")  # install external package</span></span>
 <span id="cb6-3">  <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># install.packages("caTools")  # install external package</span></span>
+font-style: inherit;"># library(caTools)             # external package providing write.gif function</span></span>
 <span id="cb6-4">  <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># library(caTools)             # external package providing write.gif function</span></span>
-<span id="cb6-5">  jet.colors <span class="ot" style="color: #003B4F;
+font-style: inherit;"># note: the code in the text of the Wikipedia article doesn't match the code</span></span>
+<span id="cb6-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#       used to generate the image in the article,</span></span>
+<span id="cb6-6">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># https://commons.wikimedia.org/wiki/File:Mandelbrot_Creation_Animation.gif</span></span>
+<span id="cb6-7">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#       the colors here have been changed to match the image.</span></span>
+<span id="cb6-8">  jet.colors <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">colorRampPalette</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(</span>
-<span id="cb6-6">    <span class="st" style="color: #20794D;
+<span id="cb6-9">    <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"green"</span>, <span class="st" style="color: #20794D;
+font-style: inherit;">"#00007F"</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"pink"</span>, <span class="st" style="color: #20794D;
+font-style: inherit;">"blue"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"#007FFF"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"cyan"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"#7FFF7F"</span>,</span>
-<span id="cb6-7">    <span class="st" style="color: #20794D;
+<span id="cb6-10">    <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"white"</span>, <span class="st" style="color: #20794D;
+font-style: inherit;">"yellow"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"#FF7F00"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"red"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"#7F0000"</span></span>
-<span id="cb6-8">  ))</span>
-<span id="cb6-9">  dx <span class="ot" style="color: #003B4F;
+<span id="cb6-11">  ))</span>
+<span id="cb6-12">  dx <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1500</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># define width</span></span>
-<span id="cb6-10">  dy <span class="ot" style="color: #003B4F;
+<span id="cb6-13">  dy <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1400</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># define height</span></span>
-<span id="cb6-11">  C <span class="ot" style="color: #003B4F;
+<span id="cb6-14">  C <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">complex</span>(</span>
-<span id="cb6-12">    <span class="at" style="color: #657422;
+<span id="cb6-15">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">real =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -42492,7 +42497,7 @@ background-color: null;
 font-style: inherit;">length.out =</span> dx), <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">each =</span> dy),</span>
-<span id="cb6-13">    <span class="at" style="color: #657422;
+<span id="cb6-16">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">imag =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -42507,22 +42512,22 @@ background-color: null;
 font-style: inherit;">1.2</span>, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">length.out =</span> dy), dx)</span>
-<span id="cb6-14">  )</span>
-<span id="cb6-15">  C <span class="ot" style="color: #003B4F;
+<span id="cb6-17">  )</span>
+<span id="cb6-18">  C <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">matrix</span>(C, dy, dx) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># reshape as square matrix of complex numbers</span></span>
-<span id="cb6-16">  Z <span class="ot" style="color: #003B4F;
+<span id="cb6-19">  Z <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># initialize Z to zero</span></span>
-<span id="cb6-17">  X <span class="ot" style="color: #003B4F;
+<span id="cb6-20">  X <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -42535,7 +42540,7 @@ background-color: null;
 font-style: inherit;">20</span>)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># initialize output 3D array</span></span>
-<span id="cb6-18">  <span class="cf" style="color: #003B4F;
+<span id="cb6-21">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> (k <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -42548,7 +42553,7 @@ background-color: null;
 font-style: inherit;">20</span>) { <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># loop with 20 iterations</span></span>
-<span id="cb6-19">    Z <span class="ot" style="color: #003B4F;
+<span id="cb6-22">    Z <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> Z<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -42559,7 +42564,7 @@ background-color: null;
 font-style: inherit;">+</span> C <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># the central difference equation</span></span>
-<span id="cb6-20">    X[, , k] <span class="ot" style="color: #003B4F;
+<span id="cb6-23">    X[, , k] <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -42570,8 +42575,8 @@ background-color: null;
 font-style: inherit;">abs</span>(Z)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># capture results</span></span>
-<span id="cb6-21">  }</span>
-<span id="cb6-22">  <span class="fu" style="color: #4758AB;
+<span id="cb6-24">  }</span>
+<span id="cb6-25">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">write.gif</span>(X, <span class="st" style="color: #20794D;
 background-color: null;
@@ -42582,7 +42587,7 @@ background-color: null;
 font-style: inherit;">delay =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span>)</span>
-<span id="cb6-23">})</span></code></pre></div>
+<span id="cb6-26">})</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in complex(real = rep(seq(-2.2, 1, length.out = dx), each = dy), :
 partial argument match of 'imag' to 'imaginary'</code></pre>
