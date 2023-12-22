@@ -1,0 +1,91 @@
+---
+title: "Using Rcpp"
+author: "John Benninghoff"
+date: '2023-12-21'
+file-modified: '2023-12-21'
+categories: notes
+order: 104
+output:
+  html_notebook:
+    theme:
+      version: 5
+      preset: bootstrap
+    css: assets/extra.css
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+---
+
+Notes on using [Rcpp](https://www.rcpp.org) to implement
+[Poker-Hand-Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) in the
+[cards](https://jabenninghoff.github.io/cards/) package.
+
+```{r setup, message = FALSE, warning = FALSE}
+# no libraries
+```
+
+# Background
+
+Rcpp provides an interface to C++, which allows
+[rewriting R code in C++](https://adv-r.hadley.nz/rcpp.html) to improve performance. The cards
+package implements functions that simulate dealing and evaluating poker hands in R and PH Evaluator
+using python via [reticulate](https://rstudio.github.io/reticulate/). Will the C++ version of PH
+Evaluator be faster?
+
+The [Thirteen Simple Steps for Creating An R Package with an External C++ Library](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-libraries.pdf)
+vignette provides good high-level guidance on integrating a C++ library into an R package using base
+R; additional work is needed to implement Rcpp using roxygen2.
+
+# Test Build
+
+To start, I followed PH Evaluator's
+[instructions](https://github.com/HenryRLee/PokerHandEvaluator/tree/master/cpp) to build and test
+the `pheval` library, which required installation of `cmake` using Homebrew (`brew install cmake`).
+
+# Example Function
+
+As a next step, I implemented a simple example function to ensure Rcpp was working properly. After
+some research, I added the following code:
+
+```cpp
+#include <Rcpp.h>
+using namespace Rcpp;
+
+//' Leading NA
+//'
+//' This function returns a logical vector identifying if
+//' there are leading NA, marking the leading NAs as TRUE and
+//' everything else as FALSE.
+//'
+//' Code from [Rcpp and Roxygen2](https://www.r-bloggers.com/2016/08/rcpp-and-roxygen2/).
+//'
+//' Installed with help from [usethis::use_rcpp()] and roxygen2 instructions on
+//'   [Rcpp](https://roxygen2.r-lib.org/articles/roxygen2.html#rcpp).
+//'
+//' Steps to install:
+//'
+//' 1. Create `src/leading_na.cpp` (this file)
+//' 1. Run [usethis::use_rcpp()], add `@importFrom Rcpp sourceCpp` and
+//'    `@useDynLib cards, .registration = TRUE` to `package.R` as directed
+//' 1. Run [desc::desc_normalize()] and [devtools::document()]
+//'
+//' @param x An integer vector
+//' @export
+// [[Rcpp::export]]
+LogicalVector leading_na(IntegerVector x) {
+  int n = x.size();
+  LogicalVector leading_na(n);
+
+  int i = 0;
+  while((i < n) &&(x[i] == NA_INTEGER)) {
+    leading_na[i] = TRUE;
+    i++;
+  }
+  return leading_na;
+}
+```
+
+After the first two steps,
+[`devtools::document()`](https://devtools.r-lib.org/reference/document.html) automates the addition
+of the `leading_na()` function, R documentation, and Rcpp support to the package.

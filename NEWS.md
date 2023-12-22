@@ -1,3 +1,9 @@
+# rtraining 1.1.5
+
+* Added Using Rcpp: Notes on using [Rcpp](https://www.rcpp.org) to implement
+[Poker-Hand-Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) in the
+[cards](https://jabenninghoff.github.io/cards/) package
+
 # rtraining 1.1.4
 
 * Updated R Training Log: fixed Wikipedia demo image colors

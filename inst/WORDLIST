@@ -14,6 +14,7 @@ Dev
 DevOps
 ECDF
 Ericson
+Evaluator's
 FaultTree
 FiveThirtyEight
 GG
@@ -44,6 +45,7 @@ README
 RStudio
 Rademaker
 Rbuildignore
+Rcpp
 Rmd
 Roxygen
 Rpres
@@ -187,6 +189,7 @@ renv's
 replot
 repo
 reproducibility
+reticulate
 rmarkdown
 roxygen
 rstudio
