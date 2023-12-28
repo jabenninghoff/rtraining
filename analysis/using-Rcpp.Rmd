@@ -127,3 +127,58 @@ Additional examples implementing C++ libraries in Rcpp I found include
 [RcppAnnoy](https://github.com/eddelbuettel/rcppannoy), written by Rcpp author and maintainer Dirk
 Eddelbuettel, [rxylib](https://github.com/R-Lum/rxylib), and
 [RcppSundials](https://github.com/AleMorales/RcppSundials.R).
+
+## Add Headers
+
+To start the first implementation, I added the headers from `cpp_example.cc`:
+
+```cpp
+#include <Rcpp.h>
+using namespace Rcpp;
+
+#include <phevaluator/phevaluator.h>
+#include <iostream>
+#include <cassert>
+
+//' Evaluate a poker hand using PH Evaluator
+//'
+//' Evaluate the rank category of a five card poker hand using
+//'   [PH Evaluator](https://github.com/HenryRLee/PokerHandEvaluator).
+//'
+//' Implemented following
+//'   [`cpp_example.cc`](https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc)
+//'   and [RcppAnnoy](https://github.com/eddelbuettel/rcppannoy).
+//'
+//' Currently implemented as a stub function that always returns "poker_hand".
+//'
+//' @param hand a hand of cards (an integer vector of length 5).
+//' @return string hand rank.
+//' @export
+// [[Rcpp::export]]
+String eval_hand_phe(IntegerVector hand) {
+  // phevaluator::Rank rank = phevaluator::EvaluateCards(hand[0], hand[1], hand[2], hand[3], hand[4]);
+  // return rank.describeCategory();
+  return "poker_hand";
+}
+```
+
+To get the updated code to compile, I had to add `src/Makevars`, which I copied from RcppAnnoy, and
+also added the `cpp/include` directory from PH Evaluator to `inst/`.
+
+`src/Makevars`:
+
+```Makefile
+PKG_CPPFLAGS = -I../inst/include/
+```
+
+While this code compiled, to get the commented code working, I'd need to add the code from
+`cpp/src`. Just dumping the files from PH Evaluator into `src` didn't work, but the rxylib
+[`Makevars`](https://github.com/R-Lum/rxylib/blob/master/src/Makevars) file offered a clue: adapt
+the [`Makefile`](https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/Makefile) from PH
+Evaluator to the R `Makevars` format to properly build the library objects. Put another way, follow
+how rxylib translated
+[`xlib/Makefile.am`](https://github.com/wojdyr/xylib/blob/master/xylib/Makefile.am) to `Makevars`.
+The Stack Overflow
+[question](https://stackoverflow.com/questions/43597632/understanding-the-contents-of-the-makevars-file-in-r-macros-variables-r-ma)
+referenced in rxylib provided additional details on the `Makevars` file format.
+
