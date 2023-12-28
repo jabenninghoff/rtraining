@@ -13,6 +13,7 @@ DF
 Dev
 DevOps
 ECDF
+Eddelbuettel
 Ericson
 Evaluator's
 FaultTree
@@ -46,6 +47,9 @@ RStudio
 Rademaker
 Rbuildignore
 Rcpp
+RcppAnnoy
+RcppStudent
+RcppSundials
 Rmd
 Roxygen
 Rpres
@@ -194,6 +198,7 @@ rmarkdown
 roxygen
 rstudio
 rtraining
+rxylib
 seaters
 serialise
 signalled
