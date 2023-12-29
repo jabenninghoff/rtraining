@@ -232,6 +232,8 @@ While reading the book, I discovered some interesting additional resources:
 
 R books on my reading list.
 
+- [The R Manuals](https://rstudio.github.io/r-manuals/) - a re-styled version of the original R
+  manuals, published using Quarto (starting with *Writing R Extensions*)
 - [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) - written by the author
   of [knitr](https://yihui.org/knitr/)
 - [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) - the follow-up to *The
