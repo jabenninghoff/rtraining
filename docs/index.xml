@@ -11,7 +11,590 @@
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Fri, 17 Nov 2023 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 21 Dec 2023 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Using Rcpp</title>
+  <dc:creator>John Benninghoff</dc:creator>
+  <link>https://jabenninghoff.github.io/rtraining/analysis/using-Rcpp.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Notes on using <a href="https://www.rcpp.org">Rcpp</a> to implement <a href="https://github.com/HenryRLee/PokerHandEvaluator">Poker-Hand-Evaluator</a> in the <a href="https://jabenninghoff.github.io/cards/">cards</a> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># no libraries</span></span></code></pre></div>
+</div>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>Rcpp provides an interface to C++, which allows <a href="https://adv-r.hadley.nz/rcpp.html">rewriting R code in C++</a> to improve performance. The cards package implements functions that simulate dealing and evaluating poker hands in R and PH Evaluator using python via <a href="https://rstudio.github.io/reticulate/">reticulate</a>. Will the C++ version of PH Evaluator be faster?</p>
+<p>The <a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-libraries.pdf">Thirteen Simple Steps for Creating An R Package with an External C++ Library</a> vignette provides good high-level guidance on integrating a C++ library into an R package using base R; additional work is needed to implement Rcpp using roxygen2.</p>
+</section>
+<section id="test-build" class="level1">
+<h1>Test Build</h1>
+<p>To start, I followed PH Evaluator’s <a href="https://github.com/HenryRLee/PokerHandEvaluator/tree/master/cpp">instructions</a> to build and test the <code>pheval</code> library, which required installation of <code>cmake</code> using Homebrew (<code>brew install cmake</code>).</p>
+</section>
+<section id="example-function" class="level1">
+<h1>Example Function</h1>
+<p>As a next step, I implemented a simple example function to ensure Rcpp was working properly. After some research, I added the following code:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;Rcpp.h&gt;</span></span>
+<span id="cb2-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">namespace</span> Rcpp<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb2-3"></span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Leading NA</span></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb2-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' This function returns a logical vector identifying if</span></span>
+<span id="cb2-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' there are leading NA, marking the leading NAs as TRUE and</span></span>
+<span id="cb2-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' everything else as FALSE.</span></span>
+<span id="cb2-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb2-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Code from [Rcpp and Roxygen2](https://www.r-bloggers.com/2016/08/rcpp-and-roxygen2/).</span></span>
+<span id="cb2-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb2-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Installed with help from [usethis::use_rcpp()] and roxygen2 instructions on</span></span>
+<span id="cb2-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [Rcpp](https://roxygen2.r-lib.org/articles/roxygen2.html#rcpp).</span></span>
+<span id="cb2-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb2-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Steps to install:</span></span>
+<span id="cb2-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb2-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' 1. Create `src/leading_na.cpp` (this file)</span></span>
+<span id="cb2-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' 1. Run [usethis::use_rcpp()], add `@importFrom Rcpp sourceCpp` and</span></span>
+<span id="cb2-19"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'    `@useDynLib cards, .registration = TRUE` to `package.R` as directed</span></span>
+<span id="cb2-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' 1. Run [desc::desc_normalize()] and [devtools::document()]</span></span>
+<span id="cb2-21"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb2-22"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @param x An integer vector</span></span>
+<span id="cb2-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @export</span></span>
+<span id="cb2-24"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// [[Rcpp::export]]</span></span>
+<span id="cb2-25">LogicalVector leading_na<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>IntegerVector x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb2-26">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">int</span> n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">();</span></span>
+<span id="cb2-27">  LogicalVector leading_na<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb2-28"></span>
+<span id="cb2-29">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">int</span> i <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb2-30">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">while</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">((</span>i <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;&amp;(</span>x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> NA_INTEGER<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">))</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb2-31">    leading_na<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> TRUE<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb2-32">    i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">++;</span></span>
+<span id="cb2-33">  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb2-34">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> leading_na<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb2-35"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+<p>After the first two steps, <a href="https://devtools.r-lib.org/reference/document.html"><code>devtools::document()</code></a> automates the addition of the <code>leading_na()</code> function, R documentation, and Rcpp support to the package.</p>
+</section>
+<section id="stub-function" class="level1">
+<h1>Stub Function</h1>
+<p>As a next step, I implemented a stub function with help from <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a>, specifically the chapter on <a href="https://teuder.github.io/rcpp4everyone_en/070_data_types.html">Data types</a>:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;Rcpp.h&gt;</span></span>
+<span id="cb3-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">namespace</span> Rcpp<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Evaluate a poker hand using PH Evaluator</span></span>
+<span id="cb3-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb3-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Evaluate the rank category of a five card poker hand using</span></span>
+<span id="cb3-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [PH Evaluator](https://github.com/HenryRLee/PokerHandEvaluator).</span></span>
+<span id="cb3-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb3-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Currently implemented as a stub function that always returns "poker_hand".</span></span>
+<span id="cb3-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb3-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @return string hand rank</span></span>
+<span id="cb3-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @export</span></span>
+<span id="cb3-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// [[Rcpp::export]]</span></span>
+<span id="cb3-14">String eval_hand_phe<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">()</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb3-15">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"poker_hand"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-16"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+<p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
+<p>Additional examples implementing C++ libraries in Rcpp I found include <a href="https://github.com/eddelbuettel/rcppannoy">RcppAnnoy</a>, written by Rcpp author and maintainer Dirk Eddelbuettel, <a href="https://github.com/R-Lum/rxylib">rxylib</a>, and <a href="https://github.com/AleMorales/RcppSundials.R">RcppSundials</a>.</p>
+<section id="add-headers" class="level2">
+<h2 class="anchored" data-anchor-id="add-headers">Add Headers</h2>
+<p>To start the first implementation, I added the headers from <code>cpp_example.cc</code>:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;Rcpp.h&gt;</span></span>
+<span id="cb4-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">namespace</span> Rcpp<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb4-3"></span>
+<span id="cb4-4"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;phevaluator/phevaluator.h&gt;</span></span>
+<span id="cb4-5"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;iostream&gt;</span></span>
+<span id="cb4-6"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;cassert&gt;</span></span>
+<span id="cb4-7"></span>
+<span id="cb4-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Evaluate a poker hand using PH Evaluator</span></span>
+<span id="cb4-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb4-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Evaluate the rank category of a five card poker hand using</span></span>
+<span id="cb4-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [PH Evaluator](https://github.com/HenryRLee/PokerHandEvaluator).</span></span>
+<span id="cb4-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb4-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Implemented following</span></span>
+<span id="cb4-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [`cpp_example.cc`](https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc)</span></span>
+<span id="cb4-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   and [RcppAnnoy](https://github.com/eddelbuettel/rcppannoy).</span></span>
+<span id="cb4-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb4-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Currently implemented as a stub function that always returns "poker_hand".</span></span>
+<span id="cb4-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb4-19"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @param hand a hand of cards (an integer vector of length 5).</span></span>
+<span id="cb4-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @return string hand rank.</span></span>
+<span id="cb4-21"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @export</span></span>
+<span id="cb4-22"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// [[Rcpp::export]]</span></span>
+<span id="cb4-23">String eval_hand_phe<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>IntegerVector hand<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb4-24">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// phevaluator::Rank rank = phevaluator::EvaluateCards(hand[0], hand[1], hand[2], hand[3], hand[4]);</span></span>
+<span id="cb4-25">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// return rank.describeCategory();</span></span>
+<span id="cb4-26">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"poker_hand"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb4-27"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+<p>To get the updated code to compile, I had to add <code>src/Makevars</code>, which I copied from RcppAnnoy, and also added the <code>cpp/include</code> directory from PH Evaluator to <code>inst/</code>.</p>
+<p><code>src/Makevars</code>:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb5-1"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">PKG_CPPFLAGS </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> -I../inst/include/</span></span></code></pre></div>
+<p>While this code compiled, to get the commented code working, I’d need to add the code from <code>cpp/src</code>. Just dumping the files from PH Evaluator into <code>src/</code> didn’t work, but the rxylib <a href="https://github.com/R-Lum/rxylib/blob/master/src/Makevars"><code>Makevars</code></a> file offered a clue: adapt the <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/Makefile"><code>Makefile</code></a> from PH Evaluator to the R <code>Makevars</code> format to properly build the library objects. Put another way, follow how rxylib translated <a href="https://github.com/wojdyr/xylib/blob/master/xylib/Makefile.am"><code>xlib/Makefile.am</code></a> to <code>Makevars</code>. The Stack Overflow <a href="https://stackoverflow.com/questions/43597632/understanding-the-contents-of-the-makevars-file-in-r-macros-variables-r-ma">question</a> referenced in rxylib provided additional details on the <code>Makevars</code> file format.</p>
+</section>
+</section>
+<section id="full-implementation" class="level1">
+<h1>Full Implementation</h1>
+<p>After some experimentation, I added the following files from PH Evaluator’s <code>cpp/src</code> to <code>src/</code>:</p>
+<pre><code>7462.c
+dptables.c
+evaluator5.c
+evaluator5.cc
+hash.c
+hash.h
+hashtable.c
+hashtable5.c
+rank.c
+tables.h
+tables_bitwise.c</code></pre>
+<p>These were the minimal files needed to support the first implementation, which only had to support evaluation of 5 card hands.</p>
+<p>I also added a line to <code>src/Makevars</code> to enable the C++ 17 standard used by PH Evaluator:</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb7-1"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">PKG_CPPFLAGS </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> -I../inst/include/</span></span>
+<span id="cb7-2"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">CXX_STD </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> CXX17</span></span></code></pre></div>
+<p>This <em>nearly</em> compiled, but failed with an error:</p>
+<pre><code>   duplicate symbol '_evaluate_5cards' in:
+       /Users/agamemnon/GitHub/cards/src/evaluator5.o
+       /Users/agamemnon/GitHub/cards/src/evaluator5.o</code></pre>
+<p>Ultimately this error was the result of two files with the same name but different file extensions (<code>evaluator5.c</code> and <code>evaluator5.cc</code>). Renaming <code>evaluator5.c</code> to <code>evaluator_5_c.c</code> fixed the issue, and the code below compiled and tested properly!</p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;Rcpp.h&gt;</span></span>
+<span id="cb9-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">namespace</span> Rcpp<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb9-3"></span>
+<span id="cb9-4"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;phevaluator/phevaluator.h&gt;</span></span>
+<span id="cb9-5"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;iostream&gt;</span></span>
+<span id="cb9-6"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">#include </span><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">&lt;cassert&gt;</span></span>
+<span id="cb9-7"></span>
+<span id="cb9-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Evaluate a poker hand using PH Evaluator</span></span>
+<span id="cb9-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb9-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Evaluate the rank category of a five card poker hand using</span></span>
+<span id="cb9-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [PH Evaluator](https://github.com/HenryRLee/PokerHandEvaluator).</span></span>
+<span id="cb9-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb9-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' Implemented following</span></span>
+<span id="cb9-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [Rcpp-libraries](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-libraries.pdf),</span></span>
+<span id="cb9-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   PH Evaluator</span></span>
+<span id="cb9-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [`cpp_example.cc`](https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc),</span></span>
+<span id="cb9-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   and [RcppAnnoy](https://github.com/eddelbuettel/rcppannoy), with help from</span></span>
+<span id="cb9-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   R-Bloggers [Rcpp and Roxygen2](https://www.r-bloggers.com/2016/08/rcpp-and-roxygen2/),</span></span>
+<span id="cb9-19"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [usethis::use_rcpp()], roxygen2 instructions on</span></span>
+<span id="cb9-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [Rcpp](https://roxygen2.r-lib.org/articles/roxygen2.html#rcpp),</span></span>
+<span id="cb9-21"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [Rcpp for everyone](https://teuder.github.io/rcpp4everyone_en/), the rxylib</span></span>
+<span id="cb9-22"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [`Makefile`](https://github.com/R-Lum/rxylib/blob/master/src/Makevars) and</span></span>
+<span id="cb9-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   [Stack Overflow](https://stackoverflow.com/questions/43597632/understanding-the-contents-of-the-makevars-file-in-r-macros-variables-r-ma).</span></span>
+<span id="cb9-24"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb9-25"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' `eval_hand_phe` returns one of the rank categories "Straight Flush", "Four of a Kind",</span></span>
+<span id="cb9-26"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'   "Full House", "Flush", "Straight", "Three of a Kind", "Two Pair", "One Pair", or "High Card".</span></span>
+<span id="cb9-27"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb9-28"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' "Royal Flush" and "Jacks or Better" are not currently supported.</span></span>
+<span id="cb9-29"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//'</span></span>
+<span id="cb9-30"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @param hand a hand of cards (an integer vector of length 5).</span></span>
+<span id="cb9-31"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @return string hand rank.</span></span>
+<span id="cb9-32"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @examples</span></span>
+<span id="cb9-33"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' hand &lt;- deal_hand(new_deck())</span></span>
+<span id="cb9-34"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' print_hand(hand)</span></span>
+<span id="cb9-35"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' eval_hand_phe(hand)</span></span>
+<span id="cb9-36"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//' @export</span></span>
+<span id="cb9-37"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// [[Rcpp::export]]</span></span>
+<span id="cb9-38">String eval_hand_phe<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>IntegerVector hand<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb9-39">  phevaluator<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>Rank rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> phevaluator<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>EvaluateCards<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>hand<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">],</span> hand<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">],</span> hand<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">],</span> hand<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">],</span> hand<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]);</span></span>
+<span id="cb9-40">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> rank<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>describeCategory<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">();</span></span>
+<span id="cb9-41"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+<p>After this, I removed the example function, added a C/C++ benchmark, and published cards 0.3.0.</p>
+<section id="follow-up" class="level2">
+<h2 class="anchored" data-anchor-id="follow-up">Follow-up</h2>
+<p>I did some additional research, and there doesn’t seem to be a simple way to change R to compile using <code>filename.cc.o</code> instead of <code>filename.o</code>, as it goes against the intent of the R developers, as described in this Stack Overflow <a href="https://stackoverflow.com/questions/23414448/r-makevars-file-to-overwrite-r-cmds-default-g-options">article</a>:</p>
+<blockquote class="blockquote">
+<p>The clear recommendation on r-devel (please check the archives) is that you should avoid Makefile logic if you can. IIRC this echoed in the Writing R Extension manual.</p>
+</blockquote>
+<p>So, it seems the right answer is to rename the files to avoid this conflict. Additionally, after reading a tidyverse blog post on <a href="https://www.tidyverse.org/blog/2023/03/cran-checks-compiled-code/">New CRAN requirements for packages with C and C++</a>, I learned that the R C++ standard was now C++17, so I technically did not need that line in the <code>Makevars</code> file, but I decided to keep it as it was an upstream requirement.</p>
+<p>I also discovered an example <a href="https://github.com/coatless-r-n-d/rcpp-headers-subdirs">package</a> that explained how to put code in a subdirectory of <code>src/</code>, which I plan to use for the second version using Rcpp Modules.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>notes</category>
+  <guid>https://jabenninghoff.github.io/rtraining/analysis/using-Rcpp.html</guid>
+  <pubDate>Thu, 21 Dec 2023 06:00:00 GMT</pubDate>
+</item>
 <item>
   <title>R Books</title>
   <dc:creator>John Benninghoff</dc:creator>
@@ -214,12 +797,13 @@ font-style: inherit;">max</span>(date))</span></code></pre></div>
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        1968 2023-12-03
-2 checkmate    265540 2023-12-03
-3 chk           14003 2023-12-03
-4 validate       1851 2023-12-03</code></pre>
+1 assertr        1771 2023-12-28
+2 checkmate    258770 2023-12-28
+3 chk           11932 2023-12-28
+4 validate       1587 2023-12-28</code></pre>
 </div>
 </div>
+<p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
 <p>Chapter 13 introduces <a href="https://docs.ropensci.org/targets/">targets</a>, “a Make-like pipeline tool for statistics and data science in R.” Conceptually, targets is very similar to an R Notebook, but like Make, will skip components that are up to date, and can run targets in parallel to speed up builds. targets can also render R Markdown documents using the <code>tarchetypes</code> package. I found the example target pipeline in the book convoluted and didn’t attempt to follow it. The targets <a href="https://books.ropensci.org/targets/">manual</a> explains that it implements <a href="https://books.ropensci.org/targets/literate-programming.html#scope">two kinds</a> of literate programming:</p>
 <blockquote class="blockquote">
 <ol type="1">
@@ -267,6 +851,7 @@ font-style: inherit;">max</span>(date))</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="future-reading">Future Reading</h2>
 <p>R books on my reading list.</p>
 <ul>
+<li><a href="https://rstudio.github.io/r-manuals/">The R Manuals</a> - a re-styled version of the original R manuals, published using Quarto (starting with <em>Writing R Extensions</em>)</li>
 <li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> - written by the author of <a href="https://yihui.org/knitr/">knitr</a></li>
 <li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">R Markdown Cookbook</a> - the follow-up to <em>The Definitive Guide</em></li>
 <li><a href="https://data-cleaning.github.io/validate/">The Data Validation Cookbook</a> - a book on the R <a href="https://cran.r-project.org/web/packages/validate/index.html">validate</a> package</li>

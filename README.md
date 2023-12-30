@@ -105,6 +105,11 @@ Notebooks in this package:
   (2020-12-02): Original notes on learning R and RStudio. An updated
   reading list of R books and other recommended resources is available
   in [R Books](r-books.html).
+- [Using
+  Rcpp](https://jabenninghoff.github.io/rtraining/analysis/using-Rcpp.html)
+  (2023-12-21): Notes on using [Rcpp](https://www.rcpp.org) to implement
+  [Poker-Hand-Evaluator](https://github.com/HenryRLee/PokerHandEvaluator)
+  in the [cards](https://jabenninghoff.github.io/cards/) package.
 
 ## Installation
 

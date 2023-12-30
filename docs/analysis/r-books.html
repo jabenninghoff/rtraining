@@ -176,6 +176,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../analysis/using-Rcpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using Rcpp</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced R (Foundations)</span></a>
   </div>
@@ -374,12 +380,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        1968 2023-12-03
-2 checkmate    265540 2023-12-03
-3 chk           14003 2023-12-03
-4 validate       1851 2023-12-03</code></pre>
+1 assertr        1771 2023-12-28
+2 checkmate    258770 2023-12-28
+3 chk           11932 2023-12-28
+4 validate       1587 2023-12-28</code></pre>
 </div>
 </div>
+<p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
 <p>Chapter 13 introduces <a href="https://docs.ropensci.org/targets/">targets</a>, “a Make-like pipeline tool for statistics and data science in R.” Conceptually, targets is very similar to an R Notebook, but like Make, will skip components that are up to date, and can run targets in parallel to speed up builds. targets can also render R Markdown documents using the <code>tarchetypes</code> package. I found the example target pipeline in the book convoluted and didn’t attempt to follow it. The targets <a href="https://books.ropensci.org/targets/">manual</a> explains that it implements <a href="https://books.ropensci.org/targets/literate-programming.html#scope">two kinds</a> of literate programming:</p>
 <blockquote class="blockquote">
 <ol type="1">
@@ -427,6 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="future-reading">Future Reading</h2>
 <p>R books on my reading list.</p>
 <ul>
+<li><a href="https://rstudio.github.io/r-manuals/">The R Manuals</a> - a re-styled version of the original R manuals, published using Quarto (starting with <em>Writing R Extensions</em>)</li>
 <li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> - written by the author of <a href="https://yihui.org/knitr/">knitr</a></li>
 <li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">R Markdown Cookbook</a> - the follow-up to <em>The Definitive Guide</em></li>
 <li><a href="https://data-cleaning.github.io/validate/">The Data Validation Cookbook</a> - a book on the R <a href="https://cran.r-project.org/web/packages/validate/index.html">validate</a> package</li>
