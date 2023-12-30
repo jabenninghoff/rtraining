@@ -17,9 +17,7 @@ output:
       smooth_scroll: no
 ---
 
-Notes on using [Rcpp](https://www.rcpp.org) to implement
-[Poker-Hand-Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) in the
-[cards](https://jabenninghoff.github.io/cards/) package.
+Notes on using [Rcpp](https://www.rcpp.org) to implement [Poker-Hand-Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) in the [cards](https://jabenninghoff.github.io/cards/) package.
 
 ```{r setup, message = FALSE, warning = FALSE}
 # no libraries
