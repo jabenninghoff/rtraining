@@ -2,7 +2,7 @@
 title: "R Books"
 author: "John Benninghoff"
 date: '2023-11-17'
-file-modified: '2023-11-17'
+file-modified: '2023-12-29'
 categories: reading
 order: 1
 output:
@@ -142,6 +142,9 @@ cran_downloads(
   group_by(package) |>
   summarize(downloads = sum(count), as_of = max(date))
 ```
+
+2023-12-29 Update: I've started using `checkmate` to check function arguments and have found
+that `validate` is better overall at data validation.
 
 Chapter 13 introduces [targets](https://docs.ropensci.org/targets/), "a Make-like pipeline tool for
 statistics and data science in R." Conceptually, targets is very similar to an R Notebook, but like
