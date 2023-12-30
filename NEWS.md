@@ -4,6 +4,8 @@
 [Poker-Hand-Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) in the
 [cards](https://jabenninghoff.github.io/cards/) package
 
+* Updated R Books: updated reading list, notes on `checkmate` and `validate`
+
 # rtraining 1.1.4
 
 * Updated R Training Log: fixed Wikipedia demo image colors
