@@ -33,7 +33,9 @@ Evaluator be faster?
 
 The [Thirteen Simple Steps for Creating An R Package with an External C++ Library](https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-libraries.pdf)
 vignette provides good high-level guidance on integrating a C++ library into an R package using base
-R; additional work is needed to implement Rcpp using roxygen2.
+R; additional work is needed to implement Rcpp using roxygen2. The source code for the
+[Corels](https://CRAN.R-project.org/package=corels) package referenced in the vignette can be found
+on GitHub: <https://github.com/corels/rcppcorels>.
 
 # Test Build
 
