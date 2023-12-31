@@ -242,7 +242,7 @@ R books on my reading list.
 - [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) - the follow-up to *The
   Definitive Guide*
 - [The Data Validation Cookbook](https://data-cleaning.github.io/validate/) - a book on the R
-  [validate](https://cran.r-project.org/web/packages/validate/index.html) package
+  [validate](https://CRAN.R-project.org/package=validate) package
 - [Discovering Statistics Using R](https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067) - recommended to me
   as an introduction to statistics using R
 
