@@ -286,3 +286,6 @@ I learned that the R C++ standard was now C++17, so I technically did not need t
 I also discovered an example [package](https://github.com/coatless-r-n-d/rcpp-headers-subdirs) that
 explained how to put code in a subdirectory of `src/`, which I plan to use for the second version
 using Rcpp Modules.
+
+I later added a script to copy (or update) the PH Evaluator source and header files to the cards
+package, to automate future updates if needed.
