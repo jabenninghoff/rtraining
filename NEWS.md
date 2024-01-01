@@ -1,3 +1,7 @@
+# rtraining 1.1.6
+
+* Using Rcpp: added link to Corels package, additional follow-up notes
+
 # rtraining 1.1.5
 
 * Added Using Rcpp: Notes on using [Rcpp](https://www.rcpp.org) to implement

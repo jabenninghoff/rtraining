@@ -2,7 +2,7 @@
 title: "Using Rcpp"
 author: "John Benninghoff"
 date: '2023-12-21'
-file-modified: '2023-12-21'
+file-modified: '2023-12-31'
 categories: notes
 order: 104
 output:
@@ -289,3 +289,12 @@ using Rcpp Modules.
 
 I later added a script to copy (or update) the PH Evaluator source and header files to the cards
 package, to automate future updates if needed.
+
+After reading through the
+[Creating R Packages](https://rstudio.github.io/r-manuals/r-exts/Creating-R-packages.html) chapter
+of [Writing R Extensions](https://rstudio.github.io/r-manuals/r-exts/) and evaluating my options,
+I am inclined to use a simple approach to creating a "phevaluator" package, copying the necessary
+files into `src/` (with a shell script for reproducibility), use a minimal `Makevars` file, and use
+[Rcpp Modules](https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf) to expose
+the C++ classes and methods in PH Evaluator, following the approach used by the
+[RcppStudent](https://github.com/coatless-r-n-d/rcpp-modules-student) R package.
