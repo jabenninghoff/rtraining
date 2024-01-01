@@ -29,7 +29,7 @@ font-style: inherit;"># no libraries</span></span></code></pre></div>
 <section id="background" class="level1">
 <h1>Background</h1>
 <p>Rcpp provides an interface to C++, which allows <a href="https://adv-r.hadley.nz/rcpp.html">rewriting R code in C++</a> to improve performance. The cards package implements functions that simulate dealing and evaluating poker hands in R and PH Evaluator using python via <a href="https://rstudio.github.io/reticulate/">reticulate</a>. Will the C++ version of PH Evaluator be faster?</p>
-<p>The <a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-libraries.pdf">Thirteen Simple Steps for Creating An R Package with an External C++ Library</a> vignette provides good high-level guidance on integrating a C++ library into an R package using base R; additional work is needed to implement Rcpp using roxygen2.</p>
+<p>The <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-libraries.pdf">Thirteen Simple Steps for Creating An R Package with an External C++ Library</a> vignette provides good high-level guidance on integrating a C++ library into an R package using base R; additional work is needed to implement Rcpp using roxygen2. The source code for the <a href="https://CRAN.R-project.org/package=corels">Corels</a> package referenced in the vignette can be found on GitHub: <a href="https://github.com/corels/rcppcorels" class="uri">https://github.com/corels/rcppcorels</a>.</p>
 </section>
 <section id="test-build" class="level1">
 <h1>Test Build</h1>
@@ -252,7 +252,7 @@ font-style: inherit;">;</span></span>
 <span id="cb3-16"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
-<p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
+<p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
 <p>Additional examples implementing C++ libraries in Rcpp I found include <a href="https://github.com/eddelbuettel/rcppannoy">RcppAnnoy</a>, written by Rcpp author and maintainer Dirk Eddelbuettel, <a href="https://github.com/R-Lum/rxylib">rxylib</a>, and <a href="https://github.com/AleMorales/RcppSundials.R">RcppSundials</a>.</p>
 <section id="add-headers" class="level2">
 <h2 class="anchored" data-anchor-id="add-headers">Add Headers</h2>
@@ -585,6 +585,8 @@ font-style: inherit;">}</span></span></code></pre></div>
 </blockquote>
 <p>So, it seems the right answer is to rename the files to avoid this conflict. Additionally, after reading a tidyverse blog post on <a href="https://www.tidyverse.org/blog/2023/03/cran-checks-compiled-code/">New CRAN requirements for packages with C and C++</a>, I learned that the R C++ standard was now C++17, so I technically did not need that line in the <code>Makevars</code> file, but I decided to keep it as it was an upstream requirement.</p>
 <p>I also discovered an example <a href="https://github.com/coatless-r-n-d/rcpp-headers-subdirs">package</a> that explained how to put code in a subdirectory of <code>src/</code>, which I plan to use for the second version using Rcpp Modules.</p>
+<p>I later added a script to copy (or update) the PH Evaluator source and header files to the cards package, to automate future updates if needed.</p>
+<p>After reading through the <a href="https://rstudio.github.io/r-manuals/r-exts/Creating-R-packages.html">Creating R Packages</a> chapter of <a href="https://rstudio.github.io/r-manuals/r-exts/">Writing R Extensions</a> and evaluating my options, I am inclined to use a simple approach to creating a “phevaluator” package, copying the necessary files into <code>src/</code> (with a shell script for reproducibility), use a minimal <code>Makevars</code> file, and use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, following the approach used by the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
 
 
 </section>
@@ -797,10 +799,10 @@ font-style: inherit;">max</span>(date))</span></code></pre></div>
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        1771 2023-12-28
-2 checkmate    258770 2023-12-28
-3 chk           11932 2023-12-28
-4 validate       1587 2023-12-28</code></pre>
+1 assertr        1609 2023-12-30
+2 checkmate    244133 2023-12-30
+3 chk           11199 2023-12-30
+4 validate       1426 2023-12-30</code></pre>
 </div>
 </div>
 <p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
@@ -854,7 +856,7 @@ font-style: inherit;">max</span>(date))</span></code></pre></div>
 <li><a href="https://rstudio.github.io/r-manuals/">The R Manuals</a> - a re-styled version of the original R manuals, published using Quarto (starting with <em>Writing R Extensions</em>)</li>
 <li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> - written by the author of <a href="https://yihui.org/knitr/">knitr</a></li>
 <li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">R Markdown Cookbook</a> - the follow-up to <em>The Definitive Guide</em></li>
-<li><a href="https://data-cleaning.github.io/validate/">The Data Validation Cookbook</a> - a book on the R <a href="https://cran.r-project.org/web/packages/validate/index.html">validate</a> package</li>
+<li><a href="https://data-cleaning.github.io/validate/">The Data Validation Cookbook</a> - a book on the R <a href="https://CRAN.R-project.org/package=validate">validate</a> package</li>
 <li><a href="https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067">Discovering Statistics Using R</a> - recommended to me as an introduction to statistics using R</li>
 </ul>
 </section>
