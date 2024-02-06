@@ -6,17 +6,18 @@
       version="2.0">
 <channel>
 <title>rtraining</title>
-<link>https://jabenninghoff.github.io/rtraining/index.html</link>
+<link>https://jabenninghoff.github.io/rtraining/</link>
 <atom:link href="https://jabenninghoff.github.io/rtraining/index.xml" rel="self" type="application/rss+xml"/>
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
-<generator>quarto-1.3.450</generator>
+<generator>quarto-1.4.549</generator>
 <lastBuildDate>Thu, 21 Dec 2023 06:00:00 GMT</lastBuildDate>
 <item>
   <title>Using Rcpp</title>
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/using-Rcpp.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -358,7 +359,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <p><code>src/Makevars</code>:</p>
 <div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb5-1"><span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">PKG_CPPFLAGS </span><span class="ch" style="color: #20794D;
+font-style: inherit;">PKG_CPPFLAGS</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -384,14 +385,14 @@ tables_bitwise.c</code></pre>
 <p>I also added a line to <code>src/Makevars</code> to enable the C++ 17 standard used by PH Evaluator:</p>
 <div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb7-1"><span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">PKG_CPPFLAGS </span><span class="ch" style="color: #20794D;
+font-style: inherit;">PKG_CPPFLAGS</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;"> -I../inst/include/</span></span>
 <span id="cb7-2"><span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">CXX_STD </span><span class="ch" style="color: #20794D;
+font-style: inherit;">CXX_STD</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -605,6 +606,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 
 
 
+
 <p>An actively maintained and curated list of R Books and other recommended resources from my reading list.</p>
 <section id="libraries" class="level2">
 <h2 class="anchored" data-anchor-id="libraries">Libraries</h2>
@@ -714,7 +716,11 @@ font-style: inherit;">+</span></span>
 background-color: null;
 font-style: inherit;">scale_color_colorblind</span>()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-books_files/figure-html/r4ds-1.png" class="img-fluid" width="816"></p>
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-books_files/figure-html/r4ds-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1054,6 +1060,7 @@ font-style: inherit;">order</span>(end_date)</span>
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-4.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1881,17 +1888,25 @@ font-style: inherit;">expr</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">f</span>(<span class="cn" style="color: #8f5902;
 background-color: null;
-font-style: inherit;">TRUE</span>, 1L, <span class="fl" style="color: #AD0000;
+font-style: inherit;">TRUE</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L, <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1.0</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"x"</span>, 1i, <span class="fu" style="color: #4758AB;
+font-style: inherit;">"x"</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">raw</span>(1L), <span class="dv" style="color: #AD0000;
+font-style: inherit;">1</span>i, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">raw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L), <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">+</span> 1i))</span></code></pre></div>
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>i))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; f(TRUE, 1L, 1, "x", 0+1i, raw(1L), 1 + (0+1i))</code></pre>
 </div>
@@ -8436,6 +8451,7 @@ font-style: inherit;">"x"</span>)</span></code></pre></div>
 
 
 
+
 <p>Workbook for completing quizzes and exercises from the “Extending” chapters of <a href="https://ggplot2-book.org/index.html">ggplot2: Elegant Graphics for Data Analysis</a>, third edition, with comparisons to solutions from <a href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to ggplot2: Elegant Graphics for Data Analysis</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
@@ -8514,7 +8530,7 @@ font-style: inherit;">+</span></span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -8578,7 +8594,7 @@ font-style: inherit;">+</span></span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -8867,7 +8883,7 @@ font-style: inherit;">scale_color_wesanderson_d</span>()</span></code></pre></di
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -8894,7 +8910,7 @@ font-style: inherit;">scale_color_wesanderson_c</span>()</span></code></pre></di
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -8946,7 +8962,7 @@ font-style: inherit;">scale_colour_wesanderson</span>()</span></code></pre></div
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9009,7 +9025,7 @@ font-style: inherit;">hide_ll</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9060,7 +9076,7 @@ font-style: inherit;">+</span></span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9136,7 +9152,7 @@ font-style: inherit;">theme_void</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9253,7 +9269,7 @@ font-style: inherit;">geom_rlm</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9380,7 +9396,7 @@ font-style: inherit;">100</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9398,7 +9414,7 @@ font-style: inherit;">100</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9412,7 +9428,7 @@ font-style: inherit;">"density"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-18-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-18-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9471,7 +9487,7 @@ font-style: inherit;">geom_point</span>())</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9482,7 +9498,7 @@ font-style: inherit;">geom_point</span>())</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9493,7 +9509,7 @@ font-style: inherit;">geom_point</span>())</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-20-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-20-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9558,7 +9574,7 @@ font-style: inherit;">NULL</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9572,7 +9588,7 @@ font-style: inherit;">NULL</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9586,7 +9602,7 @@ font-style: inherit;">NULL</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-21-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-21-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9600,7 +9616,7 @@ font-style: inherit;">NULL</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-21-4.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5_files/figure-html/unnamed-chunk-21-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9623,6 +9639,7 @@ font-style: inherit;">NULL</span>)</span>
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -9917,7 +9934,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -9990,7 +10007,7 @@ font-style: inherit;">"n = "</span>, n)))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10085,7 +10102,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10115,7 +10132,7 @@ font-style: inherit;">~</span> x)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10140,7 +10157,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10255,7 +10272,7 @@ font-style: inherit;">coord_flip</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10277,7 +10294,7 @@ font-style: inherit;">coord_flip</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10341,7 +10358,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10533,7 +10550,7 @@ font-style: inherit;">~</span> x)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10584,7 +10601,7 @@ font-style: inherit;">0.2</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10627,7 +10644,7 @@ font-style: inherit;">0.4</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10723,7 +10740,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10756,7 +10773,7 @@ font-style: inherit;">1</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10856,7 +10873,7 @@ font-style: inherit;">geom_point</span>()</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10864,7 +10881,7 @@ font-style: inherit;">geom_point</span>()</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -10939,7 +10956,7 @@ font-style: inherit;">"regular"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11004,7 +11021,7 @@ font-style: inherit;">"regular"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11065,7 +11082,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11122,7 +11139,7 @@ font-style: inherit;">coord_polar</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11211,7 +11228,7 @@ font-style: inherit;">theme_void</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11283,7 +11300,7 @@ font-style: inherit;">NULL</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11321,7 +11338,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11435,7 +11452,7 @@ font-style: inherit;">0</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11484,7 +11501,7 @@ font-style: inherit;">~</span>drv)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11530,7 +11547,7 @@ font-style: inherit;">~</span>cut)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11581,7 +11598,7 @@ font-style: inherit;">~</span>carat_n)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11643,7 +11660,7 @@ font-style: inherit;">$</span>price)))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11709,7 +11726,7 @@ font-style: inherit;">~</span>color)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11736,7 +11753,7 @@ font-style: inherit;">color =</span> color))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11767,7 +11784,7 @@ font-style: inherit;">~</span>color)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11830,7 +11847,7 @@ font-style: inherit;">~</span>class)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11885,7 +11902,7 @@ font-style: inherit;">~</span>class)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11976,7 +11993,7 @@ font-style: inherit;">"Cylinders"</span></span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -11988,7 +12005,7 @@ font-style: inherit;">theme_calc</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12000,7 +12017,7 @@ font-style: inherit;">theme_fivethirtyeight</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12012,7 +12029,7 @@ font-style: inherit;">theme_hc</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-4.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12024,7 +12041,7 @@ font-style: inherit;">theme_solarized_2</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-5.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-30-5.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12045,7 +12062,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12267,7 +12284,7 @@ font-style: inherit;">scale_color_excel</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12320,7 +12337,7 @@ font-style: inherit;">"gray50"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12377,7 +12394,7 @@ font-style: inherit;">"gray90"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12425,7 +12442,7 @@ font-style: inherit;">0</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12445,7 +12462,7 @@ font-style: inherit;">0.25</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12465,7 +12482,7 @@ font-style: inherit;">0.5</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12485,7 +12502,7 @@ font-style: inherit;">1</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-4.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12509,7 +12526,7 @@ font-style: inherit;">0</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-5.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4_files/figure-html/unnamed-chunk-35-5.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12531,6 +12548,7 @@ font-style: inherit;">0</span>))</span></code></pre></div>
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -12662,7 +12680,7 @@ font-style: inherit;">label_date_short</span>())</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12695,7 +12713,7 @@ font-style: inherit;">90</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12764,7 +12782,7 @@ font-style: inherit;">"none"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12776,7 +12794,7 @@ font-style: inherit;">scale_fill_viridis_c</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12792,7 +12810,7 @@ font-style: inherit;">"magma"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12878,7 +12896,7 @@ font-style: inherit;">NULL</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12894,7 +12912,7 @@ font-style: inherit;">NA</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12910,7 +12928,7 @@ font-style: inherit;">"yellow"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12974,7 +12992,7 @@ font-style: inherit;">geom_point</span>()</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -12982,7 +13000,7 @@ font-style: inherit;">geom_point</span>()</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13011,7 +13029,7 @@ font-style: inherit;">"r"</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13037,7 +13055,7 @@ font-style: inherit;">"r"</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13087,7 +13105,7 @@ font-style: inherit;">"r"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13134,7 +13152,7 @@ font-style: inherit;">"r"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13188,7 +13206,7 @@ font-style: inherit;">"regular"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13263,7 +13281,7 @@ font-style: inherit;">"regular"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13328,7 +13346,7 @@ font-style: inherit;">"regular"</span>)</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13379,7 +13397,7 @@ font-style: inherit;">guide_legend</span>())</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13403,7 +13421,7 @@ font-style: inherit;">1</span>)))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13421,7 +13439,7 @@ font-style: inherit;">scale_fill_binned</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13433,7 +13451,7 @@ font-style: inherit;">scale_fill_steps</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13449,7 +13467,7 @@ font-style: inherit;">8</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13476,7 +13494,7 @@ font-style: inherit;">9</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13500,7 +13518,7 @@ font-style: inherit;">9</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13524,7 +13542,7 @@ font-style: inherit;">9</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13556,7 +13574,7 @@ font-style: inherit;">geom_point</span>()</span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13576,7 +13594,7 @@ font-style: inherit;">2</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13753,7 +13771,7 @@ font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13857,7 +13875,7 @@ font-style: inherit;">NULL</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13911,7 +13929,7 @@ font-style: inherit;">NULL</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -13932,6 +13950,7 @@ font-style: inherit;">NULL</span>)</span></code></pre></div>
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -14329,7 +14348,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14359,7 +14378,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14392,7 +14411,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14439,7 +14458,7 @@ font-style: inherit;">coord_flip</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14476,7 +14495,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14493,7 +14512,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14510,7 +14529,7 @@ font-style: inherit;">geom_line</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14530,7 +14549,7 @@ font-style: inherit;">geom_histogram</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-13-4.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-13-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14597,7 +14616,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14619,7 +14638,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14657,7 +14676,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14698,7 +14717,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14715,7 +14734,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14732,7 +14751,7 @@ font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14768,7 +14787,7 @@ font-style: inherit;">vars</span>(hwy))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14792,7 +14811,7 @@ font-style: inherit;">vars</span>(cyl))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14841,7 +14860,7 @@ font-style: inherit;">vars</span>(cyl))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14902,7 +14921,7 @@ font-style: inherit;">"free"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14939,7 +14958,7 @@ font-style: inherit;">geom_jitter</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14970,7 +14989,7 @@ font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -14989,7 +15008,7 @@ font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15018,7 +15037,7 @@ font-style: inherit;">0.1</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15039,7 +15058,7 @@ font-style: inherit;">0.01</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15060,7 +15079,7 @@ font-style: inherit;">0.005</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-21-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-21-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15093,7 +15112,7 @@ font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15153,7 +15172,7 @@ font-style: inherit;">y =</span> resid))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15201,7 +15220,7 @@ font-style: inherit;">geom_bar</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15220,7 +15239,7 @@ font-style: inherit;">weight =</span> displ))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15305,7 +15324,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15354,7 +15373,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15414,7 +15433,7 @@ font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15437,6 +15456,7 @@ font-style: inherit;">FALSE</span>)</span></code></pre></div>
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -15602,7 +15622,7 @@ font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15642,7 +15662,7 @@ font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15673,7 +15693,7 @@ font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15755,7 +15775,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15795,7 +15815,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15881,7 +15901,7 @@ font-style: inherit;">"white"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15906,7 +15926,7 @@ font-style: inherit;">"white"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -15948,7 +15968,7 @@ font-style: inherit;">"white"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16009,7 +16029,7 @@ font-style: inherit;">geom_line</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16099,7 +16119,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16135,7 +16155,7 @@ font-style: inherit;">0.01</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16167,7 +16187,7 @@ font-style: inherit;">50</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16230,7 +16250,7 @@ font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16277,7 +16297,7 @@ font-style: inherit;">geom_boxplot</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16333,7 +16353,7 @@ font-style: inherit;">""</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16378,7 +16398,7 @@ font-style: inherit;">""</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16427,7 +16447,7 @@ font-style: inherit;">""</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16485,7 +16505,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16553,7 +16573,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16635,7 +16655,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16711,7 +16731,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16779,7 +16799,7 @@ font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16833,7 +16853,7 @@ font-style: inherit;">~</span>year)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16927,7 +16947,7 @@ font-style: inherit;">label =</span> text))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -16956,7 +16976,7 @@ font-style: inherit;">"inward"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -17188,7 +17208,7 @@ font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -17213,6 +17233,7 @@ font-style: inherit;">FALSE</span>)</span></code></pre></div>
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-3.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -18515,7 +18536,9 @@ font-style: inherit;">"roman"</span></span>
 <span id="cb87-9"></span>
 <span id="cb87-10"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">new_roman</span>(2022L)</span></code></pre></div>
+font-style: inherit;">new_roman</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2022</span>L)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] MMXXII</code></pre>
 </div>
@@ -18791,7 +18814,7 @@ font-style: inherit;">table</span>(x))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-3_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-3_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -21583,14 +21606,18 @@ background-color: null;
 font-style: inherit;">list</span>(</span>
 <span id="cb216-2">  <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">balance =</span> 0L,</span>
+font-style: inherit;">balance =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>L,</span>
 <span id="cb216-3">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">initialize =</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">function</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">balance =</span> 0L) {</span>
+font-style: inherit;">balance =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>L) {</span>
 <span id="cb216-4">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">stopifnot</span>(<span class="fu" style="color: #4758AB;
@@ -21779,7 +21806,9 @@ font-style: inherit;">$</span>balance) value <span class="ot" style="color: #003
 background-color: null;
 font-style: inherit;">&lt;-</span> value <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">+</span> 500L</span>
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">500</span>L</span>
 <span id="cb216-39">      super<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
@@ -21807,17 +21836,23 @@ font-style: inherit;">&lt;-</span> Account<span class="sc" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">new</span>(100L)</span>
+font-style: inherit;">new</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>L)</span>
 <span id="cb218-2">a<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">deposit</span>(100L)</span>
+font-style: inherit;">deposit</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>L)</span>
 <span id="cb218-3">a<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">withdraw</span>(250L)</span>
+font-style: inherit;">withdraw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">250</span>L)</span>
 <span id="cb218-4">a</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Account: 
@@ -21829,14 +21864,18 @@ font-style: inherit;">&lt;-</span> AccountOverdraft<span class="sc" style="color
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">new</span>(200L)</span>
+font-style: inherit;">new</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>L)</span>
 <span id="cb220-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">try</span>(a2<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">withdraw</span>(250L))</span></code></pre></div>
+font-style: inherit;">withdraw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">250</span>L))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in a2$withdraw(250L) : value &lt;= self$balance is not TRUE</code></pre>
 </div>
@@ -21844,7 +21883,9 @@ font-style: inherit;">withdraw</span>(250L))</span></code></pre></div>
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">withdraw</span>(150L)</span>
+font-style: inherit;">withdraw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">150</span>L)</span>
 <span id="cb222-2">a2</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Account: 
@@ -21856,12 +21897,16 @@ font-style: inherit;">&lt;-</span> AccountOverdraftFee<span class="sc" style="co
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">new</span>(200L)</span>
+font-style: inherit;">new</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>L)</span>
 <span id="cb224-2">a3<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">withdraw</span>(250L)</span>
+font-style: inherit;">withdraw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">250</span>L)</span>
 <span id="cb224-3">a3</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Account: 
@@ -22183,7 +22228,9 @@ font-style: inherit;">draw =</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">function</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">n =</span> 1L) {</span>
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L) {</span>
 <span id="cb228-11">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">stopifnot</span>(<span class="fu" style="color: #4758AB;
@@ -22294,7 +22341,9 @@ font-style: inherit;">try</span>(d<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">draw</span>(0L))</span></code></pre></div>
+font-style: inherit;">draw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>L))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in d$draw(0L) : n &gt; 0 is not TRUE</code></pre>
 </div>
@@ -22304,7 +22353,9 @@ font-style: inherit;">try</span>(d<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">draw</span>(53L))</span></code></pre></div>
+font-style: inherit;">draw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">53</span>L))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in d$draw(53L) : n &lt;= length(self$deck) is not TRUE</code></pre>
 </div>
@@ -22312,7 +22363,9 @@ font-style: inherit;">draw</span>(53L))</span></code></pre></div>
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">draw</span>(13L)</span>
+font-style: inherit;">draw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13</span>L)</span>
 <span id="cb236-2">d</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Cards: 
@@ -22323,7 +22376,9 @@ font-style: inherit;">draw</span>(13L)</span>
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">draw</span>(13L)</span>
+font-style: inherit;">draw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13</span>L)</span>
 <span id="cb238-2">d</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Cards: 
@@ -22944,7 +22999,9 @@ background-color: null;
 font-style: inherit;">list</span>(</span>
 <span id="cb273-3">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">.balance =</span> 0L</span>
+font-style: inherit;">.balance =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>L</span>
 <span id="cb273-4">  ),</span>
 <span id="cb273-5">  <span class="at" style="color: #657422;
 background-color: null;
@@ -23060,19 +23117,25 @@ font-style: inherit;">new</span>()</span>
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">deposit</span>(10L)</span>
+font-style: inherit;">deposit</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>L)</span>
 <span id="cb273-30">sa<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">withdraw</span>(5L)</span>
+font-style: inherit;">withdraw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>L)</span>
 <span id="cb273-31"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">try</span>(sa<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">withdraw</span>(20L))</span></code></pre></div>
+font-style: inherit;">withdraw</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>L))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in sa$withdraw(20L) : value &lt;= private$.balance is not TRUE</code></pre>
 </div>
@@ -23082,7 +23145,9 @@ font-style: inherit;">try</span>(sa<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>balance <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> 100L)</span></code></pre></div>
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>L)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error : `$balance` is read only</code></pre>
 </div>
@@ -25032,7 +25097,9 @@ background-color: null;
 font-style: inherit;">list</span>(</span>
 <span id="cb345-25">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">days =</span> 0L</span>
+font-style: inherit;">days =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>L</span>
 <span id="cb345-26">  )</span>
 <span id="cb345-27">)</span>
 <span id="cb345-28"></span>
@@ -25152,7 +25219,11 @@ font-style: inherit;">"Factor"</span>, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">data =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(1L, 2L), <span class="at" style="color: #657422;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L), <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">levels =</span> letters[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -25210,7 +25281,9 @@ font-style: inherit;">new</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Date2"</span>, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">data =</span> 1L)</span></code></pre></div>
+font-style: inherit;">data =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; An object of class "Date2"
 #&gt; Slot "data":
@@ -26045,7 +26118,13 @@ background-color: null;
 font-style: inherit;">OrderedFactor</span>(</span>
 <span id="cb388-3">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(1L, 2L, 2L),</span>
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L),</span>
 <span id="cb388-4">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
@@ -26241,6 +26320,7 @@ font-style: inherit;"># S4</span></span></code></pre></div>
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -26840,7 +26920,7 @@ font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -26948,7 +27028,7 @@ font-style: inherit;">"top"</span></span>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -27865,7 +27945,9 @@ font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">length</span>(x) <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">==</span> 0L) {</span>
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>L) {</span>
 <span id="cb107-3">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">return</span>(default)</span>
@@ -27876,10 +27958,14 @@ font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">length</span>(x) <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">==</span> 1L) {</span>
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L) {</span>
 <span id="cb107-6">    <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">return</span>(x[[1L]])</span>
+font-style: inherit;">return</span>(x[[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L]])</span>
 <span id="cb107-7">  }</span>
 <span id="cb107-8"></span>
 <span id="cb107-9">  out <span class="ot" style="color: #003B4F;
@@ -27943,7 +28029,9 @@ font-style: inherit;">+</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">`</span>, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">default =</span> 0L)</span></code></pre></div>
+font-style: inherit;">default =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>L)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] 0</code></pre>
 </div>
@@ -28273,7 +28361,9 @@ font-style: inherit;">1</span>)])</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> ind_before_longest <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">+</span> 1L</span>
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L</span>
 <span id="cb126-19">  out_end <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> ind_before_longest <span class="sc" style="color: #5E5E5E;
@@ -29665,7 +29755,7 @@ font-style: inherit;">40</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -29710,7 +29800,7 @@ font-style: inherit;">40</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-57-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-57-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -29729,7 +29819,7 @@ font-style: inherit;">1000</span>)))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -29745,7 +29835,7 @@ font-style: inherit;">1000</span>)))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-58-2.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-58-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -29761,7 +29851,7 @@ font-style: inherit;">1000</span>)))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-58-3.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-58-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -29780,7 +29870,7 @@ font-style: inherit;">50</span>)))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -30255,7 +30345,7 @@ font-style: inherit;">==</span> .(vs)))</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-69-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-69-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -30284,7 +30374,7 @@ font-style: inherit;">label_number</span>())</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -30511,7 +30601,9 @@ font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">rpois</span>(<span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">1e3</span>, 100L)</span>
+font-style: inherit;">1e3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>L)</span>
 <span id="cb244-2">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
@@ -31599,6 +31691,7 @@ font-style: inherit;">f</span>(...)</span>
 
 
 
+
 <p>Workbook for completing quizzes and exercises from the “Foundations” chapters of <a href="https://adv-r.hadley.nz/index.html">Advanced R</a>, second edition, with comparisons to solutions from <a href="https://advanced-r-solutions.rbind.io">Advanced R Solutions</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
@@ -32046,7 +32139,13 @@ font-style: inherit;">ls</span>())</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(1L, 2L, 3L)</span>
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>L)</span>
 <span id="cb41-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span></code></pre></div>
@@ -32101,7 +32200,9 @@ font-style: inherit;">&lt;-</span> x</span>
 background-color: null;
 font-style: inherit;">3</span>]] <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> 4L</span></code></pre></div>
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>L</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; tracemem[0x10b8871f8 -&gt; 0x10b88b108]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
@@ -32109,7 +32210,9 @@ font-style: inherit;">&lt;-</span> 4L</span></code></pre></div>
 background-color: null;
 font-style: inherit;">3</span>]] <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> 5L</span>
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>L</span>
 <span id="cb50-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">untracemem</span>(x)</span></code></pre></div>
@@ -32120,7 +32223,13 @@ font-style: inherit;">untracemem</span>(x)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(1L, 2L, 3L)</span>
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>L)</span>
 <span id="cb51-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span>
@@ -32145,7 +32254,13 @@ font-style: inherit;">#&gt; tracemem[0x55eec7b3af38 -&gt; 0x55eec774cc18]:</span
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">c</span>(1L, 2L, 3L)</span>
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>L)</span>
 <span id="cb52-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span>
@@ -32157,7 +32272,9 @@ font-style: inherit;">#&gt; &lt;0x55eec6940ae0&gt;</span></span>
 background-color: null;
 font-style: inherit;">3</span>]] <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> 4L</span></code></pre></div>
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>L</span></code></pre></div>
 </div>
 <p>Please be aware that running this code in RStudio will result in additional copies because of the reference from the environment pane.</p>
 <hr>
@@ -32964,7 +33081,9 @@ font-style: inherit;"># "a", "1" - character</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">c</span>(<span class="cn" style="color: #8f5902;
 background-color: null;
-font-style: inherit;">TRUE</span>, 1L) <span class="co" style="color: #5E5E5E;
+font-style: inherit;">TRUE</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 1L, 1L - integer</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -33000,7 +33119,9 @@ font-style: inherit;">typeof</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(<span class="cn" style="color: #8f5902;
 background-color: null;
-font-style: inherit;">TRUE</span>, 1L))</span></code></pre></div>
+font-style: inherit;">TRUE</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] "integer"</code></pre>
 </div>
@@ -33030,7 +33151,9 @@ font-style: inherit;"># will be coerced to character -&gt; "a" "1"</span></span>
 background-color: null;
 font-style: inherit;">c</span>(<span class="cn" style="color: #8f5902;
 background-color: null;
-font-style: inherit;">TRUE</span>, 1L) <span class="co" style="color: #5E5E5E;
+font-style: inherit;">TRUE</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># will be coerced to integer   -&gt; 1 1</span></span></code></pre></div>
 </div>
@@ -33991,9 +34114,13 @@ font-style: inherit;">"b"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"c"</span>), <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">z =</span> 4L<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">z =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">:</span>6L, <span class="at" style="color: #657422;
+font-style: inherit;">4</span>L<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>L, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">stringsAsFactors =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
@@ -35884,7 +36011,9 @@ font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">length</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">formals</span>(x)), 1L))</span>
+font-style: inherit;">formals</span>(x)), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L))</span>
 <span id="cb409-4">)</span>
 <span id="cb409-5"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -36200,7 +36329,9 @@ font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">length</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">formals</span>(x)), 1L)),</span>
+font-style: inherit;">formals</span>(x)), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L)),</span>
 <span id="cb413-5">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">prim =</span> <span class="fu" style="color: #4758AB;
@@ -37103,7 +37234,7 @@ font-style: inherit;">"blue"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-1_files/figure-html/unnamed-chunk-102-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/advanced-r-1_files/figure-html/unnamed-chunk-102-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -37278,7 +37409,7 @@ font-style: inherit;">3</span></span>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jabenninghoff.github.io/rtraining/analysis/rendered/withpng-example.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">with_png output</figcaption>
+<figcaption>with_png output</figcaption>
 </figure>
 </div>
 <p>Answer: code example above.</p>
@@ -38125,7 +38256,9 @@ font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">function</span>(a, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">b =</span> 0L) {</span>
+font-style: inherit;">b =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>L) {</span>
 <span id="cb505-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
@@ -41605,6 +41738,7 @@ font-style: inherit;">#&gt;</span></span></code></pre></div>
 
 
 
+
 <p>Notebook for testing FaultTree.widget rendering fixes.</p>
 <section id="example" class="level1">
 <h1>Example</h1>
@@ -41951,6 +42085,7 @@ font-style: inherit;">// var width_initial = $("div").filter(function(){ return 
   <dc:creator>John Benninghoff</dc:creator>
   <link>https://jabenninghoff.github.io/rtraining/analysis/r-setup-log.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -42583,6 +42718,7 @@ font-style: inherit;">open</span> docs/index.html</span></code></pre></div>
 
 
 
+
 <p>Original notes on learning R and RStudio. An updated reading list of R books and other recommended resources is available in <a href="r-books.html">R Books</a>.</p>
 <section id="libraries" class="level1">
 <h1>Libraries</h1>
@@ -42759,7 +42895,11 @@ font-style: inherit;">+</span></span>
 background-color: null;
 font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-training-log_files/figure-html/models-1.png" class="img-fluid" width="816"></p>
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-training-log_files/figure-html/models-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -42785,7 +42925,11 @@ font-style: inherit;">+</span></span>
 background-color: null;
 font-style: inherit;">theme_quo</span>()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-training-log_files/figure-html/models-2.png" class="img-fluid" width="816"></p>
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-training-log_files/figure-html/models-2.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -42995,7 +43139,7 @@ font-style: inherit;">set.seed</span>()</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jabenninghoff.github.io/rtraining/analysis/rendered/mandelbrot.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Mandelbrot set</figcaption>
+<figcaption>Mandelbrot set</figcaption>
 </figure>
 </div>
 <div class="cell">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -83,7 +83,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -92,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -105,9 +112,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">rtraining</span>
     </a>
@@ -119,36 +126,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html" rel="" target="">
- <span class="menu-text">Changelog</span></a>
+    <a class="nav-link" href="../NEWS.html"> 
+<span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../TODO.html" rel="" target="">
- <span class="menu-text">TODO</span></a>
+    <a class="nav-link" href="../TODO.html"> 
+<span class="menu-text">TODO</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-    <a href="../index.xml" rel="" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
-    <a href="https://github.com/jabenninghoff/rtraining" rel="" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+    <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
+    <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-3.html">Advanced R (Object-oriented programming)</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/advanced-r-3.html">Advanced R (Object-oriented programming)</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -238,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -272,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#trade-offs" id="toc-trade-offs" class="nav-link" data-scroll-target="#trade-offs">16 Trade-offs</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/advanced-r-3.Rmd" class="toc-action">View source</a></p><p><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/advanced-r-3.Rmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -308,7 +315,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p>Workbook for completing quizzes and exercises from the “Object-oriented programming” chapters of <a href="https://adv-r.hadley.nz/index.html">Advanced R</a>, second edition, with comparisons to solutions from <a href="https://advanced-r-solutions.rbind.io">Advanced R Solutions</a>.</p>
 <div class="cell">
@@ -855,7 +864,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a><span class="fu">new_roman</span>(2022L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a><span class="fu">new_roman</span>(<span class="dv">2022</span>L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] MMXXII</code></pre>
 </div>
@@ -999,7 +1008,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="advanced-r-3_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="816"></p>
+<p><img src="advanced-r-3_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="816"></p>
 </figure>
 </div>
 </div>
@@ -3097,8 +3106,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <p>Answer: <code>Account</code> stores a balance as an integer value of cents, and prints in dollars (to avoid problems with floating point math).</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb216"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb216-1"><a href="#cb216-1" aria-hidden="true" tabindex="-1"></a>Account <span class="ot">&lt;-</span> <span class="fu">R6Class</span>(<span class="st">"Account"</span>, <span class="fu">list</span>(</span>
-<span id="cb216-2"><a href="#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance =</span> 0L,</span>
-<span id="cb216-3"><a href="#cb216-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">initialize =</span> <span class="cf">function</span>(<span class="at">balance =</span> 0L) {</span>
+<span id="cb216-2"><a href="#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance =</span> <span class="dv">0</span>L,</span>
+<span id="cb216-3"><a href="#cb216-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">initialize =</span> <span class="cf">function</span>(<span class="at">balance =</span> <span class="dv">0</span>L) {</span>
 <span id="cb216-4"><a href="#cb216-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="fu">is.integer</span>(balance), <span class="fu">length</span>(balance) <span class="sc">==</span> <span class="dv">1</span>)</span>
 <span id="cb216-5"><a href="#cb216-5" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span>balance <span class="ot">&lt;-</span> balance</span>
 <span id="cb216-6"><a href="#cb216-6" aria-hidden="true" tabindex="-1"></a>  },</span>
@@ -3133,7 +3142,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb216-35"><a href="#cb216-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">inherit =</span> Account,</span>
 <span id="cb216-36"><a href="#cb216-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">public =</span> <span class="fu">list</span>(</span>
 <span id="cb216-37"><a href="#cb216-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">withdraw =</span> <span class="cf">function</span>(value) {</span>
-<span id="cb216-38"><a href="#cb216-38" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (value <span class="sc">&gt;</span> self<span class="sc">$</span>balance) value <span class="ot">&lt;-</span> value <span class="sc">+</span> 500L</span>
+<span id="cb216-38"><a href="#cb216-38" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (value <span class="sc">&gt;</span> self<span class="sc">$</span>balance) value <span class="ot">&lt;-</span> value <span class="sc">+</span> <span class="dv">500</span>L</span>
 <span id="cb216-39"><a href="#cb216-39" aria-hidden="true" tabindex="-1"></a>      super<span class="sc">$</span><span class="fu">withdraw</span>(value)</span>
 <span id="cb216-40"><a href="#cb216-40" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb216-41"><a href="#cb216-41" aria-hidden="true" tabindex="-1"></a>  )</span>
@@ -3143,27 +3152,27 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in initialize(...) : is.integer(balance) is not TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb218"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb218-1"><a href="#cb218-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> Account<span class="sc">$</span><span class="fu">new</span>(100L)</span>
-<span id="cb218-2"><a href="#cb218-2" aria-hidden="true" tabindex="-1"></a>a<span class="sc">$</span><span class="fu">deposit</span>(100L)</span>
-<span id="cb218-3"><a href="#cb218-3" aria-hidden="true" tabindex="-1"></a>a<span class="sc">$</span><span class="fu">withdraw</span>(250L)</span>
+<div class="sourceCode cell-code" id="cb218"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb218-1"><a href="#cb218-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> Account<span class="sc">$</span><span class="fu">new</span>(<span class="dv">100</span>L)</span>
+<span id="cb218-2"><a href="#cb218-2" aria-hidden="true" tabindex="-1"></a>a<span class="sc">$</span><span class="fu">deposit</span>(<span class="dv">100</span>L)</span>
+<span id="cb218-3"><a href="#cb218-3" aria-hidden="true" tabindex="-1"></a>a<span class="sc">$</span><span class="fu">withdraw</span>(<span class="dv">250</span>L)</span>
 <span id="cb218-4"><a href="#cb218-4" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Account: 
 #&gt;   Balance: $-0.50</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb220"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb220-1"><a href="#cb220-1" aria-hidden="true" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> AccountOverdraft<span class="sc">$</span><span class="fu">new</span>(200L)</span>
-<span id="cb220-2"><a href="#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(a2<span class="sc">$</span><span class="fu">withdraw</span>(250L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb220"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb220-1"><a href="#cb220-1" aria-hidden="true" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> AccountOverdraft<span class="sc">$</span><span class="fu">new</span>(<span class="dv">200</span>L)</span>
+<span id="cb220-2"><a href="#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(a2<span class="sc">$</span><span class="fu">withdraw</span>(<span class="dv">250</span>L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in a2$withdraw(250L) : value &lt;= self$balance is not TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a>a2<span class="sc">$</span><span class="fu">withdraw</span>(150L)</span>
+<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a>a2<span class="sc">$</span><span class="fu">withdraw</span>(<span class="dv">150</span>L)</span>
 <span id="cb222-2"><a href="#cb222-2" aria-hidden="true" tabindex="-1"></a>a2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Account: 
 #&gt;   Balance: $0.50</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a>a3 <span class="ot">&lt;-</span> AccountOverdraftFee<span class="sc">$</span><span class="fu">new</span>(200L)</span>
-<span id="cb224-2"><a href="#cb224-2" aria-hidden="true" tabindex="-1"></a>a3<span class="sc">$</span><span class="fu">withdraw</span>(250L)</span>
+<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a>a3 <span class="ot">&lt;-</span> AccountOverdraftFee<span class="sc">$</span><span class="fu">new</span>(<span class="dv">200</span>L)</span>
+<span id="cb224-2"><a href="#cb224-2" aria-hidden="true" tabindex="-1"></a>a3<span class="sc">$</span><span class="fu">withdraw</span>(<span class="dv">250</span>L)</span>
 <span id="cb224-3"><a href="#cb224-3" aria-hidden="true" tabindex="-1"></a>a3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Account: 
@@ -3237,7 +3246,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb228-7"><a href="#cb228-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"  Play:"</span>, self<span class="sc">$</span>play, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">" "</span>)</span>
 <span id="cb228-8"><a href="#cb228-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">invisible</span>(self)</span>
 <span id="cb228-9"><a href="#cb228-9" aria-hidden="true" tabindex="-1"></a>  },</span>
-<span id="cb228-10"><a href="#cb228-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">draw =</span> <span class="cf">function</span>(<span class="at">n =</span> 1L) {</span>
+<span id="cb228-10"><a href="#cb228-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">draw =</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">1</span>L) {</span>
 <span id="cb228-11"><a href="#cb228-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="fu">is.integer</span>(n), <span class="fu">length</span>(n) <span class="sc">==</span> <span class="dv">1</span>, n <span class="sc">&gt;</span> <span class="dv">0</span>, n <span class="sc">&lt;=</span> <span class="fu">length</span>(self<span class="sc">$</span>deck))</span>
 <span id="cb228-12"><a href="#cb228-12" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">head</span>(self<span class="sc">$</span>deck, n)</span>
 <span id="cb228-13"><a href="#cb228-13" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span>play <span class="ot">&lt;-</span> <span class="fu">c</span>(self<span class="sc">$</span>play, d)</span>
@@ -3262,22 +3271,22 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in d$draw(1.5) : is.integer(n) is not TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb232"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href="#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(d<span class="sc">$</span><span class="fu">draw</span>(0L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb232"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href="#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(d<span class="sc">$</span><span class="fu">draw</span>(<span class="dv">0</span>L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in d$draw(0L) : n &gt; 0 is not TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb234"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb234-1"><a href="#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(d<span class="sc">$</span><span class="fu">draw</span>(53L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb234"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb234-1"><a href="#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(d<span class="sc">$</span><span class="fu">draw</span>(<span class="dv">53</span>L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in d$draw(53L) : n &lt;= length(self$deck) is not TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb236"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb236-1"><a href="#cb236-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span><span class="fu">draw</span>(13L)</span>
+<div class="sourceCode cell-code" id="cb236"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb236-1"><a href="#cb236-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span><span class="fu">draw</span>(<span class="dv">13</span>L)</span>
 <span id="cb236-2"><a href="#cb236-2" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Cards: 
 #&gt;   Deck: 4♠ A♠ J♥ A♣ 9♦ 3♣ 5♦ 7♥ K♣ 3♠ Q♦ A♥ 5♠ 8♣ 4♦ Q♥ 7♣ 10♥ 3♦ 5♥ 7♦ J♠ 9♥ K♦ 2♦ 2♠ A♦ Q♠ 6♠ 6♦ 10♣ 8♠ 4♣ 10♠ J♦ 10♦ 6♣ J♣ 4♥ 
 #&gt;   Play: 5♣ K♠ 2♣ 9♣ K♥ 2♥ 9♠ 3♥ Q♣ 6♥ 8♥ 8♦ 7♠</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb238"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb238-1"><a href="#cb238-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span><span class="fu">draw</span>(13L)</span>
+<div class="sourceCode cell-code" id="cb238"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb238-1"><a href="#cb238-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span><span class="fu">draw</span>(<span class="dv">13</span>L)</span>
 <span id="cb238-2"><a href="#cb238-2" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Cards: 
@@ -3508,7 +3517,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb273"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb273-1"><a href="#cb273-1" aria-hidden="true" tabindex="-1"></a>SecureAccount <span class="ot">&lt;-</span> <span class="fu">R6Class</span>(<span class="st">"SecureAccount"</span>,</span>
 <span id="cb273-2"><a href="#cb273-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">private =</span> <span class="fu">list</span>(</span>
-<span id="cb273-3"><a href="#cb273-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">.balance =</span> 0L</span>
+<span id="cb273-3"><a href="#cb273-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">.balance =</span> <span class="dv">0</span>L</span>
 <span id="cb273-4"><a href="#cb273-4" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb273-5"><a href="#cb273-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">public =</span> <span class="fu">list</span>(</span>
 <span id="cb273-6"><a href="#cb273-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">deposit =</span> <span class="cf">function</span>(value) {</span>
@@ -3534,13 +3543,13 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb273-26"><a href="#cb273-26" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb273-27"><a href="#cb273-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb273-28"><a href="#cb273-28" aria-hidden="true" tabindex="-1"></a>sa <span class="ot">&lt;-</span> SecureAccount<span class="sc">$</span><span class="fu">new</span>()</span>
-<span id="cb273-29"><a href="#cb273-29" aria-hidden="true" tabindex="-1"></a>sa<span class="sc">$</span><span class="fu">deposit</span>(10L)</span>
-<span id="cb273-30"><a href="#cb273-30" aria-hidden="true" tabindex="-1"></a>sa<span class="sc">$</span><span class="fu">withdraw</span>(5L)</span>
-<span id="cb273-31"><a href="#cb273-31" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(sa<span class="sc">$</span><span class="fu">withdraw</span>(20L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb273-29"><a href="#cb273-29" aria-hidden="true" tabindex="-1"></a>sa<span class="sc">$</span><span class="fu">deposit</span>(<span class="dv">10</span>L)</span>
+<span id="cb273-30"><a href="#cb273-30" aria-hidden="true" tabindex="-1"></a>sa<span class="sc">$</span><span class="fu">withdraw</span>(<span class="dv">5</span>L)</span>
+<span id="cb273-31"><a href="#cb273-31" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(sa<span class="sc">$</span><span class="fu">withdraw</span>(<span class="dv">20</span>L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in sa$withdraw(20L) : value &lt;= private$.balance is not TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb275"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb275-1"><a href="#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(sa<span class="sc">$</span>balance <span class="ot">&lt;-</span> 100L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb275"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb275-1"><a href="#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(sa<span class="sc">$</span>balance <span class="ot">&lt;-</span> <span class="dv">100</span>L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error : `$balance` is read only</code></pre>
 </div>
@@ -4168,7 +4177,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb345-22"><a href="#cb345-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">days =</span> <span class="st">"integer"</span></span>
 <span id="cb345-23"><a href="#cb345-23" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb345-24"><a href="#cb345-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
-<span id="cb345-25"><a href="#cb345-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">days =</span> 0L</span>
+<span id="cb345-25"><a href="#cb345-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">days =</span> <span class="dv">0</span>L</span>
 <span id="cb345-26"><a href="#cb345-26" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb345-27"><a href="#cb345-27" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb345-28"><a href="#cb345-28" aria-hidden="true" tabindex="-1"></a></span>
@@ -4200,7 +4209,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb346-10"><a href="#cb346-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">FALSE</span></span>
 <span id="cb346-11"><a href="#cb346-11" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb346-12"><a href="#cb346-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb346-13"><a href="#cb346-13" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"Factor"</span>, <span class="at">data =</span> <span class="fu">c</span>(1L, 2L), <span class="at">levels =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb346-13"><a href="#cb346-13" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"Factor"</span>, <span class="at">data =</span> <span class="fu">c</span>(<span class="dv">1</span>L, <span class="dv">2</span>L), <span class="at">levels =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; An object of class "Factor"
 #&gt; Slot "data":
@@ -4224,7 +4233,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb348-7"><a href="#cb348-7" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb348-8"><a href="#cb348-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb348-9"><a href="#cb348-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-10"><a href="#cb348-10" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"Date2"</span>, <span class="at">data =</span> 1L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb348-10"><a href="#cb348-10" aria-hidden="true" tabindex="-1"></a><span class="fu">new</span>(<span class="st">"Date2"</span>, <span class="at">data =</span> <span class="dv">1</span>L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; An object of class "Date2"
 #&gt; Slot "data":
@@ -4547,7 +4556,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb388"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb388-1"><a href="#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setOldClass</span>(<span class="st">"ordered"</span>, <span class="at">S4Class =</span> <span class="st">"OrderedFactor"</span>)</span>
 <span id="cb388-2"><a href="#cb388-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">OrderedFactor</span>(</span>
-<span id="cb388-3"><a href="#cb388-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(1L, 2L, 2L),</span>
+<span id="cb388-3"><a href="#cb388-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>L, <span class="dv">2</span>L, <span class="dv">2</span>L),</span>
 <span id="cb388-4"><a href="#cb388-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>),</span>
 <span id="cb388-5"><a href="#cb388-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
 <span id="cb388-6"><a href="#cb388-6" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -4702,10 +4711,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -4715,8 +4723,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -4729,6 +4746,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -4772,6 +4908,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -4797,6 +4934,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -4858,12 +5021,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../analysis/advanced-r-2.html" class="pagination-link">
+      <a href="../analysis/advanced-r-2.html" class="pagination-link  aria-label=" advanced="" r="" (functional="" programming)"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced R (Functional programming)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../analysis/advanced-r-4.html" class="pagination-link">
+      <a href="../analysis/advanced-r-4.html" class="pagination-link" aria-label="Advanced R (Metaprogramming)">
         <span class="nav-page-text">Advanced R (Metaprogramming)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -4871,14 +5034,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, John Benninghoff</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2023, John Benninghoff</p>
+</div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../LICENSE.html">License</a>
+    <a class="nav-link" href="../LICENSE.html">
+<p>License</p>
+</a>
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/advanced-r-3.Rmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -4891,6 +5058,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 
