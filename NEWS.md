@@ -1,3 +1,7 @@
+# rtraining 1.1.7
+
+* Maintenance updates
+
 # rtraining 1.1.6
 
 * Using Rcpp: added link to Corels package, additional follow-up notes
