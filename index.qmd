@@ -21,6 +21,6 @@ Feel free to use and/or fork this project!
 # this block is required to parse inline r code above
 ```
 
-## Notebooks
+# Notebooks
 
 Notebooks in this package:
