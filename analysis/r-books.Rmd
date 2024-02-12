@@ -20,7 +20,7 @@ output:
 
 An actively maintained and curated list of R Books and other recommended resources from my reading list.
 
-## Libraries
+# Libraries
 
 Libraries used in this notebook.
 
@@ -32,11 +32,11 @@ library(cranlogs)
 library(dplyr)
 ```
 
-## Getting Started
+# Getting Started
 
 Books and resources I recommend for learning R.
 
-### R for Data Science
+## R for Data Science
 
 [R for Data Science (2e)](https://r4ds.hadley.nz) - Second Edition of
 [Hadley Wickham's](https://hadley.nz/) introductory book on R and exploratory data analysis. The
@@ -66,7 +66,7 @@ ggplot(
   scale_color_colorblind()
 ```
 
-### Resources
+## Resources
 
 In addition to R for Data Science, I recommend the following resources for new R users:
 
@@ -85,7 +85,7 @@ tools, includes all three of these packages and more, along with my own
 [style guide](https://jabenninghoff.github.io/rdev/articles/style-guide.html) and R environment
 setup [instructions](https://jabenninghoff.github.io/rdev/articles/rdev.html).
 
-## Additional Reading
+# Additional Reading
 
 Books I read to improve my knowledge of R.
 
@@ -103,7 +103,7 @@ Books I read to improve my knowledge of R.
 
 My own notes and solutions to the Advanced R and ggplot2 exercises are available on this site.
 
-### raps-with-r
+## raps-with-r
 
 [Building reproducible analytical pipelines with R](https://raps-with-r.dev) - the stated goal of
 the book is to improve the reproducibility of data analysis. I don't recommend this book. Section 1
@@ -232,7 +232,7 @@ While reading the book, I discovered some interesting additional resources:
 - I also revisited the [`validate`](https://github.com/data-cleaning/validate) package, a data
   validation rules engine, which includes the Data Validation Cookbook (in [Future Reading])
 
-## Future Reading
+# Future Reading
 
 R books on my reading list.
 
@@ -247,7 +247,7 @@ R books on my reading list.
 - [Discovering Statistics Using R](https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067) - recommended to me
   as an introduction to statistics using R
 
-## R Dialects
+# R Dialects
 
 An explanatory note on the R dialects of base R and tidyverse R.
 
