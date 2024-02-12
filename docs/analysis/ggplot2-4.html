@@ -73,10 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -135,9 +137,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -341,18 +344,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This workbook includes answers and solutions to the quizzes and exercises from <a href="https://ggplot2-book.org/index.html">ggplot2: Elegant Graphics for Data Analysis</a> and <a href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to ggplot2: Elegant Graphics for Data Analysis</a>, organized by chapter. It includes excerpts from both books, copied here.</p>
 <p><strong>WARNING, SPOILERS!</strong> If you haven’t read the ggplot2 book and intend to complete the quizzes and exercises, don’t read this notebook. It contains my (potentially wrong) answers to both.</p>
 </section>
-<section id="mastering-the-grammar" class="level1">
-<h1>13 Mastering the grammar</h1>
+<section id="mastering-the-grammar" class="level2">
+<h2 class="anchored" data-anchor-id="mastering-the-grammar">13 Mastering the grammar</h2>
 <p>In order to unlock the full power of ggplot2, you’ll need to master the underlying grammar. By understanding the grammar, and how its components fit together, you can create a wider range of visualizations, combine multiple sources of data, and customise to your heart’s content.</p>
 <p>This chapter describes the theoretical basis of ggplot2: the layered grammar of graphics. The layered grammar is based on Wilkinson’s grammar of graphics, but adds a number of enhancements that help it to be more expressive and fit seamlessly into the R environment. The differences between the layered grammar and Wilkinson’s grammar are described fully in Hadley Wickham. In this chapter you will learn a little bit about each component of the grammar and how they all fit together. The next chapters discuss the components in more detail, and provide more examples of how you can use them in practice.</p>
 <p>The grammar makes it easier for you to iteratively update a plot, changing a single feature at a time. The grammar is also useful because it suggests the high-level aspects of a plot that <em>can</em> be changed, giving you a framework to think about graphics, and hopefully shortening the distance from mind to paper. It also encourages the use of graphics customised to a particular problem, rather than relying on specific chart types.</p>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">13.5 Exercises</h2>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">13.5 Exercises</h3>
 <ul>
 <li>One of the best ways to get a handle on how the grammar works is to apply it to the analysis of existing graphics. For each of the graphics listed below, write down the components of the graphic. Don’t worry if you don’t know what the corresponding functions in ggplot2 are called (or if they even exist!), instead focussing on recording the key elements of a plot so you could communicate it to someone else.</li>
 </ul>
@@ -489,12 +492,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="build-a-plot-layer-by-layer" class="level1">
-<h1>14 Build a plot layer by layer</h1>
+<section id="build-a-plot-layer-by-layer" class="level2">
+<h2 class="anchored" data-anchor-id="build-a-plot-layer-by-layer">14 Build a plot layer by layer</h2>
 <p>One of the key ideas behind ggplot2 is that it allows you to easily iterate, building up a complex plot a layer at a time. Each layer can come from a different dataset and have a different aesthetic mapping, making it possible to create sophisticated plots that display data from multiple sources.</p>
 <p>You’ve already created layers with functions like <code>geom_point()</code> and <code>geom_histogram()</code>. In this chapter, you’ll dive into the details of a layer, and how you can control all five components: data, the aesthetic mappings, the geom, stat, and position adjustments. The goal here is to give you the tools to build sophisticated plots tailored to the problem at hand.</p>
-<section id="exercises-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-1">14.3.1 Exercises</h2>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">14.3.1 Exercises</h3>
 <ol type="1">
 <li>The first two arguments to ggplot are <code>data</code> and <code>mapping</code>. The first two arguments to all layer functions are <code>mapping</code> and <code>data</code>. Why does the order of the arguments differ? (Hint: think about what you set most commonly.)</li>
 </ol>
@@ -552,8 +555,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
-<section id="exercises-2" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-2">14.4.3 Exercises</h2>
+<section id="exercises-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-2">14.4.3 Exercises</h3>
 <ol type="1">
 <li>Simplify the following plot specifications:</li>
 </ol>
@@ -686,8 +689,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
-<section id="exercises-3" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-3">14.5.1 Exercises</h2>
+<section id="exercises-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-3">14.5.1 Exercises</h3>
 <ol type="1">
 <li>Download and print out the ggplot2 cheatsheet from <a href="http://www.rstudio.com/resources/cheatsheets/">rstudio</a> so you have a handy visual reference for all the geoms.</li>
 </ol>
@@ -758,8 +761,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
-<section id="exercises-4" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-4">14.6.2 Exercises</h2>
+<section id="exercises-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-4">14.6.2 Exercises</h3>
 <ol type="1">
 <li>The code below creates a similar dataset to <code>stat_smooth()</code>. Use the appropriate geoms to mimic the default <code>geom_smooth()</code> display.</li>
 </ol>
@@ -859,8 +862,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="exercises-5" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-5">14.7.1 Exercises</h2>
+<section id="exercises-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-5">14.7.1 Exercises</h3>
 <ol type="1">
 <li>When might you use <code>position_nudge()</code>? Read the documentation.</li>
 </ol>
@@ -887,11 +890,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="scales-and-guides" class="level1">
-<h1>15 Scales and guides</h1>
+<section id="scales-and-guides" class="level2">
+<h2 class="anchored" data-anchor-id="scales-and-guides">15 Scales and guides</h2>
 <p>The scales toolbox in Chapters 10 to 12 provides extensive guidance for how to work with scales, focusing on solving common data visualisation problems. The practical goals of the toolbox mean that topics are introduced when they are most relevant: for example, scale transformations are discussed in relation to continuous position scales (Section 10.1.7) because that is the most common situation in which you might want to transform a scale. However, because ggplot2 aims to provide a grammar of graphics, there is nothing preventing you from transforming other kinds of scales (see Section 15.6). This chapter aims to illustrate these concepts: I’ll discuss the theory underpinning scales and guides, and give examples showing how concepts that I’ve discussed specifically for position or colour scales also apply elsewhere.</p>
-<section id="setting-color-with-limits" class="level2">
-<h2 class="anchored" data-anchor-id="setting-color-with-limits">Setting color with limits</h2>
+<section id="setting-color-with-limits" class="level3">
+<h3 class="anchored" data-anchor-id="setting-color-with-limits">Setting color with limits</h3>
 <p>Let’s create a pair of plots controlling color with limits (from 11.3.5)! First, we’ll just plot both independently:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>gg_99 <span class="ot">&lt;-</span> mpg <span class="sc">|&gt;</span></span>
@@ -952,8 +955,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="key-glyphs" class="level2">
-<h2 class="anchored" data-anchor-id="key-glyphs">Key glyphs</h2>
+<section id="key-glyphs" class="level3">
+<h3 class="anchored" data-anchor-id="key-glyphs">Key glyphs</h3>
 <p>Let’s use a key glyph! (<code>draw_key_timeseries()</code>)</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(economics, <span class="fu">aes</span>(date, psavert, <span class="at">color =</span> <span class="st">"Personal</span><span class="sc">\n</span><span class="st">Savings</span><span class="sc">\n</span><span class="st">Rate"</span>)) <span class="sc">+</span></span>
@@ -970,15 +973,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="coordinate-systems" class="level1">
-<h1>16 Coordinate systems</h1>
+<section id="coordinate-systems" class="level2">
+<h2 class="anchored" data-anchor-id="coordinate-systems">16 Coordinate systems</h2>
 <p>Coordinate systems have two main jobs:</p>
 <ul>
 <li><p>Combine the two position aesthetics to produce a 2d position on the plot. The position aesthetics are called <code>x</code> and <code>y</code>, but they might be better called position 1 and 2 because their meaning depends on the coordinate system used. For example, with the polar coordinate system they become angle and radius (or radius and angle), and with maps they become latitude and longitude.</p></li>
 <li><p>In coordination with the faceter, coordinate systems draw axes and panel backgrounds. While the scales control the values that appear on the axes, and how they map from data to position, it is the coordinate system which actually draws them. This is because their appearance depends on the coordinate system: an angle axis looks quite different than an x axis.</p></li>
 </ul>
-<section id="polar-coordinates" class="level2">
-<h2 class="anchored" data-anchor-id="polar-coordinates">Polar coordinates</h2>
+<section id="polar-coordinates" class="level3">
+<h3 class="anchored" data-anchor-id="polar-coordinates">Polar coordinates</h3>
 <p>Let’s draw a spiral with polar coordinates!</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">200</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">200</span>, <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
@@ -1012,11 +1015,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="faceting" class="level1">
-<h1>17 Faceting</h1>
+<section id="faceting" class="level2">
+<h2 class="anchored" data-anchor-id="faceting">17 Faceting</h2>
 <p>You first encountered faceting in Section 2.5. Faceting generates small multiples each showing a different subset of the data. Small multiples are a powerful tool for exploratory data analysis: you can rapidly compare patterns in different parts of the data and see whether they are the same or different. This section will discuss how you can fine-tune facets, particularly the way in which they interact with position scales.</p>
-<section id="facet-grid" class="level2">
-<h2 class="anchored" data-anchor-id="facet-grid">Facet grid</h2>
+<section id="facet-grid" class="level3">
+<h3 class="anchored" data-anchor-id="facet-grid">Facet grid</h3>
 <p>Let’s draw a facet grid!</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
@@ -1035,8 +1038,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="free-scales" class="level2">
-<h2 class="anchored" data-anchor-id="free-scales">Free scales</h2>
+<section id="free-scales" class="level3">
+<h3 class="anchored" data-anchor-id="free-scales">Free scales</h3>
 <p>Free scales are useful when faceting across different variables over the same time period:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(economics_long, <span class="fu">aes</span>(date, value)) <span class="sc">+</span></span>
@@ -1051,8 +1054,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="facet-space" class="level2">
-<h2 class="anchored" data-anchor-id="facet-space">Facet space</h2>
+<section id="facet-space" class="level3">
+<h3 class="anchored" data-anchor-id="facet-space">Facet space</h3>
 <p><code>facet_grid()</code> has an additional parameter called <code>space</code>, which takes the same values as <code>scales</code>. When space is “free”, each column (or row) will have width (or height) proportional to the range of the scale for that column (or row). This makes the scaling equal across the whole plot: 1 cm on each panel maps to the same range of data. (This is somewhat analogous to the ‘sliced’ axis limits of lattice.) For example, if panel a had range 2 and panel b had range 4, one-third of the space would be given to a, and two-thirds to b. This is most useful for categorical scales, where we can assign space proportionally based on the number of levels in each facet, as illustrated below.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mpg2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(mpg, cyl <span class="sc">!=</span> <span class="dv">5</span> <span class="sc">&amp;</span> drv <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"4"</span>, <span class="st">"f"</span>) <span class="sc">&amp;</span> class <span class="sc">!=</span> <span class="st">"2seater"</span>)</span>
@@ -1073,8 +1076,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="grouping-and-faceting" class="level2">
-<h2 class="anchored" data-anchor-id="grouping-and-faceting">Grouping and faceting</h2>
+<section id="grouping-and-faceting" class="level3">
+<h3 class="anchored" data-anchor-id="grouping-and-faceting">Grouping and faceting</h3>
 <p>Let’s combine grouping and faceting!</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
@@ -1090,8 +1093,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="exercises-6" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-6">17.7 Exercises</h2>
+<section id="exercises-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-6">17.7 Exercises</h3>
 <ol type="1">
 <li>Diamonds: display the distribution of price conditional on cut and carat. Try faceting by cut and grouping by carat. Try faceting by carat and grouping by cut. Which do you prefer?</li>
 </ol>
@@ -1227,12 +1230,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="themes" class="level1">
-<h1>18 Themes</h1>
+<section id="themes" class="level2">
+<h2 class="anchored" data-anchor-id="themes">18 Themes</h2>
 <p>In this chapter you will learn how to use the ggplot2 theme system, which allows you to exercise fine control over the non-data elements of your plot. The theme system does not affect how the data is rendered by geoms, or how it is transformed by scales. Themes don’t change the perceptual properties of the plot, but they do help you make the plot aesthetically pleasing or match an existing style guide. Themes give you control over things like fonts, ticks, panel strips, and backgrounds.</p>
 <p>This separation of control into data and non-data parts is quite different from base and lattice graphics. In base and lattice graphics, most functions take a large number of arguments that specify both data and non-data appearance, which makes the functions complicated and harder to learn. ggplot2 takes a different approach: when creating the plot you determine how the data is displayed, then <em>after</em> it has been created you can edit every detail of the rendering, using the theming system.</p>
-<section id="exercises-7" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-7">18.2.1 Exercises</h2>
+<section id="exercises-7" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-7">18.2.1 Exercises</h3>
 <ol type="1">
 <li>Try out all the themes in ggthemes. Which do you like the best?</li>
 </ol>
@@ -1315,8 +1318,8 @@ What would you change?</li>
 <p>Answer: the plots from <a href="https://doi.org/10.1016/j.ssci.2018.07.021">this paper</a> on <em>Safety Science</em> most closely resemble <code>theme_classic()</code>, with few differences, the most notable being the position of the legend in Figures 4, 5, 8, and 9.</p>
 <hr>
 </section>
-<section id="exercises-8" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-8">18.4.6 Exercises</h2>
+<section id="exercises-8" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-8">18.4.6 Exercises</h3>
 <ol type="1">
 <li>Create the ugliest plot possible! (Contributed by Andrew D. Steen, University of Tennessee - Knoxville)</li>
 </ol>
@@ -1469,6 +1472,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1852,7 +1999,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">

@@ -73,10 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -135,9 +137,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -307,17 +310,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no libraries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="background" class="level1">
-<h1>Background</h1>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>Rcpp provides an interface to C++, which allows <a href="https://adv-r.hadley.nz/rcpp.html">rewriting R code in C++</a> to improve performance. The cards package implements functions that simulate dealing and evaluating poker hands in R and PH Evaluator using python via <a href="https://rstudio.github.io/reticulate/">reticulate</a>. Will the C++ version of PH Evaluator be faster?</p>
 <p>The <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-libraries.pdf">Thirteen Simple Steps for Creating An R Package with an External C++ Library</a> vignette provides good high-level guidance on integrating a C++ library into an R package using base R; additional work is needed to implement Rcpp using roxygen2. The source code for the <a href="https://CRAN.R-project.org/package=corels">Corels</a> package referenced in the vignette can be found on GitHub: <a href="https://github.com/corels/rcppcorels" class="uri">https://github.com/corels/rcppcorels</a>.</p>
 </section>
-<section id="test-build" class="level1">
-<h1>Test Build</h1>
+<section id="test-build" class="level2">
+<h2 class="anchored" data-anchor-id="test-build">Test Build</h2>
 <p>To start, I followed PH Evaluator’s <a href="https://github.com/HenryRLee/PokerHandEvaluator/tree/master/cpp">instructions</a> to build and test the <code>pheval</code> library, which required installation of <code>cmake</code> using Homebrew (<code>brew install cmake</code>).</p>
 </section>
-<section id="example-function" class="level1">
-<h1>Example Function</h1>
+<section id="example-function" class="level2">
+<h2 class="anchored" data-anchor-id="example-function">Example Function</h2>
 <p>As a next step, I implemented a simple example function to ensure Rcpp was working properly. After some research, I added the following code:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
@@ -356,8 +359,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>After the first two steps, <a href="https://devtools.r-lib.org/reference/document.html"><code>devtools::document()</code></a> automates the addition of the <code>leading_na()</code> function, R documentation, and Rcpp support to the package.</p>
 </section>
-<section id="stub-function" class="level1">
-<h1>Stub Function</h1>
+<section id="stub-function" class="level2">
+<h2 class="anchored" data-anchor-id="stub-function">Stub Function</h2>
 <p>As a next step, I implemented a stub function with help from <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a>, specifically the chapter on <a href="https://teuder.github.io/rcpp4everyone_en/070_data_types.html">Data types</a>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
@@ -377,8 +380,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
 <p>Additional examples implementing C++ libraries in Rcpp I found include <a href="https://github.com/eddelbuettel/rcppannoy">RcppAnnoy</a>, written by Rcpp author and maintainer Dirk Eddelbuettel, <a href="https://github.com/R-Lum/rxylib">rxylib</a>, and <a href="https://github.com/AleMorales/RcppSundials.R">RcppSundials</a>.</p>
-<section id="add-headers" class="level2">
-<h2 class="anchored" data-anchor-id="add-headers">Add Headers</h2>
+<section id="add-headers" class="level3">
+<h3 class="anchored" data-anchor-id="add-headers">Add Headers</h3>
 <p>To start the first implementation, I added the headers from <code>cpp_example.cc</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
@@ -413,8 +416,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>While this code compiled, to get the commented code working, I’d need to add the code from <code>cpp/src</code>. Just dumping the files from PH Evaluator into <code>src/</code> didn’t work, but the rxylib <a href="https://github.com/R-Lum/rxylib/blob/master/src/Makevars"><code>Makevars</code></a> file offered a clue: adapt the <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/Makefile"><code>Makefile</code></a> from PH Evaluator to the R <code>Makevars</code> format to properly build the library objects. Put another way, follow how rxylib translated <a href="https://github.com/wojdyr/xylib/blob/master/xylib/Makefile.am"><code>xlib/Makefile.am</code></a> to <code>Makevars</code>. The Stack Overflow <a href="https://stackoverflow.com/questions/43597632/understanding-the-contents-of-the-makevars-file-in-r-macros-variables-r-ma">question</a> referenced in rxylib provided additional details on the <code>Makevars</code> file format.</p>
 </section>
 </section>
-<section id="full-implementation" class="level1">
-<h1>Full Implementation</h1>
+<section id="full-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="full-implementation">Full Implementation</h2>
 <p>After some experimentation, I added the following files from PH Evaluator’s <code>cpp/src</code> to <code>src/</code>:</p>
 <pre><code>7462.c
 dptables.c
@@ -478,8 +481,8 @@ tables_bitwise.c</code></pre>
 <span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> rank<span class="op">.</span>describeCategory<span class="op">();</span></span>
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>After this, I removed the example function, added a C/C++ benchmark, and published cards 0.3.0.</p>
-<section id="follow-up" class="level2">
-<h2 class="anchored" data-anchor-id="follow-up">Follow-up</h2>
+<section id="follow-up" class="level3">
+<h3 class="anchored" data-anchor-id="follow-up">Follow-up</h3>
 <p>I did some additional research, and there doesn’t seem to be a simple way to change R to compile using <code>filename.cc.o</code> instead of <code>filename.o</code>, as it goes against the intent of the R developers, as described in this Stack Overflow <a href="https://stackoverflow.com/questions/23414448/r-makevars-file-to-overwrite-r-cmds-default-g-options">article</a>:</p>
 <blockquote class="blockquote">
 <p>The clear recommendation on r-devel (please check the archives) is that you should avoid Makefile logic if you can. IIRC this echoed in the Writing R Extension manual.</p>
@@ -514,6 +517,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -897,7 +1044,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
