@@ -73,10 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -135,9 +137,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -338,15 +341,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This workbook includes answers and solutions to the quizzes and exercises from <a href="https://ggplot2-book.org/index.html">ggplot2: Elegant Graphics for Data Analysis</a> and <a href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to ggplot2: Elegant Graphics for Data Analysis</a>, organized by chapter. It includes excerpts from both books, copied here.</p>
 <p><strong>WARNING, SPOILERS!</strong> If you haven’t read the ggplot2 book and intend to complete the quizzes and exercises, don’t read this notebook. It contains my (potentially wrong) answers to both.</p>
 </section>
-<section id="individual-geoms" class="level1">
-<h1>3 Individual geoms</h1>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">3.1.1 Exercises</h2>
+<section id="individual-geoms" class="level2">
+<h2 class="anchored" data-anchor-id="individual-geoms">3 Individual geoms</h2>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">3.1.1 Exercises</h3>
 <ol type="1">
 <li><p>What geoms would you use to draw each of the following named plots?</p>
 <ol type="1">
@@ -415,11 +418,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="collective-geoms" class="level1">
-<h1>4 Collective geoms</h1>
+<section id="collective-geoms" class="level2">
+<h2 class="anchored" data-anchor-id="collective-geoms">4 Collective geoms</h2>
 <p>Geoms can be roughly divided into individual and collective geoms. An <strong>individual</strong> geom draws a distinct graphical object for each observation (row). For example, the point geom draws one point per row. A <strong>collective</strong> geom displays multiple observations with one geometric object. This may be a result of a statistical summary, like a boxplot, or may be fundamental to the display of the geom, like a polygon. Lines and paths fall somewhere in between: each line is composed of a set of straight segments, but each segment represents two points. How do we control the assignment of observations to graphical elements? This is the job of the <code>group</code> aesthetic.</p>
-<section id="exercises-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-1">4.5 Exercises</h2>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">4.5 Exercises</h3>
 <p>GG Solutions offers no answers for this section.</p>
 <ol type="1">
 <li>Draw a boxplot of <code>hwy</code> for each value of <code>cyl</code>, without turning <code>cyl</code> into a factor. What extra aesthetic do you need to set?</li>
@@ -595,10 +598,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="statistical-summaries" class="level1">
-<h1>5 Statistical summaries</h1>
-<section id="exercises-2" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-2">5.4.1 Exercises</h2>
+<section id="statistical-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-summaries">5 Statistical summaries</h2>
+<section id="exercises-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-2">5.4.1 Exercises</h3>
 <ol type="1">
 <li>What <code>binwidth</code> tells you the most interesting story about the distribution of <code>carat</code>?</li>
 </ol>
@@ -791,11 +794,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="maps" class="level1">
-<h1>6 Maps</h1>
+<section id="maps" class="level2">
+<h2 class="anchored" data-anchor-id="maps">6 Maps</h2>
 <p>Plotting geospatial data is a common visualisation task, and one that requires specialised tools. Typically the problem can be decomposed into two problems: using one data source to draw a map, and adding metadata from another information source to the map. This chapter will help you tackle both problems.</p>
-<section id="bonus" class="level2">
-<h2 class="anchored" data-anchor-id="bonus">Bonus</h2>
+<section id="bonus" class="level3">
+<h3 class="anchored" data-anchor-id="bonus">Bonus</h3>
 <p>There are no exercises, so let’s draw a map of Minnesota using polygon maps!</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">"county"</span>, <span class="st">"minnesota"</span>) <span class="sc">|&gt;</span></span>
@@ -832,11 +835,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Side note: although it creates files in <code>/usr/local</code>, which causes <a href="https://brew.sh">Homebrew</a> to complain, <a href="https://github.com/r-lib/rig/"><code>rig</code></a>, <em>The R Installation Manager</em>, supports multiple versions of R, and supports installation of binary packages, which is substantially faster and requires fewer local dependencies.</p>
 </section>
 </section>
-<section id="networks" class="level1">
-<h1>7 Networks</h1>
+<section id="networks" class="level2">
+<h2 class="anchored" data-anchor-id="networks">7 Networks</h2>
 <p>Like maps and spatial data, networks and graphs occupy a special part of the visualization landscape, but whereas spatial data mostly differ from regular plotting in their use of projections, networks bring their own data structure as well as their own visualization paradigms to the table. Because of these complications networks are not directly supported in ggplot2. Several efforts over the years have tried to add this missing piece and in this chapter we will see how to use <a href="https://ggraph.data-imaginist.com"><code>ggraph</code></a> for network visualization. Other packages that offer some of the same functionality includes <a href="http://sctyner.github.io/geomnet/"><code>geomnet</code></a>, <a href="https://briatte.github.io/ggnetwork/"><code>ggnetwork</code></a>, and <a href="https://ggobi.github.io/ggally/"><code>GGally</code></a> for regular network plots, and <a href="https://github.com/YuLab-SMU/ggtree"><code>ggtree</code></a> and <a href="https://andrie.github.io/ggdendro/"><code>ggdendro</code></a> for tree visualization specifically.</p>
-<section id="notes" class="level2">
-<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+<section id="notes" class="level3">
+<h3 class="anchored" data-anchor-id="notes">Notes</h3>
 <p>While ggplot2 has limited support for maps, it has no direct support for networks and graphs. <code>ggraph</code> offers some interesting visualizations that are useful for understanding social networks, especially this one, which shows how friendships among high school boys changed from 1957 to 1958:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>highschool <span class="sc">|&gt;</span></span>
@@ -855,11 +858,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="annotations" class="level1">
-<h1>8 Annotations</h1>
+<section id="annotations" class="level2">
+<h2 class="anchored" data-anchor-id="annotations">8 Annotations</h2>
 <p>When constructing a data visualisation, it is often necessary to make annotations to the data displayed. Conceptually, an annotation supplies <em>metadata</em> for the plot: that is, it provides additional information about the data being displayed. From a practical standpoint, however, metadata is just another form of data. Because of this, the annotation tools in ggplot2 reuse the same geoms that are used to create other plots. However, to meet the specific needs that users often have when annotating plots, there are some helper functions in ggplot2 itself, and a number of other packages have extended ggplot2 in ways you may find helpful.</p>
-<section id="notes-1" class="level2">
-<h2 class="anchored" data-anchor-id="notes-1">Notes</h2>
+<section id="notes-1" class="level3">
+<h3 class="anchored" data-anchor-id="notes-1">Notes</h3>
 <p>An important distinction on axis labels:</p>
 <blockquote class="blockquote">
 <p>There are two ways to remove the axis label. Setting <code>labs(x = "")</code> omits the label but still allocates space; setting <code>labs(x = NULL)</code> removes the label and its space.</p>
@@ -936,8 +939,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="arranging-plots" class="level1">
-<h1>9 Arranging plots</h1>
+<section id="arranging-plots" class="level2">
+<h2 class="anchored" data-anchor-id="arranging-plots">9 Arranging plots</h2>
 <p>The grammar presented in ggplot2 is concerned with creating single plots. While the faceting system provides the means to produce several subplots all of these are part of the same main visualization, sharing layers, data, and scales. However, it is often necessary to use multiple disparate plots to tell a story or make an argument. These can of course be created individually and assembled in a layout program, but it is beneficial to do this in code to avoid time consuming and non-reproducible manual labor. A range of packages have risen to the occasion and provide different approaches to arranging separate plots. While this chapter will focus on the <code>patchwork</code> package you may also find some of the same functionalities in the <code>cowplot</code>, <code>gridExtra</code> and <code>ggpubr</code> packages.</p>
 
 
@@ -964,6 +967,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1347,7 +1494,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">

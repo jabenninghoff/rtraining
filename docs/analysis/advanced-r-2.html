@@ -73,10 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -155,7 +157,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -164,9 +166,10 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -364,13 +367,13 @@ window.Quarto = {
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This workbook includes answers and solutions to the quizzes and exercises from <a href="https://adv-r.hadley.nz/index.html">Advanced R</a> and <a href="https://advanced-r-solutions.rbind.io">Advanced R Solutions</a>, organized by chapter. It includes excerpts from both books, copied here.</p>
 <p><strong>WARNING, SPOILERS!</strong> If you haven’t read Advanced R and intend to complete the quizzes and exercises, don’t read this notebook. It contains my (potentially wrong) answers to both.</p>
 </section>
-<section id="functionals" class="level1">
-<h1>9 Functionals</h1>
+<section id="functionals" class="level2">
+<h2 class="anchored" data-anchor-id="functionals">9 Functionals</h2>
 <blockquote class="blockquote">
 <p>To become significantly more reliable, code must become more transparent. In particular, nested conditions and loops must be viewed with great suspicion. Complicated control flows confuse programmers. Messy code often hides bugs.</p>
 <p>— Bjarne Stroustrup</p>
@@ -380,22 +383,22 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>randomise <span class="ot">&lt;-</span> <span class="cf">function</span>(f) <span class="fu">f</span>(<span class="fu">runif</span>(<span class="fl">1e3</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.4841598</code></pre>
+<pre><code>#&gt; [1] 0.5011428</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.5047531</code></pre>
+<pre><code>#&gt; [1] 0.5098606</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 501.2797</code></pre>
+<pre><code>#&gt; [1] 506.1722</code></pre>
 </div>
 </div>
 <p>The chances are that you’ve already used a functional. You might have used for-loop replacements like base R’s <code>lapply()</code>, <code>apply()</code>, and <code>tapply()</code>; or purrr’s <code>map()</code>; or maybe you’ve used a mathematical functional like <code>integrate()</code> or <code>optim()</code>.</p>
 <p>A common use of functionals is as an alternative to for loops. For loops have a bad rap in R because many people believe they are slow<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, but the real downside of for loops is that they’re very flexible: a loop conveys that you’re iterating, but not what should be done with the results. Just as it’s better to use <code>while</code> than <code>repeat</code>, and it’s better to use <code>for</code> than <code>while</code> (Section 5.3.2), it’s better to use a functional than <code>for</code>. Each functional is tailored for a specific task, so when you recognise the functional you immediately know why it’s being used.</p>
 <p>If you’re an experienced for loop user, switching to functionals is typically a pattern matching exercise. You look at the for loop and find a functional that matches the basic form. If one doesn’t exist, don’t try and torture an existing functional to fit the form you need. Instead, just leave it as a for loop! (Or once you’ve repeated the same loop two or more times, maybe think about writing your own functional).</p>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">9.2.6 Exercises</h2>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">9.2.6 Exercises</h3>
 <ol type="1">
 <li>Use <code>as_mapper()</code> to explore how purrr generates anonymous functions for the integer, character, and list helpers. What helper allows you to extract attributes? Read the documentation to find out.</li>
 </ol>
@@ -406,7 +409,7 @@ window.Quarto = {
 #&gt; {
 #&gt;     map_("double", .x, .f, ..., .progress = .progress)
 #&gt; }
-#&gt; &lt;bytecode: 0x1166072a8&gt;
+#&gt; &lt;bytecode: 0x105f61db8&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(mtcars, <span class="sc">~</span> <span class="fu">length</span>(<span class="fu">unique</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -430,7 +433,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x105474aa8&gt;
+#&gt; &lt;bytecode: 0x1059bee68&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -455,19 +458,19 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, 2), .default = NULL)
-#&gt; &lt;environment: 0x1056fa358&gt;</code></pre>
+#&gt; &lt;environment: 0x103e1f5f0&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>)) <span class="co"># equivalent to function(x) x[["a"]][["b]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list("a", "b"), .default = NULL)
-#&gt; &lt;environment: 0x105670108&gt;</code></pre>
+#&gt; &lt;environment: 0x103e7e9c8&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">list</span>(<span class="dv">1</span>, <span class="st">"b"</span>)) <span class="co"># equivalent to function(x) x[[1]][["b]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, "b"), .default = NULL)
-#&gt; &lt;environment: 0x1056058e8&gt;</code></pre>
+#&gt; &lt;environment: 0x103ee2520&gt;</code></pre>
 </div>
 </div>
 <p>Besides mixing positions and names, it is also possible to pass along an accessor function. This is basically an anonymous function that gets information about some aspect of the input data. You are free to define your own accessor functions.</p>
@@ -494,13 +497,13 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="sc">~</span> <span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; [1] 0.28898204 0.03080936
+#&gt; [1] 0.3033222 0.3478833
 #&gt; 
 #&gt; [[2]]
-#&gt; [1] 0.8084078 0.4821147
+#&gt; [1] 0.8864170 0.3152395
 #&gt; 
 #&gt; [[3]]
-#&gt; [1] 0.8528816 0.7083845</code></pre>
+#&gt; [1] 0.4562464 0.3822637</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -527,8 +530,8 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck_raw(x, list(0.604344471124932, 0.0218792946543545), .default = NULL)
-#&gt; &lt;environment: 0x10693af08&gt;</code></pre>
+#&gt; pluck_raw(x, list(0.773506730096415, 0.147335387067869), .default = NULL)
+#&gt; &lt;environment: 0x112a794e0&gt;</code></pre>
 </div>
 </div>
 <p>A more reasonable use of a pluck mapper for <code>1:3</code> is <code>1</code>:</p>
@@ -791,8 +794,8 @@ window.Quarto = {
 <span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(bootstraps, <span class="sc">~</span> <span class="fu">summary</span>(<span class="fu">lm</span>(mpg <span class="sc">~</span> disp, .x))<span class="sc">$</span>r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.7453424 0.6263653 0.6717042 0.6913632 0.7044988 0.7600284 0.7257801
-#&gt;  [8] 0.7904557 0.7857444 0.6363400</code></pre>
+<pre><code>#&gt;  [1] 0.6838213 0.7529948 0.7295118 0.6092150 0.7211448 0.7562808 0.8130474
+#&gt;  [8] 0.7155601 0.8002178 0.7443124</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -803,8 +806,8 @@ window.Quarto = {
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(summary) <span class="sc">%&gt;%</span></span>
 <span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dbl</span>(<span class="st">"r.squared"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.7453424 0.6263653 0.6717042 0.6913632 0.7044988 0.7600284 0.7257801
-#&gt;  [8] 0.7904557 0.7857444 0.6363400</code></pre>
+<pre><code>#&gt;  [1] 0.6838213 0.7529948 0.7295118 0.6092150 0.7211448 0.7562808 0.8130474
+#&gt;  [8] 0.7155601 0.8002178 0.7443124</code></pre>
 </div>
 </div>
 <p>Note: while AR Solutions is arguably <em>slightly</em> more readable, my code should be faster:</p>
@@ -816,7 +819,7 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { map_dbl(bootstraps, ~summary(lm(… 1.99ms 2.05ms      482.    63.7KB     55.7</code></pre>
+#&gt; 1 { map_dbl(bootstraps, ~summary(lm(… 2.04ms  2.1ms      469.    63.7KB     52.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>({</span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  bootstraps <span class="sc">%&gt;%</span></span>
@@ -828,14 +831,14 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 1.98ms 2.04ms      484.    63.7KB     61.4</code></pre>
+#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 2.03ms 2.09ms      474.    63.7KB     56.8</code></pre>
 </div>
 </div>
 <p>It is actually slightly slower! AR Solutions wins!</p>
 <hr>
 </section>
-<section id="exercises-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-1">9.4.6 Exercises</h2>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">9.4.6 Exercises</h3>
 <ol type="1">
 <li>Explain the results of <code>modify(mtcars, 1)</code>.</li>
 </ol>
@@ -880,7 +883,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1), .default = NULL)
-#&gt; &lt;environment: 0x10708b3f8&gt;</code></pre>
+#&gt; &lt;environment: 0x1112f2110&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1072,8 +1075,8 @@ window.Quarto = {
 <p>AR Solutions: <code>write.csv()</code> returns <code>NULL</code>. As we call the function for its side effect (creating a CSV file), <code>walk2()</code> would be appropriate here. Otherwise, we receive a rather uninformative list of <code>NULL</code>s.</p>
 <hr>
 </section>
-<section id="exercises-2" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-2">9.6.3 Exercises</h2>
+<section id="exercises-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-2">9.6.3 Exercises</h3>
 <ol type="1">
 <li>Why isn’t <code>is.na()</code> a predicate function? What base R function is closest to being a predicate version of <code>is.na()</code>?</li>
 </ol>
@@ -1233,14 +1236,14 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                     min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span_r(test2, is.numeric)   51.2µs   52.9µs    18285.    4.01KB     65.1</code></pre>
+#&gt; 1 span_r(test2, is.numeric)   51.4µs   54.7µs    17804.    4.01KB     66.5</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">span</span>(test2, is.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;              &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span(test2, is.numeric)   68.7µs   71.4µs    13697.    4.01KB     20.8</code></pre>
+#&gt; 1 span(test2, is.numeric)   68.4µs   72.1µs    13515.    4.01KB     21.0</code></pre>
 </div>
 </div>
 <hr>
@@ -1544,8 +1547,8 @@ window.Quarto = {
 </div>
 <hr>
 </section>
-<section id="exercises-3" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-3">9.7.3 Exercises</h2>
+<section id="exercises-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-3">9.7.3 Exercises</h3>
 <ol type="1">
 <li>How does <code>apply()</code> arrange the output? Read the documentation and perform some experiments.</li>
 </ol>
@@ -1733,22 +1736,22 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 11.8µs 12.5µs    78634.        0B     23.6</code></pre>
+#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 11.7µs 12.4µs    79370.        0B     23.8</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">fixed_point</span>(cos, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point(cos, 1)   20.3µs   21.7µs    44672.        0B     26.8</code></pre>
+#&gt; 1 fixed_point(cos, 1)   20.7µs   21.5µs    45350.        0B     27.2</code></pre>
 </div>
 </div>
 <p>As usual, AR Solutions is faster. :-(</p>
 <hr>
 </section>
 </section>
-<section id="function-factories" class="level1">
-<h1>10 Function factories</h1>
+<section id="function-factories" class="level2">
+<h2 class="anchored" data-anchor-id="function-factories">10 Function factories</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1782,8 +1785,8 @@ window.Quarto = {
 </ul>
 <p>In this chapter, you’ll learn how the non-obvious combination of these three features leads to the function factory. You’ll also see examples of their usage in visualisation and statistics.</p>
 <p>Of the three main functional programming tools (functionals, function factories, and function operators), function factories are the least used. Generally, they don’t tend to reduce overall code complexity but instead partition complexity into more easily digested chunks. Function factories are also an important building block for the very useful function operators, which you’ll learn about in Chapter 11.</p>
-<section id="exercises-4" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-4">10.2.6 Exercises</h2>
+<section id="exercises-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-4">10.2.6 Exercises</h3>
 <ol type="1">
 <li>The definition of <code>force()</code> is simple:</li>
 </ol>
@@ -1792,7 +1795,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; x
-#&gt; &lt;bytecode: 0x15314ffb0&gt;
+#&gt; &lt;bytecode: 0x12594ffb0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1938,7 +1941,7 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        3.16µs   3.53µs   267745.      848B     26.8</code></pre>
+#&gt; 1 m2(x)         3.2µs   3.53µs   264993.      848B     26.5</code></pre>
 </div>
 </div>
 <p>Answer: code above, following the formula <span class="math inline">\(E[(X - E[X])^i]\)</span>, where <span class="math inline">\(E\)</span> is the <a href="https://en.wikipedia.org/wiki/Expected_value">expected value</a>, ie the <em>mean</em>.</p>
@@ -1965,7 +1968,7 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        2.05µs   2.21µs   426175.      848B     42.6</code></pre>
+#&gt; 1 m2(x)        2.05µs   2.25µs   418080.      848B     41.8</code></pre>
 </div>
 </div>
 <p>Note: isn’t <code>sum() / length()</code> just <code>mean()</code>? For fun, compare <code>bench::mark()</code> (above). Curses, foiled again!</p>
@@ -2059,8 +2062,8 @@ window.Quarto = {
 <p>AR Solutions: Without the super assignment <code>&lt;&lt;-</code>, the counter will always return 1. The counter always starts in a new execution environment within the same enclosing environment, which contains an unchanged value for <code>i</code> (in this case it remains 0).</p>
 <hr>
 </section>
-<section id="exercises-5" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-5">10.3.4 Exercises</h2>
+<section id="exercises-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-5">10.3.4 Exercises</h3>
 <ol type="1">
 <li>Compare and contrast <code>ggplot2::label_bquote()</code> with <code>scales::number_format()</code></li>
 </ol>
@@ -2099,8 +2102,8 @@ window.Quarto = {
 <p><code>scales::number_format()</code> initially <code>force()</code>s the computation of all parameters. It’s essentially a parametrised wrapper around <code>scales::number()</code> and will help you format numbers appropriately. It will return a simple function.</p>
 <hr>
 </section>
-<section id="exercises-6" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-6">10.4.4 Exercises</h2>
+<section id="exercises-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-6">10.4.4 Exercises</h3>
 <ol type="1">
 <li>In <code>boot_model()</code>, why don’t I need to force the evaluation of <code>df</code> or <code>model</code>?</li>
 </ol>
@@ -2160,14 +2163,14 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 12.1µs 12.8µs    74803.    12.8KB     29.9</code></pre>
+#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 12.2µs 12.9µs    73544.    12.8KB     29.4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb242"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href="#cb242-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson2</span>(x1), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 6.48µs 6.85µs   137840.        0B     27.6</code></pre>
+#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 6.52µs 6.85µs   137176.        0B     27.4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb244"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="fl">1e3</span>, <span class="dv">100</span>L)</span>
 <span id="cb244-2"><a href="#cb244-2" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson1</span>(x), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2175,14 +2178,14 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 377µs  398µs     2503.     189KB     10.4</code></pre>
+#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 440µs  459µs     2168.     220KB     10.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb246"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb246-1"><a href="#cb246-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson2</span>(x), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 25.3µs 27.7µs    35376.    7.86KB     10.6</code></pre>
+#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 26.7µs 28.2µs    34651.    7.86KB     13.9</code></pre>
 </div>
 </div>
 <p>Answer: <code>ll_poisson2()</code> is nearly twice as fast with <code>x1</code> and nearly 10 times as fast when the length of <code>x</code> is 100.</p>
@@ -2192,8 +2195,8 @@ window.Quarto = {
 <p>As the redundant calculations within <code>ll_poisson1()</code> become more expensive with growing length of <code>x1</code>, we expect even further relative performance improvements for <code>ll_poisson2()</code>. The following benchmark reveals a relative performance improvement of factor 20 for <code>ll_poisson2()</code> when <code>x1</code> is of length 100,000.</p>
 <hr>
 </section>
-<section id="exercises-7" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-7">10.5.1 Exercises</h2>
+<section id="exercises-7" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-7">10.5.1 Exercises</h3>
 <ol type="1">
 <li><p>Which of the following commands is equivalent to <code>with(x, f(z))</code>?</p>
 <ol type="a">
@@ -2236,8 +2239,8 @@ window.Quarto = {
 <hr>
 </section>
 </section>
-<section id="function-operators" class="level1">
-<h1>11 Function operators</h1>
+<section id="function-operators" class="level2">
+<h2 class="anchored" data-anchor-id="function-operators">11 Function operators</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb251"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb251-1"><a href="#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -2267,8 +2270,8 @@ window.Quarto = {
 <p>Function operators are closely related to function factories; indeed they’re just a function factory that takes a function as input. Like factories, there’s nothing you can’t do without them, but they often allow you to factor out complexity in order to make your code more readable and reusable.</p>
 <p>Function operators are typically paired with functionals. If you’re using a for-loop, there’s rarely a reason to use a function operator, as it will make your code more complex for little gain.</p>
 <p>If you’re familiar with Python, decorators is just another name for function operators.</p>
-<section id="exercises-8" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-8">11.2.3 Exercises</h2>
+<section id="exercises-8" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-8">11.2.3 Exercises</h3>
 <ol type="1">
 <li>Base R provides a function operator in the form of <code>Vectorize()</code>. What does it do? When might you use it?</li>
 </ol>
@@ -2328,7 +2331,7 @@ window.Quarto = {
 #&gt;         })
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x116610438&gt;
+#&gt; &lt;bytecode: 0x106bfb808&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -2350,7 +2353,7 @@ window.Quarto = {
 #&gt;     check_bool(quiet)
 #&gt;     function(...) capture_error(.f(...), otherwise, quiet)
 #&gt; }
-#&gt; &lt;bytecode: 0x116144358&gt;
+#&gt; &lt;bytecode: 0x106da80c8&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb263"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb263-1"><a href="#cb263-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">:::</span>capture_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2363,7 +2366,7 @@ window.Quarto = {
 #&gt;         list(result = otherwise, error = e)
 #&gt;     })
 #&gt; }
-#&gt; &lt;bytecode: 0x1160c9040&gt;
+#&gt; &lt;bytecode: 0x106df5df0&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -2373,8 +2376,8 @@ window.Quarto = {
 <p>Take a look at <em>Advanced R</em> or the documentation of <code>safely()</code> to see how you can take advantage of this behaviour, e.g.&nbsp;when fitting many models.</p>
 <hr>
 </section>
-<section id="exercises-9" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-9">11.3.1 Exercises</h2>
+<section id="exercises-9" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-9">11.3.1 Exercises</h3>
 <ol type="1">
 <li>Weigh the pros and cons of <code>download.file %&gt;% dot_every(10) %&gt;% delay_by(0.1)</code> versus <code>download.file %&gt;% delay_by(0.1) %&gt;% dot_every(10)</code>.</li>
 </ol>
@@ -2553,7 +2556,7 @@ window.Quarto = {
 <span id="cb279-30"><a href="#cb279-30" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.001   0.000   1.007</code></pre>
+#&gt;   0.003   0.000   1.004</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb281"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb281-1"><a href="#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
 <span id="cb281-2"><a href="#cb281-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">g</span>()</span>
@@ -2562,7 +2565,7 @@ window.Quarto = {
 <span id="cb281-5"><a href="#cb281-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.005   0.000   2.010</code></pre>
+#&gt;   0.006   0.000   2.009</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -2626,6 +2629,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -3009,7 +3156,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">

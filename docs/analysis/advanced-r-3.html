@@ -73,10 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -135,9 +137,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -341,23 +344,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This workbook includes answers and solutions to the quizzes and exercises from <a href="https://adv-r.hadley.nz/index.html">Advanced R</a> and <a href="https://advanced-r-solutions.rbind.io">Advanced R Solutions</a>, organized by chapter. It includes excerpts from both books, copied here.</p>
 <p><strong>WARNING, SPOILERS!</strong> If you haven’t read Advanced R and intend to complete the quizzes and exercises, don’t read this notebook. It contains my (potentially wrong) answers to both.</p>
 </section>
-<section id="base-types" class="level1">
-<h1>12 Base types</h1>
+<section id="base-types" class="level2">
+<h2 class="anchored" data-anchor-id="base-types">12 Base types</h2>
 <p>To talk about objects and OOP in R we first need to clear up a fundamental confusion about two uses of the word “object”. So far in this book, we’ve used the word in the general sense captured by John Chambers’ pithy quote: “Everything that exists in R is an object”. However, while everything <em>is</em> an object, not everything is object-oriented. This confusion arises because the base objects come from S, and were developed before anyone thought that S might need an OOP system. The tools and nomenclature evolved organically over many years without a single guiding principle.</p>
 <p>Most of the time, the distinction between objects and object-oriented objects is not important. But here we need to get into the nitty gritty details so we’ll use the terms <strong>base objects</strong> and <strong>OO objects</strong> to distinguish them.</p>
 </section>
-<section id="s3" class="level1">
-<h1>13 S3</h1>
+<section id="s3" class="level2">
+<h2 class="anchored" data-anchor-id="s3">13 S3</h2>
 <p>S3 is R’s first and simplest OO system. S3 is informal and ad hoc, but there is a certain elegance in its minimalism: you can’t take away any part of it and still have a useful OO system. For these reasons, you should use it, unless you have a compelling reason to do otherwise. S3 is the only OO system used in the base and stats packages, and it’s the most commonly used system in CRAN packages.</p>
 <p>S3 is very flexible, which means it allows you to do things that are quite ill-advised. If you’re coming from a strict environment like Java this will seem pretty frightening, but it gives R programmers a tremendous amount of freedom. It may be very difficult to prevent people from doing something you don’t want them to do, but your users will never be held back because there is something you haven’t implemented yet. Since S3 has few built-in constraints, the key to its successful use is applying the constraints yourself. This chapter will therefore teach you the conventions you should (almost) always follow.</p>
 <p>The goal of this chapter is to show you how the S3 system works, not how to use it effectively to create new classes and generics. I’d recommend coupling the theoretical knowledge from this chapter with the practical knowledge encoded in the <a href="https://vctrs.r-lib.org">vctrs package</a>.</p>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">13.2.1 Exercises</h2>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">13.2.1 Exercises</h3>
 <ol type="1">
 <li>Describe the difference between <code>t.test()</code> and <code>t.data.frame()</code>. When is each function called?</li>
 </ol>
@@ -544,8 +547,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>AR Solutions: This code returns a <code>table</code> object, which is built upon the <code>integer</code> type. The attribute <code>dimnames</code> is used to name the elements of the integer vector.</p>
 <hr>
 </section>
-<section id="exercises-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-1">13.3.4 Exercises</h2>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">13.3.4 Exercises</h3>
 <ol type="1">
 <li>Write a constructor for <code>data.frame</code> objects. What base type is a data frame built on? What attributes does it use? What are the restrictions placed on the individual elements? What about the names?</li>
 </ol>
@@ -800,7 +803,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     class(f) &lt;- c(if (ordered) "ordered", "factor")
 #&gt;     f
 #&gt; }
-#&gt; &lt;bytecode: 0x157406908&gt;
+#&gt; &lt;bytecode: 0x14a909108&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -912,8 +915,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="exercises-2" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-2">13.4.4 Exercises</h2>
+<section id="exercises-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-2">13.4.4 Exercises</h3>
 <ol type="1">
 <li>Read the source code for <code>t()</code> and <code>t.test()</code> and confirm that <code>t.test()</code> is an S3 generic and not an S3 method. What happens if you create an object with class <code>test</code> and call <code>t()</code> with it? Why?</li>
 </ol>
@@ -933,14 +936,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; UseMethod("t")
-#&gt; &lt;bytecode: 0x132ecb330&gt;
+#&gt; &lt;bytecode: 0x10e3fb4a0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>t.test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("t.test")
-#&gt; &lt;bytecode: 0x1271e5f78&gt;
+#&gt; &lt;bytecode: 0x15aa1cda0&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -1054,8 +1057,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb114-14"><a href="#cb114-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(method_count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;                                    name method_count
-#&gt; 1                                 print          276
-#&gt; 2                                format          124
+#&gt; 1                                 print          277
+#&gt; 2                                format          125
 #&gt; 3                                     [           49
 #&gt; 4                               summary           39
 #&gt; 5                          as.character           32
@@ -2416,7 +2419,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;         print        format             [       summary  as.character 
-#&gt;           276           124            48            39            32 
+#&gt;           277           125            48            39            32 
 #&gt; as.data.frame 
 #&gt;            32</code></pre>
 </div>
@@ -2522,8 +2525,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <hr>
 </section>
-<section id="exercises-3" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-3">13.5.1 Exercises</h2>
+<section id="exercises-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-3">13.5.1 Exercises</h3>
 <ol type="1">
 <li>Categorise the objects returned by <code>lm()</code>, <code>factor()</code>, <code>table()</code>, <code>as.Date()</code>, <code>as.POSIXct()</code>, <code>ecdf()</code>, <code>ordered()</code>, <code>I()</code> into the styles described above.</li>
 </ol>
@@ -2625,8 +2628,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <hr>
 </section>
-<section id="exercises-4" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-4">13.6.3 Exercises</h2>
+<section id="exercises-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-4">13.6.3 Exercises</h3>
 <ol type="1">
 <li>How does <code>[.Date</code> support subclasses? How does it fail to support subclasses?</li>
 </ol>
@@ -2637,14 +2640,14 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt; {
 #&gt;     .Date(NextMethod("["), oldClass(x))
 #&gt; }
-#&gt; &lt;bytecode: 0x1577c97e0&gt;
+#&gt; &lt;bytecode: 0x13b6071f0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">.Date</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (xx, cl = "Date") 
 #&gt; `class&lt;-`(xx, cl)
-#&gt; &lt;bytecode: 0x1607e8ac8&gt;
+#&gt; &lt;bytecode: 0x10d5c16f8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -2859,8 +2862,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <hr>
 </section>
-<section id="exercises-5" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-5">13.7.5 Exercises</h2>
+<section id="exercises-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-5">13.7.5 Exercises</h3>
 <ol type="1">
 <li>Explain the differences in dispatch below:</li>
 </ol>
@@ -2965,7 +2968,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;             paste(vnames[!mode.ok], collapse = ", "))
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x161599760&gt;
+#&gt; &lt;bytecode: 0x11add2770&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb191"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a>Math.Date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2973,7 +2976,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not defined for \"Date\" objects", .Generic), 
 #&gt;     domain = NA)
-#&gt; &lt;bytecode: 0x16159e8c0&gt;
+#&gt; &lt;bytecode: 0x11add78d0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb193"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a>Math.difftime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2987,14 +2990,14 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;         }, stop(gettextf("'%s' not defined for \"difftime\" objects", 
 #&gt;             .Generic), domain = NA))
 #&gt; }
-#&gt; &lt;bytecode: 0x16159de78&gt;
+#&gt; &lt;bytecode: 0x11addb398&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb195"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a>Math.factor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not meaningful for factors", sQuote(.Generic)))
-#&gt; &lt;bytecode: 0x1615a3078&gt;
+#&gt; &lt;bytecode: 0x11adda288&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb197"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a>Math.POSIXt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3004,7 +3007,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;     stop(gettextf("'%s' not defined for \"POSIXt\" objects", 
 #&gt;         .Generic), domain = NA)
 #&gt; }
-#&gt; &lt;bytecode: 0x1615a2588&gt;
+#&gt; &lt;bytecode: 0x11ade20a8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -3086,8 +3089,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <hr>
 </section>
 </section>
-<section id="r6" class="level1">
-<h1>14 R6</h1>
+<section id="r6" class="level2">
+<h2 class="anchored" data-anchor-id="r6">14 R6</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb215"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -3098,8 +3101,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ul>
 <p>If you’ve learned OOP in another programming language, it’s likely that R6 will feel very natural, and you’ll be inclined to prefer it over S3. Resist the temptation to follow the path of least resistance: in most cases R6 will lead you to non-idiomatic R code. We’ll come back to this theme in Section 16.3.</p>
 <p>R6 is very similar to a base OOP system called <strong>reference classes</strong>, or RC for short. I describe why I teach R6 and not RC in Section 14.5.</p>
-<section id="exercises-6" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-6">14.2.6 Exercises</h2>
+<section id="exercises-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-6">14.2.6 Exercises</h3>
 <ol type="1">
 <li>Create a bank account R6 class that stores a balance and allows you to deposit and withdraw money. Create a subclass that throws an error if you attempt to go into overdraft. Create another subclass that allows you to go into overdraft, but charges you a fee.</li>
 </ol>
@@ -3398,7 +3401,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb253"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb253-1"><a href="#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Mon Dec  4 15:10:24 2023"</code></pre>
+<pre><code>#&gt; [1] "Mon Feb 12 12:19:20 2024"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb255"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb255-1"><a href="#cb255-1" aria-hidden="true" tabindex="-1"></a>tz<span class="sc">$</span><span class="fu">set</span>(<span class="st">"America/New_York"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3406,7 +3409,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb257"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb257-1"><a href="#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Mon Dec  4 16:10:24 2023"</code></pre>
+<pre><code>#&gt; [1] "Mon Feb 12 13:19:20 2024"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb259"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb259-1"><a href="#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">TZ =</span> orig_tz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -3508,8 +3511,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <p>AR Solutions: R6 objects are built on top of environments. They have a <code>class</code> attribute, which is a character vector containing the class name, the name of any super classes (if existent) and the string <code>"R6"</code> as the last element.</p>
 <hr>
 </section>
-<section id="exercises-7" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-7">14.3.3 Exercises</h2>
+<section id="exercises-7" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-7">14.3.3 Exercises</h3>
 <ol type="1">
 <li>Create a bank account class that prevents you from directly setting the account balance, but you can still withdraw from and deposit to. Throw an error if you attempt to go into overdraft.</li>
 </ol>
@@ -3816,8 +3819,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <p>Note: as I discovered, private fields are not accessible through <code>super$</code>, but <em>are</em> accessible through <code>private$</code>.</p>
 <hr>
 </section>
-<section id="exercises-8" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-8">14.4.4 Exercises</h2>
+<section id="exercises-8" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-8">14.4.4 Exercises</h3>
 <ol type="1">
 <li>Create a class that allows you to write a line to a specified file. You should open a connection to the file in <code>$initialize()</code>, append a line using <code>cat()</code> in <code>$append_line()</code>, and close the connection in <code>$finalize()</code>.</li>
 </ol>
@@ -3865,15 +3868,15 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <hr>
 </section>
 </section>
-<section id="s4" class="level1">
-<h1>15 S4</h1>
+<section id="s4" class="level2">
+<h2 class="anchored" data-anchor-id="s4">15 S4</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb317"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb317-1"><a href="#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>S4 provides a formal approach to functional OOP. The underlying ideas are similar to S3 (the topic of Chapter 13), but implementation is much stricter and makes use of specialised functions for creating classes (<code>setClass()</code>), generics (<code>setGeneric()</code>), and methods (<code>setMethod()</code>). Additionally, S4 provides both multiple inheritance (i.e.&nbsp;a class can have multiple parents) and multiple dispatch (i.e.&nbsp;method dispatch can use the class of multiple arguments).</p>
 <p>An important new component of S4 is the <strong>slot</strong>, a named component of the object that is accessed using the specialised subsetting operator <code>@</code> (pronounced at). The set of slots, and their classes, forms an important part of the definition of an S4 class.</p>
-<section id="exercises-9" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-9">15.2.1 Exercises</h2>
+<section id="exercises-9" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-9">15.2.1 Exercises</h3>
 <ol type="1">
 <li><code>lubridate::period()</code> returns an S4 class. What slots does it have? What class is each slot? What accessors does it provide?</li>
 </ol>
@@ -3961,8 +3964,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </ul>
 <hr>
 </section>
-<section id="exercises-10" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-10">15.3.6 Exercises</h2>
+<section id="exercises-10" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-10">15.3.6 Exercises</h3>
 <ol type="1">
 <li>Extend the Person class with fields to match <code>utils::person()</code>. Think about what slots you will need, what class each slot should have, and what you’ll need to check in your validity method.</li>
 </ol>
@@ -4290,8 +4293,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <hr>
 </section>
-<section id="exercises-11" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-11">15.4.5 Exercises</h2>
+<section id="exercises-11" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-11">15.4.5 Exercises</h3>
 <ol type="1">
 <li>Add <code>age()</code> accessors for the <code>Person</code> class.</li>
 </ol>
@@ -4476,8 +4479,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <hr>
 </section>
-<section id="exercises-12" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-12">15.5.5 Exercises</h2>
+<section id="exercises-12" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-12">15.5.5 Exercises</h3>
 <ol type="1">
 <li>Draw the method graph for <code>f(sweat_smile, kissing_cat)</code></li>
 </ol>
@@ -4497,8 +4500,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <p>AR Solutions: We will introduce ambiguity, since one class has distance 2 to all terminal nodes and the other four have distance 1 to two terminal nodes each. To resolve this ambiguity we have to define five more methods, one per class combination.</p>
 <hr>
 </section>
-<section id="exercises-13" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-13">15.6.3 Exercises</h2>
+<section id="exercises-13" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-13">15.6.3 Exercises</h3>
 <ol type="1">
 <li>What would a full <code>setOldClass()</code> definition look like for an ordered factor (i.e.&nbsp;add <code>slots</code> and <code>prototype</code> the definition above)?</li>
 </ol>
@@ -4623,8 +4626,8 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <hr>
 </section>
 </section>
-<section id="trade-offs" class="level1">
-<h1>16 Trade-offs</h1>
+<section id="trade-offs" class="level2">
+<h2 class="anchored" data-anchor-id="trade-offs">16 Trade-offs</h2>
 <p>You now know about the three most important OOP toolkits available in R. Now that you understand their basic operation and the principles that underlie them, we can start to compare and contrast the systems in order to understand their strengths and weaknesses. This will help you pick the system that is most likely to solve new problems.</p>
 <p>Overall, when picking an OO system, I recommend that you default to S3. S3 is simple, and widely used throughout base R and CRAN. While it’s far from perfect, its idiosyncrasies are well understood and there are known approaches to overcome most shortcomings. If you have an existing background in programming you are likely to lean towards R6, because it will feel familiar. I think you should resist this tendency for two reasons. Firstly, if you use R6 it’s very easy to create a non-idiomatic API that will feel very odd to native R users, and will have surprising pain points because of the reference semantics. Secondly, if you stick to R6, you’ll lose out on learning a new way of thinking about OOP that gives you a new set of tools for solving problems.</p>
 
@@ -4652,6 +4655,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -5035,7 +5182,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">

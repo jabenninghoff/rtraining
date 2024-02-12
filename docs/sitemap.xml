@@ -1,75 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/index.html</loc>
-    <lastmod>2023-11-17T22:59:28.846Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/changelog.html</loc>
+    <lastmod>2024-02-12T18:01:52.126Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/NEWS.html</loc>
-    <lastmod>2024-02-06T04:29:58.641Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/TODO.html</loc>
+    <lastmod>2024-02-12T17:28:36.302Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-1.html</loc>
-    <lastmod>2023-11-26T01:25:59.578Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/r-setup-log.html</loc>
+    <lastmod>2024-02-12T16:49:38.145Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2.html</loc>
-    <lastmod>2023-11-26T01:25:59.578Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-3.html</loc>
+    <lastmod>2024-02-12T16:40:28.236Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-4.html</loc>
-    <lastmod>2023-11-26T01:25:59.580Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/FaultTree.html</loc>
+    <lastmod>2024-02-12T16:43:55.214Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/r-training-log.html</loc>
-    <lastmod>2023-12-09T04:05:37.721Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1.html</loc>
+    <lastmod>2024-02-12T16:44:21.858Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3.html</loc>
-    <lastmod>2023-11-26T01:25:59.581Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2.html</loc>
+    <lastmod>2024-02-12T16:46:15.431Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5.html</loc>
-    <lastmod>2023-11-26T01:25:59.583Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4.html</loc>
+    <lastmod>2024-02-12T16:47:12.302Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/r-books.html</loc>
-    <lastmod>2024-01-01T17:25:19.738Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/using-Rcpp.html</loc>
+    <lastmod>2024-02-12T16:50:55.676Z</lastmod>
   </url>
   <url>
     <loc>https://jabenninghoff.github.io/rtraining/LICENSE.html</loc>
     <lastmod>2021-10-04T01:37:12.312Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/using-Rcpp.html</loc>
-    <lastmod>2024-01-01T17:25:19.739Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/r-books.html</loc>
+    <lastmod>2024-02-12T17:05:08.420Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-4.html</loc>
-    <lastmod>2023-11-26T01:25:59.582Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-5.html</loc>
+    <lastmod>2024-02-12T16:47:47.642Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-2.html</loc>
-    <lastmod>2023-11-26T01:25:59.581Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-3.html</loc>
+    <lastmod>2024-02-12T16:46:38.210Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1.html</loc>
-    <lastmod>2023-11-26T01:25:59.581Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/r-training-log.html</loc>
+    <lastmod>2024-02-12T16:50:36.346Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/FaultTree.html</loc>
-    <lastmod>2023-11-26T01:25:59.580Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-4.html</loc>
+    <lastmod>2024-02-12T16:43:12.772Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-3.html</loc>
-    <lastmod>2023-11-26T01:25:59.579Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-2.html</loc>
+    <lastmod>2024-02-12T16:39:07.356Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/analysis/r-setup-log.html</loc>
-    <lastmod>2023-11-26T01:25:59.584Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/analysis/advanced-r-1.html</loc>
+    <lastmod>2024-02-12T16:38:37.166Z</lastmod>
   </url>
   <url>
-    <loc>https://jabenninghoff.github.io/rtraining/TODO.html</loc>
-    <lastmod>2023-11-17T22:59:28.686Z</lastmod>
+    <loc>https://jabenninghoff.github.io/rtraining/NEWS.html</loc>
+    <lastmod>2024-02-12T16:54:46.729Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jabenninghoff.github.io/rtraining/index.html</loc>
+    <lastmod>2024-02-12T18:03:49.223Z</lastmod>
   </url>
 </urlset>

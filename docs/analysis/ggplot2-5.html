@@ -72,10 +72,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -125,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -134,9 +136,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -313,17 +316,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This workbook includes answers and solutions to the quizzes and exercises from <a href="https://ggplot2-book.org/index.html">ggplot2: Elegant Graphics for Data Analysis</a> and <a href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to ggplot2: Elegant Graphics for Data Analysis</a>, organized by chapter. It includes excerpts from both books, copied here.</p>
 <p><strong>WARNING, SPOILERS!</strong> If you haven’t read the ggplot2 book and intend to complete the quizzes and exercises, don’t read this notebook. It contains my (potentially wrong) answers to both.</p>
 </section>
-<section id="programming-with-ggplot2" class="level1">
-<h1>19 Programming with ggplot2</h1>
+<section id="programming-with-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="programming-with-ggplot2">19 Programming with ggplot2</h2>
 <p>A major requirement of a good data analysis is flexibility. If your data changes, or you discover something that makes you rethink your basic assumptions, you need to be able to easily change many plots at once. The main inhibitor of flexibility is code duplication. If you have the same plotting statement repeated over and over again, you’ll have to make the same change in many different places. Often just the thought of making all those changes is exhausting! This chapter will help you overcome that problem by showing you how to program with ggplot2.</p>
 <p>To make your code more flexible, you need to reduce duplicated code by writing functions. When you notice you’re doing the same thing over and over again, think about how you might generalise it and turn it into a function. If you’re not that familiar with how functions work in R, you might want to brush up your knowledge at <a href="https://adv-r.hadley.nz/functions.html" class="uri">https://adv-r.hadley.nz/functions.html</a>.</p>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">19.2.1 Exercises</h2>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">19.2.1 Exercises</h3>
 <ol type="1">
 <li>Create an object that represents a pink histogram with 100 bins.</li>
 </ol>
@@ -445,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;             half_line, half_line, half_line), complete = TRUE)
 #&gt;     ggplot_global$theme_all_null %+replace% t
 #&gt; }
-#&gt; &lt;bytecode: 0x10e7e2418&gt;
+#&gt; &lt;bytecode: 0x14e869b28&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -467,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     discrete_scale(aesthetics, "brewer", brewer_pal(type, palette, 
 #&gt;         direction), ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x10fc7d530&gt;
+#&gt; &lt;bytecode: 0x1227eba58&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -494,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         pal
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x107ef3810&gt;
+#&gt; &lt;bytecode: 0x14e1df0b0&gt;
 #&gt; &lt;environment: namespace:scales&gt;</code></pre>
 </div>
 </div>
@@ -524,7 +527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         begin, end, direction, option)(6), values, space), na.value = na.value, 
 #&gt;         guide = guide, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x11e49fe08&gt;
+#&gt; &lt;bytecode: 0x127666c60&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -591,8 +594,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="exercises-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-1">19.3.4 Exercises</h2>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">19.3.4 Exercises</h3>
 <ol type="1">
 <li>To make the best use of space, many examples in this book hide the axes labels and legend. I’ve just copied-and-pasted the same code into multiple places, but it would make more sense to create a reusable function. What would that function look like?</li>
 </ol>
@@ -697,8 +700,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>GG Solutions: no answer.</p>
 <hr>
 </section>
-<section id="exercises-2" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-2">19.4.2 Exercises</h2>
+<section id="exercises-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-2">19.4.2 Exercises</h3>
 <ol type="1">
 <li>Create a <code>distribution()</code> function specially designed for visualising continuous distributions. Allow the user to supply a dataset and the name of a variable to visualise. Let them choose between histograms, frequency polygons, and density plots. What other arguments might you want to include?</li>
 </ol>
@@ -752,8 +755,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Answer: it would be useful to add arguments for the order of the variables, and a scale adjustment for value, drawing from examples on <a href="https://en.wikipedia.org/wiki/Parallel_coordinates">Wikipedia</a>. Using <code>...</code> for <code>geom_line()</code> prevents other unnamed parameters from being passed to other functions, like <code>ggplot()</code>.</p>
 <hr>
 </section>
-<section id="exercises-3" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-3">19.5.1 Exercises</h2>
+<section id="exercises-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-3">19.5.1 Exercises</h3>
 <ol type="1">
 <li>How could you add a <code>geom_point()</code> layer to each element of the following list?</li>
 </ol>
@@ -897,6 +900,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1277,7 +1424,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">

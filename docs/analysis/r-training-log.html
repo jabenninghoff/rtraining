@@ -73,10 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -135,9 +137,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -257,23 +260,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#not-r" id="toc-not-r" class="nav-link" data-scroll-target="#not-r">Not R</a></li>
   <li><a href="#learning-r" id="toc-learning-r" class="nav-link" data-scroll-target="#learning-r">Learning R</a>
   <ul class="collapse">
-  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science">R for Data Science</a>
-  <ul class="collapse">
-  <li><a href="#patterns-and-models" id="toc-patterns-and-models" class="nav-link" data-scroll-target="#patterns-and-models">Patterns and models</a></li>
-  <li><a href="#non-tidy-data" id="toc-non-tidy-data" class="nav-link" data-scroll-target="#non-tidy-data">Non-Tidy Data</a></li>
-  <li><a href="#graphics-learning-more" id="toc-graphics-learning-more" class="nav-link" data-scroll-target="#graphics-learning-more">Graphics: Learning more</a></li>
-  <li><a href="#r-markdown-websites" id="toc-r-markdown-websites" class="nav-link" data-scroll-target="#r-markdown-websites">R Markdown Websites</a></li>
-  <li><a href="#r-notebook-advice" id="toc-r-notebook-advice" class="nav-link" data-scroll-target="#r-notebook-advice">R Notebook Advice</a></li>
-  </ul></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a>
-  <ul class="collapse">
-  <li><a href="#system-setup" id="toc-system-setup" class="nav-link" data-scroll-target="#system-setup">System Setup</a></li>
-  <li><a href="#naming-things" id="toc-naming-things" class="nav-link" data-scroll-target="#naming-things">Naming Things</a></li>
-  <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio">RStudio</a></li>
-  <li><a href="#writing-better-code" id="toc-writing-better-code" class="nav-link" data-scroll-target="#writing-better-code">Writing Better Code</a></li>
-  <li><a href="#r-and-homebrew" id="toc-r-and-homebrew" class="nav-link" data-scroll-target="#r-and-homebrew">R and Homebrew</a></li>
-  <li><a href="#package-conventions" id="toc-package-conventions" class="nav-link" data-scroll-target="#package-conventions">Package Conventions</a></li>
-  </ul></li>
+  <li><a href="#r-for-data-science" id="toc-r-for-data-science" class="nav-link" data-scroll-target="#r-for-data-science">R for Data Science</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
   </ul></li>
   <li><a href="#r-demos" id="toc-r-demos" class="nav-link" data-scroll-target="#r-demos">R Demos</a>
   <ul class="collapse">
@@ -320,8 +308,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Original notes on learning R and RStudio. An updated reading list of R books and other recommended resources is available in <a href="r-books.html">R Books</a>.</p>
-<section id="libraries" class="level1">
-<h1>Libraries</h1>
+<section id="libraries" class="level2">
+<h2 class="anchored" data-anchor-id="libraries">Libraries</h2>
 <p>Load libraries and suppress warning and error messages. Thanks to this tidyverse <a href="https://reprex.tidyverse.org/articles/articles/suppress-startup-messages.html">article</a>. Also load rdev and set default theme and color scales.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -329,8 +317,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caTools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="files" class="level1">
-<h1>Files</h1>
+<section id="files" class="level2">
+<h2 class="anchored" data-anchor-id="files">Files</h2>
 <p>Files in this project:</p>
 <ul>
 <li><code>.Rbuildignore</code>:</li>
@@ -356,12 +344,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>tests</code>:</li>
 </ul>
 </section>
-<section id="not-r" class="level1">
-<h1>Not R</h1>
+<section id="not-r" class="level2">
+<h2 class="anchored" data-anchor-id="not-r">Not R</h2>
 <p>Not R, but has advice on git best practices and a guide to fixing commit mistakes: <a href="https://sethrobertson.github.io" class="uri">https://sethrobertson.github.io</a></p>
 </section>
-<section id="learning-r" class="level1">
-<h1>Learning R</h1>
+<section id="learning-r" class="level2">
+<h2 class="anchored" data-anchor-id="learning-r">Learning R</h2>
 <p>Resources for learning R.</p>
 <p><strong>Already using:</strong> these are packages I’m already using in R. <em>Note:</em> much of this has been influenced by the work of <a href="https://hadley.nz/">Hadley Wickham</a>, who seems to be one of the (if not the most) significant contributors to the modern R and RStudio environment. Most of these have good integration with RStudio.</p>
 <ul>
@@ -422,11 +410,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><a href="https://stuff.mit.edu/afs/athena/software/r/current/RStudio/resources/roxygen_help.html">MIT Roxygen Quick Reference</a></li>
 </ul>
-<section id="r-for-data-science" class="level2">
-<h2 class="anchored" data-anchor-id="r-for-data-science">R for Data Science</h2>
+<section id="r-for-data-science" class="level3">
+<h3 class="anchored" data-anchor-id="r-for-data-science">R for Data Science</h3>
 <p>Selected highlights from the book:</p>
-<section id="patterns-and-models" class="level3">
-<h3 class="anchored" data-anchor-id="patterns-and-models">Patterns and models</h3>
+<section id="patterns-and-models" class="level4">
+<h4 class="anchored" data-anchor-id="patterns-and-models">Patterns and models</h4>
 <p><a href="https://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models">7.6 Patterns and models</a> covers models and residuals, here showing how to reveal the expected relationship between cut and price:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelr)</span>
@@ -459,18 +447,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="non-tidy-data" class="level3">
-<h3 class="anchored" data-anchor-id="non-tidy-data">Non-Tidy Data</h3>
+<section id="non-tidy-data" class="level4">
+<h4 class="anchored" data-anchor-id="non-tidy-data">Non-Tidy Data</h4>
 <p>Hadley advocates for “tidy” data, but there are times when data is usefully <a href="https://web.archive.org/web/20220520132417/https://simplystatistics.org/posts/2016-02-17-non-tidy-data/">non-tidy</a>.</p>
 </section>
-<section id="graphics-learning-more" class="level3">
-<h3 class="anchored" data-anchor-id="graphics-learning-more">Graphics: Learning more</h3>
+<section id="graphics-learning-more" class="level4">
+<h4 class="anchored" data-anchor-id="graphics-learning-more">Graphics: Learning more</h4>
 <p>From <a href="https://r4ds.had.co.nz/graphics-for-communication.html#learning-more-4">28.8 Learning more</a>:</p>
 <p>“The absolute best place to learn more is the ggplot2 book: <a href="https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/"><em>ggplot2: Elegant graphics for data analysis</em></a>. It goes into much more depth about the underlying theory, and has many more examples of how to combine the individual pieces to solve practical problems. Unfortunately, the book is not available online for free, although you can find the source code at <a href="https://github.com/hadley/ggplot2-book" class="uri">https://github.com/hadley/ggplot2-book</a>.</p>
 <p>Another great resource is the ggplot2 extensions gallery <a href="https://exts.ggplot2.tidyverse.org/gallery/" class="uri">https://exts.ggplot2.tidyverse.org/gallery/</a>. This site lists many of the packages that extend ggplot2 with new geoms and scales. It’s a great place to start if you’re trying to do something that seems hard with ggplot2.”</p>
 </section>
-<section id="r-markdown-websites" class="level3">
-<h3 class="anchored" data-anchor-id="r-markdown-websites">R Markdown Websites</h3>
+<section id="r-markdown-websites" class="level4">
+<h4 class="anchored" data-anchor-id="r-markdown-websites">R Markdown Websites</h4>
 <p>From <a href="https://r4ds.had.co.nz/r-markdown-formats.html#websites">29.8 Websites</a>:</p>
 <p>“With a little additional infrastructure you can use R Markdown to generate a complete website:</p>
 <ul>
@@ -490,24 +478,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Execute <code>rmarkdown::render_site()</code> to build <code>_site</code>, a directory of files ready to deploy as a standalone static website, or if you use an RStudio Project for your website directory. RStudio will add a Build tab to the IDE that you can use to build and preview your site.</p>
 <p>Read more at <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html" class="uri">https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html</a>.”</p>
 </section>
-<section id="r-notebook-advice" class="level3">
-<h3 class="anchored" data-anchor-id="r-notebook-advice">R Notebook Advice</h3>
+<section id="r-notebook-advice" class="level4">
+<h4 class="anchored" data-anchor-id="r-notebook-advice">R Notebook Advice</h4>
 <p>Hadley has some good suggestions for R Notebooks in <a href="https://r4ds.had.co.nz/r-markdown-workflow.html">30 R Markdown workflow</a>.</p>
 </section>
 </section>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">R Packages</h2>
+<section id="r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="r-packages">R Packages</h3>
 <p>Notes from the book. I’ve started writing all code in the package structure described in the book and used by Hadley and the tidyverse. Doing so makes it easier to write tests, documentation, track dependencies, and provides convenient continuous integration through <code>R CMD check</code>.</p>
-<section id="system-setup" class="level3">
-<h3 class="anchored" data-anchor-id="system-setup">System Setup</h3>
+<section id="system-setup" class="level4">
+<h4 class="anchored" data-anchor-id="system-setup">System Setup</h4>
 <p><a href="https://r-pkgs.org/setup.html">Chapter 3</a> has good coverage of setting up a system for R development, I’ve incorporated what I learned from this into my “R Setup Log”.</p>
 </section>
-<section id="naming-things" class="level3">
-<h3 class="anchored" data-anchor-id="naming-things">Naming Things</h3>
+<section id="naming-things" class="level4">
+<h4 class="anchored" data-anchor-id="naming-things">Naming Things</h4>
 <p>Package names are pretty restricted, but Hadley has some good recommendation on <a href="https://r-pkgs.org/Workflow101.html#naming">naming</a> them, including the “<a href="https://github.com/r-lib/available">available</a>” package, which I’ve started using.</p>
 </section>
-<section id="rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
+<section id="rstudio" class="level4">
+<h4 class="anchored" data-anchor-id="rstudio">RStudio</h4>
 <p>There are some helpful tips in the <a href="https://r-pkgs.org/Workflow101.html#benefits-of-rstudio-projects">RStudio</a> section, including 2 key shortcuts to remember:</p>
 <ul>
 <li>control-. to “Go to file/function”</li>
@@ -515,20 +503,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>not a shortcut, but use <a href="https://usethis.r-lib.org/reference/proj_sitrep.html"><code>proj_sitrep()</code></a> to query active projects and working directory</li>
 </ul>
 </section>
-<section id="writing-better-code" class="level3">
-<h3 class="anchored" data-anchor-id="writing-better-code">Writing Better Code</h3>
+<section id="writing-better-code" class="level4">
+<h4 class="anchored" data-anchor-id="writing-better-code">Writing Better Code</h4>
 <p>Chapter 6, <a href="https://r-pkgs.org/package-within.html">The Package Within</a>, highlights some sub-optimal R code and shows how to clean it up. It never occurred to me to use a <a href="https://r-pkgs.org/package-within.html#bravo-a-better-script-that-works">left join</a> to clean up data, and I’ve already started using the technique.</p>
 </section>
-<section id="r-and-homebrew" class="level3">
-<h3 class="anchored" data-anchor-id="r-and-homebrew">R and Homebrew</h3>
+<section id="r-and-homebrew" class="level4">
+<h4 class="anchored" data-anchor-id="r-and-homebrew">R and Homebrew</h4>
 <p><a href="https://r-pkgs.org/Code.html#code-style">7.4 Code Style</a> includes a footnote that references my favorite open source project, <a href="https://brew.sh">Homebrew</a>:</p>
 <blockquote class="blockquote">
 <p>The <a href="https://mikemcquaid.com/2018/06/05/robot-pedantry-human-empathy/">Robot Pedantry, Human Empathy</a> blog post by Mike McQuaid does an excellent job summarizing the benefit of automating tasks like code re-styling.</p>
 </blockquote>
 <p>I’ve contributed to homebrew, but I’ve only recently realized how advanced a project it truly is - “advanced” DevOps concepts like trunk-based development and pedantic continuous integration checks just make sense to me, thanks to my experiences contributing. And, I’ve been the recipient of a “You Rock!” from Mike, which felt great, and still does now, even after learning it was partially automated.</p>
 </section>
-<section id="package-conventions" class="level3">
-<h3 class="anchored" data-anchor-id="package-conventions">Package Conventions</h3>
+<section id="package-conventions" class="level4">
+<h4 class="anchored" data-anchor-id="package-conventions">Package Conventions</h4>
 <p>From <a href="https://r-pkgs.org/Code.html#sec-code-r-landscape">7.6 Respect the R landscape</a>:</p>
 <p>Avoid using any of the following:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>()</span>
@@ -544,11 +532,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="r-demos" class="level1">
-<h1>R Demos</h1>
+<section id="r-demos" class="level2">
+<h2 class="anchored" data-anchor-id="r-demos">R Demos</h2>
 <p>Interesting demonstrations of R code.</p>
-<section id="wikipedia" class="level2">
-<h2 class="anchored" data-anchor-id="wikipedia">Wikipedia</h2>
+<section id="wikipedia" class="level3">
+<h3 class="anchored" data-anchor-id="wikipedia">Wikipedia</h3>
 <p>A fun demo taken from the Wikipedia article on <a href="https://en.wikipedia.org/wiki/R_(programming_language)">R</a>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -614,6 +602,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -997,7 +1129,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">

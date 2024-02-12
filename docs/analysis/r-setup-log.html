@@ -73,10 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -135,9 +137,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -259,23 +262,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#r-workspace" id="toc-r-workspace" class="nav-link" data-scroll-target="#r-workspace">R Workspace</a>
   <ul class="collapse">
   <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a>
-  <ul class="collapse">
-  <li><a href="#base-r-packages" id="toc-base-r-packages" class="nav-link" data-scroll-target="#base-r-packages">Base R Packages</a></li>
-  <li><a href="#development-packages" id="toc-development-packages" class="nav-link" data-scroll-target="#development-packages">Development Packages</a></li>
-  <li><a href="#project-packages" id="toc-project-packages" class="nav-link" data-scroll-target="#project-packages">Project Packages</a></li>
-  </ul></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
   </ul></li>
   <li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r">Using R</a>
   <ul class="collapse">
   <li><a href="#use-git" id="toc-use-git" class="nav-link" data-scroll-target="#use-git">Use git!</a></li>
   <li><a href="#using-rstudio-with-github" id="toc-using-rstudio-with-github" class="nav-link" data-scroll-target="#using-rstudio-with-github">Using RStudio with GitHub</a></li>
   <li><a href="#r-notebooks" id="toc-r-notebooks" class="nav-link" data-scroll-target="#r-notebooks">R Notebooks</a></li>
-  <li><a href="#publishing-r-notebooks" id="toc-publishing-r-notebooks" class="nav-link" data-scroll-target="#publishing-r-notebooks">Publishing R Notebooks</a>
-  <ul class="collapse">
-  <li><a href="#publishing-with-rmarkdown" id="toc-publishing-with-rmarkdown" class="nav-link" data-scroll-target="#publishing-with-rmarkdown">Publishing with rmarkdown</a></li>
-  <li><a href="#update-on-publishing" id="toc-update-on-publishing" class="nav-link" data-scroll-target="#update-on-publishing">Update on Publishing</a></li>
-  </ul></li>
+  <li><a href="#publishing-r-notebooks" id="toc-publishing-r-notebooks" class="nav-link" data-scroll-target="#publishing-r-notebooks">Publishing R Notebooks</a></li>
   <li><a href="#r-package-layout" id="toc-r-package-layout" class="nav-link" data-scroll-target="#r-package-layout">R Package Layout</a></li>
   <li><a href="#r-workflow" id="toc-r-workflow" class="nav-link" data-scroll-target="#r-workflow">R Workflow</a></li>
   </ul></li>
@@ -324,13 +318,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no libraries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="installing-r" class="level1">
-<h1>Installing R</h1>
+<section id="installing-r" class="level2">
+<h2 class="anchored" data-anchor-id="installing-r">Installing R</h2>
 <p>I prefer installing R and RStudio using <a href="https://brew.sh">Homebrew</a>. I use <a href="https://github.com/Homebrew/homebrew-bundle">Homebrew Bundle</a> to install all software on my systems, but installing R and RStudio is simple enough using the command line:</p>
 <!-- note: lintr version <= 2.0.1 throws an error when using language identifiers: <https://github.com/r-lib/lintr/issues/505> -->
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--formula</span> r <span class="kw">&amp;&amp;</span> <span class="ex">brew</span> install <span class="at">--cask</span> rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="r-variants" class="level2">
-<h2 class="anchored" data-anchor-id="r-variants">R Variants</h2>
+<section id="r-variants" class="level3">
+<h3 class="anchored" data-anchor-id="r-variants">R Variants</h3>
 <p><strong>TL;DR: just use homebrew.</strong></p>
 <p>I don’t recommend installing the <code>cask</code> variant of r because it creates problems with <code>brew doctor</code>:</p>
 <div class="cell">
@@ -347,7 +341,7 @@ Environment for statistical computing and graphics
 ==&gt; Artifacts
 R-4.3.2-arm64.pkg (Pkg)
 ==&gt; Analytics
-install: 762 (30 days), 2,484 (90 days), 6,499 (365 days)</code></pre>
+install: 754 (30 days), 2,078 (90 days), 8,111 (365 days)</code></pre>
 </div>
 </div>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
@@ -373,25 +367,25 @@ install: 762 (30 days), 2,484 (90 days), 6,499 (365 days)</code></pre>
 <p>As an active contributor to Homebrew, I <em>strongly</em> recommend using it for any/all software; their quality control is excellent.</p>
 </section>
 </section>
-<section id="r-workspace" class="level1">
-<h1>R Workspace</h1>
+<section id="r-workspace" class="level2">
+<h2 class="anchored" data-anchor-id="r-workspace">R Workspace</h2>
 <p>Once R and RStudio have been installed, you’ll need a development environment and some packages.</p>
-<section id="development-environment" class="level2">
-<h2 class="anchored" data-anchor-id="development-environment">Development Environment</h2>
+<section id="development-environment" class="level3">
+<h3 class="anchored" data-anchor-id="development-environment">Development Environment</h3>
 <p>Well, obviously, I use <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>. There are other IDEs available, and it’s also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don’t typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install github</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I also occasionally use <code>vim</code> (mainly for shell scripts) and <a href="https://atom.io">atom</a> (mainly for vanilla <code>.md</code> files using <a href="https://atom.io/packages/markdown-preview-enhanced">markdown-preview-enhanced</a>).</p>
 </section>
-<section id="packages" class="level2">
-<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<section id="packages" class="level3">
+<h3 class="anchored" data-anchor-id="packages">Packages</h3>
 <p>Managing packages and environments are a challenge for most modern languages. Thankfully R doesn’t have the same level of challenge as python, or even ruby, managing packages available within a project is a best practice. I use <a href="https://github.com/rstudio/renv">renv</a> for this purpose. (I originally discovered <a href="https://rstudio.github.io/packrat/">packrat</a> but quickly discovered RStudio is replacing it with renv)</p>
 <p>Here is my package maintenance approach:</p>
-<section id="base-r-packages" class="level3">
-<h3 class="anchored" data-anchor-id="base-r-packages">Base R Packages</h3>
+<section id="base-r-packages" class="level4">
+<h4 class="anchored" data-anchor-id="base-r-packages">Base R Packages</h4>
 <p>With no projects open, I periodically check for updates to the base R packages using the RStudio Packages “Update” function. These are the only packages I install to the base directory <code>/usr/local/Cellar/r/4.0.3_2/lib/R/library</code>. <em>Note: upgrading or reinstalling r through homebrew may ‘downgrade’ the base packages.</em></p>
 </section>
-<section id="development-packages" class="level3">
-<h3 class="anchored" data-anchor-id="development-packages">Development Packages</h3>
+<section id="development-packages" class="level4">
+<h4 class="anchored" data-anchor-id="development-packages">Development Packages</h4>
 <p>The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/r/r.rb">homebrew</a>, currently <code>/usr/local/lib/R/4.0/site-library</code>. I’ve developed a shell script to install development packages that you can find in the tools directory of <a href="https://github.com/jabenninghoff/rtraining">this repository</a>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install development packages to site repository</span></span>
@@ -415,8 +409,8 @@ install: 762 (30 days), 2,484 (90 days), 6,499 (365 days)</code></pre>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"install.packages(</span><span class="va">${DEVPKG}</span><span class="st">, repos=</span><span class="dt">\"</span><span class="st">https://cran.rstudio.com</span><span class="dt">\"</span><span class="st">, lib=</span><span class="dt">\"</span><span class="va">${SITELIB}</span><span class="dt">\"</span><span class="st">)"</span> <span class="kw">|</span> <span class="ex">R</span> <span class="at">--no-save</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="project-packages" class="level3">
-<h3 class="anchored" data-anchor-id="project-packages">Project Packages</h3>
+<section id="project-packages" class="level4">
+<h4 class="anchored" data-anchor-id="project-packages">Project Packages</h4>
 <p>Any packages <em>not</em> needed to create projects I install within a project using renv - here are some good intros:</p>
 <ul>
 <li>A <a href="https://www.rstudio.com/resources/rstudioconf-2020/renv-project-environments-for-r/">presentation at rstudio::conf 2020</a></li>
@@ -437,20 +431,20 @@ install: 762 (30 days), 2,484 (90 days), 6,499 (365 days)</code></pre>
 </section>
 </section>
 </section>
-<section id="using-r" class="level1">
-<h1>Using R</h1>
+<section id="using-r" class="level2">
+<h2 class="anchored" data-anchor-id="using-r">Using R</h2>
 <p>So - what have I learned about using R? I won’t cover the actual Data Science part here, but have some recommended reading in my <em>R Training Log</em>.</p>
-<section id="use-git" class="level2">
-<h2 class="anchored" data-anchor-id="use-git">Use git!</h2>
+<section id="use-git" class="level3">
+<h3 class="anchored" data-anchor-id="use-git">Use git!</h3>
 <p>This wasn’t really something I learned with R, but use of version control for any kind of code/script is crucial. These days, I keep all scripts and configuration files in some flavor of public or private version control. Mostly that means GitHub, but also private git servers (via ssh) are easy to set up for work that you want to keep off of GitHub.</p>
 <p>I don’t want to get too much into managing code via version control, but I favor trunk-based development with short-lived branches, small commits of working code, and rebase and merge for linear commit history. There’s a lot of good research on this topic from Google’s <a href="https://cloud.google.com/devops">Dev Ops Research and Assessment</a> team.</p>
 </section>
-<section id="using-rstudio-with-github" class="level2">
-<h2 class="anchored" data-anchor-id="using-rstudio-with-github">Using RStudio with GitHub</h2>
+<section id="using-rstudio-with-github" class="level3">
+<h3 class="anchored" data-anchor-id="using-rstudio-with-github">Using RStudio with GitHub</h3>
 <p>RStudio has good integration with GitHub. I’ve adopted the convention of “one RStudio Project (.Rproj) per repository” and storing the Rproj file in the repository. That seems to be the norm.</p>
 </section>
-<section id="r-notebooks" class="level2">
-<h2 class="anchored" data-anchor-id="r-notebooks">R Notebooks</h2>
+<section id="r-notebooks" class="level3">
+<h3 class="anchored" data-anchor-id="r-notebooks">R Notebooks</h3>
 <p>R Notebooks are my preferred file format for data analysis, as they allow an easy mixing of text (using pandoc markdown) and R code chunks. This allows me to document what I’m doing as I go, both for reproducibility as well as recording my observations, thoughts and conclusions. It especially lends itself to iterative development:</p>
 <ol type="1">
 <li>Write code</li>
@@ -510,11 +504,11 @@ install: 762 (30 days), 2,484 (90 days), 6,499 (365 days)</code></pre>
 <li>Not really a drawback, but…<code>Rcpp</code> and <code>rprojroot</code> are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with <code>renv</code>. This is a <a href="https://github.com/rstudio/rstudio/issues/7935">bug in RStudio</a>, which will be fixed in version 1.4.944.</li>
 </ul>
 </section>
-<section id="publishing-r-notebooks" class="level2">
-<h2 class="anchored" data-anchor-id="publishing-r-notebooks">Publishing R Notebooks</h2>
+<section id="publishing-r-notebooks" class="level3">
+<h3 class="anchored" data-anchor-id="publishing-r-notebooks">Publishing R Notebooks</h3>
 <p>Since R Notebooks are saved as html files, it’s possible to publish them on GitHub using GitHub pages. GitHub published a <a href="https://resources.github.com/github-and-rstudio/">tutorial</a> in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn’t quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn’t directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in <a href="https://github.com/rstudio/rmarkdown/issues/1020">rstudio/rmarkdown #1020</a> - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.</p>
-<section id="publishing-with-rmarkdown" class="level3">
-<h3 class="anchored" data-anchor-id="publishing-with-rmarkdown">Publishing with rmarkdown</h3>
+<section id="publishing-with-rmarkdown" class="level4">
+<h4 class="anchored" data-anchor-id="publishing-with-rmarkdown">Publishing with rmarkdown</h4>
 <p>After using <code>README.md</code> and GitHub pages to publish notebooks, I found I wanted an easier way to publish and navigate across collections of notebooks. Publishing R Notebooks on GitHub pages works fine, but doesn’t offer an easy navigation structure, like <a href="https://pkgdown.r-lib.org">pkgdown</a>. I tried using pkgdown to display notebooks, but pkgdown only supports building <code>vignettes</code>, which have a distinctly different look and feel than R Notebooks. The <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown site generator</a>, <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a>, allows more flexible building of websites from R Markdown files with a simple navigation bar at the top, but doesn’t support <code>html_notebook</code> files OOB.</p>
 <p>To work around this, I created a simple framework for converting <code>html_notebook</code> files to <code>html_document</code> and building a <code>_site.yml</code> from a list of notebooks stored in the non-standard <code>notebooks/</code> directory, initially using a shell script, <code>build_site</code> (stored at the root of this <a href="https://github.com/jabenninghoff/rtraining">repo</a>). It does the following:</p>
 <ol type="1">
@@ -528,13 +522,13 @@ install: 762 (30 days), 2,484 (90 days), 6,499 (365 days)</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> .build-site <span class="kw">&amp;&amp;</span> <span class="fu">sh</span> build-site <span class="kw">&amp;&amp;</span> <span class="ex">open</span> docs/index.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This approach leverages the <a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch">docs functionality</a> of GitHub pages, like pkgdown.</p>
 </section>
-<section id="update-on-publishing" class="level3">
-<h3 class="anchored" data-anchor-id="update-on-publishing">Update on Publishing</h3>
+<section id="update-on-publishing" class="level4">
+<h4 class="anchored" data-anchor-id="update-on-publishing">Update on Publishing</h4>
 <p><code>build-site</code> has been replaced with <code>build_analysis_site()</code>! At its core, it is functionally the same: builds a <code>pkgdown</code> site, adding an “Analysis” menu with all notebooks in the (renamed) <code>analysis/</code> directory, then converts and builds the notebooks using <code>rmarkdown</code>, and moves them into the <code>docs/</code> directory. Since it is now an R Script, it’s more portable and can be more easily bundled with packages. I will be migrating its functionality to <a href="https://jabenninghoff.github.io/rdev/">rdev</a> shortly, so that it’s usable across multiple analysis projects.</p>
 </section>
 </section>
-<section id="r-package-layout" class="level2">
-<h2 class="anchored" data-anchor-id="r-package-layout">R Package Layout</h2>
+<section id="r-package-layout" class="level3">
+<h3 class="anchored" data-anchor-id="r-package-layout">R Package Layout</h3>
 <p>Here is my package layout - the table shows the path, whether it’s part of the formal R package definition, and my notes on its use.</p>
 <table class="table">
 <thead>
@@ -703,8 +697,8 @@ install: 762 (30 days), 2,484 (90 days), 6,499 (365 days)</code></pre>
 </tbody>
 </table>
 </section>
-<section id="r-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="r-workflow">R Workflow</h2>
+<section id="r-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="r-workflow">R Workflow</h3>
 <p>Here is the typical workflow I’m settling into (or at least trying to…I still don’t have TDD down just yet), once a project is created. Projects are either vanilla packages and don’t contain <code>analysis/</code>, like <a href="https://jabenninghoff.github.io/rdev/">rdev</a>, or “analysis packages” and bundle analysis notebooks as a project, like <a href="https://jabenninghoff.github.io/rtraining/">rtraining</a>.</p>
 <ol type="1">
 <li>Check for updated packages when starting to work, (I created <a href="https://jabenninghoff.github.io/rdev/reference/check_renv.html"><code>check_renv()</code></a> for this) and check for errors using local CI checks (<a href="https://jabenninghoff.github.io/rdev/reference/ci.html"><code>ci()</code></a>).</li>
@@ -717,8 +711,8 @@ install: 762 (30 days), 2,484 (90 days), 6,499 (365 days)</code></pre>
 <p>One thing that annoys me is that by default, devtools just writes new lines to the end of <code>.Rbuildignore</code>, so I wrote <a href="https://jabenninghoff.github.io/rdev/reference/sort_rbuildignore.html"><code>sort_rbuildignore()</code></a>.</p>
 </section>
 </section>
-<section id="next-steps" class="level1">
-<h1>Next Steps</h1>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
 <p>I’ll keep adding to this document as I go, and will likely eventually migrate this notebook to a <code>vignette</code> and switch to <code>pkgdown</code>.</p>
 
 
@@ -745,6 +739,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1128,7 +1266,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">

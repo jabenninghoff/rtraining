@@ -73,10 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../NEWS.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
@@ -135,9 +137,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -365,13 +368,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This workbook includes answers and solutions to the quizzes and exercises from <a href="https://adv-r.hadley.nz/index.html">Advanced R</a> and <a href="https://advanced-r-solutions.rbind.io">Advanced R Solutions</a>, organized by chapter. It includes excerpts from both books, copied here.</p>
 <p><strong>WARNING, SPOILERS!</strong> If you haven’t read Advanced R and intend to complete the quizzes and exercises, don’t read this notebook. It contains my (potentially wrong) answers to both.</p>
 </section>
-<section id="names-and-values" class="level1">
-<h1>2 Names and values</h1>
+<section id="names-and-values" class="level2">
+<h2 class="anchored" data-anchor-id="names-and-values">2 Names and values</h2>
 <p>In R, it is important to understand the distinction between an object and its name. Doing so will help you:</p>
 <ul>
 <li>More accurately predict the performance and memory usage of your code.</li>
@@ -379,8 +382,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Better understand R’s functional programming tools.</li>
 </ul>
 <p>The goal of this chapter is to help you understand the distinction between names and values, and when R will copy an object.</p>
-<section id="quiz" class="level2">
-<h2 class="anchored" data-anchor-id="quiz">2 Quiz</h2>
+<section id="quiz" class="level3">
+<h3 class="anchored" data-anchor-id="quiz">2 Quiz</h3>
 <ol type="1">
 <li>Given the following data frame, how do I create a new column called “3” that contains the sum of <code>1</code> and <code>2</code>? You may only use <code>$</code>, not <code>[[</code>. What makes <code>1</code>, <code>2</code>, and <code>3</code> challenging as variable names?</li>
 </ol>
@@ -414,15 +417,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x110b00000"</code></pre>
+<pre><code>#&gt; [1] "0x121738000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x110b00000"</code></pre>
+<pre><code>#&gt; [1] "0x121738000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x110b00000"</code></pre>
+<pre><code>#&gt; [1] "0x121738000"</code></pre>
 </div>
 </div>
 <hr>
@@ -433,23 +436,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10fc74668"</code></pre>
+<pre><code>#&gt; [1] "0x1095e5d18"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10fc74668"</code></pre>
+<pre><code>#&gt; [1] "0x1095e5d18"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>b[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10fd3ef28"</code></pre>
+<pre><code>#&gt; [1] "0x109628508"</code></pre>
 </div>
 </div>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">2.2.2 Exercises</h2>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">2.2.2 Exercises</h3>
 <ol type="1">
 <li>Explain the relationship between <code>a</code>, <code>b</code>, <code>c</code> and <code>d</code> in the following code:</li>
 </ol>
@@ -464,19 +467,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10f505e10"</code></pre>
+<pre><code>#&gt; [1] "0x10787a7d0"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10f505e10"</code></pre>
+<pre><code>#&gt; [1] "0x10787a7d0"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10f505e10"</code></pre>
+<pre><code>#&gt; [1] "0x10787a7d0"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10f5f32e8"</code></pre>
+<pre><code>#&gt; [1] "0x10938dae8"</code></pre>
 </div>
 </div>
 <hr>
@@ -494,23 +497,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12c39a538"</code></pre>
+<pre><code>#&gt; [1] "0x108128590"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(base<span class="sc">::</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12c39a538"</code></pre>
+<pre><code>#&gt; [1] "0x108128590"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">get</span>(<span class="st">"mean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12c39a538"</code></pre>
+<pre><code>#&gt; [1] "0x108128590"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">evalq</span>(mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12c39a538"</code></pre>
+<pre><code>#&gt; [1] "0x108128590"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">match.fun</span>(<span class="st">"mean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12c39a538"</code></pre>
+<pre><code>#&gt; [1] "0x108128590"</code></pre>
 </div>
 </div>
 <p>Answer: they do.</p>
@@ -551,8 +554,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>AR Solutions: <code>.123e1</code> is not a syntactic name, because it starts with one dot which is followed by a number. This makes it a double, <code>1.23</code>.</p>
 <hr>
 </section>
-<section id="exercises-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-1">2.3.6 Exercises</h2>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">2.3.6 Exercises</h3>
 <ol type="1">
 <li>Why is <code>tracemem(1:10)</code> not useful?</li>
 </ol>
@@ -567,12 +570,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>L, <span class="dv">2</span>L, <span class="dv">3</span>L)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x10ae53848&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x10b83bf48&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x10ae53848 -&gt; 0x11a245b88]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
-#&gt; tracemem[0x11a245b88 -&gt; 0x11a0cb268]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x10b83bf48 -&gt; 0x10b83d348]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
+#&gt; tracemem[0x10b83d348 -&gt; 0x10b859028]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -582,12 +585,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x10b8871f8&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x10d0bab38&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x10b8871f8 -&gt; 0x10b88b108]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x10d0bab38 -&gt; 0x10d378a48]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">5</span>L</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -625,19 +628,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10c915f30"</code></pre>
+<pre><code>#&gt; [1] "0x108a43798"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10c915f30"</code></pre>
+<pre><code>#&gt; [1] "0x108a43798"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10c915f30"</code></pre>
+<pre><code>#&gt; [1] "0x108a43798"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10c915f30"</code></pre>
+<pre><code>#&gt; [1] "0x108a43798"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"second object"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -645,11 +648,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12c5f2a08"</code></pre>
+<pre><code>#&gt; [1] "0x109022e08"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12c5f2a08"</code></pre>
+<pre><code>#&gt; [1] "0x109022e08"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"third object"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -657,7 +660,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10dd164a8"</code></pre>
+<pre><code>#&gt; [1] "0x108a51378"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"fourth object (?)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -665,7 +668,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12cf92cf0"</code></pre>
+<pre><code>#&gt; [1] "0x1089728e0"</code></pre>
 </div>
 </div>
 <p>Answer: four different objects with multiple names.</p>
@@ -681,18 +684,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x12cc0fa48] &lt;list&gt; 
-#&gt; ├─[2:0x12a360b58] &lt;int&gt; 
-#&gt; └─█ [3:0x10e84ae88] &lt;list&gt; 
-#&gt;   └─[2:0x12a360b58]</code></pre>
+<pre><code>#&gt; █ [1:0x11d38d048] &lt;list&gt; 
+#&gt; ├─[2:0x10e6f8808] &lt;int&gt; 
+#&gt; └─█ [3:0x10fbef2f8] &lt;list&gt; 
+#&gt;   └─[2:0x10e6f8808]</code></pre>
 </div>
 </div>
 <p>Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which points to the original int vector.</p>
 <p>AR Solutions: The initial reference tree of <code>x</code> shows that the name <code>x</code> binds to a list object. This object contains a reference to the integer vector <code>1:10</code>. When <code>x</code> is assigned to an element of itself, copy-on-modify takes place and the list is copied to a new address in memory. The list object previously bound to <code>x</code> is now referenced in the newly created list object. It is no longer bound to a name. The integer vector is referenced twice.</p>
 <hr>
 </section>
-<section id="exercises-2" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-2">2.4.1 Exercises</h2>
+<section id="exercises-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-2">2.4.1 Exercises</h3>
 <ol type="1">
 <li>In the following example, why are <code>object.size(y)</code> and <code>obj_size(y)</code> so radically different? Consult the documentation of <code>object.size()</code>.</li>
 </ol>
@@ -791,8 +794,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>b[[2]][[1]] &lt;- 10</code>: When we modify the second element of <code>b</code>, this element will also point to a new memory address. This does not affect the size of the list. However, as <code>b</code> doesn’t share references with <code>a</code> anymore, the memory usage of the combined objects increases.</p>
 <hr>
 </section>
-<section id="exercises-3" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-3">2.5.3 Exercises</h2>
+<section id="exercises-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-3">2.5.3 Exercises</h3>
 <ol type="1">
 <li>Explain why the following code doesn’t create a circular list.</li>
 </ol>
@@ -847,31 +850,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb104-25"><a href="#cb104-25" aria-hidden="true" tabindex="-1"></a>xm <span class="ot">&lt;-</span> <span class="fu">x_medians</span>(<span class="dv">5</span>)</span>
 <span id="cb104-26"><a href="#cb104-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1          X2          X3           X4          X5
-#&gt; 1   0.43687555 -0.15952321 -0.11049405 -0.447574305  0.09157020
-#&gt; 2   0.08749675 -0.10133035  0.48789948 -0.305568328 -0.02170975
-#&gt; 3  -0.03890698  0.20359297  0.10053737 -0.103263463  0.02597145
-#&gt; 4   0.34391284 -0.49424745  0.42974962 -0.296187179  0.34387263
-#&gt; 5  -0.21085900 -0.08537066  0.19801263  0.182952770  0.07282162
-#&gt; 6   0.11524745 -0.05050875  0.06630594 -0.004480693 -0.04276207
-#&gt; 7   0.25788382 -0.32080371 -0.10849797  0.392610683  0.12800799
-#&gt; 8   0.30113996  0.39646219  0.16874994 -0.402945732 -0.12120135
-#&gt; 9  -0.04427495 -0.21338661  0.14661082  0.363260208 -0.25625303
-#&gt; 10 -0.25597920 -0.08442713  0.37669364  0.126202677  0.48536194</code></pre>
+<pre><code>#&gt;            X1           X2         X3          X4          X5
+#&gt; 1   0.4639274  0.026986962  0.4023813  0.37491426 -0.38134401
+#&gt; 2  -0.3294724  0.129255480 -0.1756350 -0.29566103 -0.48415090
+#&gt; 3   0.1456375 -0.217502473 -0.3143875 -0.20866274  0.38410726
+#&gt; 4   0.4544383 -0.005533449  0.4873950 -0.19589938 -0.05332626
+#&gt; 5   0.4739944  0.388640850  0.2371402 -0.03206151 -0.01180265
+#&gt; 6  -0.4701287 -0.379484512  0.1770713  0.40586550  0.37829894
+#&gt; 7  -0.1098569  0.450238752 -0.0760415  0.23147438 -0.17817990
+#&gt; 8  -0.3482597 -0.417344505  0.3270634  0.12022320 -0.30164143
+#&gt; 9   0.1329080  0.467001516 -0.2727678  0.05595480  0.23786813
+#&gt; 10  0.4412495 -0.487967125  0.2330382  0.21251556 -0.34990396</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">as.data.frame</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians)), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1          X2          X3           X4          X5
-#&gt; 1   0.43687555 -0.15952321 -0.11049405 -0.447574305  0.09157020
-#&gt; 2   0.08749675 -0.10133035  0.48789948 -0.305568328 -0.02170975
-#&gt; 3  -0.03890698  0.20359297  0.10053737 -0.103263463  0.02597145
-#&gt; 4   0.34391284 -0.49424745  0.42974962 -0.296187179  0.34387263
-#&gt; 5  -0.21085900 -0.08537066  0.19801263  0.182952770  0.07282162
-#&gt; 6   0.11524745 -0.05050875  0.06630594 -0.004480693 -0.04276207
-#&gt; 7   0.25788382 -0.32080371 -0.10849797  0.392610683  0.12800799
-#&gt; 8   0.30113996  0.39646219  0.16874994 -0.402945732 -0.12120135
-#&gt; 9  -0.04427495 -0.21338661  0.14661082  0.363260208 -0.25625303
-#&gt; 10 -0.25597920 -0.08442713  0.37669364  0.126202677  0.48536194</code></pre>
+<pre><code>#&gt;            X1           X2         X3          X4          X5
+#&gt; 1   0.4639274  0.026986962  0.4023813  0.37491426 -0.38134401
+#&gt; 2  -0.3294724  0.129255480 -0.1756350 -0.29566103 -0.48415090
+#&gt; 3   0.1456375 -0.217502473 -0.3143875 -0.20866274  0.38410726
+#&gt; 4   0.4544383 -0.005533449  0.4873950 -0.19589938 -0.05332626
+#&gt; 5   0.4739944  0.388640850  0.2371402 -0.03206151 -0.01180265
+#&gt; 6  -0.4701287 -0.379484512  0.1770713  0.40586550  0.37829894
+#&gt; 7  -0.1098569  0.450238752 -0.0760415  0.23147438 -0.17817990
+#&gt; 8  -0.3482597 -0.417344505  0.3270634  0.12022320 -0.30164143
+#&gt; 9   0.1329080  0.467001516 -0.2727678  0.05595480  0.23786813
+#&gt; 10  0.4412495 -0.487967125  0.2330382  0.21251556 -0.34990396</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># benchmark</span></span>
 <span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -879,21 +882,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   33.1µs   47.9µs    21409.     391KB     317.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   33.5µs     49µs    19856.     391KB     302.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   8.53µs   23.4µs    42221.     391KB     474.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   10.2µs   29.1µs    36630.     391KB     411.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">as.data.frame</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))) <span class="co"># as.data.frame introduces significant overhead</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 108µs  125µs     8215.     391KB     94.3</code></pre>
+#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 112µs  133µs     7707.     391KB     89.7</code></pre>
 </div>
 </div>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
@@ -904,14 +907,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   58.5µs   78.6µs    12454.     391KB     147.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   58.9µs   82.9µs    12035.     391KB     143.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   11.1µs   33.7µs    34530.     391KB     381.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   11.4µs   34.3µs    30621.     391KB     340.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>xm <span class="ot">&lt;-</span> <span class="fu">x_medians</span>(<span class="dv">20</span>)</span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -919,14 +922,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    113µs    136µs     7358.     400KB     88.3</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    113µs    134µs     7484.     400KB     88.0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   12.9µs   29.6µs    35733.     392KB     401.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   12.9µs   30.3µs    34634.     392KB     389.</code></pre>
 </div>
 </div>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast. So, the list method is near constant time regardless of columns, whereas the data.frame method scales linearly with the number of columns.</p>
@@ -951,16 +954,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="vectors" class="level1">
-<h1>3 Vectors</h1>
+<section id="vectors" class="level2">
+<h2 class="anchored" data-anchor-id="vectors">3 Vectors</h2>
 <p>This chapter discusses the most important family of data types in base R: vectors. While you’ve probably already used many (if not all) of the different types of vectors, you may not have thought deeply about how they’re interrelated. In this chapter, I won’t cover individual vectors types in too much detail, but I will show you how all the types fit together as a whole. If you need more details, you can find them in R’s documentation.</p>
 <p>Vectors come in two flavours: atomic vectors and lists. They differ in terms of their elements’ types: for atomic vectors, all elements must have the same type; for lists, elements can have different types. While not a vector, <code>NULL</code> is closely related to vectors and often serves the role of a generic zero length vector. This diagram, which we’ll be expanding on throughout this chapter, illustrates the basic relationships:</p>
 <p>Every vector can also have <strong>attributes</strong>, which you can think of as a named list of arbitrary metadata. Two attributes are particularly important. The <strong>dimension</strong> attribute turns vectors into matrices and arrays and the <strong>class</strong> attribute powers the S3 object system. While you’ll learn how to use S3 in Chapter 13, here you’ll learn about some of the most important S3 vectors: factors, date and times, data frames, and tibbles. And while 2D structures like matrices and data frames are not necessarily what come to mind when you think of vectors, you’ll also learn why R considers them to be vectors.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="exercises-4" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-4">3.2.5 Exercises</h2>
+<section id="exercises-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-4">3.2.5 Exercises</h3>
 <ol type="1">
 <li>How do you create raw and complex scalars? (See <code>?raw</code> and <code>?complex</code>.)</li>
 </ol>
@@ -1040,8 +1043,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Atomic vectors are defined in <em>Advanced R</em> as objects of type logical, integer, double, complex, character or raw. Vectors are defined as atomic vectors or lists.</p>
 <hr>
 </section>
-<section id="exercises-5" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-5">3.3.4 Exercises</h2>
+<section id="exercises-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-5">3.3.4 Exercises</h3>
 <ol type="1">
 <li>How is <code>setNames()</code> implemented? How is <code>unname()</code> implemented? Read the source code.</li>
 </ol>
@@ -1053,7 +1056,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x10ccb5a28&gt;
+#&gt; &lt;bytecode: 0x10ddf7580&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>unname</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1066,7 +1069,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x10abe0520&gt;
+#&gt; &lt;bytecode: 0x11ffefba0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1198,8 +1201,8 @@ it? (Hint: try using help.)</code></pre>
 </blockquote>
 <hr>
 </section>
-<section id="exercises-6" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-6">3.4.5 Exercises</h2>
+<section id="exercises-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-6">3.4.5 Exercises</h3>
 <ol type="1">
 <li>What sort of object does <code>table()</code> return? What is its type? What attributes does it have? How does the dimensionality change as you tabulate more variables?</li>
 </ol>
@@ -1211,8 +1214,8 @@ it? (Hint: try using help.)</code></pre>
 <pre><code>#&gt;    
 #&gt; a   a b c
 #&gt;   a 0 1 0
-#&gt;   b 0 0 1
-#&gt;   c 1 0 0</code></pre>
+#&gt;   b 1 0 0
+#&gt;   c 0 0 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(a_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1240,10 +1243,10 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 0 0 0 1
-#&gt;   b 0 0 1 0
-#&gt;   c 1 0 0 0
-#&gt;   d 0 1 0 0</code></pre>
+#&gt;   a 0 0 1 0
+#&gt;   b 1 0 0 0
+#&gt;   c 0 1 0 0
+#&gt;   d 0 0 0 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(b_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1325,8 +1328,8 @@ it? (Hint: try using help.)</code></pre>
 <p>AR Solutions: For <code>f2</code> and <code>f3</code> either the order of the factor elements <em>or</em> its levels are being reversed. For <code>f1</code> both transformations are occurring.</p>
 <hr>
 </section>
-<section id="exercises-7" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-7">3.5.4 Exercises</h2>
+<section id="exercises-7" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-7">3.5.4 Exercises</h3>
 <ol type="1">
 <li>List all the ways that a list differs from an atomic vector.</li>
 </ol>
@@ -1463,8 +1466,8 @@ it? (Hint: try using help.)</code></pre>
 <p>To summarise: <code>c()</code> coerces types and strips time zones. Errors may have occurred in older R versions because of inappropriate method dispatch/immature methods. <code>unlist()</code> strips attributes.</p>
 <hr>
 </section>
-<section id="exercises-8" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-8">3.6.8 Exercises</h2>
+<section id="exercises-8" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-8">3.6.8 Exercises</h3>
 <ol type="1">
 <li>Can you have a data frame with zero rows? What about zero columns?</li>
 </ol>
@@ -1660,8 +1663,8 @@ it? (Hint: try using help.)</code></pre>
 <hr>
 </section>
 </section>
-<section id="subsetting" class="level1">
-<h1>4 Subsetting</h1>
+<section id="subsetting" class="level2">
+<h2 class="anchored" data-anchor-id="subsetting">4 Subsetting</h2>
 <p>R’s subsetting operators are fast and powerful. Mastering them allows you to succinctly perform complex operations in a way that few other languages can match. Subsetting in R is easy to learn but hard to master because you need to internalise a number of interrelated concepts:</p>
 <ul>
 <li><p>There are six ways to subset atomic vectors.</p></li>
@@ -1673,8 +1676,8 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb268"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb268-1"><a href="#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="exercises-9" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-9">4.2.6 Exercises</h2>
+<section id="exercises-9" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-9">4.2.6 Exercises</h3>
 <ol type="1">
 <li>Fix each of the following common data frame subsetting errors:</li>
 </ol>
@@ -1944,8 +1947,8 @@ it? (Hint: try using help.)</code></pre>
 <p>AR Solutions: This expression replaces the <code>NA</code>s in <code>df</code> with <code>0</code>. Here <code>is.na(df)</code> returns a logical matrix that encodes the position of the missing values in <code>df</code>. Subsetting and assignment are then combined to replace only the missing values.</p>
 <hr>
 </section>
-<section id="exercises-10" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-10">4.3.5 Exercises</h2>
+<section id="exercises-10" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-10">4.3.5 Exercises</h3>
 <ol type="1">
 <li>Brainstorm as many ways as possible to extract the third value from the <code>cyl</code> variable in the <code>mtcars</code> dataset.</li>
 </ol>
@@ -2087,8 +2090,8 @@ it? (Hint: try using help.)</code></pre>
 <p>(Tip: The <a href="https://github.com/tidymodels/broom"><code>broom</code> package</a> provides a very useful approach to work with models in a tidy way.)</p>
 <hr>
 </section>
-<section id="exercises-11" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-11">4.5.9 Exercises</h2>
+<section id="exercises-11" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-11">4.5.9 Exercises</h3>
 <ol type="1">
 <li>How would you randomly permute the columns of a data frame? (This is an important technique in random forests.) Can you simultaneously permute the rows and columns in one step?</li>
 </ol>
@@ -2097,21 +2100,21 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb354-2"><a href="#cb354-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb354-3"><a href="#cb354-3" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">sample</span>(<span class="fu">ncol</span>(df))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   z y x
-#&gt; 1 a 5 1
-#&gt; 2 b 4 2
+<pre><code>#&gt;   z x y
+#&gt; 1 a 1 5
+#&gt; 2 b 2 4
 #&gt; 3 c 3 3
-#&gt; 4 d 2 4
-#&gt; 5 e 1 5</code></pre>
+#&gt; 4 d 4 2
+#&gt; 5 e 5 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">sample</span>(<span class="fu">nrow</span>(df)), <span class="fu">sample</span>(<span class="fu">ncol</span>(df))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   y x z
-#&gt; 5 1 5 e
 #&gt; 3 3 3 c
-#&gt; 4 2 4 d
+#&gt; 5 1 5 e
+#&gt; 2 4 2 b
 #&gt; 1 5 1 a
-#&gt; 2 4 2 b</code></pre>
+#&gt; 4 2 4 d</code></pre>
 </div>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -2143,16 +2146,16 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb359-13"><a href="#cb359-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_rows</span>(df, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
+#&gt; 5 5 1 e
 #&gt; 2 2 4 b
-#&gt; 4 4 2 d
-#&gt; 1 1 5 a</code></pre>
+#&gt; 3 3 3 c</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb361"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb361-1"><a href="#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_rows</span>(df, <span class="dv">3</span>, <span class="at">contiguous =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
+#&gt; 1 1 5 a
 #&gt; 2 2 4 b
-#&gt; 3 3 3 c
-#&gt; 4 4 2 d</code></pre>
+#&gt; 3 3 3 c</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb363"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb363-1"><a href="#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">sample_rows</span>(df, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2223,15 +2226,15 @@ it? (Hint: try using help.)</code></pre>
 <hr>
 </section>
 </section>
-<section id="control-flow" class="level1">
-<h1>5 Control flow</h1>
+<section id="control-flow" class="level2">
+<h2 class="anchored" data-anchor-id="control-flow">5 Control flow</h2>
 <p>There are two primary tools of control flow: choices and loops. Choices, like <code>if</code> statements and <code>switch()</code> calls, allow you to run different code depending on the input. Loops, like <code>for</code> and <code>while</code>, allow you to repeatedly run code, typically with changing options. I’d expect that you’re already familiar with the basics of these functions so I’ll briefly cover some technical details and then introduce some useful, but lesser known, features.</p>
 <p>The condition system (messages, warnings, and errors), which you’ll learn about in Chapter 8, also provides non-local control flow.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb370"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb370-1"><a href="#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="exercises-12" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-12">5.2.4 Exercises</h2>
+<section id="exercises-12" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-12">5.2.4 Exercises</h3>
 <ol type="1">
 <li>What type of vector does each of the following calls to <code>ifelse()</code> return? Read the documentation and write down the rules in your own words.</li>
 </ol>
@@ -2297,8 +2300,8 @@ it? (Hint: try using help.)</code></pre>
 <p>AR Solutions: <code>if()</code> expects a logical condition, but also accepts a numeric vector where <code>0</code> is treated as <code>FALSE</code> and all other numbers are treated as <code>TRUE</code>. Numerical missing values (including <code>NaN</code>) lead to an error in the same way that a logical missing, <code>NA</code>, does.</p>
 <hr>
 </section>
-<section id="exercises-13" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-13">5.3.3 Exercises</h2>
+<section id="exercises-13" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-13">5.3.3 Exercises</h3>
 <ol type="1">
 <li>Why does this code succeed without errors or warnings?</li>
 </ol>
@@ -2357,14 +2360,14 @@ it? (Hint: try using help.)</code></pre>
 <hr>
 </section>
 </section>
-<section id="functions" class="level1">
-<h1>6 Functions</h1>
+<section id="functions" class="level2">
+<h2 class="anchored" data-anchor-id="functions">6 Functions</h2>
 <p>If you’re reading this book, you’ve probably already created many R functions and know how to use them to reduce duplication in your code. In this chapter, you’ll learn how to turn that informal, working knowledge into more rigorous, theoretical understanding. And while you’ll see some interesting tricks and techniques along the way, keep in mind that what you’ll learn here will be important for understanding the more advanced topics discussed later in the book.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb395"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb395-1"><a href="#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="quiz-1" class="level2">
-<h2 class="anchored" data-anchor-id="quiz-1">6 Quiz</h2>
+<section id="quiz-1" class="level3">
+<h3 class="anchored" data-anchor-id="quiz-1">6 Quiz</h3>
 <p>Answer the following questions to see if you can safely skip this chapter.</p>
 <ol type="1">
 <li><p>What are the three components of a function? a: arguments, code, return value [body, arguments, environment]</p></li>
@@ -2411,8 +2414,8 @@ it? (Hint: try using help.)</code></pre>
 <li><p>How do you ensure that cleanup action occurs regardless of how a function exits? a: ??? [<code>on.exit()</code>]</p></li>
 </ol>
 </section>
-<section id="exercises-14" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-14">6.2.5 Exercises</h2>
+<section id="exercises-14" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-14">6.2.5 Exercises</h3>
 <ol type="1">
 <li>Given a name, like <code>"mean"</code>, <code>match.fun()</code> lets you find a function. Given a function, can you find its name? Why doesn’t that make sense in R?</li>
 </ol>
@@ -3081,8 +3084,8 @@ it? (Hint: try using help.)</code></pre>
 <p>AR Solutions: Primitive functions and functions created in the global environment do not print their environment.</p>
 <hr>
 </section>
-<section id="exercises-15" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-15">6.4.5 Exercises</h2>
+<section id="exercises-15" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-15">6.4.5 Exercises</h3>
 <ol type="1">
 <li>What does the following code return? Why? Describe how each of the three <code>c</code>’s is interpreted.</li>
 </ol>
@@ -3125,8 +3128,8 @@ it? (Hint: try using help.)</code></pre>
 <p>AR Solutions: Within this nested function two more functions also named <code>f</code> are defined and called. Because the functions are each executed in their own environment R will look up and use the functions defined last in these environments. The innermost <code>f()</code> is called last, though it is the first function to return a value. Therefore, the order of the calculation passes “from the inside to the outside” and the function returns <code>((10 ^ 2) + 1) * 2</code>, i.e.&nbsp;202.</p>
 <hr>
 </section>
-<section id="exercises-16" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-16">6.5.4 Exercises</h2>
+<section id="exercises-16" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-16">6.5.4 Exercises</h3>
 <ol type="1">
 <li>What important property of <code>&amp;&amp;</code> makes <code>x_ok()</code> work?</li>
 </ol>
@@ -3236,7 +3239,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb447-4"><a href="#cb447-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb447-5"><a href="#cb447-5" aria-hidden="true" tabindex="-1"></a><span class="fu">show_time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "2023-12-04 15:10:35 CST"</code></pre>
+<pre><code>#&gt; [1] "2024-02-12 12:19:31 CST"</code></pre>
 </div>
 </div>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is evaluated. This is a confusing use of lazy evaluation.</p>
@@ -3255,8 +3258,8 @@ it? (Hint: try using help.)</code></pre>
 <p>Because the <code>package</code> and <code>help</code> argument from <code>library()</code> do not show a default value, it’s easy to overlook the possibility to call <code>library()</code> without these arguments. (Instead of providing <code>NULL</code>s as default values <code>library()</code> uses <code>missing()</code> to check if these arguments were provided.)</p>
 <hr>
 </section>
-<section id="exercises-17" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-17">6.6.1 Exercises</h2>
+<section id="exercises-17" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-17">6.6.1 Exercises</h3>
 <ol type="1">
 <li>Explain the following results:</li>
 </ol>
@@ -3312,7 +3315,7 @@ it? (Hint: try using help.)</code></pre>
      build_analysis_site(). {r, fig.asp = 1} works with build_analysis_site() but is not sized
      properly in RStudio. {r, fig.asp = 1} is the best option for now.
   -->
-<div class="cell" data-layout-align="center" data-small_mar="true" data-fig.asp="1">
+<div class="cell" data-layout-align="center" data-small_mar="true">
 <div class="sourceCode cell-code" id="cb461"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb461-1"><a href="#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">col.lab =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -3346,8 +3349,8 @@ it? (Hint: try using help.)</code></pre>
 <p>The call to <code>localTitle()</code> passes the <code>col</code> parameter as part of the <code>...</code> argument to <code>title()</code>. <code>?title</code> tells us that the <code>title()</code> function specifies four parts of the plot: Main (title of the plot), sub (sub-title of the plot) and both axis labels. Therefore, it would introduce ambiguity inside <code>title()</code> to use <code>col</code> directly. Instead, one has the option to supply <code>col</code> via the <code>...</code> argument, via <code>col.lab</code> or as part of <code>xlab</code> in the form <code>xlab = list(c("index"), col = "red")</code> (similar for <code>ylab</code>).</p>
 <hr>
 </section>
-<section id="exercises-18" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-18">6.7.5 Exercises</h2>
+<section id="exercises-18" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-18">6.7.5 Exercises</h3>
 <ol type="1">
 <li>What does <code>load()</code> return? Why don’t you normally see these values?</li>
 </ol>
@@ -3426,8 +3429,8 @@ it? (Hint: try using help.)</code></pre>
 <p>The main difference is that <code>capture.output()</code> calls print.</p>
 <hr>
 </section>
-<section id="exercises-19" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-19">6.8.6 Exercises</h2>
+<section id="exercises-19" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-19">6.8.6 Exercises</h3>
 <ol type="1">
 <li>Rewrite the following code snippets into prefix form:</li>
 </ol>
@@ -3490,7 +3493,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb488-2"><a href="#cb488-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">20</span>)</span>
 <span id="cb488-3"><a href="#cb488-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x, y, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.07347184</code></pre>
+<pre><code>#&gt; [1] -0.1174202</code></pre>
 </div>
 </div>
 <p>AR Solutions: None of these functions provides a <code>...</code> argument. Therefore, the function arguments are first matched exactly, then via partial matching and finally by position. This leads us to the following explicit function calls:</p>
@@ -3552,7 +3555,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb497-7"><a href="#cb497-7" aria-hidden="true" tabindex="-1"></a><span class="fu">modrand</span>(v) <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb497-8"><a href="#cb497-8" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 NA 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 NA</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -3802,27 +3805,27 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb538-5"><a href="#cb538-5" aria-hidden="true" tabindex="-1"></a><span class="co"># taken from docs examples</span></span>
 <span id="cb538-6"><a href="#cb538-6" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sort</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">9</span>)), <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  2  4  6  7 10 11 13 15 20 NA</code></pre>
+<pre><code>#&gt;  [1]  1  2  3 12 13 14 15 17 20 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb540"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb540-1"><a href="#cb540-1" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sort</span>(<span class="fu">sample</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">23</span>, <span class="dv">7</span>)), <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  4  6  9 10 19 20 22 NA</code></pre>
+<pre><code>#&gt; [1]  3  5  6 12 15 16 20 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb542"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb542-1"><a href="#cb542-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%u%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  2  4  6  7 10 11 13 15 20 NA  9 19 22</code></pre>
+<pre><code>#&gt;  [1]  1  2  3 12 13 14 15 17 20 NA  5  6 16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb544"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb544-1"><a href="#cb544-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%n%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  4  6 10 20 NA</code></pre>
+<pre><code>#&gt; [1]  3 12 15 20 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb546"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb546-1"><a href="#cb546-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%s%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  2  7 11 13 15</code></pre>
+<pre><code>#&gt; [1]  1  2 13 14 17</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb548"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb548-1"><a href="#cb548-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">%s%</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  9 19 22</code></pre>
+<pre><code>#&gt; [1]  5  6 16</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -3859,14 +3862,14 @@ it? (Hint: try using help.)</code></pre>
 <hr>
 </section>
 </section>
-<section id="environments" class="level1">
-<h1>7 Environments</h1>
+<section id="environments" class="level2">
+<h2 class="anchored" data-anchor-id="environments">7 Environments</h2>
 <p>The environment is the data structure that powers scoping. This chapter dives deep into environments, describing their structure in depth, and using them to improve your understanding of the four scoping rules described in Section 6.4. Understanding environments is not necessary for day-to-day use of R. But they are important to understand because they power many important R features like lexical scoping, namespaces, and R6 classes, and interact with evaluation to give you powerful tools for making domain specific languages, like dplyr and ggplot2.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb556"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb556-1"><a href="#cb556-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="exercises-20" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-20">7.2.7 Exercises</h2>
+<section id="exercises-20" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-20">7.2.7 Exercises</h3>
 <ol type="1">
 <li>List three ways in which an environment differs from a list.</li>
 </ol>
@@ -3904,7 +3907,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb558-4"><a href="#cb558-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the environment</span></span>
 <span id="cb558-5"><a href="#cb558-5" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x11807d350&gt;
+<pre><code>#&gt; &lt;environment: 0x118203db8&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
@@ -3912,8 +3915,8 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb560"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb560-1"><a href="#cb560-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that it contains itself</span></span>
 <span id="cb560-2"><a href="#cb560-2" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x11807d350] &lt;env&gt; 
-#&gt; └─loop = [1:0x11807d350]</code></pre>
+<pre><code>#&gt; █ [1:0x118203db8] &lt;env&gt; 
+#&gt; └─loop = [1:0x118203db8]</code></pre>
 </div>
 </div>
 <hr>
@@ -3939,15 +3942,15 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb563-6"><a href="#cb563-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb563-7"><a href="#cb563-7" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x12ab115e8] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x10ec39568] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x12ab115e8]</code></pre>
+<pre><code>#&gt; █ [1:0x10818fa38] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x1081193a0] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x10818fa38]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb565"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb565-1"><a href="#cb565-1" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x10ec39568] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x12ab115e8] &lt;env&gt; 
-#&gt;            └─loop = [1:0x10ec39568]</code></pre>
+<pre><code>#&gt; █ [1:0x1081193a0] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x10818fa38] &lt;env&gt; 
+#&gt;            └─loop = [1:0x1081193a0]</code></pre>
 </div>
 </div>
 <hr>
@@ -3976,7 +3979,7 @@ it? (Hint: try using help.)</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb569"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb569-1"><a href="#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(e_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x10e216bc0&gt;
+<pre><code>#&gt; &lt;environment: 0x11f267408&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
@@ -4059,8 +4062,8 @@ it? (Hint: try using help.)</code></pre>
 <p>AR Solutions: The primary difference between <code>rebind()</code> and <code>&lt;&lt;-</code> is that <code>rebind()</code> will only carry out an assignment when it finds an existing binding; unlike <code>&lt;&lt;-</code> it will never create a new one in the global environment. This behaviour of <code>&lt;&lt;-</code> is usually undesirable because global variables introduce non-obvious dependencies between functions.</p>
 <hr>
 </section>
-<section id="exercises-21" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-21">7.3.1 Exercises</h2>
+<section id="exercises-21" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-21">7.3.1 Exercises</h3>
 <ol type="1">
 <li>Modify <code>where()</code> to return <em>all</em> environments that contain a binding for <code>name</code>. Carefully think through what type of object the function will need to return.</li>
 </ol>
@@ -4115,7 +4118,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb595-4"><a href="#cb595-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x10e2dfa68&gt;
+#&gt; &lt;environment: 0x10eb8d660&gt;
 #&gt; 
 #&gt; [[2]]
 #&gt; &lt;environment: R_GlobalEnv&gt;</code></pre>
@@ -4145,10 +4148,10 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb597-17"><a href="#cb597-17" aria-hidden="true" tabindex="-1"></a><span class="fu">where2</span>(<span class="st">"a"</span>, e1c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x10ff16a58&gt;
+#&gt; &lt;environment: 0x10d3ede88&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x10fe428d0&gt;</code></pre>
+#&gt; &lt;environment: 0x10d4bea48&gt;</code></pre>
 </div>
 </div>
 <hr>
@@ -4215,14 +4218,14 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x12c39a5e0&gt;
+#&gt; &lt;bytecode: 0x1081284b0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
 <hr>
 </section>
-<section id="exercises-22" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-22">7.4.5 Exercises</h2>
+<section id="exercises-22" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-22">7.4.5 Exercises</h3>
 <ol type="1">
 <li>How is <code>search_envs()</code> different from <code>env_parents(global_env())</code>?</li>
 </ol>
@@ -4281,7 +4284,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)  
 #&gt;  - attr(*, "srcref")= 'srcref' int [1:8] 1 9 17 1 9 1 1 17
-#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x118712dd0&gt;</code></pre>
+#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x107bcc468&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; fn_env():</code></pre>
@@ -4340,8 +4343,8 @@ it? (Hint: try using help.)</code></pre>
 <p>Once you have learned about tidy evaluation, you could rewrite <code>fstr()</code> to use <code>enquo()</code> so that you’d call it more like <code>str()</code>, i.e.&nbsp;<code>fstr(sum)</code>.</p>
 <hr>
 </section>
-<section id="exercises-23" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-23">7.5.5 Exercises</h2>
+<section id="exercises-23" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-23">7.5.5 Exercises</h3>
 <ol type="1">
 <li>Write a function that lists all the variables defined in the environment in which it was called. It should return the same results as <code>ls()</code>.</li>
 </ol>
@@ -4378,19 +4381,27 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb628-5"><a href="#cb628-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Test in global environment</span></span>
 <span id="cb628-6"><a href="#cb628-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="at">all.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] ".main"        ".Random.seed" "a"            "all_where"    "e_str"       
-#&gt;  [6] "e_test"       "e1"           "e1a"          "e1b"          "e1c"         
-#&gt; [11] "e2"           "e3"           "env_poke_new" "env_poke2"    "fget"        
-#&gt; [16] "fget2"        "fstr"         "ls2"          "mean"         "my_ls"       
-#&gt; [21] "rebind"       "where"        "where2"       "x"</code></pre>
+<pre><code>#&gt;  [1] ".main"               ".QuartoInlineRender" ".Random.seed"       
+#&gt;  [4] "a"                   "all_where"           "e_str"              
+#&gt;  [7] "e_test"              "e1"                  "e1a"                
+#&gt; [10] "e1b"                 "e1c"                 "e2"                 
+#&gt; [13] "e3"                  "env_poke_new"        "env_poke2"          
+#&gt; [16] "fget"                "fget2"               "fstr"               
+#&gt; [19] "ls2"                 "mean"                "my_ls"              
+#&gt; [22] "rebind"              "where"               "where2"             
+#&gt; [25] "x"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb630"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb630-1"><a href="#cb630-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] ".main"        ".Random.seed" "a"            "all_where"    "e_str"       
-#&gt;  [6] "e_test"       "e1"           "e1a"          "e1b"          "e1c"         
-#&gt; [11] "e2"           "e3"           "env_poke_new" "env_poke2"    "fget"        
-#&gt; [16] "fget2"        "fstr"         "ls2"          "mean"         "my_ls"       
-#&gt; [21] "rebind"       "where"        "where2"       "x"</code></pre>
+<pre><code>#&gt;  [1] ".main"               ".QuartoInlineRender" ".Random.seed"       
+#&gt;  [4] "a"                   "all_where"           "e_str"              
+#&gt;  [7] "e_test"              "e1"                  "e1a"                
+#&gt; [10] "e1b"                 "e1c"                 "e2"                 
+#&gt; [13] "e3"                  "env_poke_new"        "env_poke2"          
+#&gt; [16] "fget"                "fget2"               "fstr"               
+#&gt; [19] "ls2"                 "mean"                "my_ls"              
+#&gt; [22] "rebind"              "where"               "where2"             
+#&gt; [25] "x"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb632"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb632-1"><a href="#cb632-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test in "sandbox" environment</span></span>
 <span id="cb632-2"><a href="#cb632-2" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">env</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>)</span>
@@ -4406,8 +4417,8 @@ it? (Hint: try using help.)</code></pre>
 <hr>
 </section>
 </section>
-<section id="conditions" class="level1">
-<h1>8 Conditions</h1>
+<section id="conditions" class="level2">
+<h2 class="anchored" data-anchor-id="conditions">8 Conditions</h2>
 <p>The <strong>condition</strong> system provides a paired set of tools that allow the author of a function to indicate that something unusual is happening, and the user of that function to deal with it. The function author <strong>signals</strong> conditions with functions like <code>stop()</code> (for errors), <code>warning()</code> (for warnings), and <code>message()</code> (for messages), then the function user can handle them with functions like <code>tryCatch()</code> and <code>withCallingHandlers()</code>. Understanding the condition system is important because you’ll often need to play both roles: signalling conditions from the functions you create, and handle conditions signalled by the functions you call.</p>
 <p>R offers a very powerful condition system based on ideas from Common Lisp. Like R’s approach to object-oriented programming, it is rather different to currently popular programming languages so it is easy to misunderstand, and there has been relatively little written about how to use it effectively. Historically, this has meant that few people (myself included) have taken full advantage of its power. The goal of this chapter is to remedy that situation. Here you will learn about the big ideas of R’s condition system, as well as learning a bunch of practical tools that will make your code stronger.</p>
 <p>I found two resources particularly useful when writing this chapter. You may also want to read them if you want to learn more about the inspirations and motivations for the system:</p>
@@ -4419,8 +4430,8 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb636"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb636-1"><a href="#cb636-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="exercises-24" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-24">8.2.4 Exercises</h2>
+<section id="exercises-24" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-24">8.2.4 Exercises</h3>
 <ol type="1">
 <li>Write a wrapper around <code>file.remove()</code> that throws an error if the file to be deleted does not exist.</li>
 </ol>
@@ -4443,7 +4454,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb641"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb641-1"><a href="#cb641-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.remove</span>(tmp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file
-#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpXZ1Q0P/file12f2836943044',
+#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpDskmTA/file163a9573bb57a',
 #&gt; reason 'No such file or directory'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -4452,7 +4463,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb644"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb644-1"><a href="#cb644-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">safe_file_remove</span>(tmp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpXZ1Q0P/file12f2836943044' does not exist</code></pre>
+#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpDskmTA/file163a9573bb57a' does not exist</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -4488,8 +4499,8 @@ it? (Hint: try using help.)</code></pre>
 <p>Comparable behaviour regarding line breaks for <code>cat()</code> can be achieved via setting its <code>sep</code> argument to <code>"\n"</code>.</p>
 <hr>
 </section>
-<section id="exercises-25" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-25">8.4.5 Exercises</h2>
+<section id="exercises-25" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-25">8.4.5 Exercises</h3>
 <ol type="1">
 <li>What extra information does the condition generated by <code>abort()</code> contain compared to the condition generated by <code>stop()</code> i.e.&nbsp;what’s the difference between these two objects? Read the help for <code>?abort</code> to learn more.</li>
 </ol>
@@ -4630,7 +4641,7 @@ it? (Hint: try using help.)</code></pre>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x10a06f398&gt;
+#&gt; &lt;bytecode: 0x107cf6900&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb678"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb678-1"><a href="#cb678-1" aria-hidden="true" tabindex="-1"></a><span class="fu">catch_cnd</span>(<span class="fu">stop</span>(<span class="st">"error"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4752,8 +4763,8 @@ it? (Hint: try using help.)</code></pre>
 <p><code>tryCatch()</code> executes the code and captures any condition raised. The function provided as the <code>condition</code> handles this condition. In this case it dispatches on the class of the condition.</p>
 <hr>
 </section>
-<section id="exercises-26" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-26">8.5.4 Exercises</h2>
+<section id="exercises-26" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-26">8.5.4 Exercises</h3>
 <ol type="1">
 <li>Inside a package, it’s occasionally useful to check that a package is installed before using it. Write a function that checks if a package is installed (with <code>requireNamespace("pkg", quietly = FALSE))</code> and if not, throws a custom condition that includes the package name in the metadata.</li>
 </ol>
@@ -4833,8 +4844,8 @@ it? (Hint: try using help.)</code></pre>
 <p>AR Solutions: Instead of returning an error it might be preferable to throw a customised condition and place a standardised error message inside the metadata. Then the downstream package could check for the class of the condition, rather than inspecting the message.</p>
 <hr>
 </section>
-<section id="exercises-27" class="level2">
-<h2 class="anchored" data-anchor-id="exercises-27">8.6.6 Exercises</h2>
+<section id="exercises-27" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-27">8.6.6 Exercises</h3>
 <ol type="1">
 <li>Create <code>suppressConditions()</code> that works like <code>suppressMessages()</code> and <code>suppressWarnings()</code> but suppresses everything. Think carefully about how you should handle errors.</li>
 </ol>
@@ -5054,6 +5065,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -5437,7 +5592,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, John Benninghoff</p>
+<p>Copyright 2024, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
