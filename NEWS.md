@@ -1,3 +1,7 @@
+# rtraining 1.1.8
+
+* Updated site theme
+
 # rtraining 1.1.7
 
 * Maintenance updates
