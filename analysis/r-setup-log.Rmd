@@ -2,7 +2,7 @@
 title: "R Setup Log"
 author: "John Benninghoff"
 date: '2020-12-30'
-date-modified: '2023-11-17'
+date-modified: '2024-02-24'
 categories: notes
 order: 102
 output:

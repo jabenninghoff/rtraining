@@ -2,7 +2,7 @@
 title: "R Books"
 author: "John Benninghoff"
 date: '2023-11-17'
-date-modified: '2023-12-29'
+date-modified: '2024-01-01'
 categories: reading
 order: 1
 output:
