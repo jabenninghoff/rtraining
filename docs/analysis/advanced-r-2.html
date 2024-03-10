@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -337,6 +337,12 @@ window.Quarto = {
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 11, 2023</p>
+    </div>
+  </div>
     
   </div>
   
@@ -383,15 +389,15 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>randomise <span class="ot">&lt;-</span> <span class="cf">function</span>(f) <span class="fu">f</span>(<span class="fu">runif</span>(<span class="fl">1e3</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.5213847</code></pre>
+<pre><code>#&gt; [1] 0.4879462</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.4923787</code></pre>
+<pre><code>#&gt; [1] 0.5001018</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">randomise</span>(sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 509.9991</code></pre>
+<pre><code>#&gt; [1] 506.2875</code></pre>
 </div>
 </div>
 <p>The chances are that you’ve already used a functional. You might have used for-loop replacements like base R’s <code>lapply()</code>, <code>apply()</code>, and <code>tapply()</code>; or purrr’s <code>map()</code>; or maybe you’ve used a mathematical functional like <code>integrate()</code> or <code>optim()</code>.</p>
@@ -409,7 +415,7 @@ window.Quarto = {
 #&gt; {
 #&gt;     map_("double", .x, .f, ..., .progress = .progress)
 #&gt; }
-#&gt; &lt;bytecode: 0x11dc7e630&gt;
+#&gt; &lt;bytecode: 0x105b02a90&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(mtcars, <span class="sc">~</span> <span class="fu">length</span>(<span class="fu">unique</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -433,7 +439,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x10df17808&gt;
+#&gt; &lt;bytecode: 0x130720c38&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -458,19 +464,19 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, 2), .default = NULL)
-#&gt; &lt;environment: 0x1098d8280&gt;</code></pre>
+#&gt; &lt;environment: 0x106a95f60&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>)) <span class="co"># equivalent to function(x) x[["a"]][["b]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list("a", "b"), .default = NULL)
-#&gt; &lt;environment: 0x109956a60&gt;</code></pre>
+#&gt; &lt;environment: 0x106b18650&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">list</span>(<span class="dv">1</span>, <span class="st">"b"</span>)) <span class="co"># equivalent to function(x) x[[1]][["b]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, "b"), .default = NULL)
-#&gt; &lt;environment: 0x1099b8938&gt;</code></pre>
+#&gt; &lt;environment: 0x106b765e0&gt;</code></pre>
 </div>
 </div>
 <p>Besides mixing positions and names, it is also possible to pass along an accessor function. This is basically an anonymous function that gets information about some aspect of the input data. You are free to define your own accessor functions.</p>
@@ -497,13 +503,13 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="sc">~</span> <span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; [1] 0.3619714 0.8976031
+#&gt; [1] 0.8150402 0.2038741
 #&gt; 
 #&gt; [[2]]
-#&gt; [1] 0.1058137 0.1935339
+#&gt; [1] 0.1478543 0.1360639
 #&gt; 
 #&gt; [[3]]
-#&gt; [1] 0.9548614 0.2055252</code></pre>
+#&gt; [1] 0.6421006 0.3887575</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -530,8 +536,8 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_mapper</span>(<span class="fu">runif</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck_raw(x, list(0.201793782878667, 0.509042494231835), .default = NULL)
-#&gt; &lt;environment: 0x10a0fb518&gt;</code></pre>
+#&gt; pluck_raw(x, list(0.711476220749319, 0.156880941707641), .default = NULL)
+#&gt; &lt;environment: 0x11671cf70&gt;</code></pre>
 </div>
 </div>
 <p>A more reasonable use of a pluck mapper for <code>1:3</code> is <code>1</code>:</p>
@@ -797,8 +803,8 @@ window.Quarto = {
 <span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(bootstraps, <span class="sc">~</span> <span class="fu">summary</span>(<span class="fu">lm</span>(mpg <span class="sc">~</span> disp, .x))<span class="sc">$</span>r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.7662513 0.7925000 0.6601916 0.7015220 0.6726921 0.7481078 0.7005308
-#&gt;  [8] 0.7766043 0.7833145 0.6947296</code></pre>
+<pre><code>#&gt;  [1] 0.7561203 0.6365232 0.5776651 0.7538711 0.7804974 0.7385372 0.7243956
+#&gt;  [8] 0.7948500 0.7130048 0.7728491</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -809,8 +815,8 @@ window.Quarto = {
 <span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(summary) <span class="sc">%&gt;%</span></span>
 <span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dbl</span>(<span class="st">"r.squared"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.7662513 0.7925000 0.6601916 0.7015220 0.6726921 0.7481078 0.7005308
-#&gt;  [8] 0.7766043 0.7833145 0.6947296</code></pre>
+<pre><code>#&gt;  [1] 0.7561203 0.6365232 0.5776651 0.7538711 0.7804974 0.7385372 0.7243956
+#&gt;  [8] 0.7948500 0.7130048 0.7728491</code></pre>
 </div>
 </div>
 <p>Note: while AR Solutions is arguably <em>slightly</em> more readable, my code should be faster:</p>
@@ -822,7 +828,7 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { map_dbl(bootstraps, ~summary(lm(… 2.03ms 2.16ms      456.    63.7KB     49.8</code></pre>
+#&gt; 1 { map_dbl(bootstraps, ~summary(lm(… 1.99ms 2.04ms      482.    63.7KB     54.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>({</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  bootstraps <span class="sc">%&gt;%</span></span>
@@ -834,7 +840,7 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 2.02ms 2.22ms      445.    63.7KB     55.0</code></pre>
+#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 1.98ms 2.04ms      481.    63.7KB     58.6</code></pre>
 </div>
 </div>
 <p>It is actually slightly slower! AR Solutions wins!</p>
@@ -886,7 +892,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1), .default = NULL)
-#&gt; &lt;environment: 0x1099a52e0&gt;</code></pre>
+#&gt; &lt;environment: 0x1166fd478&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1239,14 +1245,14 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                     min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span_r(test2, is.numeric)   50.6µs     56µs    17129.    4.01KB     68.9</code></pre>
+#&gt; 1 span_r(test2, is.numeric)   50.4µs   53.1µs    18041.    4.01KB     65.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">span</span>(test2, is.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;              &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span(test2, is.numeric)   67.7µs     73µs    13370.    4.01KB     21.0</code></pre>
+#&gt; 1 span(test2, is.numeric)   68.6µs   71.2µs    13851.    4.01KB     20.8</code></pre>
 </div>
 </div>
 <hr>
@@ -1739,14 +1745,14 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 11.5µs 12.6µs    76233.        0B     22.9</code></pre>
+#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 11.6µs 12.4µs    77706.        0B     31.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb176"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">fixed_point</span>(cos, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point(cos, 1)   20.4µs   22.2µs    43901.        0B     26.4</code></pre>
+#&gt; 1 fixed_point(cos, 1)   20.7µs   21.7µs    45332.        0B     27.2</code></pre>
 </div>
 </div>
 <p>As usual, AR Solutions is faster. :-(</p>
@@ -1798,7 +1804,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; x
-#&gt; &lt;bytecode: 0x13d9505b0&gt;
+#&gt; &lt;bytecode: 0x137150030&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1944,7 +1950,7 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)         3.2µs   3.77µs   227495.      848B     22.8</code></pre>
+#&gt; 1 m2(x)        3.16µs   3.53µs   266214.      848B        0</code></pre>
 </div>
 </div>
 <p>Answer: code above, following the formula <span class="math inline">\(E[(X - E[X])^i]\)</span>, where <span class="math inline">\(E\)</span> is the <a href="https://en.wikipedia.org/wiki/Expected_value">expected value</a>, ie the <em>mean</em>.</p>
@@ -1971,7 +1977,7 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        2.01µs    2.3µs   408996.      848B     40.9</code></pre>
+#&gt; 1 m2(x)        2.05µs    2.3µs   386809.      848B        0</code></pre>
 </div>
 </div>
 <p>Note: isn’t <code>sum() / length()</code> just <code>mean()</code>? For fun, compare <code>bench::mark()</code> (above). Curses, foiled again!</p>
@@ -2166,14 +2172,14 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 11.9µs 13.2µs    69926.    12.8KB     21.0</code></pre>
+#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 12.1µs 12.9µs    73082.    12.8KB     29.2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb243"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb243-1"><a href="#cb243-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson2</span>(x1), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 6.52µs 7.01µs   133872.        0B     26.8</code></pre>
+#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 6.44µs 6.81µs   139082.        0B     27.8</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb245"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb245-1"><a href="#cb245-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="fl">1e3</span>, <span class="dv">100</span>L)</span>
 <span id="cb245-2"><a href="#cb245-2" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson1</span>(x), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2181,14 +2187,14 @@ window.Quarto = {
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 216µs  232µs     4263.     110KB     10.4</code></pre>
+#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 216µs  231µs     4277.     110KB     10.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb247"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb247-1"><a href="#cb247-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">optimize</span>(<span class="fu">ll_poisson2</span>(x), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">maximum =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 21.7µs 23.5µs    41037.    7.86KB     8.21</code></pre>
+#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 21.4µs 23.3µs    41825.    7.86KB     8.37</code></pre>
 </div>
 </div>
 <p>Answer: <code>ll_poisson2()</code> is nearly twice as fast with <code>x1</code> and nearly 10 times as fast when the length of <code>x</code> is 100.</p>
@@ -2334,7 +2340,7 @@ window.Quarto = {
 #&gt;         })
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x10e168ef0&gt;
+#&gt; &lt;bytecode: 0x133aac780&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -2356,7 +2362,7 @@ window.Quarto = {
 #&gt;     check_bool(quiet)
 #&gt;     function(...) capture_error(.f(...), otherwise, quiet)
 #&gt; }
-#&gt; &lt;bytecode: 0x107717350&gt;
+#&gt; &lt;bytecode: 0x133851698&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb264"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb264-1"><a href="#cb264-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">:::</span>capture_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2369,7 +2375,7 @@ window.Quarto = {
 #&gt;         list(result = otherwise, error = e)
 #&gt;     })
 #&gt; }
-#&gt; &lt;bytecode: 0x1076a58c8&gt;
+#&gt; &lt;bytecode: 0x13582b318&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -2559,7 +2565,7 @@ window.Quarto = {
 <span id="cb280-30"><a href="#cb280-30" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.002   0.000   1.007</code></pre>
+#&gt;   0.003   0.001   1.006</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb282"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb282-1"><a href="#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
 <span id="cb282-2"><a href="#cb282-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">g</span>()</span>
@@ -2568,7 +2574,7 @@ window.Quarto = {
 <span id="cb282-5"><a href="#cb282-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.006   0.000   2.010</code></pre>
+#&gt;   0.006   0.001   2.009</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -2835,6 +2841,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/jabenninghoff\.github\.io\/rtraining\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -2869,7 +2893,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

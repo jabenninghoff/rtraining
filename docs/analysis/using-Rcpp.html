@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -298,6 +298,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 10, 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -378,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>String eval_hand_phe<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"poker_hand"</span><span class="op">;</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
+<p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-rd-rcpp/rcpp-modules-student">RcppStudent</a> R package.</p>
 <p>Additional examples implementing C++ libraries in Rcpp I found include <a href="https://github.com/eddelbuettel/rcppannoy">RcppAnnoy</a>, written by Rcpp author and maintainer Dirk Eddelbuettel, <a href="https://github.com/R-Lum/rxylib">rxylib</a>, and <a href="https://github.com/AleMorales/RcppSundials.R">RcppSundials</a>.</p>
 <section id="add-headers" class="level3">
 <h3 class="anchored" data-anchor-id="add-headers">Add Headers</h3>
@@ -488,9 +494,9 @@ tables_bitwise.c</code></pre>
 <p>The clear recommendation on r-devel (please check the archives) is that you should avoid Makefile logic if you can. IIRC this echoed in the Writing R Extension manual.</p>
 </blockquote>
 <p>So, it seems the right answer is to rename the files to avoid this conflict. Additionally, after reading a tidyverse blog post on <a href="https://www.tidyverse.org/blog/2023/03/cran-checks-compiled-code/">New CRAN requirements for packages with C and C++</a>, I learned that the R C++ standard was now C++17, so I technically did not need that line in the <code>Makevars</code> file, but I decided to keep it as it was an upstream requirement.</p>
-<p>I also discovered an example <a href="https://github.com/coatless-r-n-d/rcpp-headers-subdirs">package</a> that explained how to put code in a subdirectory of <code>src/</code>, which I plan to use for the second version using Rcpp Modules.</p>
+<p>I also discovered an example <a href="https://github.com/coatless-rd-rcpp/rcpp-headers-subdirs">package</a> that explained how to put code in a subdirectory of <code>src/</code>, which I plan to use for the second version using Rcpp Modules.</p>
 <p>I later added a script to copy (or update) the PH Evaluator source and header files to the cards package, to automate future updates if needed.</p>
-<p>After reading through the <a href="https://rstudio.github.io/r-manuals/r-exts/Creating-R-packages.html">Creating R Packages</a> chapter of <a href="https://rstudio.github.io/r-manuals/r-exts/">Writing R Extensions</a> and evaluating my options, I am inclined to use a simple approach to creating a “phevaluator” package, copying the necessary files into <code>src/</code> (with a shell script for reproducibility), use a minimal <code>Makevars</code> file, and use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, following the approach used by the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
+<p>After reading through the <a href="https://rstudio.github.io/r-manuals/r-exts/Creating-R-packages.html">Creating R Packages</a> chapter of <a href="https://rstudio.github.io/r-manuals/r-exts/">Writing R Extensions</a> and evaluating my options, I am inclined to use a simple approach to creating a “phevaluator” package, copying the necessary files into <code>src/</code> (with a shell script for reproducibility), use a minimal <code>Makevars</code> file, and use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, following the approach used by the <a href="https://github.com/coatless-rd-rcpp/rcpp-modules-student">RcppStudent</a> R package.</p>
 
 
 </section>
@@ -720,6 +726,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/jabenninghoff\.github\.io\/rtraining\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -754,7 +778,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

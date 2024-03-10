@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -295,6 +295,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 11, 2023</p>
+    </div>
+  </div>
     
   </div>
   
@@ -453,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;             half_line, half_line, half_line), complete = TRUE)
 #&gt;     ggplot_global$theme_all_null %+replace% t
 #&gt; }
-#&gt; &lt;bytecode: 0x105afd000&gt;
+#&gt; &lt;bytecode: 0x10d547908&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -476,7 +482,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     discrete_scale(aesthetics, name = name, palette = pal_brewer(type, 
 #&gt;         palette, direction), ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x1058f7e20&gt;
+#&gt; &lt;bytecode: 0x10c23c910&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -503,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         pal
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x11686db68&gt;
+#&gt; &lt;bytecode: 0x10d2ad440&gt;
 #&gt; &lt;environment: namespace:scales&gt;</code></pre>
 </div>
 </div>
@@ -533,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         begin, end, direction, option)(6), values, space), na.value = na.value, 
 #&gt;         guide = guide, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x107ab2320&gt;
+#&gt; &lt;bytecode: 0x104df6ab8&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -1129,6 +1135,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/jabenninghoff\.github\.io\/rtraining\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1163,7 +1187,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
