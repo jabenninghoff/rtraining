@@ -10,7 +10,7 @@
 <atom:link href="https://jabenninghoff.github.io/rtraining/index.xml" rel="self" type="application/rss+xml"/>
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
-<generator>quarto-1.4.550</generator>
+<generator>quarto-1.4.551</generator>
 <lastBuildDate>Thu, 21 Dec 2023 06:00:00 GMT</lastBuildDate>
 <item>
   <title>Using Rcpp</title>
@@ -253,7 +253,7 @@ font-style: inherit;">;</span></span>
 <span id="cb3-16"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
-<p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
+<p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-rd-rcpp/rcpp-modules-student">RcppStudent</a> R package.</p>
 <p>Additional examples implementing C++ libraries in Rcpp I found include <a href="https://github.com/eddelbuettel/rcppannoy">RcppAnnoy</a>, written by Rcpp author and maintainer Dirk Eddelbuettel, <a href="https://github.com/R-Lum/rxylib">rxylib</a>, and <a href="https://github.com/AleMorales/RcppSundials.R">RcppSundials</a>.</p>
 <section id="add-headers" class="level3">
 <h3 class="anchored" data-anchor-id="add-headers">Add Headers</h3>
@@ -585,9 +585,9 @@ font-style: inherit;">}</span></span></code></pre></div>
 <p>The clear recommendation on r-devel (please check the archives) is that you should avoid Makefile logic if you can. IIRC this echoed in the Writing R Extension manual.</p>
 </blockquote>
 <p>So, it seems the right answer is to rename the files to avoid this conflict. Additionally, after reading a tidyverse blog post on <a href="https://www.tidyverse.org/blog/2023/03/cran-checks-compiled-code/">New CRAN requirements for packages with C and C++</a>, I learned that the R C++ standard was now C++17, so I technically did not need that line in the <code>Makevars</code> file, but I decided to keep it as it was an upstream requirement.</p>
-<p>I also discovered an example <a href="https://github.com/coatless-r-n-d/rcpp-headers-subdirs">package</a> that explained how to put code in a subdirectory of <code>src/</code>, which I plan to use for the second version using Rcpp Modules.</p>
+<p>I also discovered an example <a href="https://github.com/coatless-rd-rcpp/rcpp-headers-subdirs">package</a> that explained how to put code in a subdirectory of <code>src/</code>, which I plan to use for the second version using Rcpp Modules.</p>
 <p>I later added a script to copy (or update) the PH Evaluator source and header files to the cards package, to automate future updates if needed.</p>
-<p>After reading through the <a href="https://rstudio.github.io/r-manuals/r-exts/Creating-R-packages.html">Creating R Packages</a> chapter of <a href="https://rstudio.github.io/r-manuals/r-exts/">Writing R Extensions</a> and evaluating my options, I am inclined to use a simple approach to creating a “phevaluator” package, copying the necessary files into <code>src/</code> (with a shell script for reproducibility), use a minimal <code>Makevars</code> file, and use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, following the approach used by the <a href="https://github.com/coatless-r-n-d/rcpp-modules-student">RcppStudent</a> R package.</p>
+<p>After reading through the <a href="https://rstudio.github.io/r-manuals/r-exts/Creating-R-packages.html">Creating R Packages</a> chapter of <a href="https://rstudio.github.io/r-manuals/r-exts/">Writing R Extensions</a> and evaluating my options, I am inclined to use a simple approach to creating a “phevaluator” package, copying the necessary files into <code>src/</code> (with a shell script for reproducibility), use a minimal <code>Makevars</code> file, and use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, following the approach used by the <a href="https://github.com/coatless-rd-rcpp/rcpp-modules-student">RcppStudent</a> R package.</p>
 
 
 </section>
@@ -805,10 +805,10 @@ font-style: inherit;">max</span>(date))</span></code></pre></div>
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        2168 2024-02-23
-2 checkmate    231025 2024-02-23
-3 chk           12386 2024-02-23
-4 validate       2342 2024-02-23</code></pre>
+1 assertr        1910 2024-03-08
+2 checkmate    231904 2024-03-08
+3 chk           12867 2024-03-08
+4 validate       2449 2024-03-08</code></pre>
 </div>
 </div>
 <p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
@@ -2055,7 +2055,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, na.rm = FALSE, ...) 
 #&gt; UseMethod("median")
-#&gt; &lt;bytecode: 0x121bd83f8&gt;
+#&gt; &lt;bytecode: 0x14bcf7810&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><span class="fu" style="color: #4758AB;
@@ -3331,7 +3331,7 @@ font-style: inherit;">#&gt; + \n    o + p + q + r + s + t + u + v + w + x + y + 
 #&gt;     class(ans) &lt;- "pairwise.htest"
 #&gt;     ans
 #&gt; }
-#&gt; &lt;bytecode: 0x121e95e50&gt;
+#&gt; &lt;bytecode: 0x10d19a840&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb179" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><span class="fu" style="color: #4758AB;
@@ -5487,7 +5487,7 @@ font-style: inherit;">::</span>summarise</span></code></pre></div>
 #&gt;     }
 #&gt;     UseMethod("summarise")
 #&gt; }
-#&gt; &lt;bytecode: 0x1048f6270&gt;
+#&gt; &lt;bytecode: 0x11bb328e8&gt;
 #&gt; &lt;environment: namespace:dplyr&gt;</code></pre>
 </div>
 </div>
@@ -5516,7 +5516,7 @@ font-style: inherit;">:::</span>summarise.data.frame</span></code></pre></div>
 #&gt;     }
 #&gt;     out
 #&gt; }
-#&gt; &lt;bytecode: 0x157240038&gt;
+#&gt; &lt;bytecode: 0x1098716a0&gt;
 #&gt; &lt;environment: namespace:dplyr&gt;</code></pre>
 </div>
 </div>
@@ -5613,7 +5613,7 @@ font-style: inherit;">::</span>aes</span></code></pre></div>
 #&gt;     aes &lt;- new_aes(args, env = parent.frame())
 #&gt;     rename_aes(aes)
 #&gt; }
-#&gt; &lt;bytecode: 0x1049b5ad0&gt;
+#&gt; &lt;bytecode: 0x12c03fe18&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -5634,7 +5634,7 @@ font-style: inherit;">::</span>expr</span></code></pre></div>
 #&gt; {
 #&gt;     enexpr(expr)
 #&gt; }
-#&gt; &lt;bytecode: 0x117136ae0&gt;
+#&gt; &lt;bytecode: 0x10dda4c20&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb304" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb304-1">rlang<span class="sc" style="color: #5E5E5E;
@@ -5645,7 +5645,7 @@ font-style: inherit;">::</span>enexpr</span></code></pre></div>
 #&gt; {
 #&gt;     .Call(ffi_enexpr, substitute(arg), parent.frame())
 #&gt; }
-#&gt; &lt;bytecode: 0x1175b1ce0&gt;
+#&gt; &lt;bytecode: 0x10d40c0b0&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 </div>
@@ -6713,7 +6713,7 @@ font-style: inherit;">envir =</span> .env)</span>
 #&gt;     }
 #&gt;     structure(as.integer(ans + 1L), levels = lvs, class = "factor")
 #&gt; }
-#&gt; &lt;bytecode: 0x1068e17f0&gt;
+#&gt; &lt;bytecode: 0x10ce611a8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb407" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb407-1">expand.grid</span></code></pre></div>
@@ -6768,7 +6768,7 @@ font-style: inherit;">envir =</span> .env)</span>
 #&gt;     rn &lt;- .set_row_names(as.integer(prod(d)))
 #&gt;     structure(cargs, class = "data.frame", row.names = rn)
 #&gt; }
-#&gt; &lt;bytecode: 0x117143070&gt;
+#&gt; &lt;bytecode: 0x10cec8bc8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb409" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb409-1">par</span></code></pre></div>
@@ -6799,7 +6799,7 @@ font-style: inherit;">envir =</span> .env)</span>
 #&gt;         invisible(value)
 #&gt;     else value
 #&gt; }
-#&gt; &lt;bytecode: 0x121acd7d0&gt;
+#&gt; &lt;bytecode: 0x14bcf8e00&gt;
 #&gt; &lt;environment: namespace:graphics&gt;</code></pre>
 </div>
 </div>
@@ -7063,7 +7063,7 @@ background-color: null;
 font-style: inherit;">0</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(x) log(x)
-#&gt; &lt;environment: 0x10482bd28&gt;</code></pre>
+#&gt; &lt;environment: 0x15ba2b518&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb424" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb424-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -7072,8 +7072,8 @@ background-color: null;
 font-style: inherit;">2</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(x) (x^lambda - 1) / lambda
-#&gt; &lt;bytecode: 0x104a6f1a8&gt;
-#&gt; &lt;environment: 0x12180baf8&gt;</code></pre>
+#&gt; &lt;bytecode: 0x11bc76958&gt;
+#&gt; &lt;environment: 0x10e045d50&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb426" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb426-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -7268,7 +7268,7 @@ font-style: inherit;">0</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; log(x)
-#&gt; &lt;environment: 0x1055f0080&gt;</code></pre>
+#&gt; &lt;environment: 0x10cc77f00&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb440" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb440-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -7278,7 +7278,7 @@ font-style: inherit;">2</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; (x^2 - 1)/2
-#&gt; &lt;environment: 0x10564b830&gt;</code></pre>
+#&gt; &lt;environment: 0x10cce1130&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb442" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb442-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -7316,7 +7316,7 @@ background-color: null;
 font-style: inherit;">compose</span>(sum, as.integer)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(...) f(g(...))
-#&gt; &lt;environment: 0x1068453c0&gt;</code></pre>
+#&gt; &lt;environment: 0x109a479e8&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb446" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb446-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -7410,8 +7410,8 @@ background-color: null;
 font-style: inherit;">compose</span>(sin, cos)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(...) f(g(...))
-#&gt; &lt;bytecode: 0x1069a4de0&gt;
-#&gt; &lt;environment: 0x1175c6370&gt;</code></pre>
+#&gt; &lt;bytecode: 0x10cf21760&gt;
+#&gt; &lt;environment: 0x10ed67eb8&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb451" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb451-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -7425,7 +7425,7 @@ font-style: inherit;">compose2</span>(sin, cos)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (...) 
 #&gt; sin(cos(...))
-#&gt; &lt;environment: 0x1172f6378&gt;</code></pre>
+#&gt; &lt;environment: 0x10ec82e70&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb455" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb455-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -8688,7 +8688,7 @@ font-style: inherit;">"Blues"</span></span>
 #&gt;             half_line, half_line, half_line), complete = TRUE)
 #&gt;     ggplot_global$theme_all_null %+replace% t
 #&gt; }
-#&gt; &lt;bytecode: 0x105afd000&gt;
+#&gt; &lt;bytecode: 0x10d547908&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -8711,7 +8711,7 @@ font-style: inherit;">"Blues"</span></span>
 #&gt;     discrete_scale(aesthetics, name = name, palette = pal_brewer(type, 
 #&gt;         palette, direction), ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x1058f7e20&gt;
+#&gt; &lt;bytecode: 0x10c23c910&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -8740,7 +8740,7 @@ font-style: inherit;">::</span>brewer_pal</span></code></pre></div>
 #&gt;         pal
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x11686db68&gt;
+#&gt; &lt;bytecode: 0x10d2ad440&gt;
 #&gt; &lt;environment: namespace:scales&gt;</code></pre>
 </div>
 </div>
@@ -8800,7 +8800,7 @@ font-style: inherit;">wesanderson_pal</span>(name, type), ...)</span>
 #&gt;         begin, end, direction, option)(6), values, space), na.value = na.value, 
 #&gt;         guide = guide, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x107ab2320&gt;
+#&gt; &lt;bytecode: 0x104df6ab8&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -18557,7 +18557,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 #&gt;     class(f) &lt;- c(if (ordered) "ordered", "factor")
 #&gt;     f
 #&gt; }
-#&gt; &lt;bytecode: 0x12e109108&gt;
+#&gt; &lt;bytecode: 0x14e910bc8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -18902,14 +18902,14 @@ font-style: inherit;">t</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; UseMethod("t")
-#&gt; &lt;bytecode: 0x10a9c1938&gt;
+#&gt; &lt;bytecode: 0x10f9ffa50&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb99" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1">t.test</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("t.test")
-#&gt; &lt;bytecode: 0x12d743dd0&gt;
+#&gt; &lt;bytecode: 0x11da85180&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -18930,8 +18930,8 @@ font-style: inherit;">s3_dispatch</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">t</span>(x))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; =&gt; t.test
-#&gt;  * t.default</code></pre>
+<pre><code>#&gt;    t.test
+#&gt; =&gt; t.default</code></pre>
 </div>
 </div>
 <p>AR Solutions: We can see that <code>t.test()</code> is a generic because it calls <code>UseMethod()</code>.</p>
@@ -19170,85 +19170,85 @@ font-style: inherit;">desc</span>(method_count))</span></code></pre></div>
 #&gt; 59                                   ls            3
 #&gt; 60                                match            3
 #&gt; 61                                merge            3
-#&gt; 62                               pretty            3
-#&gt; 63                          row.names&lt;-            3
-#&gt; 64                                  seq            3
-#&gt; 65                                 sort            3
-#&gt; 66                            transform            3
-#&gt; 67                                    *            2
-#&gt; 68                                    /            2
-#&gt; 69                                aperm            2
-#&gt; 70                           as.integer            2
-#&gt; 71                             as.table            2
-#&gt; 72                               body&lt;-            2
-#&gt; 73                                   by            2
-#&gt; 74                                dim&lt;-            2
-#&gt; 75                             dimnames            2
-#&gt; 76                                  dir            2
-#&gt; 77                                 drop            2
-#&gt; 78                           droplevels            2
-#&gt; 79             getDLLRegisteredRoutines            2
-#&gt; 80                            intersect            2
-#&gt; 81                            is.finite            2
-#&gt; 82                          is.infinite            2
-#&gt; 83                               is.nan            2
-#&gt; 84                               julian            2
-#&gt; 85                              library            2
-#&gt; 86                                 list            2
-#&gt; 87                                  max            2
-#&gt; 88                                  min            2
-#&gt; 89                               months            2
-#&gt; 90                                   qr            2
-#&gt; 91                             quarters            2
-#&gt; 92                                range            2
-#&gt; 93                                rbind            2
-#&gt; 94                                  rev            2
-#&gt; 95                                round            2
-#&gt; 96                            row.names            2
-#&gt; 97                               rowsum            2
-#&gt; 98                              setdiff            2
-#&gt; 99                             setequal            2
-#&gt; 100                               solve            2
-#&gt; 101                             split&lt;-            2
-#&gt; 102                              system            2
-#&gt; 103                               trunc            2
-#&gt; 104                               union            2
-#&gt; 105                              unlist            2
-#&gt; 106                            weekdays            2
-#&gt; 107                               which            2
-#&gt; 108                              within            2
-#&gt; 109                                  !=            1
-#&gt; 110                                 %/%            1
-#&gt; 111                                  %%            1
-#&gt; 112                                   ^            1
-#&gt; 113                                   &lt;            1
-#&gt; 114                                  &lt;=            1
-#&gt; 115                                  ==            1
-#&gt; 116                                   &gt;            1
-#&gt; 117                                  &gt;=            1
-#&gt; 118                            as.array            1
-#&gt; 119                      as.environment            1
-#&gt; 120                       as.expression            1
-#&gt; 121                         as.function            1
-#&gt; 122                             as.null            1
-#&gt; 123                           as.single            1
-#&gt; 124                                attr            1
-#&gt; 125                                chol            1
-#&gt; 126                     chooseOpsMethod            1
-#&gt; 127                       conditionCall            1
-#&gt; 128                         determinant            1
-#&gt; 129                                 dim            1
-#&gt; 130                                dump            1
-#&gt; 131                                eval            1
-#&gt; 132                              factor            1
-#&gt; 133                               flush            1
-#&gt; 134                                  gc            1
-#&gt; 135                         interaction            1
-#&gt; 136                         isSymmetric            1
-#&gt; 137                           kronecker            1
-#&gt; 138                             lengths            1
-#&gt; 139                       library.dynam            1
-#&gt; 140                               mtfrm            1
+#&gt; 62                                mtfrm            3
+#&gt; 63                               pretty            3
+#&gt; 64                          row.names&lt;-            3
+#&gt; 65                                  seq            3
+#&gt; 66                                 sort            3
+#&gt; 67                            transform            3
+#&gt; 68                                    *            2
+#&gt; 69                                    /            2
+#&gt; 70                                aperm            2
+#&gt; 71                           as.integer            2
+#&gt; 72                             as.table            2
+#&gt; 73                               body&lt;-            2
+#&gt; 74                                   by            2
+#&gt; 75                                dim&lt;-            2
+#&gt; 76                             dimnames            2
+#&gt; 77                                  dir            2
+#&gt; 78                                 drop            2
+#&gt; 79                           droplevels            2
+#&gt; 80             getDLLRegisteredRoutines            2
+#&gt; 81                            intersect            2
+#&gt; 82                            is.finite            2
+#&gt; 83                          is.infinite            2
+#&gt; 84                               is.nan            2
+#&gt; 85                               julian            2
+#&gt; 86                              library            2
+#&gt; 87                                 list            2
+#&gt; 88                                  max            2
+#&gt; 89                                  min            2
+#&gt; 90                               months            2
+#&gt; 91                                   qr            2
+#&gt; 92                             quarters            2
+#&gt; 93                                range            2
+#&gt; 94                                rbind            2
+#&gt; 95                                  rev            2
+#&gt; 96                                round            2
+#&gt; 97                            row.names            2
+#&gt; 98                               rowsum            2
+#&gt; 99                              setdiff            2
+#&gt; 100                            setequal            2
+#&gt; 101                               solve            2
+#&gt; 102                             split&lt;-            2
+#&gt; 103                              system            2
+#&gt; 104                               trunc            2
+#&gt; 105                               union            2
+#&gt; 106                              unlist            2
+#&gt; 107                            weekdays            2
+#&gt; 108                               which            2
+#&gt; 109                              within            2
+#&gt; 110                                  !=            1
+#&gt; 111                                 %/%            1
+#&gt; 112                                  %%            1
+#&gt; 113                                   ^            1
+#&gt; 114                                   &lt;            1
+#&gt; 115                                  &lt;=            1
+#&gt; 116                                  ==            1
+#&gt; 117                                   &gt;            1
+#&gt; 118                                  &gt;=            1
+#&gt; 119                            as.array            1
+#&gt; 120                      as.environment            1
+#&gt; 121                       as.expression            1
+#&gt; 122                         as.function            1
+#&gt; 123                             as.null            1
+#&gt; 124                           as.single            1
+#&gt; 125                                attr            1
+#&gt; 126                                chol            1
+#&gt; 127                     chooseOpsMethod            1
+#&gt; 128                       conditionCall            1
+#&gt; 129                         determinant            1
+#&gt; 130                                 dim            1
+#&gt; 131                                dump            1
+#&gt; 132                                eval            1
+#&gt; 133                              factor            1
+#&gt; 134                               flush            1
+#&gt; 135                                  gc            1
+#&gt; 136                         interaction            1
+#&gt; 137                         isSymmetric            1
+#&gt; 138                           kronecker            1
+#&gt; 139                             lengths            1
+#&gt; 140                       library.dynam            1
 #&gt; 141                         nameOfClass            1
 #&gt; 142                               order            1
 #&gt; 143                                pmax            1
@@ -20000,458 +20000,460 @@ font-style: inherit;">desc</span>(method_count))</span></code></pre></div>
 #&gt; 889                       months.POSIXt            0
 #&gt; 890                    mostattributes&lt;-            0
 #&gt; 891                       mtfrm.default            0
-#&gt; 892                 nameOfClass.default            0
-#&gt; 893                       names.POSIXlt            0
-#&gt; 894                     names&lt;-.POSIXlt            0
-#&gt; 895                     namespaceExport            0
-#&gt; 896                     namespaceImport            0
-#&gt; 897              namespaceImportClasses            0
-#&gt; 898                 namespaceImportFrom            0
-#&gt; 899              namespaceImportMethods            0
-#&gt; 900                               nargs            0
-#&gt; 901                               nchar            0
-#&gt; 902                                ncol            0
-#&gt; 903                                NCOL            0
-#&gt; 904                              Negate            0
-#&gt; 905                             new.env            0
-#&gt; 906                                next            0
-#&gt; 907                          NextMethod            0
-#&gt; 908                            ngettext            0
-#&gt; 909                             nlevels            0
-#&gt; 910                             noquote            0
-#&gt; 911                                norm            0
-#&gt; 912                       normalizePath            0
-#&gt; 913                                nrow            0
-#&gt; 914                                NROW            0
-#&gt; 915                            nullfile            0
-#&gt; 916                             numeric            0
-#&gt; 917                     numeric_version            0
-#&gt; 918                           numToBits            0
-#&gt; 919                           numToInts            0
-#&gt; 920                              nzchar            0
-#&gt; 921                             objects            0
-#&gt; 922                            oldClass            0
-#&gt; 923                          oldClass&lt;-            0
-#&gt; 924                          OlsonNames            0
-#&gt; 925                             on.exit            0
-#&gt; 926                     open.connection            0
-#&gt; 927                        open.srcfile            0
-#&gt; 928                   open.srcfilealias            0
-#&gt; 929                    open.srcfilecopy            0
-#&gt; 930                      Ops.data.frame            0
-#&gt; 931                            Ops.Date            0
-#&gt; 932                        Ops.difftime            0
-#&gt; 933                          Ops.factor            0
-#&gt; 934                 Ops.numeric_version            0
-#&gt; 935                         Ops.ordered            0
-#&gt; 936                          Ops.POSIXt            0
-#&gt; 937                             options            0
-#&gt; 938                             ordered            0
-#&gt; 939                               outer            0
-#&gt; 940                     package_version            0
-#&gt; 941                        packageEvent            0
-#&gt; 942                 packageHasNamespace            0
-#&gt; 943                packageNotFoundError            0
-#&gt; 944               packageStartupMessage            0
-#&gt; 945                            packBits            0
-#&gt; 946                            pairlist            0
-#&gt; 947                          parent.env            0
-#&gt; 948                        parent.env&lt;-            0
-#&gt; 949                        parent.frame            0
-#&gt; 950                               parse            0
-#&gt; 951                  parseNamespaceFile            0
-#&gt; 952                               paste            0
-#&gt; 953                              paste0            0
-#&gt; 954                         path.expand            0
-#&gt; 955                        path.package            0
-#&gt; 956                         pcre_config            0
-#&gt; 957                                pipe            0
-#&gt; 958                              pmatch            0
-#&gt; 959                            pmax.int            0
-#&gt; 960                            pmin.int            0
-#&gt; 961                            polyroot            0
-#&gt; 962                          pos.to.env            0
-#&gt; 963                            Position            0
-#&gt; 964                      pretty.default            0
-#&gt; 965                           prettyNum            0
-#&gt; 966                          print.AsIs            0
-#&gt; 967                            print.by            0
-#&gt; 968                     print.condition            0
-#&gt; 969                    print.connection            0
-#&gt; 970                    print.data.frame            0
-#&gt; 971                          print.Date            0
-#&gt; 972                       print.default            0
-#&gt; 973                      print.difftime            0
-#&gt; 974                         print.Dlist            0
-#&gt; 975                       print.DLLInfo            0
-#&gt; 976                   print.DLLInfoList            0
-#&gt; 977         print.DLLRegisteredRoutines            0
-#&gt; 978                         print.eigen            0
-#&gt; 979                        print.factor            0
-#&gt; 980                      print.function            0
-#&gt; 981                       print.hexmode            0
-#&gt; 982                    print.libraryIQR            0
-#&gt; 983                        print.listof            0
-#&gt; 984             print.NativeRoutineList            0
-#&gt; 985                       print.noquote            0
-#&gt; 986               print.numeric_version            0
-#&gt; 987                       print.octmode            0
-#&gt; 988                   print.packageInfo            0
-#&gt; 989                       print.POSIXct            0
-#&gt; 990                       print.POSIXlt            0
-#&gt; 991                     print.proc_time            0
-#&gt; 992                       print.restart            0
-#&gt; 993                           print.rle            0
-#&gt; 994                   print.simple.list            0
-#&gt; 995                       print.srcfile            0
-#&gt; 996                        print.srcref            0
-#&gt; 997                 print.summary.table            0
-#&gt; 998              print.summary.warnings            0
-#&gt; 999                print.summaryDefault            0
-#&gt; 1000                        print.table            0
-#&gt; 1001                     print.warnings            0
-#&gt; 1002                           prmatrix            0
-#&gt; 1003                          proc.time            0
-#&gt; 1004                               prod            0
-#&gt; 1005                         prop.table            0
-#&gt; 1006                        proportions            0
-#&gt; 1007                    provideDimnames            0
-#&gt; 1008                           psigamma            0
-#&gt; 1009                           pushBack            0
-#&gt; 1010                     pushBackLength            0
-#&gt; 1011                                  q            0
-#&gt; 1012                            qr.coef            0
-#&gt; 1013                         qr.default            0
-#&gt; 1014                          qr.fitted            0
-#&gt; 1015                               qr.Q            0
-#&gt; 1016                             qr.qty            0
-#&gt; 1017                              qr.qy            0
-#&gt; 1018                               qr.R            0
-#&gt; 1019                           qr.resid            0
-#&gt; 1020                           qr.solve            0
-#&gt; 1021                               qr.X            0
-#&gt; 1022                      quarters.Date            0
-#&gt; 1023                    quarters.POSIXt            0
-#&gt; 1024                               quit            0
-#&gt; 1025                              quote            0
-#&gt; 1026                      R_compiled_by            0
-#&gt; 1027                   R_system_version            0
-#&gt; 1028                             R.home            0
-#&gt; 1029                          R.Version            0
-#&gt; 1030                      range.default            0
-#&gt; 1031                               rank            0
-#&gt; 1032                             rapply            0
-#&gt; 1033                                raw            0
-#&gt; 1034                      rawConnection            0
-#&gt; 1035                 rawConnectionValue            0
-#&gt; 1036                           rawShift            0
-#&gt; 1037                          rawToBits            0
-#&gt; 1038                          rawToChar            0
-#&gt; 1039                   rbind.data.frame            0
-#&gt; 1040                              rcond            0
-#&gt; 1041                                 Re            0
-#&gt; 1042                           read.dcf            0
-#&gt; 1043                            readBin            0
-#&gt; 1044                           readChar            0
-#&gt; 1045                           readline            0
-#&gt; 1046                          readLines            0
-#&gt; 1047                            readRDS            0
-#&gt; 1048                       readRenviron            0
-#&gt; 1049                             Recall            0
-#&gt; 1050                             Reduce            0
-#&gt; 1051                      reg.finalizer            0
-#&gt; 1052                            regexec            0
-#&gt; 1053                            regexpr            0
-#&gt; 1054                   registerS3method            0
-#&gt; 1055                  registerS3methods            0
-#&gt; 1056                         regmatches            0
-#&gt; 1057                       regmatches&lt;-            0
-#&gt; 1058                 removeTaskCallback            0
-#&gt; 1059                            rep_len            0
-#&gt; 1060                           rep.Date            0
-#&gt; 1061                       rep.difftime            0
-#&gt; 1062                         rep.factor            0
-#&gt; 1063                            rep.int            0
-#&gt; 1064                rep.numeric_version            0
-#&gt; 1065                        rep.POSIXct            0
-#&gt; 1066                        rep.POSIXlt            0
-#&gt; 1067                             repeat            0
-#&gt; 1068                            replace            0
-#&gt; 1069                          replicate            0
-#&gt; 1070                            require            0
-#&gt; 1071                   requireNamespace            0
-#&gt; 1072                 restartDescription            0
-#&gt; 1073                     restartFormals            0
-#&gt; 1074                         retracemem            0
-#&gt; 1075                             return            0
-#&gt; 1076                        returnValue            0
-#&gt; 1077                        rev.default            0
-#&gt; 1078                                rle            0
-#&gt; 1079                                 rm            0
-#&gt; 1080                            RNGkind            0
-#&gt; 1081                         RNGversion            0
-#&gt; 1082                         round.Date            0
-#&gt; 1083                       round.POSIXt            0
-#&gt; 1084               row.names.data.frame            0
-#&gt; 1085                  row.names.default            0
-#&gt; 1086             row.names&lt;-.data.frame            0
-#&gt; 1087                row.names&lt;-.default            0
-#&gt; 1088                           rowMeans            0
-#&gt; 1089                           rownames            0
-#&gt; 1090                         rownames&lt;-            0
-#&gt; 1091                  rowsum.data.frame            0
-#&gt; 1092                     rowsum.default            0
-#&gt; 1093                            rowSums            0
-#&gt; 1094                         sample.int            0
-#&gt; 1095                             sapply            0
-#&gt; 1096                         save.image            0
-#&gt; 1097                            saveRDS            0
-#&gt; 1098                      scale.default            0
-#&gt; 1099                               scan            0
-#&gt; 1100                             search            0
-#&gt; 1101                        searchpaths            0
-#&gt; 1102                    seek.connection            0
-#&gt; 1103                          seq_along            0
-#&gt; 1104                            seq_len            0
-#&gt; 1105                           seq.Date            0
-#&gt; 1106                        seq.default            0
-#&gt; 1107                            seq.int            0
-#&gt; 1108                         seq.POSIXt            0
-#&gt; 1109                   sequence.default            0
-#&gt; 1110                          serialize            0
-#&gt; 1111                       serverSocket            0
-#&gt; 1112                           set.seed            0
-#&gt; 1113                            setHook            0
-#&gt; 1114                   setNamespaceInfo            0
-#&gt; 1115                setSessionTimeLimit            0
-#&gt; 1116                       setTimeLimit            0
-#&gt; 1117                              setwd            0
-#&gt; 1118                    showConnections            0
-#&gt; 1119                            shQuote            0
-#&gt; 1120                               sign            0
-#&gt; 1121                    signalCondition            0
-#&gt; 1122                             signif            0
-#&gt; 1123                    simpleCondition            0
-#&gt; 1124                        simpleError            0
-#&gt; 1125                      simpleMessage            0
-#&gt; 1126                      simpleWarning            0
-#&gt; 1127                     simplify2array            0
-#&gt; 1128                                sin            0
-#&gt; 1129                             single            0
-#&gt; 1130                               sinh            0
-#&gt; 1131                        sink.number            0
-#&gt; 1132                              sinpi            0
-#&gt; 1133                        slice.index            0
-#&gt; 1134                       socketAccept            0
-#&gt; 1135                   socketConnection            0
-#&gt; 1136                       socketSelect            0
-#&gt; 1137                      socketTimeout            0
-#&gt; 1138                      solve.default            0
-#&gt; 1139                           solve.qr            0
-#&gt; 1140                       sort.default            0
-#&gt; 1141                           sort.int            0
-#&gt; 1142                          sort.list            0
-#&gt; 1143                       sort.POSIXlt            0
-#&gt; 1144                             source            0
-#&gt; 1145                   split.data.frame            0
-#&gt; 1146                         split.Date            0
-#&gt; 1147                      split.default            0
-#&gt; 1148                      split.POSIXct            0
-#&gt; 1149                 split&lt;-.data.frame            0
-#&gt; 1150                    split&lt;-.default            0
-#&gt; 1151                            sprintf            0
-#&gt; 1152                               sqrt            0
-#&gt; 1153                             sQuote            0
-#&gt; 1154                            srcfile            0
-#&gt; 1155                       srcfilealias            0
-#&gt; 1156                        srcfilecopy            0
-#&gt; 1157                             srcref            0
-#&gt; 1158                    standardGeneric            0
-#&gt; 1159                         startsWith            0
-#&gt; 1160                             stderr            0
-#&gt; 1161                              stdin            0
-#&gt; 1162                             stdout            0
-#&gt; 1163                               stop            0
-#&gt; 1164                          stopifnot            0
-#&gt; 1165                       storage.mode            0
-#&gt; 1166                     storage.mode&lt;-            0
-#&gt; 1167                     str2expression            0
-#&gt; 1168                           str2lang            0
-#&gt; 1169                           strftime            0
-#&gt; 1170                           strptime            0
-#&gt; 1171                             strrep            0
-#&gt; 1172                           strsplit            0
-#&gt; 1173                             strtoi            0
-#&gt; 1174                            strtrim            0
-#&gt; 1175                          structure            0
-#&gt; 1176                            strwrap            0
-#&gt; 1177                                sub            0
-#&gt; 1178                  subset.data.frame            0
-#&gt; 1179                     subset.default            0
-#&gt; 1180                      subset.matrix            0
-#&gt; 1181                         substitute            0
-#&gt; 1182                             substr            0
-#&gt; 1183                           substr&lt;-            0
-#&gt; 1184                          substring            0
-#&gt; 1185                        substring&lt;-            0
-#&gt; 1186                 summary.connection            0
-#&gt; 1187                 summary.data.frame            0
-#&gt; 1188                 Summary.data.frame            0
-#&gt; 1189                       summary.Date            0
-#&gt; 1190                       Summary.Date            0
-#&gt; 1191                    summary.default            0
-#&gt; 1192                   Summary.difftime            0
-#&gt; 1193                     summary.factor            0
-#&gt; 1194                     Summary.factor            0
-#&gt; 1195                     summary.matrix            0
-#&gt; 1196            Summary.numeric_version            0
-#&gt; 1197                    Summary.ordered            0
-#&gt; 1198                    summary.POSIXct            0
-#&gt; 1199                    Summary.POSIXct            0
-#&gt; 1200                    summary.POSIXlt            0
-#&gt; 1201                    Summary.POSIXlt            0
-#&gt; 1202                  summary.proc_time            0
-#&gt; 1203                    summary.srcfile            0
-#&gt; 1204                     summary.srcref            0
-#&gt; 1205                      summary.table            0
-#&gt; 1206                   summary.warnings            0
-#&gt; 1207                   suppressMessages            0
-#&gt; 1208     suppressPackageStartupMessages            0
-#&gt; 1209                   suppressWarnings            0
-#&gt; 1210                  suspendInterrupts            0
-#&gt; 1211                                svd            0
-#&gt; 1212                              sweep            0
-#&gt; 1213                             switch            0
-#&gt; 1214                           sys.call            0
-#&gt; 1215                          sys.calls            0
-#&gt; 1216                          Sys.chmod            0
-#&gt; 1217                           Sys.Date            0
-#&gt; 1218                          sys.frame            0
-#&gt; 1219                         sys.frames            0
-#&gt; 1220                       sys.function            0
-#&gt; 1221                         Sys.getenv            0
-#&gt; 1222                      Sys.getlocale            0
-#&gt; 1223                         Sys.getpid            0
-#&gt; 1224                           Sys.glob            0
-#&gt; 1225                           Sys.info            0
-#&gt; 1226                     sys.load.image            0
-#&gt; 1227                     Sys.localeconv            0
-#&gt; 1228                         sys.nframe            0
-#&gt; 1229                        sys.on.exit            0
-#&gt; 1230                         sys.parent            0
-#&gt; 1231                        sys.parents            0
-#&gt; 1232                       Sys.readlink            0
-#&gt; 1233                     sys.save.image            0
-#&gt; 1234                         Sys.setenv            0
-#&gt; 1235                    Sys.setFileTime            0
-#&gt; 1236                    Sys.setLanguage            0
-#&gt; 1237                      Sys.setlocale            0
-#&gt; 1238                          Sys.sleep            0
-#&gt; 1239                         sys.source            0
-#&gt; 1240                         sys.status            0
-#&gt; 1241                           Sys.time            0
-#&gt; 1242                       Sys.timezone            0
-#&gt; 1243                          Sys.umask            0
-#&gt; 1244                       Sys.unsetenv            0
-#&gt; 1245                          Sys.which            0
-#&gt; 1246                        system.file            0
-#&gt; 1247                        system.time            0
-#&gt; 1248                            system2            0
-#&gt; 1249                       t.data.frame            0
-#&gt; 1250                          t.default            0
-#&gt; 1251                              table            0
-#&gt; 1252                           tabulate            0
-#&gt; 1253                                tan            0
-#&gt; 1254                               tanh            0
-#&gt; 1255                              tanpi            0
-#&gt; 1256                             tapply            0
-#&gt; 1257                taskCallbackManager            0
-#&gt; 1258                         tcrossprod            0
-#&gt; 1259                            tempdir            0
-#&gt; 1260                           tempfile            0
-#&gt; 1261                     textConnection            0
-#&gt; 1262                textConnectionValue            0
-#&gt; 1263                            tolower            0
-#&gt; 1264                             topenv            0
-#&gt; 1265                   toString.default            0
-#&gt; 1266                            toupper            0
-#&gt; 1267                              trace            0
-#&gt; 1268                          traceback            0
-#&gt; 1269                           tracemem            0
-#&gt; 1270                       tracingState            0
-#&gt; 1271               transform.data.frame            0
-#&gt; 1272                  transform.default            0
-#&gt; 1273                           trigamma            0
-#&gt; 1274                             trimws            0
-#&gt; 1275                         trunc.Date            0
-#&gt; 1276                       trunc.POSIXt            0
-#&gt; 1277                truncate.connection            0
-#&gt; 1278                                try            0
-#&gt; 1279                           tryCatch            0
-#&gt; 1280                   tryInvokeRestart            0
-#&gt; 1281                             typeof            0
-#&gt; 1282                     unCfillPOSIXlt            0
-#&gt; 1283                            unclass            0
-#&gt; 1284                            undebug            0
-#&gt; 1285                       unique.array            0
-#&gt; 1286                  unique.data.frame            0
-#&gt; 1287                     unique.default            0
-#&gt; 1288                      unique.matrix            0
-#&gt; 1289             unique.numeric_version            0
-#&gt; 1290                     unique.POSIXlt            0
-#&gt; 1291                    unique.warnings            0
-#&gt; 1292                     units.difftime            0
-#&gt; 1293                   units&lt;-.difftime            0
-#&gt; 1294                          unix.time            0
-#&gt; 1295                             unlink            0
-#&gt; 1296                    unloadNamespace            0
-#&gt; 1297                      unlockBinding            0
-#&gt; 1298                             unname            0
-#&gt; 1299                        unserialize            0
-#&gt; 1300                            unsplit            0
-#&gt; 1301                            untrace            0
-#&gt; 1302                         untracemem            0
-#&gt; 1303                                unz            0
-#&gt; 1304                          upper.tri            0
-#&gt; 1305                          UseMethod            0
-#&gt; 1306                          utf8ToInt            0
-#&gt; 1307                           validEnc            0
-#&gt; 1308                          validUTF8            0
-#&gt; 1309                             vapply            0
-#&gt; 1310                             vector            0
-#&gt; 1311                          Vectorize            0
-#&gt; 1312                            warning            0
-#&gt; 1313                   warningCondition            0
-#&gt; 1314                           warnings            0
-#&gt; 1315                      weekdays.Date            0
-#&gt; 1316                    weekdays.POSIXt            0
-#&gt; 1317                          which.max            0
-#&gt; 1318                          which.min            0
-#&gt; 1319                              while            0
-#&gt; 1320                       with.default            0
-#&gt; 1321                      withAutoprint            0
-#&gt; 1322                withCallingHandlers            0
-#&gt; 1323                  within.data.frame            0
-#&gt; 1324                        within.list            0
-#&gt; 1325                       withRestarts            0
-#&gt; 1326                        withVisible            0
-#&gt; 1327                          write.dcf            0
-#&gt; 1328                           writeBin            0
-#&gt; 1329                          writeChar            0
-#&gt; 1330                         writeLines            0
-#&gt; 1331                                xor            0
-#&gt; 1332                 xpdrows.data.frame            0
-#&gt; 1333                         xtfrm.AsIs            0
-#&gt; 1334                   xtfrm.data.frame            0
-#&gt; 1335                         xtfrm.Date            0
-#&gt; 1336                      xtfrm.default            0
-#&gt; 1337                     xtfrm.difftime            0
-#&gt; 1338                       xtfrm.factor            0
-#&gt; 1339              xtfrm.numeric_version            0
-#&gt; 1340                      xtfrm.POSIXct            0
-#&gt; 1341                      xtfrm.POSIXlt            0
-#&gt; 1342                             xzfile            0
-#&gt; 1343                           zapsmall            0</code></pre>
+#&gt; 892                       mtfrm.POSIXct            0
+#&gt; 893                       mtfrm.POSIXlt            0
+#&gt; 894                 nameOfClass.default            0
+#&gt; 895                       names.POSIXlt            0
+#&gt; 896                     names&lt;-.POSIXlt            0
+#&gt; 897                     namespaceExport            0
+#&gt; 898                     namespaceImport            0
+#&gt; 899              namespaceImportClasses            0
+#&gt; 900                 namespaceImportFrom            0
+#&gt; 901              namespaceImportMethods            0
+#&gt; 902                               nargs            0
+#&gt; 903                               nchar            0
+#&gt; 904                                ncol            0
+#&gt; 905                                NCOL            0
+#&gt; 906                              Negate            0
+#&gt; 907                             new.env            0
+#&gt; 908                                next            0
+#&gt; 909                          NextMethod            0
+#&gt; 910                            ngettext            0
+#&gt; 911                             nlevels            0
+#&gt; 912                             noquote            0
+#&gt; 913                                norm            0
+#&gt; 914                       normalizePath            0
+#&gt; 915                                nrow            0
+#&gt; 916                                NROW            0
+#&gt; 917                            nullfile            0
+#&gt; 918                             numeric            0
+#&gt; 919                     numeric_version            0
+#&gt; 920                           numToBits            0
+#&gt; 921                           numToInts            0
+#&gt; 922                              nzchar            0
+#&gt; 923                             objects            0
+#&gt; 924                            oldClass            0
+#&gt; 925                          oldClass&lt;-            0
+#&gt; 926                          OlsonNames            0
+#&gt; 927                             on.exit            0
+#&gt; 928                     open.connection            0
+#&gt; 929                        open.srcfile            0
+#&gt; 930                   open.srcfilealias            0
+#&gt; 931                    open.srcfilecopy            0
+#&gt; 932                      Ops.data.frame            0
+#&gt; 933                            Ops.Date            0
+#&gt; 934                        Ops.difftime            0
+#&gt; 935                          Ops.factor            0
+#&gt; 936                 Ops.numeric_version            0
+#&gt; 937                         Ops.ordered            0
+#&gt; 938                          Ops.POSIXt            0
+#&gt; 939                             options            0
+#&gt; 940                             ordered            0
+#&gt; 941                               outer            0
+#&gt; 942                     package_version            0
+#&gt; 943                        packageEvent            0
+#&gt; 944                 packageHasNamespace            0
+#&gt; 945                packageNotFoundError            0
+#&gt; 946               packageStartupMessage            0
+#&gt; 947                            packBits            0
+#&gt; 948                            pairlist            0
+#&gt; 949                          parent.env            0
+#&gt; 950                        parent.env&lt;-            0
+#&gt; 951                        parent.frame            0
+#&gt; 952                               parse            0
+#&gt; 953                  parseNamespaceFile            0
+#&gt; 954                               paste            0
+#&gt; 955                              paste0            0
+#&gt; 956                         path.expand            0
+#&gt; 957                        path.package            0
+#&gt; 958                         pcre_config            0
+#&gt; 959                                pipe            0
+#&gt; 960                              pmatch            0
+#&gt; 961                            pmax.int            0
+#&gt; 962                            pmin.int            0
+#&gt; 963                            polyroot            0
+#&gt; 964                          pos.to.env            0
+#&gt; 965                            Position            0
+#&gt; 966                      pretty.default            0
+#&gt; 967                           prettyNum            0
+#&gt; 968                          print.AsIs            0
+#&gt; 969                            print.by            0
+#&gt; 970                     print.condition            0
+#&gt; 971                    print.connection            0
+#&gt; 972                    print.data.frame            0
+#&gt; 973                          print.Date            0
+#&gt; 974                       print.default            0
+#&gt; 975                      print.difftime            0
+#&gt; 976                         print.Dlist            0
+#&gt; 977                       print.DLLInfo            0
+#&gt; 978                   print.DLLInfoList            0
+#&gt; 979         print.DLLRegisteredRoutines            0
+#&gt; 980                         print.eigen            0
+#&gt; 981                        print.factor            0
+#&gt; 982                      print.function            0
+#&gt; 983                       print.hexmode            0
+#&gt; 984                    print.libraryIQR            0
+#&gt; 985                        print.listof            0
+#&gt; 986             print.NativeRoutineList            0
+#&gt; 987                       print.noquote            0
+#&gt; 988               print.numeric_version            0
+#&gt; 989                       print.octmode            0
+#&gt; 990                   print.packageInfo            0
+#&gt; 991                       print.POSIXct            0
+#&gt; 992                       print.POSIXlt            0
+#&gt; 993                     print.proc_time            0
+#&gt; 994                       print.restart            0
+#&gt; 995                           print.rle            0
+#&gt; 996                   print.simple.list            0
+#&gt; 997                       print.srcfile            0
+#&gt; 998                        print.srcref            0
+#&gt; 999                 print.summary.table            0
+#&gt; 1000             print.summary.warnings            0
+#&gt; 1001               print.summaryDefault            0
+#&gt; 1002                        print.table            0
+#&gt; 1003                     print.warnings            0
+#&gt; 1004                           prmatrix            0
+#&gt; 1005                          proc.time            0
+#&gt; 1006                               prod            0
+#&gt; 1007                         prop.table            0
+#&gt; 1008                        proportions            0
+#&gt; 1009                    provideDimnames            0
+#&gt; 1010                           psigamma            0
+#&gt; 1011                           pushBack            0
+#&gt; 1012                     pushBackLength            0
+#&gt; 1013                                  q            0
+#&gt; 1014                            qr.coef            0
+#&gt; 1015                         qr.default            0
+#&gt; 1016                          qr.fitted            0
+#&gt; 1017                               qr.Q            0
+#&gt; 1018                             qr.qty            0
+#&gt; 1019                              qr.qy            0
+#&gt; 1020                               qr.R            0
+#&gt; 1021                           qr.resid            0
+#&gt; 1022                           qr.solve            0
+#&gt; 1023                               qr.X            0
+#&gt; 1024                      quarters.Date            0
+#&gt; 1025                    quarters.POSIXt            0
+#&gt; 1026                               quit            0
+#&gt; 1027                              quote            0
+#&gt; 1028                      R_compiled_by            0
+#&gt; 1029                   R_system_version            0
+#&gt; 1030                             R.home            0
+#&gt; 1031                          R.Version            0
+#&gt; 1032                      range.default            0
+#&gt; 1033                               rank            0
+#&gt; 1034                             rapply            0
+#&gt; 1035                                raw            0
+#&gt; 1036                      rawConnection            0
+#&gt; 1037                 rawConnectionValue            0
+#&gt; 1038                           rawShift            0
+#&gt; 1039                          rawToBits            0
+#&gt; 1040                          rawToChar            0
+#&gt; 1041                   rbind.data.frame            0
+#&gt; 1042                              rcond            0
+#&gt; 1043                                 Re            0
+#&gt; 1044                           read.dcf            0
+#&gt; 1045                            readBin            0
+#&gt; 1046                           readChar            0
+#&gt; 1047                           readline            0
+#&gt; 1048                          readLines            0
+#&gt; 1049                            readRDS            0
+#&gt; 1050                       readRenviron            0
+#&gt; 1051                             Recall            0
+#&gt; 1052                             Reduce            0
+#&gt; 1053                      reg.finalizer            0
+#&gt; 1054                            regexec            0
+#&gt; 1055                            regexpr            0
+#&gt; 1056                   registerS3method            0
+#&gt; 1057                  registerS3methods            0
+#&gt; 1058                         regmatches            0
+#&gt; 1059                       regmatches&lt;-            0
+#&gt; 1060                 removeTaskCallback            0
+#&gt; 1061                            rep_len            0
+#&gt; 1062                           rep.Date            0
+#&gt; 1063                       rep.difftime            0
+#&gt; 1064                         rep.factor            0
+#&gt; 1065                            rep.int            0
+#&gt; 1066                rep.numeric_version            0
+#&gt; 1067                        rep.POSIXct            0
+#&gt; 1068                        rep.POSIXlt            0
+#&gt; 1069                             repeat            0
+#&gt; 1070                            replace            0
+#&gt; 1071                          replicate            0
+#&gt; 1072                            require            0
+#&gt; 1073                   requireNamespace            0
+#&gt; 1074                 restartDescription            0
+#&gt; 1075                     restartFormals            0
+#&gt; 1076                         retracemem            0
+#&gt; 1077                             return            0
+#&gt; 1078                        returnValue            0
+#&gt; 1079                        rev.default            0
+#&gt; 1080                                rle            0
+#&gt; 1081                                 rm            0
+#&gt; 1082                            RNGkind            0
+#&gt; 1083                         RNGversion            0
+#&gt; 1084                         round.Date            0
+#&gt; 1085                       round.POSIXt            0
+#&gt; 1086               row.names.data.frame            0
+#&gt; 1087                  row.names.default            0
+#&gt; 1088             row.names&lt;-.data.frame            0
+#&gt; 1089                row.names&lt;-.default            0
+#&gt; 1090                           rowMeans            0
+#&gt; 1091                           rownames            0
+#&gt; 1092                         rownames&lt;-            0
+#&gt; 1093                  rowsum.data.frame            0
+#&gt; 1094                     rowsum.default            0
+#&gt; 1095                            rowSums            0
+#&gt; 1096                         sample.int            0
+#&gt; 1097                             sapply            0
+#&gt; 1098                         save.image            0
+#&gt; 1099                            saveRDS            0
+#&gt; 1100                      scale.default            0
+#&gt; 1101                               scan            0
+#&gt; 1102                             search            0
+#&gt; 1103                        searchpaths            0
+#&gt; 1104                    seek.connection            0
+#&gt; 1105                          seq_along            0
+#&gt; 1106                            seq_len            0
+#&gt; 1107                           seq.Date            0
+#&gt; 1108                        seq.default            0
+#&gt; 1109                            seq.int            0
+#&gt; 1110                         seq.POSIXt            0
+#&gt; 1111                   sequence.default            0
+#&gt; 1112                          serialize            0
+#&gt; 1113                       serverSocket            0
+#&gt; 1114                           set.seed            0
+#&gt; 1115                            setHook            0
+#&gt; 1116                   setNamespaceInfo            0
+#&gt; 1117                setSessionTimeLimit            0
+#&gt; 1118                       setTimeLimit            0
+#&gt; 1119                              setwd            0
+#&gt; 1120                    showConnections            0
+#&gt; 1121                            shQuote            0
+#&gt; 1122                               sign            0
+#&gt; 1123                    signalCondition            0
+#&gt; 1124                             signif            0
+#&gt; 1125                    simpleCondition            0
+#&gt; 1126                        simpleError            0
+#&gt; 1127                      simpleMessage            0
+#&gt; 1128                      simpleWarning            0
+#&gt; 1129                     simplify2array            0
+#&gt; 1130                                sin            0
+#&gt; 1131                             single            0
+#&gt; 1132                               sinh            0
+#&gt; 1133                        sink.number            0
+#&gt; 1134                              sinpi            0
+#&gt; 1135                        slice.index            0
+#&gt; 1136                       socketAccept            0
+#&gt; 1137                   socketConnection            0
+#&gt; 1138                       socketSelect            0
+#&gt; 1139                      socketTimeout            0
+#&gt; 1140                      solve.default            0
+#&gt; 1141                           solve.qr            0
+#&gt; 1142                       sort.default            0
+#&gt; 1143                           sort.int            0
+#&gt; 1144                          sort.list            0
+#&gt; 1145                       sort.POSIXlt            0
+#&gt; 1146                             source            0
+#&gt; 1147                   split.data.frame            0
+#&gt; 1148                         split.Date            0
+#&gt; 1149                      split.default            0
+#&gt; 1150                      split.POSIXct            0
+#&gt; 1151                 split&lt;-.data.frame            0
+#&gt; 1152                    split&lt;-.default            0
+#&gt; 1153                            sprintf            0
+#&gt; 1154                               sqrt            0
+#&gt; 1155                             sQuote            0
+#&gt; 1156                            srcfile            0
+#&gt; 1157                       srcfilealias            0
+#&gt; 1158                        srcfilecopy            0
+#&gt; 1159                             srcref            0
+#&gt; 1160                    standardGeneric            0
+#&gt; 1161                         startsWith            0
+#&gt; 1162                             stderr            0
+#&gt; 1163                              stdin            0
+#&gt; 1164                             stdout            0
+#&gt; 1165                               stop            0
+#&gt; 1166                          stopifnot            0
+#&gt; 1167                       storage.mode            0
+#&gt; 1168                     storage.mode&lt;-            0
+#&gt; 1169                     str2expression            0
+#&gt; 1170                           str2lang            0
+#&gt; 1171                           strftime            0
+#&gt; 1172                           strptime            0
+#&gt; 1173                             strrep            0
+#&gt; 1174                           strsplit            0
+#&gt; 1175                             strtoi            0
+#&gt; 1176                            strtrim            0
+#&gt; 1177                          structure            0
+#&gt; 1178                            strwrap            0
+#&gt; 1179                                sub            0
+#&gt; 1180                  subset.data.frame            0
+#&gt; 1181                     subset.default            0
+#&gt; 1182                      subset.matrix            0
+#&gt; 1183                         substitute            0
+#&gt; 1184                             substr            0
+#&gt; 1185                           substr&lt;-            0
+#&gt; 1186                          substring            0
+#&gt; 1187                        substring&lt;-            0
+#&gt; 1188                 summary.connection            0
+#&gt; 1189                 summary.data.frame            0
+#&gt; 1190                 Summary.data.frame            0
+#&gt; 1191                       summary.Date            0
+#&gt; 1192                       Summary.Date            0
+#&gt; 1193                    summary.default            0
+#&gt; 1194                   Summary.difftime            0
+#&gt; 1195                     summary.factor            0
+#&gt; 1196                     Summary.factor            0
+#&gt; 1197                     summary.matrix            0
+#&gt; 1198            Summary.numeric_version            0
+#&gt; 1199                    Summary.ordered            0
+#&gt; 1200                    summary.POSIXct            0
+#&gt; 1201                    Summary.POSIXct            0
+#&gt; 1202                    summary.POSIXlt            0
+#&gt; 1203                    Summary.POSIXlt            0
+#&gt; 1204                  summary.proc_time            0
+#&gt; 1205                    summary.srcfile            0
+#&gt; 1206                     summary.srcref            0
+#&gt; 1207                      summary.table            0
+#&gt; 1208                   summary.warnings            0
+#&gt; 1209                   suppressMessages            0
+#&gt; 1210     suppressPackageStartupMessages            0
+#&gt; 1211                   suppressWarnings            0
+#&gt; 1212                  suspendInterrupts            0
+#&gt; 1213                                svd            0
+#&gt; 1214                              sweep            0
+#&gt; 1215                             switch            0
+#&gt; 1216                           sys.call            0
+#&gt; 1217                          sys.calls            0
+#&gt; 1218                          Sys.chmod            0
+#&gt; 1219                           Sys.Date            0
+#&gt; 1220                          sys.frame            0
+#&gt; 1221                         sys.frames            0
+#&gt; 1222                       sys.function            0
+#&gt; 1223                         Sys.getenv            0
+#&gt; 1224                      Sys.getlocale            0
+#&gt; 1225                         Sys.getpid            0
+#&gt; 1226                           Sys.glob            0
+#&gt; 1227                           Sys.info            0
+#&gt; 1228                     sys.load.image            0
+#&gt; 1229                     Sys.localeconv            0
+#&gt; 1230                         sys.nframe            0
+#&gt; 1231                        sys.on.exit            0
+#&gt; 1232                         sys.parent            0
+#&gt; 1233                        sys.parents            0
+#&gt; 1234                       Sys.readlink            0
+#&gt; 1235                     sys.save.image            0
+#&gt; 1236                         Sys.setenv            0
+#&gt; 1237                    Sys.setFileTime            0
+#&gt; 1238                    Sys.setLanguage            0
+#&gt; 1239                      Sys.setlocale            0
+#&gt; 1240                          Sys.sleep            0
+#&gt; 1241                         sys.source            0
+#&gt; 1242                         sys.status            0
+#&gt; 1243                           Sys.time            0
+#&gt; 1244                       Sys.timezone            0
+#&gt; 1245                          Sys.umask            0
+#&gt; 1246                       Sys.unsetenv            0
+#&gt; 1247                          Sys.which            0
+#&gt; 1248                        system.file            0
+#&gt; 1249                        system.time            0
+#&gt; 1250                            system2            0
+#&gt; 1251                       t.data.frame            0
+#&gt; 1252                          t.default            0
+#&gt; 1253                              table            0
+#&gt; 1254                           tabulate            0
+#&gt; 1255                                tan            0
+#&gt; 1256                               tanh            0
+#&gt; 1257                              tanpi            0
+#&gt; 1258                             tapply            0
+#&gt; 1259                taskCallbackManager            0
+#&gt; 1260                         tcrossprod            0
+#&gt; 1261                            tempdir            0
+#&gt; 1262                           tempfile            0
+#&gt; 1263                     textConnection            0
+#&gt; 1264                textConnectionValue            0
+#&gt; 1265                            tolower            0
+#&gt; 1266                             topenv            0
+#&gt; 1267                   toString.default            0
+#&gt; 1268                            toupper            0
+#&gt; 1269                              trace            0
+#&gt; 1270                          traceback            0
+#&gt; 1271                           tracemem            0
+#&gt; 1272                       tracingState            0
+#&gt; 1273               transform.data.frame            0
+#&gt; 1274                  transform.default            0
+#&gt; 1275                           trigamma            0
+#&gt; 1276                             trimws            0
+#&gt; 1277                         trunc.Date            0
+#&gt; 1278                       trunc.POSIXt            0
+#&gt; 1279                truncate.connection            0
+#&gt; 1280                                try            0
+#&gt; 1281                           tryCatch            0
+#&gt; 1282                   tryInvokeRestart            0
+#&gt; 1283                             typeof            0
+#&gt; 1284                     unCfillPOSIXlt            0
+#&gt; 1285                            unclass            0
+#&gt; 1286                            undebug            0
+#&gt; 1287                       unique.array            0
+#&gt; 1288                  unique.data.frame            0
+#&gt; 1289                     unique.default            0
+#&gt; 1290                      unique.matrix            0
+#&gt; 1291             unique.numeric_version            0
+#&gt; 1292                     unique.POSIXlt            0
+#&gt; 1293                    unique.warnings            0
+#&gt; 1294                     units.difftime            0
+#&gt; 1295                   units&lt;-.difftime            0
+#&gt; 1296                          unix.time            0
+#&gt; 1297                             unlink            0
+#&gt; 1298                    unloadNamespace            0
+#&gt; 1299                      unlockBinding            0
+#&gt; 1300                             unname            0
+#&gt; 1301                        unserialize            0
+#&gt; 1302                            unsplit            0
+#&gt; 1303                            untrace            0
+#&gt; 1304                         untracemem            0
+#&gt; 1305                                unz            0
+#&gt; 1306                          upper.tri            0
+#&gt; 1307                          UseMethod            0
+#&gt; 1308                          utf8ToInt            0
+#&gt; 1309                           validEnc            0
+#&gt; 1310                          validUTF8            0
+#&gt; 1311                             vapply            0
+#&gt; 1312                             vector            0
+#&gt; 1313                          Vectorize            0
+#&gt; 1314                            warning            0
+#&gt; 1315                   warningCondition            0
+#&gt; 1316                           warnings            0
+#&gt; 1317                      weekdays.Date            0
+#&gt; 1318                    weekdays.POSIXt            0
+#&gt; 1319                          which.max            0
+#&gt; 1320                          which.min            0
+#&gt; 1321                              while            0
+#&gt; 1322                       with.default            0
+#&gt; 1323                      withAutoprint            0
+#&gt; 1324                withCallingHandlers            0
+#&gt; 1325                  within.data.frame            0
+#&gt; 1326                        within.list            0
+#&gt; 1327                       withRestarts            0
+#&gt; 1328                        withVisible            0
+#&gt; 1329                          write.dcf            0
+#&gt; 1330                           writeBin            0
+#&gt; 1331                          writeChar            0
+#&gt; 1332                         writeLines            0
+#&gt; 1333                                xor            0
+#&gt; 1334                 xpdrows.data.frame            0
+#&gt; 1335                         xtfrm.AsIs            0
+#&gt; 1336                   xtfrm.data.frame            0
+#&gt; 1337                         xtfrm.Date            0
+#&gt; 1338                      xtfrm.default            0
+#&gt; 1339                     xtfrm.difftime            0
+#&gt; 1340                       xtfrm.factor            0
+#&gt; 1341              xtfrm.numeric_version            0
+#&gt; 1342                      xtfrm.POSIXct            0
+#&gt; 1343                      xtfrm.POSIXlt            0
+#&gt; 1344                             xzfile            0
+#&gt; 1345                           zapsmall            0</code></pre>
 </div>
 </div>
 <p>This brute-force code unsurprisingly identifies <code>print()</code> as having the greatest number of methods. A bug in <code>s3_methods_generic()</code> prevents its use (error below).</p>
@@ -20996,7 +20998,7 @@ font-style: inherit;">`</span></span></code></pre></div>
 #&gt; {
 #&gt;     .Date(NextMethod("["), oldClass(x))
 #&gt; }
-#&gt; &lt;bytecode: 0x10d5b68e0&gt;
+#&gt; &lt;bytecode: 0x13f174ed0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb144" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><span class="st" style="color: #20794D;
@@ -21009,7 +21011,7 @@ font-style: inherit;">`</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (xx, cl = "Date") 
 #&gt; `class&lt;-`(xx, cl)
-#&gt; &lt;bytecode: 0x10a44d4a8&gt;
+#&gt; &lt;bytecode: 0x10e9d4400&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -21120,13 +21122,13 @@ font-style: inherit;">union</span>(ct_generics, lt_generics)</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;  [1] "["             "[["            "[&lt;-"           "as.data.frame"
 #&gt;  [5] "as.Date"       "as.list"       "as.POSIXlt"    "c"            
-#&gt;  [9] "format"        "length&lt;-"      "mean"          "print"        
-#&gt; [13] "rep"           "split"         "summary"       "Summary"      
-#&gt; [17] "weighted.mean" "xtfrm"         "[[&lt;-"          "$&lt;-"          
-#&gt; [21] "anyNA"         "as.double"     "as.matrix"     "as.POSIXct"   
-#&gt; [25] "as.vector"     "duplicated"    "is.finite"     "is.infinite"  
-#&gt; [29] "is.na"         "is.nan"        "length"        "names"        
-#&gt; [33] "names&lt;-"       "sort"          "unique"</code></pre>
+#&gt;  [9] "format"        "length&lt;-"      "mean"          "mtfrm"        
+#&gt; [13] "print"         "rep"           "split"         "summary"      
+#&gt; [17] "Summary"       "weighted.mean" "xtfrm"         "[[&lt;-"         
+#&gt; [21] "$&lt;-"           "anyNA"         "as.double"     "as.matrix"    
+#&gt; [25] "as.POSIXct"    "as.vector"     "duplicated"    "is.finite"    
+#&gt; [29] "is.infinite"   "is.na"         "is.nan"        "length"       
+#&gt; [33] "names"         "names&lt;-"       "sort"          "unique"</code></pre>
 </div>
 </div>
 <p>We adapt work from previous exercises to get the list of all generics, and identify S3 generics that aren’t defined for either class, which must have the same behavior:</p>
@@ -21194,30 +21196,29 @@ font-style: inherit;">setdiff</span>(s3_generic_funs, defined_generics))</span><
 #&gt;  [91] "log1p"                    "log2"                    
 #&gt;  [93] "max"                      "merge"                   
 #&gt;  [95] "min"                      "Mod"                     
-#&gt;  [97] "months"                   "mtfrm"                   
-#&gt;  [99] "nameOfClass"              "open"                    
-#&gt; [101] "plot"                     "pretty"                  
-#&gt; [103] "prod"                     "qr"                      
-#&gt; [105] "quarters"                 "range"                   
-#&gt; [107] "rbind"                    "Re"                      
-#&gt; [109] "rev"                      "round"                   
-#&gt; [111] "row.names"                "row.names&lt;-"             
-#&gt; [113] "rowsum"                   "scale"                   
-#&gt; [115] "seek"                     "seq"                     
-#&gt; [117] "seq.int"                  "sequence"                
-#&gt; [119] "sign"                     "signif"                  
-#&gt; [121] "sin"                      "sinh"                    
-#&gt; [123] "sinpi"                    "solve"                   
-#&gt; [125] "split&lt;-"                  "sqrt"                    
-#&gt; [127] "subset"                   "sum"                     
-#&gt; [129] "t"                        "tan"                     
-#&gt; [131] "tanh"                     "tanpi"                   
-#&gt; [133] "toString"                 "transform"               
-#&gt; [135] "trigamma"                 "trunc"                   
-#&gt; [137] "truncate"                 "units"                   
-#&gt; [139] "units&lt;-"                  "unlist"                  
-#&gt; [141] "weekdays"                 "with"                    
-#&gt; [143] "within"</code></pre>
+#&gt;  [97] "months"                   "nameOfClass"             
+#&gt;  [99] "open"                     "plot"                    
+#&gt; [101] "pretty"                   "prod"                    
+#&gt; [103] "qr"                       "quarters"                
+#&gt; [105] "range"                    "rbind"                   
+#&gt; [107] "Re"                       "rev"                     
+#&gt; [109] "round"                    "row.names"               
+#&gt; [111] "row.names&lt;-"              "rowsum"                  
+#&gt; [113] "scale"                    "seek"                    
+#&gt; [115] "seq"                      "seq.int"                 
+#&gt; [117] "sequence"                 "sign"                    
+#&gt; [119] "signif"                   "sin"                     
+#&gt; [121] "sinh"                     "sinpi"                   
+#&gt; [123] "solve"                    "split&lt;-"                 
+#&gt; [125] "sqrt"                     "subset"                  
+#&gt; [127] "sum"                      "t"                       
+#&gt; [129] "tan"                      "tanh"                    
+#&gt; [131] "tanpi"                    "toString"                
+#&gt; [133] "transform"                "trigamma"                
+#&gt; [135] "trunc"                    "truncate"                
+#&gt; [137] "units"                    "units&lt;-"                 
+#&gt; [139] "unlist"                   "weekdays"                
+#&gt; [141] "with"                     "within"</code></pre>
 </div>
 </div>
 <p>Note: this code doesn’t quite work, since <code>Summary</code> is a generic according to <code>isGeneric</code> and is not according to <code>is_s3_generic</code>, and <code>weighted.mean</code> is a non-base S3 generic.</p>
@@ -21262,13 +21263,13 @@ font-style: inherit;">union</span>(generics_ct, generics_lt)</span></code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;  [1] "["             "[["            "[&lt;-"           "as.data.frame"
 #&gt;  [5] "as.Date"       "as.list"       "as.POSIXlt"    "c"            
-#&gt;  [9] "format"        "length&lt;-"      "mean"          "print"        
-#&gt; [13] "rep"           "split"         "summary"       "Summary"      
-#&gt; [17] "weighted.mean" "xtfrm"         "[[&lt;-"          "$&lt;-"          
-#&gt; [21] "anyNA"         "as.double"     "as.matrix"     "as.POSIXct"   
-#&gt; [25] "as.vector"     "duplicated"    "is.finite"     "is.infinite"  
-#&gt; [29] "is.na"         "is.nan"        "length"        "names"        
-#&gt; [33] "names&lt;-"       "sort"          "unique"</code></pre>
+#&gt;  [9] "format"        "length&lt;-"      "mean"          "mtfrm"        
+#&gt; [13] "print"         "rep"           "split"         "summary"      
+#&gt; [17] "Summary"       "weighted.mean" "xtfrm"         "[[&lt;-"         
+#&gt; [21] "$&lt;-"           "anyNA"         "as.double"     "as.matrix"    
+#&gt; [25] "as.POSIXct"    "as.vector"     "duplicated"    "is.finite"    
+#&gt; [29] "is.infinite"   "is.na"         "is.nan"        "length"       
+#&gt; [33] "names"         "names&lt;-"       "sort"          "unique"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb156" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -21618,7 +21619,7 @@ font-style: inherit;">"base"</span>)</span></code></pre></div>
 #&gt;             paste(vnames[!mode.ok], collapse = ", "))
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x1045bde60&gt;
+#&gt; &lt;bytecode: 0x13f97e450&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb191" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1">Math.Date</span></code></pre></div>
@@ -21626,7 +21627,7 @@ font-style: inherit;">"base"</span>)</span></code></pre></div>
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not defined for \"Date\" objects", .Generic), 
 #&gt;     domain = NA)
-#&gt; &lt;bytecode: 0x1045c2fc0&gt;
+#&gt; &lt;bytecode: 0x13f9835b0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb193" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb193-1">Math.difftime</span></code></pre></div>
@@ -21640,14 +21641,14 @@ font-style: inherit;">"base"</span>)</span></code></pre></div>
 #&gt;         }, stop(gettextf("'%s' not defined for \"difftime\" objects", 
 #&gt;             .Generic), domain = NA))
 #&gt; }
-#&gt; &lt;bytecode: 0x1045c2578&gt;
+#&gt; &lt;bytecode: 0x13f989078&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb195" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1">Math.factor</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not meaningful for factors", sQuote(.Generic)))
-#&gt; &lt;bytecode: 0x1045c7778&gt;
+#&gt; &lt;bytecode: 0x13f987f68&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb197" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1">Math.POSIXt</span></code></pre></div>
@@ -21657,7 +21658,7 @@ font-style: inherit;">"base"</span>)</span></code></pre></div>
 #&gt;     stop(gettextf("'%s' not defined for \"POSIXt\" objects", 
 #&gt;         .Generic), domain = NA)
 #&gt; }
-#&gt; &lt;bytecode: 0x1045c6c88&gt;
+#&gt; &lt;bytecode: 0x13f987478&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -22899,7 +22900,7 @@ font-style: inherit;">get</span>()</span></code></pre></div>
 background-color: null;
 font-style: inherit;">date</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Sat Feb 24 23:23:51 2024"</code></pre>
+<pre><code>#&gt; [1] "Sun Mar 10 11:02:57 2024"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb255" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb255-1">tz<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -22915,7 +22916,7 @@ font-style: inherit;">"America/New_York"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">date</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Sun Feb 25 00:23:51 2024"</code></pre>
+<pre><code>#&gt; [1] "Sun Mar 10 12:02:57 2024"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb259" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb259-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -26623,19 +26624,19 @@ font-style: inherit;">1e3</span>))</span>
 background-color: null;
 font-style: inherit;">randomise</span>(mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.5213847</code></pre>
+<pre><code>#&gt; [1] 0.4879462</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">randomise</span>(mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.4923787</code></pre>
+<pre><code>#&gt; [1] 0.5001018</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">randomise</span>(sum)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 509.9991</code></pre>
+<pre><code>#&gt; [1] 506.2875</code></pre>
 </div>
 </div>
 <p>The chances are that you’ve already used a functional. You might have used for-loop replacements like base R’s <code>lapply()</code>, <code>apply()</code>, and <code>tapply()</code>; or purrr’s <code>map()</code>; or maybe you’ve used a mathematical functional like <code>integrate()</code> or <code>optim()</code>.</p>
@@ -26653,7 +26654,7 @@ font-style: inherit;">randomise</span>(sum)</span></code></pre></div>
 #&gt; {
 #&gt;     map_("double", .x, .f, ..., .progress = .progress)
 #&gt; }
-#&gt; &lt;bytecode: 0x11dc7e630&gt;
+#&gt; &lt;bytecode: 0x105b02a90&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
@@ -26713,7 +26714,7 @@ font-style: inherit;">as_mapper</span>(mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x10df17808&gt;
+#&gt; &lt;bytecode: 0x130720c38&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="fu" style="color: #4758AB;
@@ -26768,7 +26769,7 @@ font-style: inherit;"># equivalent to function(x) x[[1]][[2]]</span></span></cod
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, 2), .default = NULL)
-#&gt; &lt;environment: 0x1098d8280&gt;</code></pre>
+#&gt; &lt;environment: 0x106a95f60&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -26784,7 +26785,7 @@ font-style: inherit;"># equivalent to function(x) x[["a"]][["b]]</span></span></
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list("a", "b"), .default = NULL)
-#&gt; &lt;environment: 0x109956a60&gt;</code></pre>
+#&gt; &lt;environment: 0x106b18650&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -26800,7 +26801,7 @@ font-style: inherit;"># equivalent to function(x) x[[1]][["b]]</span></span></co
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, "b"), .default = NULL)
-#&gt; &lt;environment: 0x1099b8938&gt;</code></pre>
+#&gt; &lt;environment: 0x106b765e0&gt;</code></pre>
 </div>
 </div>
 <p>Besides mixing positions and names, it is also possible to pass along an accessor function. This is basically an anonymous function that gets information about some aspect of the input data. You are free to define your own accessor functions.</p>
@@ -26861,13 +26862,13 @@ background-color: null;
 font-style: inherit;">2</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; [1] 0.3619714 0.8976031
+#&gt; [1] 0.8150402 0.2038741
 #&gt; 
 #&gt; [[2]]
-#&gt; [1] 0.1058137 0.1935339
+#&gt; [1] 0.1478543 0.1360639
 #&gt; 
 #&gt; [[3]]
-#&gt; [1] 0.9548614 0.2055252</code></pre>
+#&gt; [1] 0.6421006 0.3887575</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -26920,8 +26921,8 @@ background-color: null;
 font-style: inherit;">2</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck_raw(x, list(0.201793782878667, 0.509042494231835), .default = NULL)
-#&gt; &lt;environment: 0x10a0fb518&gt;</code></pre>
+#&gt; pluck_raw(x, list(0.711476220749319, 0.156880941707641), .default = NULL)
+#&gt; &lt;environment: 0x11671cf70&gt;</code></pre>
 </div>
 </div>
 <p>A more reasonable use of a pluck mapper for <code>1:3</code> is <code>1</code>:</p>
@@ -27511,8 +27512,8 @@ font-style: inherit;">~</span> disp, .x))<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>r.squared)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.7662513 0.7925000 0.6601916 0.7015220 0.6726921 0.7481078 0.7005308
-#&gt;  [8] 0.7766043 0.7833145 0.6947296</code></pre>
+<pre><code>#&gt;  [1] 0.7561203 0.6365232 0.5776651 0.7538711 0.7804974 0.7385372 0.7243956
+#&gt;  [8] 0.7948500 0.7130048 0.7728491</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -27545,8 +27546,8 @@ font-style: inherit;">map_dbl</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"r.squared"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.7662513 0.7925000 0.6601916 0.7015220 0.6726921 0.7481078 0.7005308
-#&gt;  [8] 0.7766043 0.7833145 0.6947296</code></pre>
+<pre><code>#&gt;  [1] 0.7561203 0.6365232 0.5776651 0.7538711 0.7804974 0.7385372 0.7243956
+#&gt;  [8] 0.7948500 0.7130048 0.7728491</code></pre>
 </div>
 </div>
 <p>Note: while AR Solutions is arguably <em>slightly</em> more readable, my code should be faster:</p>
@@ -27574,7 +27575,7 @@ font-style: inherit;">$</span>r.squared)</span>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { map_dbl(bootstraps, ~summary(lm(… 2.03ms 2.16ms      456.    63.7KB     49.8</code></pre>
+#&gt; 1 { map_dbl(bootstraps, ~summary(lm(… 1.99ms 2.04ms      482.    63.7KB     54.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb76" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -27612,7 +27613,7 @@ font-style: inherit;">"r.squared"</span>)</span>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 2.02ms 2.22ms      445.    63.7KB     55.0</code></pre>
+#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 1.98ms 2.04ms      481.    63.7KB     58.6</code></pre>
 </div>
 </div>
 <p>It is actually slightly slower! AR Solutions wins!</p>
@@ -27672,7 +27673,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1), .default = NULL)
-#&gt; &lt;environment: 0x1099a52e0&gt;</code></pre>
+#&gt; &lt;environment: 0x1166fd478&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb82" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -28645,7 +28646,7 @@ font-style: inherit;">span_r</span>(test2, is.numeric))</span></code></pre></div
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                     min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span_r(test2, is.numeric)   50.6µs     56µs    17129.    4.01KB     68.9</code></pre>
+#&gt; 1 span_r(test2, is.numeric)   50.4µs   53.1µs    18041.    4.01KB     65.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb135" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -28658,7 +28659,7 @@ font-style: inherit;">span</span>(test2, is.numeric))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;              &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span(test2, is.numeric)   67.7µs     73µs    13370.    4.01KB     21.0</code></pre>
+#&gt; 1 span(test2, is.numeric)   68.6µs   71.2µs    13851.    4.01KB     20.8</code></pre>
 </div>
 </div>
 <hr>
@@ -29795,7 +29796,7 @@ font-style: inherit;">0.00001</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 11.5µs 12.6µs    76233.        0B     22.9</code></pre>
+#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 11.6µs 12.4µs    77706.        0B     31.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb176" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -29810,7 +29811,7 @@ font-style: inherit;">1</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point(cos, 1)   20.4µs   22.2µs    43901.        0B     26.4</code></pre>
+#&gt; 1 fixed_point(cos, 1)   20.7µs   21.7µs    45332.        0B     27.2</code></pre>
 </div>
 </div>
 <p>As usual, AR Solutions is faster. :-(</p>
@@ -29896,7 +29897,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; x
-#&gt; &lt;bytecode: 0x13d9505b0&gt;
+#&gt; &lt;bytecode: 0x137150030&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -30256,7 +30257,7 @@ font-style: inherit;">m2</span>(x))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)         3.2µs   3.77µs   227495.      848B     22.8</code></pre>
+#&gt; 1 m2(x)        3.16µs   3.53µs   266214.      848B        0</code></pre>
 </div>
 </div>
 <p>Answer: code above, following the formula <img src="https://latex.codecogs.com/png.latex?E%5B(X%20-%20E%5BX%5D)%5Ei%5D">, where <img src="https://latex.codecogs.com/png.latex?E"> is the <a href="https://en.wikipedia.org/wiki/Expected_value">expected value</a>, ie the <em>mean</em>.</p>
@@ -30349,7 +30350,7 @@ font-style: inherit;">m2</span>(x))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        2.01µs    2.3µs   408996.      848B     40.9</code></pre>
+#&gt; 1 m2(x)        2.05µs    2.3µs   386809.      848B        0</code></pre>
 </div>
 </div>
 <p>Note: isn’t <code>sum() / length()</code> just <code>mean()</code>? For fun, compare <code>bench::mark()</code> (above). Curses, foiled again!</p>
@@ -30768,7 +30769,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 11.9µs 13.2µs    69926.    12.8KB     21.0</code></pre>
+#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 12.1µs 12.9µs    73082.    12.8KB     29.2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb243" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb243-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -30793,7 +30794,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 6.52µs 7.01µs   133872.        0B     26.8</code></pre>
+#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 6.44µs 6.81µs   139082.        0B     27.8</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb245" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb245-1">x <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -30827,7 +30828,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 216µs  232µs     4263.     110KB     10.4</code></pre>
+#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 216µs  231µs     4277.     110KB     10.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb247" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb247-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -30852,7 +30853,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 21.7µs 23.5µs    41037.    7.86KB     8.21</code></pre>
+#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 21.4µs 23.3µs    41825.    7.86KB     8.37</code></pre>
 </div>
 </div>
 <p>Answer: <code>ll_poisson2()</code> is nearly twice as fast with <code>x1</code> and nearly 10 times as fast when the length of <code>x</code> is 100.</p>
@@ -31164,7 +31165,7 @@ font-style: inherit;">"for"</span>, name)</span></code></pre></div>
 #&gt;         })
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x10e168ef0&gt;
+#&gt; &lt;bytecode: 0x133aac780&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -31186,7 +31187,7 @@ font-style: inherit;">"for"</span>, name)</span></code></pre></div>
 #&gt;     check_bool(quiet)
 #&gt;     function(...) capture_error(.f(...), otherwise, quiet)
 #&gt; }
-#&gt; &lt;bytecode: 0x107717350&gt;
+#&gt; &lt;bytecode: 0x133851698&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb264" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb264-1">purrr<span class="sc" style="color: #5E5E5E;
@@ -31201,7 +31202,7 @@ font-style: inherit;">:::</span>capture_error</span></code></pre></div>
 #&gt;         list(result = otherwise, error = e)
 #&gt;     })
 #&gt; }
-#&gt; &lt;bytecode: 0x1076a58c8&gt;
+#&gt; &lt;bytecode: 0x13582b318&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -31765,7 +31766,7 @@ font-style: inherit;">h</span>()</span>
 <span id="cb280-30">})</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.002   0.000   1.007</code></pre>
+#&gt;   0.003   0.001   1.006</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb282" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb282-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -31784,7 +31785,7 @@ font-style: inherit;">g</span>()</span>
 <span id="cb282-5">})</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.006   0.000   2.010</code></pre>
+#&gt;   0.006   0.001   2.009</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -32083,7 +32084,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x130358000"</code></pre>
+<pre><code>#&gt; [1] "0x138e20000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32091,7 +32092,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x130358000"</code></pre>
+<pre><code>#&gt; [1] "0x138e20000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32099,7 +32100,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x130358000"</code></pre>
+<pre><code>#&gt; [1] "0x138e20000"</code></pre>
 </div>
 </div>
 <hr>
@@ -32124,7 +32125,7 @@ font-style: inherit;">2</span>)</span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11064d628"</code></pre>
+<pre><code>#&gt; [1] "0x10ceeccf8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">b <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -32133,7 +32134,7 @@ font-style: inherit;">&lt;-</span> a</span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11064d628"</code></pre>
+<pre><code>#&gt; [1] "0x10ceeccf8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">b[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -32146,7 +32147,7 @@ font-style: inherit;">10</span></span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11076fd78"</code></pre>
+<pre><code>#&gt; [1] "0x10cfcf248"</code></pre>
 </div>
 </div>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
@@ -32189,25 +32190,25 @@ font-style: inherit;">10</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1101d9720"</code></pre>
+<pre><code>#&gt; [1] "0x10caa6668"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1101d9720"</code></pre>
+<pre><code>#&gt; [1] "0x10caa6668"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(c)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1101d9720"</code></pre>
+<pre><code>#&gt; [1] "0x10caa6668"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(d)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1102e0d48"</code></pre>
+<pre><code>#&gt; [1] "0x10cb9f388"</code></pre>
 </div>
 </div>
 <hr>
@@ -32239,7 +32240,7 @@ font-style: inherit;">"mean"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12309cf08"</code></pre>
+<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32247,7 +32248,7 @@ font-style: inherit;">obj_addr</span>(base<span class="sc" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">::</span>mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12309cf08"</code></pre>
+<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32257,7 +32258,7 @@ font-style: inherit;">get</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"mean"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12309cf08"</code></pre>
+<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32265,7 +32266,7 @@ font-style: inherit;">obj_addr</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">evalq</span>(mean))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12309cf08"</code></pre>
+<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32275,7 +32276,7 @@ font-style: inherit;">match.fun</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"mean"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12309cf08"</code></pre>
+<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
 </div>
 </div>
 <p>Answer: they do.</p>
@@ -32350,7 +32351,7 @@ font-style: inherit;">3</span>L)</span>
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x123533548&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x10dbb74c8&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1">x[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -32360,8 +32361,8 @@ font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x123533548 -&gt; 0x114a7ab88]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
-#&gt; tracemem[0x114a7ab88 -&gt; 0x1234c9818]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x10dbb74c8 -&gt; 0x10dbba8c8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
+#&gt; tracemem[0x10dbba8c8 -&gt; 0x10dc11578]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32391,7 +32392,7 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x123397558&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x135da3f98&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1">y <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -32404,7 +32405,7 @@ font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>L</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x123397558 -&gt; 0x12358e1a8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x135da3f98 -&gt; 0x135c7cd58]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1">y[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -32520,7 +32521,7 @@ font-style: inherit;">"first object"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x107ddcf00"</code></pre>
+<pre><code>#&gt; [1] "0x133215c40"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32528,7 +32529,7 @@ font-style: inherit;">obj_addr</span>(b[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x107ddcf00"</code></pre>
+<pre><code>#&gt; [1] "0x133215c40"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32536,7 +32537,7 @@ font-style: inherit;">obj_addr</span>(b[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x107ddcf00"</code></pre>
+<pre><code>#&gt; [1] "0x133215c40"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb61" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32544,7 +32545,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x107ddcf00"</code></pre>
+<pre><code>#&gt; [1] "0x133215c40"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb63" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32558,7 +32559,7 @@ font-style: inherit;">"second object"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1138da0c8"</code></pre>
+<pre><code>#&gt; [1] "0x134142948"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32566,7 +32567,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1138da0c8"</code></pre>
+<pre><code>#&gt; [1] "0x134142948"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32580,7 +32581,7 @@ font-style: inherit;">"third object"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(c)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x112a7dcb8"</code></pre>
+<pre><code>#&gt; [1] "0x1339a29d8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb73" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -32596,7 +32597,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1071815f0"</code></pre>
+<pre><code>#&gt; [1] "0x1338089b0"</code></pre>
 </div>
 </div>
 <p>Answer: four different objects with multiple names.</p>
@@ -32628,10 +32629,10 @@ font-style: inherit;">&lt;-</span> x</span>
 background-color: null;
 font-style: inherit;">ref</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x116327fc8] &lt;list&gt; 
-#&gt; ├─[2:0x113fd6178] &lt;int&gt; 
-#&gt; └─█ [3:0x113fdd410] &lt;list&gt; 
-#&gt;   └─[2:0x113fd6178]</code></pre>
+<pre><code>#&gt; █ [1:0x11256ba88] &lt;list&gt; 
+#&gt; ├─[2:0x10c1ab308] &lt;int&gt; 
+#&gt; └─█ [3:0x10c1b5e40] &lt;list&gt; 
+#&gt;   └─[2:0x10c1ab308]</code></pre>
 </div>
 </div>
 <p>Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which points to the original int vector.</p>
@@ -33026,17 +33027,17 @@ font-style: inherit;">$</span>medians), <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1         X2          X3          X4          X5
-#&gt; 1   0.43729034  0.2531812 -0.24584455 -0.48435452  0.39954952
-#&gt; 2   0.45537032  0.1444889 -0.42679979 -0.08714077  0.25896795
-#&gt; 3  -0.15836931 -0.1198921  0.31856464 -0.30278288 -0.08550585
-#&gt; 4  -0.08558651 -0.3559611  0.33725599 -0.18440815 -0.29255997
-#&gt; 5  -0.40065214  0.3766807 -0.04252864  0.34397050  0.35352100
-#&gt; 6   0.15386735  0.4529294  0.24212863  0.39239356  0.37901345
-#&gt; 7  -0.24069136 -0.1233305 -0.25237143  0.46544937  0.23938313
-#&gt; 8   0.46990906  0.1497565  0.31471721  0.29340340  0.46165116
-#&gt; 9  -0.42170484  0.1836673  0.06398046 -0.35654342  0.35803634
-#&gt; 10  0.19813463 -0.3563381 -0.28637566  0.09500093 -0.11195802</code></pre>
+<pre><code>#&gt;             X1           X2          X3         X4          X5
+#&gt; 1  -0.31909169 -0.413144595 -0.35859574 -0.1204953 -0.43504827
+#&gt; 2  -0.08093799  0.207107755  0.47311511  0.1770737  0.28367867
+#&gt; 3   0.32596949 -0.437373091  0.34864762 -0.3722676  0.18585576
+#&gt; 4  -0.11777362 -0.018022014 -0.29952187 -0.1543627 -0.15564994
+#&gt; 5  -0.42514173 -0.327696993 -0.21917524 -0.1982858  0.09719632
+#&gt; 6   0.07408300 -0.087990720  0.03123350  0.3809340 -0.18972684
+#&gt; 7  -0.06706237  0.418502166 -0.10928116  0.2863259  0.03363580
+#&gt; 8  -0.26989198  0.432441315  0.05770697  0.4900636 -0.09702116
+#&gt; 9   0.02184134 -0.004379089  0.44892609  0.2579126  0.32683060
+#&gt; 10  0.15364264 -0.471395641 -0.19426441 -0.3646747  0.09965263</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33052,17 +33053,17 @@ font-style: inherit;">$</span>medians)), <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1         X2          X3          X4          X5
-#&gt; 1   0.43729034  0.2531812 -0.24584455 -0.48435452  0.39954952
-#&gt; 2   0.45537032  0.1444889 -0.42679979 -0.08714077  0.25896795
-#&gt; 3  -0.15836931 -0.1198921  0.31856464 -0.30278288 -0.08550585
-#&gt; 4  -0.08558651 -0.3559611  0.33725599 -0.18440815 -0.29255997
-#&gt; 5  -0.40065214  0.3766807 -0.04252864  0.34397050  0.35352100
-#&gt; 6   0.15386735  0.4529294  0.24212863  0.39239356  0.37901345
-#&gt; 7  -0.24069136 -0.1233305 -0.25237143  0.46544937  0.23938313
-#&gt; 8   0.46990906  0.1497565  0.31471721  0.29340340  0.46165116
-#&gt; 9  -0.42170484  0.1836673  0.06398046 -0.35654342  0.35803634
-#&gt; 10  0.19813463 -0.3563381 -0.28637566  0.09500093 -0.11195802</code></pre>
+<pre><code>#&gt;             X1           X2          X3         X4          X5
+#&gt; 1  -0.31909169 -0.413144595 -0.35859574 -0.1204953 -0.43504827
+#&gt; 2  -0.08093799  0.207107755  0.47311511  0.1770737  0.28367867
+#&gt; 3   0.32596949 -0.437373091  0.34864762 -0.3722676  0.18585576
+#&gt; 4  -0.11777362 -0.018022014 -0.29952187 -0.1543627 -0.15564994
+#&gt; 5  -0.42514173 -0.327696993 -0.21917524 -0.1982858  0.09719632
+#&gt; 6   0.07408300 -0.087990720  0.03123350  0.3809340 -0.18972684
+#&gt; 7  -0.06706237  0.418502166 -0.10928116  0.2863259  0.03363580
+#&gt; 8  -0.26989198  0.432441315  0.05770697  0.4900636 -0.09702116
+#&gt; 9   0.02184134 -0.004379089  0.44892609  0.2579126  0.32683060
+#&gt; 10  0.15364264 -0.471395641 -0.19426441 -0.3646747  0.09965263</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb108" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -33080,7 +33081,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   31.6µs   53.4µs    18866.     391KB     293.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   32.1µs   48.2µs    20230.     391KB     305.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb110" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33095,7 +33096,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   8.28µs   29.6µs    34613.     391KB     391.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   9.06µs   24.6µs    43623.     391KB     490.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33114,7 +33115,7 @@ font-style: inherit;"># as.data.frame introduces significant overhead</span></sp
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 107µs  134µs     7424.     391KB     84.7</code></pre>
+#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 108µs  126µs     8057.     391KB     94.4</code></pre>
 </div>
 </div>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
@@ -33139,7 +33140,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   56.5µs   86.3µs    11604.     391KB     136.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   56.9µs   78.7µs    12729.     391KB     150.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb116" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33154,7 +33155,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   9.22µs   34.2µs    29568.     391KB     337.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   10.7µs   30.7µs    33069.     391KB     368.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1">xm <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -33176,7 +33177,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    110µs    141µs     6915.     400KB     81.3</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    109µs    134µs     7383.     400KB     87.6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33191,7 +33192,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   11.5µs   30.2µs    33633.     392KB     378.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   12.7µs   28.1µs    36352.     392KB     404.</code></pre>
 </div>
 </div>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast. So, the list method is near constant time regardless of columns, whereas the data.frame method scales linearly with the number of columns.</p>
@@ -33406,7 +33407,7 @@ font-style: inherit;"># will be coerced to integer   -&gt; 1 1</span></span></co
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x105f91950&gt;
+#&gt; &lt;bytecode: 0x1331ec188&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb140" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1">unname</span></code></pre></div>
@@ -33419,7 +33420,7 @@ font-style: inherit;"># will be coerced to integer   -&gt; 1 1</span></span></co
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x107884d48&gt;
+#&gt; &lt;bytecode: 0x132f9f8a0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -33713,9 +33714,9 @@ font-style: inherit;">sample</span>(a))</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; a   a b c
-#&gt;   a 0 0 1
+#&gt;   a 0 1 0
 #&gt;   b 1 0 0
-#&gt;   c 0 1 0</code></pre>
+#&gt;   c 0 0 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb167" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33761,10 +33762,10 @@ font-style: inherit;">sample</span>(b))</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 1 0 0 0
-#&gt;   b 0 0 1 0
-#&gt;   c 0 1 0 0
-#&gt;   d 0 0 0 1</code></pre>
+#&gt;   a 0 0 1 0
+#&gt;   b 0 0 0 1
+#&gt;   c 1 0 0 0
+#&gt;   d 0 1 0 0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb173" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -35390,12 +35391,12 @@ font-style: inherit;">sample</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ncol</span>(df))]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   x z y
-#&gt; 1 1 a 5
-#&gt; 2 2 b 4
-#&gt; 3 3 c 3
-#&gt; 4 4 d 2
-#&gt; 5 5 e 1</code></pre>
+<pre><code>#&gt;   x y z
+#&gt; 1 1 5 a
+#&gt; 2 2 4 b
+#&gt; 3 3 3 c
+#&gt; 4 4 2 d
+#&gt; 5 5 1 e</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb356" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1">df[<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -35407,12 +35408,12 @@ font-style: inherit;">sample</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ncol</span>(df))]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   z y x
-#&gt; 1 a 5 1
-#&gt; 4 d 2 4
-#&gt; 3 c 3 3
-#&gt; 2 b 4 2
-#&gt; 5 e 1 5</code></pre>
+<pre><code>#&gt;   y x z
+#&gt; 3 3 3 c
+#&gt; 2 4 2 b
+#&gt; 4 2 4 d
+#&gt; 5 1 5 e
+#&gt; 1 5 1 a</code></pre>
 </div>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -35520,9 +35521,9 @@ background-color: null;
 font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
-#&gt; 2 2 4 b
+#&gt; 4 4 2 d
 #&gt; 1 1 5 a
-#&gt; 4 4 2 d</code></pre>
+#&gt; 3 3 3 c</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb361" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb361-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -36230,16 +36231,16 @@ background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;                  name args
-#&gt; 1068             scan   22
+#&gt; 1070             scan   22
 #&gt; 570    format.default   16
-#&gt; 1121           source   16
+#&gt; 1123           source   16
 #&gt; 583           formatC   15
 #&gt; 764           library   13
 #&gt; 821  merge.data.frame   13
-#&gt; 918         prettyNum   13
-#&gt; 1231          system2   11
-#&gt; 926     print.default   10
-#&gt; 1063             save   10</code></pre>
+#&gt; 920         prettyNum   13
+#&gt; 1233          system2   11
+#&gt; 928     print.default   10
+#&gt; 1065             save   10</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb411" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb411-1">fun_args[fun_args<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -36438,71 +36439,71 @@ font-style: inherit;">0</span>, ]</span></code></pre></div>
 #&gt; 825                       min    0
 #&gt; 826                   missing    0
 #&gt; 827                       Mod    0
-#&gt; 838                     names    0
-#&gt; 840                   names&lt;-    0
-#&gt; 847                     nargs    0
-#&gt; 853                      next    0
-#&gt; 862                  nullfile    0
-#&gt; 867                    nzchar    0
-#&gt; 869                  oldClass    0
-#&gt; 870                oldClass&lt;-    0
-#&gt; 872                   on.exit    0
-#&gt; 905               pcre_config    0
-#&gt; 914                pos.to.env    0
-#&gt; 957                 proc.time    0
-#&gt; 958                      prod    0
-#&gt; 981                     quote    0
-#&gt; 982             R_compiled_by    0
-#&gt; 985                 R.Version    0
-#&gt; 986                     range    0
-#&gt; 999                        Re    0
-#&gt; 1018                      rep    0
-#&gt; 1027                   repeat    0
-#&gt; 1034               retracemem    0
-#&gt; 1035                   return    0
-#&gt; 1043                    round    0
-#&gt; 1069                   search    0
-#&gt; 1070              searchpaths    0
-#&gt; 1074                seq_along    0
-#&gt; 1075                  seq_len    0
-#&gt; 1078                  seq.int    0
-#&gt; 1094                     sign    0
-#&gt; 1096                   signif    0
-#&gt; 1102                      sin    0
-#&gt; 1104                     sinh    0
-#&gt; 1107                    sinpi    0
-#&gt; 1131                     sqrt    0
-#&gt; 1137          standardGeneric    0
-#&gt; 1139                   stderr    0
-#&gt; 1140                    stdin    0
-#&gt; 1141                   stdout    0
-#&gt; 1145           storage.mode&lt;-    0
-#&gt; 1161               substitute    0
-#&gt; 1166                      sum    0
-#&gt; 1195                   switch    0
-#&gt; 1197                sys.calls    0
-#&gt; 1199                 Sys.Date    0
-#&gt; 1201               sys.frames    0
-#&gt; 1205               Sys.getpid    0
-#&gt; 1207                 Sys.info    0
-#&gt; 1209           Sys.localeconv    0
-#&gt; 1210               sys.nframe    0
-#&gt; 1211              sys.on.exit    0
-#&gt; 1213              sys.parents    0
-#&gt; 1222               sys.status    0
-#&gt; 1223                 Sys.time    0
-#&gt; 1237                      tan    0
-#&gt; 1238                     tanh    0
-#&gt; 1239                    tanpi    0
-#&gt; 1254                 tracemem    0
-#&gt; 1259                 trigamma    0
-#&gt; 1261                    trunc    0
-#&gt; 1270           unCfillPOSIXlt    0
-#&gt; 1271                  unclass    0
-#&gt; 1295               untracemem    0
-#&gt; 1299                UseMethod    0
-#&gt; 1315                    while    0
-#&gt; 1332                    xtfrm    0</code></pre>
+#&gt; 840                     names    0
+#&gt; 842                   names&lt;-    0
+#&gt; 849                     nargs    0
+#&gt; 855                      next    0
+#&gt; 864                  nullfile    0
+#&gt; 869                    nzchar    0
+#&gt; 871                  oldClass    0
+#&gt; 872                oldClass&lt;-    0
+#&gt; 874                   on.exit    0
+#&gt; 907               pcre_config    0
+#&gt; 916                pos.to.env    0
+#&gt; 959                 proc.time    0
+#&gt; 960                      prod    0
+#&gt; 983                     quote    0
+#&gt; 984             R_compiled_by    0
+#&gt; 987                 R.Version    0
+#&gt; 988                     range    0
+#&gt; 1001                       Re    0
+#&gt; 1020                      rep    0
+#&gt; 1029                   repeat    0
+#&gt; 1036               retracemem    0
+#&gt; 1037                   return    0
+#&gt; 1045                    round    0
+#&gt; 1071                   search    0
+#&gt; 1072              searchpaths    0
+#&gt; 1076                seq_along    0
+#&gt; 1077                  seq_len    0
+#&gt; 1080                  seq.int    0
+#&gt; 1096                     sign    0
+#&gt; 1098                   signif    0
+#&gt; 1104                      sin    0
+#&gt; 1106                     sinh    0
+#&gt; 1109                    sinpi    0
+#&gt; 1133                     sqrt    0
+#&gt; 1139          standardGeneric    0
+#&gt; 1141                   stderr    0
+#&gt; 1142                    stdin    0
+#&gt; 1143                   stdout    0
+#&gt; 1147           storage.mode&lt;-    0
+#&gt; 1163               substitute    0
+#&gt; 1168                      sum    0
+#&gt; 1197                   switch    0
+#&gt; 1199                sys.calls    0
+#&gt; 1201                 Sys.Date    0
+#&gt; 1203               sys.frames    0
+#&gt; 1207               Sys.getpid    0
+#&gt; 1209                 Sys.info    0
+#&gt; 1211           Sys.localeconv    0
+#&gt; 1212               sys.nframe    0
+#&gt; 1213              sys.on.exit    0
+#&gt; 1215              sys.parents    0
+#&gt; 1224               sys.status    0
+#&gt; 1225                 Sys.time    0
+#&gt; 1239                      tan    0
+#&gt; 1240                     tanh    0
+#&gt; 1241                    tanpi    0
+#&gt; 1256                 tracemem    0
+#&gt; 1261                 trigamma    0
+#&gt; 1263                    trunc    0
+#&gt; 1272           unCfillPOSIXlt    0
+#&gt; 1273                  unclass    0
+#&gt; 1297               untracemem    0
+#&gt; 1301                UseMethod    0
+#&gt; 1317                    while    0
+#&gt; 1334                    xtfrm    0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb413" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb413-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -36739,71 +36740,71 @@ font-style: inherit;">0</span>, ]</span></code></pre></div>
 #&gt; 825                       min    0  TRUE
 #&gt; 826                   missing    0  TRUE
 #&gt; 827                       Mod    0  TRUE
-#&gt; 838                     names    0  TRUE
-#&gt; 840                   names&lt;-    0  TRUE
-#&gt; 847                     nargs    0  TRUE
-#&gt; 853                      next    0  TRUE
-#&gt; 862                  nullfile    0 FALSE
-#&gt; 867                    nzchar    0  TRUE
-#&gt; 869                  oldClass    0  TRUE
-#&gt; 870                oldClass&lt;-    0  TRUE
-#&gt; 872                   on.exit    0  TRUE
-#&gt; 905               pcre_config    0 FALSE
-#&gt; 914                pos.to.env    0  TRUE
-#&gt; 957                 proc.time    0  TRUE
-#&gt; 958                      prod    0  TRUE
-#&gt; 981                     quote    0  TRUE
-#&gt; 982             R_compiled_by    0 FALSE
-#&gt; 985                 R.Version    0 FALSE
-#&gt; 986                     range    0  TRUE
-#&gt; 999                        Re    0  TRUE
-#&gt; 1018                      rep    0  TRUE
-#&gt; 1027                   repeat    0  TRUE
-#&gt; 1034               retracemem    0  TRUE
-#&gt; 1035                   return    0  TRUE
-#&gt; 1043                    round    0  TRUE
-#&gt; 1069                   search    0 FALSE
-#&gt; 1070              searchpaths    0 FALSE
-#&gt; 1074                seq_along    0  TRUE
-#&gt; 1075                  seq_len    0  TRUE
-#&gt; 1078                  seq.int    0  TRUE
-#&gt; 1094                     sign    0  TRUE
-#&gt; 1096                   signif    0  TRUE
-#&gt; 1102                      sin    0  TRUE
-#&gt; 1104                     sinh    0  TRUE
-#&gt; 1107                    sinpi    0  TRUE
-#&gt; 1131                     sqrt    0  TRUE
-#&gt; 1137          standardGeneric    0  TRUE
-#&gt; 1139                   stderr    0 FALSE
-#&gt; 1140                    stdin    0 FALSE
-#&gt; 1141                   stdout    0 FALSE
-#&gt; 1145           storage.mode&lt;-    0  TRUE
-#&gt; 1161               substitute    0  TRUE
-#&gt; 1166                      sum    0  TRUE
-#&gt; 1195                   switch    0  TRUE
-#&gt; 1197                sys.calls    0 FALSE
-#&gt; 1199                 Sys.Date    0 FALSE
-#&gt; 1201               sys.frames    0 FALSE
-#&gt; 1205               Sys.getpid    0 FALSE
-#&gt; 1207                 Sys.info    0 FALSE
-#&gt; 1209           Sys.localeconv    0 FALSE
-#&gt; 1210               sys.nframe    0 FALSE
-#&gt; 1211              sys.on.exit    0 FALSE
-#&gt; 1213              sys.parents    0 FALSE
-#&gt; 1222               sys.status    0 FALSE
-#&gt; 1223                 Sys.time    0 FALSE
-#&gt; 1237                      tan    0  TRUE
-#&gt; 1238                     tanh    0  TRUE
-#&gt; 1239                    tanpi    0  TRUE
-#&gt; 1254                 tracemem    0  TRUE
-#&gt; 1259                 trigamma    0  TRUE
-#&gt; 1261                    trunc    0  TRUE
-#&gt; 1270           unCfillPOSIXlt    0  TRUE
-#&gt; 1271                  unclass    0  TRUE
-#&gt; 1295               untracemem    0  TRUE
-#&gt; 1299                UseMethod    0  TRUE
-#&gt; 1315                    while    0  TRUE
-#&gt; 1332                    xtfrm    0  TRUE</code></pre>
+#&gt; 840                     names    0  TRUE
+#&gt; 842                   names&lt;-    0  TRUE
+#&gt; 849                     nargs    0  TRUE
+#&gt; 855                      next    0  TRUE
+#&gt; 864                  nullfile    0 FALSE
+#&gt; 869                    nzchar    0  TRUE
+#&gt; 871                  oldClass    0  TRUE
+#&gt; 872                oldClass&lt;-    0  TRUE
+#&gt; 874                   on.exit    0  TRUE
+#&gt; 907               pcre_config    0 FALSE
+#&gt; 916                pos.to.env    0  TRUE
+#&gt; 959                 proc.time    0  TRUE
+#&gt; 960                      prod    0  TRUE
+#&gt; 983                     quote    0  TRUE
+#&gt; 984             R_compiled_by    0 FALSE
+#&gt; 987                 R.Version    0 FALSE
+#&gt; 988                     range    0  TRUE
+#&gt; 1001                       Re    0  TRUE
+#&gt; 1020                      rep    0  TRUE
+#&gt; 1029                   repeat    0  TRUE
+#&gt; 1036               retracemem    0  TRUE
+#&gt; 1037                   return    0  TRUE
+#&gt; 1045                    round    0  TRUE
+#&gt; 1071                   search    0 FALSE
+#&gt; 1072              searchpaths    0 FALSE
+#&gt; 1076                seq_along    0  TRUE
+#&gt; 1077                  seq_len    0  TRUE
+#&gt; 1080                  seq.int    0  TRUE
+#&gt; 1096                     sign    0  TRUE
+#&gt; 1098                   signif    0  TRUE
+#&gt; 1104                      sin    0  TRUE
+#&gt; 1106                     sinh    0  TRUE
+#&gt; 1109                    sinpi    0  TRUE
+#&gt; 1133                     sqrt    0  TRUE
+#&gt; 1139          standardGeneric    0  TRUE
+#&gt; 1141                   stderr    0 FALSE
+#&gt; 1142                    stdin    0 FALSE
+#&gt; 1143                   stdout    0 FALSE
+#&gt; 1147           storage.mode&lt;-    0  TRUE
+#&gt; 1163               substitute    0  TRUE
+#&gt; 1168                      sum    0  TRUE
+#&gt; 1197                   switch    0  TRUE
+#&gt; 1199                sys.calls    0 FALSE
+#&gt; 1201                 Sys.Date    0 FALSE
+#&gt; 1203               sys.frames    0 FALSE
+#&gt; 1207               Sys.getpid    0 FALSE
+#&gt; 1209                 Sys.info    0 FALSE
+#&gt; 1211           Sys.localeconv    0 FALSE
+#&gt; 1212               sys.nframe    0 FALSE
+#&gt; 1213              sys.on.exit    0 FALSE
+#&gt; 1215              sys.parents    0 FALSE
+#&gt; 1224               sys.status    0 FALSE
+#&gt; 1225                 Sys.time    0 FALSE
+#&gt; 1239                      tan    0  TRUE
+#&gt; 1240                     tanh    0  TRUE
+#&gt; 1241                    tanpi    0  TRUE
+#&gt; 1256                 tracemem    0  TRUE
+#&gt; 1261                 trigamma    0  TRUE
+#&gt; 1263                    trunc    0  TRUE
+#&gt; 1272           unCfillPOSIXlt    0  TRUE
+#&gt; 1273                  unclass    0  TRUE
+#&gt; 1297               untracemem    0  TRUE
+#&gt; 1301                UseMethod    0  TRUE
+#&gt; 1317                    while    0  TRUE
+#&gt; 1334                    xtfrm    0  TRUE</code></pre>
 </div>
 </div>
 <p>Answers:</p>
@@ -37285,7 +37286,7 @@ font-style: inherit;">print</span>(x)</span>
 background-color: null;
 font-style: inherit;">show_time</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "2024-02-24 23:24:02 CST"</code></pre>
+<pre><code>#&gt; [1] "2024-03-10 11:03:07 CDT"</code></pre>
 </div>
 </div>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is evaluated. This is a confusing use of lazy evaluation.</p>
@@ -38105,7 +38106,7 @@ font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"kendall"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.2258155</code></pre>
+<pre><code>#&gt; [1] -0.1891968</code></pre>
 </div>
 </div>
 <p>AR Solutions: None of these functions provides a <code>...</code> argument. Therefore, the function arguments are first matched exactly, then via partial matching and finally by position. This leads us to the following explicit function calls:</p>
@@ -38329,7 +38330,7 @@ background-color: null;
 font-style: inherit;">NA</span></span>
 <span id="cb497-8">v</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 NA 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>#&gt;  [1] NA  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -38911,7 +38912,7 @@ font-style: inherit;">9</span>)), <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  4  5  6 10 12 13 14 15 NA</code></pre>
+<pre><code>#&gt;  [1]  2  6 10 11 12 13 14 17 19 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb540" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb540-1">(y <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -38933,31 +38934,31 @@ font-style: inherit;">7</span>)), <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  3  5 13 16 18 20 23 NA</code></pre>
+<pre><code>#&gt; [1]  3  8  9 10 11 19 21 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb542" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb542-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%u%</span> y</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  4  5  6 10 12 13 14 15 NA  3 16 18 20 23</code></pre>
+<pre><code>#&gt;  [1]  2  6 10 11 12 13 14 17 19 NA  3  8  9 21</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb544" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb544-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%n%</span> y</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  5 13 NA</code></pre>
+<pre><code>#&gt; [1] 10 11 19 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb546" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb546-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%s%</span> y</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  1  4  6 10 12 14 15</code></pre>
+<pre><code>#&gt; [1]  2  6 12 13 14 17</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb548" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb548-1">y <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%s%</span> x</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  3 16 18 20 23</code></pre>
+<pre><code>#&gt; [1]  3  8  9 21</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -39127,7 +39128,7 @@ font-style: inherit;"># Print the environment</span></span>
 background-color: null;
 font-style: inherit;">env_print</span>(e1)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x1140a6fe0&gt;
+<pre><code>#&gt; &lt;environment: 0x10f496458&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
@@ -39141,8 +39142,8 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e1)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x1140a6fe0] &lt;env&gt; 
-#&gt; └─loop = [1:0x1140a6fe0]</code></pre>
+<pre><code>#&gt; █ [1:0x10f496458] &lt;env&gt; 
+#&gt; └─loop = [1:0x10f496458]</code></pre>
 </div>
 </div>
 <hr>
@@ -39204,9 +39205,9 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e1)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x11098a160] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x1109d1058] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x11098a160]</code></pre>
+<pre><code>#&gt; █ [1:0x1335dc0e0] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x1120256a8] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x1335dc0e0]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb565" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb565-1">lobstr<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -39214,9 +39215,9 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e2)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x1109d1058] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x11098a160] &lt;env&gt; 
-#&gt;            └─loop = [1:0x1109d1058]</code></pre>
+<pre><code>#&gt; █ [1:0x1120256a8] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x1335dc0e0] &lt;env&gt; 
+#&gt;            └─loop = [1:0x1120256a8]</code></pre>
 </div>
 </div>
 <hr>
@@ -39305,7 +39306,7 @@ font-style: inherit;">"fail"</span>))</span></code></pre></div>
 background-color: null;
 font-style: inherit;">env_print</span>(e_test)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x111ef7b90&gt;
+<pre><code>#&gt; &lt;environment: 0x133299948&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
@@ -39686,7 +39687,7 @@ font-style: inherit;">"x"</span>)</span>
 <span id="cb595-4">})</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x111d6a288&gt;
+#&gt; &lt;environment: 0x133ee5de8&gt;
 #&gt; 
 #&gt; [[2]]
 #&gt; &lt;environment: R_GlobalEnv&gt;</code></pre>
@@ -39796,10 +39797,10 @@ background-color: null;
 font-style: inherit;">"a"</span>, e1c)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x1211c3790&gt;
+#&gt; &lt;environment: 0x144cc8420&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x111b506b0&gt;</code></pre>
+#&gt; &lt;environment: 0x13230a500&gt;</code></pre>
 </div>
 </div>
 <hr>
@@ -40030,7 +40031,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x12309cfb0&gt;
+#&gt; &lt;bytecode: 0x133fc4fc8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -40154,7 +40155,7 @@ font-style: inherit;">e_str</span>(fget)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)  
 #&gt;  - attr(*, "srcref")= 'srcref' int [1:8] 1 9 17 1 9 1 1 17
-#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x1151b0588&gt;</code></pre>
+#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x10ba63f90&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; fn_env():</code></pre>
@@ -40532,7 +40533,7 @@ background-color: null;
 font-style: inherit;">file.remove</span>(tmp)</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file
-#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpENe31o/fileda1f43ccba0',
+#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpouGMI4/filee7dc60afc74e',
 #&gt; reason 'No such file or directory'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -40545,7 +40546,7 @@ background-color: null;
 font-style: inherit;">safe_file_remove</span>(tmp))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpENe31o/fileda1f43ccba0' does not exist</code></pre>
+#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpouGMI4/filee7dc60afc74e' does not exist</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -40909,7 +40910,7 @@ font-style: inherit;">"c"</span>)</span>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x122eacaa8&gt;
+#&gt; &lt;bytecode: 0x10bd30b68&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb678" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb678-1"><span class="fu" style="color: #4758AB;
@@ -42205,8 +42206,8 @@ font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">800</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<div id="htmlwidget-3a4342616a14b9df8387" style="width:100%;height:406px;" class="ftree_widget1 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3a4342616a14b9df8387">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a799eb52537810225ec9" style="width:100%;height:406px;" class="ftree_widget1 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a799eb52537810225ec9">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Check rendering without height and width specified:</p>
@@ -42215,8 +42216,8 @@ font-style: inherit;">800</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">ftree2widget</span>(tree1)</span></code></pre></div>
 <div class="cell-output-display">
-<div class="ftree_widget1 html-widget html-fill-item" id="htmlwidget-d24cec8ea1a2c7d83e27" style="width:100%;height:382px;"></div>
-<script type="application/json" data-for="htmlwidget-d24cec8ea1a2c7d83e27">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div class="ftree_widget1 html-widget html-fill-item" id="htmlwidget-e9f1e29926abd81aa129" style="width:100%;height:382px;"></div>
+<script type="application/json" data-for="htmlwidget-e9f1e29926abd81aa129">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -42329,7 +42330,7 @@ font-style: inherit;">brew</span> info <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--cask</span> r</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>==&gt; r: 4.3.2
+<pre><code>==&gt; r: 4.3.3
 https://www.r-project.org/
 Not installed
 From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r/r.rb
@@ -42338,9 +42339,9 @@ R
 ==&gt; Description
 Environment for statistical computing and graphics
 ==&gt; Artifacts
-R-4.3.2-arm64.pkg (Pkg)
+R-4.3.3-arm64.pkg (Pkg)
 ==&gt; Analytics
-install: 744 (30 days), 2,080 (90 days), 8,422 (365 days)</code></pre>
+install: 750 (30 days), 2,158 (90 days), 8,806 (365 days)</code></pre>
 </div>
 </div>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
