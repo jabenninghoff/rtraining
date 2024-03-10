@@ -1,3 +1,7 @@
+# rtraining 1.1.10
+
+* Maintenance updates
+
 # rtraining 1.1.9
 
 * Maintenance updates
