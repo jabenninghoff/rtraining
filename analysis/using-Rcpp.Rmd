@@ -2,7 +2,7 @@
 title: "Using Rcpp"
 author: "John Benninghoff"
 date: '2023-12-21'
-date-modified: '2023-12-31'
+date-modified: '2024-03-10'
 categories: notes
 order: 104
 output:
@@ -122,7 +122,7 @@ that calls `phevaluator::EvaluateCards()` and returns a string based on `Rank.ca
 [`cpp_example.cc`](https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc). A more complete implementation would use
 [Rcpp Modules](https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf) to expose
 the C++ classes and methods in PH Evaluator, with help from the
-[RcppStudent](https://github.com/coatless-r-n-d/rcpp-modules-student) R package.
+[RcppStudent](https://github.com/coatless-rd-rcpp/rcpp-modules-student) R package.
 
 Additional examples implementing C++ libraries in Rcpp I found include
 [RcppAnnoy](https://github.com/eddelbuettel/rcppannoy), written by Rcpp author and maintainer Dirk
@@ -284,9 +284,9 @@ reading a tidyverse blog post on
 I learned that the R C++ standard was now C++17, so I technically did not need that line in the
 `Makevars` file, but I decided to keep it as it was an upstream requirement.
 
-I also discovered an example [package](https://github.com/coatless-r-n-d/rcpp-headers-subdirs) that
-explained how to put code in a subdirectory of `src/`, which I plan to use for the second version
-using Rcpp Modules.
+I also discovered an example [package](https://github.com/coatless-rd-rcpp/rcpp-headers-subdirs)
+that explained how to put code in a subdirectory of `src/`, which I plan to use for the second
+version using Rcpp Modules.
 
 I later added a script to copy (or update) the PH Evaluator source and header files to the cards
 package, to automate future updates if needed.
@@ -298,4 +298,4 @@ I am inclined to use a simple approach to creating a "phevaluator" package, copy
 files into `src/` (with a shell script for reproducibility), use a minimal `Makevars` file, and use
 [Rcpp Modules](https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf) to expose
 the C++ classes and methods in PH Evaluator, following the approach used by the
-[RcppStudent](https://github.com/coatless-r-n-d/rcpp-modules-student) R package.
+[RcppStudent](https://github.com/coatless-rd-rcpp/rcpp-modules-student) R package.
