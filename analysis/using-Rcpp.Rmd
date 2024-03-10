@@ -2,7 +2,7 @@
 title: "Using Rcpp"
 author: "John Benninghoff"
 date: '2023-12-21'
-file-modified: '2023-12-31'
+date-modified: '2023-12-31'
 categories: notes
 order: 104
 output:

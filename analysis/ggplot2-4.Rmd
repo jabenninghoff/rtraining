@@ -2,7 +2,7 @@
 title: "ggplot2 (Grammar)"
 author: "John Benninghoff"
 date: '2022-12-09'
-file-modified: '2023-11-11'
+date-modified: '2023-11-11'
 categories: [exercises, ggplot2]
 order: 304
 output:

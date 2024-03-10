@@ -2,7 +2,7 @@
 title: "R Training Log"
 author: "John Benninghoff"
 date: '2020-12-02'
-file-modified: '2023-12-08'
+date-modified: '2023-12-08'
 categories: notes
 order: 101
 output:
