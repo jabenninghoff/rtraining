@@ -1,0 +1,73 @@
+---
+title: "Conditional Probability"
+author: "John Benninghoff"
+date: '2024-03-26'
+date-modified: '2024-03-26'
+categories: notes
+order: 105
+output:
+  html_notebook:
+    theme:
+      version: 5
+      preset: bootstrap
+    css: assets/extra.css
+    pandoc_args: --shift-heading-level-by=1
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+---
+
+An exploration of conditional probabilities in R, inspired by a 2015 blog [post](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/) on the hot hand.
+
+```{r setup, message = FALSE, warning = FALSE}
+# no libraries
+```
+
+# Background
+
+I recently stumbled across a blog post from 2015,
+"[Hey - guess what? There really is a hot hand!](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/)"
+The article had some R code in it that was intriguing, exploring the following proposition the post
+quoted from a [paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2627354) it cited:
+
+> Jack takes a coin from his pocket and decides that he will flip it 4 times in a row, writing down
+> the outcome of each flip on a scrap of paper. After he is done flipping, he will look at the flips
+> that immediately followed an outcome of heads, and compute the relative frequency of heads on
+> those flips. Because the coin is fair, Jack of course expects this conditional relative frequency
+> to be equal to the probability of flipping a heads: 0.5. Shockingly, Jack is wrong. If he were to
+> sample 1 million fair coins and flip each coin 4 times, observing the conditional relative
+> frequency for each coin, on average the relative frequency would be approximately 0.4.
+
+What? OK, so let's follow along with the R code. The first block runs the simulation:
+
+```{r prob}
+rep <- 1e6
+n <- 4
+data <- array(sample(c(0, 1), rep * n, replace = TRUE), c(rep, n))
+prob <- rep(NA, rep)
+for (i in 1:rep) {
+  heads1 <- data[i, 1:(n - 1)] == 1
+  heads2 <- data[i, 2:n] == 1
+  prob[i] <- sum(heads1 & heads2) / sum(heads1)
+}
+```
+
+The second block naively calculates the average:
+
+```{r mean}
+print(mean(prob))
+```
+
+This doesn't work since, as the post points out, "sometimes the first three flips are tails, so the
+probability is 0/0." Discarding these gets us the correct average, which is approximately 0.4 and
+not 0.5 as the quote predicts:
+
+```{r mean2}
+print(mean(prob, na.rm = TRUE))
+```
+
+Reading this and trying the code myself led me to ask, What the heck is going on here?
+
+<!-- next section "Huh?": explore why this is, starting with verifying that the proportion of heads
+is approximately 50% (as expected) using `mean(data)` -->
