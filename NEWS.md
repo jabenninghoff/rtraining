@@ -20,9 +20,7 @@
 
 # rtraining 1.1.5
 
-* Added Using Rcpp: Notes on using [Rcpp](https://www.rcpp.org) to implement
-[Poker-Hand-Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) in the
-[cards](https://jabenninghoff.github.io/cards/) package
+* Added Using Rcpp: Notes on using [Rcpp](https://www.rcpp.org) to implement [Poker-Hand-Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) in the [cards](https://jabenninghoff.github.io/cards/) package
 
 * Updated R Books: updated reading list, notes on `checkmate` and `validate`
 
