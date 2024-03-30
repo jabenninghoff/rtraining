@@ -52,6 +52,12 @@ Notebooks in this package:
   R](https://adv-r.hadley.nz/index.html), second edition, with
   comparisons to solutions from [Advanced R
   Solutions](https://advanced-r-solutions.rbind.io).
+- [Conditional
+  Probability](https://jabenninghoff.github.io/rtraining/analysis/cond-prob.html)
+  (2024-03-26): An exploration of conditional probabilities in R,
+  inspired by a 2015 blog
+  [post](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/)
+  on the hot hand.
 - [ggplot2 (Getting
   started)](https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1.html)
   (2022-11-20): Workbook for completing quizzes and exercises from the
