@@ -10,8 +10,445 @@
 <atom:link href="https://jabenninghoff.github.io/rtraining/index.xml" rel="self" type="application/rss+xml"/>
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
-<generator>quarto-1.4.551</generator>
-<lastBuildDate>Thu, 21 Dec 2023 06:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.552</generator>
+<lastBuildDate>Tue, 26 Mar 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Conditional Probability</title>
+  <dc:creator>John Benninghoff</dc:creator>
+  <link>https://jabenninghoff.github.io/rtraining/analysis/cond-prob.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>An exploration of conditional probabilities in R, inspired by a 2015 blog <a href="https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/">post</a> on the hot hand.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># no libraries</span></span></code></pre></div>
+</div>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>I recently stumbled across a blog post from 2015, “<a href="https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/">Hey - guess what? There really is a hot hand!</a>” The article had some R code in it that was intriguing, exploring the following proposition the post quoted from a <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2627354">paper</a> it cited:</p>
+<blockquote class="blockquote">
+<p>Jack takes a coin from his pocket and decides that he will flip it 4 times in a row, writing down the outcome of each flip on a scrap of paper. After he is done flipping, he will look at the flips that immediately followed an outcome of heads, and compute the relative frequency of heads on those flips. Because the coin is fair, Jack of course expects this conditional relative frequency to be equal to the probability of flipping a heads: 0.5. Shockingly, Jack is wrong. If he were to sample 1 million fair coins and flip each coin 4 times, observing the conditional relative frequency for each coin, on average the relative frequency would be approximately 0.4.</p>
+</blockquote>
+<p>What? OK, so let’s follow along with the R code. The first block runs the simulation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">rep <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e6</span></span>
+<span id="cb2-2">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span></span>
+<span id="cb2-3">data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">array</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sample</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), rep <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">replace =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(rep, n))</span>
+<span id="cb2-4">prob <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>, rep)</span>
+<span id="cb2-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>rep) {</span>
+<span id="cb2-6">  heads1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> data[i, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-7">  heads2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> data[i, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-8">  prob[i] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(heads1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> heads2) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(heads1)</span>
+<span id="cb2-9">}</span></code></pre></div>
+</div>
+<p>The second block naively calculates the average:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(prob))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NaN</code></pre>
+</div>
+</div>
+<p>This doesn’t work since, as the post points out, “sometimes the first three flips are tails, so the probability is 0/0.” Discarding these gets us the correct average, which is approximately 0.4 and not 0.5 as the quote predicts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(prob, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4043983</code></pre>
+</div>
+</div>
+<p>Reading this and trying the code myself led me to ask, What the heck is going on here?</p>
+</section>
+<section id="huh" class="level2">
+<h2 class="anchored" data-anchor-id="huh">Huh?</h2>
+<p>Let’s follow along with the R code and try to work out why the conditional probability is 0.4.</p>
+<section id="simulation" class="level3">
+<h3 class="anchored" data-anchor-id="simulation">Simulation</h3>
+<p>Looking at the first part of the code:</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">rep <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e6</span></span>
+<span id="cb7-2">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span></span>
+<span id="cb7-3">data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">array</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sample</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), rep <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">replace =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(rep, n))</span></code></pre></div>
+<p>This code simulates flipping the coin 4 times in a row 1 million times and stores the results in a matrix:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(data)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    1    0    0
+[2,]    0    0    1    0
+[3,]    0    0    0    0
+[4,]    1    0    0    1
+[5,]    1    1    1    0
+[6,]    0    0    0    0</code></pre>
+</div>
+</div>
+<p>By convention, 1 is heads and 0 is tails. If the coin is fair, we should expect the proportion of heads to be about 0.5.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(data)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5003085</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(data), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+</div>
+<p>While there is some expected variance, the proportion is approximately 0.5.</p>
+</section>
+<section id="calculation" class="level3">
+<h3 class="anchored" data-anchor-id="calculation">Calculation</h3>
+<p>Looking at the second part of the code:</p>
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">prob <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>, rep)</span>
+<span id="cb14-2"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>rep) {</span>
+<span id="cb14-3">  heads1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> data[i, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb14-4">  heads2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> data[i, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb14-5">  prob[i] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(heads1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> heads2) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(heads1)</span>
+<span id="cb14-6">}</span></code></pre></div>
+<p>This counts the relative frequency of heads immediately after heads, by finding heads in positions 1-3 (<code>heads1</code>), comparing to heads in positions 2-4 (<code>heads2</code>), and calculating the proportion of heads after heads (<code>prob[i]</code>). To see how this works in practice, we can test all possible combinations of heads and tails:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">calc_prob <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(flips) {</span>
+<span id="cb15-2">  heads1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> flips[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb15-3">  heads2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> flips[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>n] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb15-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(heads1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> heads2) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(heads1)</span>
+<span id="cb15-5">}</span>
+<span id="cb15-6"></span>
+<span id="cb15-7">test_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expand.grid</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb15-8">test_prob <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(test_data))</span>
+<span id="cb15-9"></span>
+<span id="cb15-10"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(test_data))) {</span>
+<span id="cb15-11">  f <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> test_data[i, ]</span>
+<span id="cb15-12">  input <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"c("</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toString</span>(f), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">")"</span>)</span>
+<span id="cb15-13">  test_prob[i] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">calc_prob</span>(f)</span>
+<span id="cb15-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(i, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">": "</span>, input, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" = "</span>, test_prob[i]))</span>
+<span id="cb15-15">}</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1: c(0, 0, 0, 0) = NaN"
+[1] "2: c(1, 0, 0, 0) = 0"
+[1] "3: c(0, 1, 0, 0) = 0"
+[1] "4: c(1, 1, 0, 0) = 0.5"
+[1] "5: c(0, 0, 1, 0) = 0"
+[1] "6: c(1, 0, 1, 0) = 0"
+[1] "7: c(0, 1, 1, 0) = 0.5"
+[1] "8: c(1, 1, 1, 0) = 0.666666666666667"
+[1] "9: c(0, 0, 0, 1) = NaN"
+[1] "10: c(1, 0, 0, 1) = 0"
+[1] "11: c(0, 1, 0, 1) = 0"
+[1] "12: c(1, 1, 0, 1) = 0.5"
+[1] "13: c(0, 0, 1, 1) = 1"
+[1] "14: c(1, 0, 1, 1) = 0.5"
+[1] "15: c(0, 1, 1, 1) = 1"
+[1] "16: c(1, 1, 1, 1) = 1"</code></pre>
+</div>
+</div>
+<p>There are 16 possible combinations of 4 coin flips, with 5 possible outcomes: 0, 1/2, 2/3, 1, and 0/0 (<code>NaN</code>).</p>
+</section>
+<section id="how-it-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-it-works">How it works</h3>
+<p>Looking at the permutations, the conditional probability starts to make sense. Calculating the conditional relative frequency for all permutations gives us:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(test_prob, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4047619</code></pre>
+</div>
+</div>
+<p>Which is approximately 0.4. As we repeat coin flips, the frequency approaches this value.</p>
+<p>Recall that the <a href="https://en.wikipedia.org/wiki/Conditional_probability">conditional probability</a> is: <img src="https://latex.codecogs.com/png.latex?%5Clarge%7BP(A%20%5Cmid%20B)%20=%20%5Cfrac%7BP(A%20%5Ccap%20B)%7D%7BP(B)%7D%7D"> (I had to look it up).</p>
+<p>In this case, we are trying to calculate the probability of heads (<img src="https://latex.codecogs.com/png.latex?A">) given heads occurring at least once (<img src="https://latex.codecogs.com/png.latex?B">), which is equivalent to <code>mean(test_prob, na.rm = TRUE)</code>.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>notes</category>
+  <guid>https://jabenninghoff.github.io/rtraining/analysis/cond-prob.html</guid>
+  <pubDate>Tue, 26 Mar 2024 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Using Rcpp</title>
   <dc:creator>John Benninghoff</dc:creator>

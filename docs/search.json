@@ -4,14 +4,21 @@
     "href": "changelog.html",
     "title": "Changelog",
     "section": "",
-    "text": "Maintenance updates"
+    "text": "Added Conditional Probability: An exploration of conditional probabilities in R, inspired by a 2015 blog post on the hot hand"
+  },
+  {
+    "objectID": "changelog.html#rtraining-1.2.0",
+    "href": "changelog.html#rtraining-1.2.0",
+    "title": "Changelog",
+    "section": "",
+    "text": "Added Conditional Probability: An exploration of conditional probabilities in R, inspired by a 2015 blog post on the hot hand"
   },
   {
     "objectID": "changelog.html#rtraining-1.1.10",
     "href": "changelog.html#rtraining-1.1.10",
     "title": "Changelog",
-    "section": "",
-    "text": "Maintenance updates"
+    "section": "rtraining 1.1.10",
+    "text": "rtraining 1.1.10\n\nMaintenance updates"
   },
   {
     "objectID": "changelog.html#rtraining-1.1.9",
@@ -927,13 +934,6 @@
     ]
   },
   {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "MIT License",
-    "section": "",
-    "text": "MIT License\nCopyright (c) 2020 rtraining authors\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
-  },
-  {
     "objectID": "analysis/r-books.html",
     "href": "analysis/r-books.html",
     "title": "R Books",
@@ -1008,6 +1008,46 @@
     "crumbs": [
       "Changelog",
       "R Books"
+    ]
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "MIT License",
+    "section": "",
+    "text": "MIT License\nCopyright (c) 2020 rtraining authors\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+  },
+  {
+    "objectID": "analysis/cond-prob.html",
+    "href": "analysis/cond-prob.html",
+    "title": "Conditional Probability",
+    "section": "",
+    "text": "An exploration of conditional probabilities in R, inspired by a 2015 blog post on the hot hand.\n# no libraries",
+    "crumbs": [
+      "Changelog",
+      "Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "analysis/cond-prob.html#background",
+    "href": "analysis/cond-prob.html#background",
+    "title": "Conditional Probability",
+    "section": "Background",
+    "text": "Background\nI recently stumbled across a blog post from 2015, “Hey - guess what? There really is a hot hand!” The article had some R code in it that was intriguing, exploring the following proposition the post quoted from a paper it cited:\n\nJack takes a coin from his pocket and decides that he will flip it 4 times in a row, writing down the outcome of each flip on a scrap of paper. After he is done flipping, he will look at the flips that immediately followed an outcome of heads, and compute the relative frequency of heads on those flips. Because the coin is fair, Jack of course expects this conditional relative frequency to be equal to the probability of flipping a heads: 0.5. Shockingly, Jack is wrong. If he were to sample 1 million fair coins and flip each coin 4 times, observing the conditional relative frequency for each coin, on average the relative frequency would be approximately 0.4.\n\nWhat? OK, so let’s follow along with the R code. The first block runs the simulation:\n\nrep &lt;- 1e6\nn &lt;- 4\ndata &lt;- array(sample(c(0, 1), rep * n, replace = TRUE), c(rep, n))\nprob &lt;- rep(NA, rep)\nfor (i in 1:rep) {\n  heads1 &lt;- data[i, 1:(n - 1)] == 1\n  heads2 &lt;- data[i, 2:n] == 1\n  prob[i] &lt;- sum(heads1 & heads2) / sum(heads1)\n}\n\nThe second block naively calculates the average:\n\nprint(mean(prob))\n\n[1] NaN\n\n\nThis doesn’t work since, as the post points out, “sometimes the first three flips are tails, so the probability is 0/0.” Discarding these gets us the correct average, which is approximately 0.4 and not 0.5 as the quote predicts:\n\nprint(mean(prob, na.rm = TRUE))\n\n[1] 0.4043983\n\n\nReading this and trying the code myself led me to ask, What the heck is going on here?",
+    "crumbs": [
+      "Changelog",
+      "Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "analysis/cond-prob.html#huh",
+    "href": "analysis/cond-prob.html#huh",
+    "title": "Conditional Probability",
+    "section": "Huh?",
+    "text": "Huh?\nLet’s follow along with the R code and try to work out why the conditional probability is 0.4.\n\nSimulation\nLooking at the first part of the code:\nrep &lt;- 1e6\nn &lt;- 4\ndata &lt;- array(sample(c(0, 1), rep * n, replace = TRUE), c(rep, n))\nThis code simulates flipping the coin 4 times in a row 1 million times and stores the results in a matrix:\n\nhead(data)\n\n     [,1] [,2] [,3] [,4]\n[1,]    1    1    0    0\n[2,]    0    0    1    0\n[3,]    0    0    0    0\n[4,]    1    0    0    1\n[5,]    1    1    1    0\n[6,]    0    0    0    0\n\n\nBy convention, 1 is heads and 0 is tails. If the coin is fair, we should expect the proportion of heads to be about 0.5.\n\nmean(data)\n\n[1] 0.5003085\n\nround(mean(data), 2)\n\n[1] 0.5\n\n\nWhile there is some expected variance, the proportion is approximately 0.5.\n\n\nCalculation\nLooking at the second part of the code:\nprob &lt;- rep(NA, rep)\nfor (i in 1:rep) {\n  heads1 &lt;- data[i, 1:(n - 1)] == 1\n  heads2 &lt;- data[i, 2:n] == 1\n  prob[i] &lt;- sum(heads1 & heads2) / sum(heads1)\n}\nThis counts the relative frequency of heads immediately after heads, by finding heads in positions 1-3 (heads1), comparing to heads in positions 2-4 (heads2), and calculating the proportion of heads after heads (prob[i]). To see how this works in practice, we can test all possible combinations of heads and tails:\n\ncalc_prob &lt;- function(flips) {\n  heads1 &lt;- flips[1:(n - 1)] == 1\n  heads2 &lt;- flips[2:n] == 1\n  sum(heads1 & heads2) / sum(heads1)\n}\n\ntest_data &lt;- expand.grid(0:1, 0:1, 0:1, 0:1)\ntest_prob &lt;- rep(NA, nrow(test_data))\n\nfor (i in seq_len(nrow(test_data))) {\n  f &lt;- test_data[i, ]\n  input &lt;- paste0(\"c(\", toString(f), \")\")\n  test_prob[i] &lt;- calc_prob(f)\n  print(paste0(i, \": \", input, \" = \", test_prob[i]))\n}\n\n[1] \"1: c(0, 0, 0, 0) = NaN\"\n[1] \"2: c(1, 0, 0, 0) = 0\"\n[1] \"3: c(0, 1, 0, 0) = 0\"\n[1] \"4: c(1, 1, 0, 0) = 0.5\"\n[1] \"5: c(0, 0, 1, 0) = 0\"\n[1] \"6: c(1, 0, 1, 0) = 0\"\n[1] \"7: c(0, 1, 1, 0) = 0.5\"\n[1] \"8: c(1, 1, 1, 0) = 0.666666666666667\"\n[1] \"9: c(0, 0, 0, 1) = NaN\"\n[1] \"10: c(1, 0, 0, 1) = 0\"\n[1] \"11: c(0, 1, 0, 1) = 0\"\n[1] \"12: c(1, 1, 0, 1) = 0.5\"\n[1] \"13: c(0, 0, 1, 1) = 1\"\n[1] \"14: c(1, 0, 1, 1) = 0.5\"\n[1] \"15: c(0, 1, 1, 1) = 1\"\n[1] \"16: c(1, 1, 1, 1) = 1\"\n\n\nThere are 16 possible combinations of 4 coin flips, with 5 possible outcomes: 0, 1/2, 2/3, 1, and 0/0 (NaN).\n\n\nHow it works\nLooking at the permutations, the conditional probability starts to make sense. Calculating the conditional relative frequency for all permutations gives us:\n\nmean(test_prob, na.rm = TRUE)\n\n[1] 0.4047619\n\n\nWhich is approximately 0.4. As we repeat coin flips, the frequency approaches this value.\nRecall that the conditional probability is: \\(\\large{P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}}\\) (I had to look it up).\nIn this case, we are trying to calculate the probability of heads (\\(A\\)) given heads occurring at least once (\\(B\\)), which is equivalent to mean(test_prob, na.rm = TRUE).",
+    "crumbs": [
+      "Changelog",
+      "Conditional Probability"
     ]
   },
   {
@@ -1398,42 +1438,42 @@
   {
     "objectID": "NEWS.html",
     "href": "NEWS.html",
-    "title": "rtraining 1.1.10",
+    "title": "rtraining 1.2.0",
     "section": "",
-    "text": "Maintenance updates"
+    "text": "Added Conditional Probability: An exploration of conditional probabilities in R, inspired by a 2015 blog post on the hot hand"
   },
   {
     "objectID": "NEWS.html#new-features",
     "href": "NEWS.html#new-features",
-    "title": "rtraining 1.1.10",
+    "title": "rtraining 1.2.0",
     "section": "New Features",
     "text": "New Features\n\nmajor update: build-site has been replaced with an R function, build_analysis_site(), which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to html_document, to_document().\nbuild_analysis_site() will be migrated to rdev in a future release"
   },
   {
     "objectID": "NEWS.html#new-content",
     "href": "NEWS.html#new-content",
-    "title": "rtraining 1.1.10",
+    "title": "rtraining 1.2.0",
     "section": "New Content",
     "text": "New Content\n\nR Setup Log: added notes on the package layout I use for “analysis” packages (will be converted to an rdev vignette in a future release)\nR Setup Log: added notes on my R Workflow\nR Training Log: updated with notes on my current book, R Packages"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures",
     "href": "NEWS.html#new-contentfeatures",
-    "title": "rtraining 1.1.10",
+    "title": "rtraining 1.2.0",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nci(): run continuous integration tests locally: lint, R CMD check, and style (off by default).\ncheck_renv(): convenience function that runs renv status(), clean(), and optionally update() (on by default)."
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-1",
     "href": "NEWS.html#new-contentfeatures-1",
-    "title": "rtraining 1.1.10",
+    "title": "rtraining 1.2.0",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R setup\nminor updates to R Training Log\nstyle_all(): style all .R and .Rmd files in a project using styler\nlint_all(): lint all .R and .Rmd files in a project using lintr\nadd GitHub Actions for continuous integration testing"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-2",
     "href": "NEWS.html#new-contentfeatures-2",
-    "title": "rtraining 1.1.10",
+    "title": "rtraining 1.2.0",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Training Log Notebook (r-training-log.Rmd): Notes on learning R and RStudio\ntools/setup-r: shell script to install development packages to site repository on macOS + Homebrew\nbuild-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/"
   },
