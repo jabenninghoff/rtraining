@@ -50,5 +50,6 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           # see https://github.com/r-hub/rhub/issues/476 for --no-multiarch
-          args: 'c("--no-manual", "--no-multiarch")'
+          # args: 'c("--no-manual", "--as-cran", "--no-multiarch")'
           upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
