@@ -1,6 +1,6 @@
 # rtraining 1.2.0
 
-* Added Conditional Probability: An exploration of conditional probabilities in R, inspired by a 2015 blog [post](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/) on the hot hand.
+* Added Conditional Probability: An exploration of conditional probabilities in R, inspired by a 2015 blog [post](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/) on the hot hand
 
 # rtraining 1.1.10
 
