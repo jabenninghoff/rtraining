@@ -93,6 +93,11 @@ Notebooks in this package:
   Analysis](https://ggplot2-book.org/index.html), third edition, with
   comparisons to solutions from [Solutions to ggplot2: Elegant Graphics
   for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
+- [Hockey Cards
+  Analysis](https://jabenninghoff.github.io/rtraining/analysis/hockey-cards.html)
+  (2024-04-17): A simple Monte Carlo simulation in R, replicating Julia
+  code from a LinkedIn
+  [post](https://www.linkedin.com/posts/etorkia_gretzky-card-simulation-using-julia-activity-7186379288563048448--FVH).
 - [R
   Books](https://jabenninghoff.github.io/rtraining/analysis/r-books.html)
   (2023-11-17): An actively maintained and curated list of R Books and
