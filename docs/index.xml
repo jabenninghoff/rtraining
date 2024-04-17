@@ -10,8 +10,213 @@
 <atom:link href="https://jabenninghoff.github.io/rtraining/index.xml" rel="self" type="application/rss+xml"/>
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
-<generator>quarto-1.4.552</generator>
-<lastBuildDate>Tue, 26 Mar 2024 05:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.553</generator>
+<lastBuildDate>Wed, 17 Apr 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Hockey Cards Analysis</title>
+  <dc:creator>John Benninghoff</dc:creator>
+  <link>https://jabenninghoff.github.io/rtraining/analysis/hockey-cards.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>A simple Monte Carlo simulation in R, replicating Julia code from a LinkedIn <a href="https://www.linkedin.com/posts/etorkia_gretzky-card-simulation-using-julia-activity-7186379288563048448--FVH">post</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(jbplot)</span></code></pre></div>
+</div>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>I came across an interesting <a href="https://www.linkedin.com/posts/etorkia_gretzky-card-simulation-using-julia-activity-7186379288563048448--FVH">post</a> on LinkedIn that used Monte Carlo simulation to help answer the question “How much is a box of unopened Canadian hockey cards worth?” The example code was in Julia, and I wanted to recreate it in R for comparison.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<p>The base R code below is functionally equivalent to the Julia code, except it omits the trial ID in the result:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">gretsky_cards <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(trials) {</span>
+<span id="cb2-2">  set_cards <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">396</span></span>
+<span id="cb2-3">  carton_cards <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">672</span></span>
+<span id="cb2-4">  cartons <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">16</span></span>
+<span id="cb2-5">  box_cards <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> carton_cards <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> cartons</span>
+<span id="cb2-6"></span>
+<span id="cb2-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">replicate</span>(trials, {</span>
+<span id="cb2-8">    carton <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sample</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>set_cards, box_cards, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">replace =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb2-9">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(carton <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">99</span>)</span>
+<span id="cb2-10">  })</span>
+<span id="cb2-11">}</span>
+<span id="cb2-12"></span>
+<span id="cb2-13">gretskys <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gretsky_cards</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span>)</span></code></pre></div>
+</div>
+<p>Also, instead of using a loop, I used <code>replicate()</code>, which I think is easier to use and understand.</p>
+</section>
+<section id="answer---base-r" class="level2">
+<h2 class="anchored" data-anchor-id="answer---base-r">Answer - Base R</h2>
+<p>Replicating the answer in base R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(gretskys)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  10.00   24.00   27.00   27.13   31.00   50.00 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">hist</span>(gretskys)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/hockey-cards_files/figure-html/summary-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="answer---ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="answer---ggplot2">Answer - ggplot2</h2>
+<p>Use ggplot2 to create a prettier histogram:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.data.frame</span>(gretskys), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(gretskys)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_hist_bw</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">binwidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Gretsky cards per case"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Number of occurrences over 10,000 simulations"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_quo</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/hockey-cards_files/figure-html/histogram-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="performance" class="level2">
+<h2 class="anchored" data-anchor-id="performance">Performance</h2>
+<p>How does the performance compare to Julia?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">bench<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mark</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gretsky_cards</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Some expressions had a GC in every iteration; so filtering is
+disabled.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  expression                min   median `itr/sec` mem_alloc `gc/sec`
+  &lt;bch:expr&gt;           &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+1 gretsky_cards(10000)    2.42s    2.42s     0.413    1.23GB     16.9</code></pre>
+</div>
+</div>
+<p>In this case, it certainly appears to be slower than the Julia test result which was 1.63 seconds.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>notes</category>
+  <guid>https://jabenninghoff.github.io/rtraining/analysis/hockey-cards.html</guid>
+  <pubDate>Wed, 17 Apr 2024 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Conditional Probability</title>
   <dc:creator>John Benninghoff</dc:creator>
