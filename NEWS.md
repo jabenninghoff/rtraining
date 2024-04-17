@@ -1,3 +1,7 @@
+# rtraining 1.2.1
+
+* Added Hockey Cards Analysis: A simple Monte Carlo simulation in R, replicating Julia code from a LinkedIn [post](https://www.linkedin.com/posts/etorkia_gretzky-card-simulation-using-julia-activity-7186379288563048448--FVH?utm_source=share&utm_medium=member_desktop)
+
 # rtraining 1.2.0
 
 * Added Conditional Probability: An exploration of conditional probabilities in R, inspired by a 2015 blog [post](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/) on the hot hand
