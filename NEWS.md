@@ -1,3 +1,7 @@
+# rtraining 1.2.2
+
+* Updated for R 4.4.0
+
 # rtraining 1.2.1
 
 * Added Hockey Cards Analysis: A simple Monte Carlo simulation in R, replicating Julia code from a LinkedIn [post](https://www.linkedin.com/posts/etorkia_gretzky-card-simulation-using-julia-activity-7186379288563048448--FVH?utm_source=share&utm_medium=member_desktop)

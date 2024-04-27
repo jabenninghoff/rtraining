@@ -120,7 +120,6 @@ ggplot
 ggthemes
 github
 gitignore
-glyphs
 grey
 greyed
 gridlines
@@ -145,7 +144,6 @@ lintr
 loc
 lockfile
 lubridate
-macOS
 magrittr
 md
 memoise
