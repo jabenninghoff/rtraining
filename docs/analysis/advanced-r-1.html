@@ -435,15 +435,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x138e20000"</code></pre>
+<pre><code>#&gt; [1] "0x1309b0000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x138e20000"</code></pre>
+<pre><code>#&gt; [1] "0x1309b0000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x138e20000"</code></pre>
+<pre><code>#&gt; [1] "0x1309b0000"</code></pre>
 </div>
 </div>
 <hr>
@@ -454,17 +454,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10ceeccf8"</code></pre>
+<pre><code>#&gt; [1] "0x10824de28"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10ceeccf8"</code></pre>
+<pre><code>#&gt; [1] "0x10824de28"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>b[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10cfcf248"</code></pre>
+<pre><code>#&gt; [1] "0x1082d0708"</code></pre>
 </div>
 </div>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
@@ -485,19 +485,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10caa6668"</code></pre>
+<pre><code>#&gt; [1] "0x107f2da10"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10caa6668"</code></pre>
+<pre><code>#&gt; [1] "0x107f2da10"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10caa6668"</code></pre>
+<pre><code>#&gt; [1] "0x107f2da10"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10cb9f388"</code></pre>
+<pre><code>#&gt; [1] "0x108033a18"</code></pre>
 </div>
 </div>
 <hr>
@@ -515,23 +515,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
+<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(base<span class="sc">::</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
+<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">get</span>(<span class="st">"mean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
+<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">evalq</span>(mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
+<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">match.fun</span>(<span class="st">"mean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133fc50a8"</code></pre>
+<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
 </div>
 </div>
 <p>Answer: they do.</p>
@@ -588,12 +588,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>L, <span class="dv">2</span>L, <span class="dv">3</span>L)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x10dbb74c8&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x109486f88&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x10dbb74c8 -&gt; 0x10dbba8c8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
-#&gt; tracemem[0x10dbba8c8 -&gt; 0x10dc11578]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x109486f88 -&gt; 0x1096381c8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
+#&gt; tracemem[0x1096381c8 -&gt; 0x10970b718]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -603,12 +603,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x135da3f98&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x109a9f338&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x135da3f98 -&gt; 0x135c7cd58]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers withCallingHandlers handle_error process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x109a9f338 -&gt; 0x109b33248]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">5</span>L</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -646,19 +646,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133215c40"</code></pre>
+<pre><code>#&gt; [1] "0x109adcfd0"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133215c40"</code></pre>
+<pre><code>#&gt; [1] "0x109adcfd0"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133215c40"</code></pre>
+<pre><code>#&gt; [1] "0x109adcfd0"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x133215c40"</code></pre>
+<pre><code>#&gt; [1] "0x109adcfd0"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"second object"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -666,11 +666,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x134142948"</code></pre>
+<pre><code>#&gt; [1] "0x109bf4788"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x134142948"</code></pre>
+<pre><code>#&gt; [1] "0x109bf4788"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"third object"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -678,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1339a29d8"</code></pre>
+<pre><code>#&gt; [1] "0x10fad8eb8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"fourth object (?)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -686,7 +686,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1338089b0"</code></pre>
+<pre><code>#&gt; [1] "0x1067aa120"</code></pre>
 </div>
 </div>
 <p>Answer: four different objects with multiple names.</p>
@@ -702,10 +702,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x11256ba88] &lt;list&gt; 
-#&gt; ├─[2:0x10c1ab308] &lt;int&gt; 
-#&gt; └─█ [3:0x10c1b5e40] &lt;list&gt; 
-#&gt;   └─[2:0x10c1ab308]</code></pre>
+<pre><code>#&gt; █ [1:0x13cd5b908] &lt;list&gt; 
+#&gt; ├─[2:0x128fbccd0] &lt;int&gt; 
+#&gt; └─█ [3:0x105bc1b38] &lt;list&gt; 
+#&gt;   └─[2:0x128fbccd0]</code></pre>
 </div>
 </div>
 <p>Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which points to the original int vector.</p>
@@ -739,14 +739,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>funs <span class="ot">&lt;-</span> <span class="fu">list</span>(mean, sd, var)</span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(funs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; 17.55 kB</code></pre>
+<pre><code>#&gt; 18.76 kB</code></pre>
 </div>
 </div>
 <p>Answer: it doesn’t seem misleading to me, but the list includes the function objects, not the return values. Also, it calculates the size discarding the overlap between the functions. Per the code below, there is some:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(mean) <span class="sc">+</span> <span class="fu">obj_size</span>(sd) <span class="sc">+</span> <span class="fu">obj_size</span>(var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; 18.08 kB</code></pre>
+<pre><code>#&gt; 19.29 kB</code></pre>
 </div>
 </div>
 <p>AR Solutions: All three functions are built-in to R as part of the <code>{base}</code> and <code>{stats}</code> packages and hence always available. So, what does it mean to measure the size of something that’s already included in R?</p>
@@ -868,31 +868,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb104-25"><a href="#cb104-25" aria-hidden="true" tabindex="-1"></a>xm <span class="ot">&lt;-</span> <span class="fu">x_medians</span>(<span class="dv">5</span>)</span>
 <span id="cb104-26"><a href="#cb104-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1           X2          X3         X4          X5
-#&gt; 1  -0.31909169 -0.413144595 -0.35859574 -0.1204953 -0.43504827
-#&gt; 2  -0.08093799  0.207107755  0.47311511  0.1770737  0.28367867
-#&gt; 3   0.32596949 -0.437373091  0.34864762 -0.3722676  0.18585576
-#&gt; 4  -0.11777362 -0.018022014 -0.29952187 -0.1543627 -0.15564994
-#&gt; 5  -0.42514173 -0.327696993 -0.21917524 -0.1982858  0.09719632
-#&gt; 6   0.07408300 -0.087990720  0.03123350  0.3809340 -0.18972684
-#&gt; 7  -0.06706237  0.418502166 -0.10928116  0.2863259  0.03363580
-#&gt; 8  -0.26989198  0.432441315  0.05770697  0.4900636 -0.09702116
-#&gt; 9   0.02184134 -0.004379089  0.44892609  0.2579126  0.32683060
-#&gt; 10  0.15364264 -0.471395641 -0.19426441 -0.3646747  0.09965263</code></pre>
+<pre><code>#&gt;             X1          X2          X3           X4         X5
+#&gt; 1   0.04369877 -0.12343847 -0.48922113 -0.146598497 -0.2654805
+#&gt; 2  -0.04546978 -0.19296387 -0.42382440  0.212102621  0.4025081
+#&gt; 3  -0.17762408 -0.23940198 -0.21213014  0.264803931 -0.2605202
+#&gt; 4  -0.11086655 -0.06925057  0.17140543  0.378969395 -0.1148295
+#&gt; 5  -0.37466195  0.26574635  0.33328310  0.047525161 -0.3423237
+#&gt; 6  -0.10997077 -0.33625997  0.10866945  0.377508526 -0.1747907
+#&gt; 7  -0.45883611  0.40933670  0.08377487  0.007819048  0.1186564
+#&gt; 8  -0.24768451  0.42040105 -0.05249180 -0.262106426 -0.4977060
+#&gt; 9  -0.23342731 -0.45125163  0.21884938 -0.448117266 -0.3207032
+#&gt; 10 -0.25681342 -0.10520468  0.48080027  0.475014569 -0.2819161</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">as.data.frame</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians)), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1           X2          X3         X4          X5
-#&gt; 1  -0.31909169 -0.413144595 -0.35859574 -0.1204953 -0.43504827
-#&gt; 2  -0.08093799  0.207107755  0.47311511  0.1770737  0.28367867
-#&gt; 3   0.32596949 -0.437373091  0.34864762 -0.3722676  0.18585576
-#&gt; 4  -0.11777362 -0.018022014 -0.29952187 -0.1543627 -0.15564994
-#&gt; 5  -0.42514173 -0.327696993 -0.21917524 -0.1982858  0.09719632
-#&gt; 6   0.07408300 -0.087990720  0.03123350  0.3809340 -0.18972684
-#&gt; 7  -0.06706237  0.418502166 -0.10928116  0.2863259  0.03363580
-#&gt; 8  -0.26989198  0.432441315  0.05770697  0.4900636 -0.09702116
-#&gt; 9   0.02184134 -0.004379089  0.44892609  0.2579126  0.32683060
-#&gt; 10  0.15364264 -0.471395641 -0.19426441 -0.3646747  0.09965263</code></pre>
+<pre><code>#&gt;             X1          X2          X3           X4         X5
+#&gt; 1   0.04369877 -0.12343847 -0.48922113 -0.146598497 -0.2654805
+#&gt; 2  -0.04546978 -0.19296387 -0.42382440  0.212102621  0.4025081
+#&gt; 3  -0.17762408 -0.23940198 -0.21213014  0.264803931 -0.2605202
+#&gt; 4  -0.11086655 -0.06925057  0.17140543  0.378969395 -0.1148295
+#&gt; 5  -0.37466195  0.26574635  0.33328310  0.047525161 -0.3423237
+#&gt; 6  -0.10997077 -0.33625997  0.10866945  0.377508526 -0.1747907
+#&gt; 7  -0.45883611  0.40933670  0.08377487  0.007819048  0.1186564
+#&gt; 8  -0.24768451  0.42040105 -0.05249180 -0.262106426 -0.4977060
+#&gt; 9  -0.23342731 -0.45125163  0.21884938 -0.448117266 -0.3207032
+#&gt; 10 -0.25681342 -0.10520468  0.48080027  0.475014569 -0.2819161</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># benchmark</span></span>
 <span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -900,21 +900,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   32.1µs   48.2µs    20230.     391KB     305.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   31.9µs   49.4µs    20500.     391KB     300.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   9.06µs   24.6µs    43623.     391KB     490.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   9.55µs   25.7µs    42371.     391KB     480.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">as.data.frame</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))) <span class="co"># as.data.frame introduces significant overhead</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 108µs  126µs     8057.     391KB     94.4</code></pre>
+#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 108µs  129µs     7697.     391KB     88.7</code></pre>
 </div>
 </div>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
@@ -925,14 +925,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   56.9µs   78.7µs    12729.     391KB     150.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   58.1µs   76.7µs    13646.     391KB     164.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   10.7µs   30.7µs    33069.     391KB     368.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)     11µs     27µs    43728.     391KB     495.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>xm <span class="ot">&lt;-</span> <span class="fu">x_medians</span>(<span class="dv">20</span>)</span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -940,14 +940,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    109µs    134µs     7383.     400KB     87.6</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    111µs    132µs     7527.     400KB     86.8</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   12.7µs   28.1µs    36352.     392KB     404.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)     13µs   25.1µs    40172.     392KB     455.</code></pre>
 </div>
 </div>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast. So, the list method is near constant time regardless of columns, whereas the data.frame method scales linearly with the number of columns.</p>
@@ -1074,7 +1074,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x1331ec188&gt;
+#&gt; &lt;bytecode: 0x12d6190d0&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>unname</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1087,7 +1087,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x132f9f8a0&gt;
+#&gt; &lt;bytecode: 0x105c5dd40&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1232,8 +1232,8 @@ it? (Hint: try using help.)</code></pre>
 <pre><code>#&gt;    
 #&gt; a   a b c
 #&gt;   a 0 1 0
-#&gt;   b 1 0 0
-#&gt;   c 0 0 1</code></pre>
+#&gt;   b 0 0 1
+#&gt;   c 1 0 0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(a_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1261,10 +1261,10 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 0 0 1 0
+#&gt;   a 0 1 0 0
 #&gt;   b 0 0 0 1
 #&gt;   c 1 0 0 0
-#&gt;   d 0 1 0 0</code></pre>
+#&gt;   d 0 0 1 0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(b_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2118,21 +2118,21 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb354-2"><a href="#cb354-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb354-3"><a href="#cb354-3" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">sample</span>(<span class="fu">ncol</span>(df))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   x y z
-#&gt; 1 1 5 a
-#&gt; 2 2 4 b
-#&gt; 3 3 3 c
-#&gt; 4 4 2 d
-#&gt; 5 5 1 e</code></pre>
+<pre><code>#&gt;   z x y
+#&gt; 1 a 1 5
+#&gt; 2 b 2 4
+#&gt; 3 c 3 3
+#&gt; 4 d 4 2
+#&gt; 5 e 5 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">sample</span>(<span class="fu">nrow</span>(df)), <span class="fu">sample</span>(<span class="fu">ncol</span>(df))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   y x z
-#&gt; 3 3 3 c
-#&gt; 2 4 2 b
-#&gt; 4 2 4 d
-#&gt; 5 1 5 e
-#&gt; 1 5 1 a</code></pre>
+<pre><code>#&gt;   x y z
+#&gt; 1 1 5 a
+#&gt; 2 2 4 b
+#&gt; 5 5 1 e
+#&gt; 4 4 2 d
+#&gt; 3 3 3 c</code></pre>
 </div>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -2165,15 +2165,15 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
 #&gt; 4 4 2 d
-#&gt; 1 1 5 a
-#&gt; 3 3 3 c</code></pre>
+#&gt; 3 3 3 c
+#&gt; 1 1 5 a</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb361"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb361-1"><a href="#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_rows</span>(df, <span class="dv">3</span>, <span class="at">contiguous =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
+#&gt; 1 1 5 a
 #&gt; 2 2 4 b
-#&gt; 3 3 3 c
-#&gt; 4 4 2 d</code></pre>
+#&gt; 3 3 3 c</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb363"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb363-1"><a href="#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">sample_rows</span>(df, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2493,17 +2493,17 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb409-4"><a href="#cb409-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb409-5"><a href="#cb409-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fun_args[<span class="fu">order</span>(fun_args<span class="sc">$</span>args, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ], <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;                  name args
-#&gt; 1070             scan   22
-#&gt; 570    format.default   16
-#&gt; 1123           source   16
-#&gt; 583           formatC   15
-#&gt; 764           library   13
-#&gt; 821  merge.data.frame   13
-#&gt; 920         prettyNum   13
-#&gt; 1233          system2   11
-#&gt; 928     print.default   10
-#&gt; 1065             save   10</code></pre>
+<pre><code>#&gt;                   name args
+#&gt; 1076              scan   22
+#&gt; 1132            source   17
+#&gt; 574     format.default   16
+#&gt; 587            formatC   15
+#&gt; 768            library   13
+#&gt; 825   merge.data.frame   13
+#&gt; 924          prettyNum   13
+#&gt; 1242           system2   12
+#&gt; 1239            system   11
+#&gt; 198  all.equal.numeric   10</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb411"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb411-1"><a href="#cb411-1" aria-hidden="true" tabindex="-1"></a>fun_args[fun_args<span class="sc">$</span>args <span class="sc">==</span> <span class="dv">0</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2534,233 +2534,238 @@ it? (Hint: try using help.)</code></pre>
 #&gt; 76                 .Primitive    0
 #&gt; 77                 .primTrace    0
 #&gt; 78               .primUntrace    0
-#&gt; 89          .standard_regexps    0
-#&gt; 90                    .subset    0
-#&gt; 91                   .subset2    0
-#&gt; 94        .tryResumeInterrupt    0
-#&gt; 96                          (    0
-#&gt; 97                          [    0
-#&gt; 115                        [[    0
-#&gt; 122                      [[&lt;-    0
-#&gt; 127                       [&lt;-    0
-#&gt; 135                         {    0
-#&gt; 136                         @    0
-#&gt; 137                       @&lt;-    0
-#&gt; 138                         *    0
-#&gt; 140                         /    0
-#&gt; 142                         &amp;    0
-#&gt; 145                        &amp;&amp;    0
-#&gt; 146                       %*%    0
-#&gt; 147                       %/%    0
-#&gt; 148                        %%    0
-#&gt; 152                         ^    0
-#&gt; 153                         +    0
-#&gt; 156                         &lt;    0
-#&gt; 157                        &lt;-    0
-#&gt; 158                       &lt;&lt;-    0
-#&gt; 159                        &lt;=    0
-#&gt; 160                         =    0
-#&gt; 161                        ==    0
-#&gt; 162                         &gt;    0
-#&gt; 163                        &gt;=    0
-#&gt; 164                         |    0
-#&gt; 167                        ||    0
-#&gt; 168                         ~    0
-#&gt; 169                         $    0
-#&gt; 172                       $&lt;-    0
-#&gt; 176                       abs    0
-#&gt; 177                      acos    0
-#&gt; 178                     acosh    0
-#&gt; 185                       all    0
-#&gt; 202                       any    0
-#&gt; 208                     anyNA    0
-#&gt; 217                       Arg    0
-#&gt; 224                   as.call    0
-#&gt; 225              as.character    0
-#&gt; 236                as.complex    0
-#&gt; 270                 as.double    0
-#&gt; 273            as.environment    0
-#&gt; 280                as.integer    0
-#&gt; 292                as.logical    0
-#&gt; 302                as.numeric    0
-#&gt; 321                    as.raw    0
-#&gt; 331                      asin    0
-#&gt; 332                     asinh    0
-#&gt; 338                      atan    0
-#&gt; 340                     atanh    0
-#&gt; 343                      attr    0
-#&gt; 345                    attr&lt;-    0
-#&gt; 346                attributes    0
-#&gt; 347              attributes&lt;-    0
-#&gt; 352                   baseenv    0
-#&gt; 371                     break    0
-#&gt; 372                   browser    0
-#&gt; 381                         c    0
-#&gt; 390                      call    0
-#&gt; 397                   ceiling    0
-#&gt; 410                     class    0
-#&gt; 411                   class&lt;-    0
-#&gt; 417       closeAllConnections    0
-#&gt; 434                      Conj    0
-#&gt; 435              contributors    0
-#&gt; 436                       cos    0
-#&gt; 437                      cosh    0
-#&gt; 438                     cospi    0
-#&gt; 440               Cstack_info    0
-#&gt; 441                    cummax    0
-#&gt; 442                    cummin    0
-#&gt; 443                   cumprod    0
-#&gt; 444                    cumsum    0
-#&gt; 453                      date    0
-#&gt; 457  default.stringsAsFactors    0
-#&gt; 474                   digamma    0
-#&gt; 475                       dim    0
-#&gt; 477                     dim&lt;-    0
-#&gt; 478                  dimnames    0
-#&gt; 480                dimnames&lt;-    0
-#&gt; 509                  emptyenv    0
-#&gt; 510                enc2native    0
-#&gt; 511                  enc2utf8    0
-#&gt; 519             environment&lt;-    0
-#&gt; 527                       exp    0
-#&gt; 529                     expm1    0
-#&gt; 530                expression    0
-#&gt; 531            extSoftVersion    0
-#&gt; 558                     floor    0
-#&gt; 561                       for    0
-#&gt; 563              forceAndCall    0
-#&gt; 586                  function    0
-#&gt; 587                     gamma    0
-#&gt; 589                   gc.time    0
-#&gt; 595         getAllConnections    0
-#&gt; 603             geterrmessage    0
-#&gt; 606             getLoadedDLLs    0
-#&gt; 616               getRversion    0
-#&gt; 618      getTaskCallbackNames    0
-#&gt; 621                     getwd    0
-#&gt; 624                 globalenv    0
-#&gt; 636                 iconvlist    0
-#&gt; 641                        if    0
-#&gt; 643                        Im    0
-#&gt; 649               interactive    0
-#&gt; 654                 invisible    0
-#&gt; 657                  is.array    0
-#&gt; 658                 is.atomic    0
-#&gt; 659                   is.call    0
-#&gt; 660              is.character    0
-#&gt; 661                is.complex    0
-#&gt; 663                 is.double    0
-#&gt; 665            is.environment    0
-#&gt; 666             is.expression    0
-#&gt; 668                 is.finite    0
-#&gt; 670               is.function    0
-#&gt; 671               is.infinite    0
-#&gt; 673                is.integer    0
-#&gt; 674               is.language    0
-#&gt; 675                   is.list    0
-#&gt; 677                is.logical    0
-#&gt; 678                 is.matrix    0
-#&gt; 679                     is.na    0
-#&gt; 687                   is.name    0
-#&gt; 688                    is.nan    0
-#&gt; 690                   is.null    0
-#&gt; 691                is.numeric    0
-#&gt; 696                 is.object    0
-#&gt; 699               is.pairlist    0
-#&gt; 702                      is.R    0
-#&gt; 703                    is.raw    0
-#&gt; 704              is.recursive    0
-#&gt; 705                 is.single    0
-#&gt; 706                 is.symbol    0
-#&gt; 722                      isS4    0
-#&gt; 736                 l10n_info    0
-#&gt; 737                La_library    0
-#&gt; 738                La_version    0
-#&gt; 745           lazyLoadDBfetch    0
-#&gt; 748                    length    0
-#&gt; 750                  length&lt;-    0
-#&gt; 759                  levels&lt;-    0
-#&gt; 762                    lgamma    0
-#&gt; 763            libcurlVersion    0
-#&gt; 767                   licence    0
-#&gt; 768                   license    0
-#&gt; 769                      list    0
-#&gt; 775          loadedNamespaces    0
-#&gt; 776      loadingNamespaceInfo    0
-#&gt; 781                       log    0
-#&gt; 782                     log10    0
-#&gt; 783                     log1p    0
-#&gt; 784                      log2    0
-#&gt; 807                       max    0
-#&gt; 819            memory.profile    0
-#&gt; 825                       min    0
-#&gt; 826                   missing    0
-#&gt; 827                       Mod    0
-#&gt; 840                     names    0
-#&gt; 842                   names&lt;-    0
-#&gt; 849                     nargs    0
-#&gt; 855                      next    0
-#&gt; 864                  nullfile    0
-#&gt; 869                    nzchar    0
-#&gt; 871                  oldClass    0
-#&gt; 872                oldClass&lt;-    0
-#&gt; 874                   on.exit    0
-#&gt; 907               pcre_config    0
-#&gt; 916                pos.to.env    0
-#&gt; 959                 proc.time    0
-#&gt; 960                      prod    0
-#&gt; 983                     quote    0
-#&gt; 984             R_compiled_by    0
-#&gt; 987                 R.Version    0
-#&gt; 988                     range    0
-#&gt; 1001                       Re    0
-#&gt; 1020                      rep    0
-#&gt; 1029                   repeat    0
-#&gt; 1036               retracemem    0
-#&gt; 1037                   return    0
-#&gt; 1045                    round    0
-#&gt; 1071                   search    0
-#&gt; 1072              searchpaths    0
-#&gt; 1076                seq_along    0
-#&gt; 1077                  seq_len    0
-#&gt; 1080                  seq.int    0
-#&gt; 1096                     sign    0
-#&gt; 1098                   signif    0
-#&gt; 1104                      sin    0
-#&gt; 1106                     sinh    0
-#&gt; 1109                    sinpi    0
-#&gt; 1133                     sqrt    0
-#&gt; 1139          standardGeneric    0
-#&gt; 1141                   stderr    0
-#&gt; 1142                    stdin    0
-#&gt; 1143                   stdout    0
-#&gt; 1147           storage.mode&lt;-    0
-#&gt; 1163               substitute    0
-#&gt; 1168                      sum    0
-#&gt; 1197                   switch    0
-#&gt; 1199                sys.calls    0
-#&gt; 1201                 Sys.Date    0
-#&gt; 1203               sys.frames    0
-#&gt; 1207               Sys.getpid    0
-#&gt; 1209                 Sys.info    0
-#&gt; 1211           Sys.localeconv    0
-#&gt; 1212               sys.nframe    0
-#&gt; 1213              sys.on.exit    0
-#&gt; 1215              sys.parents    0
-#&gt; 1224               sys.status    0
-#&gt; 1225                 Sys.time    0
-#&gt; 1239                      tan    0
-#&gt; 1240                     tanh    0
-#&gt; 1241                    tanpi    0
-#&gt; 1256                 tracemem    0
-#&gt; 1261                 trigamma    0
-#&gt; 1263                    trunc    0
-#&gt; 1272           unCfillPOSIXlt    0
-#&gt; 1273                  unclass    0
-#&gt; 1297               untracemem    0
-#&gt; 1301                UseMethod    0
-#&gt; 1317                    while    0
-#&gt; 1334                    xtfrm    0</code></pre>
+#&gt; 90          .standard_regexps    0
+#&gt; 91                    .subset    0
+#&gt; 92                   .subset2    0
+#&gt; 95        .tryResumeInterrupt    0
+#&gt; 97                          (    0
+#&gt; 98                          [    0
+#&gt; 116                        [[    0
+#&gt; 123                      [[&lt;-    0
+#&gt; 128                       [&lt;-    0
+#&gt; 136                         {    0
+#&gt; 137                         @    0
+#&gt; 138                       @&lt;-    0
+#&gt; 139                         *    0
+#&gt; 141                         /    0
+#&gt; 143                         &amp;    0
+#&gt; 146                        &amp;&amp;    0
+#&gt; 147                       %*%    0
+#&gt; 148                       %/%    0
+#&gt; 149                        %%    0
+#&gt; 154                         ^    0
+#&gt; 155                         +    0
+#&gt; 158                         &lt;    0
+#&gt; 159                        &lt;-    0
+#&gt; 160                       &lt;&lt;-    0
+#&gt; 161                        &lt;=    0
+#&gt; 162                         =    0
+#&gt; 163                        ==    0
+#&gt; 164                         &gt;    0
+#&gt; 165                        &gt;=    0
+#&gt; 166                         |    0
+#&gt; 169                        ||    0
+#&gt; 170                         ~    0
+#&gt; 171                         $    0
+#&gt; 174                       $&lt;-    0
+#&gt; 178                       abs    0
+#&gt; 179                      acos    0
+#&gt; 180                     acosh    0
+#&gt; 187                       all    0
+#&gt; 204                       any    0
+#&gt; 210                     anyNA    0
+#&gt; 219                       Arg    0
+#&gt; 226                   as.call    0
+#&gt; 227              as.character    0
+#&gt; 238                as.complex    0
+#&gt; 272                 as.double    0
+#&gt; 275            as.environment    0
+#&gt; 282                as.integer    0
+#&gt; 294                as.logical    0
+#&gt; 304                as.numeric    0
+#&gt; 323                    as.raw    0
+#&gt; 333                      asin    0
+#&gt; 334                     asinh    0
+#&gt; 340                      atan    0
+#&gt; 342                     atanh    0
+#&gt; 345                      attr    0
+#&gt; 347                    attr&lt;-    0
+#&gt; 348                attributes    0
+#&gt; 349              attributes&lt;-    0
+#&gt; 354                   baseenv    0
+#&gt; 373                     break    0
+#&gt; 374                   browser    0
+#&gt; 383                         c    0
+#&gt; 392                      call    0
+#&gt; 399                   ceiling    0
+#&gt; 412                     class    0
+#&gt; 413                   class&lt;-    0
+#&gt; 419       closeAllConnections    0
+#&gt; 436                      Conj    0
+#&gt; 437              contributors    0
+#&gt; 438                       cos    0
+#&gt; 439                      cosh    0
+#&gt; 440                     cospi    0
+#&gt; 441                 crossprod    0
+#&gt; 442               Cstack_info    0
+#&gt; 443                    cummax    0
+#&gt; 444                    cummin    0
+#&gt; 445                   cumprod    0
+#&gt; 446                    cumsum    0
+#&gt; 455                      date    0
+#&gt; 459                   declare    0
+#&gt; 460  default.stringsAsFactors    0
+#&gt; 477                   digamma    0
+#&gt; 478                       dim    0
+#&gt; 480                     dim&lt;-    0
+#&gt; 481                  dimnames    0
+#&gt; 483                dimnames&lt;-    0
+#&gt; 512                  emptyenv    0
+#&gt; 513                enc2native    0
+#&gt; 514                  enc2utf8    0
+#&gt; 522             environment&lt;-    0
+#&gt; 529                      Exec    0
+#&gt; 531                       exp    0
+#&gt; 533                     expm1    0
+#&gt; 534                expression    0
+#&gt; 535            extSoftVersion    0
+#&gt; 562                     floor    0
+#&gt; 565                       for    0
+#&gt; 567              forceAndCall    0
+#&gt; 590                  function    0
+#&gt; 591                     gamma    0
+#&gt; 593                   gc.time    0
+#&gt; 599         getAllConnections    0
+#&gt; 607             geterrmessage    0
+#&gt; 610             getLoadedDLLs    0
+#&gt; 620               getRversion    0
+#&gt; 622      getTaskCallbackNames    0
+#&gt; 625                     getwd    0
+#&gt; 628                 globalenv    0
+#&gt; 640                 iconvlist    0
+#&gt; 645                        if    0
+#&gt; 647                        Im    0
+#&gt; 653               interactive    0
+#&gt; 658                 invisible    0
+#&gt; 661                  is.array    0
+#&gt; 662                 is.atomic    0
+#&gt; 663                   is.call    0
+#&gt; 664              is.character    0
+#&gt; 665                is.complex    0
+#&gt; 667                 is.double    0
+#&gt; 669            is.environment    0
+#&gt; 670             is.expression    0
+#&gt; 672                 is.finite    0
+#&gt; 674               is.function    0
+#&gt; 675               is.infinite    0
+#&gt; 677                is.integer    0
+#&gt; 678               is.language    0
+#&gt; 679                   is.list    0
+#&gt; 681                is.logical    0
+#&gt; 682                 is.matrix    0
+#&gt; 683                     is.na    0
+#&gt; 691                   is.name    0
+#&gt; 692                    is.nan    0
+#&gt; 694                   is.null    0
+#&gt; 695                is.numeric    0
+#&gt; 700                 is.object    0
+#&gt; 703               is.pairlist    0
+#&gt; 706                      is.R    0
+#&gt; 707                    is.raw    0
+#&gt; 708              is.recursive    0
+#&gt; 709                 is.single    0
+#&gt; 710                 is.symbol    0
+#&gt; 726                      isS4    0
+#&gt; 740                 l10n_info    0
+#&gt; 741                La_library    0
+#&gt; 742                La_version    0
+#&gt; 749           lazyLoadDBfetch    0
+#&gt; 752                    length    0
+#&gt; 754                  length&lt;-    0
+#&gt; 763                  levels&lt;-    0
+#&gt; 766                    lgamma    0
+#&gt; 767            libcurlVersion    0
+#&gt; 771                   licence    0
+#&gt; 772                   license    0
+#&gt; 773                      list    0
+#&gt; 779          loadedNamespaces    0
+#&gt; 780      loadingNamespaceInfo    0
+#&gt; 785                       log    0
+#&gt; 786                     log10    0
+#&gt; 787                     log1p    0
+#&gt; 788                      log2    0
+#&gt; 811                       max    0
+#&gt; 823            memory.profile    0
+#&gt; 829                       min    0
+#&gt; 830                   missing    0
+#&gt; 831                       Mod    0
+#&gt; 844                     names    0
+#&gt; 846                   names&lt;-    0
+#&gt; 853                     nargs    0
+#&gt; 859                      next    0
+#&gt; 868                  nullfile    0
+#&gt; 873                    nzchar    0
+#&gt; 875                  oldClass    0
+#&gt; 876                oldClass&lt;-    0
+#&gt; 878                   on.exit    0
+#&gt; 911               pcre_config    0
+#&gt; 920                pos.to.env    0
+#&gt; 963                 proc.time    0
+#&gt; 964                      prod    0
+#&gt; 987                     quote    0
+#&gt; 988             R_compiled_by    0
+#&gt; 991                 R.Version    0
+#&gt; 992                     range    0
+#&gt; 1007                       Re    0
+#&gt; 1026                      rep    0
+#&gt; 1035                   repeat    0
+#&gt; 1042               retracemem    0
+#&gt; 1043                   return    0
+#&gt; 1051                    round    0
+#&gt; 1077                   search    0
+#&gt; 1078              searchpaths    0
+#&gt; 1082                seq_along    0
+#&gt; 1083                  seq_len    0
+#&gt; 1086                  seq.int    0
+#&gt; 1102                     sign    0
+#&gt; 1104                   signif    0
+#&gt; 1110                      sin    0
+#&gt; 1112                     sinh    0
+#&gt; 1115                    sinpi    0
+#&gt; 1142                     sqrt    0
+#&gt; 1148          standardGeneric    0
+#&gt; 1150                   stderr    0
+#&gt; 1151                    stdin    0
+#&gt; 1152                   stdout    0
+#&gt; 1156           storage.mode&lt;-    0
+#&gt; 1172               substitute    0
+#&gt; 1177                      sum    0
+#&gt; 1206                   switch    0
+#&gt; 1208                sys.calls    0
+#&gt; 1210                 Sys.Date    0
+#&gt; 1212               sys.frames    0
+#&gt; 1216               Sys.getpid    0
+#&gt; 1218                 Sys.info    0
+#&gt; 1220           Sys.localeconv    0
+#&gt; 1221               sys.nframe    0
+#&gt; 1222              sys.on.exit    0
+#&gt; 1224              sys.parents    0
+#&gt; 1233               sys.status    0
+#&gt; 1234                 Sys.time    0
+#&gt; 1248                 Tailcall    0
+#&gt; 1249                      tan    0
+#&gt; 1250                     tanh    0
+#&gt; 1251                    tanpi    0
+#&gt; 1254               tcrossprod    0
+#&gt; 1266                 tracemem    0
+#&gt; 1271                 trigamma    0
+#&gt; 1273                    trunc    0
+#&gt; 1282           unCfillPOSIXlt    0
+#&gt; 1283                  unclass    0
+#&gt; 1307               untracemem    0
+#&gt; 1312                UseMethod    0
+#&gt; 1328                    while    0
+#&gt; 1345                    xtfrm    0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb413"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb413-1"><a href="#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check if all functions with 0 arguments are primitive</span></span>
 <span id="cb413-2"><a href="#cb413-2" aria-hidden="true" tabindex="-1"></a>fun_args2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -2797,233 +2802,238 @@ it? (Hint: try using help.)</code></pre>
 #&gt; 76                 .Primitive    0  TRUE
 #&gt; 77                 .primTrace    0  TRUE
 #&gt; 78               .primUntrace    0  TRUE
-#&gt; 89          .standard_regexps    0 FALSE
-#&gt; 90                    .subset    0  TRUE
-#&gt; 91                   .subset2    0  TRUE
-#&gt; 94        .tryResumeInterrupt    0 FALSE
-#&gt; 96                          (    0  TRUE
-#&gt; 97                          [    0  TRUE
-#&gt; 115                        [[    0  TRUE
-#&gt; 122                      [[&lt;-    0  TRUE
-#&gt; 127                       [&lt;-    0  TRUE
-#&gt; 135                         {    0  TRUE
-#&gt; 136                         @    0  TRUE
-#&gt; 137                       @&lt;-    0  TRUE
-#&gt; 138                         *    0  TRUE
-#&gt; 140                         /    0  TRUE
-#&gt; 142                         &amp;    0  TRUE
-#&gt; 145                        &amp;&amp;    0  TRUE
-#&gt; 146                       %*%    0  TRUE
-#&gt; 147                       %/%    0  TRUE
-#&gt; 148                        %%    0  TRUE
-#&gt; 152                         ^    0  TRUE
-#&gt; 153                         +    0  TRUE
-#&gt; 156                         &lt;    0  TRUE
-#&gt; 157                        &lt;-    0  TRUE
-#&gt; 158                       &lt;&lt;-    0  TRUE
-#&gt; 159                        &lt;=    0  TRUE
-#&gt; 160                         =    0  TRUE
-#&gt; 161                        ==    0  TRUE
-#&gt; 162                         &gt;    0  TRUE
-#&gt; 163                        &gt;=    0  TRUE
-#&gt; 164                         |    0  TRUE
-#&gt; 167                        ||    0  TRUE
-#&gt; 168                         ~    0  TRUE
-#&gt; 169                         $    0  TRUE
-#&gt; 172                       $&lt;-    0  TRUE
-#&gt; 176                       abs    0  TRUE
-#&gt; 177                      acos    0  TRUE
-#&gt; 178                     acosh    0  TRUE
-#&gt; 185                       all    0  TRUE
-#&gt; 202                       any    0  TRUE
-#&gt; 208                     anyNA    0  TRUE
-#&gt; 217                       Arg    0  TRUE
-#&gt; 224                   as.call    0  TRUE
-#&gt; 225              as.character    0  TRUE
-#&gt; 236                as.complex    0  TRUE
-#&gt; 270                 as.double    0  TRUE
-#&gt; 273            as.environment    0  TRUE
-#&gt; 280                as.integer    0  TRUE
-#&gt; 292                as.logical    0  TRUE
-#&gt; 302                as.numeric    0  TRUE
-#&gt; 321                    as.raw    0  TRUE
-#&gt; 331                      asin    0  TRUE
-#&gt; 332                     asinh    0  TRUE
-#&gt; 338                      atan    0  TRUE
-#&gt; 340                     atanh    0  TRUE
-#&gt; 343                      attr    0  TRUE
-#&gt; 345                    attr&lt;-    0  TRUE
-#&gt; 346                attributes    0  TRUE
-#&gt; 347              attributes&lt;-    0  TRUE
-#&gt; 352                   baseenv    0  TRUE
-#&gt; 371                     break    0  TRUE
-#&gt; 372                   browser    0  TRUE
-#&gt; 381                         c    0  TRUE
-#&gt; 390                      call    0  TRUE
-#&gt; 397                   ceiling    0  TRUE
-#&gt; 410                     class    0  TRUE
-#&gt; 411                   class&lt;-    0  TRUE
-#&gt; 417       closeAllConnections    0 FALSE
-#&gt; 434                      Conj    0  TRUE
-#&gt; 435              contributors    0 FALSE
-#&gt; 436                       cos    0  TRUE
-#&gt; 437                      cosh    0  TRUE
-#&gt; 438                     cospi    0  TRUE
-#&gt; 440               Cstack_info    0 FALSE
-#&gt; 441                    cummax    0  TRUE
-#&gt; 442                    cummin    0  TRUE
-#&gt; 443                   cumprod    0  TRUE
-#&gt; 444                    cumsum    0  TRUE
-#&gt; 453                      date    0 FALSE
-#&gt; 457  default.stringsAsFactors    0 FALSE
-#&gt; 474                   digamma    0  TRUE
-#&gt; 475                       dim    0  TRUE
-#&gt; 477                     dim&lt;-    0  TRUE
-#&gt; 478                  dimnames    0  TRUE
-#&gt; 480                dimnames&lt;-    0  TRUE
-#&gt; 509                  emptyenv    0  TRUE
-#&gt; 510                enc2native    0  TRUE
-#&gt; 511                  enc2utf8    0  TRUE
-#&gt; 519             environment&lt;-    0  TRUE
-#&gt; 527                       exp    0  TRUE
-#&gt; 529                     expm1    0  TRUE
-#&gt; 530                expression    0  TRUE
-#&gt; 531            extSoftVersion    0 FALSE
-#&gt; 558                     floor    0  TRUE
-#&gt; 561                       for    0  TRUE
-#&gt; 563              forceAndCall    0  TRUE
-#&gt; 586                  function    0  TRUE
-#&gt; 587                     gamma    0  TRUE
-#&gt; 589                   gc.time    0  TRUE
-#&gt; 595         getAllConnections    0 FALSE
-#&gt; 603             geterrmessage    0 FALSE
-#&gt; 606             getLoadedDLLs    0 FALSE
-#&gt; 616               getRversion    0 FALSE
-#&gt; 618      getTaskCallbackNames    0 FALSE
-#&gt; 621                     getwd    0 FALSE
-#&gt; 624                 globalenv    0  TRUE
-#&gt; 636                 iconvlist    0 FALSE
-#&gt; 641                        if    0  TRUE
-#&gt; 643                        Im    0  TRUE
-#&gt; 649               interactive    0  TRUE
-#&gt; 654                 invisible    0  TRUE
-#&gt; 657                  is.array    0  TRUE
-#&gt; 658                 is.atomic    0  TRUE
-#&gt; 659                   is.call    0  TRUE
-#&gt; 660              is.character    0  TRUE
-#&gt; 661                is.complex    0  TRUE
-#&gt; 663                 is.double    0  TRUE
-#&gt; 665            is.environment    0  TRUE
-#&gt; 666             is.expression    0  TRUE
-#&gt; 668                 is.finite    0  TRUE
-#&gt; 670               is.function    0  TRUE
-#&gt; 671               is.infinite    0  TRUE
-#&gt; 673                is.integer    0  TRUE
-#&gt; 674               is.language    0  TRUE
-#&gt; 675                   is.list    0  TRUE
-#&gt; 677                is.logical    0  TRUE
-#&gt; 678                 is.matrix    0  TRUE
-#&gt; 679                     is.na    0  TRUE
-#&gt; 687                   is.name    0  TRUE
-#&gt; 688                    is.nan    0  TRUE
-#&gt; 690                   is.null    0  TRUE
-#&gt; 691                is.numeric    0  TRUE
-#&gt; 696                 is.object    0  TRUE
-#&gt; 699               is.pairlist    0  TRUE
-#&gt; 702                      is.R    0 FALSE
-#&gt; 703                    is.raw    0  TRUE
-#&gt; 704              is.recursive    0  TRUE
-#&gt; 705                 is.single    0  TRUE
-#&gt; 706                 is.symbol    0  TRUE
-#&gt; 722                      isS4    0  TRUE
-#&gt; 736                 l10n_info    0 FALSE
-#&gt; 737                La_library    0 FALSE
-#&gt; 738                La_version    0 FALSE
-#&gt; 745           lazyLoadDBfetch    0  TRUE
-#&gt; 748                    length    0  TRUE
-#&gt; 750                  length&lt;-    0  TRUE
-#&gt; 759                  levels&lt;-    0  TRUE
-#&gt; 762                    lgamma    0  TRUE
-#&gt; 763            libcurlVersion    0 FALSE
-#&gt; 767                   licence    0 FALSE
-#&gt; 768                   license    0 FALSE
-#&gt; 769                      list    0  TRUE
-#&gt; 775          loadedNamespaces    0 FALSE
-#&gt; 776      loadingNamespaceInfo    0 FALSE
-#&gt; 781                       log    0  TRUE
-#&gt; 782                     log10    0  TRUE
-#&gt; 783                     log1p    0  TRUE
-#&gt; 784                      log2    0  TRUE
-#&gt; 807                       max    0  TRUE
-#&gt; 819            memory.profile    0 FALSE
-#&gt; 825                       min    0  TRUE
-#&gt; 826                   missing    0  TRUE
-#&gt; 827                       Mod    0  TRUE
-#&gt; 840                     names    0  TRUE
-#&gt; 842                   names&lt;-    0  TRUE
-#&gt; 849                     nargs    0  TRUE
-#&gt; 855                      next    0  TRUE
-#&gt; 864                  nullfile    0 FALSE
-#&gt; 869                    nzchar    0  TRUE
-#&gt; 871                  oldClass    0  TRUE
-#&gt; 872                oldClass&lt;-    0  TRUE
-#&gt; 874                   on.exit    0  TRUE
-#&gt; 907               pcre_config    0 FALSE
-#&gt; 916                pos.to.env    0  TRUE
-#&gt; 959                 proc.time    0  TRUE
-#&gt; 960                      prod    0  TRUE
-#&gt; 983                     quote    0  TRUE
-#&gt; 984             R_compiled_by    0 FALSE
-#&gt; 987                 R.Version    0 FALSE
-#&gt; 988                     range    0  TRUE
-#&gt; 1001                       Re    0  TRUE
-#&gt; 1020                      rep    0  TRUE
-#&gt; 1029                   repeat    0  TRUE
-#&gt; 1036               retracemem    0  TRUE
-#&gt; 1037                   return    0  TRUE
-#&gt; 1045                    round    0  TRUE
-#&gt; 1071                   search    0 FALSE
-#&gt; 1072              searchpaths    0 FALSE
-#&gt; 1076                seq_along    0  TRUE
-#&gt; 1077                  seq_len    0  TRUE
-#&gt; 1080                  seq.int    0  TRUE
-#&gt; 1096                     sign    0  TRUE
-#&gt; 1098                   signif    0  TRUE
-#&gt; 1104                      sin    0  TRUE
-#&gt; 1106                     sinh    0  TRUE
-#&gt; 1109                    sinpi    0  TRUE
-#&gt; 1133                     sqrt    0  TRUE
-#&gt; 1139          standardGeneric    0  TRUE
-#&gt; 1141                   stderr    0 FALSE
-#&gt; 1142                    stdin    0 FALSE
-#&gt; 1143                   stdout    0 FALSE
-#&gt; 1147           storage.mode&lt;-    0  TRUE
-#&gt; 1163               substitute    0  TRUE
-#&gt; 1168                      sum    0  TRUE
-#&gt; 1197                   switch    0  TRUE
-#&gt; 1199                sys.calls    0 FALSE
-#&gt; 1201                 Sys.Date    0 FALSE
-#&gt; 1203               sys.frames    0 FALSE
-#&gt; 1207               Sys.getpid    0 FALSE
-#&gt; 1209                 Sys.info    0 FALSE
-#&gt; 1211           Sys.localeconv    0 FALSE
-#&gt; 1212               sys.nframe    0 FALSE
-#&gt; 1213              sys.on.exit    0 FALSE
-#&gt; 1215              sys.parents    0 FALSE
-#&gt; 1224               sys.status    0 FALSE
-#&gt; 1225                 Sys.time    0 FALSE
-#&gt; 1239                      tan    0  TRUE
-#&gt; 1240                     tanh    0  TRUE
-#&gt; 1241                    tanpi    0  TRUE
-#&gt; 1256                 tracemem    0  TRUE
-#&gt; 1261                 trigamma    0  TRUE
-#&gt; 1263                    trunc    0  TRUE
-#&gt; 1272           unCfillPOSIXlt    0  TRUE
-#&gt; 1273                  unclass    0  TRUE
-#&gt; 1297               untracemem    0  TRUE
-#&gt; 1301                UseMethod    0  TRUE
-#&gt; 1317                    while    0  TRUE
-#&gt; 1334                    xtfrm    0  TRUE</code></pre>
+#&gt; 90          .standard_regexps    0 FALSE
+#&gt; 91                    .subset    0  TRUE
+#&gt; 92                   .subset2    0  TRUE
+#&gt; 95        .tryResumeInterrupt    0 FALSE
+#&gt; 97                          (    0  TRUE
+#&gt; 98                          [    0  TRUE
+#&gt; 116                        [[    0  TRUE
+#&gt; 123                      [[&lt;-    0  TRUE
+#&gt; 128                       [&lt;-    0  TRUE
+#&gt; 136                         {    0  TRUE
+#&gt; 137                         @    0  TRUE
+#&gt; 138                       @&lt;-    0  TRUE
+#&gt; 139                         *    0  TRUE
+#&gt; 141                         /    0  TRUE
+#&gt; 143                         &amp;    0  TRUE
+#&gt; 146                        &amp;&amp;    0  TRUE
+#&gt; 147                       %*%    0  TRUE
+#&gt; 148                       %/%    0  TRUE
+#&gt; 149                        %%    0  TRUE
+#&gt; 154                         ^    0  TRUE
+#&gt; 155                         +    0  TRUE
+#&gt; 158                         &lt;    0  TRUE
+#&gt; 159                        &lt;-    0  TRUE
+#&gt; 160                       &lt;&lt;-    0  TRUE
+#&gt; 161                        &lt;=    0  TRUE
+#&gt; 162                         =    0  TRUE
+#&gt; 163                        ==    0  TRUE
+#&gt; 164                         &gt;    0  TRUE
+#&gt; 165                        &gt;=    0  TRUE
+#&gt; 166                         |    0  TRUE
+#&gt; 169                        ||    0  TRUE
+#&gt; 170                         ~    0  TRUE
+#&gt; 171                         $    0  TRUE
+#&gt; 174                       $&lt;-    0  TRUE
+#&gt; 178                       abs    0  TRUE
+#&gt; 179                      acos    0  TRUE
+#&gt; 180                     acosh    0  TRUE
+#&gt; 187                       all    0  TRUE
+#&gt; 204                       any    0  TRUE
+#&gt; 210                     anyNA    0  TRUE
+#&gt; 219                       Arg    0  TRUE
+#&gt; 226                   as.call    0  TRUE
+#&gt; 227              as.character    0  TRUE
+#&gt; 238                as.complex    0  TRUE
+#&gt; 272                 as.double    0  TRUE
+#&gt; 275            as.environment    0  TRUE
+#&gt; 282                as.integer    0  TRUE
+#&gt; 294                as.logical    0  TRUE
+#&gt; 304                as.numeric    0  TRUE
+#&gt; 323                    as.raw    0  TRUE
+#&gt; 333                      asin    0  TRUE
+#&gt; 334                     asinh    0  TRUE
+#&gt; 340                      atan    0  TRUE
+#&gt; 342                     atanh    0  TRUE
+#&gt; 345                      attr    0  TRUE
+#&gt; 347                    attr&lt;-    0  TRUE
+#&gt; 348                attributes    0  TRUE
+#&gt; 349              attributes&lt;-    0  TRUE
+#&gt; 354                   baseenv    0  TRUE
+#&gt; 373                     break    0  TRUE
+#&gt; 374                   browser    0  TRUE
+#&gt; 383                         c    0  TRUE
+#&gt; 392                      call    0  TRUE
+#&gt; 399                   ceiling    0  TRUE
+#&gt; 412                     class    0  TRUE
+#&gt; 413                   class&lt;-    0  TRUE
+#&gt; 419       closeAllConnections    0 FALSE
+#&gt; 436                      Conj    0  TRUE
+#&gt; 437              contributors    0 FALSE
+#&gt; 438                       cos    0  TRUE
+#&gt; 439                      cosh    0  TRUE
+#&gt; 440                     cospi    0  TRUE
+#&gt; 441                 crossprod    0  TRUE
+#&gt; 442               Cstack_info    0 FALSE
+#&gt; 443                    cummax    0  TRUE
+#&gt; 444                    cummin    0  TRUE
+#&gt; 445                   cumprod    0  TRUE
+#&gt; 446                    cumsum    0  TRUE
+#&gt; 455                      date    0 FALSE
+#&gt; 459                   declare    0  TRUE
+#&gt; 460  default.stringsAsFactors    0 FALSE
+#&gt; 477                   digamma    0  TRUE
+#&gt; 478                       dim    0  TRUE
+#&gt; 480                     dim&lt;-    0  TRUE
+#&gt; 481                  dimnames    0  TRUE
+#&gt; 483                dimnames&lt;-    0  TRUE
+#&gt; 512                  emptyenv    0  TRUE
+#&gt; 513                enc2native    0  TRUE
+#&gt; 514                  enc2utf8    0  TRUE
+#&gt; 522             environment&lt;-    0  TRUE
+#&gt; 529                      Exec    0  TRUE
+#&gt; 531                       exp    0  TRUE
+#&gt; 533                     expm1    0  TRUE
+#&gt; 534                expression    0  TRUE
+#&gt; 535            extSoftVersion    0 FALSE
+#&gt; 562                     floor    0  TRUE
+#&gt; 565                       for    0  TRUE
+#&gt; 567              forceAndCall    0  TRUE
+#&gt; 590                  function    0  TRUE
+#&gt; 591                     gamma    0  TRUE
+#&gt; 593                   gc.time    0  TRUE
+#&gt; 599         getAllConnections    0 FALSE
+#&gt; 607             geterrmessage    0 FALSE
+#&gt; 610             getLoadedDLLs    0 FALSE
+#&gt; 620               getRversion    0 FALSE
+#&gt; 622      getTaskCallbackNames    0 FALSE
+#&gt; 625                     getwd    0 FALSE
+#&gt; 628                 globalenv    0  TRUE
+#&gt; 640                 iconvlist    0 FALSE
+#&gt; 645                        if    0  TRUE
+#&gt; 647                        Im    0  TRUE
+#&gt; 653               interactive    0  TRUE
+#&gt; 658                 invisible    0  TRUE
+#&gt; 661                  is.array    0  TRUE
+#&gt; 662                 is.atomic    0  TRUE
+#&gt; 663                   is.call    0  TRUE
+#&gt; 664              is.character    0  TRUE
+#&gt; 665                is.complex    0  TRUE
+#&gt; 667                 is.double    0  TRUE
+#&gt; 669            is.environment    0  TRUE
+#&gt; 670             is.expression    0  TRUE
+#&gt; 672                 is.finite    0  TRUE
+#&gt; 674               is.function    0  TRUE
+#&gt; 675               is.infinite    0  TRUE
+#&gt; 677                is.integer    0  TRUE
+#&gt; 678               is.language    0  TRUE
+#&gt; 679                   is.list    0  TRUE
+#&gt; 681                is.logical    0  TRUE
+#&gt; 682                 is.matrix    0  TRUE
+#&gt; 683                     is.na    0  TRUE
+#&gt; 691                   is.name    0  TRUE
+#&gt; 692                    is.nan    0  TRUE
+#&gt; 694                   is.null    0  TRUE
+#&gt; 695                is.numeric    0  TRUE
+#&gt; 700                 is.object    0  TRUE
+#&gt; 703               is.pairlist    0  TRUE
+#&gt; 706                      is.R    0 FALSE
+#&gt; 707                    is.raw    0  TRUE
+#&gt; 708              is.recursive    0  TRUE
+#&gt; 709                 is.single    0  TRUE
+#&gt; 710                 is.symbol    0  TRUE
+#&gt; 726                      isS4    0  TRUE
+#&gt; 740                 l10n_info    0 FALSE
+#&gt; 741                La_library    0 FALSE
+#&gt; 742                La_version    0 FALSE
+#&gt; 749           lazyLoadDBfetch    0  TRUE
+#&gt; 752                    length    0  TRUE
+#&gt; 754                  length&lt;-    0  TRUE
+#&gt; 763                  levels&lt;-    0  TRUE
+#&gt; 766                    lgamma    0  TRUE
+#&gt; 767            libcurlVersion    0 FALSE
+#&gt; 771                   licence    0 FALSE
+#&gt; 772                   license    0 FALSE
+#&gt; 773                      list    0  TRUE
+#&gt; 779          loadedNamespaces    0 FALSE
+#&gt; 780      loadingNamespaceInfo    0 FALSE
+#&gt; 785                       log    0  TRUE
+#&gt; 786                     log10    0  TRUE
+#&gt; 787                     log1p    0  TRUE
+#&gt; 788                      log2    0  TRUE
+#&gt; 811                       max    0  TRUE
+#&gt; 823            memory.profile    0 FALSE
+#&gt; 829                       min    0  TRUE
+#&gt; 830                   missing    0  TRUE
+#&gt; 831                       Mod    0  TRUE
+#&gt; 844                     names    0  TRUE
+#&gt; 846                   names&lt;-    0  TRUE
+#&gt; 853                     nargs    0  TRUE
+#&gt; 859                      next    0  TRUE
+#&gt; 868                  nullfile    0 FALSE
+#&gt; 873                    nzchar    0  TRUE
+#&gt; 875                  oldClass    0  TRUE
+#&gt; 876                oldClass&lt;-    0  TRUE
+#&gt; 878                   on.exit    0  TRUE
+#&gt; 911               pcre_config    0 FALSE
+#&gt; 920                pos.to.env    0  TRUE
+#&gt; 963                 proc.time    0  TRUE
+#&gt; 964                      prod    0  TRUE
+#&gt; 987                     quote    0  TRUE
+#&gt; 988             R_compiled_by    0 FALSE
+#&gt; 991                 R.Version    0 FALSE
+#&gt; 992                     range    0  TRUE
+#&gt; 1007                       Re    0  TRUE
+#&gt; 1026                      rep    0  TRUE
+#&gt; 1035                   repeat    0  TRUE
+#&gt; 1042               retracemem    0  TRUE
+#&gt; 1043                   return    0  TRUE
+#&gt; 1051                    round    0  TRUE
+#&gt; 1077                   search    0 FALSE
+#&gt; 1078              searchpaths    0 FALSE
+#&gt; 1082                seq_along    0  TRUE
+#&gt; 1083                  seq_len    0  TRUE
+#&gt; 1086                  seq.int    0  TRUE
+#&gt; 1102                     sign    0  TRUE
+#&gt; 1104                   signif    0  TRUE
+#&gt; 1110                      sin    0  TRUE
+#&gt; 1112                     sinh    0  TRUE
+#&gt; 1115                    sinpi    0  TRUE
+#&gt; 1142                     sqrt    0  TRUE
+#&gt; 1148          standardGeneric    0  TRUE
+#&gt; 1150                   stderr    0 FALSE
+#&gt; 1151                    stdin    0 FALSE
+#&gt; 1152                   stdout    0 FALSE
+#&gt; 1156           storage.mode&lt;-    0  TRUE
+#&gt; 1172               substitute    0  TRUE
+#&gt; 1177                      sum    0  TRUE
+#&gt; 1206                   switch    0  TRUE
+#&gt; 1208                sys.calls    0 FALSE
+#&gt; 1210                 Sys.Date    0 FALSE
+#&gt; 1212               sys.frames    0 FALSE
+#&gt; 1216               Sys.getpid    0 FALSE
+#&gt; 1218                 Sys.info    0 FALSE
+#&gt; 1220           Sys.localeconv    0 FALSE
+#&gt; 1221               sys.nframe    0 FALSE
+#&gt; 1222              sys.on.exit    0 FALSE
+#&gt; 1224              sys.parents    0 FALSE
+#&gt; 1233               sys.status    0 FALSE
+#&gt; 1234                 Sys.time    0 FALSE
+#&gt; 1248                 Tailcall    0  TRUE
+#&gt; 1249                      tan    0  TRUE
+#&gt; 1250                     tanh    0  TRUE
+#&gt; 1251                    tanpi    0  TRUE
+#&gt; 1254               tcrossprod    0  TRUE
+#&gt; 1266                 tracemem    0  TRUE
+#&gt; 1271                 trigamma    0  TRUE
+#&gt; 1273                    trunc    0  TRUE
+#&gt; 1282           unCfillPOSIXlt    0  TRUE
+#&gt; 1283                  unclass    0  TRUE
+#&gt; 1307               untracemem    0  TRUE
+#&gt; 1312                UseMethod    0  TRUE
+#&gt; 1328                    while    0  TRUE
+#&gt; 1345                    xtfrm    0  TRUE</code></pre>
 </div>
 </div>
 <p>Answers:</p>
@@ -3059,7 +3069,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb417"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb417-1"><a href="#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(n_args <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 253</code></pre>
+<pre><code>#&gt; [1] 258</code></pre>
 </div>
 </div>
 <p>However, this over counts because <code>formals()</code> returns <code>NULL</code> for primitive functions, and <code>length(NULL)</code> is 0. To fix this, we can first remove the primitive functions:</p>
@@ -3082,7 +3092,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb421"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb421-1"><a href="#cb421-1" aria-hidden="true" tabindex="-1"></a>funs <span class="ot">&lt;-</span> <span class="fu">Filter</span>(is.primitive, objs)</span>
 <span id="cb421-2"><a href="#cb421-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(funs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 205</code></pre>
+<pre><code>#&gt; [1] 210</code></pre>
 </div>
 </div>
 <hr>
@@ -3257,7 +3267,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb447-4"><a href="#cb447-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb447-5"><a href="#cb447-5" aria-hidden="true" tabindex="-1"></a><span class="fu">show_time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "2024-03-10 11:03:07 CDT"</code></pre>
+<pre><code>#&gt; [1] "2024-04-27 09:20:31 CDT"</code></pre>
 </div>
 </div>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is evaluated. This is a confusing use of lazy evaluation.</p>
@@ -3511,7 +3521,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb488-2"><a href="#cb488-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">20</span>)</span>
 <span id="cb488-3"><a href="#cb488-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x, y, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] -0.1891968</code></pre>
+<pre><code>#&gt; [1] 0.1492563</code></pre>
 </div>
 </div>
 <p>AR Solutions: None of these functions provides a <code>...</code> argument. Therefore, the function arguments are first matched exactly, then via partial matching and finally by position. This leads us to the following explicit function calls:</p>
@@ -3573,7 +3583,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb497-7"><a href="#cb497-7" aria-hidden="true" tabindex="-1"></a><span class="fu">modrand</span>(v) <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb497-8"><a href="#cb497-8" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] NA  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 NA 18 19 20</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -3823,27 +3833,27 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb538-5"><a href="#cb538-5" aria-hidden="true" tabindex="-1"></a><span class="co"># taken from docs examples</span></span>
 <span id="cb538-6"><a href="#cb538-6" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sort</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">9</span>)), <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  2  6 10 11 12 13 14 17 19 NA</code></pre>
+<pre><code>#&gt;  [1]  2  3  4  9 11 12 14 17 20 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb540"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb540-1"><a href="#cb540-1" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sort</span>(<span class="fu">sample</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">23</span>, <span class="dv">7</span>)), <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  3  8  9 10 11 19 21 NA</code></pre>
+<pre><code>#&gt; [1]  4  5  8 12 17 18 21 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb542"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb542-1"><a href="#cb542-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%u%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  2  6 10 11 12 13 14 17 19 NA  3  8  9 21</code></pre>
+<pre><code>#&gt;  [1]  2  3  4  9 11 12 14 17 20 NA  5  8 18 21</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb544"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb544-1"><a href="#cb544-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%n%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 10 11 19 NA</code></pre>
+<pre><code>#&gt; [1]  4 12 17 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb546"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb546-1"><a href="#cb546-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%s%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  2  6 12 13 14 17</code></pre>
+<pre><code>#&gt; [1]  2  3  9 11 14 20</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb548"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb548-1"><a href="#cb548-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">%s%</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  3  8  9 21</code></pre>
+<pre><code>#&gt; [1]  5  8 18 21</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -3925,7 +3935,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb558-4"><a href="#cb558-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the environment</span></span>
 <span id="cb558-5"><a href="#cb558-5" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x10f496458&gt;
+<pre><code>#&gt; &lt;environment: 0x13ca42770&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
@@ -3933,8 +3943,8 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb560"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb560-1"><a href="#cb560-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that it contains itself</span></span>
 <span id="cb560-2"><a href="#cb560-2" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x10f496458] &lt;env&gt; 
-#&gt; └─loop = [1:0x10f496458]</code></pre>
+<pre><code>#&gt; █ [1:0x13ca42770] &lt;env&gt; 
+#&gt; └─loop = [1:0x13ca42770]</code></pre>
 </div>
 </div>
 <hr>
@@ -3960,15 +3970,15 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb563-6"><a href="#cb563-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb563-7"><a href="#cb563-7" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x1335dc0e0] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x1120256a8] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x1335dc0e0]</code></pre>
+<pre><code>#&gt; █ [1:0x107ee7888] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x107e607b0] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x107ee7888]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb565"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb565-1"><a href="#cb565-1" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x1120256a8] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x1335dc0e0] &lt;env&gt; 
-#&gt;            └─loop = [1:0x1120256a8]</code></pre>
+<pre><code>#&gt; █ [1:0x107e607b0] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x107ee7888] &lt;env&gt; 
+#&gt;            └─loop = [1:0x107e607b0]</code></pre>
 </div>
 </div>
 <hr>
@@ -3997,7 +4007,7 @@ it? (Hint: try using help.)</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb569"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb569-1"><a href="#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(e_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x133299948&gt;
+<pre><code>#&gt; &lt;environment: 0x106c5dd18&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
@@ -4136,7 +4146,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb595-4"><a href="#cb595-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x133ee5de8&gt;
+#&gt; &lt;environment: 0x1068152e0&gt;
 #&gt; 
 #&gt; [[2]]
 #&gt; &lt;environment: R_GlobalEnv&gt;</code></pre>
@@ -4166,10 +4176,10 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb597-17"><a href="#cb597-17" aria-hidden="true" tabindex="-1"></a><span class="fu">where2</span>(<span class="st">"a"</span>, e1c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x144cc8420&gt;
+#&gt; &lt;environment: 0x108dee0e8&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x13230a500&gt;</code></pre>
+#&gt; &lt;environment: 0x1280e57e8&gt;</code></pre>
 </div>
 </div>
 <hr>
@@ -4236,7 +4246,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x133fc4fc8&gt;
+#&gt; &lt;bytecode: 0x1058a2210&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -4302,7 +4312,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)  
 #&gt;  - attr(*, "srcref")= 'srcref' int [1:8] 1 9 17 1 9 1 1 17
-#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x10ba63f90&gt;</code></pre>
+#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x128fd90f0&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; fn_env():</code></pre>
@@ -4472,7 +4482,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb641"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb641-1"><a href="#cb641-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.remove</span>(tmp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file
-#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpouGMI4/filee7dc60afc74e',
+#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpQlaAMH/file1716173023728',
 #&gt; reason 'No such file or directory'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -4481,7 +4491,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb644"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb644-1"><a href="#cb644-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">safe_file_remove</span>(tmp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpouGMI4/filee7dc60afc74e' does not exist</code></pre>
+#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpQlaAMH/file1716173023728' does not exist</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -4659,7 +4669,7 @@ it? (Hint: try using help.)</code></pre>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x10bd30b68&gt;
+#&gt; &lt;bytecode: 0x128e84120&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb678"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb678-1"><a href="#cb678-1" aria-hidden="true" tabindex="-1"></a><span class="fu">catch_cnd</span>(<span class="fu">stop</span>(<span class="st">"error"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

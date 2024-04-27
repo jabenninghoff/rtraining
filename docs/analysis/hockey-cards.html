@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gretskys)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  10.00   24.00   27.00   27.13   31.00   50.00 </code></pre>
+  10.00   23.00   27.00   27.17   31.00   51.00 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gretskys)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -397,7 +397,7 @@ disabled.</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;           &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 gretsky_cards(10000)    2.42s    2.42s     0.413    1.23GB     16.9</code></pre>
+1 gretsky_cards(10000)    2.44s    2.44s     0.410     1.2GB     13.9</code></pre>
 </div>
 </div>
 <p>In this case, it certainly appears to be slower than the Julia test result which was 1.63 seconds.</p>
