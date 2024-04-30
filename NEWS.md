@@ -1,3 +1,7 @@
+# rtraining 1.2.3
+
+* Added Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management.
+
 # rtraining 1.2.2
 
 * Updated for R 4.4.0
