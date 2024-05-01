@@ -27,6 +27,9 @@ Visualizations exploring the use of constraints vs performance improvements in r
 ```{r setup, message = FALSE, warning = FALSE}
 library(ggplot2)
 library(jbplot)
+
+xmin <- -5
+xmax <- 5
 ```
 
 # Normal Performance
@@ -35,12 +38,93 @@ Replicate a version of Figure 9 from the
 [Safety-II White Paper](https://www.england.nhs.uk/signuptosafety/wp-content/uploads/sites/16/2015/10/safety-1-safety-2-whte-papr.pdf),
 with help from <https://ggplot2tutor.com/tutorials/sampling_distributions>:
 
-```{r fig9}
-ggplot(data.frame(x = c(-3, 3)), aes(x)) +
-  stat_function(fun = dnorm, geom = "line") +
-  stat_function(fun = dnorm, geom = "area", fill = "red", xlim = c(-3, -2)) +
+```{r background}
+background <- ggplot(data.frame(x = c(xmin, xmax)), aes(x)) +
   scale_x_continuous(breaks = -3:3, minor_breaks = NULL) +
   labs(x = NULL, y = NULL) +
-  theme_quo(minor.y = FALSE) +
-  theme(axis.text.y = element_blank())
+  theme_quo(minor.y = FALSE)
+
+baseline <- stat_function(fun = dnorm, geom = "line")
+bad <- stat_function(fun = dnorm, geom = "area", fill = "red", xlim = c(xmin, -2))
+
+background + bad + baseline
+```
+
+The plot above shows "bad" outcomes in red. Let's add in "good" outcomes (>1) in green:
+
+```{r good}
+good <- stat_function(fun = dnorm, geom = "area", fill = "green", xlim = c(1, xmax))
+
+background + bad + good + baseline
+```
+
+# Constrained Performance
+
+One way of reducing "bad" outcomes is by constraining performance - reducing the standard
+deviation.
+
+```{r constrained}
+constrained <- stat_function(fun = dnorm, args = list(sd = 0.7), geom = "line", color = "blue")
+taller <- scale_y_continuous(limits = c(0, 0.6))
+
+background +
+  stat_function(
+    fun = dnorm, args = list(sd = 0.7), geom = "area", fill = "red", xlim = c(xmin, -2)
+  ) +
+  stat_function(
+    fun = dnorm, args = list(sd = 0.7), geom = "area", fill = "green", xlim = c(1, xmax)
+  ) +
+  constrained +
+  taller
+```
+
+Plotting both on the same grid shows the reduction in both "bad" and "good" outcomes:
+
+```{r overlay}
+background +
+  bad +
+  good +
+  baseline +
+  constrained +
+  taller
+```
+
+# Improved Performance
+
+Another way of reducing bad outcomes is by improving performance - shifting the mean.
+
+```{r performance}
+performance <- stat_function(fun = dnorm, args = list(mean = 1), geom = "line", color = "blue")
+improved <- stat_function(
+  fun = dnorm, args = list(mean = 1), geom = "area", fill = "green", xlim = c(1, xmax)
+)
+
+background +
+  stat_function(
+    fun = dnorm, args = list(mean = 1), geom = "area", fill = "red", xlim = c(xmin, -2)
+  ) +
+  improved +
+  performance
+```
+
+Plotting both together shows a reduction in "bad" and an increase in "good" outcomes:
+
+```{r overlay_perf}
+background +
+  bad +
+  improved +
+  baseline +
+  performance
+```
+
+Comparing all three:
+
+```{r overlay_all}
+background +
+  bad +
+  improved +
+  baseline +
+  constrained +
+  performance +
+  taller
 ```
