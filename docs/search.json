@@ -4,14 +4,21 @@
     "href": "changelog.html",
     "title": "Changelog",
     "section": "",
-    "text": "Updated for R 4.4.0"
+    "text": "Added Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management."
+  },
+  {
+    "objectID": "changelog.html#rtraining-1.2.3",
+    "href": "changelog.html#rtraining-1.2.3",
+    "title": "Changelog",
+    "section": "",
+    "text": "Added Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management."
   },
   {
     "objectID": "changelog.html#rtraining-1.2.2",
     "href": "changelog.html#rtraining-1.2.2",
     "title": "Changelog",
-    "section": "",
-    "text": "Updated for R 4.4.0"
+    "section": "rtraining 1.2.2",
+    "text": "rtraining 1.2.2\n\nUpdated for R 4.4.0"
   },
   {
     "objectID": "changelog.html#rtraining-1.2.1",
@@ -1025,13 +1032,6 @@
     ]
   },
   {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "MIT License",
-    "section": "",
-    "text": "MIT License\nCopyright (c) 2024 John Benninghoff\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
-  },
-  {
     "objectID": "analysis/hockey-cards.html",
     "href": "analysis/hockey-cards.html",
     "title": "Hockey Cards Analysis",
@@ -1095,6 +1095,68 @@
     "crumbs": [
       "Changelog",
       "Hockey Cards Analysis"
+    ]
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "MIT License",
+    "section": "",
+    "text": "MIT License\nCopyright (c) 2024 John Benninghoff\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+  },
+  {
+    "objectID": "analysis/constraints.html",
+    "href": "analysis/constraints.html",
+    "title": "Constraints vs Performance",
+    "section": "",
+    "text": "Visualizations exploring the use of constraints vs performance improvements in risk management.",
+    "crumbs": [
+      "Changelog",
+      "Constraints vs Performance"
+    ]
+  },
+  {
+    "objectID": "analysis/constraints.html#questionstodo",
+    "href": "analysis/constraints.html#questionstodo",
+    "title": "Constraints vs Performance",
+    "section": "Questions/TODO",
+    "text": "Questions/TODO\n\nQuestions/TODO list here\n\n\nlibrary(ggplot2)\nlibrary(jbplot)\nlibrary(fs)",
+    "crumbs": [
+      "Changelog",
+      "Constraints vs Performance"
+    ]
+  },
+  {
+    "objectID": "analysis/constraints.html#normal-performance",
+    "href": "analysis/constraints.html#normal-performance",
+    "title": "Constraints vs Performance",
+    "section": "Normal Performance",
+    "text": "Normal Performance\nReplicate a version of Figure 9 from the Safety-II White Paper, with help from https://ggplot2tutor.com/tutorials/sampling_distributions:\n\nxmin &lt;- -5\nxmax &lt;- 5\n\nsave_png &lt;- function(filename) {\n  ggsave(filename = path(\"rendered\", filename), width = 16 * 0.6, height = 9 * 0.6, bg = \"white\")\n}\n\nbackground &lt;- ggplot(data.frame(x = c(xmin, xmax)), aes(x)) +\n  scale_x_continuous(breaks = -3:3, minor_breaks = NULL) +\n  labs(x = NULL, y = NULL) +\n  theme_quo(minor.y = FALSE)\n\nbaseline &lt;- stat_function(fun = dnorm, geom = \"line\")\nbad &lt;- stat_function(fun = dnorm, geom = \"area\", fill = \"red\", xlim = c(xmin, -2))\n\nbackground + bad + baseline\n\n\n\n\n\n\n\nsave_png(\"01-baseline-bad.png\")\n\nThe plot above shows “bad” outcomes in red. Let’s add in “good” outcomes (&gt;1) in green:\n\ngood &lt;- stat_function(fun = dnorm, geom = \"area\", fill = \"green\", xlim = c(1, xmax))\n\nbackground + bad + good + baseline\n\n\n\n\n\n\n\nsave_png(\"02-baseline-bad-good.png\")",
+    "crumbs": [
+      "Changelog",
+      "Constraints vs Performance"
+    ]
+  },
+  {
+    "objectID": "analysis/constraints.html#constrained-performance",
+    "href": "analysis/constraints.html#constrained-performance",
+    "title": "Constraints vs Performance",
+    "section": "Constrained Performance",
+    "text": "Constrained Performance\nOne way of reducing “bad” outcomes is by constraining performance - reducing the standard deviation.\n\nconstrained &lt;- stat_function(fun = dnorm, args = list(sd = 0.7), geom = \"line\", color = \"blue\")\ntaller &lt;- scale_y_continuous(limits = c(0, 0.6))\n\nbackground +\n  stat_function(\n    fun = dnorm, args = list(sd = 0.7), geom = \"area\", fill = \"red\", xlim = c(xmin, -2)\n  ) +\n  stat_function(\n    fun = dnorm, args = list(sd = 0.7), geom = \"area\", fill = \"green\", xlim = c(1, xmax)\n  ) +\n  constrained +\n  taller\n\n\n\n\n\n\n\nsave_png(\"03-constrained.png\")\n\nPlotting both on the same grid shows the reduction in both “bad” and “good” outcomes:\n\nbackground +\n  bad +\n  good +\n  baseline +\n  constrained +\n  taller\n\n\n\n\n\n\n\nsave_png(\"04-baseline-constrained.png\")",
+    "crumbs": [
+      "Changelog",
+      "Constraints vs Performance"
+    ]
+  },
+  {
+    "objectID": "analysis/constraints.html#improved-performance",
+    "href": "analysis/constraints.html#improved-performance",
+    "title": "Constraints vs Performance",
+    "section": "Improved Performance",
+    "text": "Improved Performance\nAnother way of reducing bad outcomes is by improving performance - shifting the mean.\n\nperformance &lt;- stat_function(fun = dnorm, args = list(mean = 1), geom = \"line\", color = \"blue\")\nimproved &lt;- stat_function(\n  fun = dnorm, args = list(mean = 1), geom = \"area\", fill = \"green\", xlim = c(1, xmax)\n)\n\nbackground +\n  stat_function(\n    fun = dnorm, args = list(mean = 1), geom = \"area\", fill = \"red\", xlim = c(xmin, -2)\n  ) +\n  improved +\n  performance\n\n\n\n\n\n\n\nsave_png(\"05-improved.png\")\n\nPlotting both together shows a reduction in “bad” and an increase in “good” outcomes:\n\nbackground +\n  bad +\n  improved +\n  baseline +\n  performance\n\n\n\n\n\n\n\nsave_png(\"06-baseline-improved.png\")\n\nComparing all three:\n\nbackground +\n  bad +\n  improved +\n  baseline +\n  constrained +\n  performance +\n  taller\n\n\n\n\n\n\n\nsave_png(\"07-baseline-constrained-improved.png\")",
+    "crumbs": [
+      "Changelog",
+      "Constraints vs Performance"
     ]
   },
   {
@@ -1518,42 +1580,42 @@
   {
     "objectID": "NEWS.html",
     "href": "NEWS.html",
-    "title": "rtraining 1.2.2",
+    "title": "rtraining 1.2.3",
     "section": "",
-    "text": "Updated for R 4.4.0"
+    "text": "Added Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management."
   },
   {
     "objectID": "NEWS.html#new-features",
     "href": "NEWS.html#new-features",
-    "title": "rtraining 1.2.2",
+    "title": "rtraining 1.2.3",
     "section": "New Features",
     "text": "New Features\n\nmajor update: build-site has been replaced with an R function, build_analysis_site(), which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to html_document, to_document().\nbuild_analysis_site() will be migrated to rdev in a future release"
   },
   {
     "objectID": "NEWS.html#new-content",
     "href": "NEWS.html#new-content",
-    "title": "rtraining 1.2.2",
+    "title": "rtraining 1.2.3",
     "section": "New Content",
     "text": "New Content\n\nR Setup Log: added notes on the package layout I use for “analysis” packages (will be converted to an rdev vignette in a future release)\nR Setup Log: added notes on my R Workflow\nR Training Log: updated with notes on my current book, R Packages"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures",
     "href": "NEWS.html#new-contentfeatures",
-    "title": "rtraining 1.2.2",
+    "title": "rtraining 1.2.3",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nci(): run continuous integration tests locally: lint, R CMD check, and style (off by default).\ncheck_renv(): convenience function that runs renv status(), clean(), and optionally update() (on by default)."
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-1",
     "href": "NEWS.html#new-contentfeatures-1",
-    "title": "rtraining 1.2.2",
+    "title": "rtraining 1.2.3",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R setup\nminor updates to R Training Log\nstyle_all(): style all .R and .Rmd files in a project using styler\nlint_all(): lint all .R and .Rmd files in a project using lintr\nadd GitHub Actions for continuous integration testing"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-2",
     "href": "NEWS.html#new-contentfeatures-2",
-    "title": "rtraining 1.2.2",
+    "title": "rtraining 1.2.3",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Training Log Notebook (r-training-log.Rmd): Notes on learning R and RStudio\ntools/setup-r: shell script to install development packages to site repository on macOS + Homebrew\nbuild-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/"
   },
