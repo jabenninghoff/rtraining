@@ -27,9 +27,7 @@ Visualizations exploring the use of constraints vs performance improvements in r
 ```{r setup, message = FALSE, warning = FALSE}
 library(ggplot2)
 library(jbplot)
-
-xmin <- -5
-xmax <- 5
+library(fs)
 ```
 
 # Normal Performance
@@ -39,6 +37,13 @@ Replicate a version of Figure 9 from the
 with help from <https://ggplot2tutor.com/tutorials/sampling_distributions>:
 
 ```{r background}
+xmin <- -5
+xmax <- 5
+
+save_png <- function(filename) {
+  ggsave(filename = path("rendered", filename), width = 16 * 0.6, height = 9 * 0.6, bg = "white")
+}
+
 background <- ggplot(data.frame(x = c(xmin, xmax)), aes(x)) +
   scale_x_continuous(breaks = -3:3, minor_breaks = NULL) +
   labs(x = NULL, y = NULL) +
@@ -48,6 +53,8 @@ baseline <- stat_function(fun = dnorm, geom = "line")
 bad <- stat_function(fun = dnorm, geom = "area", fill = "red", xlim = c(xmin, -2))
 
 background + bad + baseline
+
+save_png("01-baseline-bad.png")
 ```
 
 The plot above shows "bad" outcomes in red. Let's add in "good" outcomes (>1) in green:
@@ -56,6 +63,8 @@ The plot above shows "bad" outcomes in red. Let's add in "good" outcomes (>1) in
 good <- stat_function(fun = dnorm, geom = "area", fill = "green", xlim = c(1, xmax))
 
 background + bad + good + baseline
+
+save_png("02-baseline-bad-good.png")
 ```
 
 # Constrained Performance
@@ -76,6 +85,8 @@ background +
   ) +
   constrained +
   taller
+
+save_png("03-constrained.png")
 ```
 
 Plotting both on the same grid shows the reduction in both "bad" and "good" outcomes:
@@ -87,6 +98,8 @@ background +
   baseline +
   constrained +
   taller
+
+save_png("04-baseline-constrained.png")
 ```
 
 # Improved Performance
@@ -105,6 +118,8 @@ background +
   ) +
   improved +
   performance
+
+save_png("05-improved.png")
 ```
 
 Plotting both together shows a reduction in "bad" and an increase in "good" outcomes:
@@ -115,6 +130,8 @@ background +
   improved +
   baseline +
   performance
+
+save_png("06-baseline-improved.png")
 ```
 
 Comparing all three:
@@ -127,4 +144,6 @@ background +
   constrained +
   performance +
   taller
+
+save_png("07-baseline-constrained-improved.png")
 ```
