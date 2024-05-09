@@ -4,10 +4,10 @@ project:
 
 website:
   title: "rtraining"
-  site-url: https://jabenninghoff.github.io/rtraining/
+  site-url: "https://jabenninghoff.github.io/rtraining/"
   description:
     "My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto."
-  repo-url: https://github.com/jabenninghoff/rtraining
+  repo-url: "https://github.com/jabenninghoff/rtraining"
   repo-actions: [source, issue]
   page-navigation: true
   sidebar:
