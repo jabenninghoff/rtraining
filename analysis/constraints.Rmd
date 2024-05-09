@@ -28,6 +28,8 @@ Visualizations exploring the use of constraints vs performance improvements in r
 library(ggplot2)
 library(jbplot)
 library(fs)
+library(tibble)
+library(dplyr)
 ```
 
 # Normal Performance
@@ -146,4 +148,40 @@ background +
   taller
 
 save_png("07-baseline-constrained-improved.png")
+```
+
+# Growth of Controls
+
+Visualize an example of the growth of controls using the Cyentia/RiskRecon State of Third-Party Risk
+Management 2020 and 2024 reports (data from 2023).
+
+Source:
+
+- 2020 data: <https://www.riskrecon.com/state-of-third-party-risk-management-report>
+- 2023 data: <https://www.riskrecon.com/state-of-third-party-risk-management-2024>
+
+```{r questionnaire}
+questionnaire <- tribble(
+  ~year, ~questions, ~percent,
+  2020,  ">400",     0.041,
+  2020,  "101-400",  0.148,
+  2020,  "11-100",   0.705,
+  2020,  "1-10",     0.107,
+  2023,  ">400",     0.02,
+  2023,  "101-400",  0.333,
+  2023,  "11-100",   0.616,
+  2023,  "1-10",     0.030
+) |>
+  mutate(year = as.factor(year)) |>
+  mutate(questions = factor(questions, levels = c("1-10", "11-100", "101-400", ">400")))
+
+ggplot(questionnaire, aes(questions, percent, fill = year)) +
+  geom_col(position = "dodge") +
+  scale_y_continuous(labels = scales::label_percent()) +
+  scale_fill_viridis_d() +
+  labs(x = NULL, y = NULL, fill = "Year", title = "Third-Party Questionnaire Length by Year") +
+  labs(caption = "Source: Cyentia/RiskRecon State of Third-Party Risk Management, 2020 and 2024") +
+  theme_quo()
+
+save_png("08-questionnaire-length.png")
 ```
