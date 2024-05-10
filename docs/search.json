@@ -4,14 +4,21 @@
     "href": "changelog.html",
     "title": "Changelog",
     "section": "",
-    "text": "Added Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management."
+    "text": "Updated Constraints vs Performance: Added “Growth of Controls” section"
+  },
+  {
+    "objectID": "changelog.html#rtraining-1.2.4",
+    "href": "changelog.html#rtraining-1.2.4",
+    "title": "Changelog",
+    "section": "",
+    "text": "Updated Constraints vs Performance: Added “Growth of Controls” section"
   },
   {
     "objectID": "changelog.html#rtraining-1.2.3",
     "href": "changelog.html#rtraining-1.2.3",
     "title": "Changelog",
-    "section": "",
-    "text": "Added Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management."
+    "section": "rtraining 1.2.3",
+    "text": "rtraining 1.2.3\n\nAdded Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management."
   },
   {
     "objectID": "changelog.html#rtraining-1.2.2",
@@ -1120,7 +1127,7 @@
     "href": "analysis/constraints.html#questionstodo",
     "title": "Constraints vs Performance",
     "section": "Questions/TODO",
-    "text": "Questions/TODO\n\nQuestions/TODO list here\n\n\nlibrary(ggplot2)\nlibrary(jbplot)\nlibrary(fs)",
+    "text": "Questions/TODO\n\nQuestions/TODO list here\n\n\nlibrary(ggplot2)\nlibrary(jbplot)\nlibrary(fs)\nlibrary(tibble)\nlibrary(dplyr)",
     "crumbs": [
       "Changelog",
       "Constraints vs Performance"
@@ -1154,6 +1161,17 @@
     "title": "Constraints vs Performance",
     "section": "Improved Performance",
     "text": "Improved Performance\nAnother way of reducing bad outcomes is by improving performance - shifting the mean.\n\nperformance &lt;- stat_function(fun = dnorm, args = list(mean = 1), geom = \"line\", color = \"blue\")\nimproved &lt;- stat_function(\n  fun = dnorm, args = list(mean = 1), geom = \"area\", fill = \"green\", xlim = c(1, xmax)\n)\n\nbackground +\n  stat_function(\n    fun = dnorm, args = list(mean = 1), geom = \"area\", fill = \"red\", xlim = c(xmin, -2)\n  ) +\n  improved +\n  performance\n\n\n\n\n\n\n\nsave_png(\"05-improved.png\")\n\nPlotting both together shows a reduction in “bad” and an increase in “good” outcomes:\n\nbackground +\n  bad +\n  improved +\n  baseline +\n  performance\n\n\n\n\n\n\n\nsave_png(\"06-baseline-improved.png\")\n\nComparing all three:\n\nbackground +\n  bad +\n  improved +\n  baseline +\n  constrained +\n  performance +\n  taller\n\n\n\n\n\n\n\nsave_png(\"07-baseline-constrained-improved.png\")",
+    "crumbs": [
+      "Changelog",
+      "Constraints vs Performance"
+    ]
+  },
+  {
+    "objectID": "analysis/constraints.html#growth-of-controls",
+    "href": "analysis/constraints.html#growth-of-controls",
+    "title": "Constraints vs Performance",
+    "section": "Growth of Controls",
+    "text": "Growth of Controls\nVisualize an example of the growth of controls using the Cyentia/RiskRecon State of Third-Party Risk Management 2020 and 2024 reports (data from 2023).\nSource:\n\n2020 data: https://www.riskrecon.com/state-of-third-party-risk-management-report\n2023 data: https://www.riskrecon.com/state-of-third-party-risk-management-2024\n\n\nquestionnaire &lt;- tribble(\n  ~year, ~questions, ~percent,\n  2020,  \"&gt;400\",     0.041,\n  2020,  \"101-400\",  0.148,\n  2020,  \"11-100\",   0.705,\n  2020,  \"1-10\",     0.107,\n  2023,  \"&gt;400\",     0.02,\n  2023,  \"101-400\",  0.333,\n  2023,  \"11-100\",   0.616,\n  2023,  \"1-10\",     0.030\n) |&gt;\n  mutate(year = as.factor(year)) |&gt;\n  mutate(questions = factor(questions, levels = c(\"1-10\", \"11-100\", \"101-400\", \"&gt;400\")))\n\nggplot(questionnaire, aes(questions, percent, fill = year)) +\n  geom_col(position = \"dodge\") +\n  scale_y_continuous(labels = scales::label_percent()) +\n  scale_fill_manual(values = c(\"steelblue2\", \"steelblue4\")) +\n  labs(x = NULL, y = NULL, fill = \"Year\", title = \"Third-Party Questionnaire Length by Year\") +\n  labs(caption = \"Source: Cyentia/RiskRecon State of Third-Party Risk Management, 2020 and 2024\") +\n  theme_quo()\n\n\n\n\n\n\n\nsave_png(\"08-questionnaire-length.png\")",
     "crumbs": [
       "Changelog",
       "Constraints vs Performance"
@@ -1580,42 +1598,42 @@
   {
     "objectID": "NEWS.html",
     "href": "NEWS.html",
-    "title": "rtraining 1.2.3",
+    "title": "rtraining 1.2.4",
     "section": "",
-    "text": "Added Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management."
+    "text": "Updated Constraints vs Performance: Added “Growth of Controls” section"
   },
   {
     "objectID": "NEWS.html#new-features",
     "href": "NEWS.html#new-features",
-    "title": "rtraining 1.2.3",
+    "title": "rtraining 1.2.4",
     "section": "New Features",
     "text": "New Features\n\nmajor update: build-site has been replaced with an R function, build_analysis_site(), which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to html_document, to_document().\nbuild_analysis_site() will be migrated to rdev in a future release"
   },
   {
     "objectID": "NEWS.html#new-content",
     "href": "NEWS.html#new-content",
-    "title": "rtraining 1.2.3",
+    "title": "rtraining 1.2.4",
     "section": "New Content",
     "text": "New Content\n\nR Setup Log: added notes on the package layout I use for “analysis” packages (will be converted to an rdev vignette in a future release)\nR Setup Log: added notes on my R Workflow\nR Training Log: updated with notes on my current book, R Packages"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures",
     "href": "NEWS.html#new-contentfeatures",
-    "title": "rtraining 1.2.3",
+    "title": "rtraining 1.2.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nci(): run continuous integration tests locally: lint, R CMD check, and style (off by default).\ncheck_renv(): convenience function that runs renv status(), clean(), and optionally update() (on by default)."
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-1",
     "href": "NEWS.html#new-contentfeatures-1",
-    "title": "rtraining 1.2.3",
+    "title": "rtraining 1.2.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R setup\nminor updates to R Training Log\nstyle_all(): style all .R and .Rmd files in a project using styler\nlint_all(): lint all .R and .Rmd files in a project using lintr\nadd GitHub Actions for continuous integration testing"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-2",
     "href": "NEWS.html#new-contentfeatures-2",
-    "title": "rtraining 1.2.3",
+    "title": "rtraining 1.2.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Training Log Notebook (r-training-log.Rmd): Notes on learning R and RStudio\ntools/setup-r: shell script to install development packages to site repository on macOS + Homebrew\nbuild-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/"
   },
