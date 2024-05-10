@@ -178,7 +178,7 @@ questionnaire <- tribble(
 ggplot(questionnaire, aes(questions, percent, fill = year)) +
   geom_col(position = "dodge") +
   scale_y_continuous(labels = scales::label_percent()) +
-  scale_fill_viridis_d() +
+  scale_fill_manual(values = c("steelblue2", "steelblue4")) +
   labs(x = NULL, y = NULL, fill = "Year", title = "Third-Party Questionnaire Length by Year") +
   labs(caption = "Source: Cyentia/RiskRecon State of Third-Party Risk Management, 2020 and 2024") +
   theme_quo()
