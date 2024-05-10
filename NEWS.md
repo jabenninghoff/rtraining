@@ -1,3 +1,7 @@
+# rtraining 1.2.5
+
+* Updated Constraints vs Performance: Added "Transparent Donut" section
+
 # rtraining 1.2.4
 
 * Updated Constraints vs Performance: Added "Growth of Controls" section

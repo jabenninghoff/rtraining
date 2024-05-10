@@ -185,3 +185,27 @@ ggplot(questionnaire, aes(questions, percent, fill = year)) +
 
 save_png("08-questionnaire-length.png")
 ```
+
+# Transparent Donut
+
+Create a transparent donut plot showing an 80% reduction.
+
+```{r custom_donut}
+# custom function based on ggplot_donut_percent()
+custom_donut <- function(p, text = "", accuracy = NULL, hsize = 4, size = 12, family = "Lato") {
+  data <- data.frame(group = c(TRUE, FALSE), n = c(p, 1 - p))
+  label <- paste0(scales::label_percent(accuracy = accuracy)(p), "\n", text)
+
+  ggplot_donut(data, hsize = hsize) +
+    guides(fill = "none") +
+    geom_text(x = 0, label = label, size = size, family = family) +
+    scale_fill_grey() +
+    theme(plot.background = element_rect(fill = "transparent", color = NA))
+}
+
+custom_donut(0.8, "reduction")
+ggsave("rendered/80-percent-safety.png")
+
+custom_donut(0.8, "reduction?")
+ggsave("rendered/80-percent-security.png")
+```
