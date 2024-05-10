@@ -10,7 +10,7 @@
 <atom:link href="https://jabenninghoff.github.io/rtraining/index.xml" rel="self" type="application/rss+xml"/>
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
-<generator>quarto-1.4.553</generator>
+<generator>quarto-1.4.554</generator>
 <lastBuildDate>Tue, 30 Apr 2024 05:00:00 GMT</lastBuildDate>
 <item>
   <title>Constraints vs Performance</title>
@@ -36,7 +36,13 @@ background-color: null;
 font-style: inherit;">library</span>(jbplot)</span>
 <span id="cb1-3"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">library</span>(fs)</span></code></pre></div>
+font-style: inherit;">library</span>(fs)</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tibble)</span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span></code></pre></div>
 </div>
 </section>
 <section id="normal-performance" class="level2">
@@ -575,6 +581,204 @@ background-color: null;
 font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"07-baseline-constrained-improved.png"</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="growth-of-controls" class="level2">
+<h2 class="anchored" data-anchor-id="growth-of-controls">Growth of Controls</h2>
+<p>Visualize an example of the growth of controls using the Cyentia/RiskRecon State of Third-Party Risk Management 2020 and 2024 reports (data from 2023).</p>
+<p>Source:</p>
+<ul>
+<li>2020 data: <a href="https://www.riskrecon.com/state-of-third-party-risk-management-report" class="uri">https://www.riskrecon.com/state-of-third-party-risk-management-report</a></li>
+<li>2023 data: <a href="https://www.riskrecon.com/state-of-third-party-risk-management-2024" class="uri">https://www.riskrecon.com/state-of-third-party-risk-management-2024</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">questionnaire <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tribble</span>(</span>
+<span id="cb16-2">  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>year, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>questions, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>percent,</span>
+<span id="cb16-3">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>,  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&gt;400"</span>,     <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.041</span>,</span>
+<span id="cb16-4">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>,  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"101-400"</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.148</span>,</span>
+<span id="cb16-5">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>,  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"11-100"</span>,   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.705</span>,</span>
+<span id="cb16-6">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>,  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1-10"</span>,     <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.107</span>,</span>
+<span id="cb16-7">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>,  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&gt;400"</span>,     <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.02</span>,</span>
+<span id="cb16-8">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>,  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"101-400"</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.333</span>,</span>
+<span id="cb16-9">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>,  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"11-100"</span>,   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.616</span>,</span>
+<span id="cb16-10">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>,  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1-10"</span>,     <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.030</span></span>
+<span id="cb16-11">) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb16-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">year =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.factor</span>(year)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb16-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">questions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(questions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1-10"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"11-100"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"101-400"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&gt;400"</span>)))</span>
+<span id="cb16-14"></span>
+<span id="cb16-15"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(questionnaire, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(questions, percent, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> year)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb16-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_col</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dodge"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb16-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> scales<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">label_percent</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb16-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"steelblue2"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"steelblue4"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb16-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Year"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Third-Party Questionnaire Length by Year"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb16-20">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Source: Cyentia/RiskRecon State of Third-Party Risk Management, 2020 and 2024"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb16-21">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_quo</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/questionnaire-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"08-questionnaire-length.png"</span>)</span></code></pre></div>
 </div>
 
 
