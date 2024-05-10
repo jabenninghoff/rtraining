@@ -1,3 +1,7 @@
+# rtraining 1.2.4
+
+* Updated Constraints vs Performance: Added "Growth of Controls" section
+
 # rtraining 1.2.3
 
 * Added Constraints vs Performance: Visualizations exploring the use of constraints vs performance improvements in risk management.
