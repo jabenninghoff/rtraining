@@ -4,14 +4,21 @@
     "href": "changelog.html",
     "title": "Changelog",
     "section": "",
-    "text": "Updated Constraints vs Performance: Added “Growth of Controls” section"
+    "text": "Updated Constraints vs Performance: Added “Transparent Donut” section"
+  },
+  {
+    "objectID": "changelog.html#rtraining-1.2.5",
+    "href": "changelog.html#rtraining-1.2.5",
+    "title": "Changelog",
+    "section": "",
+    "text": "Updated Constraints vs Performance: Added “Transparent Donut” section"
   },
   {
     "objectID": "changelog.html#rtraining-1.2.4",
     "href": "changelog.html#rtraining-1.2.4",
     "title": "Changelog",
-    "section": "",
-    "text": "Updated Constraints vs Performance: Added “Growth of Controls” section"
+    "section": "rtraining 1.2.4",
+    "text": "rtraining 1.2.4\n\nUpdated Constraints vs Performance: Added “Growth of Controls” section"
   },
   {
     "objectID": "changelog.html#rtraining-1.2.3",
@@ -1178,6 +1185,17 @@
     ]
   },
   {
+    "objectID": "analysis/constraints.html#transparent-donut",
+    "href": "analysis/constraints.html#transparent-donut",
+    "title": "Constraints vs Performance",
+    "section": "Transparent Donut",
+    "text": "Transparent Donut\nCreate a transparent donut plot showing an 80% reduction.\n\n# custom function based on ggplot_donut_percent()\ncustom_donut &lt;- function(p, text = \"\", accuracy = NULL, hsize = 4, size = 12, family = \"Lato\") {\n  data &lt;- data.frame(group = c(TRUE, FALSE), n = c(p, 1 - p))\n  label &lt;- paste0(scales::label_percent(accuracy = accuracy)(p), \"\\n\", text)\n\n  ggplot_donut(data, hsize = hsize) +\n    guides(fill = \"none\") +\n    geom_text(x = 0, label = label, size = size, family = family) +\n    scale_fill_grey() +\n    theme(plot.background = element_rect(fill = \"transparent\", color = NA))\n}\n\ncustom_donut(0.8, \"reduction\")\n\n\n\n\n\n\n\nggsave(\"rendered/80-percent-safety.png\")\n\nSaving 8.5 x 5 in image\n\ncustom_donut(0.8, \"reduction?\")\n\n\n\n\n\n\n\nggsave(\"rendered/80-percent-security.png\")\n\nSaving 8.5 x 5 in image",
+    "crumbs": [
+      "Changelog",
+      "Constraints vs Performance"
+    ]
+  },
+  {
     "objectID": "analysis/cond-prob.html",
     "href": "analysis/cond-prob.html",
     "title": "Conditional Probability",
@@ -1598,42 +1616,42 @@
   {
     "objectID": "NEWS.html",
     "href": "NEWS.html",
-    "title": "rtraining 1.2.4",
+    "title": "rtraining 1.2.5",
     "section": "",
-    "text": "Updated Constraints vs Performance: Added “Growth of Controls” section"
+    "text": "Updated Constraints vs Performance: Added “Transparent Donut” section"
   },
   {
     "objectID": "NEWS.html#new-features",
     "href": "NEWS.html#new-features",
-    "title": "rtraining 1.2.4",
+    "title": "rtraining 1.2.5",
     "section": "New Features",
     "text": "New Features\n\nmajor update: build-site has been replaced with an R function, build_analysis_site(), which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to html_document, to_document().\nbuild_analysis_site() will be migrated to rdev in a future release"
   },
   {
     "objectID": "NEWS.html#new-content",
     "href": "NEWS.html#new-content",
-    "title": "rtraining 1.2.4",
+    "title": "rtraining 1.2.5",
     "section": "New Content",
     "text": "New Content\n\nR Setup Log: added notes on the package layout I use for “analysis” packages (will be converted to an rdev vignette in a future release)\nR Setup Log: added notes on my R Workflow\nR Training Log: updated with notes on my current book, R Packages"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures",
     "href": "NEWS.html#new-contentfeatures",
-    "title": "rtraining 1.2.4",
+    "title": "rtraining 1.2.5",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nci(): run continuous integration tests locally: lint, R CMD check, and style (off by default).\ncheck_renv(): convenience function that runs renv status(), clean(), and optionally update() (on by default)."
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-1",
     "href": "NEWS.html#new-contentfeatures-1",
-    "title": "rtraining 1.2.4",
+    "title": "rtraining 1.2.5",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R setup\nminor updates to R Training Log\nstyle_all(): style all .R and .Rmd files in a project using styler\nlint_all(): lint all .R and .Rmd files in a project using lintr\nadd GitHub Actions for continuous integration testing"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-2",
     "href": "NEWS.html#new-contentfeatures-2",
-    "title": "rtraining 1.2.4",
+    "title": "rtraining 1.2.5",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Training Log Notebook (r-training-log.Rmd): Notes on learning R and RStudio\ntools/setup-r: shell script to install development packages to site repository on macOS + Homebrew\nbuild-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/"
   },
