@@ -1,3 +1,7 @@
+# rtraining 1.2.6
+
+* Minor updates
+
 # rtraining 1.2.5
 
 * Updated Constraints vs Performance: Added "Transparent Donut" section
