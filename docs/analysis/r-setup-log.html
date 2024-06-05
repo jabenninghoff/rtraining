@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -205,12 +205,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/constraints.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Constraints vs Performance</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced R (Foundations)</span></a>
   </div>
@@ -365,7 +359,7 @@ Environment for statistical computing and graphics
 ==&gt; Artifacts
 R-4.4.0-arm64.pkg (Pkg)
 ==&gt; Analytics
-install: 630 (30 days), 2,111 (90 days), 7,994 (365 days)</code></pre>
+install: 675 (30 days), 2,024 (90 days), 8,454 (365 days)</code></pre>
 </div>
 </div>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
@@ -478,7 +472,7 @@ install: 630 (30 days), 2,111 (90 days), 7,994 (365 days)</code></pre>
 </ol>
 <p>This method of development is not always appropriate, but fits well with exploratory analysis. Once I get to writing functions, I’m starting to adopt the formal structure of <a href="https://r-pkgs.org/index.html">packages</a>, <a href="https://testthat.r-lib.org">testthat</a>, and <a href="https://roxygen2.r-lib.org">roxygen2</a>.</p>
 <p>Specifically, I use <code>html_notebook</code>, which was recommended to me. RStudio handles this differently than <code>html_document</code>:</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 21%">
 <col style="width: 39%">
@@ -554,7 +548,7 @@ install: 630 (30 days), 2,111 (90 days), 7,994 (365 days)</code></pre>
 <section id="r-package-layout" class="level3">
 <h3 class="anchored" data-anchor-id="r-package-layout">R Package Layout</h3>
 <p>Here is my package layout - the table shows the path, whether it’s part of the formal R package definition, and my notes on its use.</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Path</th>

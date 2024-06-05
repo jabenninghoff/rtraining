@@ -10,955 +10,8 @@
 <atom:link href="https://jabenninghoff.github.io/rtraining/index.xml" rel="self" type="application/rss+xml"/>
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
-<generator>quarto-1.4.554</generator>
-<lastBuildDate>Tue, 30 Apr 2024 05:00:00 GMT</lastBuildDate>
-<item>
-  <title>Constraints vs Performance</title>
-  <dc:creator>John Benninghoff</dc:creator>
-  <link>https://jabenninghoff.github.io/rtraining/analysis/constraints.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Visualizations exploring the use of constraints vs performance improvements in risk management.</p>
-<section id="questionstodo" class="level2">
-<h2 class="anchored" data-anchor-id="questionstodo">Questions/TODO</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Questions/TODO list here</label></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(ggplot2)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(jbplot)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(fs)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(tibble)</span>
-<span id="cb1-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(dplyr)</span></code></pre></div>
-</div>
-</section>
-<section id="normal-performance" class="level2">
-<h2 class="anchored" data-anchor-id="normal-performance">Normal Performance</h2>
-<p>Replicate a version of Figure 9 from the <a href="https://www.england.nhs.uk/signuptosafety/wp-content/uploads/sites/16/2015/10/safety-1-safety-2-whte-papr.pdf">Safety-II White Paper</a>, with help from <a href="https://ggplot2tutor.com/tutorials/sampling_distributions" class="uri">https://ggplot2tutor.com/tutorials/sampling_distributions</a>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">xmin <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span></span>
-<span id="cb2-2">xmax <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span></span>
-<span id="cb2-3"></span>
-<span id="cb2-4">save_png <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(filename) {</span>
-<span id="cb2-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsave</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">filename =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">path</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"rendered"</span>, filename), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">16</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">height =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">bg =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"white"</span>)</span>
-<span id="cb2-6">}</span>
-<span id="cb2-7"></span>
-<span id="cb2-8">background <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(xmin, xmax)), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(x)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-9">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_x_continuous</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">breaks =</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">minor_breaks =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-10">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-11">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_quo</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">minor.y =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>)</span>
-<span id="cb2-12"></span>
-<span id="cb2-13">baseline <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"line"</span>)</span>
-<span id="cb2-14">bad <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"area"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"red"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(xmin, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>))</span>
-<span id="cb2-15"></span>
-<span id="cb2-16">background <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> bad <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> baseline</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/background-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"01-baseline-bad.png"</span>)</span></code></pre></div>
-</div>
-<p>The plot above shows “bad” outcomes in red. Let’s add in “good” outcomes (&gt;1) in green:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">good <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"area"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"green"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, xmax))</span>
-<span id="cb4-2"></span>
-<span id="cb4-3">background <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> bad <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> good <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> baseline</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/good-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"02-baseline-bad-good.png"</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="constrained-performance" class="level2">
-<h2 class="anchored" data-anchor-id="constrained-performance">Constrained Performance</h2>
-<p>One way of reducing “bad” outcomes is by constraining performance - reducing the standard deviation.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">constrained <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">args =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.7</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"line"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"blue"</span>)</span>
-<span id="cb6-2">taller <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">limits =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>))</span>
-<span id="cb6-3"></span>
-<span id="cb6-4">background <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb6-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(</span>
-<span id="cb6-6">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">args =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.7</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"area"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"red"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(xmin, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb6-7">  ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb6-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(</span>
-<span id="cb6-9">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">args =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.7</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"area"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"green"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, xmax)</span>
-<span id="cb6-10">  ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb6-11">  constrained <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb6-12">  taller</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/constrained-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"03-constrained.png"</span>)</span></code></pre></div>
-</div>
-<p>Plotting both on the same grid shows the reduction in both “bad” and “good” outcomes:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">background <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb8-2">  bad <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb8-3">  good <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb8-4">  baseline <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb8-5">  constrained <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb8-6">  taller</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/overlay-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"04-baseline-constrained.png"</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="improved-performance" class="level2">
-<h2 class="anchored" data-anchor-id="improved-performance">Improved Performance</h2>
-<p>Another way of reducing bad outcomes is by improving performance - shifting the mean.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">performance <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">args =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"line"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"blue"</span>)</span>
-<span id="cb10-2">improved <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(</span>
-<span id="cb10-3">  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">args =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"area"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"green"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, xmax)</span>
-<span id="cb10-4">)</span>
-<span id="cb10-5"></span>
-<span id="cb10-6">background <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb10-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">stat_function</span>(</span>
-<span id="cb10-8">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fun =</span> dnorm, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">args =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"area"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"red"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(xmin, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb10-9">  ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb10-10">  improved <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb10-11">  performance</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/performance-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"05-improved.png"</span>)</span></code></pre></div>
-</div>
-<p>Plotting both together shows a reduction in “bad” and an increase in “good” outcomes:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">background <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb12-2">  bad <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb12-3">  improved <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb12-4">  baseline <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb12-5">  performance</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/overlay_perf-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"06-baseline-improved.png"</span>)</span></code></pre></div>
-</div>
-<p>Comparing all three:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">background <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb14-2">  bad <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb14-3">  improved <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb14-4">  baseline <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb14-5">  constrained <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb14-6">  performance <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb14-7">  taller</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/overlay_all-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"07-baseline-constrained-improved.png"</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="growth-of-controls" class="level2">
-<h2 class="anchored" data-anchor-id="growth-of-controls">Growth of Controls</h2>
-<p>Visualize an example of the growth of controls using the Cyentia/RiskRecon State of Third-Party Risk Management 2020 and 2024 reports (data from 2023).</p>
-<p>Source:</p>
-<ul>
-<li>2020 data: <a href="https://www.riskrecon.com/state-of-third-party-risk-management-report" class="uri">https://www.riskrecon.com/state-of-third-party-risk-management-report</a></li>
-<li>2023 data: <a href="https://www.riskrecon.com/state-of-third-party-risk-management-2024" class="uri">https://www.riskrecon.com/state-of-third-party-risk-management-2024</a></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">questionnaire <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tribble</span>(</span>
-<span id="cb16-2">  <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span>year, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span>questions, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span>percent,</span>
-<span id="cb16-3">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2020</span>,  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"&gt;400"</span>,     <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.041</span>,</span>
-<span id="cb16-4">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2020</span>,  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"101-400"</span>,  <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.148</span>,</span>
-<span id="cb16-5">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2020</span>,  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"11-100"</span>,   <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.705</span>,</span>
-<span id="cb16-6">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2020</span>,  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"1-10"</span>,     <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.107</span>,</span>
-<span id="cb16-7">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2023</span>,  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"&gt;400"</span>,     <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.02</span>,</span>
-<span id="cb16-8">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2023</span>,  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"101-400"</span>,  <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.333</span>,</span>
-<span id="cb16-9">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2023</span>,  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"11-100"</span>,   <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.616</span>,</span>
-<span id="cb16-10">  <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2023</span>,  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"1-10"</span>,     <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.030</span></span>
-<span id="cb16-11">) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb16-12">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">year =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as.factor</span>(year)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb16-13">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">questions =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(questions, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"1-10"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"11-100"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"101-400"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"&gt;400"</span>)))</span>
-<span id="cb16-14"></span>
-<span id="cb16-15"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(questionnaire, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(questions, percent, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> year)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb16-16">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_col</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">position =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"dodge"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb16-17">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">labels =</span> scales<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">label_percent</span>()) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb16-18">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"steelblue2"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"steelblue4"</span>)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb16-19">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Year"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Third-Party Questionnaire Length by Year"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb16-20">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">caption =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Source: Cyentia/RiskRecon State of Third-Party Risk Management, 2020 and 2024"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb16-21">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_quo</span>()</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/questionnaire-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">save_png</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"08-questionnaire-length.png"</span>)</span></code></pre></div>
-</div>
-</section>
-<section id="transparent-donut" class="level2">
-<h2 class="anchored" data-anchor-id="transparent-donut">Transparent Donut</h2>
-<p>Create a transparent donut plot showing an 80% reduction.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># custom function based on ggplot_donut_percent()</span></span>
-<span id="cb18-2">custom_donut <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">function</span>(p, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">text =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">accuracy =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">hsize =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">12</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Lato"</span>) {</span>
-<span id="cb18-3">  data <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">group =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>, <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(p, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> p))</span>
-<span id="cb18-4">  label <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">paste0</span>(scales<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">label_percent</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">accuracy =</span> accuracy)(p), <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>, text)</span>
-<span id="cb18-5"></span>
-<span id="cb18-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot_donut</span>(data, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">hsize =</span> hsize) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb18-7">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">guides</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"none"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb18-8">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_text</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">label =</span> label, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> size, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">family =</span> family) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb18-9">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_fill_grey</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb18-10">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"transparent"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NA</span>))</span>
-<span id="cb18-11">}</span>
-<span id="cb18-12"></span>
-<span id="cb18-13"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">custom_donut</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.8</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"reduction"</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/custom_donut-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsave</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"rendered/80-percent-safety.png"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Saving 8.5 x 5 in image</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">custom_donut</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.8</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"reduction?"</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://jabenninghoff.github.io/rtraining/analysis/constraints_files/figure-html/custom_donut-2.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggsave</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"rendered/80-percent-security.png"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Saving 8.5 x 5 in image</code></pre>
-</div>
-</div>
-
-
-</section>
-
- ]]></description>
-  <category>notes</category>
-  <guid>https://jabenninghoff.github.io/rtraining/analysis/constraints.html</guid>
-  <pubDate>Tue, 30 Apr 2024 05:00:00 GMT</pubDate>
-</item>
+<generator>quarto-1.4.555</generator>
+<lastBuildDate>Wed, 17 Apr 2024 05:00:00 GMT</lastBuildDate>
 <item>
   <title>Hockey Cards Analysis</title>
   <dc:creator>John Benninghoff</dc:creator>
@@ -1056,7 +109,7 @@ background-color: null;
 font-style: inherit;">summary</span>(gretskys)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  10.00   23.00   27.00   27.17   31.00   51.00 </code></pre>
+  10.00   24.00   27.00   27.18   31.00   51.00 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1151,7 +204,7 @@ disabled.</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;           &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 gretsky_cards(10000)    2.44s    2.44s     0.410     1.2GB     13.9</code></pre>
+1 gretsky_cards(10000)    2.57s    2.57s     0.389     1.2GB     12.8</code></pre>
 </div>
 </div>
 <p>In this case, it certainly appears to be slower than the Julia test result which was 1.63 seconds.</p>
@@ -1296,7 +349,7 @@ font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4050794</code></pre>
+<pre><code>[1] 0.40483</code></pre>
 </div>
 </div>
 <p>Reading this and trying the code myself led me to ask, What the heck is going on here?</p>
@@ -1346,11 +399,11 @@ font-style: inherit;">head</span>(data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]    1    1    1    0
-[2,]    1    0    1    0
-[3,]    1    0    0    1
-[4,]    0    0    1    1
-[5,]    0    0    1    0
-[6,]    0    0    0    0</code></pre>
+[2,]    0    1    1    0
+[3,]    1    1    1    0
+[4,]    0    0    0    0
+[5,]    0    0    1    1
+[6,]    0    0    0    1</code></pre>
 </div>
 </div>
 <p>By convention, 1 is heads and 0 is tails. If the coin is fair, we should expect the proportion of heads to be about 0.5.</p>
@@ -1359,7 +412,7 @@ font-style: inherit;">head</span>(data)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">mean</span>(data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.500019</code></pre>
+<pre><code>[1] 0.5001815</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2394,10 +1447,10 @@ font-style: inherit;">max</span>(date))</span></code></pre></div>
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        1750 2024-04-25
-2 checkmate    235940 2024-04-25
-3 chk           13913 2024-04-25
-4 validate       2678 2024-04-25</code></pre>
+1 assertr        1730 2024-06-04
+2 checkmate    246000 2024-06-04
+3 chk           12787 2024-06-04
+4 validate       1926 2024-06-04</code></pre>
 </div>
 </div>
 <p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
@@ -3644,7 +2697,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, na.rm = FALSE, ...) 
 #&gt; UseMethod("median")
-#&gt; &lt;bytecode: 0x107d85df8&gt;
+#&gt; &lt;bytecode: 0x109a64068&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><span class="fu" style="color: #4758AB;
@@ -4920,7 +3973,7 @@ font-style: inherit;">#&gt; + \n    o + p + q + r + s + t + u + v + w + x + y + 
 #&gt;     class(ans) &lt;- "pairwise.htest"
 #&gt;     ans
 #&gt; }
-#&gt; &lt;bytecode: 0x11825b208&gt;
+#&gt; &lt;bytecode: 0x109e05a20&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb179" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><span class="fu" style="color: #4758AB;
@@ -7076,7 +6129,7 @@ font-style: inherit;">::</span>summarise</span></code></pre></div>
 #&gt;     }
 #&gt;     UseMethod("summarise")
 #&gt; }
-#&gt; &lt;bytecode: 0x12f5764d0&gt;
+#&gt; &lt;bytecode: 0x106c75fe0&gt;
 #&gt; &lt;environment: namespace:dplyr&gt;</code></pre>
 </div>
 </div>
@@ -7105,7 +6158,7 @@ font-style: inherit;">:::</span>summarise.data.frame</span></code></pre></div>
 #&gt;     }
 #&gt;     out
 #&gt; }
-#&gt; &lt;bytecode: 0x11a0d9298&gt;
+#&gt; &lt;bytecode: 0x10d0cd5c0&gt;
 #&gt; &lt;environment: namespace:dplyr&gt;</code></pre>
 </div>
 </div>
@@ -7202,7 +6255,7 @@ font-style: inherit;">::</span>aes</span></code></pre></div>
 #&gt;     aes &lt;- new_aes(args, env = parent.frame())
 #&gt;     rename_aes(aes)
 #&gt; }
-#&gt; &lt;bytecode: 0x11e9281a0&gt;
+#&gt; &lt;bytecode: 0x11847b658&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -7223,7 +6276,7 @@ font-style: inherit;">::</span>expr</span></code></pre></div>
 #&gt; {
 #&gt;     enexpr(expr)
 #&gt; }
-#&gt; &lt;bytecode: 0x1290ba6a8&gt;
+#&gt; &lt;bytecode: 0x138322868&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb304" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb304-1">rlang<span class="sc" style="color: #5E5E5E;
@@ -7234,7 +6287,7 @@ font-style: inherit;">::</span>enexpr</span></code></pre></div>
 #&gt; {
 #&gt;     .Call(ffi_enexpr, substitute(arg), parent.frame())
 #&gt; }
-#&gt; &lt;bytecode: 0x11f561978&gt;
+#&gt; &lt;bytecode: 0x12fb0f808&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 </div>
@@ -8302,7 +7355,7 @@ font-style: inherit;">envir =</span> .env)</span>
 #&gt;     }
 #&gt;     structure(as.integer(ans + 1L), levels = lvs, class = "factor")
 #&gt; }
-#&gt; &lt;bytecode: 0x11abab928&gt;
+#&gt; &lt;bytecode: 0x10d3b7d38&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb407" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb407-1">expand.grid</span></code></pre></div>
@@ -8357,7 +7410,7 @@ font-style: inherit;">envir =</span> .env)</span>
 #&gt;     rn &lt;- .set_row_names(as.integer(prod(d)))
 #&gt;     structure(cargs, class = "data.frame", row.names = rn)
 #&gt; }
-#&gt; &lt;bytecode: 0x11ac0d180&gt;
+#&gt; &lt;bytecode: 0x108b51ba0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb409" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb409-1">par</span></code></pre></div>
@@ -8388,7 +7441,7 @@ font-style: inherit;">envir =</span> .env)</span>
 #&gt;         invisible(value)
 #&gt;     else value
 #&gt; }
-#&gt; &lt;bytecode: 0x1072da278&gt;
+#&gt; &lt;bytecode: 0x107d4dfa8&gt;
 #&gt; &lt;environment: namespace:graphics&gt;</code></pre>
 </div>
 </div>
@@ -8652,7 +7705,7 @@ background-color: null;
 font-style: inherit;">0</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(x) log(x)
-#&gt; &lt;environment: 0x12eaab560&gt;</code></pre>
+#&gt; &lt;environment: 0x106933060&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb424" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb424-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -8661,8 +7714,8 @@ background-color: null;
 font-style: inherit;">2</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(x) (x^lambda - 1) / lambda
-#&gt; &lt;bytecode: 0x12ab746e8&gt;
-#&gt; &lt;environment: 0x11f693b50&gt;</code></pre>
+#&gt; &lt;bytecode: 0x1089187f8&gt;
+#&gt; &lt;environment: 0x1079e64b8&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb426" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb426-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -8857,7 +7910,7 @@ font-style: inherit;">0</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; log(x)
-#&gt; &lt;environment: 0x11b4942e0&gt;</code></pre>
+#&gt; &lt;environment: 0x12fdf66c0&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb440" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb440-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -8867,7 +7920,7 @@ font-style: inherit;">2</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; (x^2 - 1)/2
-#&gt; &lt;environment: 0x11b4fc5c8&gt;</code></pre>
+#&gt; &lt;environment: 0x12fe5b998&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb442" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb442-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -8905,7 +7958,7 @@ background-color: null;
 font-style: inherit;">compose</span>(sum, as.integer)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(...) f(g(...))
-#&gt; &lt;environment: 0x11abc43a8&gt;</code></pre>
+#&gt; &lt;environment: 0x10d3cfde0&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb446" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb446-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -8999,8 +8052,8 @@ background-color: null;
 font-style: inherit;">compose</span>(sin, cos)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function(...) f(g(...))
-#&gt; &lt;bytecode: 0x119843920&gt;
-#&gt; &lt;environment: 0x118560830&gt;</code></pre>
+#&gt; &lt;bytecode: 0x108c5a8c0&gt;
+#&gt; &lt;environment: 0x10d419de0&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb451" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb451-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -9014,7 +8067,7 @@ font-style: inherit;">compose2</span>(sin, cos)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (...) 
 #&gt; sin(cos(...))
-#&gt; &lt;environment: 0x1184944a0&gt;</code></pre>
+#&gt; &lt;environment: 0x10d4fb9c0&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb455" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb455-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -10274,7 +9327,7 @@ font-style: inherit;">"Blues"</span></span>
 #&gt;             half_line, half_line, half_line), complete = TRUE)
 #&gt;     ggplot_global$theme_all_null %+replace% t
 #&gt; }
-#&gt; &lt;bytecode: 0x11a376d50&gt;
+#&gt; &lt;bytecode: 0x11492f830&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -10297,7 +9350,7 @@ font-style: inherit;">"Blues"</span></span>
 #&gt;     discrete_scale(aesthetics, name = name, palette = pal_brewer(type, 
 #&gt;         palette, direction), ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x1067cf8f8&gt;
+#&gt; &lt;bytecode: 0x1112b3ca0&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -10326,7 +9379,7 @@ font-style: inherit;">::</span>brewer_pal</span></code></pre></div>
 #&gt;         pal
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x10618eea0&gt;
+#&gt; &lt;bytecode: 0x12159f328&gt;
 #&gt; &lt;environment: namespace:scales&gt;</code></pre>
 </div>
 </div>
@@ -10386,7 +9439,7 @@ font-style: inherit;">wesanderson_pal</span>(name, type), ...)</span>
 #&gt;         begin, end, direction, option)(6), values, space), na.value = na.value, 
 #&gt;         guide = guide, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x11906df90&gt;
+#&gt; &lt;bytecode: 0x1078124e0&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -19960,7 +19013,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 #&gt;     class(f) &lt;- c(if (ordered) "ordered", "factor")
 #&gt;     f
 #&gt; }
-#&gt; &lt;bytecode: 0x158901678&gt;
+#&gt; &lt;bytecode: 0x14885f678&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -20305,14 +19358,14 @@ font-style: inherit;">t</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; UseMethod("t")
-#&gt; &lt;bytecode: 0x10fd37468&gt;
+#&gt; &lt;bytecode: 0x11ec57740&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb99" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1">t.test</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("t.test")
-#&gt; &lt;bytecode: 0x1588fa8a0&gt;
+#&gt; &lt;bytecode: 0x12832c908&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -20512,7 +19565,7 @@ background-color: null;
 font-style: inherit;">desc</span>(method_count))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;                                    name method_count
-#&gt; 1                                 print          277
+#&gt; 1                                 print          278
 #&gt; 2                                format          126
 #&gt; 3                                     [           49
 #&gt; 4                               summary           39
@@ -21945,7 +20998,7 @@ background-color: null;
 font-style: inherit;">head</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;         print        format             [       summary  as.character 
-#&gt;           277           126            48            39            32 
+#&gt;           278           126            48            39            32 
 #&gt; as.data.frame 
 #&gt;            32</code></pre>
 </div>
@@ -22412,7 +21465,7 @@ font-style: inherit;">`</span></span></code></pre></div>
 #&gt; {
 #&gt;     .Date(NextMethod("["), oldClass(x))
 #&gt; }
-#&gt; &lt;bytecode: 0x148a1e7f8&gt;
+#&gt; &lt;bytecode: 0x150257bf8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb144" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><span class="st" style="color: #20794D;
@@ -22425,7 +21478,7 @@ font-style: inherit;">`</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (xx, cl = "Date") 
 #&gt; `class&lt;-`(xx, cl)
-#&gt; &lt;bytecode: 0x11937a7f0&gt;
+#&gt; &lt;bytecode: 0x1292f7778&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -23035,7 +22088,7 @@ font-style: inherit;">"base"</span>)</span></code></pre></div>
 #&gt;             paste(vnames[!mode.ok], collapse = ", "))
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x13828fc98&gt;
+#&gt; &lt;bytecode: 0x103a7dc98&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb191" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1">Math.Date</span></code></pre></div>
@@ -23043,7 +22096,7 @@ font-style: inherit;">"base"</span>)</span></code></pre></div>
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not defined for \"Date\" objects", .Generic), 
 #&gt;     domain = NA)
-#&gt; &lt;bytecode: 0x138296df8&gt;
+#&gt; &lt;bytecode: 0x103a84df8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb193" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb193-1">Math.difftime</span></code></pre></div>
@@ -23057,14 +22110,14 @@ font-style: inherit;">"base"</span>)</span></code></pre></div>
 #&gt;         }, stop(gettextf("'%s' not defined for \"difftime\" objects", 
 #&gt;             .Generic), domain = NA))
 #&gt; }
-#&gt; &lt;bytecode: 0x13829e8c0&gt;
+#&gt; &lt;bytecode: 0x103a8a8c0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb195" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1">Math.factor</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not meaningful for factors", sQuote(.Generic)))
-#&gt; &lt;bytecode: 0x13829d7b0&gt;
+#&gt; &lt;bytecode: 0x103a897b0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb197" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1">Math.POSIXt</span></code></pre></div>
@@ -23074,7 +22127,7 @@ font-style: inherit;">"base"</span>)</span></code></pre></div>
 #&gt;     stop(gettextf("'%s' not defined for \"POSIXt\" objects", 
 #&gt;         .Generic), domain = NA)
 #&gt; }
-#&gt; &lt;bytecode: 0x1382a2fd0&gt;
+#&gt; &lt;bytecode: 0x103a90fd0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -24316,7 +23369,7 @@ font-style: inherit;">get</span>()</span></code></pre></div>
 background-color: null;
 font-style: inherit;">date</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Sat Apr 27 09:20:20 2024"</code></pre>
+<pre><code>#&gt; [1] "Wed Jun  5 12:54:37 2024"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb255" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb255-1">tz<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -24332,7 +23385,7 @@ font-style: inherit;">"America/New_York"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">date</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Sat Apr 27 10:20:20 2024"</code></pre>
+<pre><code>#&gt; [1] "Wed Jun  5 13:54:37 2024"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb259" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb259-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -28040,19 +27093,19 @@ font-style: inherit;">1e3</span>))</span>
 background-color: null;
 font-style: inherit;">randomise</span>(mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.490206</code></pre>
+<pre><code>#&gt; [1] 0.4918217</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">randomise</span>(mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.5041099</code></pre>
+<pre><code>#&gt; [1] 0.5099028</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">randomise</span>(sum)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 502.0583</code></pre>
+<pre><code>#&gt; [1] 509.304</code></pre>
 </div>
 </div>
 <p>The chances are that you’ve already used a functional. You might have used for-loop replacements like base R’s <code>lapply()</code>, <code>apply()</code>, and <code>tapply()</code>; or purrr’s <code>map()</code>; or maybe you’ve used a mathematical functional like <code>integrate()</code> or <code>optim()</code>.</p>
@@ -28070,7 +27123,7 @@ font-style: inherit;">randomise</span>(sum)</span></code></pre></div>
 #&gt; {
 #&gt;     map_("double", .x, .f, ..., .progress = .progress)
 #&gt; }
-#&gt; &lt;bytecode: 0x113d3fc28&gt;
+#&gt; &lt;bytecode: 0x1093edd98&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
@@ -28130,7 +27183,7 @@ font-style: inherit;">as_mapper</span>(mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x1405749c0&gt;
+#&gt; &lt;bytecode: 0x13b703fb0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="fu" style="color: #4758AB;
@@ -28185,7 +27238,7 @@ font-style: inherit;"># equivalent to function(x) x[[1]][[2]]</span></span></cod
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, 2), .default = NULL)
-#&gt; &lt;environment: 0x125537d18&gt;</code></pre>
+#&gt; &lt;environment: 0x14c0698b8&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -28201,7 +27254,7 @@ font-style: inherit;"># equivalent to function(x) x[["a"]][["b]]</span></span></
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list("a", "b"), .default = NULL)
-#&gt; &lt;environment: 0x124b97c70&gt;</code></pre>
+#&gt; &lt;environment: 0x11b91c940&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -28217,7 +27270,7 @@ font-style: inherit;"># equivalent to function(x) x[[1]][["b]]</span></span></co
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1, "b"), .default = NULL)
-#&gt; &lt;environment: 0x124a975a0&gt;</code></pre>
+#&gt; &lt;environment: 0x14c9c4550&gt;</code></pre>
 </div>
 </div>
 <p>Besides mixing positions and names, it is also possible to pass along an accessor function. This is basically an anonymous function that gets information about some aspect of the input data. You are free to define your own accessor functions.</p>
@@ -28278,13 +27331,13 @@ background-color: null;
 font-style: inherit;">2</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; [1] 0.87867860 0.03784156
+#&gt; [1] 0.1175752 0.4415385
 #&gt; 
 #&gt; [[2]]
-#&gt; [1] 0.4949940 0.3020369
+#&gt; [1] 0.8230599 0.6903236
 #&gt; 
 #&gt; [[3]]
-#&gt; [1] 0.9883319 0.8015935</code></pre>
+#&gt; [1] 0.87540758 0.05865927</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -28337,8 +27390,8 @@ background-color: null;
 font-style: inherit;">2</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
-#&gt; pluck_raw(x, list(0.904492039233446, 0.102344793267548), .default = NULL)
-#&gt; &lt;environment: 0x115b7f390&gt;</code></pre>
+#&gt; pluck_raw(x, list(0.964742003707215, 0.320784154115245), .default = NULL)
+#&gt; &lt;environment: 0x10b581df0&gt;</code></pre>
 </div>
 </div>
 <p>A more reasonable use of a pluck mapper for <code>1:3</code> is <code>1</code>:</p>
@@ -28925,8 +27978,8 @@ font-style: inherit;">~</span> disp, .x))<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>r.squared)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.7567321 0.7244990 0.6324280 0.7947267 0.5716059 0.6304013 0.5817392
-#&gt;  [8] 0.7713750 0.7795558 0.6131795</code></pre>
+<pre><code>#&gt;  [1] 0.7892368 0.4849622 0.7123165 0.7339370 0.6355157 0.7098360 0.8012979
+#&gt;  [8] 0.7472488 0.7377214 0.8102839</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -28959,8 +28012,8 @@ font-style: inherit;">map_dbl</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"r.squared"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1] 0.7567321 0.7244990 0.6324280 0.7947267 0.5716059 0.6304013 0.5817392
-#&gt;  [8] 0.7713750 0.7795558 0.6131795</code></pre>
+<pre><code>#&gt;  [1] 0.7892368 0.4849622 0.7123165 0.7339370 0.6355157 0.7098360 0.8012979
+#&gt;  [8] 0.7472488 0.7377214 0.8102839</code></pre>
 </div>
 </div>
 <p>Note: while AR Solutions is arguably <em>slightly</em> more readable, my code should be faster:</p>
@@ -28987,8 +28040,8 @@ font-style: inherit;">$</span>r.squared)</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { map_dbl(bootstraps, ~summary(lm(m… 1.9ms 1.96ms      507.    63.7KB     55.5</code></pre>
+#&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 { map_dbl(bootstraps, ~summary(lm(… 1.97ms 2.15ms      458.    63.7KB     51.8</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb75" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -29026,7 +28079,7 @@ font-style: inherit;">"r.squared"</span>)</span>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 1.95ms 2.04ms      478.    63.7KB     58.8</code></pre>
+#&gt; 1 { bootstraps %&gt;% map(~lm(mpg ~ dis… 1.97ms 2.12ms      464.    63.7KB     57.4</code></pre>
 </div>
 </div>
 <p>It is actually slightly slower! AR Solutions wins!</p>
@@ -29086,7 +28139,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; pluck_raw(x, list(1), .default = NULL)
-#&gt; &lt;environment: 0x15423fde0&gt;</code></pre>
+#&gt; &lt;environment: 0x10b6fef18&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb81" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -30059,7 +29112,7 @@ font-style: inherit;">span_r</span>(test2, is.numeric))</span></code></pre></div
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                     min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span_r(test2, is.numeric)   50.8µs   53.5µs    17982.    4.01KB     62.4</code></pre>
+#&gt; 1 span_r(test2, is.numeric)     51µs   53.5µs    18143.    4.01KB     70.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb134" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -30072,7 +29125,7 @@ font-style: inherit;">span</span>(test2, is.numeric))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;              &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 span(test2, is.numeric)   67.2µs   70.9µs    13899.    4.01KB     20.8</code></pre>
+#&gt; 1 span(test2, is.numeric)     68µs   72.1µs    13458.    4.01KB     20.9</code></pre>
 </div>
 </div>
 <hr>
@@ -31209,7 +30262,7 @@ font-style: inherit;">0.00001</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 11.4µs 12.3µs    77860.        0B     23.4</code></pre>
+#&gt; 1 fixed_point_ar(cos, x_init = 1, to… 11.4µs 12.4µs    78570.        0B     23.6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb175" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -31224,7 +30277,7 @@ font-style: inherit;">1</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression               min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;          &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 fixed_point(cos, 1)   18.9µs   20.2µs    48549.        0B     29.1</code></pre>
+#&gt; 1 fixed_point(cos, 1)     19µs   20.3µs    48520.        0B     29.1</code></pre>
 </div>
 </div>
 <p>As usual, AR Solutions is faster. :-(</p>
@@ -31310,7 +30363,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; x
-#&gt; &lt;bytecode: 0x154046040&gt;
+#&gt; &lt;bytecode: 0x14b14ea40&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -31670,7 +30723,7 @@ font-style: inherit;">m2</span>(x))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        3.16µs   3.53µs   259192.      848B     25.9</code></pre>
+#&gt; 1 m2(x)        3.16µs   3.57µs   249603.      848B     25.0</code></pre>
 </div>
 </div>
 <p>Answer: code above, following the formula <img src="https://latex.codecogs.com/png.latex?E%5B(X%20-%20E%5BX%5D)%5Ei%5D">, where <img src="https://latex.codecogs.com/png.latex?E"> is the <a href="https://en.wikipedia.org/wiki/Expected_value">expected value</a>, ie the <em>mean</em>.</p>
@@ -31763,7 +30816,7 @@ font-style: inherit;">m2</span>(x))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 m2(x)        2.09µs   2.38µs   393500.      848B     39.4</code></pre>
+#&gt; 1 m2(x)        2.01µs    2.3µs   400593.      848B     40.1</code></pre>
 </div>
 </div>
 <p>Note: isn’t <code>sum() / length()</code> just <code>mean()</code>? For fun, compare <code>bench::mark()</code> (above). Curses, foiled again!</p>
@@ -32182,7 +31235,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 12.7µs 13.6µs    70314.    12.8KB     21.1</code></pre>
+#&gt; 1 optimize(ll_poisson1(x1), c(0, 100… 12.7µs 13.9µs    67731.    12.8KB     20.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb242" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb242-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -32207,7 +31260,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 7.01µs 7.46µs   128806.        0B     25.8</code></pre>
+#&gt; 1 optimize(ll_poisson2(x1), c(0, 100… 6.97µs 7.63µs   122986.        0B     24.6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb244" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb244-1">x <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -32241,7 +31294,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 216µs  224µs     4449.     110KB     10.2</code></pre>
+#&gt; 1 optimize(ll_poisson1(x), c(0, 100),… 399µs  428µs     2322.     204KB     10.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb246" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb246-1">bench<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -32266,7 +31319,7 @@ font-style: inherit;">TRUE</span>))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 22.3µs 23.8µs    41237.    7.86KB     8.25</code></pre>
+#&gt; 1 optimize(ll_poisson2(x), c(0, 100)… 27.1µs 29.2µs    33061.    7.86KB     9.92</code></pre>
 </div>
 </div>
 <p>Answer: <code>ll_poisson2()</code> is nearly twice as fast with <code>x1</code> and nearly 10 times as fast when the length of <code>x</code> is 100.</p>
@@ -32578,7 +31631,7 @@ font-style: inherit;">"for"</span>, name)</span></code></pre></div>
 #&gt;         })
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x114afc3d8&gt;
+#&gt; &lt;bytecode: 0x10da98ef0&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -32600,7 +31653,7 @@ font-style: inherit;">"for"</span>, name)</span></code></pre></div>
 #&gt;     check_bool(quiet)
 #&gt;     function(...) capture_error(.f(...), otherwise, quiet)
 #&gt; }
-#&gt; &lt;bytecode: 0x113f941c8&gt;
+#&gt; &lt;bytecode: 0x10d820da0&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb263" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb263-1">purrr<span class="sc" style="color: #5E5E5E;
@@ -32615,7 +31668,7 @@ font-style: inherit;">:::</span>capture_error</span></code></pre></div>
 #&gt;         list(result = otherwise, error = e)
 #&gt;     })
 #&gt; }
-#&gt; &lt;bytecode: 0x113f20428&gt;
+#&gt; &lt;bytecode: 0x10c51e058&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
@@ -33179,7 +32232,7 @@ font-style: inherit;">h</span>()</span>
 <span id="cb279-30">})</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.003   0.000   1.006</code></pre>
+#&gt;   0.002   0.000   1.006</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb281" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb281-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33198,7 +32251,7 @@ font-style: inherit;">g</span>()</span>
 <span id="cb281-5">})</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    user  system elapsed 
-#&gt;   0.007   0.000   2.010</code></pre>
+#&gt;   0.005   0.001   2.007</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -33497,7 +32550,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1309b0000"</code></pre>
+<pre><code>#&gt; [1] "0x110048000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33505,7 +32558,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1309b0000"</code></pre>
+<pre><code>#&gt; [1] "0x110048000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33513,7 +32566,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1309b0000"</code></pre>
+<pre><code>#&gt; [1] "0x110048000"</code></pre>
 </div>
 </div>
 <hr>
@@ -33538,7 +32591,7 @@ font-style: inherit;">2</span>)</span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10824de28"</code></pre>
+<pre><code>#&gt; [1] "0x129b2b428"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">b <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -33547,7 +32600,7 @@ font-style: inherit;">&lt;-</span> a</span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10824de28"</code></pre>
+<pre><code>#&gt; [1] "0x129b2b428"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">b[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -33560,7 +32613,7 @@ font-style: inherit;">10</span></span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1082d0708"</code></pre>
+<pre><code>#&gt; [1] "0x129c0ba18"</code></pre>
 </div>
 </div>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
@@ -33603,25 +32656,25 @@ font-style: inherit;">10</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x107f2da10"</code></pre>
+<pre><code>#&gt; [1] "0x13fb9e590"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x107f2da10"</code></pre>
+<pre><code>#&gt; [1] "0x13fb9e590"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(c)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x107f2da10"</code></pre>
+<pre><code>#&gt; [1] "0x13fb9e590"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(d)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x108033a18"</code></pre>
+<pre><code>#&gt; [1] "0x13fc9bfa8"</code></pre>
 </div>
 </div>
 <hr>
@@ -33653,7 +32706,7 @@ font-style: inherit;">"mean"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
+<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33661,7 +32714,7 @@ font-style: inherit;">obj_addr</span>(base<span class="sc" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">::</span>mean)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
+<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33671,7 +32724,7 @@ font-style: inherit;">get</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"mean"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
+<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33679,7 +32732,7 @@ font-style: inherit;">obj_addr</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">evalq</span>(mean))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
+<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33689,7 +32742,7 @@ font-style: inherit;">match.fun</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"mean"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1058a22b8"</code></pre>
+<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
 </div>
 </div>
 <p>Answer: they do.</p>
@@ -33764,7 +32817,7 @@ font-style: inherit;">3</span>L)</span>
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x109486f88&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x12acafec8&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1">x[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -33774,8 +32827,8 @@ font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x109486f88 -&gt; 0x1096381c8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
-#&gt; tracemem[0x1096381c8 -&gt; 0x10970b718]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x12acafec8 -&gt; 0x12ad8f248]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
+#&gt; tracemem[0x12ad8f248 -&gt; 0x12ae6ac78]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33805,7 +32858,7 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x109a9f338&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x12b1f6a28&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1">y <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -33818,7 +32871,7 @@ font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>L</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x109a9f338 -&gt; 0x109b33248]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x12b1f6a28 -&gt; 0x12b28a938]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1">y[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -33934,7 +32987,7 @@ font-style: inherit;">"first object"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x109adcfd0"</code></pre>
+<pre><code>#&gt; [1] "0x12b2204a8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33942,7 +32995,7 @@ font-style: inherit;">obj_addr</span>(b[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x109adcfd0"</code></pre>
+<pre><code>#&gt; [1] "0x12b2204a8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33950,7 +33003,7 @@ font-style: inherit;">obj_addr</span>(b[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x109adcfd0"</code></pre>
+<pre><code>#&gt; [1] "0x12b2204a8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb61" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33958,7 +33011,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x109adcfd0"</code></pre>
+<pre><code>#&gt; [1] "0x12b2204a8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb63" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33972,7 +33025,7 @@ font-style: inherit;">"second object"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x109bf4788"</code></pre>
+<pre><code>#&gt; [1] "0x12b385d48"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33980,7 +33033,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x109bf4788"</code></pre>
+<pre><code>#&gt; [1] "0x12b385d48"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33994,7 +33047,7 @@ font-style: inherit;">"third object"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(c)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x10fad8eb8"</code></pre>
+<pre><code>#&gt; [1] "0x12f176248"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb73" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34010,7 +33063,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>]])</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1067aa120"</code></pre>
+<pre><code>#&gt; [1] "0x12b2d32a8"</code></pre>
 </div>
 </div>
 <p>Answer: four different objects with multiple names.</p>
@@ -34042,10 +33095,10 @@ font-style: inherit;">&lt;-</span> x</span>
 background-color: null;
 font-style: inherit;">ref</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x13cd5b908] &lt;list&gt; 
-#&gt; ├─[2:0x128fbccd0] &lt;int&gt; 
-#&gt; └─█ [3:0x105bc1b38] &lt;list&gt; 
-#&gt;   └─[2:0x128fbccd0]</code></pre>
+<pre><code>#&gt; █ [1:0x128223288] &lt;list&gt; 
+#&gt; ├─[2:0x11f2578b8] &lt;int&gt; 
+#&gt; └─█ [3:0x11f3ab040] &lt;list&gt; 
+#&gt;   └─[2:0x11f2578b8]</code></pre>
 </div>
 </div>
 <p>Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which points to the original int vector.</p>
@@ -34440,17 +33493,17 @@ font-style: inherit;">$</span>medians), <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1          X2          X3           X4         X5
-#&gt; 1   0.04369877 -0.12343847 -0.48922113 -0.146598497 -0.2654805
-#&gt; 2  -0.04546978 -0.19296387 -0.42382440  0.212102621  0.4025081
-#&gt; 3  -0.17762408 -0.23940198 -0.21213014  0.264803931 -0.2605202
-#&gt; 4  -0.11086655 -0.06925057  0.17140543  0.378969395 -0.1148295
-#&gt; 5  -0.37466195  0.26574635  0.33328310  0.047525161 -0.3423237
-#&gt; 6  -0.10997077 -0.33625997  0.10866945  0.377508526 -0.1747907
-#&gt; 7  -0.45883611  0.40933670  0.08377487  0.007819048  0.1186564
-#&gt; 8  -0.24768451  0.42040105 -0.05249180 -0.262106426 -0.4977060
-#&gt; 9  -0.23342731 -0.45125163  0.21884938 -0.448117266 -0.3207032
-#&gt; 10 -0.25681342 -0.10520468  0.48080027  0.475014569 -0.2819161</code></pre>
+<pre><code>#&gt;             X1          X2         X3           X4          X5
+#&gt; 1   0.50401654  0.23540291 -0.4396194  0.080767878  0.35250166
+#&gt; 2  -0.31573176 -0.20049932 -0.1819276  0.146580934 -0.45343353
+#&gt; 3  -0.24911741  0.25277186  0.4041711  0.093107896  0.10502921
+#&gt; 4   0.34201792  0.09558642 -0.1391102  0.009346764  0.48911436
+#&gt; 5   0.16331704 -0.32881049  0.1439023  0.058086289  0.46017467
+#&gt; 6  -0.11430997 -0.24042064 -0.1319872 -0.087266846 -0.19610622
+#&gt; 7  -0.28163062 -0.36819243  0.3742738 -0.458176441 -0.29351082
+#&gt; 8  -0.49340229 -0.47871765 -0.3259736 -0.105638131  0.46178661
+#&gt; 9  -0.06241899  0.19421609 -0.3935998  0.420250407  0.24622488
+#&gt; 10  0.02756655 -0.16216753  0.3696997 -0.157226758  0.07701606</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34466,17 +33519,17 @@ font-style: inherit;">$</span>medians)), <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1          X2          X3           X4         X5
-#&gt; 1   0.04369877 -0.12343847 -0.48922113 -0.146598497 -0.2654805
-#&gt; 2  -0.04546978 -0.19296387 -0.42382440  0.212102621  0.4025081
-#&gt; 3  -0.17762408 -0.23940198 -0.21213014  0.264803931 -0.2605202
-#&gt; 4  -0.11086655 -0.06925057  0.17140543  0.378969395 -0.1148295
-#&gt; 5  -0.37466195  0.26574635  0.33328310  0.047525161 -0.3423237
-#&gt; 6  -0.10997077 -0.33625997  0.10866945  0.377508526 -0.1747907
-#&gt; 7  -0.45883611  0.40933670  0.08377487  0.007819048  0.1186564
-#&gt; 8  -0.24768451  0.42040105 -0.05249180 -0.262106426 -0.4977060
-#&gt; 9  -0.23342731 -0.45125163  0.21884938 -0.448117266 -0.3207032
-#&gt; 10 -0.25681342 -0.10520468  0.48080027  0.475014569 -0.2819161</code></pre>
+<pre><code>#&gt;             X1          X2         X3           X4          X5
+#&gt; 1   0.50401654  0.23540291 -0.4396194  0.080767878  0.35250166
+#&gt; 2  -0.31573176 -0.20049932 -0.1819276  0.146580934 -0.45343353
+#&gt; 3  -0.24911741  0.25277186  0.4041711  0.093107896  0.10502921
+#&gt; 4   0.34201792  0.09558642 -0.1391102  0.009346764  0.48911436
+#&gt; 5   0.16331704 -0.32881049  0.1439023  0.058086289  0.46017467
+#&gt; 6  -0.11430997 -0.24042064 -0.1319872 -0.087266846 -0.19610622
+#&gt; 7  -0.28163062 -0.36819243  0.3742738 -0.458176441 -0.29351082
+#&gt; 8  -0.49340229 -0.47871765 -0.3259736 -0.105638131  0.46178661
+#&gt; 9  -0.06241899  0.19421609 -0.3935998  0.420250407  0.24622488
+#&gt; 10  0.02756655 -0.16216753  0.3696997 -0.157226758  0.07701606</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb108" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -34494,7 +33547,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   31.9µs   49.4µs    20500.     391KB     300.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   31.7µs   48.3µs    21402.     391KB     306.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb110" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34509,7 +33562,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   9.55µs   25.7µs    42371.     391KB     480.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   9.18µs   24.3µs    39638.     391KB     449.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34528,7 +33581,7 @@ font-style: inherit;"># as.data.frame introduces significant overhead</span></sp
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 108µs  129µs     7697.     391KB     88.7</code></pre>
+#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 110µs  126µs     8185.     391KB     96.0</code></pre>
 </div>
 </div>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
@@ -34553,7 +33606,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   58.1µs   76.7µs    13646.     391KB     164.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   58.5µs   78.6µs    12663.     391KB     151.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb116" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34568,7 +33621,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)     11µs     27µs    43728.     391KB     495.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)     11µs   26.9µs    41441.     391KB     469.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1">xm <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -34590,7 +33643,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    111µs    132µs     7527.     400KB     86.8</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)    113µs    132µs     7508.     400KB     86.4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34605,7 +33658,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)     13µs   25.1µs    40172.     392KB     455.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   12.9µs   25.3µs    39625.     392KB     453.</code></pre>
 </div>
 </div>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast. So, the list method is near constant time regardless of columns, whereas the data.frame method scales linearly with the number of columns.</p>
@@ -34820,7 +33873,7 @@ font-style: inherit;"># will be coerced to integer   -&gt; 1 1</span></span></co
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x12d6190d0&gt;
+#&gt; &lt;bytecode: 0x159fb63b0&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb140" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1">unname</span></code></pre></div>
@@ -34833,7 +33886,7 @@ font-style: inherit;"># will be coerced to integer   -&gt; 1 1</span></span></co
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x105c5dd40&gt;
+#&gt; &lt;bytecode: 0x11f363278&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -35127,9 +34180,9 @@ font-style: inherit;">sample</span>(a))</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; a   a b c
-#&gt;   a 0 1 0
+#&gt;   a 1 0 0
 #&gt;   b 0 0 1
-#&gt;   c 1 0 0</code></pre>
+#&gt;   c 0 1 0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb167" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -35175,10 +34228,10 @@ font-style: inherit;">sample</span>(b))</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 0 1 0 0
-#&gt;   b 0 0 0 1
+#&gt;   a 0 0 1 0
+#&gt;   b 0 1 0 0
 #&gt;   c 1 0 0 0
-#&gt;   d 0 0 1 0</code></pre>
+#&gt;   d 0 0 0 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb173" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -36804,12 +35857,12 @@ font-style: inherit;">sample</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ncol</span>(df))]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   z x y
-#&gt; 1 a 1 5
-#&gt; 2 b 2 4
-#&gt; 3 c 3 3
-#&gt; 4 d 4 2
-#&gt; 5 e 5 1</code></pre>
+<pre><code>#&gt;   x y z
+#&gt; 1 1 5 a
+#&gt; 2 2 4 b
+#&gt; 3 3 3 c
+#&gt; 4 4 2 d
+#&gt; 5 5 1 e</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb356" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1">df[<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -36821,12 +35874,12 @@ font-style: inherit;">sample</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ncol</span>(df))]</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   x y z
-#&gt; 1 1 5 a
-#&gt; 2 2 4 b
-#&gt; 5 5 1 e
-#&gt; 4 4 2 d
-#&gt; 3 3 3 c</code></pre>
+<pre><code>#&gt;   y z x
+#&gt; 3 3 c 3
+#&gt; 4 2 d 4
+#&gt; 1 5 a 1
+#&gt; 2 4 b 2
+#&gt; 5 1 e 5</code></pre>
 </div>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -36935,8 +35988,8 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
 #&gt; 4 4 2 d
-#&gt; 3 3 3 c
-#&gt; 1 1 5 a</code></pre>
+#&gt; 1 1 5 a
+#&gt; 5 5 1 e</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb361" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb361-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -36949,9 +36002,9 @@ background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
-#&gt; 1 1 5 a
 #&gt; 2 2 4 b
-#&gt; 3 3 3 c</code></pre>
+#&gt; 3 3 3 c
+#&gt; 4 4 2 d</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb363" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb363-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -38709,7 +37762,7 @@ font-style: inherit;">print</span>(x)</span>
 background-color: null;
 font-style: inherit;">show_time</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "2024-04-27 09:20:31 CDT"</code></pre>
+<pre><code>#&gt; [1] "2024-06-05 12:54:47 CDT"</code></pre>
 </div>
 </div>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is evaluated. This is a confusing use of lazy evaluation.</p>
@@ -39529,7 +38582,7 @@ font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"kendall"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.1492563</code></pre>
+<pre><code>#&gt; [1] 0.1488646</code></pre>
 </div>
 </div>
 <p>AR Solutions: None of these functions provides a <code>...</code> argument. Therefore, the function arguments are first matched exactly, then via partial matching and finally by position. This leads us to the following explicit function calls:</p>
@@ -39753,7 +38806,7 @@ background-color: null;
 font-style: inherit;">NA</span></span>
 <span id="cb497-8">v</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 NA 18 19 20</code></pre>
+<pre><code>#&gt;  [1]  1  2  3 NA  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -40335,7 +39388,7 @@ font-style: inherit;">9</span>)), <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  2  3  4  9 11 12 14 17 20 NA</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  7 11 14 18 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb540" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb540-1">(y <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -40357,31 +39410,31 @@ font-style: inherit;">7</span>)), <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  4  5  8 12 17 18 21 NA</code></pre>
+<pre><code>#&gt; [1]  4  7 14 15 17 18 19 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb542" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb542-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%u%</span> y</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  2  3  4  9 11 12 14 17 20 NA  5  8 18 21</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  7 11 14 18 NA 15 17 19</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb544" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb544-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%n%</span> y</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  4 12 17 NA</code></pre>
+<pre><code>#&gt; [1]  4  7 14 18 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb546" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb546-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%s%</span> y</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  2  3  9 11 14 20</code></pre>
+<pre><code>#&gt; [1]  1  2  3  5 11</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb548" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb548-1">y <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%s%</span> x</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  5  8 18 21</code></pre>
+<pre><code>#&gt; [1] 15 17 19</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -40551,7 +39604,7 @@ font-style: inherit;"># Print the environment</span></span>
 background-color: null;
 font-style: inherit;">env_print</span>(e1)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x13ca42770&gt;
+<pre><code>#&gt; &lt;environment: 0x10c1d6208&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
@@ -40565,8 +39618,8 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e1)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x13ca42770] &lt;env&gt; 
-#&gt; └─loop = [1:0x13ca42770]</code></pre>
+<pre><code>#&gt; █ [1:0x10c1d6208] &lt;env&gt; 
+#&gt; └─loop = [1:0x10c1d6208]</code></pre>
 </div>
 </div>
 <hr>
@@ -40628,9 +39681,9 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e1)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x107ee7888] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x107e607b0] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x107ee7888]</code></pre>
+<pre><code>#&gt; █ [1:0x11f8ffb78] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x11f864830] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x11f8ffb78]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb565" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb565-1">lobstr<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -40638,9 +39691,9 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e2)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x107e607b0] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x107ee7888] &lt;env&gt; 
-#&gt;            └─loop = [1:0x107e607b0]</code></pre>
+<pre><code>#&gt; █ [1:0x11f864830] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x11f8ffb78] &lt;env&gt; 
+#&gt;            └─loop = [1:0x11f864830]</code></pre>
 </div>
 </div>
 <hr>
@@ -40729,7 +39782,7 @@ font-style: inherit;">"fail"</span>))</span></code></pre></div>
 background-color: null;
 font-style: inherit;">env_print</span>(e_test)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x106c5dd18&gt;
+<pre><code>#&gt; &lt;environment: 0x159eab410&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
@@ -41110,7 +40163,7 @@ font-style: inherit;">"x"</span>)</span>
 <span id="cb595-4">})</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x1068152e0&gt;
+#&gt; &lt;environment: 0x149f43320&gt;
 #&gt; 
 #&gt; [[2]]
 #&gt; &lt;environment: R_GlobalEnv&gt;</code></pre>
@@ -41220,10 +40273,10 @@ background-color: null;
 font-style: inherit;">"a"</span>, e1c)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x108dee0e8&gt;
+#&gt; &lt;environment: 0x14f269e10&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x1280e57e8&gt;</code></pre>
+#&gt; &lt;environment: 0x159c79250&gt;</code></pre>
 </div>
 </div>
 <hr>
@@ -41454,7 +40507,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x1058a2210&gt;
+#&gt; &lt;bytecode: 0x148b60f40&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -41578,7 +40631,7 @@ font-style: inherit;">e_str</span>(fget)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)  
 #&gt;  - attr(*, "srcref")= 'srcref' int [1:8] 1 9 17 1 9 1 1 17
-#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x128fd90f0&gt;</code></pre>
+#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x12f071aa8&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; fn_env():</code></pre>
@@ -41956,7 +41009,7 @@ background-color: null;
 font-style: inherit;">file.remove</span>(tmp)</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file
-#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpQlaAMH/file1716173023728',
+#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpilmYzh/filec2b7510e5703',
 #&gt; reason 'No such file or directory'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -41969,7 +41022,7 @@ background-color: null;
 font-style: inherit;">safe_file_remove</span>(tmp))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpQlaAMH/file1716173023728' does not exist</code></pre>
+#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpilmYzh/filec2b7510e5703' does not exist</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -42333,7 +41386,7 @@ font-style: inherit;">"c"</span>)</span>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x128e84120&gt;
+#&gt; &lt;bytecode: 0x12f04c838&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb678" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb678-1"><span class="fu" style="color: #4758AB;
@@ -43629,8 +42682,8 @@ font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">800</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<div id="htmlwidget-b5d101c32e3de1c4b8ba" style="width:100%;height:406px;" class="ftree_widget1 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b5d101c32e3de1c4b8ba">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-53ad22d062ee09d1098f" style="width:100%;height:406px;" class="ftree_widget1 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-53ad22d062ee09d1098f">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Check rendering without height and width specified:</p>
@@ -43639,8 +42692,8 @@ font-style: inherit;">800</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">ftree2widget</span>(tree1)</span></code></pre></div>
 <div class="cell-output-display">
-<div class="ftree_widget1 html-widget html-fill-item" id="htmlwidget-7dbd854c7837c1c19040" style="width:100%;height:382px;"></div>
-<script type="application/json" data-for="htmlwidget-7dbd854c7837c1c19040">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div class="ftree_widget1 html-widget html-fill-item" id="htmlwidget-6b943c8ce7650ab4289f" style="width:100%;height:382px;"></div>
+<script type="application/json" data-for="htmlwidget-6b943c8ce7650ab4289f">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -43764,7 +42817,7 @@ Environment for statistical computing and graphics
 ==&gt; Artifacts
 R-4.4.0-arm64.pkg (Pkg)
 ==&gt; Analytics
-install: 630 (30 days), 2,111 (90 days), 7,994 (365 days)</code></pre>
+install: 675 (30 days), 2,024 (90 days), 8,454 (365 days)</code></pre>
 </div>
 </div>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
@@ -44061,7 +43114,7 @@ font-style: inherit;"># check for unpdated versions of installed libraries</span
 </ol>
 <p>This method of development is not always appropriate, but fits well with exploratory analysis. Once I get to writing functions, I’m starting to adopt the formal structure of <a href="https://r-pkgs.org/index.html">packages</a>, <a href="https://testthat.r-lib.org">testthat</a>, and <a href="https://roxygen2.r-lib.org">roxygen2</a>.</p>
 <p>Specifically, I use <code>html_notebook</code>, which was recommended to me. RStudio handles this differently than <code>html_document</code>:</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 21%">
 <col style="width: 39%">
@@ -44149,7 +43202,7 @@ font-style: inherit;">open</span> docs/index.html</span></code></pre></div>
 <section id="r-package-layout" class="level3">
 <h3 class="anchored" data-anchor-id="r-package-layout">R Package Layout</h3>
 <p>Here is my package layout - the table shows the path, whether it’s part of the formal R package definition, and my notes on its use.</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Path</th>
