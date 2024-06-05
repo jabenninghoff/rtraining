@@ -1,3 +1,7 @@
+# rtraining 1.2.7
+
+* Moved Constraints vs Performance to new [security](https://jabenninghoff.github.io/security/) analysis package
+
 # rtraining 1.2.6
 
 * Minor updates
