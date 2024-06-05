@@ -58,10 +58,6 @@ Notebooks in this package:
   inspired by a 2015 blog
   [post](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/)
   on the hot hand.
-- [Constraints vs
-  Performance](https://jabenninghoff.github.io/rtraining/analysis/constraints.html)
-  (2024-04-30): Visualizations exploring the use of constraints vs
-  performance improvements in risk management.
 - [ggplot2 (Getting
   started)](https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1.html)
   (2022-11-20): Workbook for completing quizzes and exercises from the
