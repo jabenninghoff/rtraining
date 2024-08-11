@@ -1,3 +1,7 @@
+# rtraining 1.2.8
+
+* Updated R Books: add summary of [What They Forgot to Teach You About R](https://rstats.wtf)
+
 # rtraining 1.2.7
 
 * Moved Constraints vs Performance to new [security](https://jabenninghoff.github.io/security/) analysis package

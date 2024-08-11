@@ -232,6 +232,36 @@ While reading the book, I discovered some interesting additional resources:
 - I also revisited the [`validate`](https://github.com/data-cleaning/validate) package, a data
   validation rules engine, which includes the Data Validation Cookbook (in [Future Reading])
 
+## rstats.wtf
+
+[What They Forgot to Teach You About R](https://rstats.wtf) - a book based on a workshop taught by
+current and former posit employees intended for self-taught data analysts. It's short, still in
+draft, and offers good advice on R development (I use *almost* all the suggestions):
+
+- Use an IDE (RStudio)
+- Don't save `.RData`
+- Restart R frequently
+- Automate long workflows using [targets](https://docs.ropensci.org/targets/)
+- Don't use `setwd()`
+- Use RStudio projects
+- Use [here](https://here.r-lib.org) and [fs](https://fs.r-lib.org) for paths
+- Use "-" as space and "_" as a field delimiter in
+  [file names](https://speakerdeck.com/jennybc/how-to-name-files)
+- Use ISO standard dates (ISO 8601, YYYY-MM-DD)
+- Use version control (git, GitHub)
+- Use [renv](https://rstudio.github.io/renv/index.html), [rig](https://github.com/r-lib/rig/), and
+  [homebrew](https://brew.sh)
+- Use `.Renviron` and `.Rprofile`
+- Use CRAN R and CRAN binaries to speed up package installation
+- Don't use Conda (for Python)
+- Update packages!
+- Use [debugging](https://rstats.wtf/debugging-r) commands and RStudio for troubleshooting
+- Search for error messages and read the source code to understand your problem
+
+The book also suggests use of the [Posit Public Package Manager](https://p3m.dev/) (P3M). I'd *like*
+to agree with this advice, however, I've had problems with their binaries; this package (rtraining)
+doesn't work when using P3M, and works fine with CRAN binary packages.
+
 # Future Reading
 
 R books on my reading list.

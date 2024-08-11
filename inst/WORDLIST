@@ -8,6 +8,7 @@ Categorise
 Changelog
 ColorBrewer
 Colour
+Conda
 Corels
 Counterintuitively
 DF
@@ -72,6 +73,7 @@ Vectorised
 Wickham
 Wickham's
 YAML
+YYYY
 Yan
 aes
 al
@@ -114,6 +116,7 @@ flavours
 fnd
 focussing
 frac
+fs
 generalise
 geoms
 geospatial
@@ -200,6 +203,7 @@ reproducibility
 reticulate
 rmarkdown
 roxygen
+rstats
 rstudio
 rtraining
 rxylib
@@ -245,3 +249,4 @@ visualise
 visualising
 wd
 wesanderson
+wtf
