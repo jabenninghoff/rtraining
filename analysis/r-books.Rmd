@@ -262,6 +262,36 @@ The book also suggests use of the [Posit Public Package Manager](https://p3m.dev
 to agree with this advice, however, I've had problems with their binaries; this package (rtraining)
 doesn't work when using P3M, and works fine with CRAN binary packages.
 
+## do4ds
+
+[DevOps for Data Science](https://do4ds.com), another book written by a Posit employee was brought
+to my attention thanks to a LinkedIn Post by [\@Corey Neskey](https://www.linkedin.com/in/cneskey/)
+(It included a reference to rstats.wtf, which I read first). The book is split into 3 sections:
+
+1. [DevOps Lessons for Data Science](https://do4ds.com/chapters/sec1/1-0-sec-intro.html)
+   (Chapters 1-6)
+1. [IT/Admin for Data Science](https://do4ds.com/chapters/sec2/2-0-sec-intro.html) (Chapters 7-14)
+1. [Enterprise-Grade Data Science](https://do4ds.com/chapters/sec3/3-0-sec-intro.html)
+   (Chapters 15-18)
+
+I chose not to do the exercises in the book.
+
+Chapters 1-6 cover basic software engineering concepts including library/package management, the
+three-tier application model, types of projects (jobs, apps, reports, and APIs), connecting to
+databases and APIs, logging and monitoring, deploying code with CI/CD in dev, test, and production
+(including branching strategy) and Docker.
+
+Useful references from the first section include:
+
+- [pins](https://pins.rstudio.com), a package for publishing data, models, and other R objects to
+  folders or cloud storage, including AWS, Azure, GCP, Google Drive, OneDrive, and Dropbox.
+- [Mastering Shiny](https://mastering-shiny.org/index.html), Hadley Wickham's book on R
+  [Shiny](https://shiny.posit.co), published in 2021.
+
+<!-- summary of second section -->
+
+<!-- summary of third section -->
+
 # Future Reading
 
 R books on my reading list.
