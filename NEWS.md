@@ -1,6 +1,6 @@
 # rtraining 1.2.8
 
-* Updated R Books: add summary of [What They Forgot to Teach You About R](https://rstats.wtf)
+* Updated R Books: add summaries of [What They Forgot to Teach You About R](https://rstats.wtf), [DevOps for Data Science](https://do4ds.com)
 
 # rtraining 1.2.7
 
