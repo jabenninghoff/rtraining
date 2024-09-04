@@ -285,10 +285,23 @@ Useful references from the first section include:
 
 - [pins](https://pins.rstudio.com), a package for publishing data, models, and other R objects to
   folders or cloud storage, including AWS, Azure, GCP, Google Drive, OneDrive, and Dropbox.
+- [vetiver](https://vetiver.posit.co), R and Python libraries designed to version, deploy, and
+  monitor a trained ML model.
 - [Mastering Shiny](https://mastering-shiny.org/index.html), Hadley Wickham's book on R
   [Shiny](https://shiny.posit.co), published in 2021.
 
-<!-- summary of second section -->
+Chapters 7-14 cover basic infrastructure engineering concepts, including cloud computing (IaaS,
+PaaS, and SaaS), the command line (terminals, shells, and SSH), Linux (Unix), scaling hardware,
+networking, DNS, and TLS (HTTPS).
+
+I disagreed with the recommendations on macOS terminals and configuration management in chapter 8; I
+use macOS Terminal and `.zprofile` and `.zshrc` respectively. Given my background in infrastructure
+and systems engineering, most of the section was not new to me, except for AWS, which I haven't
+worked with.
+
+There was one useful reference from the second section:
+
+- [paws](https://github.com/paws-r/paws), an Amazon Web Services SDK for R.
 
 <!-- summary of third section -->
 

@@ -12,6 +12,7 @@ Conda
 Corels
 Counterintuitively
 DF
+DNS
 Dev
 DevOps
 Donut
@@ -24,12 +25,14 @@ FiveThirtyEight
 GCP
 GG
 Geoms
+HTTPS
 Hadley
 Hadley's
 Holtz
 Homebrew
 IDEs
 IIRC
+IaaS
 Kao
 Lato
 LibPath
@@ -47,6 +50,7 @@ OOP
 ORCID
 OneDrive
 POSIXct
+PaaS
 Parlapiano
 Pre
 Quasiquotation
@@ -64,12 +68,15 @@ Roxygen
 Rpres
 Rprofile
 Rproj
+SDK
 SIRACon
+SaaS
 Seibel
 Shan
 Statist
 Steen
 Stroustrup
+TLS
 Tidyverse
 Tierney
 Vectorised
@@ -248,6 +255,7 @@ vctrs
 vectorised
 vectorized
 vectorizes
+vetiver
 viridis
 visualisation
 visualise
