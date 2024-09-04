@@ -1,3 +1,4 @@
+ABAC
 AST
 ASTs
 Backtrace
@@ -34,6 +35,8 @@ IDEs
 IIRC
 IaaS
 Kao
+Kubernetes
+LDAP
 Lato
 LibPath
 LinkedIn
@@ -55,6 +58,7 @@ Parlapiano
 Pre
 Quasiquotation
 Quealy
+RBAC
 README
 RStudio
 Rademaker
@@ -70,6 +74,7 @@ Rprofile
 Rproj
 SDK
 SIRACon
+SSO
 SaaS
 Seibel
 Shan
@@ -140,6 +145,7 @@ grey
 greyed
 gridlines
 homebrew
+httr
 ie
 iesel
 initialisation

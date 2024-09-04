@@ -303,7 +303,15 @@ There was one useful reference from the second section:
 
 - [paws](https://github.com/paws-r/paws), an Amazon Web Services SDK for R.
 
-<!-- summary of third section -->
+Chapters 15-18 cover issues that come up in larger, "enterprise", organizations. It includes
+discussion of networking and network security (including proxies), authentication and authorization
+(including identity and access management: LDAP, SSO, MFA, RBAC and ABAC), infrastructure as code,
+Docker and Kubernetes, and how enterprise policies affect use of R and Python packages.
+
+The third section doesn't contain labs, and has one useful reference:
+
+- [httr2](https://httr2.r-lib.org), tools for creating and modifying HTTP requests, then
+  performing them and processing the results.
 
 # Future Reading
 
