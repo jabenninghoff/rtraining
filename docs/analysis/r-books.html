@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="John Benninghoff">
 <meta name="dcterms.date" content="2023-11-17">
 
-<title>rtraining - R Books</title>
+<title>R Books – rtraining</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools tools-wide">
+            <div class="quarto-navbar-tools tools-wide">
     <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -145,11 +145,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/r-books.html">R Books</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -275,6 +275,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#additional-reading" id="toc-additional-reading" class="nav-link" data-scroll-target="#additional-reading">Additional Reading</a>
   <ul class="collapse">
   <li><a href="#raps-with-r" id="toc-raps-with-r" class="nav-link" data-scroll-target="#raps-with-r">raps-with-r</a></li>
+  <li><a href="#rstats.wtf" id="toc-rstats.wtf" class="nav-link" data-scroll-target="#rstats.wtf">rstats.wtf</a></li>
+  <li><a href="#do4ds" id="toc-do4ds" class="nav-link" data-scroll-target="#do4ds">do4ds</a></li>
   </ul></li>
   <li><a href="#future-reading" id="toc-future-reading" class="nav-link" data-scroll-target="#future-reading">Future Reading</a></li>
   <li><a href="#r-dialects" id="toc-r-dialects" class="nav-link" data-scroll-target="#r-dialects">R Dialects</a></li>
@@ -414,10 +416,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        1730 2024-06-04
-2 checkmate    246000 2024-06-04
-3 chk           12787 2024-06-04
-4 validate       1926 2024-06-04</code></pre>
+1 assertr        1576 2024-09-03
+2 checkmate    324633 2024-09-03
+3 chk           13394 2024-09-03
+4 validate       1845 2024-09-03</code></pre>
 </div>
 </div>
 <p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
@@ -461,6 +463,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Use the <a href="https://docs.ropensci.org/assertr/"><code>assertr</code></a> package for data assertions, which works especially well for assertion checks against data frames used in data analysis</li>
 </ul></li>
 <li>I also revisited the <a href="https://github.com/data-cleaning/validate"><code>validate</code></a> package, a data validation rules engine, which includes the Data Validation Cookbook (in <a href="#future-reading">Future Reading</a>)</li>
+</ul>
+</section>
+<section id="rstats.wtf" class="level3">
+<h3 class="anchored" data-anchor-id="rstats.wtf">rstats.wtf</h3>
+<p><a href="https://rstats.wtf">What They Forgot to Teach You About R</a> - a book based on a workshop taught by current and former posit employees intended for self-taught data analysts. It’s short, still in draft, and offers good advice on R development (I use <em>almost</em> all the suggestions):</p>
+<ul>
+<li>Use an IDE (RStudio)</li>
+<li>Don’t save <code>.RData</code></li>
+<li>Restart R frequently</li>
+<li>Automate long workflows using <a href="https://docs.ropensci.org/targets/">targets</a></li>
+<li>Don’t use <code>setwd()</code></li>
+<li>Use RStudio projects</li>
+<li>Use <a href="https://here.r-lib.org">here</a> and <a href="https://fs.r-lib.org">fs</a> for paths</li>
+<li>Use “-” as space and “_” as a field delimiter in <a href="https://speakerdeck.com/jennybc/how-to-name-files">file names</a></li>
+<li>Use ISO standard dates (ISO 8601, YYYY-MM-DD)</li>
+<li>Use version control (git, GitHub)</li>
+<li>Use <a href="https://rstudio.github.io/renv/index.html">renv</a>, <a href="https://github.com/r-lib/rig/">rig</a>, and <a href="https://brew.sh">homebrew</a></li>
+<li>Use <code>.Renviron</code> and <code>.Rprofile</code></li>
+<li>Use CRAN R and CRAN binaries to speed up package installation</li>
+<li>Don’t use Conda (for Python)</li>
+<li>Update packages!</li>
+<li>Use <a href="https://rstats.wtf/debugging-r">debugging</a> commands and RStudio for troubleshooting</li>
+<li>Search for error messages and read the source code to understand your problem</li>
+</ul>
+<p>The book also suggests use of the <a href="https://p3m.dev/">Posit Public Package Manager</a> (P3M). I’d <em>like</em> to agree with this advice, however, I’ve had problems with their binaries; this package (rtraining) doesn’t work when using P3M, and works fine with CRAN binary packages.</p>
+</section>
+<section id="do4ds" class="level3">
+<h3 class="anchored" data-anchor-id="do4ds">do4ds</h3>
+<p><a href="https://do4ds.com">DevOps for Data Science</a>, another book written by a Posit employee was brought to my attention thanks to a LinkedIn Post by <a href="https://www.linkedin.com/in/cneskey/">@Corey Neskey</a> (It included a reference to rstats.wtf, which I read first). The book is split into 3 sections:</p>
+<ol type="1">
+<li><a href="https://do4ds.com/chapters/sec1/1-0-sec-intro.html">DevOps Lessons for Data Science</a> (Chapters 1-6)</li>
+<li><a href="https://do4ds.com/chapters/sec2/2-0-sec-intro.html">IT/Admin for Data Science</a> (Chapters 7-14)</li>
+<li><a href="https://do4ds.com/chapters/sec3/3-0-sec-intro.html">Enterprise-Grade Data Science</a> (Chapters 15-18)</li>
+</ol>
+<p>I chose not to do the exercises in the book.</p>
+<p>Chapters 1-6 cover basic software engineering concepts including library/package management, the three-tier application model, types of projects (jobs, apps, reports, and APIs), connecting to databases and APIs, logging and monitoring, deploying code with CI/CD in dev, test, and production (including branching strategy) and Docker.</p>
+<p>Useful references from the first section include:</p>
+<ul>
+<li><a href="https://pins.rstudio.com">pins</a>, a package for publishing data, models, and other R objects to folders or cloud storage, including AWS, Azure, GCP, Google Drive, OneDrive, and Dropbox.</li>
+<li><a href="https://vetiver.posit.co">vetiver</a>, R and Python libraries designed to version, deploy, and monitor a trained ML model.</li>
+<li><a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>, Hadley Wickham’s book on R <a href="https://shiny.posit.co">Shiny</a>, published in 2021.</li>
+</ul>
+<p>Chapters 7-14 cover basic infrastructure engineering concepts, including cloud computing (IaaS, PaaS, and SaaS), the command line (terminals, shells, and SSH), Linux (Unix), scaling hardware, networking, DNS, and TLS (HTTPS).</p>
+<p>I disagreed with the recommendations on macOS terminals and configuration management in chapter 8; I use macOS Terminal and <code>.zprofile</code> and <code>.zshrc</code> respectively. Given my background in infrastructure and systems engineering, most of the section was not new to me, except for AWS, which I haven’t worked with.</p>
+<p>There was one useful reference from the second section:</p>
+<ul>
+<li><a href="https://github.com/paws-r/paws">paws</a>, an Amazon Web Services SDK for R.</li>
+</ul>
+<p>Chapters 15-18 cover issues that come up in larger, “enterprise”, organizations. It includes discussion of networking and network security (including proxies), authentication and authorization (including identity and access management: LDAP, SSO, MFA, RBAC and ABAC), infrastructure as code, Docker and Kubernetes, and how enterprise policies affect use of R and Python packages.</p>
+<p>The third section doesn’t contain labs, and has one useful reference:</p>
+<ul>
+<li><a href="https://httr2.r-lib.org">httr2</a>, tools for creating and modifying HTTP requests, then performing them and processing the results.</li>
 </ul>
 </section>
 </section>
@@ -703,18 +757,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -746,7 +789,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/jabenninghoff\.github\.io\/rtraining\/");
@@ -754,7 +819,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
