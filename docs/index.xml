@@ -1286,8 +1286,11 @@ background-color: null;
 font-style: inherit;">library</span>(ggthemes)</span>
 <span id="cb1-4"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">library</span>(cranlogs)</span>
+font-style: inherit;">library</span>(showtext)</span>
 <span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(cranlogs)</span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(dplyr)</span></code></pre></div>
 </div>
@@ -1406,6 +1409,342 @@ font-style: inherit;">scale_color_colorblind</span>()</span></code></pre></div>
 </ul>
 <p><a href="https://jabenninghoff.github.io/rdev/index.html">rdev</a>, my personalized collection of R development tools, includes all three of these packages and more, along with my own <a href="https://jabenninghoff.github.io/rdev/articles/style-guide.html">style guide</a> and R environment setup <a href="https://jabenninghoff.github.io/rdev/articles/rdev.html">instructions</a>.</p>
 </section>
+<section id="custom-fonts" class="level3">
+<h3 class="anchored" data-anchor-id="custom-fonts">Custom Fonts</h3>
+<p>Working with custom fonts in R can be problematic, and font support is platform-dependent. By default, R provides default mappings for three device-independent font families: <code>sans</code> (Helvetica or Arial), <code>serif</code> (Times New Roman), and <code>mono</code> (Courier New). On macOS, <code>quartz</code> is the default graphics device, and uses the following fonts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">quartzFonts</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$serif
+[1] "Times-Roman"      "Times-Bold"       "Times-Italic"     "Times-BoldItalic"
+
+$sans
+[1] "Helvetica"             "Helvetica-Bold"        "Helvetica-Oblique"    
+[4] "Helvetica-BoldOblique"
+
+$mono
+[1] "Courier"             "Courier-Bold"        "Courier-Oblique"    
+[4] "Courier-BoldOblique"</code></pre>
+</div>
+</div>
+<p>Custom fonts installed on the local system <em>should</em> work without installing any additional packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">size <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">28</span></span>
+<span id="cb5-2"></span>
+<span id="cb5-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Default"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> size) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Lato"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Lato"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> size) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Metropolis"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Metropolis"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> size) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">limits =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_void</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-books_files/figure-html/system_fonts-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This approach works, but isn’t portable as it introduces hidden dependencies on the custom fonts. The plot above works because I have the <a href="https://www.latofonts.com/">Lato</a> and <a href="https://www.1001fonts.com/metropolis-font.html">Metropolis</a> fonts installed on the macOS system I use to build this page; on systems without these fonts installed this plot would generate warnings and fallback to the default font:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Not Missing"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> size) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Missing"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"missing"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> size) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">limits =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_void</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, : no
+font could be found for family "missing"
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, : no
+font could be found for family "missing"
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, : no
+font could be found for family "missing"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-books_files/figure-html/missing-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There are a few packages that facilitate use of custom fonts in R:</p>
+<ul>
+<li><a href="https://cran.r-project.org/package=extrafont">extrafont</a> is an older package that can import fonts for use in PDF, PostScript, and Windows</li>
+<li><a href="https://cran.r-project.org/package=showtext">showtext</a> is a newer package that is most often recommended for custom fonts, and can import fonts directly from Google Fonts with <code>font_add_google()</code></li>
+<li><a href="https://cran.r-project.org/package=ragg">ragg</a> is a graphics back-end that gives access to all installed system fonts, and is recommended as an alternative to showtext</li>
+<li><a href="https://cran.r-project.org/package=systemfonts">systemfonts</a> locates installed fonts using system libraries on macOS and Linux, and Freetype on Windows</li>
+</ul>
+<p>On macOS, no additional packages are needed to access all system fonts, although this may not be the case on other platforms (I haven’t tested). I currently use a combination of base R and showtext. systemfonts can help troubleshoot issues by showing what system fonts R recognizes.</p>
+<p>showtext will work even with fonts not present on the local system:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">font_add_google</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Open Sans"</span>)</span>
+<span id="cb8-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">showtext_auto</span>()</span>
+<span id="cb8-3"></span>
+<span id="cb8-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Default"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> size) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Open Sans"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Open Sans"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> size) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">limits =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_void</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://jabenninghoff.github.io/rtraining/analysis/r-books_files/figure-html/showtext-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>An important caveat: showtext <em>replaces</em> all system fonts when enabled. To disable it and use the standard font system, run:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">showtext_auto</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
+</div>
+<p>Additional articles on using custom fonts in R:</p>
+<ul>
+<li><a href="https://r-graph-gallery.com/custom-fonts-in-R-and-ggplot2.html" class="uri">https://r-graph-gallery.com/custom-fonts-in-R-and-ggplot2.html</a></li>
+<li><a href="https://gradientdescending.com/adding-custom-fonts-to-ggplot-in-r/" class="uri">https://gradientdescending.com/adding-custom-fonts-to-ggplot-in-r/</a></li>
+<li><a href="https://www.cararthompson.com/posts/2024-01-12-using-fonts-in-r-for-dataviz/2024-01-12_getting-fonts-to-work" class="uri">https://www.cararthompson.com/posts/2024-01-12-using-fonts-in-r-for-dataviz/2024-01-12_getting-fonts-to-work</a></li>
+</ul>
+</section>
 </section>
 <section id="additional-reading" class="level2">
 <h2 class="anchored" data-anchor-id="additional-reading">Additional Reading</h2>
@@ -1424,10 +1763,10 @@ font-style: inherit;">scale_color_colorblind</span>()</span></code></pre></div>
 <p>Chapter 12 gives recommendations on testing: unit testing with some basic examples, <a href="https://en.wikipedia.org/wiki/Assertion_(software_development)">assertive programming</a>, <a href="https://en.wikipedia.org/wiki/Test-driven_development">Test-Driven Development (TDD)</a>, and test coverage. It suggests three packages for R assertions: <a href="https://github.com/hadley/assertthat"><code>assertthat</code></a>, <a href="https://poissonconsulting.github.io/chk/"><code>chk</code></a>, and <a href="https://mllg.github.io/checkmate/"><code>checkmate</code></a>. Both <code>chk</code> and <code>checkmate</code> are designed to check function arguments; of the two, <code>checkmate</code> appears to be more robust and built to address the downside of R being a dynamically typed language.</p>
 <p>For data validation, I currently use <code>stopifnot()</code>, although I may switch to either <code>assertr</code> or <code>validate</code>, which are both popular packages. I validate function arguments using manual checks, but <code>checkmate</code> looks appealing as a way to write more succinct code. Total downloads for the <code>assertr</code>, <code>validate</code>, <code>chk</code>, and <code>checkmate</code> packages for the last month are listed below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cran_downloads</span>(</span>
-<span id="cb3-2">  <span class="at" style="color: #657422;
+<span id="cb10-2">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">packages =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1440,20 +1779,20 @@ background-color: null;
 font-style: inherit;">"chk"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"checkmate"</span>),</span>
-<span id="cb3-3">  <span class="at" style="color: #657422;
+<span id="cb10-3">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">when =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"last-month"</span></span>
-<span id="cb3-4">) <span class="sc" style="color: #5E5E5E;
+<span id="cb10-4">) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb3-5">  <span class="fu" style="color: #4758AB;
+<span id="cb10-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">group_by</span>(package) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb3-6">  <span class="fu" style="color: #4758AB;
+<span id="cb10-6">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">summarize</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1468,10 +1807,10 @@ font-style: inherit;">max</span>(date))</span></code></pre></div>
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        1576 2024-09-03
-2 checkmate    324633 2024-09-03
-3 chk           13394 2024-09-03
-4 validate       1845 2024-09-03</code></pre>
+1 assertr        2502 2024-11-16
+2 checkmate    340627 2024-11-16
+3 chk           16461 2024-11-16
+4 validate       2161 2024-11-16</code></pre>
 </div>
 </div>
 <p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
@@ -1588,12 +1927,12 @@ font-style: inherit;">max</span>(date))</span></code></pre></div>
 <p>Like many human languages, R has developed two distinct dialects: base R and tidyverse R. Base R consists of the <a href="https://cran.r-project.org/doc/FAQ/R-FAQ.html#Add_002don-packages-in-R">packages</a> included in the R distribution <em>(base, compiler, datasets, graphics, grDevices, grid, methods, parallel, splines, stats, stats4, tcltk, tools, utils)</em>, and the <a href="https://en.wikipedia.org/wiki/Tidyverse">Tidyverse</a> is a collection of packages that implement a <a href="https://en.wikipedia.org/wiki/Domain-specific_language">domain-specific language</a> for data analysis, originally created by <a href="https://en.wikipedia.org/wiki/Hadley_Wickham">Hadley Wickham</a>.</p>
 <p>In my experience, tidyverse R is better for data analysis, where base R is better for writing packages - tidyverse functions are closer to natural language, but have many more dependencies. <a href="https://atrebas.github.io/post/2019-03-03-datatable-dplyr/">Comparing</a> two popular tools for data manipulation, <a href="https://dplyr.tidyverse.org">dplyr</a> (tidyverse R) and <a href="https://rdatatable.gitlab.io/data.table/">data.table</a> (base R) shows these differences.</p>
 <p>This code snippet is from a short analysis of survey responses using dplyr:</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">survey_results <span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">survey_results <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> survey_import <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-2">  <span class="fu" style="color: #4758AB;
+<span id="cb12-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1604,7 +1943,7 @@ background-color: null;
 font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">case_when</span>(</span>
-<span id="cb5-3">    .x <span class="sc" style="color: #5E5E5E;
+<span id="cb12-3">    .x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -1613,7 +1952,7 @@ background-color: null;
 font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>,</span>
-<span id="cb5-4">    .x <span class="sc" style="color: #5E5E5E;
+<span id="cb12-4">    .x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -1622,7 +1961,7 @@ background-color: null;
 font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>,</span>
-<span id="cb5-5">    .x <span class="sc" style="color: #5E5E5E;
+<span id="cb12-5">    .x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -1631,7 +1970,7 @@ background-color: null;
 font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>,</span>
-<span id="cb5-6">    .x <span class="sc" style="color: #5E5E5E;
+<span id="cb12-6">    .x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -1640,7 +1979,7 @@ background-color: null;
 font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>,</span>
-<span id="cb5-7">    .x <span class="sc" style="color: #5E5E5E;
+<span id="cb12-7">    .x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -1649,10 +1988,10 @@ background-color: null;
 font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span></span>
-<span id="cb5-8">  ))) <span class="sc" style="color: #5E5E5E;
+<span id="cb12-8">  ))) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-9">  <span class="fu" style="color: #4758AB;
+<span id="cb12-9">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1665,30 +2004,30 @@ background-color: null;
 font-style: inherit;">"Yes"</span>)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-10">  <span class="fu" style="color: #4758AB;
+<span id="cb12-10">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">arrange</span>(end_date)</span></code></pre></div>
 <p>The code is reasonably easy to understand, even if you’re not familiar with R.</p>
 <p>The same code written in data.table isn’t as clear:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">likert_5 <span class="ot" style="color: #003B4F;
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">likert_5 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(</span>
-<span id="cb6-2">  <span class="st" style="color: #20794D;
+<span id="cb13-2">  <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"strongly disagree"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"disagree"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"neither agree nor disagree"</span>,</span>
-<span id="cb6-3">  <span class="st" style="color: #20794D;
+<span id="cb13-3">  <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"agree"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"strongly agree"</span></span>
-<span id="cb6-4">)</span>
-<span id="cb6-5">q_likert <span class="ot" style="color: #003B4F;
+<span id="cb13-4">)</span>
+<span id="cb13-5">q_likert <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1701,21 +2040,21 @@ background-color: null;
 font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span>)</span>
-<span id="cb6-6">q_yesno <span class="ot" style="color: #003B4F;
+<span id="cb13-6">q_yesno <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Q8"</span></span>
-<span id="cb6-7"></span>
-<span id="cb6-8">survey_results <span class="ot" style="color: #003B4F;
+<span id="cb13-7"></span>
+<span id="cb13-8">survey_results <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">copy</span>(survey_import)</span>
-<span id="cb6-9">survey_results <span class="ot" style="color: #003B4F;
+<span id="cb13-9">survey_results <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> survey_results[</span>
-<span id="cb6-10">  , (q_likert) <span class="sc" style="color: #5E5E5E;
+<span id="cb13-10">  , (q_likert) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span><span class="er" style="color: #AD0000;
 background-color: null;
@@ -1728,11 +2067,11 @@ background-color: null;
 font-style: inherit;">factor</span>(x, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">levels =</span> likert_5))),</span>
-<span id="cb6-11">  .SDcols <span class="ot" style="color: #003B4F;
+<span id="cb13-11">  .SDcols <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> q_likert</span>
-<span id="cb6-12">][</span>
-<span id="cb6-13">  , (q_yesno) <span class="sc" style="color: #5E5E5E;
+<span id="cb13-12">][</span>
+<span id="cb13-13">  , (q_yesno) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span><span class="er" style="color: #AD0000;
 background-color: null;
@@ -1745,14 +2084,14 @@ background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Yes"</span>)),</span>
-<span id="cb6-14">  .SDcols <span class="ot" style="color: #003B4F;
+<span id="cb13-14">  .SDcols <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">=</span> q_yesno</span>
-<span id="cb6-15">][</span>
-<span id="cb6-16">  <span class="fu" style="color: #4758AB;
+<span id="cb13-15">][</span>
+<span id="cb13-16">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">order</span>(end_date)</span>
-<span id="cb6-17">]</span></code></pre></div>
+<span id="cb13-17">]</span></code></pre></div>
 <p>While it may be harder to read, data.table has some clear advantages: it is quite <a href="https://h2oai.github.io/db-benchmark/">fast</a>, especially with very large datasets, and has no <a href="https://github.com/Rdatatable/data.table/blob/master/DESCRIPTION">dependencies</a> other than base R, where dplyr has many.</p>
 <p>These tradeoffs are why I tend to use tidyverse R for analysis and base R for functions (most tidyverse expressions have functional equivalents in base R). Code used in data analysis should be clear and easy to read, which tidyverse R excels at. Packaged functions provide documentation and the source code isn’t typically read, but many dependencies can be problematic; <code>R CMD check</code> will raise a NOTE if there are too many imports.</p>
 
