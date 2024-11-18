@@ -1,6 +1,7 @@
 ABAC
 AST
 ASTs
+Arial
 Backtrace
 Bjarne
 Bostock
@@ -23,6 +24,7 @@ Ericson
 Evaluator's
 FaultTree
 FiveThirtyEight
+Freetype
 GCP
 GG
 Geoms
@@ -125,6 +127,7 @@ ecdf
 egular
 et
 eval
+extrafont
 faceter
 facetted
 favourite
@@ -203,6 +206,7 @@ quasiquoting
 quattro
 quosure
 quosures
+ragg
 raws
 rdev
 readr
@@ -227,6 +231,7 @@ rtraining
 rxylib
 seaters
 serialise
+showtext
 signalled
 signalling
 specialised
@@ -240,6 +245,7 @@ styler
 subclasses
 subsettable
 summarise
+systemfonts
 testthat
 th
 thanol

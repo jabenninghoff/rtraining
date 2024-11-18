@@ -1,3 +1,7 @@
+# rtraining 1.2.9
+
+* Updated R Books: Added "Custom Fonts" section
+
 # rtraining 1.2.8
 
 * Updated R Books: add summaries of [What They Forgot to Teach You About R](https://rstats.wtf), [DevOps for Data Science](https://do4ds.com)
