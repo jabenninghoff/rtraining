@@ -2,7 +2,7 @@
 title: "R Books"
 author: "John Benninghoff"
 date: '2023-11-17'
-date-modified: '2024-01-01'
+date-modified: '2024-11-17'
 categories: reading
 order: 1
 output:
@@ -28,6 +28,7 @@ Libraries used in this notebook.
 library(palmerpenguins)
 library(ggplot2)
 library(ggthemes)
+library(showtext)
 library(cranlogs)
 library(dplyr)
 ```
@@ -84,6 +85,85 @@ In addition to R for Data Science, I recommend the following resources for new R
 tools, includes all three of these packages and more, along with my own
 [style guide](https://jabenninghoff.github.io/rdev/articles/style-guide.html) and R environment
 setup [instructions](https://jabenninghoff.github.io/rdev/articles/rdev.html).
+
+## Custom Fonts
+
+Working with custom fonts in R can be problematic, and font support is platform-dependent. By
+default, R provides default mappings for three device-independent font families: `sans` (Helvetica or Arial), `serif` (Times New Roman), and `mono` (Courier New). On macOS, `quartz` is the default
+graphics device, and uses the following fonts:
+
+```{r quartzFonts}
+quartzFonts()
+```
+
+Custom fonts installed on the local system *should* work without installing any additional packages:
+
+```{r system_fonts}
+size <- 28
+
+ggplot() +
+  annotate("text", x = 0, y = 0, label = "Default", size = size) +
+  annotate("text", x = 0, y = -1, label = "Lato", family = "Lato", size = size) +
+  annotate("text", x = 0, y = -2, label = "Metropolis", family = "Metropolis", size = size) +
+  scale_y_continuous(limits = c(-2.5, 0.5)) +
+  theme_void()
+```
+
+This approach works, but isn't portable as it introduces hidden dependencies on the custom fonts.
+The plot above works because I have the [Lato](https://www.latofonts.com/) and
+[Metropolis](https://www.1001fonts.com/metropolis-font.html) fonts installed on the macOS system I
+use to build this page; on systems without these fonts installed this plot would generate warnings
+and fallback to the default font:
+
+```{r missing}
+ggplot() +
+  annotate("text", x = 0, y = 0, label = "Not Missing", size = size) +
+  annotate("text", x = 0, y = -1, label = "Missing", family = "missing", size = size) +
+  scale_y_continuous(limits = c(-1.5, 0.5)) +
+  theme_void()
+```
+
+There are a few packages that facilitate use of custom fonts in R:
+
+- [extrafont](https://cran.r-project.org/package=extrafont) is an older package that can import
+  fonts for use in PDF, PostScript, and Windows
+- [showtext](https://cran.r-project.org/package=showtext) is a newer package that is most often
+  recommended for custom fonts, and can import fonts directly from Google Fonts with
+  `font_add_google()`
+- [ragg](https://cran.r-project.org/package=ragg) is a graphics back-end that gives access to all
+  installed system fonts, and is recommended as an alternative to showtext
+- [systemfonts](https://cran.r-project.org/package=systemfonts) locates installed fonts using system
+  libraries on macOS and Linux, and Freetype on Windows
+
+On macOS, no additional packages are needed to access all system fonts, although this may not be the
+case on other platforms (I haven't tested). I currently use a combination of base R and showtext.
+systemfonts can help troubleshoot issues by showing what system fonts R recognizes.
+
+showtext will work even with fonts not present on the local system:
+
+```{r showtext}
+font_add_google("Open Sans")
+showtext_auto()
+
+ggplot() +
+  annotate("text", x = 0, y = 0, label = "Default", size = size) +
+  annotate("text", x = 0, y = -1, label = "Open Sans", family = "Open Sans", size = size) +
+  scale_y_continuous(limits = c(-1.5, 0.5)) +
+  theme_void()
+```
+
+An important caveat: showtext *replaces* all system fonts when enabled. To disable it and use the
+standard font system, run:
+
+```{r disable_showtext}
+showtext_auto(FALSE)
+```
+
+Additional articles on using custom fonts in R:
+
+- <https://r-graph-gallery.com/custom-fonts-in-R-and-ggplot2.html>
+- <https://gradientdescending.com/adding-custom-fonts-to-ggplot-in-r/>
+- <https://www.cararthompson.com/posts/2024-01-12-using-fonts-in-r-for-dataviz/2024-01-12_getting-fonts-to-work>
 
 # Additional Reading
 
