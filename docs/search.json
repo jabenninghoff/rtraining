@@ -4,14 +4,21 @@
     "href": "changelog.html",
     "title": "Changelog",
     "section": "",
-    "text": "Updated R Books: Added “Custom Fonts” section"
+    "text": "Minor updates"
+  },
+  {
+    "objectID": "changelog.html#rtraining-1.2.10",
+    "href": "changelog.html#rtraining-1.2.10",
+    "title": "Changelog",
+    "section": "",
+    "text": "Minor updates"
   },
   {
     "objectID": "changelog.html#rtraining-1.2.9",
     "href": "changelog.html#rtraining-1.2.9",
     "title": "Changelog",
-    "section": "",
-    "text": "Updated R Books: Added “Custom Fonts” section"
+    "section": "rtraining 1.2.9",
+    "text": "rtraining 1.2.9\n\nUpdated R Books: Added “Custom Fonts” section"
   },
   {
     "objectID": "changelog.html#rtraining-1.2.8",
@@ -1567,42 +1574,42 @@
   {
     "objectID": "NEWS.html",
     "href": "NEWS.html",
-    "title": "rtraining 1.2.9",
+    "title": "rtraining 1.2.10",
     "section": "",
-    "text": "Updated R Books: Added “Custom Fonts” section"
+    "text": "Minor updates"
   },
   {
     "objectID": "NEWS.html#new-features",
     "href": "NEWS.html#new-features",
-    "title": "rtraining 1.2.9",
+    "title": "rtraining 1.2.10",
     "section": "New Features",
     "text": "New Features\n\nmajor update: build-site has been replaced with an R function, build_analysis_site(), which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to html_document, to_document().\nbuild_analysis_site() will be migrated to rdev in a future release"
   },
   {
     "objectID": "NEWS.html#new-content",
     "href": "NEWS.html#new-content",
-    "title": "rtraining 1.2.9",
+    "title": "rtraining 1.2.10",
     "section": "New Content",
     "text": "New Content\n\nR Setup Log: added notes on the package layout I use for “analysis” packages (will be converted to an rdev vignette in a future release)\nR Setup Log: added notes on my R Workflow\nR Training Log: updated with notes on my current book, R Packages"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures",
     "href": "NEWS.html#new-contentfeatures",
-    "title": "rtraining 1.2.9",
+    "title": "rtraining 1.2.10",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nci(): run continuous integration tests locally: lint, R CMD check, and style (off by default).\ncheck_renv(): convenience function that runs renv status(), clean(), and optionally update() (on by default)."
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-1",
     "href": "NEWS.html#new-contentfeatures-1",
-    "title": "rtraining 1.2.9",
+    "title": "rtraining 1.2.10",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R setup\nminor updates to R Training Log\nstyle_all(): style all .R and .Rmd files in a project using styler\nlint_all(): lint all .R and .Rmd files in a project using lintr\nadd GitHub Actions for continuous integration testing"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-2",
     "href": "NEWS.html#new-contentfeatures-2",
-    "title": "rtraining 1.2.9",
+    "title": "rtraining 1.2.10",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Training Log Notebook (r-training-log.Rmd): Notes on learning R and RStudio\ntools/setup-r: shell script to install development packages to site repository on macOS + Homebrew\nbuild-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/"
   },
