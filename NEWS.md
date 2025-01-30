@@ -1,3 +1,7 @@
+# rtraining 1.2.10
+
+* Minor updates
+
 # rtraining 1.2.9
 
 * Updated R Books: Added "Custom Fonts" section
