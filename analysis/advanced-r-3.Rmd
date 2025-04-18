@@ -232,7 +232,7 @@ new_data.frame <- function(x, n, row.names = NULL) {
 
   # Check all inputs are the same length
   # (This check also allows that x has length 0)
-  stopifnot(all(lengths(x) == n))
+  stopifnot(all(lengths(x) == n)) # nolint: stopifnot_all_linter.
 
   if (is.null(row.names)) {
     # Use special row names helper from base R

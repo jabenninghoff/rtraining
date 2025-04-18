@@ -313,23 +313,19 @@ Answer: code below. In this case, it is useful to include `binwidth` and `bins`,
 ```{r}
 distribution <- function(data, var, type = "histogram", binwidth = NULL, bins = NULL,
                          na.rm = FALSE) {
-  gg <- ggplot(data, aes({{ var }}))
-
-  if (type == "histogram") {
-    gg <- gg + geom_histogram(binwidth = binwidth, bins = bins, na.rm = na.rm)
-  } else if (type == "freqpoly") {
-    gg <- gg + geom_freqpoly(binwidth = binwidth, bins = bins, na.rm = na.rm)
-  } else if (type == "density") {
-    gg <- gg + geom_density(na.rm = na.rm)
-  } else {
-    stop("`type` must be histogram, freqpoly, or density")
-  }
-  gg
+  ggplot(data, aes({{ var }})) +
+    switch(type,
+      histogram = geom_histogram(binwidth = binwidth, bins = bins, na.rm = na.rm),
+      freqpoly = geom_freqpoly(binwidth = binwidth, bins = bins, na.rm = na.rm),
+      density = geom_density(na.rm = na.rm),
+      stop("`type` must be histogram, freqpoly, or density")
+    )
 }
 
 distribution(diamonds, price, binwidth = 100)
 distribution(diamonds, price, type = "freqpoly", binwidth = 100)
 distribution(diamonds, price, type = "density")
+try(distribution(diamonds, price, type = "other"))
 ```
 
 ---
