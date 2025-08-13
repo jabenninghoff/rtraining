@@ -1,3 +1,7 @@
+# rtraining 1.2.12
+
+* Corrected GitHub language stats
+
 # rtraining 1.2.11
 
 * Updated for R 4.5.0
