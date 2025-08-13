@@ -86,10 +86,8 @@ Stroustrup
 TLS
 Tidyverse
 Tierney
-Vectorised
 Wickham
 Wickham's
-YAML
 YYYY
 Yan
 aes
@@ -126,7 +124,6 @@ dtc
 ecdf
 egular
 et
-eval
 extrafont
 faceter
 facetted
@@ -156,7 +153,6 @@ initialised
 inlined
 internalise
 invertible
-iteratively
 jpeg
 kableExtra
 kangnade
@@ -196,7 +192,6 @@ plotmath
 png
 po
 pre
-programmatically
 pts
 purrr
 purrr's
@@ -220,8 +215,6 @@ remium
 renv
 renv's
 replot
-repo
-reproducibility
 reticulate
 rmarkdown
 roxygen
@@ -242,7 +235,6 @@ standardised
 stateful
 stringr
 styler
-subclasses
 subsettable
 summarise
 systemfonts
@@ -259,16 +251,12 @@ toolkits
 traceback
 travelled
 trl
-unevaluated
 unlist
 unquotation
 validator
 vctrs
-vectorised
-vectorized
 vectorizes
 vetiver
-viridis
 visualisation
 visualise
 visualising
