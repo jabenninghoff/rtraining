@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.43">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,8 +23,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -68,17 +69,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <link href="../analysis/advanced-r-2.html" rel="next">
 <link href="../analysis/hockey-cards.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4379b0ccadffce622b03caf4c46266b3.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0ba06d69d9413235fcabd0124410f94b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f5104fd9079c8b4cb30874d00ca37881.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-5fdbc8f45c2d0bcdc137be0dad0ef85a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2cfd8bc47213d4766483d56c471cfecb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-5fdbc8f45c2d0bcdc137be0dad0ef85a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,7 +114,169 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -325,6 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Advanced R (Foundations)</h1>
@@ -435,15 +602,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x110048000"</code></pre>
+<pre><code>#&gt; [1] "0x308a40000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x110048000"</code></pre>
+<pre><code>#&gt; [1] "0x308a40000"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y[[<span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x110048000"</code></pre>
+<pre><code>#&gt; [1] "0x308a40000"</code></pre>
 </div>
 </div>
 <hr>
@@ -454,17 +621,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x129b2b428"</code></pre>
+<pre><code>#&gt; [1] "0x106b17c38"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x129b2b428"</code></pre>
+<pre><code>#&gt; [1] "0x106b17c38"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>b[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x129c0ba18"</code></pre>
+<pre><code>#&gt; [1] "0x106a8f1d8"</code></pre>
 </div>
 </div>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
@@ -485,19 +652,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x13fb9e590"</code></pre>
+<pre><code>#&gt; [1] "0x1296d9af8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x13fb9e590"</code></pre>
+<pre><code>#&gt; [1] "0x1296d9af8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x13fb9e590"</code></pre>
+<pre><code>#&gt; [1] "0x1296d9af8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x13fc9bfa8"</code></pre>
+<pre><code>#&gt; [1] "0x139fcd678"</code></pre>
 </div>
 </div>
 <hr>
@@ -515,23 +682,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
+<pre><code>#&gt; [1] "0x128ce5a40"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(base<span class="sc">::</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
+<pre><code>#&gt; [1] "0x128ce5a40"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">get</span>(<span class="st">"mean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
+<pre><code>#&gt; [1] "0x128ce5a40"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">evalq</span>(mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
+<pre><code>#&gt; [1] "0x128ce5a40"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(<span class="fu">match.fun</span>(<span class="st">"mean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x148b60fe8"</code></pre>
+<pre><code>#&gt; [1] "0x128ce5a40"</code></pre>
 </div>
 </div>
 <p>Answer: they do.</p>
@@ -588,12 +755,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>L, <span class="dv">2</span>L, <span class="dv">3</span>L)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x12acafec8&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x106b4ac08&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x12acafec8 -&gt; 0x12ad8f248]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
-#&gt; tracemem[0x12ad8f248 -&gt; 0x12ae6ac78]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x106b4ac08 -&gt; 0x106906c48]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
+#&gt; tracemem[0x106906c48 -&gt; 0x1063cbdf8]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -603,12 +770,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x12b1f6a28&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x106810b48&gt;"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x12b1f6a28 -&gt; 0x12b28a938]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x106810b48 -&gt; 0x106c54468]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">5</span>L</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -646,19 +813,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12b2204a8"</code></pre>
+<pre><code>#&gt; [1] "0x10a50d598"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12b2204a8"</code></pre>
+<pre><code>#&gt; [1] "0x10a50d598"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12b2204a8"</code></pre>
+<pre><code>#&gt; [1] "0x10a50d598"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12b2204a8"</code></pre>
+<pre><code>#&gt; [1] "0x10a50d598"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"second object"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -666,11 +833,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12b385d48"</code></pre>
+<pre><code>#&gt; [1] "0x106b4a8c8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12b385d48"</code></pre>
+<pre><code>#&gt; [1] "0x106b4a8c8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"third object"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -678,7 +845,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12f176248"</code></pre>
+<pre><code>#&gt; [1] "0x109050578"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"fourth object (?)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -686,7 +853,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(c[[<span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x12b2d32a8"</code></pre>
+<pre><code>#&gt; [1] "0x10a7160b0"</code></pre>
 </div>
 </div>
 <p>Answer: four different objects with multiple names.</p>
@@ -702,10 +869,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x128223288] &lt;list&gt; 
-#&gt; ├─[2:0x11f2578b8] &lt;int&gt; 
-#&gt; └─█ [3:0x11f3ab040] &lt;list&gt; 
-#&gt;   └─[2:0x11f2578b8]</code></pre>
+<pre><code>#&gt; █ [1:0x106b4b008] &lt;list&gt; 
+#&gt; ├─[2:0x109af99e0] &lt;int&gt; 
+#&gt; └─█ [3:0x10b052898] &lt;list&gt; 
+#&gt;   └─[2:0x109af99e0]</code></pre>
 </div>
 </div>
 <p>Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which points to the original int vector.</p>
@@ -868,31 +1035,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb104-25"><a href="#cb104-25" aria-hidden="true" tabindex="-1"></a>xm <span class="ot">&lt;-</span> <span class="fu">x_medians</span>(<span class="dv">5</span>)</span>
 <span id="cb104-26"><a href="#cb104-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1          X2         X3           X4          X5
-#&gt; 1   0.50401654  0.23540291 -0.4396194  0.080767878  0.35250166
-#&gt; 2  -0.31573176 -0.20049932 -0.1819276  0.146580934 -0.45343353
-#&gt; 3  -0.24911741  0.25277186  0.4041711  0.093107896  0.10502921
-#&gt; 4   0.34201792  0.09558642 -0.1391102  0.009346764  0.48911436
-#&gt; 5   0.16331704 -0.32881049  0.1439023  0.058086289  0.46017467
-#&gt; 6  -0.11430997 -0.24042064 -0.1319872 -0.087266846 -0.19610622
-#&gt; 7  -0.28163062 -0.36819243  0.3742738 -0.458176441 -0.29351082
-#&gt; 8  -0.49340229 -0.47871765 -0.3259736 -0.105638131  0.46178661
-#&gt; 9  -0.06241899  0.19421609 -0.3935998  0.420250407  0.24622488
-#&gt; 10  0.02756655 -0.16216753  0.3696997 -0.157226758  0.07701606</code></pre>
+<pre><code>#&gt;             X1           X2          X3          X4          X5
+#&gt; 1   0.49273802  0.448991300 -0.30054783 -0.20660580 -0.23777924
+#&gt; 2   0.05652385  0.001813463  0.33416889 -0.32789212 -0.41676241
+#&gt; 3  -0.01419049 -0.124659081  0.23041291 -0.17780543 -0.01559204
+#&gt; 4  -0.35148395 -0.283882082 -0.05977822 -0.37134434  0.16385501
+#&gt; 5   0.46042474 -0.394483475  0.02800966 -0.41412171  0.38361873
+#&gt; 6   0.46424602  0.065797360 -0.18683243  0.20643509  0.40758088
+#&gt; 7   0.14870457  0.246980951  0.02194860 -0.49816890 -0.02810495
+#&gt; 8  -0.18344086 -0.023087556 -0.02944398  0.41556811  0.10070186
+#&gt; 9  -0.04334291 -0.458556863  0.40602094  0.06722513  0.35967006
+#&gt; 10 -0.19192932  0.325450716 -0.46721896  0.38585107  0.29621147</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">as.data.frame</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians)), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1          X2         X3           X4          X5
-#&gt; 1   0.50401654  0.23540291 -0.4396194  0.080767878  0.35250166
-#&gt; 2  -0.31573176 -0.20049932 -0.1819276  0.146580934 -0.45343353
-#&gt; 3  -0.24911741  0.25277186  0.4041711  0.093107896  0.10502921
-#&gt; 4   0.34201792  0.09558642 -0.1391102  0.009346764  0.48911436
-#&gt; 5   0.16331704 -0.32881049  0.1439023  0.058086289  0.46017467
-#&gt; 6  -0.11430997 -0.24042064 -0.1319872 -0.087266846 -0.19610622
-#&gt; 7  -0.28163062 -0.36819243  0.3742738 -0.458176441 -0.29351082
-#&gt; 8  -0.49340229 -0.47871765 -0.3259736 -0.105638131  0.46178661
-#&gt; 9  -0.06241899  0.19421609 -0.3935998  0.420250407  0.24622488
-#&gt; 10  0.02756655 -0.16216753  0.3696997 -0.157226758  0.07701606</code></pre>
+<pre><code>#&gt;             X1           X2          X3          X4          X5
+#&gt; 1   0.49273802  0.448991300 -0.30054783 -0.20660580 -0.23777924
+#&gt; 2   0.05652385  0.001813463  0.33416889 -0.32789212 -0.41676241
+#&gt; 3  -0.01419049 -0.124659081  0.23041291 -0.17780543 -0.01559204
+#&gt; 4  -0.35148395 -0.283882082 -0.05977822 -0.37134434  0.16385501
+#&gt; 5   0.46042474 -0.394483475  0.02800966 -0.41412171  0.38361873
+#&gt; 6   0.46424602  0.065797360 -0.18683243  0.20643509  0.40758088
+#&gt; 7   0.14870457  0.246980951  0.02194860 -0.49816890 -0.02810495
+#&gt; 8  -0.18344086 -0.023087556 -0.02944398  0.41556811  0.10070186
+#&gt; 9  -0.04334291 -0.458556863  0.40602094  0.06722513  0.35967006
+#&gt; 10 -0.19192932  0.325450716 -0.46721896  0.38585107  0.29621147</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># benchmark</span></span>
 <span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -900,21 +1067,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   31.7µs   48.3µs    21402.     391KB     306.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   24.3µs   39.5µs    24813.     391KB     270.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   9.18µs   24.3µs    39638.     391KB     449.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   7.54µs   19.6µs    52116.     391KB     596.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">as.data.frame</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))) <span class="co"># as.data.frame introduces significant overhead</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m… 110µs  126µs     8185.     391KB     96.0</code></pre>
+#&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 as.data.frame(ls_medians(xm$x, xm$… 86.5µs  106µs     9475.     391KB     112.</code></pre>
 </div>
 </div>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
@@ -925,14 +1092,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   58.5µs   78.6µs    12663.     391KB     151.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   41.2µs   63.4µs    15658.     391KB     184.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)     11µs   26.9µs    41441.     391KB     469.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   8.36µs   25.2µs    39350.     391KB     450.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>xm <span class="ot">&lt;-</span> <span class="fu">x_medians</span>(<span class="dv">20</span>)</span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">df_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -940,14 +1107,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)    113µs    132µs     7508.     400KB     86.4</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   79.2µs    103µs     9562.     400KB     116.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mark</span>(<span class="fu">ls_medians</span>(xm<span class="sc">$</span>x, xm<span class="sc">$</span>medians))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   12.9µs   25.3µs    39625.     392KB     453.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   9.06µs   21.2µs    46164.     392KB     532.</code></pre>
 </div>
 </div>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast. So, the list method is near constant time regardless of columns, whereas the data.frame method scales linearly with the number of columns.</p>
@@ -1074,7 +1241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x159fb63b0&gt;
+#&gt; &lt;bytecode: 0x139c410e0&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>unname</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1087,7 +1254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x11f363278&gt;
+#&gt; &lt;bytecode: 0x139fce478&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1231,8 +1398,8 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; a   a b c
-#&gt;   a 1 0 0
-#&gt;   b 0 0 1
+#&gt;   a 0 0 1
+#&gt;   b 1 0 0
 #&gt;   c 0 1 0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(a_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1261,10 +1428,10 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 0 0 1 0
+#&gt;   a 0 0 0 1
 #&gt;   b 0 1 0 0
 #&gt;   c 1 0 0 0
-#&gt;   d 0 0 0 1</code></pre>
+#&gt;   d 0 0 1 0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(b_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2118,21 +2285,21 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb354-2"><a href="#cb354-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb354-3"><a href="#cb354-3" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">sample</span>(<span class="fu">ncol</span>(df))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   x y z
-#&gt; 1 1 5 a
-#&gt; 2 2 4 b
+<pre><code>#&gt;   y x z
+#&gt; 1 5 1 a
+#&gt; 2 4 2 b
 #&gt; 3 3 3 c
-#&gt; 4 4 2 d
-#&gt; 5 5 1 e</code></pre>
+#&gt; 4 2 4 d
+#&gt; 5 1 5 e</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">sample</span>(<span class="fu">nrow</span>(df)), <span class="fu">sample</span>(<span class="fu">ncol</span>(df))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   y z x
-#&gt; 3 3 c 3
-#&gt; 4 2 d 4
-#&gt; 1 5 a 1
-#&gt; 2 4 b 2
-#&gt; 5 1 e 5</code></pre>
+<pre><code>#&gt;   z x y
+#&gt; 5 e 5 1
+#&gt; 1 a 1 5
+#&gt; 2 b 2 4
+#&gt; 3 c 3 3
+#&gt; 4 d 4 2</code></pre>
 </div>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -2164,9 +2331,9 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb359-13"><a href="#cb359-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_rows</span>(df, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
-#&gt; 4 4 2 d
 #&gt; 1 1 5 a
-#&gt; 5 5 1 e</code></pre>
+#&gt; 2 2 4 b
+#&gt; 4 4 2 d</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb361"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb361-1"><a href="#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_rows</span>(df, <span class="dv">3</span>, <span class="at">contiguous =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2446,7 +2613,8 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell" data-layout-align="center" data-result="hide">
 <div class="sourceCode cell-code" id="cb402"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb402-1"><a href="#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>(x) <span class="dv">3</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; function(x) 3()</code></pre>
+<pre><code>#&gt; function (x) 
+#&gt; 3()</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb404"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb404-1"><a href="#cb404-1" aria-hidden="true" tabindex="-1"></a>(<span class="cf">function</span>(x) <span class="dv">3</span>)()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2494,16 +2662,16 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb409-5"><a href="#cb409-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fun_args[<span class="fu">order</span>(fun_args<span class="sc">$</span>args, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ], <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;                   name args
-#&gt; 1076              scan   22
-#&gt; 1132            source   17
-#&gt; 574     format.default   16
-#&gt; 587            formatC   15
-#&gt; 768            library   13
-#&gt; 825   merge.data.frame   13
-#&gt; 924          prettyNum   13
-#&gt; 1242           system2   12
-#&gt; 1239            system   11
-#&gt; 198  all.equal.numeric   10</code></pre>
+#&gt; 1078              scan   22
+#&gt; 1134            source   17
+#&gt; 575     format.default   16
+#&gt; 588            formatC   15
+#&gt; 770            library   13
+#&gt; 827   merge.data.frame   13
+#&gt; 926          prettyNum   13
+#&gt; 1245           system2   12
+#&gt; 1242            system   11
+#&gt; 199  all.equal.numeric   10</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb411"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb411-1"><a href="#cb411-1" aria-hidden="true" tabindex="-1"></a>fun_args[fun_args<span class="sc">$</span>args <span class="sc">==</span> <span class="dv">0</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2534,238 +2702,238 @@ it? (Hint: try using help.)</code></pre>
 #&gt; 76                 .Primitive    0
 #&gt; 77                 .primTrace    0
 #&gt; 78               .primUntrace    0
-#&gt; 90          .standard_regexps    0
-#&gt; 91                    .subset    0
-#&gt; 92                   .subset2    0
-#&gt; 95        .tryResumeInterrupt    0
-#&gt; 97                          (    0
-#&gt; 98                          [    0
-#&gt; 116                        [[    0
-#&gt; 123                      [[&lt;-    0
-#&gt; 128                       [&lt;-    0
-#&gt; 136                         {    0
-#&gt; 137                         @    0
-#&gt; 138                       @&lt;-    0
-#&gt; 139                         *    0
-#&gt; 141                         /    0
-#&gt; 143                         &amp;    0
-#&gt; 146                        &amp;&amp;    0
-#&gt; 147                       %*%    0
-#&gt; 148                       %/%    0
-#&gt; 149                        %%    0
-#&gt; 154                         ^    0
-#&gt; 155                         +    0
-#&gt; 158                         &lt;    0
-#&gt; 159                        &lt;-    0
-#&gt; 160                       &lt;&lt;-    0
-#&gt; 161                        &lt;=    0
-#&gt; 162                         =    0
-#&gt; 163                        ==    0
-#&gt; 164                         &gt;    0
-#&gt; 165                        &gt;=    0
-#&gt; 166                         |    0
-#&gt; 169                        ||    0
-#&gt; 170                         ~    0
-#&gt; 171                         $    0
-#&gt; 174                       $&lt;-    0
-#&gt; 178                       abs    0
-#&gt; 179                      acos    0
-#&gt; 180                     acosh    0
-#&gt; 187                       all    0
-#&gt; 204                       any    0
-#&gt; 210                     anyNA    0
-#&gt; 219                       Arg    0
-#&gt; 226                   as.call    0
-#&gt; 227              as.character    0
-#&gt; 238                as.complex    0
-#&gt; 272                 as.double    0
-#&gt; 275            as.environment    0
-#&gt; 282                as.integer    0
-#&gt; 294                as.logical    0
-#&gt; 304                as.numeric    0
-#&gt; 323                    as.raw    0
-#&gt; 333                      asin    0
-#&gt; 334                     asinh    0
-#&gt; 340                      atan    0
-#&gt; 342                     atanh    0
-#&gt; 345                      attr    0
-#&gt; 347                    attr&lt;-    0
-#&gt; 348                attributes    0
-#&gt; 349              attributes&lt;-    0
-#&gt; 354                   baseenv    0
-#&gt; 373                     break    0
-#&gt; 374                   browser    0
-#&gt; 383                         c    0
-#&gt; 392                      call    0
-#&gt; 399                   ceiling    0
-#&gt; 412                     class    0
-#&gt; 413                   class&lt;-    0
-#&gt; 419       closeAllConnections    0
-#&gt; 436                      Conj    0
-#&gt; 437              contributors    0
-#&gt; 438                       cos    0
-#&gt; 439                      cosh    0
-#&gt; 440                     cospi    0
-#&gt; 441                 crossprod    0
-#&gt; 442               Cstack_info    0
-#&gt; 443                    cummax    0
-#&gt; 444                    cummin    0
-#&gt; 445                   cumprod    0
-#&gt; 446                    cumsum    0
-#&gt; 455                      date    0
-#&gt; 459                   declare    0
-#&gt; 460  default.stringsAsFactors    0
-#&gt; 477                   digamma    0
-#&gt; 478                       dim    0
-#&gt; 480                     dim&lt;-    0
-#&gt; 481                  dimnames    0
-#&gt; 483                dimnames&lt;-    0
-#&gt; 512                  emptyenv    0
-#&gt; 513                enc2native    0
-#&gt; 514                  enc2utf8    0
-#&gt; 522             environment&lt;-    0
-#&gt; 529                      Exec    0
-#&gt; 531                       exp    0
-#&gt; 533                     expm1    0
-#&gt; 534                expression    0
-#&gt; 535            extSoftVersion    0
-#&gt; 562                     floor    0
-#&gt; 565                       for    0
-#&gt; 567              forceAndCall    0
-#&gt; 590                  function    0
-#&gt; 591                     gamma    0
-#&gt; 593                   gc.time    0
-#&gt; 599         getAllConnections    0
-#&gt; 607             geterrmessage    0
-#&gt; 610             getLoadedDLLs    0
-#&gt; 620               getRversion    0
-#&gt; 622      getTaskCallbackNames    0
-#&gt; 625                     getwd    0
-#&gt; 628                 globalenv    0
-#&gt; 640                 iconvlist    0
-#&gt; 645                        if    0
-#&gt; 647                        Im    0
-#&gt; 653               interactive    0
-#&gt; 658                 invisible    0
-#&gt; 661                  is.array    0
-#&gt; 662                 is.atomic    0
-#&gt; 663                   is.call    0
-#&gt; 664              is.character    0
-#&gt; 665                is.complex    0
-#&gt; 667                 is.double    0
-#&gt; 669            is.environment    0
-#&gt; 670             is.expression    0
-#&gt; 672                 is.finite    0
-#&gt; 674               is.function    0
-#&gt; 675               is.infinite    0
-#&gt; 677                is.integer    0
-#&gt; 678               is.language    0
-#&gt; 679                   is.list    0
-#&gt; 681                is.logical    0
-#&gt; 682                 is.matrix    0
-#&gt; 683                     is.na    0
-#&gt; 691                   is.name    0
-#&gt; 692                    is.nan    0
-#&gt; 694                   is.null    0
-#&gt; 695                is.numeric    0
-#&gt; 700                 is.object    0
-#&gt; 703               is.pairlist    0
-#&gt; 706                      is.R    0
-#&gt; 707                    is.raw    0
-#&gt; 708              is.recursive    0
-#&gt; 709                 is.single    0
-#&gt; 710                 is.symbol    0
-#&gt; 726                      isS4    0
-#&gt; 740                 l10n_info    0
-#&gt; 741                La_library    0
-#&gt; 742                La_version    0
-#&gt; 749           lazyLoadDBfetch    0
-#&gt; 752                    length    0
-#&gt; 754                  length&lt;-    0
-#&gt; 763                  levels&lt;-    0
-#&gt; 766                    lgamma    0
-#&gt; 767            libcurlVersion    0
-#&gt; 771                   licence    0
-#&gt; 772                   license    0
-#&gt; 773                      list    0
-#&gt; 779          loadedNamespaces    0
-#&gt; 780      loadingNamespaceInfo    0
-#&gt; 785                       log    0
-#&gt; 786                     log10    0
-#&gt; 787                     log1p    0
-#&gt; 788                      log2    0
-#&gt; 811                       max    0
-#&gt; 823            memory.profile    0
-#&gt; 829                       min    0
-#&gt; 830                   missing    0
-#&gt; 831                       Mod    0
-#&gt; 844                     names    0
-#&gt; 846                   names&lt;-    0
-#&gt; 853                     nargs    0
-#&gt; 859                      next    0
-#&gt; 868                  nullfile    0
-#&gt; 873                    nzchar    0
-#&gt; 875                  oldClass    0
-#&gt; 876                oldClass&lt;-    0
-#&gt; 878                   on.exit    0
-#&gt; 911               pcre_config    0
-#&gt; 920                pos.to.env    0
-#&gt; 963                 proc.time    0
-#&gt; 964                      prod    0
-#&gt; 987                     quote    0
-#&gt; 988             R_compiled_by    0
-#&gt; 991                 R.Version    0
-#&gt; 992                     range    0
-#&gt; 1007                       Re    0
-#&gt; 1026                      rep    0
-#&gt; 1035                   repeat    0
-#&gt; 1042               retracemem    0
-#&gt; 1043                   return    0
-#&gt; 1051                    round    0
-#&gt; 1077                   search    0
-#&gt; 1078              searchpaths    0
-#&gt; 1082                seq_along    0
-#&gt; 1083                  seq_len    0
-#&gt; 1086                  seq.int    0
-#&gt; 1102                     sign    0
-#&gt; 1104                   signif    0
-#&gt; 1110                      sin    0
-#&gt; 1112                     sinh    0
-#&gt; 1115                    sinpi    0
-#&gt; 1142                     sqrt    0
-#&gt; 1148          standardGeneric    0
-#&gt; 1150                   stderr    0
-#&gt; 1151                    stdin    0
-#&gt; 1152                   stdout    0
-#&gt; 1156           storage.mode&lt;-    0
-#&gt; 1172               substitute    0
-#&gt; 1177                      sum    0
-#&gt; 1206                   switch    0
-#&gt; 1208                sys.calls    0
-#&gt; 1210                 Sys.Date    0
-#&gt; 1212               sys.frames    0
-#&gt; 1216               Sys.getpid    0
-#&gt; 1218                 Sys.info    0
-#&gt; 1220           Sys.localeconv    0
-#&gt; 1221               sys.nframe    0
-#&gt; 1222              sys.on.exit    0
-#&gt; 1224              sys.parents    0
-#&gt; 1233               sys.status    0
-#&gt; 1234                 Sys.time    0
-#&gt; 1248                 Tailcall    0
-#&gt; 1249                      tan    0
-#&gt; 1250                     tanh    0
-#&gt; 1251                    tanpi    0
-#&gt; 1254               tcrossprod    0
-#&gt; 1266                 tracemem    0
-#&gt; 1271                 trigamma    0
-#&gt; 1273                    trunc    0
-#&gt; 1282           unCfillPOSIXlt    0
-#&gt; 1283                  unclass    0
-#&gt; 1307               untracemem    0
-#&gt; 1312                UseMethod    0
-#&gt; 1328                    while    0
-#&gt; 1345                    xtfrm    0</code></pre>
+#&gt; 91          .standard_regexps    0
+#&gt; 92                    .subset    0
+#&gt; 93                   .subset2    0
+#&gt; 96        .tryResumeInterrupt    0
+#&gt; 98                          (    0
+#&gt; 99                          [    0
+#&gt; 117                        [[    0
+#&gt; 124                      [[&lt;-    0
+#&gt; 129                       [&lt;-    0
+#&gt; 137                         {    0
+#&gt; 138                         @    0
+#&gt; 139                       @&lt;-    0
+#&gt; 140                         *    0
+#&gt; 142                         /    0
+#&gt; 144                         &amp;    0
+#&gt; 147                        &amp;&amp;    0
+#&gt; 148                       %*%    0
+#&gt; 149                       %/%    0
+#&gt; 150                        %%    0
+#&gt; 155                         ^    0
+#&gt; 156                         +    0
+#&gt; 159                         &lt;    0
+#&gt; 160                        &lt;-    0
+#&gt; 161                       &lt;&lt;-    0
+#&gt; 162                        &lt;=    0
+#&gt; 163                         =    0
+#&gt; 164                        ==    0
+#&gt; 165                         &gt;    0
+#&gt; 166                        &gt;=    0
+#&gt; 167                         |    0
+#&gt; 170                        ||    0
+#&gt; 171                         ~    0
+#&gt; 172                         $    0
+#&gt; 175                       $&lt;-    0
+#&gt; 179                       abs    0
+#&gt; 180                      acos    0
+#&gt; 181                     acosh    0
+#&gt; 188                       all    0
+#&gt; 205                       any    0
+#&gt; 211                     anyNA    0
+#&gt; 220                       Arg    0
+#&gt; 227                   as.call    0
+#&gt; 228              as.character    0
+#&gt; 239                as.complex    0
+#&gt; 273                 as.double    0
+#&gt; 276            as.environment    0
+#&gt; 283                as.integer    0
+#&gt; 295                as.logical    0
+#&gt; 305                as.numeric    0
+#&gt; 324                    as.raw    0
+#&gt; 334                      asin    0
+#&gt; 335                     asinh    0
+#&gt; 341                      atan    0
+#&gt; 343                     atanh    0
+#&gt; 346                      attr    0
+#&gt; 348                    attr&lt;-    0
+#&gt; 349                attributes    0
+#&gt; 350              attributes&lt;-    0
+#&gt; 355                   baseenv    0
+#&gt; 374                     break    0
+#&gt; 375                   browser    0
+#&gt; 384                         c    0
+#&gt; 393                      call    0
+#&gt; 400                   ceiling    0
+#&gt; 413                     class    0
+#&gt; 414                   class&lt;-    0
+#&gt; 420       closeAllConnections    0
+#&gt; 437                      Conj    0
+#&gt; 438              contributors    0
+#&gt; 439                       cos    0
+#&gt; 440                      cosh    0
+#&gt; 441                     cospi    0
+#&gt; 442                 crossprod    0
+#&gt; 443               Cstack_info    0
+#&gt; 444                    cummax    0
+#&gt; 445                    cummin    0
+#&gt; 446                   cumprod    0
+#&gt; 447                    cumsum    0
+#&gt; 456                      date    0
+#&gt; 460                   declare    0
+#&gt; 461  default.stringsAsFactors    0
+#&gt; 478                   digamma    0
+#&gt; 479                       dim    0
+#&gt; 481                     dim&lt;-    0
+#&gt; 482                  dimnames    0
+#&gt; 484                dimnames&lt;-    0
+#&gt; 513                  emptyenv    0
+#&gt; 514                enc2native    0
+#&gt; 515                  enc2utf8    0
+#&gt; 523             environment&lt;-    0
+#&gt; 530                      Exec    0
+#&gt; 532                       exp    0
+#&gt; 534                     expm1    0
+#&gt; 535                expression    0
+#&gt; 536            extSoftVersion    0
+#&gt; 563                     floor    0
+#&gt; 566                       for    0
+#&gt; 568              forceAndCall    0
+#&gt; 591                  function    0
+#&gt; 592                     gamma    0
+#&gt; 594                   gc.time    0
+#&gt; 600         getAllConnections    0
+#&gt; 608             geterrmessage    0
+#&gt; 611             getLoadedDLLs    0
+#&gt; 621               getRversion    0
+#&gt; 623      getTaskCallbackNames    0
+#&gt; 626                     getwd    0
+#&gt; 629                 globalenv    0
+#&gt; 642                 iconvlist    0
+#&gt; 647                        if    0
+#&gt; 649                        Im    0
+#&gt; 655               interactive    0
+#&gt; 660                 invisible    0
+#&gt; 663                  is.array    0
+#&gt; 664                 is.atomic    0
+#&gt; 665                   is.call    0
+#&gt; 666              is.character    0
+#&gt; 667                is.complex    0
+#&gt; 669                 is.double    0
+#&gt; 671            is.environment    0
+#&gt; 672             is.expression    0
+#&gt; 674                 is.finite    0
+#&gt; 676               is.function    0
+#&gt; 677               is.infinite    0
+#&gt; 679                is.integer    0
+#&gt; 680               is.language    0
+#&gt; 681                   is.list    0
+#&gt; 683                is.logical    0
+#&gt; 684                 is.matrix    0
+#&gt; 685                     is.na    0
+#&gt; 693                   is.name    0
+#&gt; 694                    is.nan    0
+#&gt; 696                   is.null    0
+#&gt; 697                is.numeric    0
+#&gt; 702                 is.object    0
+#&gt; 705               is.pairlist    0
+#&gt; 708                      is.R    0
+#&gt; 709                    is.raw    0
+#&gt; 710              is.recursive    0
+#&gt; 711                 is.single    0
+#&gt; 712                 is.symbol    0
+#&gt; 728                      isS4    0
+#&gt; 742                 l10n_info    0
+#&gt; 743                La_library    0
+#&gt; 744                La_version    0
+#&gt; 751           lazyLoadDBfetch    0
+#&gt; 754                    length    0
+#&gt; 756                  length&lt;-    0
+#&gt; 765                  levels&lt;-    0
+#&gt; 768                    lgamma    0
+#&gt; 769            libcurlVersion    0
+#&gt; 773                   licence    0
+#&gt; 774                   license    0
+#&gt; 775                      list    0
+#&gt; 781          loadedNamespaces    0
+#&gt; 782      loadingNamespaceInfo    0
+#&gt; 787                       log    0
+#&gt; 788                     log10    0
+#&gt; 789                     log1p    0
+#&gt; 790                      log2    0
+#&gt; 813                       max    0
+#&gt; 825            memory.profile    0
+#&gt; 831                       min    0
+#&gt; 832                   missing    0
+#&gt; 833                       Mod    0
+#&gt; 846                     names    0
+#&gt; 848                   names&lt;-    0
+#&gt; 855                     nargs    0
+#&gt; 861                      next    0
+#&gt; 870                  nullfile    0
+#&gt; 875                    nzchar    0
+#&gt; 877                  oldClass    0
+#&gt; 878                oldClass&lt;-    0
+#&gt; 880                   on.exit    0
+#&gt; 913               pcre_config    0
+#&gt; 922                pos.to.env    0
+#&gt; 965                 proc.time    0
+#&gt; 966                      prod    0
+#&gt; 989                     quote    0
+#&gt; 990             R_compiled_by    0
+#&gt; 993                 R.Version    0
+#&gt; 994                     range    0
+#&gt; 1009                       Re    0
+#&gt; 1028                      rep    0
+#&gt; 1037                   repeat    0
+#&gt; 1044               retracemem    0
+#&gt; 1045                   return    0
+#&gt; 1053                    round    0
+#&gt; 1079                   search    0
+#&gt; 1080              searchpaths    0
+#&gt; 1084                seq_along    0
+#&gt; 1085                  seq_len    0
+#&gt; 1088                  seq.int    0
+#&gt; 1104                     sign    0
+#&gt; 1106                   signif    0
+#&gt; 1112                      sin    0
+#&gt; 1114                     sinh    0
+#&gt; 1117                    sinpi    0
+#&gt; 1144                     sqrt    0
+#&gt; 1150          standardGeneric    0
+#&gt; 1152                   stderr    0
+#&gt; 1153                    stdin    0
+#&gt; 1154                   stdout    0
+#&gt; 1158           storage.mode&lt;-    0
+#&gt; 1174               substitute    0
+#&gt; 1179                      sum    0
+#&gt; 1209                   switch    0
+#&gt; 1211                sys.calls    0
+#&gt; 1213                 Sys.Date    0
+#&gt; 1215               sys.frames    0
+#&gt; 1219               Sys.getpid    0
+#&gt; 1221                 Sys.info    0
+#&gt; 1223           Sys.localeconv    0
+#&gt; 1224               sys.nframe    0
+#&gt; 1225              sys.on.exit    0
+#&gt; 1227              sys.parents    0
+#&gt; 1236               sys.status    0
+#&gt; 1237                 Sys.time    0
+#&gt; 1251                 Tailcall    0
+#&gt; 1252                      tan    0
+#&gt; 1253                     tanh    0
+#&gt; 1254                    tanpi    0
+#&gt; 1257               tcrossprod    0
+#&gt; 1269                 tracemem    0
+#&gt; 1274                 trigamma    0
+#&gt; 1276                    trunc    0
+#&gt; 1285           unCfillPOSIXlt    0
+#&gt; 1286                  unclass    0
+#&gt; 1310               untracemem    0
+#&gt; 1315                UseMethod    0
+#&gt; 1331                    while    0
+#&gt; 1348                    xtfrm    0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb413"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb413-1"><a href="#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check if all functions with 0 arguments are primitive</span></span>
 <span id="cb413-2"><a href="#cb413-2" aria-hidden="true" tabindex="-1"></a>fun_args2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -2802,238 +2970,238 @@ it? (Hint: try using help.)</code></pre>
 #&gt; 76                 .Primitive    0  TRUE
 #&gt; 77                 .primTrace    0  TRUE
 #&gt; 78               .primUntrace    0  TRUE
-#&gt; 90          .standard_regexps    0 FALSE
-#&gt; 91                    .subset    0  TRUE
-#&gt; 92                   .subset2    0  TRUE
-#&gt; 95        .tryResumeInterrupt    0 FALSE
-#&gt; 97                          (    0  TRUE
-#&gt; 98                          [    0  TRUE
-#&gt; 116                        [[    0  TRUE
-#&gt; 123                      [[&lt;-    0  TRUE
-#&gt; 128                       [&lt;-    0  TRUE
-#&gt; 136                         {    0  TRUE
-#&gt; 137                         @    0  TRUE
-#&gt; 138                       @&lt;-    0  TRUE
-#&gt; 139                         *    0  TRUE
-#&gt; 141                         /    0  TRUE
-#&gt; 143                         &amp;    0  TRUE
-#&gt; 146                        &amp;&amp;    0  TRUE
-#&gt; 147                       %*%    0  TRUE
-#&gt; 148                       %/%    0  TRUE
-#&gt; 149                        %%    0  TRUE
-#&gt; 154                         ^    0  TRUE
-#&gt; 155                         +    0  TRUE
-#&gt; 158                         &lt;    0  TRUE
-#&gt; 159                        &lt;-    0  TRUE
-#&gt; 160                       &lt;&lt;-    0  TRUE
-#&gt; 161                        &lt;=    0  TRUE
-#&gt; 162                         =    0  TRUE
-#&gt; 163                        ==    0  TRUE
-#&gt; 164                         &gt;    0  TRUE
-#&gt; 165                        &gt;=    0  TRUE
-#&gt; 166                         |    0  TRUE
-#&gt; 169                        ||    0  TRUE
-#&gt; 170                         ~    0  TRUE
-#&gt; 171                         $    0  TRUE
-#&gt; 174                       $&lt;-    0  TRUE
-#&gt; 178                       abs    0  TRUE
-#&gt; 179                      acos    0  TRUE
-#&gt; 180                     acosh    0  TRUE
-#&gt; 187                       all    0  TRUE
-#&gt; 204                       any    0  TRUE
-#&gt; 210                     anyNA    0  TRUE
-#&gt; 219                       Arg    0  TRUE
-#&gt; 226                   as.call    0  TRUE
-#&gt; 227              as.character    0  TRUE
-#&gt; 238                as.complex    0  TRUE
-#&gt; 272                 as.double    0  TRUE
-#&gt; 275            as.environment    0  TRUE
-#&gt; 282                as.integer    0  TRUE
-#&gt; 294                as.logical    0  TRUE
-#&gt; 304                as.numeric    0  TRUE
-#&gt; 323                    as.raw    0  TRUE
-#&gt; 333                      asin    0  TRUE
-#&gt; 334                     asinh    0  TRUE
-#&gt; 340                      atan    0  TRUE
-#&gt; 342                     atanh    0  TRUE
-#&gt; 345                      attr    0  TRUE
-#&gt; 347                    attr&lt;-    0  TRUE
-#&gt; 348                attributes    0  TRUE
-#&gt; 349              attributes&lt;-    0  TRUE
-#&gt; 354                   baseenv    0  TRUE
-#&gt; 373                     break    0  TRUE
-#&gt; 374                   browser    0  TRUE
-#&gt; 383                         c    0  TRUE
-#&gt; 392                      call    0  TRUE
-#&gt; 399                   ceiling    0  TRUE
-#&gt; 412                     class    0  TRUE
-#&gt; 413                   class&lt;-    0  TRUE
-#&gt; 419       closeAllConnections    0 FALSE
-#&gt; 436                      Conj    0  TRUE
-#&gt; 437              contributors    0 FALSE
-#&gt; 438                       cos    0  TRUE
-#&gt; 439                      cosh    0  TRUE
-#&gt; 440                     cospi    0  TRUE
-#&gt; 441                 crossprod    0  TRUE
-#&gt; 442               Cstack_info    0 FALSE
-#&gt; 443                    cummax    0  TRUE
-#&gt; 444                    cummin    0  TRUE
-#&gt; 445                   cumprod    0  TRUE
-#&gt; 446                    cumsum    0  TRUE
-#&gt; 455                      date    0 FALSE
-#&gt; 459                   declare    0  TRUE
-#&gt; 460  default.stringsAsFactors    0 FALSE
-#&gt; 477                   digamma    0  TRUE
-#&gt; 478                       dim    0  TRUE
-#&gt; 480                     dim&lt;-    0  TRUE
-#&gt; 481                  dimnames    0  TRUE
-#&gt; 483                dimnames&lt;-    0  TRUE
-#&gt; 512                  emptyenv    0  TRUE
-#&gt; 513                enc2native    0  TRUE
-#&gt; 514                  enc2utf8    0  TRUE
-#&gt; 522             environment&lt;-    0  TRUE
-#&gt; 529                      Exec    0  TRUE
-#&gt; 531                       exp    0  TRUE
-#&gt; 533                     expm1    0  TRUE
-#&gt; 534                expression    0  TRUE
-#&gt; 535            extSoftVersion    0 FALSE
-#&gt; 562                     floor    0  TRUE
-#&gt; 565                       for    0  TRUE
-#&gt; 567              forceAndCall    0  TRUE
-#&gt; 590                  function    0  TRUE
-#&gt; 591                     gamma    0  TRUE
-#&gt; 593                   gc.time    0  TRUE
-#&gt; 599         getAllConnections    0 FALSE
-#&gt; 607             geterrmessage    0 FALSE
-#&gt; 610             getLoadedDLLs    0 FALSE
-#&gt; 620               getRversion    0 FALSE
-#&gt; 622      getTaskCallbackNames    0 FALSE
-#&gt; 625                     getwd    0 FALSE
-#&gt; 628                 globalenv    0  TRUE
-#&gt; 640                 iconvlist    0 FALSE
-#&gt; 645                        if    0  TRUE
-#&gt; 647                        Im    0  TRUE
-#&gt; 653               interactive    0  TRUE
-#&gt; 658                 invisible    0  TRUE
-#&gt; 661                  is.array    0  TRUE
-#&gt; 662                 is.atomic    0  TRUE
-#&gt; 663                   is.call    0  TRUE
-#&gt; 664              is.character    0  TRUE
-#&gt; 665                is.complex    0  TRUE
-#&gt; 667                 is.double    0  TRUE
-#&gt; 669            is.environment    0  TRUE
-#&gt; 670             is.expression    0  TRUE
-#&gt; 672                 is.finite    0  TRUE
-#&gt; 674               is.function    0  TRUE
-#&gt; 675               is.infinite    0  TRUE
-#&gt; 677                is.integer    0  TRUE
-#&gt; 678               is.language    0  TRUE
-#&gt; 679                   is.list    0  TRUE
-#&gt; 681                is.logical    0  TRUE
-#&gt; 682                 is.matrix    0  TRUE
-#&gt; 683                     is.na    0  TRUE
-#&gt; 691                   is.name    0  TRUE
-#&gt; 692                    is.nan    0  TRUE
-#&gt; 694                   is.null    0  TRUE
-#&gt; 695                is.numeric    0  TRUE
-#&gt; 700                 is.object    0  TRUE
-#&gt; 703               is.pairlist    0  TRUE
-#&gt; 706                      is.R    0 FALSE
-#&gt; 707                    is.raw    0  TRUE
-#&gt; 708              is.recursive    0  TRUE
-#&gt; 709                 is.single    0  TRUE
-#&gt; 710                 is.symbol    0  TRUE
-#&gt; 726                      isS4    0  TRUE
-#&gt; 740                 l10n_info    0 FALSE
-#&gt; 741                La_library    0 FALSE
-#&gt; 742                La_version    0 FALSE
-#&gt; 749           lazyLoadDBfetch    0  TRUE
-#&gt; 752                    length    0  TRUE
-#&gt; 754                  length&lt;-    0  TRUE
-#&gt; 763                  levels&lt;-    0  TRUE
-#&gt; 766                    lgamma    0  TRUE
-#&gt; 767            libcurlVersion    0 FALSE
-#&gt; 771                   licence    0 FALSE
-#&gt; 772                   license    0 FALSE
-#&gt; 773                      list    0  TRUE
-#&gt; 779          loadedNamespaces    0 FALSE
-#&gt; 780      loadingNamespaceInfo    0 FALSE
-#&gt; 785                       log    0  TRUE
-#&gt; 786                     log10    0  TRUE
-#&gt; 787                     log1p    0  TRUE
-#&gt; 788                      log2    0  TRUE
-#&gt; 811                       max    0  TRUE
-#&gt; 823            memory.profile    0 FALSE
-#&gt; 829                       min    0  TRUE
-#&gt; 830                   missing    0  TRUE
-#&gt; 831                       Mod    0  TRUE
-#&gt; 844                     names    0  TRUE
-#&gt; 846                   names&lt;-    0  TRUE
-#&gt; 853                     nargs    0  TRUE
-#&gt; 859                      next    0  TRUE
-#&gt; 868                  nullfile    0 FALSE
-#&gt; 873                    nzchar    0  TRUE
-#&gt; 875                  oldClass    0  TRUE
-#&gt; 876                oldClass&lt;-    0  TRUE
-#&gt; 878                   on.exit    0  TRUE
-#&gt; 911               pcre_config    0 FALSE
-#&gt; 920                pos.to.env    0  TRUE
-#&gt; 963                 proc.time    0  TRUE
-#&gt; 964                      prod    0  TRUE
-#&gt; 987                     quote    0  TRUE
-#&gt; 988             R_compiled_by    0 FALSE
-#&gt; 991                 R.Version    0 FALSE
-#&gt; 992                     range    0  TRUE
-#&gt; 1007                       Re    0  TRUE
-#&gt; 1026                      rep    0  TRUE
-#&gt; 1035                   repeat    0  TRUE
-#&gt; 1042               retracemem    0  TRUE
-#&gt; 1043                   return    0  TRUE
-#&gt; 1051                    round    0  TRUE
-#&gt; 1077                   search    0 FALSE
-#&gt; 1078              searchpaths    0 FALSE
-#&gt; 1082                seq_along    0  TRUE
-#&gt; 1083                  seq_len    0  TRUE
-#&gt; 1086                  seq.int    0  TRUE
-#&gt; 1102                     sign    0  TRUE
-#&gt; 1104                   signif    0  TRUE
-#&gt; 1110                      sin    0  TRUE
-#&gt; 1112                     sinh    0  TRUE
-#&gt; 1115                    sinpi    0  TRUE
-#&gt; 1142                     sqrt    0  TRUE
-#&gt; 1148          standardGeneric    0  TRUE
-#&gt; 1150                   stderr    0 FALSE
-#&gt; 1151                    stdin    0 FALSE
-#&gt; 1152                   stdout    0 FALSE
-#&gt; 1156           storage.mode&lt;-    0  TRUE
-#&gt; 1172               substitute    0  TRUE
-#&gt; 1177                      sum    0  TRUE
-#&gt; 1206                   switch    0  TRUE
-#&gt; 1208                sys.calls    0 FALSE
-#&gt; 1210                 Sys.Date    0 FALSE
-#&gt; 1212               sys.frames    0 FALSE
-#&gt; 1216               Sys.getpid    0 FALSE
-#&gt; 1218                 Sys.info    0 FALSE
-#&gt; 1220           Sys.localeconv    0 FALSE
-#&gt; 1221               sys.nframe    0 FALSE
-#&gt; 1222              sys.on.exit    0 FALSE
-#&gt; 1224              sys.parents    0 FALSE
-#&gt; 1233               sys.status    0 FALSE
-#&gt; 1234                 Sys.time    0 FALSE
-#&gt; 1248                 Tailcall    0  TRUE
-#&gt; 1249                      tan    0  TRUE
-#&gt; 1250                     tanh    0  TRUE
-#&gt; 1251                    tanpi    0  TRUE
-#&gt; 1254               tcrossprod    0  TRUE
-#&gt; 1266                 tracemem    0  TRUE
-#&gt; 1271                 trigamma    0  TRUE
-#&gt; 1273                    trunc    0  TRUE
-#&gt; 1282           unCfillPOSIXlt    0  TRUE
-#&gt; 1283                  unclass    0  TRUE
-#&gt; 1307               untracemem    0  TRUE
-#&gt; 1312                UseMethod    0  TRUE
-#&gt; 1328                    while    0  TRUE
-#&gt; 1345                    xtfrm    0  TRUE</code></pre>
+#&gt; 91          .standard_regexps    0 FALSE
+#&gt; 92                    .subset    0  TRUE
+#&gt; 93                   .subset2    0  TRUE
+#&gt; 96        .tryResumeInterrupt    0 FALSE
+#&gt; 98                          (    0  TRUE
+#&gt; 99                          [    0  TRUE
+#&gt; 117                        [[    0  TRUE
+#&gt; 124                      [[&lt;-    0  TRUE
+#&gt; 129                       [&lt;-    0  TRUE
+#&gt; 137                         {    0  TRUE
+#&gt; 138                         @    0  TRUE
+#&gt; 139                       @&lt;-    0  TRUE
+#&gt; 140                         *    0  TRUE
+#&gt; 142                         /    0  TRUE
+#&gt; 144                         &amp;    0  TRUE
+#&gt; 147                        &amp;&amp;    0  TRUE
+#&gt; 148                       %*%    0  TRUE
+#&gt; 149                       %/%    0  TRUE
+#&gt; 150                        %%    0  TRUE
+#&gt; 155                         ^    0  TRUE
+#&gt; 156                         +    0  TRUE
+#&gt; 159                         &lt;    0  TRUE
+#&gt; 160                        &lt;-    0  TRUE
+#&gt; 161                       &lt;&lt;-    0  TRUE
+#&gt; 162                        &lt;=    0  TRUE
+#&gt; 163                         =    0  TRUE
+#&gt; 164                        ==    0  TRUE
+#&gt; 165                         &gt;    0  TRUE
+#&gt; 166                        &gt;=    0  TRUE
+#&gt; 167                         |    0  TRUE
+#&gt; 170                        ||    0  TRUE
+#&gt; 171                         ~    0  TRUE
+#&gt; 172                         $    0  TRUE
+#&gt; 175                       $&lt;-    0  TRUE
+#&gt; 179                       abs    0  TRUE
+#&gt; 180                      acos    0  TRUE
+#&gt; 181                     acosh    0  TRUE
+#&gt; 188                       all    0  TRUE
+#&gt; 205                       any    0  TRUE
+#&gt; 211                     anyNA    0  TRUE
+#&gt; 220                       Arg    0  TRUE
+#&gt; 227                   as.call    0  TRUE
+#&gt; 228              as.character    0  TRUE
+#&gt; 239                as.complex    0  TRUE
+#&gt; 273                 as.double    0  TRUE
+#&gt; 276            as.environment    0  TRUE
+#&gt; 283                as.integer    0  TRUE
+#&gt; 295                as.logical    0  TRUE
+#&gt; 305                as.numeric    0  TRUE
+#&gt; 324                    as.raw    0  TRUE
+#&gt; 334                      asin    0  TRUE
+#&gt; 335                     asinh    0  TRUE
+#&gt; 341                      atan    0  TRUE
+#&gt; 343                     atanh    0  TRUE
+#&gt; 346                      attr    0  TRUE
+#&gt; 348                    attr&lt;-    0  TRUE
+#&gt; 349                attributes    0  TRUE
+#&gt; 350              attributes&lt;-    0  TRUE
+#&gt; 355                   baseenv    0  TRUE
+#&gt; 374                     break    0  TRUE
+#&gt; 375                   browser    0  TRUE
+#&gt; 384                         c    0  TRUE
+#&gt; 393                      call    0  TRUE
+#&gt; 400                   ceiling    0  TRUE
+#&gt; 413                     class    0  TRUE
+#&gt; 414                   class&lt;-    0  TRUE
+#&gt; 420       closeAllConnections    0 FALSE
+#&gt; 437                      Conj    0  TRUE
+#&gt; 438              contributors    0 FALSE
+#&gt; 439                       cos    0  TRUE
+#&gt; 440                      cosh    0  TRUE
+#&gt; 441                     cospi    0  TRUE
+#&gt; 442                 crossprod    0  TRUE
+#&gt; 443               Cstack_info    0 FALSE
+#&gt; 444                    cummax    0  TRUE
+#&gt; 445                    cummin    0  TRUE
+#&gt; 446                   cumprod    0  TRUE
+#&gt; 447                    cumsum    0  TRUE
+#&gt; 456                      date    0 FALSE
+#&gt; 460                   declare    0  TRUE
+#&gt; 461  default.stringsAsFactors    0 FALSE
+#&gt; 478                   digamma    0  TRUE
+#&gt; 479                       dim    0  TRUE
+#&gt; 481                     dim&lt;-    0  TRUE
+#&gt; 482                  dimnames    0  TRUE
+#&gt; 484                dimnames&lt;-    0  TRUE
+#&gt; 513                  emptyenv    0  TRUE
+#&gt; 514                enc2native    0  TRUE
+#&gt; 515                  enc2utf8    0  TRUE
+#&gt; 523             environment&lt;-    0  TRUE
+#&gt; 530                      Exec    0  TRUE
+#&gt; 532                       exp    0  TRUE
+#&gt; 534                     expm1    0  TRUE
+#&gt; 535                expression    0  TRUE
+#&gt; 536            extSoftVersion    0 FALSE
+#&gt; 563                     floor    0  TRUE
+#&gt; 566                       for    0  TRUE
+#&gt; 568              forceAndCall    0  TRUE
+#&gt; 591                  function    0  TRUE
+#&gt; 592                     gamma    0  TRUE
+#&gt; 594                   gc.time    0  TRUE
+#&gt; 600         getAllConnections    0 FALSE
+#&gt; 608             geterrmessage    0 FALSE
+#&gt; 611             getLoadedDLLs    0 FALSE
+#&gt; 621               getRversion    0 FALSE
+#&gt; 623      getTaskCallbackNames    0 FALSE
+#&gt; 626                     getwd    0 FALSE
+#&gt; 629                 globalenv    0  TRUE
+#&gt; 642                 iconvlist    0 FALSE
+#&gt; 647                        if    0  TRUE
+#&gt; 649                        Im    0  TRUE
+#&gt; 655               interactive    0  TRUE
+#&gt; 660                 invisible    0  TRUE
+#&gt; 663                  is.array    0  TRUE
+#&gt; 664                 is.atomic    0  TRUE
+#&gt; 665                   is.call    0  TRUE
+#&gt; 666              is.character    0  TRUE
+#&gt; 667                is.complex    0  TRUE
+#&gt; 669                 is.double    0  TRUE
+#&gt; 671            is.environment    0  TRUE
+#&gt; 672             is.expression    0  TRUE
+#&gt; 674                 is.finite    0  TRUE
+#&gt; 676               is.function    0  TRUE
+#&gt; 677               is.infinite    0  TRUE
+#&gt; 679                is.integer    0  TRUE
+#&gt; 680               is.language    0  TRUE
+#&gt; 681                   is.list    0  TRUE
+#&gt; 683                is.logical    0  TRUE
+#&gt; 684                 is.matrix    0  TRUE
+#&gt; 685                     is.na    0  TRUE
+#&gt; 693                   is.name    0  TRUE
+#&gt; 694                    is.nan    0  TRUE
+#&gt; 696                   is.null    0  TRUE
+#&gt; 697                is.numeric    0  TRUE
+#&gt; 702                 is.object    0  TRUE
+#&gt; 705               is.pairlist    0  TRUE
+#&gt; 708                      is.R    0 FALSE
+#&gt; 709                    is.raw    0  TRUE
+#&gt; 710              is.recursive    0  TRUE
+#&gt; 711                 is.single    0  TRUE
+#&gt; 712                 is.symbol    0  TRUE
+#&gt; 728                      isS4    0  TRUE
+#&gt; 742                 l10n_info    0 FALSE
+#&gt; 743                La_library    0 FALSE
+#&gt; 744                La_version    0 FALSE
+#&gt; 751           lazyLoadDBfetch    0  TRUE
+#&gt; 754                    length    0  TRUE
+#&gt; 756                  length&lt;-    0  TRUE
+#&gt; 765                  levels&lt;-    0  TRUE
+#&gt; 768                    lgamma    0  TRUE
+#&gt; 769            libcurlVersion    0 FALSE
+#&gt; 773                   licence    0 FALSE
+#&gt; 774                   license    0 FALSE
+#&gt; 775                      list    0  TRUE
+#&gt; 781          loadedNamespaces    0 FALSE
+#&gt; 782      loadingNamespaceInfo    0 FALSE
+#&gt; 787                       log    0  TRUE
+#&gt; 788                     log10    0  TRUE
+#&gt; 789                     log1p    0  TRUE
+#&gt; 790                      log2    0  TRUE
+#&gt; 813                       max    0  TRUE
+#&gt; 825            memory.profile    0 FALSE
+#&gt; 831                       min    0  TRUE
+#&gt; 832                   missing    0  TRUE
+#&gt; 833                       Mod    0  TRUE
+#&gt; 846                     names    0  TRUE
+#&gt; 848                   names&lt;-    0  TRUE
+#&gt; 855                     nargs    0  TRUE
+#&gt; 861                      next    0  TRUE
+#&gt; 870                  nullfile    0 FALSE
+#&gt; 875                    nzchar    0  TRUE
+#&gt; 877                  oldClass    0  TRUE
+#&gt; 878                oldClass&lt;-    0  TRUE
+#&gt; 880                   on.exit    0  TRUE
+#&gt; 913               pcre_config    0 FALSE
+#&gt; 922                pos.to.env    0  TRUE
+#&gt; 965                 proc.time    0  TRUE
+#&gt; 966                      prod    0  TRUE
+#&gt; 989                     quote    0  TRUE
+#&gt; 990             R_compiled_by    0 FALSE
+#&gt; 993                 R.Version    0 FALSE
+#&gt; 994                     range    0  TRUE
+#&gt; 1009                       Re    0  TRUE
+#&gt; 1028                      rep    0  TRUE
+#&gt; 1037                   repeat    0  TRUE
+#&gt; 1044               retracemem    0  TRUE
+#&gt; 1045                   return    0  TRUE
+#&gt; 1053                    round    0  TRUE
+#&gt; 1079                   search    0 FALSE
+#&gt; 1080              searchpaths    0 FALSE
+#&gt; 1084                seq_along    0  TRUE
+#&gt; 1085                  seq_len    0  TRUE
+#&gt; 1088                  seq.int    0  TRUE
+#&gt; 1104                     sign    0  TRUE
+#&gt; 1106                   signif    0  TRUE
+#&gt; 1112                      sin    0  TRUE
+#&gt; 1114                     sinh    0  TRUE
+#&gt; 1117                    sinpi    0  TRUE
+#&gt; 1144                     sqrt    0  TRUE
+#&gt; 1150          standardGeneric    0  TRUE
+#&gt; 1152                   stderr    0 FALSE
+#&gt; 1153                    stdin    0 FALSE
+#&gt; 1154                   stdout    0 FALSE
+#&gt; 1158           storage.mode&lt;-    0  TRUE
+#&gt; 1174               substitute    0  TRUE
+#&gt; 1179                      sum    0  TRUE
+#&gt; 1209                   switch    0  TRUE
+#&gt; 1211                sys.calls    0 FALSE
+#&gt; 1213                 Sys.Date    0 FALSE
+#&gt; 1215               sys.frames    0 FALSE
+#&gt; 1219               Sys.getpid    0 FALSE
+#&gt; 1221                 Sys.info    0 FALSE
+#&gt; 1223           Sys.localeconv    0 FALSE
+#&gt; 1224               sys.nframe    0 FALSE
+#&gt; 1225              sys.on.exit    0 FALSE
+#&gt; 1227              sys.parents    0 FALSE
+#&gt; 1236               sys.status    0 FALSE
+#&gt; 1237                 Sys.time    0 FALSE
+#&gt; 1251                 Tailcall    0  TRUE
+#&gt; 1252                      tan    0  TRUE
+#&gt; 1253                     tanh    0  TRUE
+#&gt; 1254                    tanpi    0  TRUE
+#&gt; 1257               tcrossprod    0  TRUE
+#&gt; 1269                 tracemem    0  TRUE
+#&gt; 1274                 trigamma    0  TRUE
+#&gt; 1276                    trunc    0  TRUE
+#&gt; 1285           unCfillPOSIXlt    0  TRUE
+#&gt; 1286                  unclass    0  TRUE
+#&gt; 1310               untracemem    0  TRUE
+#&gt; 1315                UseMethod    0  TRUE
+#&gt; 1331                    while    0  TRUE
+#&gt; 1348                    xtfrm    0  TRUE</code></pre>
 </div>
 </div>
 <p>Answers:</p>
@@ -3267,7 +3435,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb447-4"><a href="#cb447-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb447-5"><a href="#cb447-5" aria-hidden="true" tabindex="-1"></a><span class="fu">show_time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "2024-06-05 12:54:47 CDT"</code></pre>
+<pre><code>#&gt; [1] "2025-08-13 10:32:30 CDT"</code></pre>
 </div>
 </div>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is evaluated. This is a confusing use of lazy evaluation.</p>
@@ -3521,7 +3689,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb488-2"><a href="#cb488-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">20</span>)</span>
 <span id="cb488-3"><a href="#cb488-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x, y, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0.1488646</code></pre>
+<pre><code>#&gt; [1] 0.3028081</code></pre>
 </div>
 </div>
 <p>AR Solutions: None of these functions provides a <code>...</code> argument. Therefore, the function arguments are first matched exactly, then via partial matching and finally by position. This leads us to the following explicit function calls:</p>
@@ -3583,7 +3751,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb497-7"><a href="#cb497-7" aria-hidden="true" tabindex="-1"></a><span class="fu">modrand</span>(v) <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb497-8"><a href="#cb497-8" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  2  3 NA  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 NA 14 15 16 17 18 19 20</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -3833,27 +4001,27 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb538-5"><a href="#cb538-5" aria-hidden="true" tabindex="-1"></a><span class="co"># taken from docs examples</span></span>
 <span id="cb538-6"><a href="#cb538-6" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sort</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">9</span>)), <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  2  3  4  5  7 11 14 18 NA</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  8  9 13 19 20 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb540"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb540-1"><a href="#cb540-1" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sort</span>(<span class="fu">sample</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">23</span>, <span class="dv">7</span>)), <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  4  7 14 15 17 18 19 NA</code></pre>
+<pre><code>#&gt; [1]  7  9 15 16 19 21 22 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb542"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb542-1"><a href="#cb542-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%u%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  2  3  4  5  7 11 14 18 NA 15 17 19</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  8  9 13 19 20 NA  7 15 16 21 22</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb544"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb544-1"><a href="#cb544-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%n%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  4  7 14 18 NA</code></pre>
+<pre><code>#&gt; [1]  9 19 NA</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb546"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb546-1"><a href="#cb546-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%s%</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  1  2  3  5 11</code></pre>
+<pre><code>#&gt; [1]  1  2  3  4  8 13 20</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb548"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb548-1"><a href="#cb548-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">%s%</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 15 17 19</code></pre>
+<pre><code>#&gt; [1]  7 15 16 21 22</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -3935,7 +4103,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb558-4"><a href="#cb558-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the environment</span></span>
 <span id="cb558-5"><a href="#cb558-5" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x10c1d6208&gt;
+<pre><code>#&gt; &lt;environment: 0x10a8e9210&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
@@ -3943,8 +4111,8 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb560"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb560-1"><a href="#cb560-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that it contains itself</span></span>
 <span id="cb560-2"><a href="#cb560-2" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x10c1d6208] &lt;env&gt; 
-#&gt; └─loop = [1:0x10c1d6208]</code></pre>
+<pre><code>#&gt; █ [1:0x10a8e9210] &lt;env&gt; 
+#&gt; └─loop = [1:0x10a8e9210]</code></pre>
 </div>
 </div>
 <hr>
@@ -3970,15 +4138,15 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb563-6"><a href="#cb563-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb563-7"><a href="#cb563-7" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x11f8ffb78] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x11f864830] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x11f8ffb78]</code></pre>
+<pre><code>#&gt; █ [1:0x10e228068] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x10e2511e8] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x10e228068]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb565"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb565-1"><a href="#cb565-1" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(e2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x11f864830] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x11f8ffb78] &lt;env&gt; 
-#&gt;            └─loop = [1:0x11f864830]</code></pre>
+<pre><code>#&gt; █ [1:0x10e2511e8] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x10e228068] &lt;env&gt; 
+#&gt;            └─loop = [1:0x10e2511e8]</code></pre>
 </div>
 </div>
 <hr>
@@ -4007,7 +4175,7 @@ it? (Hint: try using help.)</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb569"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb569-1"><a href="#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(e_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x159eab410&gt;
+<pre><code>#&gt; &lt;environment: 0x10fa0f738&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
@@ -4146,7 +4314,7 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb595-4"><a href="#cb595-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x149f43320&gt;
+#&gt; &lt;environment: 0x1083bf098&gt;
 #&gt; 
 #&gt; [[2]]
 #&gt; &lt;environment: R_GlobalEnv&gt;</code></pre>
@@ -4176,10 +4344,10 @@ it? (Hint: try using help.)</code></pre>
 <span id="cb597-17"><a href="#cb597-17" aria-hidden="true" tabindex="-1"></a><span class="fu">where2</span>(<span class="st">"a"</span>, e1c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x14f269e10&gt;
+#&gt; &lt;environment: 0x10f9cc228&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x159c79250&gt;</code></pre>
+#&gt; &lt;environment: 0x10f972298&gt;</code></pre>
 </div>
 </div>
 <hr>
@@ -4246,7 +4414,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x148b60f40&gt;
+#&gt; &lt;bytecode: 0x128ce5ae8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -4310,9 +4478,7 @@ it? (Hint: try using help.)</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb616"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb616-1"><a href="#cb616-1" aria-hidden="true" tabindex="-1"></a><span class="fu">e_str</span>(fget)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)  
-#&gt;  - attr(*, "srcref")= 'srcref' int [1:8] 1 9 17 1 9 1 1 17
-#&gt;   ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' &lt;environment: 0x12f071aa8&gt;</code></pre>
+<pre><code>#&gt; function (name, env = caller_env(), inherits = TRUE)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; fn_env():</code></pre>
@@ -4482,7 +4648,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb641"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb641-1"><a href="#cb641-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.remove</span>(tmp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file
-#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpilmYzh/filec2b7510e5703',
+#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//Rtmp0pX9uV/file27ab70dd7a26',
 #&gt; reason 'No such file or directory'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -4491,7 +4657,7 @@ it? (Hint: try using help.)</code></pre>
 <div class="sourceCode cell-code" id="cb644"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb644-1"><a href="#cb644-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">safe_file_remove</span>(tmp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpilmYzh/filec2b7510e5703' does not exist</code></pre>
+#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//Rtmp0pX9uV/file27ab70dd7a26' does not exist</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -4669,7 +4835,7 @@ it? (Hint: try using help.)</code></pre>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x12f04c838&gt;
+#&gt; &lt;bytecode: 0x106f30070&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb678"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb678-1"><a href="#cb678-1" aria-hidden="true" tabindex="-1"></a><span class="fu">catch_cnd</span>(<span class="fu">stop</span>(<span class="st">"error"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5074,380 +5240,255 @@ it? (Hint: try using help.)</code></pre>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jabenninghoff\.github\.io\/rtraining\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/jabenninghoff\.github\.io\/rtraining\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -5455,185 +5496,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../analysis/hockey-cards.html" class="pagination-link" aria-label="Hockey Cards Analysis">

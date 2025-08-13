@@ -2,7 +2,7 @@
   "hash": "563e23491bddd6a987c17ff03600d6b1",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"rtraining\"\nlisting:\n  type: default\n  contents: analysis\n  sort-ui: true\n  filter-ui: true\n  max-description-length: 500\n  date-format: iso\n  categories: true\n  feed:\n    items: 100\n    language: en-us\n---\n\n\n**R Training:** My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.\n\nFeel free to use and/or fork this project!\n\n\n::: {.cell}\n\n:::\n\n\n## Notebooks\n\nNotebooks in this package:\n",
+    "markdown": "---\ntitle: \"rtraining\"\nlisting:\n  type: default\n  contents: analysis\n  sort-ui: true\n  filter-ui: true\n  max-description-length: 500\n  date-format: iso\n  categories: true\n  feed:\n    items: 100\n    language: en-us\n---\n\n**R Training:** My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.\n\nFeel free to use and/or fork this project!\n\n\n::: {.cell}\n\n:::\n\n\n## Notebooks\n\nNotebooks in this package:\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
