@@ -58,6 +58,10 @@ Notebooks in this package:
   inspired by a 2015 blog
   [post](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/)
   on the hot hand.
+- [FizzBuzz](https://jabenninghoff.github.io/rtraining/analysis/fizzbuzz.html)
+  (2025-10-01): My implementation of
+  [FizzBuzz](https://rosettacode.org/wiki/FizzBuzz) in R, using a vector
+  function.
 - [ggplot2 (Getting
   started)](https://jabenninghoff.github.io/rtraining/analysis/ggplot2-1.html)
   (2022-11-20): Workbook for completing quizzes and exercises from the

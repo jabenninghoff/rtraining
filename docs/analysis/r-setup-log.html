@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,18 +71,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../analysis/r-training-log.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5fdbc8f45c2d0bcdc137be0dad0ef85a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-2cfd8bc47213d4766483d56c471cfecb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-5fdbc8f45c2d0bcdc137be0dad0ef85a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9bf6b10bcba5eae4d51a1abb52d3b9a8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -283,6 +284,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">rtraining</span>
     </a>
@@ -325,6 +328,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -367,6 +374,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../analysis/hockey-cards.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hockey Cards Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/fizzbuzz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FizzBuzz</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -501,22 +514,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>My notes on my personal R setup. I started my R journey in <a href="https://www.information-safety.org/2020/09/11/working-with-r/">September 2020</a> after <a href="https://societyinforisk.org/event-3899786">SIRACon 2020</a>. <strong>Important:</strong> this historical setup is outdated and differs from my current approach, which is documented in <a href="https://jabenninghoff.github.io/rdev/articles/rdev.html">rdev</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no libraries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no libraries</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="installing-r" class="level2">
 <h2 class="anchored" data-anchor-id="installing-r">Installing R</h2>
 <p>I prefer installing R and RStudio using <a href="https://brew.sh">Homebrew</a>. I use <a href="https://github.com/Homebrew/homebrew-bundle">Homebrew Bundle</a> to install all software on my systems, but installing R and RStudio is simple enough using the command line:</p>
 <!-- note: lintr version <= 2.0.1 throws an error when using language identifiers: <https://github.com/r-lib/lintr/issues/505> -->
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--formula</span> r <span class="kw">&amp;&amp;</span> <span class="ex">brew</span> install <span class="at">--cask</span> rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--formula</span> r <span class="kw">&amp;&amp;</span> <span class="ex">brew</span> install <span class="at">--cask</span> rstudio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="r-variants" class="level3">
 <h3 class="anchored" data-anchor-id="r-variants">R Variants</h3>
 <p><strong>TL;DR: just use homebrew.</strong></p>
 <p>I don’t recommend installing the <code>cask</code> variant of r because it creates problems with <code>brew doctor</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> info <span class="at">--cask</span> r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> info <span class="at">--cask</span> r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: Cask r was renamed to r-app.
-==&gt; r-app: 4.5.1
+<pre><code>==&gt; r-app: 4.5.1
 https://www.r-project.org/
 Not installed
 From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r/r-app.rb
@@ -532,7 +544,7 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 </div>
 <p>I tried “<a href="https://luispuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">installing all the things</a>” with <a href="https://github.com/sethrfore/homebrew-r-srf">homebrew-r-srf</a> but didn’t like how the uninstall doesn’t clean up, and frankly, I haven’t found a need for more than the capabilities included with homebrew R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">capabilities</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">capabilities</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       jpeg         png        tiff       tcltk         X11        aqua 
        TRUE        TRUE        TRUE        TRUE        TRUE        TRUE 
@@ -545,7 +557,7 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 </div>
 </div>
 <p>Currently, this is everything except the X11 dependencies, which aren’t really needed:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>?capabilities</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>?capabilities</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p><strong>Note to macOS users</strong></p>
 <p>Capabilities “jpeg”, “png” and “tiff” refer to the X11-based versions of these devices. If capabilities(“aqua”) is true, then these devices with type = “quartz” will be available, and out-of-the-box will be the default type. Thus for example the tiff device will be available if capabilities(“aqua”) || capabilities(“tiff”) if the defaults are unchanged.</p>
@@ -559,7 +571,7 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 <section id="development-environment" class="level3">
 <h3 class="anchored" data-anchor-id="development-environment">Development Environment</h3>
 <p>Well, obviously, I use <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>. There are other IDEs available, and it’s also possible to develop using the command line, but RStudio provides a pleasant, integrated experience for R development, and actively supports the R community. I don’t typically use the built-in Git client, instead using the GitHub Desktop client and git command-line tool.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install github</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install github</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>I also occasionally use <code>vim</code> (mainly for shell scripts) and <a href="https://atom.io">atom</a> (mainly for vanilla <code>.md</code> files using <a href="https://atom.io/packages/markdown-preview-enhanced">markdown-preview-enhanced</a>).</p>
 </section>
 <section id="packages" class="level3">
@@ -573,7 +585,7 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 <section id="development-packages" class="level4">
 <h4 class="anchored" data-anchor-id="development-packages">Development Packages</h4>
 <p>The only other tools I install outside of projects are for supporting development. Originally this was just renv, but now it includes a number of development tools needed to create projects. I use the R site library used by <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/r/r.rb">homebrew</a>, currently <code>/usr/local/lib/R/4.0/site-library</code>. I’ve developed a shell script to install development packages that you can find in the tools directory of <a href="https://github.com/jabenninghoff/rtraining">this repository</a>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install development packages to site repository</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># thanks to https://blog.sellorm.com/2017/10/21/quick-script-to-install-an-r-package-from-the-command-line/</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and https://github.com/Homebrew/homebrew-core/blob/master/Formula/r/r.rb</span></span>
@@ -593,7 +605,7 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install libgit2 <span class="co"># required by devtools</span></span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"install.packages(</span><span class="va">${DEVPKG}</span><span class="st">, repos=</span><span class="dt">\"</span><span class="st">https://cran.rstudio.com</span><span class="dt">\"</span><span class="st">, lib=</span><span class="dt">\"</span><span class="va">${SITELIB}</span><span class="dt">\"</span><span class="st">)"</span> <span class="kw">|</span> <span class="ex">R</span> <span class="at">--no-save</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"install.packages(</span><span class="va">${DEVPKG}</span><span class="st">, repos=</span><span class="dt">\"</span><span class="st">https://cran.rstudio.com</span><span class="dt">\"</span><span class="st">, lib=</span><span class="dt">\"</span><span class="va">${SITELIB}</span><span class="dt">\"</span><span class="st">)"</span> <span class="kw">|</span> <span class="ex">R</span> <span class="at">--no-save</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="project-packages" class="level4">
 <h4 class="anchored" data-anchor-id="project-packages">Project Packages</h4>
@@ -604,13 +616,13 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 <li>An <a href="https://rstudio.github.io/renv/articles/renv.html">Introduction to renv</a></li>
 <li><a href="https://github.com/rstudio/renv">renv</a> on GitHub</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>() <span class="co"># to set up renv in the project</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>() <span class="co"># to set up renv in the project</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">install</span>(<span class="st">"rtraining"</span>) <span class="co"># to install a package</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>() <span class="co"># checks if renv.lock is in sync</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>() <span class="co"># save libraries in renv.lock</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>() <span class="co"># restore libraries from renv.lock - use when first using an existing project</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">clean</span>() <span class="co"># remove extra libraries</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">update</span>() <span class="co"># check for unpdated versions of installed libraries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">update</span>() <span class="co"># check for unpdated versions of installed libraries</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If you’re installing (development) versions of packages from GitHub, you’ll be prompted to set up a personal access token using <code>create_github_token()</code> and adding it to your <code>.Renviron</code> as <code>GITHUB_PAT=</code> using <code>usethis::edit_r_environ()</code>. I had to install the development versions of both <code>styler</code> and <code>lintr</code> due to bugs not yet fixed in the released (CRAN) versions. I did also look at using <a href="https://pak.r-lib.org">pak</a> but found it too buggy to use.</p>
 <p><em>Note:</em> I came across an odd quirk where renv will prompt you to upgrade base R projects, even if they’re not used. I resolved these by just upgrading the base packages with RStudio with no project open.</p>
 <p>I’ve included some comments on useful packages in my <em>R Training Log</em> notebook.</p>
@@ -705,7 +717,7 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 <li>Calls <code>rmarkdown::render_site()</code> to render the site in the <code>docs/</code> directory</li>
 </ol>
 <p>I typically rebuild a site with the following command, run from the top-level directory of the project:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> .build-site <span class="kw">&amp;&amp;</span> <span class="fu">sh</span> build-site <span class="kw">&amp;&amp;</span> <span class="ex">open</span> docs/index.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> .build-site <span class="kw">&amp;&amp;</span> <span class="fu">sh</span> build-site <span class="kw">&amp;&amp;</span> <span class="ex">open</span> docs/index.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This approach leverages the <a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch">docs functionality</a> of GitHub pages, like pkgdown.</p>
 </section>
 <section id="update-on-publishing" class="level4">
@@ -969,13 +981,14 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="John Benninghoff">
+<meta name="dcterms.date" content="2025-10-01">
 
-<title>todo – rtraining</title>
+<title>FizzBuzz – rtraining</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,31 +22,68 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9bf6b10bcba5eae4d51a1abb52d3b9a8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../analysis/advanced-r-1.html" rel="next">
+<link href="../analysis/hockey-cards.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9bf6b10bcba5eae4d51a1abb52d3b9a8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -245,9 +284,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">rtraining</span>
     </a>
   </div>
@@ -258,17 +297,17 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./changelog.html"> 
+    <a class="nav-link" href="../changelog.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./TODO.html" aria-current="page"> 
+    <a class="nav-link" href="../TODO.html"> 
 <span class="menu-text">TODO</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
-    <a href="./index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
+    <a href="../index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -279,7 +318,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/fizzbuzz.html">FizzBuzz</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -290,110 +329,110 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
+      <a href="../index.html" class="sidebar-logo-link">
       </a>
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/r-books.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/r-books.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Books</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/r-training-log.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/r-training-log.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Training Log</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/r-setup-log.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Setup Log</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/FaultTree.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">FaultTree.widget Test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/using-Rcpp.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/using-Rcpp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using Rcpp</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/cond-prob.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/cond-prob.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditional Probability</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/hockey-cards.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/hockey-cards.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hockey Cards Analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/fizzbuzz.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/fizzbuzz.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">FizzBuzz</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/advanced-r-1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced R (Foundations)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/advanced-r-2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced R (Functional programming)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/advanced-r-3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced R (Object-oriented programming)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/advanced-r-4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced R (Metaprogramming)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/ggplot2-1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ggplot2 (Getting started)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/ggplot2-2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ggplot2 (Layers)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/ggplot2-3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ggplot2 (Scales)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/ggplot2-4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ggplot2 (Grammar)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
+  <a href="../analysis/ggplot2-5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ggplot2 (Extending)</span></a>
   </div>
 </li>
@@ -407,82 +446,300 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#todo" id="toc-todo" class="nav-link active" data-scroll-target="#todo">TODO</a>
+  <li><a href="#fizzbuzz" id="toc-fizzbuzz" class="nav-link active" data-scroll-target="#fizzbuzz">FizzBuzz</a>
   <ul class="collapse">
-  <li><a href="#content" id="toc-content" class="nav-link" data-scroll-target="#content">Content</a></li>
-  <li><a href="#package" id="toc-package" class="nav-link" data-scroll-target="#package">Package</a></li>
-  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github">GitHub</a></li>
+  <li><a href="#first-implementation" id="toc-first-implementation" class="nav-link" data-scroll-target="#first-implementation">First Implementation</a></li>
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr">dplyr</a></li>
+  <li><a href="#for-loop" id="toc-for-loop" class="nav-link" data-scroll-target="#for-loop">for loop</a></li>
+  <li><a href="#rosetta-code" id="toc-rosetta-code" class="nav-link" data-scroll-target="#rosetta-code">Rosetta Code</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jabenninghoff/rtraining/blob/main/TODO.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/fizzbuzz.Rmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">FizzBuzz</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">notes</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>John Benninghoff </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 1, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 1, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
 
 
-<section id="todo" class="level1">
-<h1>TODO</h1>
-<p><em>Inspired by renv’s <a href="https://github.com/rstudio/renv/blob/99737730ea69730b211770ba2bfa78301cf0e7b2/TODO.md">historical TODO.md</a></em></p>
-<section id="content" class="level2">
-<h2 class="anchored" data-anchor-id="content">Content</h2>
-<ul class="task-list">
-<li><label><input type="checkbox" checked="">Add R Setup notebook</label></li>
-<li><label><input type="checkbox" checked="">Add problems and solutions to the training log, including how to get around the limitation that you can’t debug R Notebooks. (considered and rejected the knitr-spin.R approach)</label></li>
-<li><label><input type="checkbox" checked=""><del>Add notes on resolving the error message generated by <code>use_package("tidyverse")</code></del></label></li>
-<li><label><input type="checkbox" checked="">Update README.Rmd</label></li>
-<li><label><input type="checkbox" checked=""><del>Add notes from <a href="https://r-pkgs.org" class="uri">https://r-pkgs.org</a></del></label></li>
-<li><label><input type="checkbox" checked=""><del>Convert R Setup notebook to a vignette</del></label></li>
-<li><label><input type="checkbox" checked=""><del>Update setup notes with current configuration using <a href="https://github.com/r-lib/rig">rig</a></del></label></li>
-</ul>
+</header>
+
+
+<p>My implementation of <a href="https://rosettacode.org/wiki/FizzBuzz">FizzBuzz</a> in R, using a vector function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="fizzbuzz" class="level2">
+<h2 class="anchored" data-anchor-id="fizzbuzz">FizzBuzz</h2>
+<p>An R implementation of <a href="https://en.wikipedia.org/wiki/Fizz_buzz">Fizz Buzz</a>, using the instructions from <a href="https://rosettacode.org/wiki/FizzBuzz">Rosetta Code</a>.</p>
+<section id="first-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="first-implementation">First Implementation</h3>
+<p>My implementation, written first.</p>
+<p>The function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fizz_buzz <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  fb_single <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (n <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> n <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">"FizzBuzz"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (n <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Buzz"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (n <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Fizz"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="co"># use as.character() so all return values match character(1)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>(n)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vapply</span>(x, fb_single, <span class="fu">character</span>(<span class="dv">1</span>))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The task:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fizz_buzz</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "1"        "2"        "Fizz"     "4"        "Buzz"     "Fizz"    
+  [7] "7"        "8"        "Fizz"     "Buzz"     "11"       "Fizz"    
+ [13] "13"       "14"       "FizzBuzz" "16"       "17"       "Fizz"    
+ [19] "19"       "Buzz"     "Fizz"     "22"       "23"       "Fizz"    
+ [25] "Buzz"     "26"       "Fizz"     "28"       "29"       "FizzBuzz"
+ [31] "31"       "32"       "Fizz"     "34"       "Buzz"     "Fizz"    
+ [37] "37"       "38"       "Fizz"     "Buzz"     "41"       "Fizz"    
+ [43] "43"       "44"       "FizzBuzz" "46"       "47"       "Fizz"    
+ [49] "49"       "Buzz"     "Fizz"     "52"       "53"       "Fizz"    
+ [55] "Buzz"     "56"       "Fizz"     "58"       "59"       "FizzBuzz"
+ [61] "61"       "62"       "Fizz"     "64"       "Buzz"     "Fizz"    
+ [67] "67"       "68"       "Fizz"     "Buzz"     "71"       "Fizz"    
+ [73] "73"       "74"       "FizzBuzz" "76"       "77"       "Fizz"    
+ [79] "79"       "Buzz"     "Fizz"     "82"       "83"       "Fizz"    
+ [85] "Buzz"     "86"       "Fizz"     "88"       "89"       "FizzBuzz"
+ [91] "91"       "92"       "Fizz"     "94"       "Buzz"     "Fizz"    
+ [97] "97"       "98"       "Fizz"     "Buzz"    </code></pre>
+</div>
+</div>
+<p>To solve this, I first wrote the task, then wrote the function. I took advantage of the fact that R will print the return output of a function by default.</p>
+<p>For the function, I wanted to use functional programming and avoid a <code>for()</code> loop, and only use base R, so I implemented a function for a single case and used <code>vapply()</code> to apply the function across the vector sequence <code>1:100</code>. In my original version, I used <code>unlist(lapply())</code> because I couldn’t get <code>vapply()</code> to work. The help for <code>dplyr::case_when()</code> includes a FizzBuzz example with <code>as.character()</code> so that the return type is always the same; I adapted this to my initial base R solution.</p>
 </section>
-<section id="package" class="level2">
-<h2 class="anchored" data-anchor-id="package">Package</h2>
-<ul class="task-list">
-<li><label><input type="checkbox" checked="">Write wrapper functions to <code>styler</code> and <code>lintr</code> all files: the package, README.Rmd, and notebooks directory</label></li>
-<li><label><input type="checkbox" checked="">Write a utility/maintenance function to verify: <code>renv::status</code>, <code>renv::clean</code>, and possibly <code>renv::update</code> - see <a href="https://github.com/rstudio/renv/blob/master/R/status.R" class="uri">https://github.com/rstudio/renv/blob/master/R/status.R</a></label></li>
-<li><label><input type="checkbox" checked=""><del>Write a utility function to sort <code>.Rbuildignore</code></del></label></li>
-<li><label><input type="checkbox" checked="">Migrate utility functions to <a href="https://github.com/jabenninghoff/rdev">rdev</a></label></li>
-<li><label><input type="checkbox" checked="">Integrate <code>build-site</code> and pkgdown using custom navbars</label>
-<ul>
-<li>Implement <a href="https://pkgdown.r-lib.org">pkgdown</a></li>
-<li>Rename notebooks/ to analysis/, <code>build-site</code> in a subdirectory (docs/analysis)</li>
-</ul></li>
-<li><label><input type="checkbox" checked="">Refactor site builder as an R function</label>
-<ul>
-<li>wrapper for <code>rmarkdown::render_site()</code></li>
-<li>run the build in a temporary directory like <code>render_site()</code></li>
-<li><del>re-use code from <code>render_site()</code> to create list of R Notebooks</del></li>
-<li>dynamically build the <code>_site.yml</code> file using <a href="https://github.com/vubiostat/r-yaml">yaml</a> with configuration settings passed to the wrapper function</li>
-<li>dynamically build the <code>index.Rmd</code> using <code>DESCRIPTION</code></li>
-<li>support for additional links in the navbar</li>
-<li><del>order links by Title, not filename</del></li>
-<li>better logic for converting <code>html_notebook</code> to <code>html_document</code></li>
-</ul></li>
-<li><label><input type="checkbox" checked="">Migrate site builder to rdev</label></li>
-<li><label><input type="checkbox" checked="">Review <a href="https://github.com/rstudio/renv/" class="uri">https://github.com/rstudio/renv/</a> for ideas to include here</label></li>
-<li><label><input type="checkbox" checked="">Review <a href="https://rstudio.github.io/bslib/index.html">bslib</a>, <a href="https://pkgdown.r-lib.org/articles/customise.html">pkgdown</a> documentation, and <a href="https://bootswatch.com">bootswatch</a> themes to determine new site look and feel</label></li>
-<li><label><input type="checkbox" checked="">Evaluate converting from notebooks to a <a href="https://quarto.org/docs/websites/">Quarto website</a></label></li>
-<li><label><input type="checkbox">Review <a href="https://github.com/jimbrig/rtraining/" class="uri">https://github.com/jimbrig/rtraining/</a> for ideas to include here</label></li>
-</ul>
+<section id="dplyr" class="level3">
+<h3 class="anchored" data-anchor-id="dplyr">dplyr</h3>
+<p>Using <code>dplyr::case_when()</code> allows much simpler code: (R doesn’t have a built-in ‘case’ statement)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fizz_buzz_d <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># x %% 15 == 0 is equivalent to x %% 5 == 0 &amp;&amp; x %% 3 == 0</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">%%</span> <span class="dv">15</span> <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"FizzBuzz"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Buzz"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Fizz"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="fu">as.character</span>(x)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">fizz_buzz_d</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "1"        "2"        "Fizz"     "4"        "Buzz"     "Fizz"    
+  [7] "7"        "8"        "Fizz"     "Buzz"     "11"       "Fizz"    
+ [13] "13"       "14"       "FizzBuzz" "16"       "17"       "Fizz"    
+ [19] "19"       "Buzz"     "Fizz"     "22"       "23"       "Fizz"    
+ [25] "Buzz"     "26"       "Fizz"     "28"       "29"       "FizzBuzz"
+ [31] "31"       "32"       "Fizz"     "34"       "Buzz"     "Fizz"    
+ [37] "37"       "38"       "Fizz"     "Buzz"     "41"       "Fizz"    
+ [43] "43"       "44"       "FizzBuzz" "46"       "47"       "Fizz"    
+ [49] "49"       "Buzz"     "Fizz"     "52"       "53"       "Fizz"    
+ [55] "Buzz"     "56"       "Fizz"     "58"       "59"       "FizzBuzz"
+ [61] "61"       "62"       "Fizz"     "64"       "Buzz"     "Fizz"    
+ [67] "67"       "68"       "Fizz"     "Buzz"     "71"       "Fizz"    
+ [73] "73"       "74"       "FizzBuzz" "76"       "77"       "Fizz"    
+ [79] "79"       "Buzz"     "Fizz"     "82"       "83"       "Fizz"    
+ [85] "Buzz"     "86"       "Fizz"     "88"       "89"       "FizzBuzz"
+ [91] "91"       "92"       "Fizz"     "94"       "Buzz"     "Fizz"    
+ [97] "97"       "98"       "Fizz"     "Buzz"    </code></pre>
+</div>
+</div>
 </section>
-<section id="github" class="level2">
-<h2 class="anchored" data-anchor-id="github">GitHub</h2>
-<ul class="task-list">
-<li><label><input type="checkbox" checked="">Implement site builder for a collection of notebooks leveraging the <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown site generator</a>, <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a></label></li>
-<li><label><input type="checkbox" checked="">Update <code>DESCRIPTION</code> and use description data in <code>README.Rmd</code></label></li>
-<li><label><input type="checkbox" checked="">Set up <a href="https://usethis.r-lib.org/reference/github_actions.html">GitHub Actions</a></label>
-<ul class="task-list">
-<li><label><input type="checkbox" checked="">Use <a href="https://github.com/r-lib/actions/blob/master/examples/check-standard.yaml">standard</a> <code>R CMD check</code></label></li>
-<li><label><input type="checkbox" checked="">Use <a href="https://github.com/r-lib/actions/blob/master/examples/lint.yaml">lintr</a></label></li>
-</ul></li>
-<li><label><input type="checkbox" checked=""><del>Add GitHub Action for html/link checking using something like <a href="https://github.com/gjtorikian/html-proofer">htmlproofer</a></del></label></li>
-<li><label><input type="checkbox" checked=""><del>Run <a href="https://github.com/r-lib/actions/blob/master/examples/test-coverage.yaml">test coverage</a></del></label></li>
-<li><label><input type="checkbox" checked="">Switch to <a href="https://github.com/r-lib/actions/blob/master/examples/check-full.yaml">full</a> <code>R CMD check</code> ?</label></li>
-<li><label><input type="checkbox" checked=""><del>Autobuild <code>docs/</code> like <a href="https://github.com/r-lib/actions/blob/master/examples/pkgdown.yaml">pkgdown</a> ?</del></label></li>
-</ul>
+<section id="for-loop" class="level3">
+<h3 class="anchored" data-anchor-id="for-loop">for loop</h3>
+<p>The simplest way to solve this is with a for loop:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (n <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> n <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"FizzBuzz"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (n <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Buzz"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (n <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Fizz"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(n)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] "Fizz"
+[1] 4
+[1] "Buzz"
+[1] "Fizz"
+[1] 7
+[1] 8
+[1] "Fizz"
+[1] "Buzz"
+[1] 11
+[1] "Fizz"
+[1] 13
+[1] 14
+[1] "FizzBuzz"
+[1] 16
+[1] 17
+[1] "Fizz"
+[1] 19
+[1] "Buzz"
+[1] "Fizz"
+[1] 22
+[1] 23
+[1] "Fizz"
+[1] "Buzz"
+[1] 26
+[1] "Fizz"
+[1] 28
+[1] 29
+[1] "FizzBuzz"
+[1] 31
+[1] 32
+[1] "Fizz"
+[1] 34
+[1] "Buzz"
+[1] "Fizz"
+[1] 37
+[1] 38
+[1] "Fizz"
+[1] "Buzz"
+[1] 41
+[1] "Fizz"
+[1] 43
+[1] 44
+[1] "FizzBuzz"
+[1] 46
+[1] 47
+[1] "Fizz"
+[1] 49
+[1] "Buzz"
+[1] "Fizz"
+[1] 52
+[1] 53
+[1] "Fizz"
+[1] "Buzz"
+[1] 56
+[1] "Fizz"
+[1] 58
+[1] 59
+[1] "FizzBuzz"
+[1] 61
+[1] 62
+[1] "Fizz"
+[1] 64
+[1] "Buzz"
+[1] "Fizz"
+[1] 67
+[1] 68
+[1] "Fizz"
+[1] "Buzz"
+[1] 71
+[1] "Fizz"
+[1] 73
+[1] 74
+[1] "FizzBuzz"
+[1] 76
+[1] 77
+[1] "Fizz"
+[1] 79
+[1] "Buzz"
+[1] "Fizz"
+[1] 82
+[1] 83
+[1] "Fizz"
+[1] "Buzz"
+[1] 86
+[1] "Fizz"
+[1] 88
+[1] 89
+[1] "FizzBuzz"
+[1] 91
+[1] 92
+[1] "Fizz"
+[1] 94
+[1] "Buzz"
+[1] "Fizz"
+[1] 97
+[1] 98
+[1] "Fizz"
+[1] "Buzz"</code></pre>
+</div>
+</div>
+<p>The downside to this approach is that it prints each result individually, instead of returning a vector.</p>
+</section>
+<section id="rosetta-code" class="level3">
+<h3 class="anchored" data-anchor-id="rosetta-code">Rosetta Code</h3>
+<p>Note: Rosetta Code offers several different <a href="https://rosettacode.org/wiki/FizzBuzz#R">solutions for R</a>. The first solution is cleverer yet still understandable use of base R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>xx[x <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">"Fizz"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>xx[x <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">"Buzz"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>xx[x <span class="sc">%%</span> <span class="dv">15</span> <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">"FizzBuzz"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>xx</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "1"        "2"        "Fizz"     "4"        "Buzz"     "Fizz"    
+  [7] "7"        "8"        "Fizz"     "Buzz"     "11"       "Fizz"    
+ [13] "13"       "14"       "FizzBuzz" "16"       "17"       "Fizz"    
+ [19] "19"       "Buzz"     "Fizz"     "22"       "23"       "Fizz"    
+ [25] "Buzz"     "26"       "Fizz"     "28"       "29"       "FizzBuzz"
+ [31] "31"       "32"       "Fizz"     "34"       "Buzz"     "Fizz"    
+ [37] "37"       "38"       "Fizz"     "Buzz"     "41"       "Fizz"    
+ [43] "43"       "44"       "FizzBuzz" "46"       "47"       "Fizz"    
+ [49] "49"       "Buzz"     "Fizz"     "52"       "53"       "Fizz"    
+ [55] "Buzz"     "56"       "Fizz"     "58"       "59"       "FizzBuzz"
+ [61] "61"       "62"       "Fizz"     "64"       "Buzz"     "Fizz"    
+ [67] "67"       "68"       "Fizz"     "Buzz"     "71"       "Fizz"    
+ [73] "73"       "74"       "FizzBuzz" "76"       "77"       "Fizz"    
+ [79] "79"       "Buzz"     "Fizz"     "82"       "83"       "Fizz"    
+ [85] "Buzz"     "86"       "Fizz"     "88"       "89"       "FizzBuzz"
+ [91] "91"       "92"       "Fizz"     "94"       "Buzz"     "Fizz"    
+ [97] "97"       "98"       "Fizz"     "Buzz"    </code></pre>
+</div>
+</div>
+<p>Of all the solutions, I think using <code>dplyr::case_when()</code> is the most readable. If I needed a base R solution in the future, I’d pick the Rosetta version.</p>
 
 
 </section>
@@ -902,6 +1159,18 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../analysis/hockey-cards.html" class="pagination-link" aria-label="Hockey Cards Analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Hockey Cards Analysis</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../analysis/advanced-r-1.html" class="pagination-link" aria-label="Advanced R (Foundations)">
+        <span class="nav-page-text">Advanced R (Foundations)</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -911,12 +1180,12 @@ ul.task-list li input[type="checkbox"] {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./LICENSE.html">
+    <a class="nav-link" href="../LICENSE.html">
 <p>License</p>
 </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jabenninghoff/rtraining/blob/main/TODO.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jabenninghoff/rtraining/blob/main/analysis/fizzbuzz.Rmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

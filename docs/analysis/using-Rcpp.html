@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,18 +71,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../analysis/FaultTree.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5fdbc8f45c2d0bcdc137be0dad0ef85a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-2cfd8bc47213d4766483d56c471cfecb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-5fdbc8f45c2d0bcdc137be0dad0ef85a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9bf6b10bcba5eae4d51a1abb52d3b9a8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -283,6 +284,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">rtraining</span>
     </a>
@@ -325,6 +328,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -367,6 +374,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../analysis/hockey-cards.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hockey Cards Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/fizzbuzz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FizzBuzz</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -493,7 +506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Notes on using <a href="https://www.rcpp.org">Rcpp</a> to implement <a href="https://github.com/HenryRLee/PokerHandEvaluator">Poker-Hand-Evaluator</a> in the <a href="https://jabenninghoff.github.io/cards/">cards</a> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no libraries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no libraries</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
@@ -507,7 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="example-function" class="level2">
 <h2 class="anchored" data-anchor-id="example-function">Example Function</h2>
 <p>As a next step, I implemented a simple example function to ensure Rcpp was working properly. After some research, I added the following code:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">//' Leading NA</span></span>
@@ -541,13 +554,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    i<span class="op">++;</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> leading_na<span class="op">;</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>After the first two steps, <a href="https://devtools.r-lib.org/reference/document.html"><code>devtools::document()</code></a> automates the addition of the <code>leading_na()</code> function, R documentation, and Rcpp support to the package.</p>
 </section>
 <section id="stub-function" class="level2">
 <h2 class="anchored" data-anchor-id="stub-function">Stub Function</h2>
 <p>As a next step, I implemented a stub function with help from <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a>, specifically the chapter on <a href="https://teuder.github.io/rcpp4everyone_en/070_data_types.html">Data types</a>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">//' Evaluate a poker hand using PH Evaluator</span></span>
@@ -562,13 +575,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>String eval_hand_phe<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"poker_hand"</span><span class="op">;</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The stub works, and suggests an approach for a first implementation using Rcpp: create a function that calls <code>phevaluator::EvaluateCards()</code> and returns a string based on <code>Rank.category()</code> or <code>Rank.describeCategory</code>, following <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/examples/cpp_example.cc"><code>cpp_example.cc</code></a>. A more complete implementation would use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, with help from the <a href="https://github.com/coatless-rd-rcpp/rcpp-modules-student">RcppStudent</a> R package.</p>
 <p>Additional examples implementing C++ libraries in Rcpp I found include <a href="https://github.com/eddelbuettel/rcppannoy">RcppAnnoy</a>, written by Rcpp author and maintainer Dirk Eddelbuettel, <a href="https://github.com/R-Lum/rxylib">rxylib</a>, and <a href="https://github.com/AleMorales/RcppSundials.R">RcppSundials</a>.</p>
 <section id="add-headers" class="level3">
 <h3 class="anchored" data-anchor-id="add-headers">Add Headers</h3>
 <p>To start the first implementation, I added the headers from <code>cpp_example.cc</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;phevaluator/phevaluator.h&gt;</span></span>
@@ -594,10 +607,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// phevaluator::Rank rank = phevaluator::EvaluateCards(hand[0], hand[1], hand[2], hand[3], hand[4]);</span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">// return rank.describeCategory();</span></span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"poker_hand"</span><span class="op">;</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To get the updated code to compile, I had to add <code>src/Makevars</code>, which I copied from RcppAnnoy, and also added the <code>cpp/include</code> directory from PH Evaluator to <code>inst/</code>.</p>
 <p><code>src/Makevars</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">PKG_CPPFLAGS</span> <span class="ch">=</span><span class="st"> -I../inst/include/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">PKG_CPPFLAGS</span> <span class="ch">=</span><span class="st"> -I../inst/include/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>While this code compiled, to get the commented code working, I’d need to add the code from <code>cpp/src</code>. Just dumping the files from PH Evaluator into <code>src/</code> didn’t work, but the rxylib <a href="https://github.com/R-Lum/rxylib/blob/master/src/Makevars"><code>Makevars</code></a> file offered a clue: adapt the <a href="https://github.com/HenryRLee/PokerHandEvaluator/blob/master/cpp/Makefile"><code>Makefile</code></a> from PH Evaluator to the R <code>Makevars</code> format to properly build the library objects. Put another way, follow how rxylib translated <a href="https://github.com/wojdyr/xylib/blob/master/xylib/Makefile.am"><code>xlib/Makefile.am</code></a> to <code>Makevars</code>. The Stack Overflow <a href="https://stackoverflow.com/questions/43597632/understanding-the-contents-of-the-makevars-file-in-r-macros-variables-r-ma">question</a> referenced in rxylib provided additional details on the <code>Makevars</code> file format.</p>
 </section>
 </section>
@@ -617,14 +630,14 @@ tables.h
 tables_bitwise.c</code></pre>
 <p>These were the minimal files needed to support the first implementation, which only had to support evaluation of 5 card hands.</p>
 <p>I also added a line to <code>src/Makevars</code> to enable the C++ 17 standard used by PH Evaluator:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">PKG_CPPFLAGS</span> <span class="ch">=</span><span class="st"> -I../inst/include/</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">CXX_STD</span> <span class="ch">=</span><span class="st"> CXX17</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">PKG_CPPFLAGS</span> <span class="ch">=</span><span class="st"> -I../inst/include/</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">CXX_STD</span> <span class="ch">=</span><span class="st"> CXX17</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This <em>nearly</em> compiled, but failed with an error:</p>
 <pre><code>   duplicate symbol '_evaluate_5cards' in:
        /Users/agamemnon/GitHub/cards/src/evaluator5.o
        /Users/agamemnon/GitHub/cards/src/evaluator5.o</code></pre>
 <p>Ultimately this error was the result of two files with the same name but different file extensions (<code>evaluator5.c</code> and <code>evaluator5.cc</code>). Renaming <code>evaluator5.c</code> to <code>evaluator_5_c.c</code> fixed the issue, and the code below compiled and tested properly!</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;phevaluator/phevaluator.h&gt;</span></span>
@@ -664,7 +677,7 @@ tables_bitwise.c</code></pre>
 <span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>String eval_hand_phe<span class="op">(</span>IntegerVector hand<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  phevaluator<span class="op">::</span>Rank rank <span class="op">=</span> phevaluator<span class="op">::</span>EvaluateCards<span class="op">(</span>hand<span class="op">[</span><span class="dv">0</span><span class="op">],</span> hand<span class="op">[</span><span class="dv">1</span><span class="op">],</span> hand<span class="op">[</span><span class="dv">2</span><span class="op">],</span> hand<span class="op">[</span><span class="dv">3</span><span class="op">],</span> hand<span class="op">[</span><span class="dv">4</span><span class="op">]);</span></span>
 <span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> rank<span class="op">.</span>describeCategory<span class="op">();</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>After this, I removed the example function, added a C/C++ benchmark, and published cards 0.3.0.</p>
 <section id="follow-up" class="level3">
 <h3 class="anchored" data-anchor-id="follow-up">Follow-up</h3>
@@ -746,13 +759,14 @@ tables_bitwise.c</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

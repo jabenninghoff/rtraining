@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,18 +70,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../analysis/ggplot2-4.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5fdbc8f45c2d0bcdc137be0dad0ef85a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-2cfd8bc47213d4766483d56c471cfecb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-5fdbc8f45c2d0bcdc137be0dad0ef85a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9bf6b10bcba5eae4d51a1abb52d3b9a8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -282,6 +283,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">rtraining</span>
     </a>
@@ -324,6 +327,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -366,6 +373,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../analysis/hockey-cards.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hockey Cards Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/fizzbuzz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FizzBuzz</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -490,7 +503,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Workbook for completing quizzes and exercises from the “Extending” chapters of <a href="https://ggplot2-book.org/index.html">ggplot2: Elegant Graphics for Data Analysis</a>, third edition, with comparisons to solutions from <a href="https://ggplot2-book-solutions-3ed.netlify.app">Solutions to ggplot2: Elegant Graphics for Data Analysis</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wesanderson)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span>
@@ -499,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">"#&gt;"</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
@@ -517,10 +530,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: <code>pink_hist</code> applied to the price of <code>diamonds</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pink_hist <span class="ot">&lt;-</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>, <span class="at">fill =</span> <span class="st">"pink"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pink_hist <span class="ot">&lt;-</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>, <span class="at">fill =</span> <span class="st">"pink"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(price)) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  pink_hist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  pink_hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -531,10 +544,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>GG Solutions:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pink_hist_ggs <span class="ot">&lt;-</span> <span class="fu">geom_histogram</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pink_hist_ggs <span class="ot">&lt;-</span> <span class="fu">geom_histogram</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"pink"</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">bins =</span> <span class="dv">100</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Note: I think the intent here is to set <code>fill</code>, not <code>color</code>.</p>
 <hr>
@@ -543,12 +556,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: <code>blues</code> applied to a <code>geom_bar()</code> example:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>blues <span class="ot">&lt;-</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>blues <span class="ot">&lt;-</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  blues</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  blues</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -559,9 +572,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>GG Solutions:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fill_blues <span class="ot">&lt;-</span> <span class="fu">scale_fill_distiller</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fill_blues <span class="ot">&lt;-</span> <span class="fu">scale_fill_distiller</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Blues"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Note that the documentation states:</p>
 <blockquote class="blockquote">
@@ -573,69 +586,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: <code>theme_grey()</code> has 4 arguments: <code>base_size</code>, <code>base_family</code>, <code>base_line_size</code>, and <code>base_rect_size</code>. It specifies a complete theme object, <code>t</code>, and uses the <code>%+replace%</code> function to modify an internal global, <code>ggplot_global$theme_all_null</code> using <code>t</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>theme_grey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>theme_grey</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; function (base_size = 11, base_family = "", base_line_size = base_size/22, 
-#&gt;     base_rect_size = base_size/22) 
+<pre><code>#&gt; function (base_size = 11, base_family = "", header_family = NULL, 
+#&gt;     base_line_size = base_size/22, base_rect_size = base_size/22, 
+#&gt;     ink = "black", paper = "white", accent = "#3366FF") 
 #&gt; {
 #&gt;     half_line &lt;- base_size/2
-#&gt;     t &lt;- theme(line = element_line(colour = "black", linewidth = base_line_size, 
-#&gt;         linetype = 1, lineend = "butt"), rect = element_rect(fill = "white", 
-#&gt;         colour = "black", linewidth = base_rect_size, linetype = 1), 
-#&gt;         text = element_text(family = base_family, face = "plain", 
-#&gt;             colour = "black", size = base_size, lineheight = 0.9, 
+#&gt;     t &lt;- theme(line = element_line(colour = ink, linewidth = base_line_size, 
+#&gt;         linetype = 1, lineend = "butt", linejoin = "round"), 
+#&gt;         rect = element_rect(fill = paper, colour = ink, linewidth = base_rect_size, 
+#&gt;             linetype = 1, linejoin = "round"), text = element_text(family = base_family, 
+#&gt;             face = "plain", colour = ink, size = base_size, lineheight = 0.9, 
 #&gt;             hjust = 0.5, vjust = 0.5, angle = 0, margin = margin(), 
-#&gt;             debug = FALSE), axis.line = element_blank(), axis.line.x = NULL, 
-#&gt;         axis.line.y = NULL, axis.text = element_text(size = rel(0.8), 
-#&gt;             colour = "grey30"), axis.text.x = element_text(margin = margin(t = 0.8 * 
+#&gt;             debug = FALSE), title = element_text(family = header_family), 
+#&gt;         spacing = unit(half_line, "pt"), margins = margin_auto(half_line), 
+#&gt;         point = element_point(colour = ink, shape = 19, fill = paper, 
+#&gt;             size = (base_size/11) * 1.5, stroke = base_line_size), 
+#&gt;         polygon = element_polygon(fill = paper, colour = ink, 
+#&gt;             linewidth = base_rect_size, linetype = 1, linejoin = "round"), 
+#&gt;         geom = element_geom(ink = ink, paper = paper, accent = accent, 
+#&gt;             linewidth = base_line_size, borderwidth = base_line_size, 
+#&gt;             linetype = 1L, bordertype = 1L, family = base_family, 
+#&gt;             fontsize = base_size, pointsize = (base_size/11) * 
+#&gt;                 1.5, pointshape = 19), axis.line = element_blank(), 
+#&gt;         axis.line.x = NULL, axis.line.y = NULL, axis.text = element_text(size = rel(0.8), 
+#&gt;             colour = col_mix(ink, paper, 0.302)), axis.text.x = element_text(margin = margin(t = 0.8 * 
 #&gt;             half_line/2), vjust = 1), axis.text.x.top = element_text(margin = margin(b = 0.8 * 
 #&gt;             half_line/2), vjust = 0), axis.text.y = element_text(margin = margin(r = 0.8 * 
 #&gt;             half_line/2), hjust = 1), axis.text.y.right = element_text(margin = margin(l = 0.8 * 
 #&gt;             half_line/2), hjust = 0), axis.text.r = element_text(margin = margin(l = 0.8 * 
 #&gt;             half_line/2, r = 0.8 * half_line/2), hjust = 0.5), 
-#&gt;         axis.ticks = element_line(colour = "grey20"), axis.ticks.length = unit(half_line/2, 
-#&gt;             "pt"), axis.ticks.length.x = NULL, axis.ticks.length.x.top = NULL, 
-#&gt;         axis.ticks.length.x.bottom = NULL, axis.ticks.length.y = NULL, 
-#&gt;         axis.ticks.length.y.left = NULL, axis.ticks.length.y.right = NULL, 
-#&gt;         axis.minor.ticks.length = rel(0.75), axis.title.x = element_text(margin = margin(t = half_line/2), 
+#&gt;         axis.ticks = element_line(colour = col_mix(ink, paper, 
+#&gt;             0.2)), axis.ticks.length = rel(0.5), axis.ticks.length.x = NULL, 
+#&gt;         axis.ticks.length.x.top = NULL, axis.ticks.length.x.bottom = NULL, 
+#&gt;         axis.ticks.length.y = NULL, axis.ticks.length.y.left = NULL, 
+#&gt;         axis.ticks.length.y.right = NULL, axis.minor.ticks.length = rel(0.75), 
+#&gt;         axis.title.x = element_text(margin = margin(t = half_line/2), 
 #&gt;             vjust = 1), axis.title.x.top = element_text(margin = margin(b = half_line/2), 
 #&gt;             vjust = 0), axis.title.y = element_text(angle = 90, 
 #&gt;             margin = margin(r = half_line/2), vjust = 1), axis.title.y.right = element_text(angle = -90, 
 #&gt;             margin = margin(l = half_line/2), vjust = 1), legend.background = element_rect(colour = NA), 
-#&gt;         legend.spacing = unit(2 * half_line, "pt"), legend.spacing.x = NULL, 
-#&gt;         legend.spacing.y = NULL, legend.margin = margin(half_line, 
-#&gt;             half_line, half_line, half_line), legend.key = NULL, 
-#&gt;         legend.key.size = unit(1.2, "lines"), legend.key.height = NULL, 
-#&gt;         legend.key.width = NULL, legend.key.spacing = unit(half_line, 
-#&gt;             "pt"), legend.text = element_text(size = rel(0.8)), 
+#&gt;         legend.spacing = rel(2), legend.spacing.x = NULL, legend.spacing.y = NULL, 
+#&gt;         legend.margin = NULL, legend.key = NULL, legend.key.size = unit(1.2, 
+#&gt;             "lines"), legend.key.height = NULL, legend.key.width = NULL, 
+#&gt;         legend.key.spacing = NULL, legend.text = element_text(size = rel(0.8)), 
 #&gt;         legend.title = element_text(hjust = 0), legend.ticks.length = rel(0.2), 
 #&gt;         legend.position = "right", legend.direction = NULL, legend.justification = "center", 
-#&gt;         legend.box = NULL, legend.box.margin = margin(0, 0, 0, 
-#&gt;             0, "cm"), legend.box.background = element_blank(), 
-#&gt;         legend.box.spacing = unit(2 * half_line, "pt"), panel.background = element_rect(fill = "grey92", 
-#&gt;             colour = NA), panel.border = element_blank(), panel.grid = element_line(colour = "white"), 
-#&gt;         panel.grid.minor = element_line(linewidth = rel(0.5)), 
-#&gt;         panel.spacing = unit(half_line, "pt"), panel.spacing.x = NULL, 
-#&gt;         panel.spacing.y = NULL, panel.ontop = FALSE, strip.background = element_rect(fill = "grey85", 
-#&gt;             colour = NA), strip.clip = "inherit", strip.text = element_text(colour = "grey10", 
-#&gt;             size = rel(0.8), margin = margin(0.8 * half_line, 
-#&gt;                 0.8 * half_line, 0.8 * half_line, 0.8 * half_line)), 
-#&gt;         strip.text.x = NULL, strip.text.y = element_text(angle = -90), 
+#&gt;         legend.box = NULL, legend.box.margin = margin_auto(0), 
+#&gt;         legend.box.background = element_blank(), legend.box.spacing = rel(2), 
+#&gt;         panel.background = element_rect(fill = col_mix(ink, paper, 
+#&gt;             0.92), colour = NA), panel.border = element_blank(), 
+#&gt;         panel.grid = element_line(colour = paper), panel.grid.minor = element_line(linewidth = rel(0.5)), 
+#&gt;         panel.spacing = NULL, panel.spacing.x = NULL, panel.spacing.y = NULL, 
+#&gt;         panel.ontop = FALSE, strip.background = element_rect(fill = col_mix(ink, 
+#&gt;             paper, 0.85), colour = NA), strip.clip = "on", strip.text = element_text(colour = col_mix(ink, 
+#&gt;             paper, 0.1), size = rel(0.8), margin = margin_auto(0.8 * 
+#&gt;             half_line)), strip.text.x = NULL, strip.text.y = element_text(angle = -90), 
 #&gt;         strip.text.y.left = element_text(angle = 90), strip.placement = "inside", 
 #&gt;         strip.placement.x = NULL, strip.placement.y = NULL, strip.switch.pad.grid = unit(half_line/2, 
 #&gt;             "pt"), strip.switch.pad.wrap = unit(half_line/2, 
-#&gt;             "pt"), plot.background = element_rect(colour = "white"), 
+#&gt;             "pt"), plot.background = element_rect(colour = paper), 
 #&gt;         plot.title = element_text(size = rel(1.2), hjust = 0, 
 #&gt;             vjust = 1, margin = margin(b = half_line)), plot.title.position = "panel", 
 #&gt;         plot.subtitle = element_text(hjust = 0, vjust = 1, margin = margin(b = half_line)), 
 #&gt;         plot.caption = element_text(size = rel(0.8), hjust = 1, 
 #&gt;             vjust = 1, margin = margin(t = half_line)), plot.caption.position = "panel", 
 #&gt;         plot.tag = element_text(size = rel(1.2), hjust = 0.5, 
-#&gt;             vjust = 0.5), plot.tag.position = "topleft", plot.margin = margin(half_line, 
-#&gt;             half_line, half_line, half_line), complete = TRUE)
+#&gt;             vjust = 0.5), plot.tag.position = "topleft", plot.margin = NULL, 
+#&gt;         complete = TRUE)
 #&gt;     ggplot_global$theme_all_null %+replace% t
 #&gt; }
-#&gt; &lt;bytecode: 0x1075c7db0&gt;
+#&gt; &lt;bytecode: 0x10a6088f8&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -650,7 +672,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: to construct this function, it is helpful to review the code for <code>scale_color_brewer()</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>scale_color_brewer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>scale_color_brewer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (name = waiver(), ..., type = "seq", palette = 1, direction = 1, 
 #&gt;     aesthetics = "colour") 
@@ -658,13 +680,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     discrete_scale(aesthetics, name = name, palette = pal_brewer(type, 
 #&gt;         palette, direction), ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x116395660&gt;
+#&gt; &lt;bytecode: 0x10cbce328&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
 <p>The function is a wrapper for <code>discrete_scale()</code> and calls <code>scales::brewer_pal()</code>, which is a <a href="https://adv-r.hadley.nz/function-factories.html">function factory</a>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span>brewer_pal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span>brewer_pal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (type = "seq", palette = 1, direction = 1) 
 #&gt; {
@@ -687,13 +709,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     nlevels &lt;- RColorBrewer::brewer.pal.info[pal, "maxcolors"]
 #&gt;     new_discrete_palette(fun, "colour", nlevels)
 #&gt; }
-#&gt; &lt;bytecode: 0x1165ec000&gt;
+#&gt; &lt;bytecode: 0x10d4565f8&gt;
 #&gt; &lt;environment: namespace:scales&gt;</code></pre>
 </div>
 </div>
 <p>First we construct a discrete scale, using <code>Darjeeling1</code> as the default:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>wesanderson_pal <span class="ot">&lt;-</span> <span class="cf">function</span>(name, type) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>wesanderson_pal <span class="ot">&lt;-</span> <span class="cf">function</span>(name, type) {</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(n) {</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wes_palette</span>(name, n, type)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  }</span>
@@ -702,12 +724,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>scale_color_wesanderson_d <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">name =</span> <span class="st">"Darjeeling1"</span>, <span class="at">type =</span> <span class="st">"discrete"</span>,</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">aesthetics =</span> <span class="st">"colour"</span>) {</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">discrete_scale</span>(aesthetics, <span class="st">"wesanderson_d"</span>, <span class="fu">wesanderson_pal</span>(name, type), ...)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Note that these functions are limited by the number of colors in each wesanderson palette (4-7), which will generate an error if more colors are requested. The <code>wesanderson_pal</code> function could be revised to auto-enable <code>continuous</code> or <code>scale_color_wesanderson_d()</code> can be called with <code>type = "continuous"</code>.</p>
 <p>For a continuous scale, it is helpful to review the code of <code>scale_color_viridis_c()</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>scale_color_viridis_c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>scale_color_viridis_c</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (name = waiver(), ..., alpha = 1, begin = 0, end = 1, 
 #&gt;     direction = 1, option = "D", values = NULL, space = "Lab", 
@@ -717,13 +739,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         begin, end, direction, option)(6), values, space), na.value = na.value, 
 #&gt;         guide = guide, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x116c1f5a0&gt;
+#&gt; &lt;bytecode: 0x10a733ef0&gt;
 #&gt; &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
 <p>We can add a continuous scale based using <code>Zissou1</code> as the default:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>scale_color_wesanderson_c <span class="ot">&lt;-</span> <span class="cf">function</span>(...,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>scale_color_wesanderson_c <span class="ot">&lt;-</span> <span class="cf">function</span>(...,</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">name =</span> <span class="st">"Zissou1"</span>,</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">type =</span> <span class="st">"continuous"</span>,</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">values =</span> <span class="cn">NULL</span>,</span>
@@ -736,13 +758,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gradient_n_pal</span>(<span class="fu">wesanderson_pal</span>(name, type)(<span class="fu">length</span>(wes_palettes[[name]])), values, space),</span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.value =</span> na.value, <span class="at">guide =</span> guide, ...</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>scale_colour_wesanderson_d()</code> applied to an <code>mpg</code> plot:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_wesanderson_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_wesanderson_d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: The `scale_name` argument of `discrete_scale()` is deprecated as of ggplot2
 #&gt; 3.5.0.</code></pre>
@@ -757,9 +779,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><code>scale_colour_wesanderson_c()</code> applied to an <code>mpg</code> plot:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">color =</span> cyl)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">color =</span> cyl)) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_wesanderson_c</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_wesanderson_c</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning: The `scale_name` argument of `continuous_scale()` is deprecated as of ggplot2
 #&gt; 3.5.0.</code></pre>
@@ -775,13 +797,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Notes: while the exercise calls for a single function, this breaks the normal conventions for ggplot2. Such a function could be written by combining <code>scale_colour_wesanderson_d()</code> and <code>scale_colour_wesanderson_c()</code>.</p>
 <p>GG Solutions:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>scale_colour_wesanderson <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">palette =</span> <span class="st">"BottleRocket1"</span>, ...) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>scale_colour_wesanderson <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">palette =</span> <span class="st">"BottleRocket1"</span>, ...) {</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(palette), ...)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Working example</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(wt, disp, <span class="at">color =</span> <span class="fu">factor</span>(gear))) <span class="sc">+</span></span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_wesanderson</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_wesanderson</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -799,7 +821,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: <code>hide_ll()</code> does this, demonstrated with an <code>mpg</code> plot.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hide_ll <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hide_ll <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>),</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
@@ -808,7 +830,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hide_ll</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hide_ll</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -819,7 +841,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>GG Solutions:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>remove_labels <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>remove_labels <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
@@ -827,7 +849,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Working Example</span></span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(wt, disp, <span class="at">color =</span> <span class="fu">factor</span>(gear))) <span class="sc">+</span></span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  remove_labels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  remove_labels</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -843,7 +865,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: <code>borders_quickmap()</code> implemented and demonstrated using a <code>borders()</code> example. In this case, the function passes all <code>...</code> variables to <code>borders()</code> and none to <code>coord_quickmap()</code> which avoids the complexity of handling arguments for both functions.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>borders_quickmap <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>borders_quickmap <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">borders</span>(...),</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>()</span>
@@ -855,7 +877,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(long, lat)) <span class="sc">+</span></span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">borders_quickmap</span>(<span class="st">"state"</span>) <span class="sc">+</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Warning: `borders()` was deprecated in ggplot2 4.0.0.
+#&gt; ℹ Please use `annotation_borders()` instead.</code></pre>
+</div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -872,21 +898,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: a common pattern I use is <code>geom_smooth</code> with <code>lm</code> and <code>y ~ x</code>. An implementation of this using robust linear modeling from <code>MASS</code> is demonstrated below:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>geom_rlm <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">mapping =</span> <span class="cn">NULL</span>, <span class="at">data =</span> <span class="cn">NULL</span>, <span class="at">stat =</span> <span class="st">"smooth"</span>, <span class="at">position =</span> <span class="st">"identity"</span>, ...,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method =</span> MASS<span class="sc">::</span>rlm, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">se =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">na.rm =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">orientation =</span> <span class="cn">NA</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show.legend =</span> <span class="cn">NA</span>, <span class="at">inherit.aes =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> mapping, <span class="at">data =</span> data, <span class="at">stat =</span> stat, <span class="at">position =</span> position, ...,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method, <span class="at">formula =</span> formula, <span class="at">se =</span> se, <span class="at">na.rm =</span> na.rm, <span class="at">orientation =</span> orientation,</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> show.legend, <span class="at">inherit.aes =</span> <span class="cn">TRUE</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rlm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>geom_rlm <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">mapping =</span> <span class="cn">NULL</span>, <span class="at">data =</span> <span class="cn">NULL</span>, <span class="at">stat =</span> <span class="st">"smooth"</span>, <span class="at">position =</span> <span class="st">"identity"</span>, ...,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method =</span> MASS<span class="sc">::</span>rlm, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">se =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">na.rm =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">orientation =</span> <span class="cn">NA</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show.legend =</span> <span class="cn">NA</span>, <span class="at">inherit.aes =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> mapping, <span class="at">data =</span> data, <span class="at">stat =</span> stat, <span class="at">position =</span> position, ...,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method, <span class="at">formula =</span> formula, <span class="at">se =</span> se, <span class="at">na.rm =</span> na.rm, <span class="at">orientation =</span> orientation,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> show.legend, <span class="at">inherit.aes =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rlm</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -905,18 +931,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Answer: code below. In this case, it is useful to include <code>binwidth</code> and <code>bins</code>, used in creating both histograms and frequency polygons, and <code>na.rm</code>, used in all three. Defaults to histogram.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>distribution <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var, <span class="at">type =</span> <span class="st">"histogram"</span>, <span class="at">binwidth =</span> <span class="cn">NULL</span>, <span class="at">bins =</span> <span class="cn">NULL</span>,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">na.rm =</span> <span class="cn">FALSE</span>) {</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data, <span class="fu">aes</span>({{ var }})) <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span>(type,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">histogram =</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> binwidth, <span class="at">bins =</span> bins, <span class="at">na.rm =</span> na.rm),</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">freqpoly =</span> <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> binwidth, <span class="at">bins =</span> bins, <span class="at">na.rm =</span> na.rm),</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">density =</span> <span class="fu">geom_density</span>(<span class="at">na.rm =</span> na.rm),</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stop</span>(<span class="st">"`type` must be histogram, freqpoly, or density"</span>)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">distribution</span>(diamonds, price, <span class="at">binwidth =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>distribution <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var, <span class="at">type =</span> <span class="st">"histogram"</span>, <span class="at">binwidth =</span> <span class="cn">NULL</span>, <span class="at">bins =</span> <span class="cn">NULL</span>,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">na.rm =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data, <span class="fu">aes</span>({{ var }})) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span>(type,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">histogram =</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> binwidth, <span class="at">bins =</span> bins, <span class="at">na.rm =</span> na.rm),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">freqpoly =</span> <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> binwidth, <span class="at">bins =</span> bins, <span class="at">na.rm =</span> na.rm),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">density =</span> <span class="fu">geom_density</span>(<span class="at">na.rm =</span> na.rm),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stop</span>(<span class="st">"`type` must be histogram, freqpoly, or density"</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">distribution</span>(diamonds, price, <span class="at">binwidth =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -924,7 +950,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distribution</span>(diamonds, price, <span class="at">type =</span> <span class="st">"freqpoly"</span>, <span class="at">binwidth =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distribution</span>(diamonds, price, <span class="at">type =</span> <span class="st">"freqpoly"</span>, <span class="at">binwidth =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -932,7 +958,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distribution</span>(diamonds, price, <span class="at">type =</span> <span class="st">"density"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distribution</span>(diamonds, price, <span class="at">type =</span> <span class="st">"density"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -940,7 +966,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">distribution</span>(diamonds, price, <span class="at">type =</span> <span class="st">"other"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">distribution</span>(diamonds, price, <span class="at">type =</span> <span class="st">"other"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in distribution(diamonds, price, type = "other") : 
 #&gt;   `type` must be histogram, freqpoly, or density</code></pre>
@@ -959,15 +985,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>How could you add a <code>geom_point()</code> layer to each element of the following list?</li>
 </ol>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)),</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price)),</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(waiting, eruptions, <span class="at">size =</span> density))</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price)),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(waiting, eruptions, <span class="at">size =</span> density))</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Answer: easily done with <code>lapply</code>()`:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(plots, <span class="cf">function</span>(g) g <span class="sc">+</span> <span class="fu">geom_point</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(plots, <span class="cf">function</span>(g) g <span class="sc">+</span> <span class="fu">geom_point</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]</code></pre>
 </div>
@@ -1006,17 +1032,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>What does the following function do? What’s a better name for it?</li>
 </ol>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mystery <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Reduce</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>, <span class="fu">list</span>(...), <span class="at">accumulate =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mystery</span>(</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(),</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(),</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>),</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>)</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mystery <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Reduce</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>, <span class="fu">list</span>(...), <span class="at">accumulate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mystery</span>(</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(),</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(),</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>),</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]</code></pre>
 </div>
@@ -1142,13 +1168,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
