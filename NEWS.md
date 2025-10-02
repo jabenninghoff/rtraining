@@ -1,3 +1,7 @@
+# rtraining 1.3.0
+
+* Added FizzBuzz: My implementation of [FizzBuzz](https://rosettacode.org/wiki/FizzBuzz) in R, using a vector function
+
 # rtraining 1.2.12
 
 * Corrected GitHub language stats
