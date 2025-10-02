@@ -11,6 +11,8 @@ License: MIT + file LICENSE
 URL: https://jabenninghoff.github.io/rtraining/,
     https://github.com/jabenninghoff/rtraining
 BugReports: https://github.com/jabenninghoff/rtraining/issues
+Depends: 
+    R (>= 4.1.0)
 Suggests:
     babynames,
     bench,
