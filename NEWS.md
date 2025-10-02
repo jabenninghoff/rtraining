@@ -1,3 +1,7 @@
+# rtraining 1.3.1
+
+* Updated FizzBuzz: converted Rosetta Code solution to function
+
 # rtraining 1.3.0
 
 * Added FizzBuzz: My implementation of [FizzBuzz](https://rosettacode.org/wiki/FizzBuzz) in R, using a vector function
