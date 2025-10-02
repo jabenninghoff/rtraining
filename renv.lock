@@ -5128,7 +5128,7 @@
     },
     "rdev": {
       "Package": "rdev",
-      "Version": "1.14.0",
+      "Version": "1.14.1",
       "Source": "GitHub",
       "Title": "R Development Tools",
       "Authors@R": "person(\"John\", \"Benninghoff\", , \"jbenninghoff@mac.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-6230-4742\"))",
@@ -5190,14 +5190,14 @@
       "Encoding": "UTF-8",
       "Language": "en-US",
       "Roxygen": "list(markdown = TRUE)",
-      "RoxygenNote": "7.3.2",
+      "RoxygenNote": "7.3.3",
       "Author": "John Benninghoff [aut, cre] (ORCID: <https://orcid.org/0000-0002-6230-4742>)",
       "Maintainer": "John Benninghoff <jbenninghoff@mac.com>",
       "RemoteType": "github",
       "RemoteUsername": "jabenninghoff",
       "RemoteRepo": "rdev",
       "RemoteRef": "main",
-      "RemoteSha": "14236f40f57acd74cb8346a0ac326a4378d03766",
+      "RemoteSha": "7aea6ddbee8c9df421472bdaf53ac52d2d694493",
       "RemoteHost": "api.github.com"
     },
     "readr": {
