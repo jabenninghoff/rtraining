@@ -1,0 +1,126 @@
+---
+title: "FizzBuzz"
+author: "John Benninghoff"
+date: '2025-10-01'
+date-modified: '2025-10-01'
+categories: notes
+order: 107
+output:
+  html_notebook:
+    theme:
+      version: 5
+      preset: bootstrap
+    css: assets/extra.css
+    pandoc_args: --shift-heading-level-by=1
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+---
+
+My implementation of [FizzBuzz](https://rosettacode.org/wiki/FizzBuzz) in R, using a vector function.
+
+```{r setup, message = FALSE, warning = FALSE}
+library(dplyr)
+```
+
+# FizzBuzz
+
+An R implementation of [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz), using the instructions
+from [Rosetta Code](https://rosettacode.org/wiki/FizzBuzz).
+
+## First Implementation
+
+My implementation, written first.
+
+The function:
+
+```{r fizz_buzz}
+fizz_buzz <- function(x) {
+  fb_single <- function(n) {
+    if (n %% 3 == 0 && n %% 5 == 0) {
+      "FizzBuzz"
+    } else if (n %% 5 == 0) {
+      "Buzz"
+    } else if (n %% 3 == 0) {
+      "Fizz"
+    } else {
+      # use as.character() so all return values match character(1)
+      as.character(n)
+    }
+  }
+  vapply(x, fb_single, character(1))
+}
+```
+
+The task:
+
+```{r run_fizz_buzz}
+fizz_buzz(1:100)
+```
+
+To solve this, I first wrote the task, then wrote the function. I took advantage of the fact that R
+will print the return output of a function by default.
+
+For the function, I wanted to use functional programming and avoid a `for()` loop, and only use base
+R, so I implemented a function for a single case and used `vapply()` to apply the function across
+the vector sequence `1:100`. In my original version, I used `unlist(lapply())` because I couldn't
+get `vapply()` to work. The help for `dplyr::case_when()` includes a FizzBuzz example with
+`as.character()` so that the return type is always the same; I adapted this to my initial base R
+solution.
+
+## dplyr
+
+Using `dplyr::case_when()` allows much simpler code: (R doesn't have a built-in 'case' statement)
+
+```{r fizz_buzz_d}
+fizz_buzz_d <- function(x) {
+  dplyr::case_when(
+    # x %% 15 == 0 is equivalent to x %% 5 == 0 && x %% 3 == 0
+    x %% 15 == 0 ~ "FizzBuzz",
+    x %% 5 == 0 ~ "Buzz",
+    x %% 3 == 0 ~ "Fizz",
+    .default = as.character(x)
+  )
+}
+
+fizz_buzz_d(1:100)
+```
+
+## for loop
+
+The simplest way to solve this is with a for loop:
+
+```{r fizz_buzz_loop}
+for (n in 1:100) {
+  if (n %% 3 == 0 && n %% 5 == 0) {
+    print("FizzBuzz")
+  } else if (n %% 5 == 0) {
+    print("Buzz")
+  } else if (n %% 3 == 0) {
+    print("Fizz")
+  } else {
+    print(n)
+  }
+}
+```
+
+The downside to this approach is that it prints each result individually, instead of returning a
+vector.
+
+## Rosetta Code
+
+Note: Rosetta Code offers several different
+[solutions for R](https://rosettacode.org/wiki/FizzBuzz#R). The first solution is cleverer yet still
+understandable use of base R:
+
+```{r fizz_buzz_rosetta}
+xx <- x <- 1:100
+xx[x %% 3 == 0] <- "Fizz"
+xx[x %% 5 == 0] <- "Buzz"
+xx[x %% 15 == 0] <- "FizzBuzz"
+xx
+```
+
+Of all the solutions, I think using `dplyr::case_when()` is the most readable. If I needed a base R
+solution in the future, I'd pick the Rosetta version.
