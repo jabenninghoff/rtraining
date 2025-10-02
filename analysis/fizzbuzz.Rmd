@@ -2,7 +2,7 @@
 title: "FizzBuzz"
 author: "John Benninghoff"
 date: '2025-10-01'
-date-modified: '2025-10-01'
+date-modified: '2025-10-02'
 categories: notes
 order: 107
 output:
@@ -114,12 +114,16 @@ Note: Rosetta Code offers several different
 [solutions for R](https://rosettacode.org/wiki/FizzBuzz#R). The first solution is cleverer yet still
 understandable use of base R:
 
-```{r fizz_buzz_rosetta}
-xx <- x <- 1:100
-xx[x %% 3 == 0] <- "Fizz"
-xx[x %% 5 == 0] <- "Buzz"
-xx[x %% 15 == 0] <- "FizzBuzz"
-xx
+```{r fizz_buzz_r}
+fizz_buzz_r <- function(x) {
+  xx <- x
+  xx[x %% 3 == 0] <- "Fizz"
+  xx[x %% 5 == 0] <- "Buzz"
+  xx[x %% 15 == 0] <- "FizzBuzz"
+  xx
+}
+
+fizz_buzz_r(1:100)
 ```
 
 Of all the solutions, I think using `dplyr::case_when()` is the most readable. If I needed a base R
