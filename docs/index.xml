@@ -1790,7 +1790,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <blockquote class="blockquote">
 <p>The clear recommendation on r-devel (please check the archives) is that you should avoid Makefile logic if you can. IIRC this echoed in the Writing R Extension manual.</p>
 </blockquote>
-<p>So, it seems the right answer is to rename the files to avoid this conflict. Additionally, after reading a tidyverse blog post on <a href="https://www.tidyverse.org/blog/2023/03/cran-checks-compiled-code/">New CRAN requirements for packages with C and C++</a>, I learned that the R C++ standard was now C++17, so I technically did not need that line in the <code>Makevars</code> file, but I decided to keep it as it was an upstream requirement.</p>
+<p>So, it seems the right answer is to rename the files to avoid this conflict. Additionally, after reading a tidyverse blog post on <a href="https://tidyverse.org/blog/2023/03/cran-checks-compiled-code/">New CRAN requirements for packages with C and C++</a>, I learned that the R C++ standard was now C++17, so I technically did not need that line in the <code>Makevars</code> file, but I decided to keep it as it was an upstream requirement.</p>
 <p>I also discovered an example <a href="https://github.com/coatless-rd-rcpp/rcpp-headers-subdirs">package</a> that explained how to put code in a subdirectory of <code>src/</code>, which I plan to use for the second version using Rcpp Modules.</p>
 <p>I later added a script to copy (or update) the PH Evaluator source and header files to the cards package, to automate future updates if needed.</p>
 <p>After reading through the <a href="https://rstudio.github.io/r-manuals/r-exts/Creating-R-packages.html">Creating R Packages</a> chapter of <a href="https://rstudio.github.io/r-manuals/r-exts/">Writing R Extensions</a> and evaluating my options, I am inclined to use a simple approach to creating a “phevaluator” package, copying the necessary files into <code>src/</code> (with a shell script for reproducibility), use a minimal <code>Makevars</code> file, and use <a href="https://CRAN.R-project.org/package=Rcpp/vignettes/Rcpp-modules.pdf">Rcpp Modules</a> to expose the C++ classes and methods in PH Evaluator, following the approach used by the <a href="https://github.com/coatless-rd-rcpp/rcpp-modules-student">RcppStudent</a> R package.</p>
@@ -33932,7 +33932,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x119238000"</code></pre>
+<pre><code>#&gt; [1] "0x108b08000"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33940,7 +33940,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x119238000"</code></pre>
+<pre><code>#&gt; [1] "0x108b08000"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -33948,7 +33948,7 @@ font-style: inherit;">obj_addr</span>(y[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>]])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x119238000"</code></pre>
+<pre><code>#&gt; [1] "0x108b08000"</code></pre>
 </div>
 </div>
 <hr>
@@ -33973,7 +33973,7 @@ font-style: inherit;">2</span>)</span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1072abdb8"</code></pre>
+<pre><code>#&gt; [1] "0x1142121f8"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">b <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -33982,7 +33982,7 @@ font-style: inherit;">&lt;-</span> a</span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1072abdb8"</code></pre>
+<pre><code>#&gt; [1] "0x1142121f8"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">b[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -33995,7 +33995,7 @@ font-style: inherit;">10</span></span>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1072a6cd8"</code></pre>
+<pre><code>#&gt; [1] "0x1115eb6f8"</code></pre>
 </div>
 </div>
 <p>Answer: the third line (copy-on-write). [copy-on-modify]</p>
@@ -34038,25 +34038,25 @@ font-style: inherit;">10</span></span></code></pre></div></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11426b398"</code></pre>
+<pre><code>#&gt; [1] "0x11084d4d0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11426b398"</code></pre>
+<pre><code>#&gt; [1] "0x11084d4d0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(c)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11426b398"</code></pre>
+<pre><code>#&gt; [1] "0x11084d4d0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">obj_addr</span>(d)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x113d910a0"</code></pre>
+<pre><code>#&gt; [1] "0x120a14858"</code></pre>
 </div>
 </div>
 <hr>
@@ -34088,7 +34088,7 @@ font-style: inherit;">"mean"</span>)</span></code></pre></div></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(mean)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x113291520"</code></pre>
+<pre><code>#&gt; [1] "0x111b42fd0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34096,7 +34096,7 @@ font-style: inherit;">obj_addr</span>(base<span class="sc" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">::</span>mean)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x113291520"</code></pre>
+<pre><code>#&gt; [1] "0x111b42fd0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34106,7 +34106,7 @@ font-style: inherit;">get</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"mean"</span>))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x113291520"</code></pre>
+<pre><code>#&gt; [1] "0x111b42fd0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34114,7 +34114,7 @@ font-style: inherit;">obj_addr</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">evalq</span>(mean))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x113291520"</code></pre>
+<pre><code>#&gt; [1] "0x111b42fd0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34124,7 +34124,7 @@ font-style: inherit;">match.fun</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"mean"</span>))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x113291520"</code></pre>
+<pre><code>#&gt; [1] "0x111b42fd0"</code></pre>
 </div>
 </div>
 <p>Answer: they do.</p>
@@ -34199,7 +34199,7 @@ font-style: inherit;">3</span>L)</span>
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x110f23f48&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x116a71848&gt;"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1">x[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -34209,8 +34209,8 @@ font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span></span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x110f23f48 -&gt; 0x110fe9548]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
-#&gt; tracemem[0x110fe9548 -&gt; 0x110c42e58]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x116a71848 -&gt; 0x116b4d108]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main 
+#&gt; tracemem[0x116b4d108 -&gt; 0x116aebb58]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34240,7 +34240,7 @@ font-style: inherit;">3</span>)</span>
 background-color: null;
 font-style: inherit;">tracemem</span>(x)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "&lt;0x11613e4d8&gt;"</code></pre>
+<pre><code>#&gt; [1] "&lt;0x124874de8&gt;"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1">y <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -34253,7 +34253,7 @@ font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>L</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; tracemem[0x11613e4d8 -&gt; 0x116182398]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
+<pre><code>#&gt; tracemem[0x124874de8 -&gt; 0x1248c0bb8]: eval eval withVisible withCallingHandlers eval eval with_handlers doWithOneRestart withOneRestart withRestartList doWithOneRestart withOneRestart withRestartList withRestarts &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group withCallingHandlers &lt;Anonymous&gt; process_file &lt;Anonymous&gt; &lt;Anonymous&gt; execute .main</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1">y[[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -34369,7 +34369,7 @@ font-style: inherit;">"first object"</span>)</span></code></pre></div></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(a)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11654ada0"</code></pre>
+<pre><code>#&gt; [1] "0x124cc69b0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34377,7 +34377,7 @@ font-style: inherit;">obj_addr</span>(b[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11654ada0"</code></pre>
+<pre><code>#&gt; [1] "0x124cc69b0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34385,7 +34385,7 @@ font-style: inherit;">obj_addr</span>(b[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11654ada0"</code></pre>
+<pre><code>#&gt; [1] "0x124cc69b0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34393,7 +34393,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x11654ada0"</code></pre>
+<pre><code>#&gt; [1] "0x124cc69b0"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34407,7 +34407,7 @@ font-style: inherit;">"second object"</span>)</span></code></pre></div></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(b)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x116476788"</code></pre>
+<pre><code>#&gt; [1] "0x124b0b888"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34415,7 +34415,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x116476788"</code></pre>
+<pre><code>#&gt; [1] "0x124b0b888"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34429,7 +34429,7 @@ font-style: inherit;">"third object"</span>)</span></code></pre></div></div>
 background-color: null;
 font-style: inherit;">obj_addr</span>(c)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1166f8898"</code></pre>
+<pre><code>#&gt; [1] "0x124e1af78"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34445,7 +34445,7 @@ font-style: inherit;">obj_addr</span>(c[[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>]])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "0x1165a6be0"</code></pre>
+<pre><code>#&gt; [1] "0x124d22828"</code></pre>
 </div>
 </div>
 <p>Answer: four different objects with multiple names.</p>
@@ -34477,10 +34477,10 @@ font-style: inherit;">&lt;-</span> x</span>
 background-color: null;
 font-style: inherit;">ref</span>(x)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x11675df48] &lt;list&gt; 
-#&gt; ├─[2:0x116ce9dd0] &lt;int&gt; 
-#&gt; └─█ [3:0x106393350] &lt;list&gt; 
-#&gt;   └─[2:0x116ce9dd0]</code></pre>
+<pre><code>#&gt; █ [1:0x111832f88] &lt;list&gt; 
+#&gt; ├─[2:0x1151ab778] &lt;int&gt; 
+#&gt; └─█ [3:0x11221eea8] &lt;list&gt; 
+#&gt;   └─[2:0x1151ab778]</code></pre>
 </div>
 </div>
 <p>Initially x is a list of one element, an int vector 1:10. Then a second list element is added, which points to the original int vector.</p>
@@ -34882,17 +34882,17 @@ font-style: inherit;">$</span>medians), <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1           X2         X3          X4          X5
-#&gt; 1  -0.16835527 -0.473456873  0.3799435 -0.08899423  0.32717262
-#&gt; 2   0.13400482  0.298803460 -0.3848004 -0.40976468  0.24014878
-#&gt; 3   0.24329373  0.335762391  0.3255231  0.32694636 -0.24344696
-#&gt; 4  -0.20275693  0.002408049 -0.2904241  0.48495011 -0.38091733
-#&gt; 5  -0.45942317  0.188104575 -0.2822282 -0.47238504 -0.19273541
-#&gt; 6  -0.41138332 -0.366321461 -0.3841737  0.12167447 -0.08383285
-#&gt; 7  -0.07910379 -0.319984353  0.2780613 -0.39555938 -0.42864403
-#&gt; 8  -0.47928193 -0.024306796  0.2093443 -0.43801738 -0.32986170
-#&gt; 9   0.15315983 -0.425557586  0.2499339  0.11377855  0.20102636
-#&gt; 10  0.07588349 -0.418820322 -0.2682968  0.44536774 -0.24138827</code></pre>
+<pre><code>#&gt;               X1          X2         X3            X4         X5
+#&gt; 1   0.0562811451 -0.11555682 -0.1577505 -3.888610e-01 -0.1264360
+#&gt; 2   0.3748688936 -0.24700495  0.3257154  2.835727e-01  0.2073893
+#&gt; 3  -0.0479005770 -0.19398118  0.1746321 -4.463835e-01 -0.3906054
+#&gt; 4  -0.2507021633 -0.14059599  0.2546489 -2.404211e-01  0.3746388
+#&gt; 5   0.3180572899  0.45735235  0.3365394 -4.029501e-01  0.1056284
+#&gt; 6  -0.0999255829  0.05541192  0.1527375  2.797669e-01 -0.4131618
+#&gt; 7   0.3156872190 -0.46590189 -0.4106098 -3.514765e-05  0.2857199
+#&gt; 8  -0.0009176213 -0.07640459 -0.2771376 -2.957464e-01  0.4904157
+#&gt; 9  -0.0029013426  0.44396942 -0.3750538  2.667788e-02  0.2142961
+#&gt; 10  0.1398591500  0.49359222 -0.2864704  3.860484e-01  0.1004166</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34908,17 +34908,17 @@ font-style: inherit;">$</span>medians)), <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;             X1           X2         X3          X4          X5
-#&gt; 1  -0.16835527 -0.473456873  0.3799435 -0.08899423  0.32717262
-#&gt; 2   0.13400482  0.298803460 -0.3848004 -0.40976468  0.24014878
-#&gt; 3   0.24329373  0.335762391  0.3255231  0.32694636 -0.24344696
-#&gt; 4  -0.20275693  0.002408049 -0.2904241  0.48495011 -0.38091733
-#&gt; 5  -0.45942317  0.188104575 -0.2822282 -0.47238504 -0.19273541
-#&gt; 6  -0.41138332 -0.366321461 -0.3841737  0.12167447 -0.08383285
-#&gt; 7  -0.07910379 -0.319984353  0.2780613 -0.39555938 -0.42864403
-#&gt; 8  -0.47928193 -0.024306796  0.2093443 -0.43801738 -0.32986170
-#&gt; 9   0.15315983 -0.425557586  0.2499339  0.11377855  0.20102636
-#&gt; 10  0.07588349 -0.418820322 -0.2682968  0.44536774 -0.24138827</code></pre>
+<pre><code>#&gt;               X1          X2         X3            X4         X5
+#&gt; 1   0.0562811451 -0.11555682 -0.1577505 -3.888610e-01 -0.1264360
+#&gt; 2   0.3748688936 -0.24700495  0.3257154  2.835727e-01  0.2073893
+#&gt; 3  -0.0479005770 -0.19398118  0.1746321 -4.463835e-01 -0.3906054
+#&gt; 4  -0.2507021633 -0.14059599  0.2546489 -2.404211e-01  0.3746388
+#&gt; 5   0.3180572899  0.45735235  0.3365394 -4.029501e-01  0.1056284
+#&gt; 6  -0.0999255829  0.05541192  0.1527375  2.797669e-01 -0.4131618
+#&gt; 7   0.3156872190 -0.46590189 -0.4106098 -3.514765e-05  0.2857199
+#&gt; 8  -0.0009176213 -0.07640459 -0.2771376 -2.957464e-01  0.4904157
+#&gt; 9  -0.0029013426  0.44396942 -0.3750538  2.667788e-02  0.2142961
+#&gt; 10  0.1398591500  0.49359222 -0.2864704  3.860484e-01  0.1004166</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -34936,7 +34936,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   24.1µs   41.9µs    23712.     391KB     330.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)     23µs     40µs    24738.     391KB     341.</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34951,7 +34951,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   7.63µs   22.1µs    47323.     391KB     541.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   6.23µs   18.5µs    55288.     391KB     632.</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -34969,8 +34969,8 @@ font-style: inherit;"># as.data.frame introduces significant overhead</span></sp
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 as.data.frame(ls_medians(xm$x, xm$… 82.2µs  103µs     9633.     391KB     115.</code></pre>
+#&gt;   &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+#&gt; 1 as.data.frame(ls_medians(xm$x, xm$m…  80µs  105µs     9359.     391KB     112.</code></pre>
 </div>
 </div>
 <p>Answer: with 5 columns, the list method is about twice as fast.</p>
@@ -34995,7 +34995,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   43.2µs   63.3µs    15627.     391KB     185.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   40.7µs     64µs    15652.     391KB     182.</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -35010,7 +35010,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   8.28µs   22.1µs    44487.     391KB     504.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   6.93µs   20.6µs    49670.     391KB     573.</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1">xm <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -35032,7 +35032,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 df_medians(xm$x, xm$medians)   83.3µs    104µs     9615.     400KB     117.</code></pre>
+#&gt; 1 df_medians(xm$x, xm$medians)   78.9µs    107µs     9299.     400KB     112.</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -35047,7 +35047,7 @@ font-style: inherit;">$</span>medians))</span></code></pre></div></div>
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   expression                        min   median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                   &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 ls_medians(xm$x, xm$medians)   9.35µs   19.9µs    50204.     392KB     584.</code></pre>
+#&gt; 1 ls_medians(xm$x, xm$medians)   8.94µs   19.6µs    49717.     392KB     578.</code></pre>
 </div>
 </div>
 <p>With 10 columns, the list method is 3 times as fast. With 20, the list method is 5 times as fast. So, the list method is near constant time regardless of columns, whereas the data.frame method scales linearly with the number of columns.</p>
@@ -35262,7 +35262,7 @@ font-style: inherit;"># will be coerced to integer   -&gt; 1 1</span></span></co
 #&gt;     names(object) &lt;- nm
 #&gt;     object
 #&gt; }
-#&gt; &lt;bytecode: 0x1155fcb68&gt;
+#&gt; &lt;bytecode: 0x113722cf0&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb140" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1">unname</span></code></pre></div></div>
@@ -35275,7 +35275,7 @@ font-style: inherit;"># will be coerced to integer   -&gt; 1 1</span></span></co
 #&gt;         dimnames(obj) &lt;- NULL
 #&gt;     obj
 #&gt; }
-#&gt; &lt;bytecode: 0x112b3ad48&gt;
+#&gt; &lt;bytecode: 0x10686cc68&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -35569,9 +35569,9 @@ font-style: inherit;">sample</span>(a))</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; a   a b c
-#&gt;   a 0 1 0
-#&gt;   b 1 0 0
-#&gt;   c 0 0 1</code></pre>
+#&gt;   a 0 0 1
+#&gt;   b 0 1 0
+#&gt;   c 1 0 0</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb167" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -35617,10 +35617,10 @@ font-style: inherit;">sample</span>(b))</span>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;    
 #&gt; b   a b c d
-#&gt;   a 0 0 1 0
-#&gt;   b 0 0 0 1
+#&gt;   a 0 1 0 0
+#&gt;   b 0 0 1 0
 #&gt;   c 1 0 0 0
-#&gt;   d 0 1 0 0</code></pre>
+#&gt;   d 0 0 0 1</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb173" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -37249,12 +37249,12 @@ font-style: inherit;">sample</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ncol</span>(df))]</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   y z x
-#&gt; 1 5 a 1
-#&gt; 2 4 b 2
-#&gt; 3 3 c 3
-#&gt; 4 2 d 4
-#&gt; 5 1 e 5</code></pre>
+<pre><code>#&gt;   y x z
+#&gt; 1 5 1 a
+#&gt; 2 4 2 b
+#&gt; 3 3 3 c
+#&gt; 4 2 4 d
+#&gt; 5 1 5 e</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb356" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1">df[<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -37266,12 +37266,12 @@ font-style: inherit;">sample</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ncol</span>(df))]</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   y x z
-#&gt; 5 1 5 e
-#&gt; 1 5 1 a
-#&gt; 4 2 4 d
-#&gt; 3 3 3 c
-#&gt; 2 4 2 b</code></pre>
+<pre><code>#&gt;   z x y
+#&gt; 1 a 1 5
+#&gt; 4 d 4 2
+#&gt; 2 b 2 4
+#&gt; 5 e 5 1
+#&gt; 3 c 3 3</code></pre>
 </div>
 </div>
 <p>Answer: using <code>sample()</code>. Yes!</p>
@@ -37382,9 +37382,9 @@ background-color: null;
 font-style: inherit;">3</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   x y z
-#&gt; 5 5 1 e
-#&gt; 2 2 4 b
-#&gt; 4 4 2 d</code></pre>
+#&gt; 1 1 5 a
+#&gt; 3 3 3 c
+#&gt; 5 5 1 e</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb361" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb361-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -39184,7 +39184,7 @@ font-style: inherit;">print</span>(x)</span>
 background-color: null;
 font-style: inherit;">show_time</span>()</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "2025-10-01 21:51:26 CDT"</code></pre>
+<pre><code>#&gt; [1] "2025-11-12 14:35:10 CST"</code></pre>
 </div>
 </div>
 <p>Answer: <code>stop</code> is redefined before <code>x</code> is evaluated. This is a confusing use of lazy evaluation.</p>
@@ -39421,7 +39421,7 @@ font-style: inherit;">title</span>(...)</span></code></pre></div></div>
 <li>What does <code>write.table()</code> return? What would be more useful?</li>
 </ol>
 <p>Answer: it returns <code>invisible(NULL)</code>. Returning the written table or the argument <code>x</code> would be more useful.</p>
-<p>AR Solutions: <code>write.table()</code> writes an object, usually a data frame or a matrix, to disk. The function invisibly returns <code>NULL</code>. It would be more useful if <code>write.table()</code> would (invisibly) return the input data, <code>x</code>. This would allow to save intermediate results and directly take on further processing steps without breaking the flow of the code (i.e.&nbsp;breaking it into different lines). One package which uses this pattern is the <code>{readr}</code> package, which is part of the <a href="https://www.tidyverse.org/">tidyverse-ecosystem</a>.</p>
+<p>AR Solutions: <code>write.table()</code> writes an object, usually a data frame or a matrix, to disk. The function invisibly returns <code>NULL</code>. It would be more useful if <code>write.table()</code> would (invisibly) return the input data, <code>x</code>. This would allow to save intermediate results and directly take on further processing steps without breaking the flow of the code (i.e.&nbsp;breaking it into different lines). One package which uses this pattern is the <code>{readr}</code> package, which is part of the <a href="https://tidyverse.org/">tidyverse-ecosystem</a>.</p>
 <hr>
 <ol start="3" type="1">
 <li>How does the <code>chdir</code> parameter of <code>source()</code> compare to <code>with_dir()</code>? Why might you prefer one to the other?</li>
@@ -40016,7 +40016,7 @@ font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"kendall"</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 0</code></pre>
+<pre><code>#&gt; [1] -0.2163836</code></pre>
 </div>
 </div>
 <p>AR Solutions: None of these functions provides a <code>...</code> argument. Therefore, the function arguments are first matched exactly, then via partial matching and finally by position. This leads us to the following explicit function calls:</p>
@@ -40243,7 +40243,7 @@ background-color: null;
 font-style: inherit;">NA</span></span>
 <span id="cb497-8">v</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8 NA 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 NA 20</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -40836,7 +40836,7 @@ font-style: inherit;">9</span>)), <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  4  5  6  7 11 15 17 19 NA</code></pre>
+<pre><code>#&gt;  [1]  3  5  8  9 14 17 18 19 20 NA</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb540" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb540-1">(y <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -40858,31 +40858,31 @@ font-style: inherit;">7</span>)), <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  9 10 12 15 17 19 21 NA</code></pre>
+<pre><code>#&gt; [1]  3  4 11 17 18 19 21 NA</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb542" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb542-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%u%</span> y</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;  [1]  1  4  5  6  7 11 15 17 19 NA  9 10 12 21</code></pre>
+<pre><code>#&gt;  [1]  3  5  8  9 14 17 18 19 20 NA  4 11 21</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb544" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb544-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%n%</span> y</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] 15 17 19 NA</code></pre>
+<pre><code>#&gt; [1]  3 17 18 19 NA</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb546" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb546-1">x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%s%</span> y</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  1  4  5  6  7 11</code></pre>
+<pre><code>#&gt; [1]  5  8  9 14 20</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb548" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb548-1">y <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%s%</span> x</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1]  9 10 12 21</code></pre>
+<pre><code>#&gt; [1]  4 11 21</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -41055,7 +41055,7 @@ font-style: inherit;"># Print the environment</span></span>
 background-color: null;
 font-style: inherit;">env_print</span>(e1)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x106abc300&gt;
+<pre><code>#&gt; &lt;environment: 0x1116e8228&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • loop: &lt;env&gt;</code></pre>
@@ -41069,8 +41069,8 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e1)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x106abc300] &lt;env&gt; 
-#&gt; └─loop = [1:0x106abc300]</code></pre>
+<pre><code>#&gt; █ [1:0x1116e8228] &lt;env&gt; 
+#&gt; └─loop = [1:0x1116e8228]</code></pre>
 </div>
 </div>
 <hr>
@@ -41132,9 +41132,9 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e1)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x124ad71e0] &lt;env&gt; 
-#&gt; └─loop = █ [2:0x124b00408] &lt;env&gt; 
-#&gt;          └─dedoop = [1:0x124ad71e0]</code></pre>
+<pre><code>#&gt; █ [1:0x112817690] &lt;env&gt; 
+#&gt; └─loop = █ [2:0x107a138a0] &lt;env&gt; 
+#&gt;          └─dedoop = [1:0x112817690]</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb565" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb565-1">lobstr<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -41142,9 +41142,9 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ref</span>(e2)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; █ [1:0x124b00408] &lt;env&gt; 
-#&gt; └─dedoop = █ [2:0x124ad71e0] &lt;env&gt; 
-#&gt;            └─loop = [1:0x124b00408]</code></pre>
+<pre><code>#&gt; █ [1:0x107a138a0] &lt;env&gt; 
+#&gt; └─dedoop = █ [2:0x112817690] &lt;env&gt; 
+#&gt;            └─loop = [1:0x107a138a0]</code></pre>
 </div>
 </div>
 <hr>
@@ -41236,7 +41236,7 @@ font-style: inherit;">"fail"</span>))</span></code></pre></div></div>
 background-color: null;
 font-style: inherit;">env_print</span>(e_test)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; &lt;environment: 0x123cced60&gt;
+<pre><code>#&gt; &lt;environment: 0x106726110&gt;
 #&gt; Parent: &lt;environment: global&gt;
 #&gt; Bindings:
 #&gt; • a: &lt;NULL&gt;
@@ -41634,7 +41634,7 @@ font-style: inherit;">"x"</span>)</span>
 <span id="cb595-4">})</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x1248460a8&gt;
+#&gt; &lt;environment: 0x11159cfb8&gt;
 #&gt; 
 #&gt; [[2]]
 #&gt; &lt;environment: R_GlobalEnv&gt;</code></pre>
@@ -41748,10 +41748,10 @@ background-color: null;
 font-style: inherit;">"a"</span>, e1c)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [[1]]
-#&gt; &lt;environment: 0x1108ad350&gt;
+#&gt; &lt;environment: 0x16822abf0&gt;
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;environment: 0x110bb6308&gt;</code></pre>
+#&gt; &lt;environment: 0x1680cbf90&gt;</code></pre>
 </div>
 </div>
 <hr>
@@ -41993,7 +41993,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x1132915c8&gt;
+#&gt; &lt;bytecode: 0x111b43078&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -42508,7 +42508,7 @@ background-color: null;
 font-style: inherit;">file.remove</span>(tmp)</span></code></pre></div></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>#&gt; Warning in file.remove(tmp): cannot remove file
-#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmptXyDvy/filea2b03262dba4',
+#&gt; '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpqEIqrs/file1f25201921ba',
 #&gt; reason 'No such file or directory'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -42521,7 +42521,7 @@ background-color: null;
 font-style: inherit;">safe_file_remove</span>(tmp))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; Error in safe_file_remove(tmp) : 
-#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmptXyDvy/filea2b03262dba4' does not exist</code></pre>
+#&gt;   file '/var/folders/vn/cw5f9gws42v9m8mdsds_zbl00000gp/T//RtmpqEIqrs/file1f25201921ba' does not exist</code></pre>
 </div>
 </div>
 <p>Answer: code above.</p>
@@ -42893,7 +42893,7 @@ font-style: inherit;">"c"</span>)</span>
 #&gt;         return(NULL)
 #&gt;     })))
 #&gt; }
-#&gt; &lt;bytecode: 0x113506cd0&gt;
+#&gt; &lt;bytecode: 0x113145968&gt;
 #&gt; &lt;environment: namespace:rlang&gt;</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb678" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb678-1"><span class="fu" style="color: #4758AB;
@@ -45020,7 +45020,7 @@ font-style: inherit;">library</span>(caTools)</span></code></pre></div></div>
 <ul>
 <li><a href="https://github.com/rstudio/renv">renv</a> - for package version management by project</li>
 <li><a href="https://styler.r-lib.org/">styler</a> and <a href="https://github.com/r-lib/lintr">lintr</a> - for implementing the <a href="https://style.tidyverse.org/">tidyverse style guide</a></li>
-<li>Various <a href="https://www.tidyverse.org/">tidyverse</a> packages, including:
+<li>Various <a href="https://tidyverse.org/">tidyverse</a> packages, including:
 <ul>
 <li>dplyr</li>
 <li>ggplot2</li>
