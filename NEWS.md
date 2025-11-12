@@ -1,3 +1,7 @@
+# rtraining 1.3.2
+
+* Initial upkeep using `use_upkeep_issue()`
+
 # rtraining 1.3.1
 
 * Updated FizzBuzz: converted Rosetta Code solution to function

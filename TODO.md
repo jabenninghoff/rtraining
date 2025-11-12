@@ -11,6 +11,7 @@
 - [x] ~~Add notes from <https://r-pkgs.org>~~
 - [x] ~~Convert R Setup notebook to a vignette~~
 - [x] ~~Update setup notes with current configuration using [rig](https://github.com/r-lib/rig)~~
+- [ ] Accessibility: Add alt-text to pictures, plots, etc; see https://posit.co/blog/knitr-fig-alt/ for examples and https://pkgdown.r-lib.org/articles/accessibility.html for additional guidance.
 
 ## Package
 
