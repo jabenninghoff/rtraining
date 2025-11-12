@@ -1882,7 +1882,7 @@ AR Solutions: `load()` loads objects saved to disk in `.Rdata` files by `save()`
 
 Answer: it returns `invisible(NULL)`. Returning the written table or the argument `x` would be more useful.
 
-AR Solutions: `write.table()` writes an object, usually a data frame or a matrix, to disk. The function invisibly returns `NULL`. It would be more useful if `write.table()` would (invisibly) return the input data, `x`. This would allow to save intermediate results and directly take on further processing steps without breaking the flow of the code (i.e. breaking it into different lines). One package which uses this pattern is the `{readr}` package, which is part of the [tidyverse-ecosystem](https://www.tidyverse.org/).
+AR Solutions: `write.table()` writes an object, usually a data frame or a matrix, to disk. The function invisibly returns `NULL`. It would be more useful if `write.table()` would (invisibly) return the input data, `x`. This would allow to save intermediate results and directly take on further processing steps without breaking the flow of the code (i.e. breaking it into different lines). One package which uses this pattern is the `{readr}` package, which is part of the [tidyverse-ecosystem](https://tidyverse.org/).
 
 ---
 
