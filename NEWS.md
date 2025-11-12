@@ -2,6 +2,8 @@
 
 * Initial upkeep using `use_upkeep_issue()`
 
+* Updated R Books: Future Reading list
+
 # rtraining 1.3.1
 
 * Updated FizzBuzz: converted Rosetta Code solution to function

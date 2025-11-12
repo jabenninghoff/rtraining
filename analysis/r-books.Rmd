@@ -2,7 +2,7 @@
 title: "R Books"
 author: "John Benninghoff"
 date: '2023-11-17'
-date-modified: '2024-11-17'
+date-modified: '2025-11-12'
 categories: reading
 order: 1
 output:
@@ -398,7 +398,8 @@ The third section doesn't contain labs, and has one useful reference:
 R books on my reading list.
 
 - [The R Manuals](https://rstudio.github.io/r-manuals/) - a re-styled version of the original R
-  manuals, published using Quarto (starting with *Writing R Extensions*)
+  manuals, published using Quarto (starting with
+  [*Writing R Extensions*](https://rstudio.github.io/r-manuals/r-exts/))
 - [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) - written by the author
   of [knitr](https://yihui.org/knitr/)
 - [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) - the follow-up to *The
@@ -407,6 +408,9 @@ R books on my reading list.
   [validate](https://CRAN.R-project.org/package=validate) package
 - [Discovering Statistics Using R](https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067) - recommended to me
   as an introduction to statistics using R
+- While it's not an R book, I am interested in using
+  [DiagrammeR](https://rich-iannone.github.io/DiagrammeR/) for graph visualizations (it also
+  supports [Graphviz](https://graphviz.org) and [Mermaid](https://mermaid.js.org))
 
 # R Dialects
 
