@@ -1,3 +1,7 @@
+# rtraining 1.3.3
+
+* Minor updates
+
 # rtraining 1.3.2
 
 * Initial upkeep using `use_upkeep_issue()`

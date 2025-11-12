@@ -280,7 +280,7 @@ logic if you can. IIRC this echoed in the Writing R Extension manual.
 
 So, it seems the right answer is to rename the files to avoid this conflict. Additionally, after
 reading a tidyverse blog post on
-[New CRAN requirements for packages with C and C++](https://www.tidyverse.org/blog/2023/03/cran-checks-compiled-code/),
+[New CRAN requirements for packages with C and C++](https://tidyverse.org/blog/2023/03/cran-checks-compiled-code/),
 I learned that the R C++ standard was now C++17, so I technically did not need that line in the
 `Makevars` file, but I decided to keep it as it was an upstream requirement.
 

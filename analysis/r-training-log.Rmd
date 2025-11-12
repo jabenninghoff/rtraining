@@ -68,7 +68,7 @@ Resources for learning R.
 
 - [renv](https://github.com/rstudio/renv) - for package version management by project
 - [styler](https://styler.r-lib.org/) and [lintr](https://github.com/r-lib/lintr) - for implementing the [tidyverse style guide](https://style.tidyverse.org/)
-- Various [tidyverse](https://www.tidyverse.org/) packages, including:
+- Various [tidyverse](https://tidyverse.org/) packages, including:
   - dplyr
   - ggplot2
   - glue
