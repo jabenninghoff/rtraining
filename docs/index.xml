@@ -10,7 +10,7 @@
 <atom:link href="https://jabenninghoff.github.io/rtraining/index.xml" rel="self" type="application/rss+xml"/>
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
-<generator>quarto-1.8.25</generator>
+<generator>quarto-1.8.26</generator>
 <lastBuildDate>Wed, 01 Oct 2025 05:00:00 GMT</lastBuildDate>
 <item>
   <title>FizzBuzz</title>
@@ -2351,10 +2351,10 @@ font-style: inherit;">max</span>(date))</span></code></pre></div></div>
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        8170 2025-09-30
-2 checkmate    399400 2025-09-30
-3 chk           31657 2025-09-30
-4 validate       7703 2025-09-30</code></pre>
+1 assertr        4715 2025-11-11
+2 checkmate    418485 2025-11-11
+3 chk           25055 2025-11-11
+4 validate       4864 2025-11-11</code></pre>
 </div>
 </div>
 <p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
@@ -2457,11 +2457,12 @@ font-style: inherit;">max</span>(date))</span></code></pre></div></div>
 <h2 class="anchored" data-anchor-id="future-reading">Future Reading</h2>
 <p>R books on my reading list.</p>
 <ul>
-<li><a href="https://rstudio.github.io/r-manuals/">The R Manuals</a> - a re-styled version of the original R manuals, published using Quarto (starting with <em>Writing R Extensions</em>)</li>
+<li><a href="https://rstudio.github.io/r-manuals/">The R Manuals</a> - a re-styled version of the original R manuals, published using Quarto (starting with <a href="https://rstudio.github.io/r-manuals/r-exts/"><em>Writing R Extensions</em></a>)</li>
 <li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> - written by the author of <a href="https://yihui.org/knitr/">knitr</a></li>
 <li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">R Markdown Cookbook</a> - the follow-up to <em>The Definitive Guide</em></li>
 <li><a href="https://data-cleaning.github.io/validate/">The Data Validation Cookbook</a> - a book on the R <a href="https://CRAN.R-project.org/package=validate">validate</a> package</li>
 <li><a href="https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067">Discovering Statistics Using R</a> - recommended to me as an introduction to statistics using R</li>
+<li>While it’s not an R book, I am interested in using <a href="https://rich-iannone.github.io/DiagrammeR/">DiagrammeR</a> for graph visualizations (it also supports <a href="https://graphviz.org">Graphviz</a> and <a href="https://mermaid.js.org">Mermaid</a>)</li>
 </ul>
 </section>
 <section id="r-dialects" class="level2">
