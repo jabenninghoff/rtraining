@@ -4,14 +4,21 @@
     "href": "changelog.html",
     "title": "Changelog",
     "section": "",
-    "text": "Minor updates"
+    "text": "Updated FaultTree.widget Test: use official FaultTree.widget repository (fixed)"
+  },
+  {
+    "objectID": "changelog.html#rtraining-1.3.4",
+    "href": "changelog.html#rtraining-1.3.4",
+    "title": "Changelog",
+    "section": "",
+    "text": "Updated FaultTree.widget Test: use official FaultTree.widget repository (fixed)"
   },
   {
     "objectID": "changelog.html#rtraining-1.3.3",
     "href": "changelog.html#rtraining-1.3.3",
     "title": "Changelog",
-    "section": "",
-    "text": "Minor updates"
+    "section": "rtraining 1.3.3",
+    "text": "rtraining 1.3.3\n\nMinor updates"
   },
   {
     "objectID": "changelog.html#rtraining-1.3.2",
@@ -753,7 +760,7 @@
     "href": "analysis/FaultTree.html#solution",
     "title": "FaultTree.widget Test",
     "section": "Solution",
-    "text": "Solution\nA partial fix is to change the line in inst/htmlwidgets/ftree_widget1.js and inst/htmlwidgets/ftree_widget2.js\nfrom (which sets the position based on the width of the browser window):\nvar width_initial = $(window).width()/2-60;\nto (which sets the position based on the width of the div containing the widget):\nvar width_initial = $(\"div\").width()/2-60;\nThen the fault tree will position itself within view, but not always centered. A complete fix would render the fault tree centered within the widget.\nOther approaches tested:\n// var width_initial = $('div:contains(\"htmlwidget\")').width()/2-60;\n// var width_initial = $(\"div\").filter(function(){ return this.children.length === 0; }).width()/2-60;",
+    "text": "Solution\nA partial fix is to change the line in inst/htmlwidgets/ftree_widget1.js and inst/htmlwidgets/ftree_widget2.js\nfrom (which sets the position based on the width of the browser window):\nvar width_initial = $(window).width()/2-60;\nto (which sets the position based on the width of the div containing the widget):\nvar width_initial = $(\"div\").width()/2-60;\nThen the fault tree will position itself within view, but not always centered. A complete fix would render the fault tree centered within the widget.\nThe partial fix has been implemented in FaultTree.widget.\nOther approaches tested:\n// var width_initial = $('div:contains(\"htmlwidget\")').width()/2-60;\n// var width_initial = $(\"div\").filter(function(){ return this.children.length === 0; }).width()/2-60;",
     "crumbs": [
       "Changelog",
       "FaultTree.widget Test"
@@ -1638,42 +1645,42 @@
   {
     "objectID": "NEWS.html",
     "href": "NEWS.html",
-    "title": "rtraining 1.3.3",
+    "title": "rtraining 1.3.4",
     "section": "",
-    "text": "Minor updates"
+    "text": "Updated FaultTree.widget Test: use official FaultTree.widget repository (fixed)"
   },
   {
     "objectID": "NEWS.html#new-features",
     "href": "NEWS.html#new-features",
-    "title": "rtraining 1.3.3",
+    "title": "rtraining 1.3.4",
     "section": "New Features",
     "text": "New Features\n\nmajor update: build-site has been replaced with an R function, build_analysis_site(), which retains all of the functionality of the old shell script. It is still considered Experimental, due to lack of test coverage and some features that are not implemented, but should work for projects with limited pkgdown customization. The update also includes a function to convert notebooks to html_document, to_document().\nbuild_analysis_site() will be migrated to rdev in a future release"
   },
   {
     "objectID": "NEWS.html#new-content",
     "href": "NEWS.html#new-content",
-    "title": "rtraining 1.3.3",
+    "title": "rtraining 1.3.4",
     "section": "New Content",
     "text": "New Content\n\nR Setup Log: added notes on the package layout I use for “analysis” packages (will be converted to an rdev vignette in a future release)\nR Setup Log: added notes on my R Workflow\nR Training Log: updated with notes on my current book, R Packages"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures",
     "href": "NEWS.html#new-contentfeatures",
-    "title": "rtraining 1.3.3",
+    "title": "rtraining 1.3.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nci(): run continuous integration tests locally: lint, R CMD check, and style (off by default).\ncheck_renv(): convenience function that runs renv status(), clean(), and optionally update() (on by default)."
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-1",
     "href": "NEWS.html#new-contentfeatures-1",
-    "title": "rtraining 1.3.3",
+    "title": "rtraining 1.3.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Setup Log Notebook (r-setup-log.Rmd): My notes on my personal R setup\nminor updates to R Training Log\nstyle_all(): style all .R and .Rmd files in a project using styler\nlint_all(): lint all .R and .Rmd files in a project using lintr\nadd GitHub Actions for continuous integration testing"
   },
   {
     "objectID": "NEWS.html#new-contentfeatures-2",
     "href": "NEWS.html#new-contentfeatures-2",
-    "title": "rtraining 1.3.3",
+    "title": "rtraining 1.3.4",
     "section": "New Content/Features",
     "text": "New Content/Features\n\nR Training Log Notebook (r-training-log.Rmd): Notes on learning R and RStudio\ntools/setup-r: shell script to install development packages to site repository on macOS + Homebrew\nbuild-site: build a website from a collection of R Notebooks (html_notebook) in notebooks/"
   },
