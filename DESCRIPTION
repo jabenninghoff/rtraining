@@ -58,9 +58,9 @@ Suggests:
     wesanderson,
     withr
 Remotes:
-    jabenninghoff/FaultTree.widget,
     jabenninghoff/jbplot,
     jabenninghoff/rdev,
+    jto888/FaultTree.widget,
     ropensci/USAboundaries,
     ropensci/USAboundariesData
 Config/rdev/last-upkeep: 2025-11-12
