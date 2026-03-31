@@ -26,7 +26,7 @@
   - wrapper for `rmarkdown::render_site()`
   - run the build in a temporary directory like `render_site()`
   - ~~re-use code from `render_site()` to create list of R Notebooks~~
-  - dynamically build the `_site.yml` file using [yaml](https://github.com/vubiostat/r-yaml) with configuration settings passed to the wrapper function
+  - dynamically build the `_site.yml` file using [yaml]https://github.com/r-lib/yaml) with configuration settings passed to the wrapper function
   - dynamically build the `index.Rmd` using `DESCRIPTION`
   - support for additional links in the navbar
   - ~~order links by Title, not filename~~
@@ -39,7 +39,7 @@
 
 ## GitHub
 
-- [x] Implement site builder for a collection of notebooks leveraging the [rmarkdown site generator](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html), [render_site](https://rdrr.io/cran/rmarkdown/man/render_site.html)
+- [x] Implement site builder for a collection of notebooks leveraging the [rmarkdown site generator](https://yihui.org/rmarkdown/rmarkdown-site.html), [render_site](https://rdrr.io/cran/rmarkdown/man/render_site.html)
 - [x] Update `DESCRIPTION` and use description data in `README.Rmd`
 - [x] Set up [GitHub Actions](https://usethis.r-lib.org/reference/github_actions.html)
   - [x] Use [standard](https://github.com/r-lib/actions/blob/master/examples/check-standard.yaml) `R CMD check`
