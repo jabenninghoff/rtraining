@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>R Books – rtraining</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -70,19 +73,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../analysis/r-training-log.html" rel="next">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9bf6b10bcba5eae4d51a1abb52d3b9a8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-44e7dcc055fbee3430a8bc270d054f06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-26e60e5bcc5842cc01ff0ab26801697a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-44e7dcc055fbee3430a8bc270d054f06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -688,10 +690,10 @@ font could be found for family "missing"</code></pre>
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        4715 2025-11-11
-2 checkmate    418485 2025-11-11
-3 chk           25055 2025-11-11
-4 validate       4864 2025-11-11</code></pre>
+1 assertr        2801 2026-03-30
+2 checkmate    495751 2026-03-30
+3 chk           21189 2026-03-30
+4 validate       2103 2026-03-30</code></pre>
 </div>
 </div>
 <p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
@@ -795,8 +797,8 @@ font could be found for family "missing"</code></pre>
 <p>R books on my reading list.</p>
 <ul>
 <li><a href="https://rstudio.github.io/r-manuals/">The R Manuals</a> - a re-styled version of the original R manuals, published using Quarto (starting with <a href="https://rstudio.github.io/r-manuals/r-exts/"><em>Writing R Extensions</em></a>)</li>
-<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> - written by the author of <a href="https://yihui.org/knitr/">knitr</a></li>
-<li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">R Markdown Cookbook</a> - the follow-up to <em>The Definitive Guide</em></li>
+<li><a href="https://yihui.org/rmarkdown/">R Markdown: The Definitive Guide</a> - written by the author of <a href="https://yihui.org/knitr/">knitr</a></li>
+<li><a href="https://yihui.org/rmarkdown-cookbook/">R Markdown Cookbook</a> - the follow-up to <em>The Definitive Guide</em></li>
 <li><a href="https://data-cleaning.github.io/validate/">The Data Validation Cookbook</a> - a book on the R <a href="https://CRAN.R-project.org/package=validate">validate</a> package</li>
 <li><a href="https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067">Discovering Statistics Using R</a> - recommended to me as an introduction to statistics using R</li>
 <li>While it’s not an R book, I am interested in using <a href="https://rich-iannone.github.io/DiagrammeR/">DiagrammeR</a> for graph visualizations (it also supports <a href="https://graphviz.org">Graphviz</a> and <a href="https://mermaid.js.org">Mermaid</a>)</li>

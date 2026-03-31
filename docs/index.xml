@@ -10,7 +10,7 @@
 <atom:link href="https://jabenninghoff.github.io/rtraining/index.xml" rel="self" type="application/rss+xml"/>
 <description>My notes and experiences learning R and RStudio, bundled as an R package (work-in-progress), and published to GitHub Pages using Quarto.</description>
 <language>en-us</language>
-<generator>quarto-1.8.26</generator>
+<generator>quarto-1.9.36</generator>
 <lastBuildDate>Wed, 01 Oct 2025 05:00:00 GMT</lastBuildDate>
 <item>
   <title>FizzBuzz</title>
@@ -2351,10 +2351,10 @@ font-style: inherit;">max</span>(date))</span></code></pre></div></div>
 <pre><code># A tibble: 4 × 3
   package   downloads as_of     
   &lt;chr&gt;         &lt;dbl&gt; &lt;date&gt;    
-1 assertr        4715 2025-11-11
-2 checkmate    418485 2025-11-11
-3 chk           25055 2025-11-11
-4 validate       4864 2025-11-11</code></pre>
+1 assertr        2801 2026-03-30
+2 checkmate    495751 2026-03-30
+3 chk           21189 2026-03-30
+4 validate       2103 2026-03-30</code></pre>
 </div>
 </div>
 <p>2023-12-29 Update: I’ve started using <code>checkmate</code> to check function arguments and have found that <code>validate</code> is better overall at data validation.</p>
@@ -2458,8 +2458,8 @@ font-style: inherit;">max</span>(date))</span></code></pre></div></div>
 <p>R books on my reading list.</p>
 <ul>
 <li><a href="https://rstudio.github.io/r-manuals/">The R Manuals</a> - a re-styled version of the original R manuals, published using Quarto (starting with <a href="https://rstudio.github.io/r-manuals/r-exts/"><em>Writing R Extensions</em></a>)</li>
-<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> - written by the author of <a href="https://yihui.org/knitr/">knitr</a></li>
-<li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">R Markdown Cookbook</a> - the follow-up to <em>The Definitive Guide</em></li>
+<li><a href="https://yihui.org/rmarkdown/">R Markdown: The Definitive Guide</a> - written by the author of <a href="https://yihui.org/knitr/">knitr</a></li>
+<li><a href="https://yihui.org/rmarkdown-cookbook/">R Markdown Cookbook</a> - the follow-up to <em>The Definitive Guide</em></li>
 <li><a href="https://data-cleaning.github.io/validate/">The Data Validation Cookbook</a> - a book on the R <a href="https://CRAN.R-project.org/package=validate">validate</a> package</li>
 <li><a href="https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067">Discovering Statistics Using R</a> - recommended to me as an introduction to statistics using R</li>
 <li>While it’s not an R book, I am interested in using <a href="https://rich-iannone.github.io/DiagrammeR/">DiagrammeR</a> for graph visualizations (it also supports <a href="https://graphviz.org">Graphviz</a> and <a href="https://mermaid.js.org">Mermaid</a>)</li>
@@ -44229,8 +44229,8 @@ font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">800</span>)</span></code></pre></div></div>
 <div class="cell-output-display">
-<div id="htmlwidget-4e2d3d2beaaa2db328e7" style="width:100%;height:406px;" class="ftree_widget1 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4e2d3d2beaaa2db328e7">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5bffe8a568eee2ce1e95" style="width:100%;height:406px;" class="ftree_widget1 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5bffe8a568eee2ce1e95">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Check rendering without height and width specified:</p>
@@ -44239,8 +44239,8 @@ font-style: inherit;">800</span>)</span></code></pre></div></div>
 background-color: null;
 font-style: inherit;">ftree2widget</span>(tree1)</span></code></pre></div></div>
 <div class="cell-output-display">
-<div class="ftree_widget1 html-widget html-fill-item" id="htmlwidget-c3bc82b2699d3fdee148" style="width:100%;height:382px;"></div>
-<script type="application/json" data-for="htmlwidget-c3bc82b2699d3fdee148">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
+<div class="ftree_widget1 html-widget html-fill-item" id="htmlwidget-3da322afd4b3067cc691" style="width:100%;height:382px;"></div>
+<script type="application/json" data-for="htmlwidget-3da322afd4b3067cc691">{"x":{"root":{"id":1,"gparent":-1,"tag":"top","type":14,"cfr":0.000222339590217002,"pbf":3.04575275244065e-07,"crt":0.00136986565331405,"moe":0,"condition":0,"cond_code":1,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Site power loss","name2":"","children":[{"id":2,"gparent":1,"tag":"G_2","type":10,"cfr":-1,"pbf":0.000222339590217002,"crt":0.00136986565331405,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"neither emergency","name2":"generator operable","children":[{"id":3,"gparent":2,"tag":"G_3","type":11,"cfr":0.00163690899152319,"pbf":1.68851766373046e-05,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Independent failure","name2":"of generators","children":[{"id":4,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""},{"id":5,"gparent":3,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]},{"id":6,"gparent":2,"tag":"G_6","type":12,"cfr":0.01,"pbf":0.000205457882772264,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"failure of generators","children":[{"id":7,"gparent":6,"tag":"E_7","type":4,"cfr":-1,"pbf":0.05,"crt":-1,"moe":0,"condition":1,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"Common cause","name2":"beta factor"},{"id":8,"gparent":6,"tag":"","type":2,"cfr":0.2,"pbf":0.00410915765544528,"crt":0.00136986301369863,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":0.000273897562311695,"p2":0.0384615384615385,"collapse":0,"name":"e-gen set fails","name2":""}]}]},{"id":9,"gparent":1,"tag":"E_9","type":3,"cfr":1,"pbf":-1,"crt":-1,"moe":0,"condition":0,"cond_code":0,"etype":0,"p1":-1,"p2":-1,"collapse":0,"name":"External power","name2":"interruption"}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -44298,6 +44298,7 @@ font-style: inherit;">60</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span></code></pre></div></div>
 <p>Then the fault tree will position itself within view, but not always centered. A complete fix would render the fault tree centered within the widget.</p>
+<p>The partial fix has been implemented in <a href="https://github.com/jto888/FaultTree.widget">FaultTree.widget</a>.</p>
 <p>Other approaches tested:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -44357,7 +44358,7 @@ font-style: inherit;">brew</span> info <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--cask</span> r</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>==&gt; r-app: 4.5.1
+<pre><code>==&gt; r-app: 4.5.3
 https://www.r-project.org/
 Not installed
 From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r/r-app.rb
@@ -44366,7 +44367,7 @@ R
 ==&gt; Description
 Environment for statistical computing and graphics
 ==&gt; Artifacts
-R-4.5.1-arm64.pkg (Pkg)
+R-4.5.3-arm64.pkg (Pkg)
 ==&gt; Analytics
 install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 </div>
@@ -44719,7 +44720,7 @@ font-style: inherit;"># check for unpdated versions of installed libraries</span
 <li>“Run All”</li>
 <li>Save</li>
 </ol></li>
-<li><a href="https://support.posit.co/hc/en-us/articles/205612627-Debugging-with-the-RStudio-IDE#debugging-in-r-markdown-documents">Debug breakpoints don’t work in R Markdown documents</a>. To fix this, <a href="https://bookdown.org/yihui/rmarkdown-cookbook/purl.html">convert R Markdown documents to R Scripts using purl</a> for debugging.</li>
+<li><a href="https://support.posit.co/hc/en-us/articles/205612627-Debugging-with-the-RStudio-IDE#debugging-in-r-markdown-documents">Debug breakpoints don’t work in R Markdown documents</a>. To fix this, <a href="https://yihui.org/rmarkdown-cookbook/purl.html">convert R Markdown documents to R Scripts using purl</a> for debugging.</li>
 <li>Not really a drawback, but…<code>Rcpp</code> and <code>rprojroot</code> are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with <code>renv</code>. This is a <a href="https://github.com/rstudio/rstudio/issues/7935">bug in RStudio</a>, which will be fixed in version 1.4.944.</li>
 </ul>
 </section>
@@ -44728,7 +44729,7 @@ font-style: inherit;"># check for unpdated versions of installed libraries</span
 <p>Since R Notebooks are saved as html files, it’s possible to publish them on GitHub using GitHub pages. GitHub published a <a href="https://resources.github.com/github-and-rstudio/">tutorial</a> in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn’t quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn’t directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in <a href="https://github.com/rstudio/rmarkdown/issues/1020">rstudio/rmarkdown #1020</a> - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.</p>
 <section id="publishing-with-rmarkdown" class="level4">
 <h4 class="anchored" data-anchor-id="publishing-with-rmarkdown">Publishing with rmarkdown</h4>
-<p>After using <code>README.md</code> and GitHub pages to publish notebooks, I found I wanted an easier way to publish and navigate across collections of notebooks. Publishing R Notebooks on GitHub pages works fine, but doesn’t offer an easy navigation structure, like <a href="https://pkgdown.r-lib.org">pkgdown</a>. I tried using pkgdown to display notebooks, but pkgdown only supports building <code>vignettes</code>, which have a distinctly different look and feel than R Notebooks. The <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown site generator</a>, <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a>, allows more flexible building of websites from R Markdown files with a simple navigation bar at the top, but doesn’t support <code>html_notebook</code> files OOB.</p>
+<p>After using <code>README.md</code> and GitHub pages to publish notebooks, I found I wanted an easier way to publish and navigate across collections of notebooks. Publishing R Notebooks on GitHub pages works fine, but doesn’t offer an easy navigation structure, like <a href="https://pkgdown.r-lib.org">pkgdown</a>. I tried using pkgdown to display notebooks, but pkgdown only supports building <code>vignettes</code>, which have a distinctly different look and feel than R Notebooks. The <a href="https://yihui.org/rmarkdown/rmarkdown-site.html">rmarkdown site generator</a>, <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a>, allows more flexible building of websites from R Markdown files with a simple navigation bar at the top, but doesn’t support <code>html_notebook</code> files OOB.</p>
 <p>To work around this, I created a simple framework for converting <code>html_notebook</code> files to <code>html_document</code> and building a <code>_site.yml</code> from a list of notebooks stored in the non-standard <code>notebooks/</code> directory, initially using a shell script, <code>build_site</code> (stored at the root of this <a href="https://github.com/jabenninghoff/rtraining">repo</a>). It does the following:</p>
 <ol type="1">
 <li>Creates a working directory, <code>.build-site</code></li>
@@ -45316,7 +45317,7 @@ font-style: inherit;">:</span><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;"> 3-inline.html</span></span></code></pre></div></div>
 <p>Execute <code>rmarkdown::render_site()</code> to build <code>_site</code>, a directory of files ready to deploy as a standalone static website, or if you use an RStudio Project for your website directory. RStudio will add a Build tab to the IDE that you can use to build and preview your site.</p>
-<p>Read more at <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html" class="uri">https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html</a>.”</p>
+<p>Read more at <a href="https://yihui.org/rmarkdown/rmarkdown-site.html" class="uri">https://yihui.org/rmarkdown/rmarkdown-site.html</a>.”</p>
 </section>
 <section id="r-notebook-advice" class="level4">
 <h4 class="anchored" data-anchor-id="r-notebook-advice">R Notebook Advice</h4>

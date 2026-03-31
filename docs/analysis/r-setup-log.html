@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>R Setup Log – rtraining</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -71,19 +74,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../analysis/r-training-log.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9bf6b10bcba5eae4d51a1abb52d3b9a8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-887db9f152f626290836d94654f4db8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-44e7dcc055fbee3430a8bc270d054f06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-26e60e5bcc5842cc01ff0ab26801697a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-44e7dcc055fbee3430a8bc270d054f06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -522,7 +524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> info <span class="at">--cask</span> r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>==&gt; r-app: 4.5.1
+<pre><code>==&gt; r-app: 4.5.3
 https://www.r-project.org/
 Not installed
 From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/r/r-app.rb
@@ -531,7 +533,7 @@ R
 ==&gt; Description
 Environment for statistical computing and graphics
 ==&gt; Artifacts
-R-4.5.1-arm64.pkg (Pkg)
+R-4.5.3-arm64.pkg (Pkg)
 ==&gt; Analytics
 install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 </div>
@@ -692,7 +694,7 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 <li>“Run All”</li>
 <li>Save</li>
 </ol></li>
-<li><a href="https://support.posit.co/hc/en-us/articles/205612627-Debugging-with-the-RStudio-IDE#debugging-in-r-markdown-documents">Debug breakpoints don’t work in R Markdown documents</a>. To fix this, <a href="https://bookdown.org/yihui/rmarkdown-cookbook/purl.html">convert R Markdown documents to R Scripts using purl</a> for debugging.</li>
+<li><a href="https://support.posit.co/hc/en-us/articles/205612627-Debugging-with-the-RStudio-IDE#debugging-in-r-markdown-documents">Debug breakpoints don’t work in R Markdown documents</a>. To fix this, <a href="https://yihui.org/rmarkdown-cookbook/purl.html">convert R Markdown documents to R Scripts using purl</a> for debugging.</li>
 <li>Not really a drawback, but…<code>Rcpp</code> and <code>rprojroot</code> are erroneously listed in RStudio as required to create R Markdown, which can also cause problems with <code>renv</code>. This is a <a href="https://github.com/rstudio/rstudio/issues/7935">bug in RStudio</a>, which will be fixed in version 1.4.944.</li>
 </ul>
 </section>
@@ -701,7 +703,7 @@ install: 1,314 (30 days), 2,440 (90 days), 2,440 (365 days)</code></pre>
 <p>Since R Notebooks are saved as html files, it’s possible to publish them on GitHub using GitHub pages. GitHub published a <a href="https://resources.github.com/github-and-rstudio/">tutorial</a> in 2018 on getting RStudio integrated with GitHub, and I started working on that. Quickly I discovered that while the tutorial was helpful, it wasn’t quite the setup I wanted; it published R Markdown through GitHub pages, but wouldn’t directly support the automatically generated html of R Notebooks. After more searching, I was able to get Notebooks working on GitHub, but I used the method described in <a href="https://github.com/rstudio/rmarkdown/issues/1020">rstudio/rmarkdown #1020</a> - checking in the .nb.html into git, and using GitHub Pages so that you can view the rendered HTML instead of just the HTML code.</p>
 <section id="publishing-with-rmarkdown" class="level4">
 <h4 class="anchored" data-anchor-id="publishing-with-rmarkdown">Publishing with rmarkdown</h4>
-<p>After using <code>README.md</code> and GitHub pages to publish notebooks, I found I wanted an easier way to publish and navigate across collections of notebooks. Publishing R Notebooks on GitHub pages works fine, but doesn’t offer an easy navigation structure, like <a href="https://pkgdown.r-lib.org">pkgdown</a>. I tried using pkgdown to display notebooks, but pkgdown only supports building <code>vignettes</code>, which have a distinctly different look and feel than R Notebooks. The <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown site generator</a>, <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a>, allows more flexible building of websites from R Markdown files with a simple navigation bar at the top, but doesn’t support <code>html_notebook</code> files OOB.</p>
+<p>After using <code>README.md</code> and GitHub pages to publish notebooks, I found I wanted an easier way to publish and navigate across collections of notebooks. Publishing R Notebooks on GitHub pages works fine, but doesn’t offer an easy navigation structure, like <a href="https://pkgdown.r-lib.org">pkgdown</a>. I tried using pkgdown to display notebooks, but pkgdown only supports building <code>vignettes</code>, which have a distinctly different look and feel than R Notebooks. The <a href="https://yihui.org/rmarkdown/rmarkdown-site.html">rmarkdown site generator</a>, <a href="https://rdrr.io/cran/rmarkdown/man/render_site.html">render_site</a>, allows more flexible building of websites from R Markdown files with a simple navigation bar at the top, but doesn’t support <code>html_notebook</code> files OOB.</p>
 <p>To work around this, I created a simple framework for converting <code>html_notebook</code> files to <code>html_document</code> and building a <code>_site.yml</code> from a list of notebooks stored in the non-standard <code>notebooks/</code> directory, initially using a shell script, <code>build_site</code> (stored at the root of this <a href="https://github.com/jabenninghoff/rtraining">repo</a>). It does the following:</p>
 <ol type="1">
 <li>Creates a working directory, <code>.build-site</code></li>
