@@ -70,6 +70,8 @@ var width_initial = $("div").width()/2-60;
 
 Then the fault tree will position itself within view, but not always centered. A complete fix would render the fault tree centered within the widget.
 
+The partial fix has been implemented in [FaultTree.widget](https://github.com/jto888/FaultTree.widget).
+
 Other approaches tested:
 
 ```javascript

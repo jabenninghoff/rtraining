@@ -87,11 +87,11 @@
     },
     "FaultTree.widget": {
       "Package": "FaultTree.widget",
-      "Version": "0.2.8.1",
+      "Version": "0.2.8.3",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Widget Code for 'FaultTree'",
-      "Date": "2022-7-17",
+      "Date": "2022-7-23",
       "Author": "David J. Silkworth",
       "Maintainer": "Jacob T. Ormerod <jake@openreliability.org>",
       "Description": "Code for presenting fault trees as a widget.",
@@ -108,10 +108,10 @@
       "LazyLoad": "yes",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "jabenninghoff",
+      "RemoteUsername": "jto888",
       "RemoteRepo": "FaultTree.widget",
       "RemoteRef": "master",
-      "RemoteSha": "1febe8fbb278c1b79db5c13c1bc7a58eef0e6aa8"
+      "RemoteSha": "8667feb9a4586fa6d54bde64c761ce9128d5cb62"
     },
     "KernSmooth": {
       "Package": "KernSmooth",
