@@ -1,3 +1,7 @@
+# rtraining 1.3.5
+
+* 2026-08 Upkeep
+
 # rtraining 1.3.4
 
 * Updated FaultTree.widget Test: use official FaultTree.widget repository (fixed)

@@ -1,7 +1,9 @@
 ^_freeze$
+^\.claude$
 ^\.github$
 ^\.lintr$
 ^\.nojekyll$
+^\.positai$
 ^\.quarto$
 ^\.Rproj\.user$
 ^analysis/.*-figure$
@@ -17,4 +19,3 @@
 ^renv\.lock$
 ^renv$
 ^rtraining\.Rproj$
-^TODO\.md$
