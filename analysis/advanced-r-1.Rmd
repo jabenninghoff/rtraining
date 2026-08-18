@@ -3026,7 +3026,7 @@ check_installed <- function(package) {
   TRUE
 }
 check_installed("rlang")
-try(check_installed("ggplot3"))
+# try(check_installed("ggplot3")) # errors on missing_deps()
 ```
 
 ---
