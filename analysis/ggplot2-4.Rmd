@@ -20,7 +20,10 @@ output:
 
 Workbook for completing quizzes and exercises from the "Grammar" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(MASS) # nolint: unused_import_linter. Used for "rlm".
 library(ggplot2)
 library(dplyr)
@@ -267,7 +270,8 @@ mpg %>%
 
 1.  Simplify the following plot specifications:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 ggplot(mpg) +
   geom_point(aes(mpg$displ, mpg$hwy))
 
@@ -295,7 +299,8 @@ ggplot(msleep, aes(log(brainwt), log(bodywt))) +
 
 GG Solutions offers a similar solution for the first two and a strange solution for the third (since the `diamonds` data is never used in the third plot):
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 ggplot(mpg) +
   geom_point(aes(displ, hwy))
 
@@ -322,7 +327,8 @@ Note: I prefer my answer to GG Solutions.
 2.  What does the following code do? Does it work? Does it make sense?
     Why/why not?
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 ggplot(mpg) +
   geom_point(aes(class, cty)) +
   geom_boxplot(aes(trans, hwy))
@@ -354,7 +360,8 @@ Answer: let's experiment!
 
 This code throws an error, `Error: Discrete value supplied to continuous scale`
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   geom_point(aes(drv, hwy), color = "red")

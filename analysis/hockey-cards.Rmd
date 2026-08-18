@@ -20,7 +20,10 @@ output:
 
 A simple Monte Carlo simulation in R, replicating Julia code from a LinkedIn [post](https://www.linkedin.com/posts/etorkia_gretzky-card-simulation-using-julia-activity-7186379288563048448--FVH).
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(ggplot2)
 library(jbplot)
 ```
@@ -38,7 +41,8 @@ R for comparison.
 The base R code below is functionally equivalent to the Julia code, except it omits the trial ID in
 the result:
 
-```{r gretsky_cards}
+```{r}
+#| label: gretsky_cards
 gretsky_cards <- function(trials) {
   set_cards <- 396
   carton_cards <- 672
@@ -60,7 +64,8 @@ Also, instead of using a loop, I used `replicate()`, which I think is easier to 
 
 Replicating the answer in base R:
 
-```{r summary}
+```{r}
+#| label: summary
 summary(gretskys)
 hist(gretskys)
 ```
@@ -69,7 +74,8 @@ hist(gretskys)
 
 Use ggplot2 to create a prettier histogram:
 
-```{r histogram}
+```{r}
+#| label: histogram
 ggplot(as.data.frame(gretskys), aes(gretskys)) +
   geom_hist_bw(binwidth = 1) +
   labs(title = "Gretsky cards per case", x = NULL, y = NULL) +
@@ -81,7 +87,8 @@ ggplot(as.data.frame(gretskys), aes(gretskys)) +
 
 How does the performance compare to Julia?
 
-```{r benchmark}
+```{r}
+#| label: benchmark
 bench::mark(gretsky_cards(10000))
 ```
 

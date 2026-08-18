@@ -20,7 +20,10 @@ output:
 
 My implementation of [FizzBuzz](https://rosettacode.org/wiki/FizzBuzz) in R, using a vector function.
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(dplyr)
 ```
 
@@ -35,7 +38,8 @@ My implementation, written first.
 
 The function:
 
-```{r fizz_buzz}
+```{r}
+#| label: fizz_buzz
 fizz_buzz <- function(x) {
   fb_single <- function(n) {
     if (n %% 3 == 0 && n %% 5 == 0) {
@@ -55,7 +59,8 @@ fizz_buzz <- function(x) {
 
 The task:
 
-```{r run_fizz_buzz}
+```{r}
+#| label: run_fizz_buzz
 fizz_buzz(1:100)
 ```
 
@@ -73,7 +78,8 @@ solution.
 
 Using `dplyr::case_when()` allows much simpler code: (R doesn't have a built-in 'case' statement)
 
-```{r fizz_buzz_d}
+```{r}
+#| label: fizz_buzz_d
 fizz_buzz_d <- function(x) {
   dplyr::case_when(
     # x %% 15 == 0 is equivalent to x %% 5 == 0 && x %% 3 == 0
@@ -91,7 +97,8 @@ fizz_buzz_d(1:100)
 
 The simplest way to solve this is with a for loop:
 
-```{r fizz_buzz_loop}
+```{r}
+#| label: fizz_buzz_loop
 for (n in 1:100) {
   if (n %% 3 == 0 && n %% 5 == 0) {
     print("FizzBuzz")
@@ -114,7 +121,8 @@ Note: Rosetta Code offers several different
 [solutions for R](https://rosettacode.org/wiki/FizzBuzz#R). The first solution is cleverer yet still
 understandable use of base R:
 
-```{r fizz_buzz_r}
+```{r}
+#| label: fizz_buzz_r
 fizz_buzz_r <- function(x) {
   xx <- x
   xx[x %% 3 == 0] <- "Fizz"

@@ -20,7 +20,10 @@ output:
 
 An exploration of conditional probabilities in R, inspired by a 2015 blog [post](https://statmodeling.stat.columbia.edu/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/) on the hot hand.
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 # no libraries
 ```
 
@@ -41,7 +44,8 @@ quoted from a [paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=262735
 
 What? OK, so let's follow along with the R code. The first block runs the simulation:
 
-```{r prob}
+```{r}
+#| label: prob
 rep <- 1e6
 n <- 4
 data <- array(sample(c(0, 1), rep * n, replace = TRUE), c(rep, n))
@@ -55,7 +59,8 @@ for (i in 1:rep) {
 
 The second block naively calculates the average:
 
-```{r mean}
+```{r}
+#| label: mean
 print(mean(prob))
 ```
 
@@ -63,7 +68,8 @@ This doesn't work since, as the post points out, "sometimes the first three flip
 probability is 0/0." Discarding these gets us the correct average, which is approximately 0.4 and
 not 0.5 as the quote predicts:
 
-```{r mean_rm}
+```{r}
+#| label: mean_rm
 print(mean(prob, na.rm = TRUE))
 ```
 
@@ -86,14 +92,16 @@ data <- array(sample(c(0, 1), rep * n, replace = TRUE), c(rep, n))
 This code simulates flipping the coin 4 times in a row 1 million times and stores the results in a
 matrix:
 
-```{r data}
+```{r}
+#| label: data
 head(data)
 ```
 
 By convention, 1 is heads and 0 is tails. If the coin is fair, we should expect the proportion of
 heads to be about 0.5.
 
-```{r data_mean}
+```{r}
+#| label: data_mean
 mean(data)
 round(mean(data), 2)
 ```
@@ -118,7 +126,8 @@ This counts the relative frequency of heads immediately after heads, by finding 
 heads after heads (`prob[i]`). To see how this works in practice, we can test all possible
 combinations of heads and tails:
 
-```{r calc_prob}
+```{r}
+#| label: calc_prob
 calc_prob <- function(flips) {
   heads1 <- flips[1:(n - 1)] == 1
   heads2 <- flips[2:n] == 1
@@ -144,7 +153,8 @@ There are 16 possible combinations of 4 coin flips, with 5 possible outcomes: 0,
 Looking at the permutations, the conditional probability starts to make sense. Calculating the
 conditional relative frequency for all permutations gives us:
 
-```{r test_mean}
+```{r}
+#| label: test_mean
 mean(test_prob, na.rm = TRUE)
 ```
 

@@ -20,7 +20,10 @@ output:
 
 Workbook for completing quizzes and exercises from the "Metaprogramming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io).
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(lobstr)
 library(rlang)
 
@@ -57,7 +60,8 @@ But I think it's easier to learn metaprogramming now than ever before. Over the 
 
 To compute on the language, we first need to understand its structure. That requires some new vocabulary, some new tools, and some new ways of thinking about R code. The first of these is the distinction between an operation and its result. Take the following code, which multiplies a variable `x` by 10 and saves the result to a new variable called `y`. It doesn't work because we haven't defined a variable called `x`:
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 rm(x)
 try(y <- x * 10)
 ```
@@ -123,7 +127,8 @@ ast((x + y) * z)
 2.  Draw the following trees by hand and then check your answers with
     `lobstr::ast()`.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 f(g(h(i(1, 2, 3))))
 f(1, g(2, h(3, i())))
 f(g(1, 2), h(3, i(4, 5)))
@@ -294,7 +299,8 @@ AR Solutions: When the first element of a call object is removed, the second ele
 
 3.  Describe the differences between the following call objects.
 
-```{r, results = FALSE}
+```{r}
+#| results: false
 x <- 1:10
 call2(median, x, na.rm = TRUE)
 call2(expr(median), x, na.rm = TRUE)
@@ -351,7 +357,8 @@ AR Solutions: The reason for this unexpected behaviour is that `mean()` uses the
 
 5.  Why does this code not make sense?
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 x <- expr(foo(x = 1))
 names(x) <- c("x", "y")
 ```
@@ -413,7 +420,8 @@ ast(`if`(x > 1, "a", "b"))
 1.  R uses parentheses in two slightly different ways as illustrated by
     these two calls:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 f((1))
 `(`(1 + 1)
 ```
@@ -467,7 +475,8 @@ b = c(c = 1) # styler: off
 
 So, when we play with `ast()`, we can directly see that the following is not possible:
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 try(ast(b = c(c = 1)))
 ```
 
@@ -605,7 +614,8 @@ parse_exprs("x + 1; y + 1")
 
 AR Solutions: In this case `parse_expr()` notices that more than one expression would have to be generated and throws an error.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 try(parse_expr("x + 1; y + 1"))
 ```
 
@@ -623,7 +633,8 @@ try(parse_expr("f())"))
 
 AR Solutions: Invalid expressions will lead to an error in the underlying `parse()` function.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 try(parse_expr("a +"))
 try(parse_expr("f())"))
 try(parse(text = "a +"))
@@ -651,7 +662,8 @@ expr_text(expr)
 
 AR Solutions: `expr_text()` will paste the results from `deparse(expr)` together and use a linebreak (`\n`) as separator.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 expr <- expr(g(a + b + c + d + e + f + g + h + i + j + k + l + m +
   n + o + p + q + r + s + t + u + v + w + x + y + z))
 deparse(expr)
@@ -678,7 +690,8 @@ pairwise.t.test(1:18, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1
 
 AR Solutions: The function `pairwise.t.test()` captures its data arguments (`x` and `g`) so it can print the input expressions along the computed p-values. Prior to R 4.0.0 this used to be implemented via `deparse(substitute(x))` in combination with `paste()`. This could lead to unexpected output, if one of the inputs exceeded the default `width.cutoff` value of 60 characters within `deparse()`. In this case, the expression would be split into a character vector of length greater 1.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # Output in R version 3.6.2
 d <- 1
 pairwise.t.test(2, d + d + d + d + d + d + d + d +
@@ -697,7 +710,8 @@ In [R 4.0.0](https://cran.r-project.org/doc/manuals/r-release/NEWS.html) `pairwi
 
 > deparse1() is a simple utility added in R 4.0.0 to ensure a string result (character vector of length one), typically used in name construction, as deparse1(substitute(.)).
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # Output since R 4.0.0
 d <- 1
 pairwise.t.test(2, d + d + d + d + d + d + d + d +
@@ -849,7 +863,8 @@ Note: I was unable to solve this exercise on my own, and needed to consult AR So
     a function. Why? How could you modify `logical_abbr()` to make it
     work? What components of a function will you need to recurse over?
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 logical_abbr(function(x = TRUE) {
   g(x + T)
 })
@@ -857,7 +872,8 @@ logical_abbr(function(x = TRUE) {
 
 AR Solutions: The function currently fails, because `"closure"` is not handled in `switch_expr()` within `logical_abbr_rec()`.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 f <- function(x = TRUE) {
   g(x + T)
 }
@@ -965,7 +981,8 @@ So, we need to catch the case where the first two elements are both calls. Furth
 
 This is why we add the following block within another `else` statement in `find_assign_call()`:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 if (is_call(x, "<-") && is_call(x[[2]])) {
   lhs <- expr_text(x[[2]])
   children <- as.list(x)[-1]
@@ -1123,7 +1140,8 @@ Quasiquotation is one of the three pillars of tidy evaluation. You'll learn abou
 1.  For each function in the following base R code, identify which arguments
     are quoted and which are evaluated.
 
-```{r, results = FALSE}
+```{r}
+#| results: false
 library(MASS) # nolint: unused_import_linter.
 
 mtcars2 <- subset(mtcars, cyl == 4)
@@ -1158,13 +1176,15 @@ Results: `MASS`, `cyl`, `vs` are quoted, `mtcars`, `mtcars2` and `mtcars2$am` ar
 
 AR Solutions: For each argument we first follow the advice from *Advanced R* and execute the argument outside of the respective function. Since `MASS`, `cyl`, `vs` and `am` are not objects contained in the global environment, their execution raises an "Object not found" error. This way we confirm that the respective function arguments are quoted. For the other arguments, we may inspect the source code (and the documentation) to check if any quoting mechanisms are applied or the arguments are evaluated.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 library(MASS) # MASS is quoted # nolint: unused_import_linter.
 ```
 
 `library()` also accepts character vectors and doesn't quote when `character.only` is set to `TRUE`, so `library(MASS, character.only = TRUE)` would raise an error.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 mtcars2 <- subset(mtcars, cyl == 4) # mtcars is evaluated
 # cyl is quoted
 with(mtcars2, sum(vs)) # mtcars2 is evaluated
@@ -1175,7 +1195,8 @@ sum(mtcars2$am) # matcars$am is evaluated
 
 When we inspect the source code of `rm()`, we notice that `rm()` catches its `...` argument as an unevaluated call (in this case a pairlist) via `match.call()`. This call is then converted into a string for further evaluation.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 rm(mtcars2) # mtcars2 is quoted
 ```
 
@@ -1184,7 +1205,8 @@ rm(mtcars2) # mtcars2 is quoted
 2.  For each function in the following tidyverse code, identify which arguments
     are quoted and which are evaluated.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 library(dplyr)
 library(ggplot2)
 
@@ -1203,14 +1225,16 @@ Answer: `library` automatically quotes its arguments. `cyl`, `mpg`, and `mean` a
 
 AR Solutions: From the previous exercise we've already learned that `library()` quotes its first argument.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 library(dplyr) # dplyr is quoted
 library(ggplot2) # ggplot2 is quoted
 ```
 
 In similar fashion, it becomes clear that `cyl` is quoted by `group_by()`.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 by_cyl <- mtcars %>% # mtcars is evaluated
   group_by(cyl) %>% # cyl is quoted
   summarise(mean = mean(mpg)) # mean = mean(mpg) is quoted
@@ -1226,7 +1250,8 @@ dplyr::summarise
 dplyr:::summarise.data.frame
 ```
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 dplyr:::summarise_cols
 #> function (.data, ...)
 #> {
@@ -1247,7 +1272,8 @@ dplyr:::summarise_cols
 
 In the following `{ggplot2}` expression the `cyl`- and `mean`-objects are quoted.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 ggplot(
   by_cyl, # by_cyl is evaluated
   aes(cyl, mean) # aes() is evaluated
@@ -1284,7 +1310,8 @@ AR Solutions: `expr()` acts as a simple wrapper, which passes its argument to `e
 2.  Compare and contrast the following two functions. Can you predict the
     output before running them?
 
-```{r, results = FALSE}
+```{r}
+#| results: false
 f1 <- function(x, y) {
   exprs(x = x, y = y)
 }
@@ -1340,7 +1367,8 @@ try(enexpr(arg = foo))
 
 AR Solutions: In the first case an error is thrown:
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 on_expr <- function(x) {
   enexpr(expr(x))
 }
@@ -1477,7 +1505,8 @@ abc <- exprs(a, b, c)
 
 Use quasiquotation to construct the following calls:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 (x + y) / (y + z)
 -(x + z)^(y + z)
 (x + y) + (y + z) - (x + y)
@@ -1626,7 +1655,8 @@ interaction(list(a = c("a", "b", "c", "d"), b = c("e", "f"))) # list
 
 3.  Explain the problem with this definition of `set_attr()`
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 set_attr <- function(x, ...) {
   attr <- rlang::list2(...)
   attributes(x) <- attr
@@ -1756,7 +1786,8 @@ compose(sum, as.integer)(1:10)
 
 Answer: (non-working) code below.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 compose <- function(f, g) {
   new_function(
     expr(...),
@@ -1839,7 +1870,8 @@ locate_evaluation(tmp_file, local = TRUE)
 
 2.  Predict the results of the following lines of code:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 eval(expr(eval(expr(eval(expr(2 + 2))))))
 eval(eval(expr(eval(expr(eval(expr(2 + 2)))))))
 expr(eval(expr(eval(expr(eval(expr(2 + 2)))))))

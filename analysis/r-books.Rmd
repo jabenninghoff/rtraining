@@ -24,7 +24,10 @@ An actively maintained and curated list of R Books and other recommended resourc
 
 Libraries used in this notebook.
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(palmerpenguins)
 library(ggplot2)
 library(ggthemes)
@@ -50,7 +53,10 @@ analysis and visualization. A companion book provides suggested
 
 Sample visualization from the first chapter:
 
-```{r r4ds, message = FALSE, warning = FALSE}
+```{r}
+#| label: r4ds
+#| message: false
+#| warning: false
 # visualization from https://r4ds.hadley.nz/data-visualize#first-steps
 ggplot(
   data = penguins,
@@ -92,13 +98,15 @@ Working with custom fonts in R can be problematic, and font support is platform-
 default, R provides default mappings for three device-independent font families: `sans` (Helvetica or Arial), `serif` (Times New Roman), and `mono` (Courier New). On macOS, `quartz` is the default
 graphics device, and uses the following fonts:
 
-```{r quartzFonts}
+```{r}
+#| label: quartzFonts
 quartzFonts()
 ```
 
 Custom fonts installed on the local system *should* work without installing any additional packages:
 
-```{r system_fonts}
+```{r}
+#| label: system_fonts
 size <- 28
 
 ggplot() +
@@ -115,7 +123,8 @@ The plot above works because I have the [Lato](https://www.latofonts.com/) and
 use to build this page; on systems without these fonts installed this plot would generate warnings
 and fallback to the default font:
 
-```{r missing}
+```{r}
+#| label: missing
 ggplot() +
   annotate("text", x = 0, y = 0, label = "Not Missing", size = size) +
   annotate("text", x = 0, y = -1, label = "Missing", family = "missing", size = size) +
@@ -141,7 +150,8 @@ systemfonts can help troubleshoot issues by showing what system fonts R recogniz
 
 showtext will work even with fonts not present on the local system:
 
-```{r showtext}
+```{r}
+#| label: showtext
 font_add_google("Open Sans")
 showtext_auto()
 
@@ -155,7 +165,8 @@ ggplot() +
 An important caveat: showtext *replaces* all system fonts when enabled. To disable it and use the
 standard font system, run:
 
-```{r disable_showtext}
+```{r}
+#| label: disable_showtext
 showtext_auto(FALSE)
 ```
 
@@ -215,7 +226,8 @@ For data validation, I currently use `stopifnot()`, although I may switch to eit
 `checkmate` looks appealing as a way to write more succinct code. Total downloads for the `assertr`,
 `validate`, `chk`, and `checkmate` packages for the last month are listed below:
 
-```{r cran_downloads}
+```{r}
+#| label: cran_downloads
 cran_downloads(
   packages = c("assertr", "validate", "chk", "checkmate"),
   when = "last-month"

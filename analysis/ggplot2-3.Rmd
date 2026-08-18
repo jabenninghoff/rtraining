@@ -20,7 +20,10 @@ output:
 
 Workbook for completing quizzes and exercises from the "Scales" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(ggplot2)
 library(dplyr)
 library(jbplot)
@@ -41,14 +44,18 @@ This workbook includes answers and solutions to the quizzes and exercises from [
 
 Position scales are used to control the locations of visual entities in a plot, and how those locations are mapped to data values. Every plot has two position scales, corresponding to the x and y aesthetics. In most cases this is clear in the plot specification, because the user explicitly specifies the variables mapped to x and y explicitly. However, this is not always the case. Consider this plot specification:
 
-```{r, fig.show = "hide", message = FALSE}
+```{r}
+#| message: false
+#| fig-show: hide
 ggplot(mpg, aes(x = displ)) +
   geom_histogram()
 ```
 
 In this example the y aesthetic is not specified by the user. Rather, the aesthetic is mapped to a computed variable: `geom_histogram()` computes a `count` variable that gets mapped to the y aesthetic. The default behaviour of `geom_histogram()` is equivalent to the following:
 
-```{r, fig.show = "hide", message = FALSE}
+```{r}
+#| message: false
+#| fig-show: hide
 ggplot(mpg, aes(x = displ, y = after_stat(count))) +
   geom_histogram()
 ```

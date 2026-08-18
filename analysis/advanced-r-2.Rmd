@@ -20,7 +20,10 @@ output:
 
 Workbook for completing quizzes and exercises from the "Functional programming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io).
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(purrr)
 library(palmerpenguins)
 library(ggplot2)
@@ -229,7 +232,8 @@ Notes: the code AR Solutions uses for trials, `trials <- map(1:100, ~ t.test(rpo
     function to every element of a nested list. Why does it fail, and 
     what do you need to do to make it work?
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 x <- list(
   list(1, c(3, 9)),
   list(c(3, 6), 7, c(4, 7, 6))
@@ -249,7 +253,8 @@ AR Solutions: This function call fails, because `triple()` is specified as the `
 
 There are a number of ways we could resolve the problem. However, there is not much to choose between them for this simple example, although it is good to know your options for more complicated cases.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # Don't name the argument
 map(x, map, triple)
 
@@ -361,7 +366,8 @@ unlist(map(mtcars, 1))
 2.  Rewrite the following code to use `iwalk()` instead of `walk2()`. What
     are the advantages and disadvantages?
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 cyls <- split(mtcars, mtcars$cyl)
 paths <- file.path(temp, paste0("cyl-", names(cyls), ".csv"))
 walk2(cyls, paths, write.csv)
@@ -382,7 +388,8 @@ The main advantage of using `iwalk()` is that it will use `seq_along()` if `x` d
 
 AR Solutions: `iwalk()` allows us to use a single variable, storing the output path in the names.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 temp <- tempfile()
 dir.create(temp)
 cyls <- split(mtcars, mtcars$cyl)
@@ -392,7 +399,8 @@ iwalk(cyls, ~ write.csv(.x, .y))
 
 We could do this in a single pipe by taking advantage of `set_names()`:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 mtcars %>%
   split(mtcars$cyl) %>%
   set_names(~ file.path(temp, paste0("cyl-", .x, ".csv"))) %>%
@@ -424,7 +432,8 @@ rm(mtcars)
 
 Compare and contrast the `map2()` approach to this `map()` approach:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 mtcars[nm] <- map(nm, ~ trans[[.x]](mtcars[[.x]]))
 ```
 
@@ -440,7 +449,8 @@ The equivalent `map()` approach isn't as clean: it's harder to understand what `
 
 AR Solutions: In the first approach
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 mtcars[nm] <- map2(trans, mtcars[nm], function(f, var) f(var))
 ```
 
@@ -448,7 +458,8 @@ the list of the 2 functions (`trans`) and the 2 appropriately selected data fram
 
 The `map()` variant
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 mtcars[nm] <- map(nm, ~ trans[[.x]](mtcars[[.x]]))
 ```
 
@@ -535,7 +546,8 @@ simple_reduce <- function(x, f, default) {
 
 Our new `simple_reduce()` now works as intended:
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 try(simple_reduce(integer(0), `+`))
 simple_reduce(integer(0), `+`, default = 0L)
 simple_reduce(1, `+`)
@@ -688,7 +700,8 @@ modify_if(iris, is.numeric, scale01)
 
 AR Solutions: To apply a function to every column of a data frame, we can use `purrr::modify()` (or `purrr::map_dfr()`), which also conveniently returns a data frame. To limit the application to numeric columns, the scoped version `modify_if()` can be used.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 modify_if(mtcars, is.numeric, scale01)
 ```
 
@@ -699,7 +712,8 @@ modify_if(mtcars, is.numeric, scale01)
 1.  How does `apply()` arrange the output? Read the documentation and perform 
     some experiments.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # experiments
 m1 <- matrix(1:4, nrow = 1)
 apply(m1, 1, sum)
@@ -837,7 +851,8 @@ fixed_point(function(y) sin(y) + cos(y), 1.0)
 
 AR Solutions: A number $x$ is called a fixed point of a function $f$ if it satisfies the equation $f(x) = x$. For some functions we may find a fixed point by beginning with a starting value and applying $f$ repeatedly. Here `fixed_point()` acts as a functional because it takes a function as an argument.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 fixed_point_ar <- function(f, x_init, n_max = 10000, tol = 0.0001) {
   n <- 0
   x <- x_init
@@ -874,7 +889,8 @@ Notes: AR Solutions offers a different approach using a `while()` loop that is g
 
 **Note: in previous versions of R (before R 4.4?), this block failed with a different error.**
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 try(fixed_point(add_one, 1))
 ```
 
@@ -1103,7 +1119,8 @@ i <- 0
 
 AR Solutions: Without the captured and encapsulated environment of a closure the counts will be stored in the global environment. Here they can be overwritten or deleted as well as interfere with other counters.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 new_counter2()
 i
 new_counter2()
@@ -1315,7 +1332,8 @@ rm(list = ls())
 
 In this chapter, you'll learn about function operators. A __function operator__ is a function that takes one (or more) functions as input and returns a function as output. The following code shows a simple function operator, `chatty()`. It wraps a function, making a new function that prints out its first argument. You might create a function like this because it gives you a window to see how functionals, like `map_int()`, work.
 
-```{r, eval = TRUE}
+```{r}
+#| eval: true
 chatty <- function(f) {
   force(f)
 
@@ -1612,7 +1630,8 @@ AR Solutions:
 
 To ensure that the function created by `delay_by()` waits that a certain amount of time has passed since its last execution, we incorporate three little changes into our new `delay_atleast()` as indicated in the corresponding comments below.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 delay_atleast <- function(amount, f) {
   force(f)
   force(amount)
