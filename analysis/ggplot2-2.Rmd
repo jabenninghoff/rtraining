@@ -27,7 +27,7 @@ library(babynames)
 library(jbplot)
 library(modelr)
 library(maps) # nolint: unused_import_linter. maps is required by map_data().
-library(sf)
+library(sf) # nolint: unused_import_linter. sf is required by us_counties().
 library(USAboundaries)
 library(USAboundariesData) # nolint: unused_import_linter. Needed by USAboundaries.
 library(ggraph)
