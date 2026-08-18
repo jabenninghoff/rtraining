@@ -25,7 +25,8 @@ Notebook for testing FaultTree.widget rendering fixes.
 
 The fault tree below is centered in-frame when viewed in RStudio, but is partially off-frame when viewed in a browser, and completely off-frame if the browser window is wide enough. This is true for both `html_notebook` and `html_document`.
 
-```{r tree1}
+```{r}
+#| label: tree1
 library(FaultTree)
 library(FaultTree.widget)
 
@@ -48,7 +49,8 @@ ftree2widget(tree1, height = 500, width = 800)
 
 Check rendering without height and width specified:
 
-```{r no_hw}
+```{r}
+#| label: no_hw
 ftree2widget(tree1)
 ```
 

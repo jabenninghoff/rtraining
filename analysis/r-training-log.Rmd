@@ -24,7 +24,10 @@ Original notes on learning R and RStudio. An updated reading list of R books and
 
 Load libraries and suppress warning and error messages. Thanks to this tidyverse [article](https://reprex.tidyverse.org/articles/articles/suppress-startup-messages.html). Also load rdev and set default theme and color scales.
 
-```{r startup, message = FALSE, warning = FALSE}
+```{r}
+#| label: startup
+#| message: false
+#| warning: false
 library(tidyverse)
 library(jbplot)
 library(caTools)
@@ -126,7 +129,8 @@ Selected highlights from the book:
 
 [7.6 Patterns and models](https://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models) covers models and residuals, here showing how to reveal the expected relationship between cut and price:
 
-```{r models}
+```{r}
+#| label: models
 library(modelr)
 
 mod <- lm(log(price) ~ log(carat), data = diamonds)
@@ -248,7 +252,8 @@ A fun demo taken from the Wikipedia article on [R](https://en.wikipedia.org/wiki
 
 ![Mandelbrot set](rendered/mandelbrot.gif)
 
-```{r wikipedia_demo}
+```{r}
+#| label: wikipedia_demo
 local({
   # install.packages("caTools")  # install external package
   # library(caTools)             # external package providing write.gif function

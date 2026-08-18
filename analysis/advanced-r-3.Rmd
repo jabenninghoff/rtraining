@@ -20,7 +20,10 @@ output:
 
 Workbook for completing quizzes and exercises from the "Object-oriented programming" chapters of [Advanced R](https://adv-r.hadley.nz/index.html), second edition, with comparisons to solutions from [Advanced R Solutions](https://advanced-r-solutions.rbind.io).
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(sloop)
 library(purrr)
 library(dplyr)
@@ -225,7 +228,8 @@ We need to provide the number of rows as an input to make it possible to create 
 
 This leads to the following constructor:
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 new_data.frame <- function(x, n, row.names = NULL) {
   # Check if the underlying object is a list
   stopifnot(is.list(x))
@@ -321,7 +325,8 @@ The `factor()` helper including the constructor (`new_factor()`) and its validat
 
 To improve the `factor()` helper we choose to return an informative error message instead.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 factor2 <- function(x, levels = unique(x)) {
   new_levels <- match(x, levels)
 
@@ -471,7 +476,8 @@ validate_roman <- function(x) {
 
 For convenience, we allow the user to also pass real values to a helper function.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 roman <- function(x = integer()) {
   x <- as.integer(x)
 
@@ -533,7 +539,8 @@ However, in older versions of R (pre R 4.0.0; when *Advanced R* was written) thi
 
 Answer: `s3_methods_class()` answers this question:
 
-```{r warning = FALSE}
+```{r}
+#| warning: false
 s3_methods_class("table")
 ```
 
@@ -552,7 +559,8 @@ plot(table(x))
 
 Answer:
 
-```{r warning = FALSE}
+```{r}
+#| warning: false
 s3_methods_class("ecdf")
 ```
 
@@ -566,7 +574,8 @@ The methods are primarily designed for display (`plot()`, `print()`, `summary()`
 
 Answer: using code from 6.2.5, identify generics and count defined methods:
 
-```{r, warning = FALSE}
+```{r}
+#| warning: false
 # from 6.2.5 exercises, this code makes a list of all functions in the base package
 funs <- Filter(is.function, mget(ls("package:base", all.names = TRUE), inherits = TRUE))
 
@@ -594,7 +603,8 @@ AR Solutions: A little experimentation (and thinking about the most popular func
 
 Let's verify this programmatically with the tools we have learned in this and the previous chapters.
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 ls(all.names = TRUE, envir = baseenv()) %>%
   mget(envir = baseenv()) %>%
   keep(is_function) %>%
@@ -664,7 +674,9 @@ names(formals(`[.AsIs`))
 
 To finally get a better overview, we have to put in a little more effort and also use `s3_methods_generic()` again.
 
-```{r, message = FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| warning: false
 s3_methods_generic("[") %>%
   filter(visible) %>%
   mutate(
@@ -816,7 +828,8 @@ Note: this is a better explanation of how it fails to support subclasses; it dro
 
 Answer: if a generic is defined for either class, it must have different behaviors. Generics that aren't defined for either class must have the same behavior. We can get the list of generics defined for either class using `sloop::s3_methods_class()`. These generics have different behaviors for the two classes:
 
-```{r, warning = FALSE}
+```{r}
+#| warning: false
 ct_generics <- s3_methods_class("POSIXct")$generic
 lt_generics <- s3_methods_class("POSIXlt")$generic
 defined_generics <- union(ct_generics, lt_generics)
@@ -834,7 +847,8 @@ Note: this code doesn't quite work, since `Summary` is a generic according to `i
 
 AR Solutions: To answer this question, we have to get the respective generics
 
-```{r, warning = FALSE}
+```{r}
+#| warning: false
 generics_t <- s3_methods_class("POSIXt")$generic
 generics_ct <- s3_methods_class("POSIXct")$generic
 generics_lt <- s3_methods_class("POSIXlt")$generic
@@ -1337,7 +1351,8 @@ Timezone <- R6Class(
 
 Answer: similar to `TimeZone`, `WorkingDirectory` initializes `wd` to `getwd()`.
 
-```{r warning = FALSE}
+```{r}
+#| warning: false
 orig_wd <- getwd()
 
 WorkingDirectory <- R6Class("WorkingDirectory", list(
@@ -1452,7 +1467,8 @@ sa$balance
 
 AR Solutions: To fulfill this requirement, we make balance a private field. The user has to use the `$deposit()` and `$withdraw()` methods which have access to the balance field.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 BankAccountStrict2 <- R6Class(
   classname = "BankAccountStrict2",
   public = list(
@@ -1544,7 +1560,8 @@ Password <- R6Class(
 
 Let's create one instance of our new class and confirm that the password is neither accessible nor visible, but still check-able.
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 my_pw <- Password$new()
 my_pw$set("snuffles")
 my_pw$password
@@ -1709,7 +1726,9 @@ readLines(tmp)
 
 AR Solutions: Our `FileWriter` class will create a connection to a file at initialization. Therefore, we open a connection to a user specified file during the initialisation. Note that we need to set `open = "a"` in `file()` to open connection for appending text. Otherwise, `cat()` would only work when applied to files, but not with connections as explicitly asked for in the exercise. Further, we add the `append_line()` method and a `close()` statement as finalizer.
 
-```{r, eval = TRUE, error = TRUE}
+```{r}
+#| eval: true
+#| error: true
 FileWriter <- R6::R6Class(
   classname = "FileWriter",
   public = list(
@@ -2325,7 +2344,8 @@ OrderedFactor <- setClass(
 
 We can now register the (S3) ordered-class, while providing an "S4 template". We can also use the S4-class to create new object directly.
 
-```{r, warning = FALSE}
+```{r}
+#| warning: false
 setOldClass("ordered", S4Class = "OrderedFactor")
 x <- OrderedFactor(
   c(1L, 2L, 2L),

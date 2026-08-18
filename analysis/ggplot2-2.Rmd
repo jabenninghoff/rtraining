@@ -20,7 +20,10 @@ output:
 
 Workbook for completing quizzes and exercises from the "Layers" chapters of [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), third edition, with comparisons to solutions from [Solutions to ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book-solutions-3ed.netlify.app).
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
 library(ggplot2)
 library(dplyr)
 library(babynames)
@@ -145,7 +148,8 @@ ggplot(mpg, aes(cyl, hwy, group = cyl)) +
 2.  Modify the following plot so that you get one boxplot per integer value 
     of `displ`.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 ggplot(mpg, aes(displ, cty)) +
   geom_boxplot()
 ```
@@ -195,7 +199,8 @@ ggplot(df, aes(x, y, colour = factor(colour))) +
 4.  How many bars are in each of the following plots?
     (Hint: try adding an outline around each bar with `colour = "white"`)
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 ggplot(mpg, aes(drv)) +
   geom_bar()
 ggplot(mpg, aes(drv, fill = hwy, group = hwy)) +
@@ -230,7 +235,8 @@ mpg |>
     babynames in the US. Run the following code and fix the resulting graph.
     Why does this graph make me unhappy?
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 hadley <- filter(babynames, name == "Hadley")
 ggplot(hadley, aes(year, n)) +
   geom_line()
@@ -416,7 +422,8 @@ map_data("county", "minnesota") |>
 
 Polygon maps are superseded by simple features maps, so let's draw it again, adding Minneapolis, in red:
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 us_counties(resolution = "high", states = "MN") |>
   ggplot() +
   geom_sf(fill = "white") +
@@ -435,7 +442,8 @@ Like maps and spatial data, networks and graphs occupy a special part of the vis
 
 While ggplot2 has limited support for maps, it has no direct support for networks and graphs. `ggraph` offers some interesting visualizations that are useful for understanding social networks, especially this one, which shows how friendships among high school boys changed from 1957 to 1958:
 
-```{r, warning = FALSE}
+```{r}
+#| warning: false
 highschool |>
   as_tbl_graph(directed = FALSE) |>
   ggraph(layout = "stress") +
