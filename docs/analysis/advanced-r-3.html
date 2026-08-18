@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -78,14 +81,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-44e7dcc055fbee3430a8bc270d054f06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-26e60e5bcc5842cc01ff0ab26801697a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-44e7dcc055fbee3430a8bc270d054f06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4cb18ab0a9f211dec1641a4d0d812265.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-45fce60d440c9543cfc9a67b89e4fbdf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-4cb18ab0a9f211dec1641a4d0d812265.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1001,7 +1004,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;     class(f) &lt;- c(if (ordered) "ordered", "factor")
 #&gt;     f
 #&gt; }
-#&gt; &lt;bytecode: 0x124834c08&gt;
+#&gt; &lt;bytecode: 0x12a415fe0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1134,14 +1137,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x) 
 #&gt; UseMethod("t")
-#&gt; &lt;bytecode: 0x123934ca0&gt;
+#&gt; &lt;bytecode: 0x10a552738&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>t.test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; UseMethod("t.test")
-#&gt; &lt;bytecode: 0x1252f0fc8&gt;
+#&gt; &lt;bytecode: 0x12ac986d8&gt;
 #&gt; &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -1185,7 +1188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s3_methods_class</span>(<span class="st">"table"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; # A tibble: 11 × 4
+<pre><code>#&gt; # A tibble: 12 × 4
 #&gt;    generic       class visible source             
 #&gt;    &lt;chr&gt;         &lt;chr&gt; &lt;lgl&gt;   &lt;chr&gt;              
 #&gt;  1 [             table TRUE    base               
@@ -1193,12 +1196,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;  3 as_tibble     table FALSE   registered S3method
 #&gt;  4 as.data.frame table TRUE    base               
 #&gt;  5 Axis          table FALSE   registered S3method
-#&gt;  6 lines         table FALSE   registered S3method
-#&gt;  7 plot          table FALSE   registered S3method
-#&gt;  8 points        table FALSE   registered S3method
-#&gt;  9 print         table TRUE    base               
-#&gt; 10 summary       table TRUE    base               
-#&gt; 11 tail          table FALSE   registered S3method</code></pre>
+#&gt;  6 free1way      table FALSE   registered S3method
+#&gt;  7 lines         table FALSE   registered S3method
+#&gt;  8 plot          table FALSE   registered S3method
+#&gt;  9 points        table FALSE   registered S3method
+#&gt; 10 print         table TRUE    base               
+#&gt; 11 summary       table TRUE    base               
+#&gt; 12 tail          table FALSE   registered S3method</code></pre>
 </div>
 </div>
 <p>AR Solutions: This is a simple application of <code>sloop::s3_methods_class()</code>.</p>
@@ -1255,13 +1259,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb114-14"><a href="#cb114-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(method_count))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;                                    name method_count
-#&gt; 1                                 print          280
-#&gt; 2                                format          126
-#&gt; 3                                     [           50
-#&gt; 4                               summary           40
+#&gt; 1                                 print          296
+#&gt; 2                                format          139
+#&gt; 3                                     [           51
+#&gt; 4                               summary           41
 #&gt; 5                          as.character           33
 #&gt; 6                         as.data.frame           33
-#&gt; 7                                  plot           31
+#&gt; 7                                  plot           32
 #&gt; 8                                    [[           22
 #&gt; 9                                   [&lt;-           20
 #&gt; 10                                  $&lt;-           18
@@ -1300,55 +1304,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 43                            as.vector            4
 #&gt; 44                                close            4
 #&gt; 45                                  cut            4
-#&gt; 46                                 open            4
-#&gt; 47                                range            4
-#&gt; 48                                split            4
-#&gt; 49                               subset            4
-#&gt; 50                                    !            3
-#&gt; 51                                    &amp;            3
-#&gt; 52                                    |            3
-#&gt; 53                           as.logical            3
-#&gt; 54                                cbind            3
-#&gt; 55                           dimnames&lt;-            3
-#&gt; 56                           is.numeric            3
-#&gt; 57                                kappa            3
-#&gt; 58                               levels            3
-#&gt; 59                             levels&lt;-            3
-#&gt; 60                                   ls            3
-#&gt; 61                                match            3
-#&gt; 62                                merge            3
-#&gt; 63                                mtfrm            3
+#&gt; 46                                mtfrm            4
+#&gt; 47                                 open            4
+#&gt; 48                                range            4
+#&gt; 49                                split            4
+#&gt; 50                               subset            4
+#&gt; 51                                    !            3
+#&gt; 52                                    &amp;            3
+#&gt; 53                                    |            3
+#&gt; 54                           as.logical            3
+#&gt; 55                                cbind            3
+#&gt; 56                           dimnames&lt;-            3
+#&gt; 57                           is.numeric            3
+#&gt; 58                                kappa            3
+#&gt; 59                               levels            3
+#&gt; 60                             levels&lt;-            3
+#&gt; 61                                   ls            3
+#&gt; 62                                match            3
+#&gt; 63                                merge            3
 #&gt; 64                               pretty            3
-#&gt; 65                          row.names&lt;-            3
-#&gt; 66                                  seq            3
-#&gt; 67                                 sort            3
-#&gt; 68                            transform            3
-#&gt; 69                                    *            2
-#&gt; 70                                    /            2
-#&gt; 71                                aperm            2
-#&gt; 72                           as.integer            2
-#&gt; 73                             as.table            2
-#&gt; 74                               body&lt;-            2
-#&gt; 75                                   by            2
-#&gt; 76                                dim&lt;-            2
-#&gt; 77                             dimnames            2
-#&gt; 78                                  dir            2
-#&gt; 79                                 drop            2
-#&gt; 80                           droplevels            2
-#&gt; 81             getDLLRegisteredRoutines            2
-#&gt; 82                            intersect            2
-#&gt; 83                            is.finite            2
-#&gt; 84                          is.infinite            2
-#&gt; 85                               is.nan            2
-#&gt; 86                               julian            2
-#&gt; 87                              library            2
-#&gt; 88                                 list            2
-#&gt; 89                                  max            2
-#&gt; 90                                  min            2
-#&gt; 91                               months            2
-#&gt; 92                                   qr            2
-#&gt; 93                             quarters            2
-#&gt; 94                                rbind            2
+#&gt; 65                                rbind            3
+#&gt; 66                          row.names&lt;-            3
+#&gt; 67                                  seq            3
+#&gt; 68                                 sort            3
+#&gt; 69                            transform            3
+#&gt; 70                                    *            2
+#&gt; 71                                    /            2
+#&gt; 72                                aperm            2
+#&gt; 73                           as.integer            2
+#&gt; 74                             as.table            2
+#&gt; 75                               body&lt;-            2
+#&gt; 76                                   by            2
+#&gt; 77                                dim&lt;-            2
+#&gt; 78                             dimnames            2
+#&gt; 79                                  dir            2
+#&gt; 80                                 drop            2
+#&gt; 81                           droplevels            2
+#&gt; 82             getDLLRegisteredRoutines            2
+#&gt; 83                            intersect            2
+#&gt; 84                            is.finite            2
+#&gt; 85                          is.infinite            2
+#&gt; 86                               is.nan            2
+#&gt; 87                               julian            2
+#&gt; 88                              library            2
+#&gt; 89                                 list            2
+#&gt; 90                                  max            2
+#&gt; 91                                  min            2
+#&gt; 92                               months            2
+#&gt; 93                                   qr            2
+#&gt; 94                             quarters            2
 #&gt; 95                                  rev            2
 #&gt; 96                                round            2
 #&gt; 97                            row.names            2
@@ -1482,78 +1486,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 225                         .NotYetUsed            0
 #&gt; 226                  .OptRequireMethods            0
 #&gt; 227                           .packages            0
-#&gt; 228              .packageStartupMessage            0
-#&gt; 229                            .POSIXct            0
-#&gt; 230                            .POSIXlt            0
-#&gt; 231                             .pretty            0
-#&gt; 232                          .Primitive            0
-#&gt; 233                          .primTrace            0
-#&gt; 234                        .primUntrace            0
-#&gt; 235                           .rangeNum            0
-#&gt; 236                              .rmpkg            0
-#&gt; 237                                .row            0
-#&gt; 238                     .row_names_info            0
-#&gt; 239                           .rowMeans            0
-#&gt; 240                       .rowNamesDF&lt;-            0
-#&gt; 241                            .rowSums            0
-#&gt; 242                           .S3method            0
-#&gt; 243                             .Script            0
-#&gt; 244             .set_ops_need_as_vector            0
-#&gt; 245                      .set_row_names            0
-#&gt; 246                .signalSimpleWarning            0
-#&gt; 247                   .standard_regexps            0
-#&gt; 248                             .subset            0
-#&gt; 249                            .subset2            0
-#&gt; 250                      .TAOCP1997init            0
-#&gt; 251                          .traceback            0
-#&gt; 252                 .tryResumeInterrupt            0
-#&gt; 253                       .valid.factor            0
-#&gt; 254                                   (            0
-#&gt; 255                              [.AsIs            0
-#&gt; 256                        [.data.frame            0
-#&gt; 257                              [.Date            0
-#&gt; 258                          [.difftime            0
-#&gt; 259                             [.Dlist            0
-#&gt; 260                       [.DLLInfoList            0
-#&gt; 261                            [.factor            0
-#&gt; 262                           [.hexmode            0
-#&gt; 263                            [.listof            0
-#&gt; 264                           [.noquote            0
-#&gt; 265                   [.numeric_version            0
-#&gt; 266                           [.octmode            0
-#&gt; 267                           [.POSIXct            0
-#&gt; 268                           [.POSIXlt            0
-#&gt; 269                       [.simple.list            0
-#&gt; 270                             [.table            0
-#&gt; 271                          [.warnings            0
-#&gt; 272                       [[.data.frame            0
-#&gt; 273                             [[.Date            0
-#&gt; 274                           [[.factor            0
-#&gt; 275                  [[.numeric_version            0
-#&gt; 276                          [[.POSIXct            0
-#&gt; 277                          [[.POSIXlt            0
-#&gt; 278                     [[&lt;-.data.frame            0
-#&gt; 279                         [[&lt;-.factor            0
-#&gt; 280                [[&lt;-.numeric_version            0
-#&gt; 281                        [[&lt;-.POSIXlt            0
-#&gt; 282                      [&lt;-.data.frame            0
-#&gt; 283                            [&lt;-.Date            0
-#&gt; 284                        [&lt;-.difftime            0
-#&gt; 285                          [&lt;-.factor            0
-#&gt; 286                 [&lt;-.numeric_version            0
-#&gt; 287                         [&lt;-.POSIXct            0
-#&gt; 288                         [&lt;-.POSIXlt            0
-#&gt; 289                                   {            0
-#&gt; 290                                   @            0
-#&gt; 291                                 @&lt;-            0
-#&gt; 292                          *.difftime            0
-#&gt; 293                          /.difftime            0
-#&gt; 294                           &amp;.hexmode            0
-#&gt; 295                           &amp;.octmode            0
-#&gt; 296                                  &amp;&amp;            0
-#&gt; 297                                 %*%            0
-#&gt; 298                                %||%            0
-#&gt; 299                                %in%            0
+#&gt; 228                            .POSIXct            0
+#&gt; 229                            .POSIXlt            0
+#&gt; 230                             .pretty            0
+#&gt; 231                          .Primitive            0
+#&gt; 232                          .primTrace            0
+#&gt; 233                        .primUntrace            0
+#&gt; 234                           .rangeNum            0
+#&gt; 235                              .rmpkg            0
+#&gt; 236                                .row            0
+#&gt; 237                     .row_names_info            0
+#&gt; 238                           .rowMeans            0
+#&gt; 239                       .rowNamesDF&lt;-            0
+#&gt; 240                            .rowSums            0
+#&gt; 241                           .S3method            0
+#&gt; 242                             .Script            0
+#&gt; 243             .set_ops_need_as_vector            0
+#&gt; 244                      .set_row_names            0
+#&gt; 245                .signalSimpleWarning            0
+#&gt; 246                   .standard_regexps            0
+#&gt; 247                             .subset            0
+#&gt; 248                            .subset2            0
+#&gt; 249                      .TAOCP1997init            0
+#&gt; 250                          .traceback            0
+#&gt; 251                 .tryResumeInterrupt            0
+#&gt; 252                       .valid.factor            0
+#&gt; 253                                   (            0
+#&gt; 254                              [.AsIs            0
+#&gt; 255                        [.data.frame            0
+#&gt; 256                              [.Date            0
+#&gt; 257                          [.difftime            0
+#&gt; 258                             [.Dlist            0
+#&gt; 259                       [.DLLInfoList            0
+#&gt; 260                            [.factor            0
+#&gt; 261                           [.hexmode            0
+#&gt; 262                            [.listof            0
+#&gt; 263                           [.noquote            0
+#&gt; 264                   [.numeric_version            0
+#&gt; 265                           [.octmode            0
+#&gt; 266                           [.POSIXct            0
+#&gt; 267                           [.POSIXlt            0
+#&gt; 268                       [.simple.list            0
+#&gt; 269                             [.table            0
+#&gt; 270                          [.warnings            0
+#&gt; 271                       [[.data.frame            0
+#&gt; 272                             [[.Date            0
+#&gt; 273                           [[.factor            0
+#&gt; 274                  [[.numeric_version            0
+#&gt; 275                          [[.POSIXct            0
+#&gt; 276                          [[.POSIXlt            0
+#&gt; 277                     [[&lt;-.data.frame            0
+#&gt; 278                         [[&lt;-.factor            0
+#&gt; 279                [[&lt;-.numeric_version            0
+#&gt; 280                        [[&lt;-.POSIXlt            0
+#&gt; 281                      [&lt;-.data.frame            0
+#&gt; 282                            [&lt;-.Date            0
+#&gt; 283                        [&lt;-.difftime            0
+#&gt; 284                          [&lt;-.factor            0
+#&gt; 285                 [&lt;-.numeric_version            0
+#&gt; 286                         [&lt;-.POSIXct            0
+#&gt; 287                         [&lt;-.POSIXlt            0
+#&gt; 288                                   {            0
+#&gt; 289                                   @            0
+#&gt; 290                                 @&lt;-            0
+#&gt; 291                          *.difftime            0
+#&gt; 292                          /.difftime            0
+#&gt; 293                           &amp;.hexmode            0
+#&gt; 294                           &amp;.octmode            0
+#&gt; 295                                  &amp;&amp;            0
+#&gt; 296                                 %*%            0
+#&gt; 297                                %||%            0
+#&gt; 298                                %in%            0
+#&gt; 299                             %notin%            0
 #&gt; 300                                 %o%            0
 #&gt; 301                                 %x%            0
 #&gt; 302                              +.Date            0
@@ -2144,477 +2148,479 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 887                    merge.data.frame            0
 #&gt; 888                       merge.default            0
 #&gt; 889                             message            0
-#&gt; 890                                mget            0
-#&gt; 891                             missing            0
-#&gt; 892                                 Mod            0
-#&gt; 893                                mode            0
-#&gt; 894                              mode&lt;-            0
-#&gt; 895                         months.Date            0
-#&gt; 896                       months.POSIXt            0
-#&gt; 897                    mostattributes&lt;-            0
-#&gt; 898                       mtfrm.default            0
-#&gt; 899                       mtfrm.POSIXct            0
-#&gt; 900                       mtfrm.POSIXlt            0
-#&gt; 901                 nameOfClass.default            0
-#&gt; 902                       names.POSIXlt            0
-#&gt; 903                     names&lt;-.POSIXlt            0
-#&gt; 904                     namespaceExport            0
-#&gt; 905                     namespaceImport            0
-#&gt; 906              namespaceImportClasses            0
-#&gt; 907                 namespaceImportFrom            0
-#&gt; 908              namespaceImportMethods            0
-#&gt; 909                               nargs            0
-#&gt; 910                               nchar            0
-#&gt; 911                                ncol            0
-#&gt; 912                                NCOL            0
-#&gt; 913                              Negate            0
-#&gt; 914                             new.env            0
-#&gt; 915                                next            0
-#&gt; 916                          NextMethod            0
-#&gt; 917                            ngettext            0
-#&gt; 918                             nlevels            0
-#&gt; 919                             noquote            0
-#&gt; 920                                norm            0
-#&gt; 921                       normalizePath            0
-#&gt; 922                                nrow            0
-#&gt; 923                                NROW            0
-#&gt; 924                            nullfile            0
-#&gt; 925                             numeric            0
-#&gt; 926                     numeric_version            0
-#&gt; 927                           numToBits            0
-#&gt; 928                           numToInts            0
-#&gt; 929                              nzchar            0
-#&gt; 930                             objects            0
-#&gt; 931                            oldClass            0
-#&gt; 932                          oldClass&lt;-            0
-#&gt; 933                          OlsonNames            0
-#&gt; 934                             on.exit            0
-#&gt; 935                     open.connection            0
-#&gt; 936                        open.srcfile            0
-#&gt; 937                   open.srcfilealias            0
-#&gt; 938                    open.srcfilecopy            0
-#&gt; 939                      Ops.data.frame            0
-#&gt; 940                            Ops.Date            0
-#&gt; 941                        Ops.difftime            0
-#&gt; 942                          Ops.factor            0
-#&gt; 943                 Ops.numeric_version            0
-#&gt; 944                         Ops.ordered            0
-#&gt; 945                          Ops.POSIXt            0
-#&gt; 946                             options            0
-#&gt; 947                             ordered            0
-#&gt; 948                               outer            0
-#&gt; 949                     package_version            0
-#&gt; 950                        packageEvent            0
-#&gt; 951                 packageHasNamespace            0
-#&gt; 952                packageNotFoundError            0
-#&gt; 953               packageStartupMessage            0
-#&gt; 954                            packBits            0
-#&gt; 955                            pairlist            0
-#&gt; 956                          parent.env            0
-#&gt; 957                        parent.env&lt;-            0
-#&gt; 958                        parent.frame            0
-#&gt; 959                               parse            0
-#&gt; 960                  parseNamespaceFile            0
-#&gt; 961                               paste            0
-#&gt; 962                              paste0            0
-#&gt; 963                         path.expand            0
-#&gt; 964                        path.package            0
-#&gt; 965                         pcre_config            0
-#&gt; 966                                pipe            0
-#&gt; 967                              pmatch            0
-#&gt; 968                            pmax.int            0
-#&gt; 969                            pmin.int            0
-#&gt; 970                            polyroot            0
-#&gt; 971                          pos.to.env            0
-#&gt; 972                            Position            0
-#&gt; 973                      pretty.default            0
-#&gt; 974                           prettyNum            0
-#&gt; 975                          print.AsIs            0
-#&gt; 976                            print.by            0
-#&gt; 977                     print.condition            0
-#&gt; 978                    print.connection            0
-#&gt; 979                    print.data.frame            0
-#&gt; 980                          print.Date            0
-#&gt; 981                       print.default            0
-#&gt; 982                      print.difftime            0
-#&gt; 983                         print.Dlist            0
-#&gt; 984                       print.DLLInfo            0
-#&gt; 985                   print.DLLInfoList            0
-#&gt; 986         print.DLLRegisteredRoutines            0
-#&gt; 987                         print.eigen            0
-#&gt; 988                        print.factor            0
-#&gt; 989                      print.function            0
-#&gt; 990                       print.hexmode            0
-#&gt; 991                    print.libraryIQR            0
-#&gt; 992                        print.listof            0
-#&gt; 993             print.NativeRoutineList            0
-#&gt; 994                       print.noquote            0
-#&gt; 995               print.numeric_version            0
-#&gt; 996                       print.octmode            0
-#&gt; 997                   print.packageInfo            0
-#&gt; 998                       print.POSIXct            0
-#&gt; 999                       print.POSIXlt            0
-#&gt; 1000                    print.proc_time            0
-#&gt; 1001                      print.restart            0
-#&gt; 1002                          print.rle            0
-#&gt; 1003                  print.simple.list            0
-#&gt; 1004                      print.srcfile            0
-#&gt; 1005                       print.srcref            0
-#&gt; 1006                print.summary.table            0
-#&gt; 1007             print.summary.warnings            0
-#&gt; 1008               print.summaryDefault            0
-#&gt; 1009                        print.table            0
-#&gt; 1010                     print.warnings            0
-#&gt; 1011                           prmatrix            0
-#&gt; 1012                          proc.time            0
-#&gt; 1013                               prod            0
-#&gt; 1014                         prop.table            0
-#&gt; 1015                        proportions            0
-#&gt; 1016                    provideDimnames            0
-#&gt; 1017                           psigamma            0
-#&gt; 1018                           pushBack            0
-#&gt; 1019                     pushBackLength            0
-#&gt; 1020                                  q            0
-#&gt; 1021                            qr.coef            0
-#&gt; 1022                         qr.default            0
-#&gt; 1023                          qr.fitted            0
-#&gt; 1024                               qr.Q            0
-#&gt; 1025                             qr.qty            0
-#&gt; 1026                              qr.qy            0
-#&gt; 1027                               qr.R            0
-#&gt; 1028                           qr.resid            0
-#&gt; 1029                           qr.solve            0
-#&gt; 1030                               qr.X            0
-#&gt; 1031                      quarters.Date            0
-#&gt; 1032                    quarters.POSIXt            0
-#&gt; 1033                               quit            0
-#&gt; 1034                              quote            0
-#&gt; 1035                      R_compiled_by            0
-#&gt; 1036                   R_system_version            0
-#&gt; 1037                             R.home            0
-#&gt; 1038                          R.Version            0
-#&gt; 1039                         range.Date            0
-#&gt; 1040                      range.default            0
-#&gt; 1041                      range.POSIXct            0
-#&gt; 1042                               rank            0
-#&gt; 1043                             rapply            0
-#&gt; 1044                                raw            0
-#&gt; 1045                      rawConnection            0
-#&gt; 1046                 rawConnectionValue            0
-#&gt; 1047                           rawShift            0
-#&gt; 1048                          rawToBits            0
-#&gt; 1049                          rawToChar            0
-#&gt; 1050                   rbind.data.frame            0
-#&gt; 1051                              rcond            0
-#&gt; 1052                                 Re            0
-#&gt; 1053                           read.dcf            0
-#&gt; 1054                            readBin            0
-#&gt; 1055                           readChar            0
-#&gt; 1056                           readline            0
-#&gt; 1057                          readLines            0
-#&gt; 1058                            readRDS            0
-#&gt; 1059                       readRenviron            0
-#&gt; 1060                             Recall            0
-#&gt; 1061                             Reduce            0
-#&gt; 1062                      reg.finalizer            0
-#&gt; 1063                            regexec            0
-#&gt; 1064                            regexpr            0
-#&gt; 1065                   registerS3method            0
-#&gt; 1066                  registerS3methods            0
-#&gt; 1067                         regmatches            0
-#&gt; 1068                       regmatches&lt;-            0
-#&gt; 1069                 removeTaskCallback            0
-#&gt; 1070                            rep_len            0
-#&gt; 1071                           rep.Date            0
-#&gt; 1072                       rep.difftime            0
-#&gt; 1073                         rep.factor            0
-#&gt; 1074                            rep.int            0
-#&gt; 1075                rep.numeric_version            0
-#&gt; 1076                        rep.POSIXct            0
-#&gt; 1077                        rep.POSIXlt            0
-#&gt; 1078                             repeat            0
-#&gt; 1079                            replace            0
-#&gt; 1080                          replicate            0
-#&gt; 1081                            require            0
-#&gt; 1082                   requireNamespace            0
-#&gt; 1083                 restartDescription            0
-#&gt; 1084                     restartFormals            0
-#&gt; 1085                         retracemem            0
-#&gt; 1086                             return            0
-#&gt; 1087                        returnValue            0
-#&gt; 1088                        rev.default            0
-#&gt; 1089                                rle            0
-#&gt; 1090                                 rm            0
-#&gt; 1091                            RNGkind            0
-#&gt; 1092                         RNGversion            0
-#&gt; 1093                         round.Date            0
-#&gt; 1094                       round.POSIXt            0
-#&gt; 1095               row.names.data.frame            0
-#&gt; 1096                  row.names.default            0
-#&gt; 1097             row.names&lt;-.data.frame            0
-#&gt; 1098                row.names&lt;-.default            0
-#&gt; 1099                           rowMeans            0
-#&gt; 1100                           rownames            0
-#&gt; 1101                         rownames&lt;-            0
-#&gt; 1102                  rowsum.data.frame            0
-#&gt; 1103                     rowsum.default            0
-#&gt; 1104                            rowSums            0
-#&gt; 1105                         sample.int            0
-#&gt; 1106                             sapply            0
-#&gt; 1107                         save.image            0
-#&gt; 1108                            saveRDS            0
-#&gt; 1109                      scale.default            0
-#&gt; 1110                               scan            0
-#&gt; 1111                             search            0
-#&gt; 1112                        searchpaths            0
-#&gt; 1113                    seek.connection            0
-#&gt; 1114                          seq_along            0
-#&gt; 1115                            seq_len            0
-#&gt; 1116                           seq.Date            0
-#&gt; 1117                        seq.default            0
-#&gt; 1118                            seq.int            0
-#&gt; 1119                         seq.POSIXt            0
-#&gt; 1120                   sequence.default            0
-#&gt; 1121                          serialize            0
-#&gt; 1122                       serverSocket            0
-#&gt; 1123                           set.seed            0
-#&gt; 1124                            setHook            0
-#&gt; 1125                   setNamespaceInfo            0
-#&gt; 1126                setSessionTimeLimit            0
-#&gt; 1127                       setTimeLimit            0
-#&gt; 1128                              setwd            0
-#&gt; 1129                    showConnections            0
-#&gt; 1130                            shQuote            0
-#&gt; 1131                               sign            0
-#&gt; 1132                    signalCondition            0
-#&gt; 1133                             signif            0
-#&gt; 1134                    simpleCondition            0
-#&gt; 1135                        simpleError            0
-#&gt; 1136                      simpleMessage            0
-#&gt; 1137                      simpleWarning            0
-#&gt; 1138                     simplify2array            0
-#&gt; 1139                                sin            0
-#&gt; 1140                             single            0
-#&gt; 1141                               sinh            0
-#&gt; 1142                        sink.number            0
-#&gt; 1143                              sinpi            0
-#&gt; 1144                        slice.index            0
-#&gt; 1145                       socketAccept            0
-#&gt; 1146                   socketConnection            0
-#&gt; 1147                       socketSelect            0
-#&gt; 1148                      socketTimeout            0
-#&gt; 1149                      solve.default            0
-#&gt; 1150                           solve.qr            0
-#&gt; 1151                 sort_by.data.frame            0
-#&gt; 1152                    sort_by.default            0
-#&gt; 1153                       sort.default            0
-#&gt; 1154                           sort.int            0
-#&gt; 1155                          sort.list            0
-#&gt; 1156                       sort.POSIXlt            0
-#&gt; 1157                             source            0
-#&gt; 1158                   split.data.frame            0
-#&gt; 1159                         split.Date            0
-#&gt; 1160                      split.default            0
-#&gt; 1161                      split.POSIXct            0
-#&gt; 1162                 split&lt;-.data.frame            0
-#&gt; 1163                    split&lt;-.default            0
-#&gt; 1164                            sprintf            0
-#&gt; 1165                               sqrt            0
-#&gt; 1166                             sQuote            0
-#&gt; 1167                            srcfile            0
-#&gt; 1168                       srcfilealias            0
-#&gt; 1169                        srcfilecopy            0
-#&gt; 1170                             srcref            0
-#&gt; 1171                    standardGeneric            0
-#&gt; 1172                         startsWith            0
-#&gt; 1173                             stderr            0
-#&gt; 1174                              stdin            0
-#&gt; 1175                             stdout            0
-#&gt; 1176                               stop            0
-#&gt; 1177                          stopifnot            0
-#&gt; 1178                       storage.mode            0
-#&gt; 1179                     storage.mode&lt;-            0
-#&gt; 1180                     str2expression            0
-#&gt; 1181                           str2lang            0
-#&gt; 1182                           strftime            0
-#&gt; 1183                           strptime            0
-#&gt; 1184                             strrep            0
-#&gt; 1185                           strsplit            0
-#&gt; 1186                             strtoi            0
-#&gt; 1187                            strtrim            0
-#&gt; 1188                          structure            0
-#&gt; 1189                            strwrap            0
-#&gt; 1190                                sub            0
-#&gt; 1191                  subset.data.frame            0
-#&gt; 1192                     subset.default            0
-#&gt; 1193                      subset.matrix            0
-#&gt; 1194                         substitute            0
-#&gt; 1195                             substr            0
-#&gt; 1196                           substr&lt;-            0
-#&gt; 1197                          substring            0
-#&gt; 1198                        substring&lt;-            0
-#&gt; 1199                 summary.connection            0
-#&gt; 1200                 summary.data.frame            0
-#&gt; 1201                 Summary.data.frame            0
-#&gt; 1202                       summary.Date            0
-#&gt; 1203                       Summary.Date            0
-#&gt; 1204                    summary.default            0
-#&gt; 1205                   summary.difftime            0
-#&gt; 1206                   Summary.difftime            0
-#&gt; 1207                     summary.factor            0
-#&gt; 1208                     Summary.factor            0
-#&gt; 1209                     summary.matrix            0
-#&gt; 1210            Summary.numeric_version            0
-#&gt; 1211                    Summary.ordered            0
-#&gt; 1212                    summary.POSIXct            0
-#&gt; 1213                    Summary.POSIXct            0
-#&gt; 1214                    summary.POSIXlt            0
-#&gt; 1215                    Summary.POSIXlt            0
-#&gt; 1216                  summary.proc_time            0
-#&gt; 1217                    summary.srcfile            0
-#&gt; 1218                     summary.srcref            0
-#&gt; 1219                      summary.table            0
-#&gt; 1220                   summary.warnings            0
-#&gt; 1221                   suppressMessages            0
-#&gt; 1222     suppressPackageStartupMessages            0
-#&gt; 1223                   suppressWarnings            0
-#&gt; 1224                  suspendInterrupts            0
-#&gt; 1225                                svd            0
-#&gt; 1226                              sweep            0
-#&gt; 1227                             switch            0
-#&gt; 1228                           sys.call            0
-#&gt; 1229                          sys.calls            0
-#&gt; 1230                          Sys.chmod            0
-#&gt; 1231                           Sys.Date            0
-#&gt; 1232                          sys.frame            0
-#&gt; 1233                         sys.frames            0
-#&gt; 1234                       sys.function            0
-#&gt; 1235                         Sys.getenv            0
-#&gt; 1236                      Sys.getlocale            0
-#&gt; 1237                         Sys.getpid            0
-#&gt; 1238                           Sys.glob            0
-#&gt; 1239                           Sys.info            0
-#&gt; 1240                     sys.load.image            0
-#&gt; 1241                     Sys.localeconv            0
-#&gt; 1242                         sys.nframe            0
-#&gt; 1243                        sys.on.exit            0
-#&gt; 1244                         sys.parent            0
-#&gt; 1245                        sys.parents            0
-#&gt; 1246                       Sys.readlink            0
-#&gt; 1247                     sys.save.image            0
-#&gt; 1248                         Sys.setenv            0
-#&gt; 1249                    Sys.setFileTime            0
-#&gt; 1250                    Sys.setLanguage            0
-#&gt; 1251                      Sys.setlocale            0
-#&gt; 1252                          Sys.sleep            0
-#&gt; 1253                         sys.source            0
-#&gt; 1254                         sys.status            0
-#&gt; 1255                           Sys.time            0
-#&gt; 1256                       Sys.timezone            0
-#&gt; 1257                          Sys.umask            0
-#&gt; 1258                       Sys.unsetenv            0
-#&gt; 1259                          Sys.which            0
-#&gt; 1260                        system.file            0
-#&gt; 1261                        system.time            0
-#&gt; 1262                            system2            0
-#&gt; 1263                       t.data.frame            0
-#&gt; 1264                          t.default            0
-#&gt; 1265                              table            0
-#&gt; 1266                           tabulate            0
-#&gt; 1267                           Tailcall            0
-#&gt; 1268                                tan            0
-#&gt; 1269                               tanh            0
-#&gt; 1270                              tanpi            0
-#&gt; 1271                             tapply            0
-#&gt; 1272                taskCallbackManager            0
-#&gt; 1273                         tcrossprod            0
-#&gt; 1274                            tempdir            0
-#&gt; 1275                           tempfile            0
-#&gt; 1276                     textConnection            0
-#&gt; 1277                textConnectionValue            0
-#&gt; 1278                            tolower            0
-#&gt; 1279                             topenv            0
-#&gt; 1280                   toString.default            0
-#&gt; 1281                            toupper            0
-#&gt; 1282                              trace            0
-#&gt; 1283                          traceback            0
-#&gt; 1284                           tracemem            0
-#&gt; 1285                       tracingState            0
-#&gt; 1286               transform.data.frame            0
-#&gt; 1287                  transform.default            0
-#&gt; 1288                           trigamma            0
-#&gt; 1289                             trimws            0
-#&gt; 1290                         trunc.Date            0
-#&gt; 1291                       trunc.POSIXt            0
-#&gt; 1292                truncate.connection            0
-#&gt; 1293                                try            0
-#&gt; 1294                           tryCatch            0
-#&gt; 1295                   tryInvokeRestart            0
-#&gt; 1296                             typeof            0
-#&gt; 1297                     unCfillPOSIXlt            0
-#&gt; 1298                            unclass            0
-#&gt; 1299                            undebug            0
-#&gt; 1300                       unique.array            0
-#&gt; 1301                  unique.data.frame            0
-#&gt; 1302                     unique.default            0
-#&gt; 1303                      unique.matrix            0
-#&gt; 1304             unique.numeric_version            0
-#&gt; 1305                     unique.POSIXlt            0
-#&gt; 1306                    unique.warnings            0
-#&gt; 1307                     units.difftime            0
-#&gt; 1308                   units&lt;-.difftime            0
-#&gt; 1309                          unix.time            0
-#&gt; 1310                             unlink            0
-#&gt; 1311                    unloadNamespace            0
-#&gt; 1312                      unlockBinding            0
-#&gt; 1313                             unname            0
-#&gt; 1314                        unserialize            0
-#&gt; 1315                            unsplit            0
-#&gt; 1316                            untrace            0
-#&gt; 1317                         untracemem            0
-#&gt; 1318                                unz            0
-#&gt; 1319                          upper.tri            0
-#&gt; 1320                                use            0
-#&gt; 1321                          UseMethod            0
-#&gt; 1322                          utf8ToInt            0
-#&gt; 1323                           validEnc            0
-#&gt; 1324                          validUTF8            0
-#&gt; 1325                             vapply            0
-#&gt; 1326                             vector            0
-#&gt; 1327                          Vectorize            0
-#&gt; 1328                            warning            0
-#&gt; 1329                   warningCondition            0
-#&gt; 1330                           warnings            0
-#&gt; 1331                      weekdays.Date            0
-#&gt; 1332                    weekdays.POSIXt            0
-#&gt; 1333                          which.max            0
-#&gt; 1334                          which.min            0
-#&gt; 1335                              while            0
-#&gt; 1336                       with.default            0
-#&gt; 1337                      withAutoprint            0
-#&gt; 1338                withCallingHandlers            0
-#&gt; 1339                  within.data.frame            0
-#&gt; 1340                        within.list            0
-#&gt; 1341                       withRestarts            0
-#&gt; 1342                        withVisible            0
-#&gt; 1343                          write.dcf            0
-#&gt; 1344                           writeBin            0
-#&gt; 1345                          writeChar            0
-#&gt; 1346                         writeLines            0
-#&gt; 1347                                xor            0
-#&gt; 1348                 xpdrows.data.frame            0
-#&gt; 1349                         xtfrm.AsIs            0
-#&gt; 1350                   xtfrm.data.frame            0
-#&gt; 1351                         xtfrm.Date            0
-#&gt; 1352                      xtfrm.default            0
-#&gt; 1353                     xtfrm.difftime            0
-#&gt; 1354                       xtfrm.factor            0
-#&gt; 1355              xtfrm.numeric_version            0
-#&gt; 1356                      xtfrm.POSIXct            0
-#&gt; 1357                      xtfrm.POSIXlt            0
-#&gt; 1358                             xzfile            0
-#&gt; 1359                           zapsmall            0
-#&gt; 1360                           zstdfile            0</code></pre>
+#&gt; 890                    messageCondition            0
+#&gt; 891                                mget            0
+#&gt; 892                             missing            0
+#&gt; 893                                 Mod            0
+#&gt; 894                                mode            0
+#&gt; 895                              mode&lt;-            0
+#&gt; 896                         months.Date            0
+#&gt; 897                       months.POSIXt            0
+#&gt; 898                    mostattributes&lt;-            0
+#&gt; 899                          mtfrm.Date            0
+#&gt; 900                       mtfrm.default            0
+#&gt; 901                       mtfrm.POSIXct            0
+#&gt; 902                       mtfrm.POSIXlt            0
+#&gt; 903                 nameOfClass.default            0
+#&gt; 904                       names.POSIXlt            0
+#&gt; 905                     names&lt;-.POSIXlt            0
+#&gt; 906                     namespaceExport            0
+#&gt; 907                     namespaceImport            0
+#&gt; 908              namespaceImportClasses            0
+#&gt; 909                 namespaceImportFrom            0
+#&gt; 910              namespaceImportMethods            0
+#&gt; 911                               nargs            0
+#&gt; 912                               nchar            0
+#&gt; 913                                ncol            0
+#&gt; 914                                NCOL            0
+#&gt; 915                              Negate            0
+#&gt; 916                             new.env            0
+#&gt; 917                                next            0
+#&gt; 918                          NextMethod            0
+#&gt; 919                            ngettext            0
+#&gt; 920                             nlevels            0
+#&gt; 921                             noquote            0
+#&gt; 922                                norm            0
+#&gt; 923                       normalizePath            0
+#&gt; 924                                nrow            0
+#&gt; 925                                NROW            0
+#&gt; 926                            nullfile            0
+#&gt; 927                             numeric            0
+#&gt; 928                     numeric_version            0
+#&gt; 929                           numToBits            0
+#&gt; 930                           numToInts            0
+#&gt; 931                              nzchar            0
+#&gt; 932                             objects            0
+#&gt; 933                            oldClass            0
+#&gt; 934                          oldClass&lt;-            0
+#&gt; 935                          OlsonNames            0
+#&gt; 936                             on.exit            0
+#&gt; 937                     open.connection            0
+#&gt; 938                        open.srcfile            0
+#&gt; 939                   open.srcfilealias            0
+#&gt; 940                    open.srcfilecopy            0
+#&gt; 941                      Ops.data.frame            0
+#&gt; 942                            Ops.Date            0
+#&gt; 943                        Ops.difftime            0
+#&gt; 944                          Ops.factor            0
+#&gt; 945                 Ops.numeric_version            0
+#&gt; 946                         Ops.ordered            0
+#&gt; 947                          Ops.POSIXt            0
+#&gt; 948                             options            0
+#&gt; 949                             ordered            0
+#&gt; 950                               outer            0
+#&gt; 951                     package_version            0
+#&gt; 952                        packageEvent            0
+#&gt; 953                 packageHasNamespace            0
+#&gt; 954                packageNotFoundError            0
+#&gt; 955               packageStartupMessage            0
+#&gt; 956                            packBits            0
+#&gt; 957                            pairlist            0
+#&gt; 958                          parent.env            0
+#&gt; 959                        parent.env&lt;-            0
+#&gt; 960                        parent.frame            0
+#&gt; 961                               parse            0
+#&gt; 962                  parseNamespaceFile            0
+#&gt; 963                               paste            0
+#&gt; 964                              paste0            0
+#&gt; 965                         path.expand            0
+#&gt; 966                        path.package            0
+#&gt; 967                         pcre_config            0
+#&gt; 968                                pipe            0
+#&gt; 969                              pmatch            0
+#&gt; 970                            pmax.int            0
+#&gt; 971                            pmin.int            0
+#&gt; 972                            polyroot            0
+#&gt; 973                          pos.to.env            0
+#&gt; 974                            Position            0
+#&gt; 975                      pretty.default            0
+#&gt; 976                           prettyNum            0
+#&gt; 977                          print.AsIs            0
+#&gt; 978                            print.by            0
+#&gt; 979                     print.condition            0
+#&gt; 980                    print.connection            0
+#&gt; 981                    print.data.frame            0
+#&gt; 982                          print.Date            0
+#&gt; 983                       print.default            0
+#&gt; 984                      print.difftime            0
+#&gt; 985                         print.Dlist            0
+#&gt; 986                       print.DLLInfo            0
+#&gt; 987                   print.DLLInfoList            0
+#&gt; 988         print.DLLRegisteredRoutines            0
+#&gt; 989                         print.eigen            0
+#&gt; 990                        print.factor            0
+#&gt; 991                      print.function            0
+#&gt; 992                       print.hexmode            0
+#&gt; 993                    print.libraryIQR            0
+#&gt; 994                        print.listof            0
+#&gt; 995             print.NativeRoutineList            0
+#&gt; 996                       print.noquote            0
+#&gt; 997               print.numeric_version            0
+#&gt; 998                       print.octmode            0
+#&gt; 999                   print.packageInfo            0
+#&gt; 1000                      print.POSIXct            0
+#&gt; 1001                      print.POSIXlt            0
+#&gt; 1002                    print.proc_time            0
+#&gt; 1003                      print.restart            0
+#&gt; 1004                          print.rle            0
+#&gt; 1005                  print.simple.list            0
+#&gt; 1006                      print.srcfile            0
+#&gt; 1007                       print.srcref            0
+#&gt; 1008                print.summary.table            0
+#&gt; 1009             print.summary.warnings            0
+#&gt; 1010               print.summaryDefault            0
+#&gt; 1011                        print.table            0
+#&gt; 1012                     print.warnings            0
+#&gt; 1013                           prmatrix            0
+#&gt; 1014                          proc.time            0
+#&gt; 1015                               prod            0
+#&gt; 1016                         prop.table            0
+#&gt; 1017                        proportions            0
+#&gt; 1018                    provideDimnames            0
+#&gt; 1019                           psigamma            0
+#&gt; 1020                           pushBack            0
+#&gt; 1021                     pushBackLength            0
+#&gt; 1022                                  q            0
+#&gt; 1023                            qr.coef            0
+#&gt; 1024                         qr.default            0
+#&gt; 1025                          qr.fitted            0
+#&gt; 1026                               qr.Q            0
+#&gt; 1027                             qr.qty            0
+#&gt; 1028                              qr.qy            0
+#&gt; 1029                               qr.R            0
+#&gt; 1030                           qr.resid            0
+#&gt; 1031                           qr.solve            0
+#&gt; 1032                               qr.X            0
+#&gt; 1033                      quarters.Date            0
+#&gt; 1034                    quarters.POSIXt            0
+#&gt; 1035                               quit            0
+#&gt; 1036                              quote            0
+#&gt; 1037                      R_compiled_by            0
+#&gt; 1038                   R_system_version            0
+#&gt; 1039                             R.home            0
+#&gt; 1040                          R.Version            0
+#&gt; 1041                         range.Date            0
+#&gt; 1042                      range.default            0
+#&gt; 1043                      range.POSIXct            0
+#&gt; 1044                               rank            0
+#&gt; 1045                             rapply            0
+#&gt; 1046                                raw            0
+#&gt; 1047                      rawConnection            0
+#&gt; 1048                 rawConnectionValue            0
+#&gt; 1049                           rawShift            0
+#&gt; 1050                          rawToBits            0
+#&gt; 1051                          rawToChar            0
+#&gt; 1052                   rbind.data.frame            0
+#&gt; 1053                              rcond            0
+#&gt; 1054                                 Re            0
+#&gt; 1055                           read.dcf            0
+#&gt; 1056                            readBin            0
+#&gt; 1057                           readChar            0
+#&gt; 1058                           readline            0
+#&gt; 1059                          readLines            0
+#&gt; 1060                            readRDS            0
+#&gt; 1061                       readRenviron            0
+#&gt; 1062                             Recall            0
+#&gt; 1063                             Reduce            0
+#&gt; 1064                      reg.finalizer            0
+#&gt; 1065                            regexec            0
+#&gt; 1066                            regexpr            0
+#&gt; 1067                   registerS3method            0
+#&gt; 1068                  registerS3methods            0
+#&gt; 1069                         regmatches            0
+#&gt; 1070                       regmatches&lt;-            0
+#&gt; 1071                 removeTaskCallback            0
+#&gt; 1072                            rep_len            0
+#&gt; 1073                           rep.Date            0
+#&gt; 1074                       rep.difftime            0
+#&gt; 1075                         rep.factor            0
+#&gt; 1076                            rep.int            0
+#&gt; 1077                rep.numeric_version            0
+#&gt; 1078                        rep.POSIXct            0
+#&gt; 1079                        rep.POSIXlt            0
+#&gt; 1080                             repeat            0
+#&gt; 1081                            replace            0
+#&gt; 1082                          replicate            0
+#&gt; 1083                            require            0
+#&gt; 1084                   requireNamespace            0
+#&gt; 1085                 restartDescription            0
+#&gt; 1086                     restartFormals            0
+#&gt; 1087                         retracemem            0
+#&gt; 1088                             return            0
+#&gt; 1089                        returnValue            0
+#&gt; 1090                        rev.default            0
+#&gt; 1091                                rle            0
+#&gt; 1092                                 rm            0
+#&gt; 1093                            RNGkind            0
+#&gt; 1094                         RNGversion            0
+#&gt; 1095                         round.Date            0
+#&gt; 1096                       round.POSIXt            0
+#&gt; 1097               row.names.data.frame            0
+#&gt; 1098                  row.names.default            0
+#&gt; 1099             row.names&lt;-.data.frame            0
+#&gt; 1100                row.names&lt;-.default            0
+#&gt; 1101                           rowMeans            0
+#&gt; 1102                           rownames            0
+#&gt; 1103                         rownames&lt;-            0
+#&gt; 1104                  rowsum.data.frame            0
+#&gt; 1105                     rowsum.default            0
+#&gt; 1106                            rowSums            0
+#&gt; 1107                         sample.int            0
+#&gt; 1108                             sapply            0
+#&gt; 1109                         save.image            0
+#&gt; 1110                            saveRDS            0
+#&gt; 1111                      scale.default            0
+#&gt; 1112                               scan            0
+#&gt; 1113                             search            0
+#&gt; 1114                        searchpaths            0
+#&gt; 1115                    seek.connection            0
+#&gt; 1116                          seq_along            0
+#&gt; 1117                            seq_len            0
+#&gt; 1118                           seq.Date            0
+#&gt; 1119                        seq.default            0
+#&gt; 1120                            seq.int            0
+#&gt; 1121                         seq.POSIXt            0
+#&gt; 1122                   sequence.default            0
+#&gt; 1123                          serialize            0
+#&gt; 1124                       serverSocket            0
+#&gt; 1125                           set.seed            0
+#&gt; 1126                            setHook            0
+#&gt; 1127                   setNamespaceInfo            0
+#&gt; 1128                setSessionTimeLimit            0
+#&gt; 1129                       setTimeLimit            0
+#&gt; 1130                              setwd            0
+#&gt; 1131                    showConnections            0
+#&gt; 1132                            shQuote            0
+#&gt; 1133                               sign            0
+#&gt; 1134                    signalCondition            0
+#&gt; 1135                             signif            0
+#&gt; 1136                    simpleCondition            0
+#&gt; 1137                        simpleError            0
+#&gt; 1138                      simpleMessage            0
+#&gt; 1139                      simpleWarning            0
+#&gt; 1140                     simplify2array            0
+#&gt; 1141                                sin            0
+#&gt; 1142                             single            0
+#&gt; 1143                               sinh            0
+#&gt; 1144                        sink.number            0
+#&gt; 1145                              sinpi            0
+#&gt; 1146                        slice.index            0
+#&gt; 1147                       socketAccept            0
+#&gt; 1148                   socketConnection            0
+#&gt; 1149                       socketSelect            0
+#&gt; 1150                      socketTimeout            0
+#&gt; 1151                      solve.default            0
+#&gt; 1152                           solve.qr            0
+#&gt; 1153                 sort_by.data.frame            0
+#&gt; 1154                    sort_by.default            0
+#&gt; 1155                       sort.default            0
+#&gt; 1156                           sort.int            0
+#&gt; 1157                          sort.list            0
+#&gt; 1158                       sort.POSIXlt            0
+#&gt; 1159                             source            0
+#&gt; 1160                   split.data.frame            0
+#&gt; 1161                         split.Date            0
+#&gt; 1162                      split.default            0
+#&gt; 1163                      split.POSIXct            0
+#&gt; 1164                 split&lt;-.data.frame            0
+#&gt; 1165                    split&lt;-.default            0
+#&gt; 1166                            sprintf            0
+#&gt; 1167                               sqrt            0
+#&gt; 1168                             sQuote            0
+#&gt; 1169                            srcfile            0
+#&gt; 1170                       srcfilealias            0
+#&gt; 1171                        srcfilecopy            0
+#&gt; 1172                             srcref            0
+#&gt; 1173                    standardGeneric            0
+#&gt; 1174                         startsWith            0
+#&gt; 1175                             stderr            0
+#&gt; 1176                              stdin            0
+#&gt; 1177                             stdout            0
+#&gt; 1178                               stop            0
+#&gt; 1179                          stopifnot            0
+#&gt; 1180                       storage.mode            0
+#&gt; 1181                     storage.mode&lt;-            0
+#&gt; 1182                     str2expression            0
+#&gt; 1183                           str2lang            0
+#&gt; 1184                           strftime            0
+#&gt; 1185                           strptime            0
+#&gt; 1186                             strrep            0
+#&gt; 1187                           strsplit            0
+#&gt; 1188                             strtoi            0
+#&gt; 1189                            strtrim            0
+#&gt; 1190                          structure            0
+#&gt; 1191                            strwrap            0
+#&gt; 1192                                sub            0
+#&gt; 1193                  subset.data.frame            0
+#&gt; 1194                     subset.default            0
+#&gt; 1195                      subset.matrix            0
+#&gt; 1196                         substitute            0
+#&gt; 1197                             substr            0
+#&gt; 1198                           substr&lt;-            0
+#&gt; 1199                          substring            0
+#&gt; 1200                        substring&lt;-            0
+#&gt; 1201                 summary.connection            0
+#&gt; 1202                 summary.data.frame            0
+#&gt; 1203                 Summary.data.frame            0
+#&gt; 1204                       summary.Date            0
+#&gt; 1205                       Summary.Date            0
+#&gt; 1206                    summary.default            0
+#&gt; 1207                   summary.difftime            0
+#&gt; 1208                   Summary.difftime            0
+#&gt; 1209                     summary.factor            0
+#&gt; 1210                     Summary.factor            0
+#&gt; 1211                     summary.matrix            0
+#&gt; 1212            Summary.numeric_version            0
+#&gt; 1213                    Summary.ordered            0
+#&gt; 1214                    summary.POSIXct            0
+#&gt; 1215                    Summary.POSIXct            0
+#&gt; 1216                    summary.POSIXlt            0
+#&gt; 1217                    Summary.POSIXlt            0
+#&gt; 1218                  summary.proc_time            0
+#&gt; 1219                    summary.srcfile            0
+#&gt; 1220                     summary.srcref            0
+#&gt; 1221                      summary.table            0
+#&gt; 1222                   summary.warnings            0
+#&gt; 1223                   suppressMessages            0
+#&gt; 1224     suppressPackageStartupMessages            0
+#&gt; 1225                   suppressWarnings            0
+#&gt; 1226                  suspendInterrupts            0
+#&gt; 1227                                svd            0
+#&gt; 1228                              sweep            0
+#&gt; 1229                             switch            0
+#&gt; 1230                           sys.call            0
+#&gt; 1231                          sys.calls            0
+#&gt; 1232                          Sys.chmod            0
+#&gt; 1233                           Sys.Date            0
+#&gt; 1234                          sys.frame            0
+#&gt; 1235                         sys.frames            0
+#&gt; 1236                       sys.function            0
+#&gt; 1237                         Sys.getenv            0
+#&gt; 1238                      Sys.getlocale            0
+#&gt; 1239                         Sys.getpid            0
+#&gt; 1240                           Sys.glob            0
+#&gt; 1241                           Sys.info            0
+#&gt; 1242                     sys.load.image            0
+#&gt; 1243                     Sys.localeconv            0
+#&gt; 1244                         sys.nframe            0
+#&gt; 1245                        sys.on.exit            0
+#&gt; 1246                         sys.parent            0
+#&gt; 1247                        sys.parents            0
+#&gt; 1248                       Sys.readlink            0
+#&gt; 1249                     sys.save.image            0
+#&gt; 1250                         Sys.setenv            0
+#&gt; 1251                    Sys.setFileTime            0
+#&gt; 1252                    Sys.setLanguage            0
+#&gt; 1253                      Sys.setlocale            0
+#&gt; 1254                          Sys.sleep            0
+#&gt; 1255                         sys.source            0
+#&gt; 1256                         sys.status            0
+#&gt; 1257                           Sys.time            0
+#&gt; 1258                       Sys.timezone            0
+#&gt; 1259                          Sys.umask            0
+#&gt; 1260                       Sys.unsetenv            0
+#&gt; 1261                          Sys.which            0
+#&gt; 1262                        system.file            0
+#&gt; 1263                        system.time            0
+#&gt; 1264                            system2            0
+#&gt; 1265                       t.data.frame            0
+#&gt; 1266                          t.default            0
+#&gt; 1267                              table            0
+#&gt; 1268                           tabulate            0
+#&gt; 1269                           Tailcall            0
+#&gt; 1270                                tan            0
+#&gt; 1271                               tanh            0
+#&gt; 1272                              tanpi            0
+#&gt; 1273                             tapply            0
+#&gt; 1274                taskCallbackManager            0
+#&gt; 1275                         tcrossprod            0
+#&gt; 1276                            tempdir            0
+#&gt; 1277                           tempfile            0
+#&gt; 1278                     textConnection            0
+#&gt; 1279                textConnectionValue            0
+#&gt; 1280                            tolower            0
+#&gt; 1281                             topenv            0
+#&gt; 1282                   toString.default            0
+#&gt; 1283                            toupper            0
+#&gt; 1284                              trace            0
+#&gt; 1285                          traceback            0
+#&gt; 1286                           tracemem            0
+#&gt; 1287                       tracingState            0
+#&gt; 1288               transform.data.frame            0
+#&gt; 1289                  transform.default            0
+#&gt; 1290                           trigamma            0
+#&gt; 1291                             trimws            0
+#&gt; 1292                         trunc.Date            0
+#&gt; 1293                       trunc.POSIXt            0
+#&gt; 1294                truncate.connection            0
+#&gt; 1295                                try            0
+#&gt; 1296                           tryCatch            0
+#&gt; 1297                   tryInvokeRestart            0
+#&gt; 1298                             typeof            0
+#&gt; 1299                     unCfillPOSIXlt            0
+#&gt; 1300                            unclass            0
+#&gt; 1301                            undebug            0
+#&gt; 1302                       unique.array            0
+#&gt; 1303                  unique.data.frame            0
+#&gt; 1304                     unique.default            0
+#&gt; 1305                      unique.matrix            0
+#&gt; 1306             unique.numeric_version            0
+#&gt; 1307                     unique.POSIXlt            0
+#&gt; 1308                    unique.warnings            0
+#&gt; 1309                     units.difftime            0
+#&gt; 1310                   units&lt;-.difftime            0
+#&gt; 1311                          unix.time            0
+#&gt; 1312                             unlink            0
+#&gt; 1313                    unloadNamespace            0
+#&gt; 1314                      unlockBinding            0
+#&gt; 1315                             unname            0
+#&gt; 1316                        unserialize            0
+#&gt; 1317                            unsplit            0
+#&gt; 1318                            untrace            0
+#&gt; 1319                         untracemem            0
+#&gt; 1320                                unz            0
+#&gt; 1321                          upper.tri            0
+#&gt; 1322                                use            0
+#&gt; 1323                          UseMethod            0
+#&gt; 1324                          utf8ToInt            0
+#&gt; 1325                           validEnc            0
+#&gt; 1326                          validUTF8            0
+#&gt; 1327                             vapply            0
+#&gt; 1328                             vector            0
+#&gt; 1329                          Vectorize            0
+#&gt; 1330                            warning            0
+#&gt; 1331                   warningCondition            0
+#&gt; 1332                           warnings            0
+#&gt; 1333                      weekdays.Date            0
+#&gt; 1334                    weekdays.POSIXt            0
+#&gt; 1335                          which.max            0
+#&gt; 1336                          which.min            0
+#&gt; 1337                              while            0
+#&gt; 1338                       with.default            0
+#&gt; 1339                      withAutoprint            0
+#&gt; 1340                withCallingHandlers            0
+#&gt; 1341                  within.data.frame            0
+#&gt; 1342                        within.list            0
+#&gt; 1343                       withRestarts            0
+#&gt; 1344                        withVisible            0
+#&gt; 1345                          write.dcf            0
+#&gt; 1346                           writeBin            0
+#&gt; 1347                          writeChar            0
+#&gt; 1348                         writeLines            0
+#&gt; 1349                                xor            0
+#&gt; 1350                 xpdrows.data.frame            0
+#&gt; 1351                         xtfrm.AsIs            0
+#&gt; 1352                   xtfrm.data.frame            0
+#&gt; 1353                         xtfrm.Date            0
+#&gt; 1354                      xtfrm.default            0
+#&gt; 1355                     xtfrm.difftime            0
+#&gt; 1356                       xtfrm.factor            0
+#&gt; 1357              xtfrm.numeric_version            0
+#&gt; 1358                      xtfrm.POSIXct            0
+#&gt; 1359                      xtfrm.POSIXlt            0
+#&gt; 1360                             xzfile            0
+#&gt; 1361                           zapsmall            0
+#&gt; 1362                           zstdfile            0</code></pre>
 </div>
 </div>
 <p>This brute-force code unsurprisingly identifies <code>print()</code> as having the greatest number of methods. A bug in <code>s3_methods_generic()</code> prevents its use (error below).</p>
@@ -2634,7 +2640,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;         print        format             [       summary  as.character 
-#&gt;           280           126            49            40            33 
+#&gt;           296           139            50            41            33 
 #&gt; as.data.frame 
 #&gt;            33</code></pre>
 </div>
@@ -2855,14 +2861,14 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt; {
 #&gt;     .Date(NextMethod("["), oldClass(x))
 #&gt; }
-#&gt; &lt;bytecode: 0x107527220&gt;
+#&gt; &lt;bytecode: 0x12c7e05f8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">.Date</span><span class="st">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (xx, cl = "Date") 
 #&gt; `class&lt;-`(xx, cl)
-#&gt; &lt;bytecode: 0x106f508d8&gt;
+#&gt; &lt;bytecode: 0x10e22a720&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -3184,7 +3190,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;             paste(vnames[!mode.ok], collapse = ", "))
 #&gt;     }
 #&gt; }
-#&gt; &lt;bytecode: 0x107dd72d0&gt;
+#&gt; &lt;bytecode: 0x12d8b8b88&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb191"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a>Math.Date</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3192,7 +3198,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not defined for \"Date\" objects", .Generic), 
 #&gt;     domain = NA)
-#&gt; &lt;bytecode: 0x107ddc430&gt;
+#&gt; &lt;bytecode: 0x12d8bdce8&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb193"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a>Math.difftime</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3206,14 +3212,14 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;         }, stop(gettextf("'%s' not defined for \"difftime\" objects", 
 #&gt;             .Generic), domain = NA))
 #&gt; }
-#&gt; &lt;bytecode: 0x107ddb9e8&gt;
+#&gt; &lt;bytecode: 0x12d8bd2a0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb195"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a>Math.factor</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; function (x, ...) 
 #&gt; stop(gettextf("%s not meaningful for factors", sQuote(.Generic)))
-#&gt; &lt;bytecode: 0x107de0be8&gt;
+#&gt; &lt;bytecode: 0x12d8c44a0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb197"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a>Math.POSIXt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3223,7 +3229,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 #&gt;     stop(gettextf("'%s' not defined for \"POSIXt\" objects", 
 #&gt;         .Generic), domain = NA)
 #&gt; }
-#&gt; &lt;bytecode: 0x107de00f8&gt;
+#&gt; &lt;bytecode: 0x12d8c39b0&gt;
 #&gt; &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -3617,7 +3623,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb253"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb253-1"><a href="#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Wed Oct  1 21:51:18 2025"</code></pre>
+<pre><code>#&gt; [1] "Tue Aug 18 18:37:31 2026"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb255"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb255-1"><a href="#cb255-1" aria-hidden="true" tabindex="-1"></a>tz<span class="sc">$</span><span class="fu">set</span>(<span class="st">"America/New_York"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -3625,7 +3631,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb257"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb257-1"><a href="#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt; [1] "Wed Oct  1 22:51:18 2025"</code></pre>
+<pre><code>#&gt; [1] "Tue Aug 18 19:37:31 2026"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb259"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb259-1"><a href="#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">TZ =</span> orig_tz)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -4215,7 +4221,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <span id="cb334-21"><a href="#cb334-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb334-22"><a href="#cb334-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(object<span class="sc">@</span>family) <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
 <span id="cb334-23"><a href="#cb334-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"@family must be a string (length 1)"</span></span>
-<span id="cb334-24"><a href="#cb334-24" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(object<span class="sc">@</span>email) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">grepl</span>(regex, object<span class="sc">@</span>email, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb334-24"><a href="#cb334-24" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(object<span class="sc">@</span>email) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">grepl</span>(regex, object<span class="sc">@</span>email, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)) {</span>
 <span id="cb334-25"><a href="#cb334-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"invalid @email"</span></span>
 <span id="cb334-26"><a href="#cb334-26" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
 <span id="cb334-27"><a href="#cb334-27" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span></span>
@@ -5285,7 +5291,7 @@ invalid regular expression '^([.,]', reason 'Missing ')''</code></pre>
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2025, John Benninghoff</p>
+<p>Copyright 2026, John Benninghoff</p>
 </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
