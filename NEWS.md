@@ -1,3 +1,7 @@
+# rtraining 1.3.6
+
+* Update R-CMD-check to run on macOS only
+
 # rtraining 1.3.5
 
 * 2026-08 Upkeep
