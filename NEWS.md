@@ -12,7 +12,7 @@
 
 # rtraining 1.3.2
 
-* Initial upkeep using `use_upkeep_issue()`
+* Initial upkeep using `rdev::use_upkeep_issue()`
 
 * Updated R Books: Future Reading list
 
