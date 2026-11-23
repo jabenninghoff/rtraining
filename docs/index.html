@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -40,18 +40,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4cb18ab0a9f211dec1641a4d0d812265.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-45fce60d440c9543cfc9a67b89e4fbdf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4cb18ab0a9f211dec1641a4d0d812265.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1b4ba04632daeeeb8a9019d8d1445319.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-af53e09cfb0b295621f4ede4471d097f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-1b4ba04632daeeeb8a9019d8d1445319.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,12 +102,6 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
   </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -141,7 +136,7 @@ window.Quarto = {
 
 <link rel="alternate" type="application/rss+xml" title="rtraining" href="index.xml" data-external="1"></head>
 
-<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -164,6 +159,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -193,13 +189,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -293,6 +295,7 @@ window.Quarto = {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -307,15 +310,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">rtraining</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -333,17 +335,18 @@ window.Quarto = {
             <div class="quarto-navbar-tools tools-wide">
     <a href="./index.xml" title="" class="quarto-navigation-tool px-1" aria-label="rss"><i class="bi bi-rss"></i></a>
     <a href="https://github.com/jabenninghoff/rtraining" title="" class="quarto-navigation-tool px-1" aria-label="github"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">rtraining</li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">rtraining</li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -351,7 +354,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -462,7 +465,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -471,7 +474,7 @@ window.Quarto = {
 <div class="toc-actions"><ul><li><a href="https://github.com/jabenninghoff/rtraining/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/jabenninghoff/rtraining/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(17)</span></div><div class="category" data-category="YWR2YW5jZWQtcg==">advanced-r <span class="quarto-category-count">(4)</span></div><div class="category" data-category="ZXhlcmNpc2Vz">exercises <span class="quarto-category-count">(9)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(5)</span></div><div class="category" data-category="bm90ZXM=">notes <span class="quarto-category-count">(7)</span></div><div class="category" data-category="cmVhZGluZw==">reading <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -531,26 +534,28 @@ window.Quarto = {
 </div>
 <div class="list quarto-listing-default">
 <div class="quarto-post image-right" data-index="0" data-categories="cmVhZGluZw==" data-listing-date-sort="1700200800000" data-listing-file-modified-sort="1787097693283" data-listing-date-modified-sort="1762927200000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3016">
-<div class="thumbnail"><a href="./analysis/r-books.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/r-books.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/r-books_files/figure-html/r4ds-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/r-books.html" class="no-external">R Books</a>
+<a href="./analysis/r-books.html" class="no-external-icon">R Books</a>
 </h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('cmVhZGluZw=='); return false;">reading</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/r-books.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/r-books.html" class="no-external-icon">
 An actively maintained and curated list of R Books and other recommended resources from my reading list.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/r-books.html" class="no-external">
+<a href="./analysis/r-books.html" class="no-external-icon">
 <div class="listing-date">
 2023-11-17
 </div>
@@ -561,26 +566,28 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="1" data-categories="bm90ZXM=" data-listing-date-sort="1606888800000" data-listing-file-modified-sort="1787097693284" data-listing-date-modified-sort="1702015200000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1325">
-<div class="thumbnail"><a href="./analysis/r-training-log.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/r-training-log.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/r-training-log_files/figure-html/models-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/r-training-log.html" class="no-external">R Training Log</a>
+<a href="./analysis/r-training-log.html" class="no-external-icon">R Training Log</a>
 </h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/r-training-log.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/r-training-log.html" class="no-external-icon">
 Original notes on learning R and RStudio. An updated reading list of R books and other recommended resources is available in R Books.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/r-training-log.html" class="no-external">
+<a href="./analysis/r-training-log.html" class="no-external-icon">
 <div class="listing-date">
 2020-12-02
 </div>
@@ -591,26 +598,28 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="2" data-categories="bm90ZXM=" data-listing-date-sort="1609308000000" data-listing-file-modified-sort="1787097693283" data-listing-date-modified-sort="1708754400000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2248">
-<div class="thumbnail"><a href="./analysis/r-setup-log.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/r-setup-log.html" class="no-external-icon" aria-hidden="true" tabindex="-1">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/r-setup-log.html" class="no-external">R Setup Log</a>
+<a href="./analysis/r-setup-log.html" class="no-external-icon">R Setup Log</a>
 </h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/r-setup-log.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/r-setup-log.html" class="no-external-icon">
 My notes on my personal R setup. I started my R journey in September 2020 after SIRACon 2020. <strong>Important:</strong> this historical setup is outdated and differs from my current approach, which is documented in rdev.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/r-setup-log.html" class="no-external">
+<a href="./analysis/r-setup-log.html" class="no-external-icon">
 <div class="listing-date">
 2020-12-30
 </div>
@@ -621,26 +630,28 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="3" data-categories="bm90ZXM=" data-listing-date-sort="1632978000000" data-listing-file-modified-sort="1787097693281" data-listing-date-modified-sort="1641967200000" data-listing-reading-time-sort="2" data-listing-word-count-sort="316">
-<div class="thumbnail"><a href="./analysis/FaultTree.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/FaultTree.html" class="no-external-icon" aria-hidden="true" tabindex="-1">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/FaultTree.html" class="no-external">FaultTree.widget Test</a>
+<a href="./analysis/FaultTree.html" class="no-external-icon">FaultTree.widget Test</a>
 </h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/FaultTree.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/FaultTree.html" class="no-external-icon">
 Notebook for testing FaultTree.widget rendering fixes.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/FaultTree.html" class="no-external">
+<a href="./analysis/FaultTree.html" class="no-external-icon">
 <div class="listing-date">
 2021-09-30
 </div>
@@ -651,26 +662,28 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="4" data-categories="bm90ZXM=" data-listing-date-sort="1703138400000" data-listing-file-modified-sort="1787097693284" data-listing-date-modified-sort="1710050400000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1148">
-<div class="thumbnail"><a href="./analysis/using-Rcpp.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/using-Rcpp.html" class="no-external-icon" aria-hidden="true" tabindex="-1">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/using-Rcpp.html" class="no-external">Using Rcpp</a>
+<a href="./analysis/using-Rcpp.html" class="no-external-icon">Using Rcpp</a>
 </h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/using-Rcpp.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/using-Rcpp.html" class="no-external-icon">
 Notes on using Rcpp to implement Poker-Hand-Evaluator in the cards package.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/using-Rcpp.html" class="no-external">
+<a href="./analysis/using-Rcpp.html" class="no-external-icon">
 <div class="listing-date">
 2023-12-21
 </div>
@@ -681,26 +694,28 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="5" data-categories="bm90ZXM=" data-listing-date-sort="1711429200000" data-listing-file-modified-sort="1787097693281" data-listing-date-modified-sort="1711429200000" data-listing-reading-time-sort="4" data-listing-word-count-sort="657">
-<div class="thumbnail"><a href="./analysis/cond-prob.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/cond-prob.html" class="no-external-icon" aria-hidden="true" tabindex="-1">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/cond-prob.html" class="no-external">Conditional Probability</a>
+<a href="./analysis/cond-prob.html" class="no-external-icon">Conditional Probability</a>
 </h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/cond-prob.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/cond-prob.html" class="no-external-icon">
 An exploration of conditional probabilities in R, inspired by a 2015 blog post on the hot hand.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/cond-prob.html" class="no-external">
+<a href="./analysis/cond-prob.html" class="no-external-icon">
 <div class="listing-date">
 2024-03-26
 </div>
@@ -711,26 +726,28 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="6" data-categories="bm90ZXM=" data-listing-date-sort="1713330000000" data-listing-file-modified-sort="1787097693283" data-listing-date-modified-sort="1713330000000" data-listing-reading-time-sort="2" data-listing-word-count-sort="224">
-<div class="thumbnail"><a href="./analysis/hockey-cards.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/hockey-cards.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/hockey-cards_files/figure-html/summary-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/hockey-cards.html" class="no-external">Hockey Cards Analysis</a>
+<a href="./analysis/hockey-cards.html" class="no-external-icon">Hockey Cards Analysis</a>
 </h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/hockey-cards.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/hockey-cards.html" class="no-external-icon">
 A simple Monte Carlo simulation in R, replicating Julia code from a LinkedIn post.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/hockey-cards.html" class="no-external">
+<a href="./analysis/hockey-cards.html" class="no-external-icon">
 <div class="listing-date">
 2024-04-17
 </div>
@@ -741,26 +758,28 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="7" data-categories="bm90ZXM=" data-listing-date-sort="1759294800000" data-listing-file-modified-sort="1787097693281" data-listing-date-modified-sort="1759381200000" data-listing-reading-time-sort="3" data-listing-word-count-sort="493">
-<div class="thumbnail"><a href="./analysis/fizzbuzz.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/fizzbuzz.html" class="no-external-icon" aria-hidden="true" tabindex="-1">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/fizzbuzz.html" class="no-external">FizzBuzz</a>
+<a href="./analysis/fizzbuzz.html" class="no-external-icon">FizzBuzz</a>
 </h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/fizzbuzz.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/fizzbuzz.html" class="no-external-icon">
 My implementation of FizzBuzz in R, using a vector function.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/fizzbuzz.html" class="no-external">
+<a href="./analysis/fizzbuzz.html" class="no-external-icon">
 <div class="listing-date">
 2025-10-01
 </div>
@@ -771,14 +790,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="8" data-categories="ZXhlcmNpc2VzJTJDYWR2YW5jZWQtcg==" data-listing-date-sort="1655010000000" data-listing-file-modified-sort="1787097693279" data-listing-date-modified-sort="1659243600000" data-listing-reading-time-sort="84" data-listing-word-count-sort="16664">
-<div class="thumbnail"><a href="./analysis/advanced-r-1.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/advanced-r-1.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/advanced-r-1_files/figure-html/unnamed-chunk-102-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/advanced-r-1.html" class="no-external">Advanced R (Foundations)</a>
+<a href="./analysis/advanced-r-1.html" class="no-external-icon">Advanced R (Foundations)</a>
 </h3>
 <div class="listing-categories">
 
@@ -787,12 +806,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('YWR2YW5jZWQtcg=='); return false;">advanced-r</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/advanced-r-1.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/advanced-r-1.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Foundations” chapters of Advanced R, second edition, with comparisons to solutions from Advanced R Solutions.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/advanced-r-1.html" class="no-external">
+<a href="./analysis/advanced-r-1.html" class="no-external-icon">
 <div class="listing-date">
 2022-06-12
 </div>
@@ -803,14 +824,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="9" data-categories="ZXhlcmNpc2VzJTJDYWR2YW5jZWQtcg==" data-listing-date-sort="1659243600000" data-listing-file-modified-sort="1787097693280" data-listing-date-modified-sort="1699682400000" data-listing-reading-time-sort="45" data-listing-word-count-sort="8899">
-<div class="thumbnail"><a href="./analysis/advanced-r-2.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/advanced-r-2.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/advanced-r-2_files/figure-html/unnamed-chunk-11-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/advanced-r-2.html" class="no-external">Advanced R (Functional programming)</a>
+<a href="./analysis/advanced-r-2.html" class="no-external-icon">Advanced R (Functional programming)</a>
 </h3>
 <div class="listing-categories">
 
@@ -819,12 +840,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('YWR2YW5jZWQtcg=='); return false;">advanced-r</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/advanced-r-2.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/advanced-r-2.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Functional programming” chapters of Advanced R, second edition, with comparisons to solutions from Advanced R Solutions.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/advanced-r-2.html" class="no-external">
+<a href="./analysis/advanced-r-2.html" class="no-external-icon">
 <div class="listing-date">
 2022-07-31
 </div>
@@ -835,14 +858,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="10" data-categories="ZXhlcmNpc2VzJTJDYWR2YW5jZWQtcg==" data-listing-date-sort="1660539600000" data-listing-file-modified-sort="1787097693280" data-listing-date-modified-sort="1699682400000" data-listing-reading-time-sort="62" data-listing-word-count-sort="12226">
-<div class="thumbnail"><a href="./analysis/advanced-r-3.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/advanced-r-3.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/advanced-r-3_files/figure-html/unnamed-chunk-28-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/advanced-r-3.html" class="no-external">Advanced R (Object-oriented programming)</a>
+<a href="./analysis/advanced-r-3.html" class="no-external-icon">Advanced R (Object-oriented programming)</a>
 </h3>
 <div class="listing-categories">
 
@@ -851,12 +874,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('YWR2YW5jZWQtcg=='); return false;">advanced-r</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/advanced-r-3.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/advanced-r-3.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Object-oriented programming” chapters of Advanced R, second edition, with comparisons to solutions from Advanced R Solutions.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/advanced-r-3.html" class="no-external">
+<a href="./analysis/advanced-r-3.html" class="no-external-icon">
 <div class="listing-date">
 2022-08-15
 </div>
@@ -867,14 +892,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="11" data-categories="ZXhlcmNpc2VzJTJDYWR2YW5jZWQtcg==" data-listing-date-sort="1676786400000" data-listing-file-modified-sort="1787097693281" data-listing-date-modified-sort="1699682400000" data-listing-reading-time-sort="47" data-listing-word-count-sort="9216">
-<div class="thumbnail"><a href="./analysis/advanced-r-4.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/advanced-r-4.html" class="no-external-icon" aria-hidden="true" tabindex="-1">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/advanced-r-4.html" class="no-external">Advanced R (Metaprogramming)</a>
+<a href="./analysis/advanced-r-4.html" class="no-external-icon">Advanced R (Metaprogramming)</a>
 </h3>
 <div class="listing-categories">
 
@@ -883,12 +908,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('YWR2YW5jZWQtcg=='); return false;">advanced-r</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/advanced-r-4.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/advanced-r-4.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Metaprogramming” chapters of Advanced R, second edition, with comparisons to solutions from Advanced R Solutions.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/advanced-r-4.html" class="no-external">
+<a href="./analysis/advanced-r-4.html" class="no-external-icon">
 <div class="listing-date">
 2023-02-19
 </div>
@@ -899,14 +926,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="12" data-categories="ZXhlcmNpc2VzJTJDZ2dwbG90Mg==" data-listing-date-sort="1668924000000" data-listing-file-modified-sort="1787097693282" data-listing-date-modified-sort="1699682400000" data-listing-reading-time-sort="18" data-listing-word-count-sort="3453">
-<div class="thumbnail"><a href="./analysis/ggplot2-1.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/ggplot2-1.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/ggplot2-1_files/figure-html/unnamed-chunk-9-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/ggplot2-1.html" class="no-external">ggplot2 (Getting started)</a>
+<a href="./analysis/ggplot2-1.html" class="no-external-icon">ggplot2 (Getting started)</a>
 </h3>
 <div class="listing-categories">
 
@@ -915,12 +942,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">ggplot2</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/ggplot2-1.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/ggplot2-1.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Getting started” chapters of ggplot2: Elegant Graphics for Data Analysis, third edition, with comparisons to solutions from Solutions to ggplot2: Elegant Graphics for Data Analysis.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/ggplot2-1.html" class="no-external">
+<a href="./analysis/ggplot2-1.html" class="no-external-icon">
 <div class="listing-date">
 2022-11-20
 </div>
@@ -931,14 +960,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="13" data-categories="ZXhlcmNpc2VzJTJDZ2dwbG90Mg==" data-listing-date-sort="1668924000000" data-listing-file-modified-sort="1787097693282" data-listing-date-modified-sort="1699682400000" data-listing-reading-time-sort="15" data-listing-word-count-sort="2956">
-<div class="thumbnail"><a href="./analysis/ggplot2-2.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/ggplot2-2.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/ggplot2-2_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/ggplot2-2.html" class="no-external">ggplot2 (Layers)</a>
+<a href="./analysis/ggplot2-2.html" class="no-external-icon">ggplot2 (Layers)</a>
 </h3>
 <div class="listing-categories">
 
@@ -947,12 +976,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">ggplot2</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/ggplot2-2.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/ggplot2-2.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Layers” chapters of ggplot2: Elegant Graphics for Data Analysis, third edition, with comparisons to solutions from Solutions to ggplot2: Elegant Graphics for Data Analysis.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/ggplot2-2.html" class="no-external">
+<a href="./analysis/ggplot2-2.html" class="no-external-icon">
 <div class="listing-date">
 2022-11-20
 </div>
@@ -963,14 +994,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="14" data-categories="ZXhlcmNpc2VzJTJDZ2dwbG90Mg==" data-listing-date-sort="1670047200000" data-listing-file-modified-sort="1787097693282" data-listing-date-modified-sort="1699682400000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1610">
-<div class="thumbnail"><a href="./analysis/ggplot2-3.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/ggplot2-3.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/ggplot2-3_files/figure-html/unnamed-chunk-3-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/ggplot2-3.html" class="no-external">ggplot2 (Scales)</a>
+<a href="./analysis/ggplot2-3.html" class="no-external-icon">ggplot2 (Scales)</a>
 </h3>
 <div class="listing-categories">
 
@@ -979,12 +1010,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">ggplot2</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/ggplot2-3.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/ggplot2-3.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Scales” chapters of ggplot2: Elegant Graphics for Data Analysis, third edition, with comparisons to solutions from Solutions to ggplot2: Elegant Graphics for Data Analysis.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/ggplot2-3.html" class="no-external">
+<a href="./analysis/ggplot2-3.html" class="no-external-icon">
 <div class="listing-date">
 2022-12-03
 </div>
@@ -995,14 +1028,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="15" data-categories="ZXhlcmNpc2VzJTJDZ2dwbG90Mg==" data-listing-date-sort="1670565600000" data-listing-file-modified-sort="1787097693283" data-listing-date-modified-sort="1699682400000" data-listing-reading-time-sort="27" data-listing-word-count-sort="5243">
-<div class="thumbnail"><a href="./analysis/ggplot2-4.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/ggplot2-4.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/ggplot2-4_files/figure-html/unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/ggplot2-4.html" class="no-external">ggplot2 (Grammar)</a>
+<a href="./analysis/ggplot2-4.html" class="no-external-icon">ggplot2 (Grammar)</a>
 </h3>
 <div class="listing-categories">
 
@@ -1011,12 +1044,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">ggplot2</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/ggplot2-4.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/ggplot2-4.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Grammar” chapters of ggplot2: Elegant Graphics for Data Analysis, third edition, with comparisons to solutions from Solutions to ggplot2: Elegant Graphics for Data Analysis.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/ggplot2-4.html" class="no-external">
+<a href="./analysis/ggplot2-4.html" class="no-external-icon">
 <div class="listing-date">
 2022-12-09
 </div>
@@ -1027,14 +1062,14 @@ John Benninghoff
 </div>
 </div>
 <div class="quarto-post image-right" data-index="16" data-categories="ZXhlcmNpc2VzJTJDZ2dwbG90Mg==" data-listing-date-sort="1671343200000" data-listing-file-modified-sort="1787097693283" data-listing-date-modified-sort="1699682400000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1948">
-<div class="thumbnail"><a href="./analysis/ggplot2-5.html" class="no-external">
+<div class="thumbnail"><a href="./analysis/ggplot2-5.html" class="no-external-icon">
 
 <p class="card-img-top"><img loading='lazy' src="analysis/ggplot2-5_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./analysis/ggplot2-5.html" class="no-external">ggplot2 (Extending)</a>
+<a href="./analysis/ggplot2-5.html" class="no-external-icon">ggplot2 (Extending)</a>
 </h3>
 <div class="listing-categories">
 
@@ -1043,12 +1078,14 @@ John Benninghoff
 <div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">ggplot2</div>
 
 </div>
-<div class="delink listing-description"><a href="./analysis/ggplot2-5.html" class="no-external">
+<div class="listing-description">
+<a href="./analysis/ggplot2-5.html" class="no-external-icon">
 Workbook for completing quizzes and exercises from the “Extending” chapters of ggplot2: Elegant Graphics for Data Analysis, third edition, with comparisons to solutions from Solutions to ggplot2: Elegant Graphics for Data Analysis.
-</a></div>
+</a>
+</div>
 </div>
 <div class="metadata">
-<a href="./analysis/ggplot2-5.html" class="no-external">
+<a href="./analysis/ggplot2-5.html" class="no-external-icon">
 <div class="listing-date">
 2022-12-18
 </div>
@@ -1065,15 +1102,50 @@ John Benninghoff
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1152,7 +1224,8 @@ John Benninghoff
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1161,8 +1234,69 @@ John Benninghoff
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1176,6 +1310,7 @@ John Benninghoff
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1338,44 +1473,54 @@ John Benninghoff
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1473,6 +1618,9 @@ John Benninghoff
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">
